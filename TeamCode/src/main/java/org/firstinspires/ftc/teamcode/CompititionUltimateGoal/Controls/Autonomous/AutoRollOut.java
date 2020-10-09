@@ -5,9 +5,9 @@ import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 
 import org.firstinspires.ftc.teamcode.CompititionUltimateGoal.Robots.LabBot;
 
-@Autonomous(name = "AutoBotSquare")
+@Autonomous(name = "Remote:Blue:Left:")
 
-public class AutoBotSquare1 extends LinearOpMode {
+public class AutoRollOut extends LinearOpMode {
 
     public LabBot Bot = new LabBot();
 
