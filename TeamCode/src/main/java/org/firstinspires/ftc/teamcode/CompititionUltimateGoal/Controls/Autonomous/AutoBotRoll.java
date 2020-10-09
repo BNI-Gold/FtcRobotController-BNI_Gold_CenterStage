@@ -1,4 +1,4 @@
-package org.firstinspires.ftc.teamcode.CompititionUltimateGoal.Controls;
+package org.firstinspires.ftc.teamcode.CompititionUltimateGoal.Controls.Autonomous;
 
 import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
 import com.qualcomm.robotcore.eventloop.opmode.Disabled;
@@ -22,6 +22,9 @@ public class AutoBotRoll extends LinearOpMode {
         waitForStart();
 
         while (opModeIsActive()) {
+
+            Bot.driveForward(0.5, 1500);
+
 
             Bot.driveForward(0.5);
             sleep(1000);

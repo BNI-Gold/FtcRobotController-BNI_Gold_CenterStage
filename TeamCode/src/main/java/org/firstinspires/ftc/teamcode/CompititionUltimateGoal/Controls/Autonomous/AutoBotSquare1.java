@@ -1,0 +1,75 @@
+package org.firstinspires.ftc.teamcode.CompititionUltimateGoal.Controls.Autonomous;
+
+import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
+import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
+
+import org.firstinspires.ftc.teamcode.CompititionUltimateGoal.Robots.LabBot;
+
+@Autonomous(name = "AutoBotSquare")
+
+public class AutoBotSquare1 extends LinearOpMode {
+
+    public LabBot Bot = new LabBot();
+
+    public enum Square {A, B, C}
+
+
+    @Override
+    public void runOpMode() throws InterruptedException {
+        Bot.initRobot(hardwareMap);
+        Bot.setLinearOp(this);
+        Bot.servoClosed();
+//        Call vision tracking Class - set wobbleTarget to correct Square
+
+        Square wobbleTarget = Square.B;
+
+        waitForStart();
+
+        while (opModeIsActive()){
+
+            switch (wobbleTarget) {
+                case A:
+                    Bot.driveForward(0.5,7.75);
+                    sleep(500);
+                    Bot.strafeRight(0.5,.5);
+                    sleep(500);
+                    Bot.servoOpened();
+                    sleep(500);
+                    Bot.servoClosed();
+                    break;
+
+                case B:
+                    Bot.driveForward(.5,10.5);
+                    sleep(500);
+                    Bot.strafeRight(0.5,3.5);
+                    sleep(500);
+                    Bot.servoOpened();
+                    sleep(500);
+                    Bot.servoClosed();
+                    sleep(500);
+                    Bot.driveBackward(0.5, 2.5);
+
+                    break;
+
+
+                case C:
+                    Bot.driveForward(.5,12.5);
+                    sleep(500);
+                    Bot.strafeRight(0.5,.5);
+                    sleep(500);
+                    Bot.servoOpened();
+                    sleep(500);
+                    Bot.servoClosed();
+                    sleep(500);
+                    Bot.driveBackward(0.5, 4.5);
+
+
+
+
+                    break;
+
+            }
+        requestOpModeStop();
+        }
+    }
+}

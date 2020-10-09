@@ -3,6 +3,7 @@ package org.firstinspires.ftc.teamcode.CompititionUltimateGoal.Robots;
 import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.hardware.DcMotorSimple;
 import com.qualcomm.robotcore.hardware.HardwareMap;
+import com.qualcomm.robotcore.hardware.Servo;
 
 import org.firstinspires.ftc.teamcode.CompititionUltimateGoal.DriveTrains.MecanumDrive;
 
@@ -10,6 +11,7 @@ public class LabBot extends MecanumDrive {
 
     //hardware constructors
     public HardwareMap hwBot  =  null;
+    Servo servo = null;
 
     //LabBot constructor
     public LabBot() {
@@ -17,6 +19,12 @@ public class LabBot extends MecanumDrive {
     }
     public void initRobot(HardwareMap hwMap){
         hwBot = hwMap;
+
+//        Servos
+        servo = hwBot.get(Servo.class, "servo");
+        servo.setDirection(Servo.Direction.FORWARD);
+
+
 
         // define motors for robot
         frontLeftMotor=hwBot.dcMotor.get("front_left_motor");
@@ -40,4 +48,13 @@ public class LabBot extends MecanumDrive {
         rearLeftMotor.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
 
     }
+
+    public void servoClosed () {
+        servo.setPosition(1);
+    }
+
+    public void servoOpened(){
+        servo.setPosition(0.72);
+    }
+
 }
