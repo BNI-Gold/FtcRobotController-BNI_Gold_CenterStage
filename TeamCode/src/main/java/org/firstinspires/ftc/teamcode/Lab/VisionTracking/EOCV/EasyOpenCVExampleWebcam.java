@@ -19,16 +19,15 @@
  * SOFTWARE.
  */
 
-package org.firstinspires.ftc.teamcode.Lab.VisionTracking;
+package org.firstinspires.ftc.teamcode.Lab.VisionTracking.EOCV;
 
-import com.qualcomm.robotcore.eventloop.opmode.Disabled;
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 
 import org.firstinspires.ftc.robotcore.external.hardware.camera.WebcamName;
 //import org.firstinspires.ftc.teamcode.examples.PipelineStageSwitchingExample;
 
-import org.firstinspires.ftc.teamcode.Lab.VisionTracking.examples.PipelineStageSwitchingExample;
+import org.firstinspires.ftc.teamcode.Lab.VisionTracking.EOCV.examples.PipelineStageSwitchingExample;
 
 import org.opencv.core.Core;
 import org.opencv.core.Mat;
@@ -39,7 +38,6 @@ import org.opencv.imgproc.Imgproc;
 import org.openftc.easyopencv.OpenCvCamera;
 import org.openftc.easyopencv.OpenCvCameraFactory;
 import org.openftc.easyopencv.OpenCvCameraRotation;
-import org.openftc.easyopencv.OpenCvInternalCamera;
 import org.openftc.easyopencv.OpenCvPipeline;
 
 @TeleOp (name = "WebCam Exmaple - DUVAL", group = "DUVAL")
