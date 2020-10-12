@@ -1,4 +1,4 @@
-package org.firstinspires.ftc.teamcode.CompititionUltimateGoal.Controls.Autonomous;
+package org.firstinspires.ftc.teamcode.CompititionUltimateGoal.Controls.Autonomous.Lab;
 
 import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
@@ -62,9 +62,6 @@ public class AutoRollOut extends LinearOpMode {
                     Bot.servoClosed();
                     sleep(500);
                     Bot.driveBackward(0.5, 4.5);
-
-
-
 
                     break;
 

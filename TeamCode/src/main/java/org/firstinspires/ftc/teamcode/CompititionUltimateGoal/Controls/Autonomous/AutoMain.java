@@ -2,13 +2,24 @@ package org.firstinspires.ftc.teamcode.CompititionUltimateGoal.Controls.Autonomo
 
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 
+import org.firstinspires.ftc.teamcode.CompititionUltimateGoal.Robots.LabBot;
+
 public abstract class AutoMain extends LinearOpMode {
 
     public TargetZone zone = null;
 
+//    This will later detect our 0, 1, or 4 ring stacks!
     public TargetZone detectStarterStack () {
         zone = TargetZone.A;
         return zone;
+    }
+
+//    Lower servo to score it, and then raise it to not damage anything.
+    public void ScoreWobble (LabBot Bot) {
+        Bot.servoOpened();
+        sleep(500);
+        Bot.servoClosed();
+        sleep(500);
     }
 
 }
