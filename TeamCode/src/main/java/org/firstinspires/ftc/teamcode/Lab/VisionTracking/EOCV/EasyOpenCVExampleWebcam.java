@@ -134,9 +134,12 @@ public class EasyOpenCVExampleWebcam extends LinearOpMode
 //        USE THIS TO FIGURE OUT NUMBER OF RINGS.
         static final Point REGION1_TOPLEFT_ANCHOR_POINT = new Point(181,98);
 
+//        ORIGINAL AREA
         static final int REGION_WIDTH = 35;
-        static final int REGION_HEIGHT = 25;
+//        Was 25 10/12 @ 4pm
+        static final int REGION_HEIGHT = 30;
 
+//        ORIGINAL THRESHOLDS
         final int FOUR_RING_THRESHOLD = 150;
         final int ONE_RING_THRESHOLD = 135;
 

@@ -2,6 +2,7 @@ package org.firstinspires.ftc.teamcode.CompititionUltimateGoal.Controls.Autonomo
 
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 
+import org.firstinspires.ftc.teamcode.CompititionUltimateGoal.Modules.EasyOpenCVWebcam;
 import org.firstinspires.ftc.teamcode.CompititionUltimateGoal.Robots.LabBot;
 
 public abstract class AutoMain extends LinearOpMode {
@@ -9,8 +10,9 @@ public abstract class AutoMain extends LinearOpMode {
     public TargetZone zone = null;
 
 //    This will later detect our 0, 1, or 4 ring stacks!
-    public TargetZone detectStarterStack () {
-        zone = TargetZone.A;
+    public TargetZone detectStarterStack (LabBot Bot) {
+        zone = TargetZone.C;
+
         return zone;
     }
 

@@ -1,8 +1,12 @@
 package org.firstinspires.ftc.teamcode.CompititionUltimateGoal.Controls.Autonomous.BlueLeft;
 
+import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
+
 import org.firstinspires.ftc.teamcode.CompititionUltimateGoal.Controls.Autonomous.StartPosition;
 import org.firstinspires.ftc.teamcode.CompititionUltimateGoal.Controls.Autonomous.TargetZone;
 import org.firstinspires.ftc.teamcode.CompititionUltimateGoal.Robots.LabBot;
+
+@Autonomous (name = "Remote:Blue:Left:", group = "BLUE")
 
 public class AutoBlueLeft extends BlueLeft {
 
@@ -11,9 +15,14 @@ public class AutoBlueLeft extends BlueLeft {
     public StartPosition startPosition = null;
     public TargetZone targetZone = null;
     public long sleepTime = 100;
+
+
+
     @Override
     public void runOpMode() throws InterruptedException {
 //        Constructor to set up our hardware mapping.
+
+
         Bot.initRobot(hardwareMap);
         Bot.setLinearOp(this);
 
@@ -26,7 +35,7 @@ public class AutoBlueLeft extends BlueLeft {
         while (opModeIsActive()) {
 //            Change value in detectStarterStack to test different Auto paths.
 //            select the function call below and use "Cmd + B" to go direcrtly to that function.
-            targetZone = detectStarterStack();
+            targetZone = detectStarterStack(Bot);
             sleep(sleepTime);
 //            Drive to the Target Zone; depends on the targetZone!
             driveToTargetZone (Bot, targetZone);

@@ -5,7 +5,7 @@ import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 
 import org.firstinspires.ftc.teamcode.CompititionUltimateGoal.Robots.LabBot;
 
-@Autonomous(name = "Remote:Blue:Left:")
+@Autonomous(name = "Auto Roll Out")
 
 public class AutoRollOut extends LinearOpMode {
 

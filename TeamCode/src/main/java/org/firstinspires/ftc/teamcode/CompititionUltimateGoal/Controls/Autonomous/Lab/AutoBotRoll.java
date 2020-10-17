@@ -7,6 +7,7 @@ import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 import org.firstinspires.ftc.teamcode.CompititionUltimateGoal.Robots.LabBot;
 
 @Autonomous(name = "Bot:LabBot Auto:AutoBotRoll")
+@Disabled
 //@Disabled
 public class AutoBotRoll extends LinearOpMode {
 
