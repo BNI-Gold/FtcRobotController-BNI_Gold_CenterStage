@@ -13,11 +13,15 @@ public abstract class BlueLeft extends AutoMain {
                 sleep(500);
                 Bot.strafeRight(0.5,.5);
                 sleep(500);
+                ScoreWobble(Bot);
+                sleep(500);
                 break;
             case B:
                 Bot.driveForward(.5,10.5);
                 sleep(500);
                 Bot.strafeRight(0.5,3.5);
+                sleep(500);
+                ScoreWobble(Bot);
                 sleep(500);
                 break;
             case C:
@@ -25,7 +29,8 @@ public abstract class BlueLeft extends AutoMain {
                 sleep(500);
                 Bot.strafeRight(0.5,.5);
                 sleep(500);
-
+                ScoreWobble(Bot);
+                sleep(500);
                 break;
         }
     }

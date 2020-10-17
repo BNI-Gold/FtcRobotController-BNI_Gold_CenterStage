@@ -58,13 +58,16 @@ public class LabBot extends MecanumDrive  {
 
 
     Servo WobbleArm = null;
-
+    Servo WobbleGrab = null;
 //    Servos servos = new Servos();
 
 
-    public double servoOpenPos = 0.72;
-    public double servoClosePos = 1.0;
-
+    public double servoOpenPos = 0.36;
+    public double servoClosePos = 0.93;
+    public double WobbleArmRaisedPos = 0.36;
+    public double WobbleArmLowerPos = 0.93;
+    public double WobbleGrabOpenPos = 0.68;
+    public double WobbleGrabClosePos = 0.53;
     //LabBot constructor
     public LabBot() {
 
@@ -72,8 +75,11 @@ public class LabBot extends MecanumDrive  {
     public void initRobot(HardwareMap hwMap){
         hwBot = hwMap;
 //        Servos
-        WobbleArm = hwBot.get(Servo.class, "servo");
+        WobbleArm = hwBot.get(Servo.class, "wobble_arm");
         WobbleArm.setDirection(Servo.Direction.FORWARD);
+        WobbleGrab = hwBot.get(Servo.class, "wobble_grab");
+        WobbleGrab.setDirection(Servo.Direction.FORWARD);
+
 
 
         // define motors for robot
@@ -141,7 +147,7 @@ public class LabBot extends MecanumDrive  {
         });
 
     }
-
+//
     public void servoClosed () {
         WobbleArm.setPosition(servoClosePos);
     }
@@ -150,7 +156,18 @@ public class LabBot extends MecanumDrive  {
         WobbleArm.setPosition(servoOpenPos);
     }
 
-
+    public void WobbleLower() {
+        WobbleArm.setPosition(WobbleArmLowerPos);
+    }
+    public void WobbleRaised() {
+        WobbleArm.setPosition(WobbleArmRaisedPos);
+    }
+    public void WobbleOpen(){
+        WobbleGrab.setPosition(WobbleGrabOpenPos);
+    }
+    public void WobbleClosed(){
+        WobbleGrab.setPosition(WobbleGrabClosePos);
+    }
     public void detectRings () {
 
     }

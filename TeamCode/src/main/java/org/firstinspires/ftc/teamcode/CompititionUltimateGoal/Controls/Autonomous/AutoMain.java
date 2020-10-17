@@ -18,9 +18,15 @@ public abstract class AutoMain extends LinearOpMode {
 
 //    Lower servo to score it, and then raise it to not damage anything.
     public void ScoreWobble (LabBot Bot) {
-        Bot.servoOpened();
+        Bot.WobbleLower();
         sleep(500);
-        Bot.servoClosed();
+        Bot.WobbleClosed();
+        sleep(500);
+        Bot.WobbleRaised();
+        sleep(500);
+        Bot.WobbleLower();
+        sleep(500);
+        Bot.WobbleOpen();
         sleep(500);
     }
 
