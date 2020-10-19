@@ -52,8 +52,8 @@ public class LabBot extends MecanumDrive  {
     public float hsvValues[] = {0F, 0F, 0F};
     public final double SCALE_FACTOR = 1;
 //  Camera Initialization
-    OpenCvCamera webcam;
-    EasyOpenCVWebcam.SkystoneDeterminationPipeline pipeline;
+    public OpenCvCamera webcam;
+    public SkystoneDeterminationPipeline pipeline;
 
 
 
@@ -64,10 +64,11 @@ public class LabBot extends MecanumDrive  {
 
     public double servoOpenPos = 0.36;
     public double servoClosePos = 0.93;
-    public double WobbleArmRaisedPos = 0.36;
-    public double WobbleArmLowerPos = 0.93;
-    public double WobbleGrabOpenPos = 0.68;
-    public double WobbleGrabClosePos = 0.53;
+    public double WobbleArmRaisedPos = 0.40;
+    public double WobbleArmLowerPos = 0.14;
+    public double WobbleGrabOpenPos = 0.72;
+    public double WobbleGrabClosePos = 0.552;
+
     //LabBot constructor
     public LabBot() {
 
@@ -77,9 +78,10 @@ public class LabBot extends MecanumDrive  {
 //        Servos
         WobbleArm = hwBot.get(Servo.class, "wobble_arm");
         WobbleArm.setDirection(Servo.Direction.FORWARD);
+        WobbleArm.setPosition(WobbleArmRaisedPos);
         WobbleGrab = hwBot.get(Servo.class, "wobble_grab");
         WobbleGrab.setDirection(Servo.Direction.FORWARD);
-
+        WobbleGrab.setPosition(WobbleGrabClosePos);
 
 
         // define motors for robot
@@ -116,10 +118,17 @@ public class LabBot extends MecanumDrive  {
         imu = hwBot.get(BNO055IMU.class, "imu");
         imu.initialize(parametersimu);
 
+
+
+
+
+    }
+
+    public void initCamera () {
         int cameraMonitorViewId = hwBot.appContext.getResources().getIdentifier("cameraMonitorViewId", "id", hwBot.appContext.getPackageName());
         webcam = OpenCvCameraFactory.getInstance().createWebcam(hwBot.get(WebcamName.class, "Webcam 1"), cameraMonitorViewId);
 //        pipeline = new EasyOpenCVWebcam.SkystoneDeterminationPipeline();
-        pipeline = new EasyOpenCVWebcam.SkystoneDeterminationPipeline();
+        pipeline = new SkystoneDeterminationPipeline();
         webcam.setPipeline(pipeline);
         webcam.openCameraDeviceAsync(new OpenCvCamera.AsyncCameraOpenListener()
         {
@@ -145,7 +154,6 @@ public class LabBot extends MecanumDrive  {
                 webcam.startStreaming(320, 240, OpenCvCameraRotation.UPRIGHT);
             }
         });
-
     }
 //
     public void servoClosed () {
@@ -220,10 +228,10 @@ public class LabBot extends MecanumDrive  {
 
         //        ORIGINAL AREA
         static final int REGION_WIDTH = 35;
-        static final int REGION_HEIGHT = 25;
+        static final int REGION_HEIGHT = 30;
 
         //        ORIGINAL THRESHOLDS
-        final int FOUR_RING_THRESHOLD = 150;
+        final int FOUR_RING_THRESHOLD = 145;
         final int ONE_RING_THRESHOLD = 135;
 
         Point region1_pointA = new Point(
@@ -239,10 +247,10 @@ public class LabBot extends MecanumDrive  {
         Mat region1_Cb;
         Mat YCrCb = new Mat();
         Mat Cb = new Mat();
-        int avg1;
+        public int avg1;
 
         // Volatile since accessed by OpMode thread w/o synchronization
-        private volatile EasyOpenCVWebcam.SkystoneDeterminationPipeline.RingPosition position = EasyOpenCVWebcam.SkystoneDeterminationPipeline.RingPosition.FOUR;
+        public volatile EasyOpenCVWebcam.SkystoneDeterminationPipeline.RingPosition position = EasyOpenCVWebcam.SkystoneDeterminationPipeline.RingPosition.FOUR;
 
         /*
          * This function takes the RGB frame, converts to YCrCb,

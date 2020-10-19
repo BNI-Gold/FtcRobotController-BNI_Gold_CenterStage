@@ -136,7 +136,8 @@ public class EasyOpenCVWebcam extends LinearOpMode
 
 //        ORIGINAL AREA
         static final int REGION_WIDTH = 35;
-        static final int REGION_HEIGHT = 25;
+        //was 25/josh 4:46pm 10/19/20
+        static final int REGION_HEIGHT = 35;
 
 //        ORIGINAL THRESHOLDS
         final int FOUR_RING_THRESHOLD = 150;
