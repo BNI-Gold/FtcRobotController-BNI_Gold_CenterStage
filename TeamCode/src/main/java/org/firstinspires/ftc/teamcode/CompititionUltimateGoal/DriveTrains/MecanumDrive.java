@@ -14,7 +14,7 @@ public class MecanumDrive {
     public DcMotor frontRightMotor;
     public DcMotor rearRightMotor;
     public DcMotor rearLeftMotor;
-    public static final double TICKS_PER_ROTATION = 386.3;   // GoBilda Motor TICKS
+    public static final double TICKS_PER_ROTATION = 383.6;   // GoBilda 13.7 Motor PPR
 
     public LinearOpMode linearOp = null;
 
@@ -128,11 +128,26 @@ public class MecanumDrive {
             double ticks = rotations * (-1) * TICKS_PER_ROTATION;
             setMotorRunModes(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
             setMotorRunModes(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
-
+//            linearOp.telemetry.addData("Current ticks: ", frontLeftMotor.getCurrentPosition());
+//            linearOp.telemetry.addData("Target ticks: ", ticks);
+//            linearOp.telemetry.addLine("Going into drive backwards loop");
+//            linearOp.telemetry.update();
+            linearOp.sleep(1000);
+//            Switched from NR 20s to Go Bilda 13.7
             while (frontLeftMotor.getCurrentPosition() > ticks && linearOp.opModeIsActive()) {
                 driveBackward(speed);
+                linearOp.telemetry.addData("Current ticks: ", frontLeftMotor.getCurrentPosition());
+                linearOp.telemetry.addData("Target ticks: ", ticks);
+                linearOp.telemetry.addLine("INSIDE drive backwards loop");
+                linearOp.telemetry.update();
             }
             stopMotors();
+
+            linearOp.telemetry.addData("Current ticks: ", frontLeftMotor.getCurrentPosition());
+            linearOp.telemetry.addData("Target ticks: ", ticks);
+            linearOp.telemetry.addLine("Finished with drive backwards loop");
+            linearOp.telemetry.update();
+            linearOp.sleep(1000);
         }
     }
 
