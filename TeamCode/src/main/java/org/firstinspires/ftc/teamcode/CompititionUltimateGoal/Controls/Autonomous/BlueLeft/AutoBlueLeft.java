@@ -7,7 +7,7 @@ import org.firstinspires.ftc.teamcode.CompititionUltimateGoal.Controls.Autonomou
 import org.firstinspires.ftc.teamcode.CompititionUltimateGoal.Controls.Autonomous.TargetZone;
 import org.firstinspires.ftc.teamcode.CompititionUltimateGoal.Modules.EasyOpenCVWebcam;
 import org.firstinspires.ftc.teamcode.CompititionUltimateGoal.Robots.CompetitionBot;
-//import org.firstinspires.ftc.teamcode.CompititionUltimateGoal.Robots.LabBot;
+import org.firstinspires.ftc.teamcode.CompititionUltimateGoal.Robots.LabBot;
 
 @Autonomous (name = "Remote:Blue:Left:", group = "BLUE")
 //@Disabled
@@ -26,8 +26,6 @@ public class AutoBlueLeft extends BlueLeft {
     @Override
     public void runOpMode() throws InterruptedException {
 //        Constructor to set up our hardware mapping.
-
-
         Bot.initRobot(hardwareMap);
 //        Bot.initCamera();
         Bot.setLinearOp(this);
@@ -35,7 +33,6 @@ public class AutoBlueLeft extends BlueLeft {
 //        This is hard-coded for this auto.  May or may not use, but here just in case.
         startPosition = StartPosition.BlueLeft;
 
-//        setLinearOp (this);
         waitForStart();
 
         while (opModeIsActive()) {
@@ -45,36 +42,24 @@ public class AutoBlueLeft extends BlueLeft {
 //            telemetry.addData("SAMPLING VALUE #: ", Bot.pipeline.avg1);
 //            telemetry.addData("NUMBER OF RINGS: ", Bot.pipeline.position);
             telemetry.addData("TARGET ZONE: ", targetZone);
-
             telemetry.update();
 
             //STOP THE CAMERA! - closeCameraDevice does close the camera on RC
-
-//            Bot.webcam.closeCameraDevice();
+//            Bot.webcam.closeCameraDevice();  //This does stop the camera.  Uncomment when ready to use Webcam.
 //OR
-//            Bot.webcam.pauseViewport();
+//            Bot.webcam.pauseViewport();   // This line hasn't been used - so leave commented out.
 
             sleep(1000);
-//            Bot.pipeline.getAnalysis();
-//            if (Bot.pipeline.position == EasyOpenCVWebcam.SkystoneDeterminationPipeline.RingPosition.NONE) {
-//                targetZone = TargetZone.A;
-//            }
-//            else if (Bot.pipeline.position == EasyOpenCVWebcam.SkystoneDeterminationPipeline.RingPosition.ONE) {
-//                targetZone = targetZone.B;
-//            }
-//            else {
-//                targetZone = TargetZone.C;
-//            }
-//            Drive to the Target Zone; depends on the targetZone!
-
+//            Drives robot to target Zone
             driveToTargetZone (Bot, targetZone);
-
             sleep(sleepTime);
+
 //            Lower and raise the Servo to score the Wobble.
 //            ScoreWobble(Bot);
-            sleep(sleepTime);
+//            sleep(sleepTime);
+
 //            Park robot on the launch line.
-//            ParkLaunchLine(Bot, targetZone);
+            ParkLaunchLine(Bot, targetZone);
             sleep(sleepTime);
 
 //            Required to stop Autonomous!

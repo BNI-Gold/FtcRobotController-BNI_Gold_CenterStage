@@ -7,7 +7,7 @@ import org.firstinspires.ftc.teamcode.CompititionUltimateGoal.Robots.Competition
 import org.firstinspires.ftc.teamcode.CompititionUltimateGoal.Robots.LabBot;
 
 public abstract class BlueLeft extends AutoMain {
-    public void driveToTargetZone (CompetitionBot Bot, TargetZone target) {
+    public void driveToTargetZone (CompetitionBot Bot, TargetZone target) throws InterruptedException {
         switch (target) {
             case A:
                 Bot.driveBackward(0.5,7.75);
@@ -27,7 +27,8 @@ public abstract class BlueLeft extends AutoMain {
                 Bot.gyroCorrection(0.2, 0);
                 break;
             case C:
-                Bot.driveBackward(.5,5);
+                Bot.driveGyroStraight(0.5, 7.75, "backward");
+//                Bot.driveBackward(.5,5);
                 sleep(500);
                 Bot.strafeLeft(0.5,.5);
                 sleep(500);
