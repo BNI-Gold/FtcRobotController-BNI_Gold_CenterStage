@@ -1,25 +1,32 @@
-package org.firstinspires.ftc.teamcode.CompititionUltimateGoal.Robots;
+/*
+ * Copyright (c) 2020 OpenFTC Team
+ *
+ * Permission is hereby granted, free of charge, to any person obtaining a copy
+ * of this software and associated documentation files (the "Software"), to deal
+ * in the Software without restriction, including without limitation the rights
+ * to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+ * copies of the Software, and to permit persons to whom the Software is
+ * furnished to do so, subject to the following conditions:
+ *
+ * The above copyright notice and this permission notice shall be included in all
+ * copies or substantial portions of the Software.
+ * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+ * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+ * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+ * AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+ * LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+ * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+ * SOFTWARE.
+ */
 
-import com.qualcomm.hardware.bosch.BNO055IMU;
-import com.qualcomm.hardware.bosch.JustLoggingAccelerationIntegrator;
-import com.qualcomm.robotcore.hardware.ColorSensor;
-import com.qualcomm.robotcore.hardware.DcMotor;
-import com.qualcomm.robotcore.hardware.DcMotorSimple;
-import com.qualcomm.robotcore.hardware.DistanceSensor;
-import com.qualcomm.robotcore.hardware.HardwareMap;
+package org.firstinspires.ftc.teamcode.Lab.VisionTracking.EOCV;
+
+import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
+import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 import com.qualcomm.robotcore.hardware.Servo;
+import com.qualcomm.robotcore.util.Range;
 
 import org.firstinspires.ftc.robotcore.external.hardware.camera.WebcamName;
-import org.firstinspires.ftc.robotcore.external.navigation.Acceleration;
-import org.firstinspires.ftc.robotcore.external.navigation.AngleUnit;
-import org.firstinspires.ftc.robotcore.external.navigation.AxesOrder;
-import org.firstinspires.ftc.robotcore.external.navigation.AxesReference;
-import org.firstinspires.ftc.robotcore.external.navigation.Orientation;
-import org.firstinspires.ftc.teamcode.CompititionUltimateGoal.DriveTrains.MecanumDrive;
-import org.firstinspires.ftc.teamcode.CompititionUltimateGoal.Modules.EasyOpenCVWebcam;
-import org.firstinspires.ftc.teamcode.CompititionUltimateGoal.Modules.EasyOpenCVWebcam;
-import org.firstinspires.ftc.teamcode.CompititionUltimateGoal.Modules.Servos;
-import org.firstinspires.ftc.teamcode.Lab.VisionTracking.EOCV.EasyOpenCVExampleWebcam;
 import org.firstinspires.ftc.teamcode.Lab.VisionTracking.EOCV.examples.PipelineStageSwitchingExample;
 import org.opencv.core.Core;
 import org.opencv.core.Mat;
@@ -32,104 +39,49 @@ import org.openftc.easyopencv.OpenCvCameraFactory;
 import org.openftc.easyopencv.OpenCvCameraRotation;
 import org.openftc.easyopencv.OpenCvPipeline;
 
+//import org.firstinspires.ftc.teamcode.examples.PipelineStageSwitchingExample;
 
-public class LabBot extends MecanumDrive  {
+@TeleOp (name = "WebCam Exmaple + Servo", group = "DUVAL")
 
-    //hardware constructors
-    public HardwareMap hwBot  =  null;
+public class EasyOpenCVExampleWebcam_SERVO extends LinearOpMode
+{
+    OpenCvCamera webcam;
+    SkystoneDeterminationPipeline pipeline;
 
-//GYRO INITIALIZATION
+    public Servo myServo = null;
 
-    public BNO055IMU imu;
-    public Orientation angles;
-    public Acceleration gravity;
-    public final double SPEED = .3;
-    public final double TOLERANCE = .4;
+    public double servoPos = 0.5;
 
-    // Color and Distance Hardware & Variables
-    public ColorSensor sensorColor;
-    public DistanceSensor sensorDistance;
-    public float hsvValues[] = {0F, 0F, 0F};
-    public final double SCALE_FACTOR = 1;
-//  Camera Initialization
-    public OpenCvCamera webcam;
-    public SkystoneDeterminationPipeline pipeline;
+    private double incVal = 0.001;
 
 
-
-    Servo WobbleArm = null;
-    Servo WobbleGrab = null;
-//    Servos servos = new Servos();
-
-
-    public double servoOpenPos = 0.36;
-    public double servoClosePos = 0.93;
-    public double WobbleArmRaisedPos = 0.40;
-    public double WobbleArmLowerPos = 0.14;
-    public double WobbleGrabOpenPos = 0.72;
-    public double WobbleGrabClosePos = 0.552;
-
-    //LabBot constructor
-    public LabBot() {
-
-    }
-    public void initRobot(HardwareMap hwMap){
-        hwBot = hwMap;
-//        Servos
-        WobbleArm = hwBot.get(Servo.class, "wobble_arm");
-        WobbleArm.setDirection(Servo.Direction.FORWARD);
-        WobbleArm.setPosition(WobbleArmRaisedPos);
-        WobbleGrab = hwBot.get(Servo.class, "wobble_grab");
-        WobbleGrab.setDirection(Servo.Direction.FORWARD);
-        WobbleGrab.setPosition(WobbleGrabClosePos);
+    @Override
+    public void runOpMode()
+    {
+        myServo = hardwareMap.servo.get("camera_servo");
+        myServo.setPosition(servoPos);
 
 
-        // define motors for robot
-        frontLeftMotor=hwBot.dcMotor.get("front_left_motor");
-        frontRightMotor=hwBot.dcMotor.get("front_right_motor");
-        rearLeftMotor = hwBot.dcMotor.get("rear_left_motor");
-        rearRightMotor = hwBot.dcMotor.get("rear_right_motor");
-
-        frontLeftMotor.setDirection(DcMotor.Direction.FORWARD);
-        rearLeftMotor.setDirection(DcMotor.Direction.FORWARD);
-        frontRightMotor.setDirection(DcMotor.Direction.REVERSE);
-        rearRightMotor.setDirection(DcMotor.Direction.REVERSE);
-
-
-        //Initialize Motor Run Mode for Robot
-        setMotorRunModes(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
-        setMotorRunModes(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
-
-        frontLeftMotor.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
-        frontRightMotor.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
-        rearRightMotor.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
-        rearLeftMotor.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
-
-
-        // Define and Initialize Gyro
-        BNO055IMU.Parameters parametersimu = new BNO055IMU.Parameters();
-        parametersimu.angleUnit = BNO055IMU.AngleUnit.DEGREES;
-        parametersimu.accelUnit = BNO055IMU.AccelUnit.METERS_PERSEC_PERSEC;
-        parametersimu.calibrationDataFile = "BNO055IMUCalibration.json"; // see the calibration sample opmode
-        parametersimu.loggingEnabled = true;
-        parametersimu.loggingTag = "IMU";
-        parametersimu.accelerationIntegrationAlgorithm = new JustLoggingAccelerationIntegrator();
-
-        imu = hwBot.get(BNO055IMU.class, "imu");
-        imu.initialize(parametersimu);
-
-
-
-
-
-    }
-
-    public void initCamera () {
-        int cameraMonitorViewId = hwBot.appContext.getResources().getIdentifier("cameraMonitorViewId", "id", hwBot.appContext.getPackageName());
-        webcam = OpenCvCameraFactory.getInstance().createWebcam(hwBot.get(WebcamName.class, "Webcam 1"), cameraMonitorViewId);
-//        pipeline = new EasyOpenCVWebcam.SkystoneDeterminationPipeline();
+        int cameraMonitorViewId = hardwareMap.appContext.getResources().getIdentifier("cameraMonitorViewId", "id", hardwareMap.appContext.getPackageName());
+        webcam = OpenCvCameraFactory.getInstance().createWebcam(hardwareMap.get(WebcamName.class, "Webcam 1"), cameraMonitorViewId);
+//        Used for SamplePipe from WebcamExample.  Going to change it to use "SkystoneDeterminationPipeline" based on Wizards.exe example.
+//        webcam.setPipeline(new SamplePipeline());
         pipeline = new SkystoneDeterminationPipeline();
         webcam.setPipeline(pipeline);
+
+
+//        All the old stuff that used phone... Here for reference.
+//        pipeline = new SkystoneDeterminationPipeline();
+//        webcam.setPipeline(pipeline);
+
+        // We set the viewport policy to optimized view so the preview doesn't appear 90 deg
+        // out when the RC activity is in portrait. We do our actual image processing assuming
+        // landscape orientation, though.
+
+
+//        phoneCam.setViewportRenderingPolicy(OpenCvCamera.ViewportRenderingPolicy.OPTIMIZE_VIEW);
+
+//        phoneCam.openCameraDeviceAsync(new OpenCvCamera.AsyncCameraOpenListener()
         webcam.openCameraDeviceAsync(new OpenCvCamera.AsyncCameraOpenListener()
         {
             @Override
@@ -154,51 +106,36 @@ public class LabBot extends MecanumDrive  {
                 webcam.startStreaming(320, 240, OpenCvCameraRotation.UPRIGHT);
             }
         });
-    }
-//
-    public void servoClosed () {
-        WobbleArm.setPosition(servoClosePos);
-    }
 
-    public void servoOpened(){
-        WobbleArm.setPosition(servoOpenPos);
-    }
+        waitForStart();
 
-    public void WobbleLower() {
-        WobbleArm.setPosition(WobbleArmLowerPos);
-    }
-    public void WobbleRaised() {
-        WobbleArm.setPosition(WobbleArmRaisedPos);
-    }
-    public void WobbleOpen(){
-        WobbleGrab.setPosition(WobbleGrabOpenPos);
-    }
-    public void WobbleClosed(){
-        WobbleGrab.setPosition(WobbleGrabClosePos);
-    }
-    public void detectRings () {
-
-    }
-
-    public void gyroCorrection (double speed, double angle) {
-
-        angles = imu.getAngularOrientation(AxesReference.INTRINSIC, AxesOrder.ZYX, AngleUnit.DEGREES);
-
-        if (angles.firstAngle >= angle + TOLERANCE) {
-            while (angles.firstAngle >=  angle + TOLERANCE && linearOp.opModeIsActive()) {
-                rotateRight(speed);
-                angles = imu.getAngularOrientation(AxesReference.INTRINSIC, AxesOrder.ZYX, AngleUnit.DEGREES);
+        while (opModeIsActive())
+        {
+            if (gamepad1.right_bumper) {
+                servoPos += incVal;
+                servoPos = Range.clip(servoPos,0,1);
+                telemetry.addLine("Increase Servo Pos!");
             }
-        }
-        else if (angles.firstAngle <= angle - TOLERANCE) {
-            while (angles.firstAngle <= angle - TOLERANCE && linearOp.opModeIsActive()) {
-                rotateLeft(speed);
-                angles = imu.getAngularOrientation(AxesReference.INTRINSIC, AxesOrder.ZYX, AngleUnit.DEGREES);
-            }
-        }
-        stopMotors();
 
-        angles = imu.getAngularOrientation(AxesReference.INTRINSIC, AxesOrder.ZYX, AngleUnit.DEGREES);
+            if (gamepad1.left_bumper){
+                servoPos -= incVal;
+                servoPos = Range.clip(servoPos, 0,  1);
+                telemetry.addLine( "Decrease Servo Pos!");
+            }
+
+            myServo.setPosition(servoPos);
+            telemetry.addLine("RB: increase, LB: Decrease");
+            telemetry.addLine("x = set to .90, y = set to 0.10");
+            telemetry.addData("TestS ervo Positiom: ", myServo.getPosition());
+            telemetry.addData("Servo Variable Position: ", servoPos);
+
+            telemetry.addData("Analysis", pipeline.getAnalysis());
+            telemetry.addData("Position", pipeline.position);
+            telemetry.update();
+
+            // Don't burn CPU cycles busy-looping in this sample
+            sleep(50);
+        }
     }
 
     public static class SkystoneDeterminationPipeline extends OpenCvPipeline
@@ -223,15 +160,16 @@ public class LabBot extends MecanumDrive  {
          * The core values which define the location and size of the sample regions
          */
 
-        //        USE THIS TO FIGURE OUT NUMBER OF RINGS.
+//        USE THIS TO FIGURE OUT NUMBER OF RINGS.
         static final Point REGION1_TOPLEFT_ANCHOR_POINT = new Point(181,98);
 
-        //        ORIGINAL AREA
+//        ORIGINAL AREA
         static final int REGION_WIDTH = 35;
+//        Was 25 10/12 @ 4pm
         static final int REGION_HEIGHT = 30;
 
-        //        ORIGINAL THRESHOLDS
-        final int FOUR_RING_THRESHOLD = 145;
+//        ORIGINAL THRESHOLDS
+        final int FOUR_RING_THRESHOLD = 150;
         final int ONE_RING_THRESHOLD = 135;
 
         Point region1_pointA = new Point(
@@ -247,10 +185,10 @@ public class LabBot extends MecanumDrive  {
         Mat region1_Cb;
         Mat YCrCb = new Mat();
         Mat Cb = new Mat();
-        public int avg1;
+        int avg1;
 
         // Volatile since accessed by OpMode thread w/o synchronization
-        public volatile EasyOpenCVWebcam.SkystoneDeterminationPipeline.RingPosition position = EasyOpenCVWebcam.SkystoneDeterminationPipeline.RingPosition.FOUR;
+        private volatile RingPosition position = RingPosition.FOUR;
 
         /*
          * This function takes the RGB frame, converts to YCrCb,
@@ -284,13 +222,13 @@ public class LabBot extends MecanumDrive  {
                     BLUE, // The color the rectangle is drawn in
                     2); // Thickness of the rectangle lines
 
-            position = EasyOpenCVWebcam.SkystoneDeterminationPipeline.RingPosition.FOUR; // Record our analysis
+            position = RingPosition.FOUR; // Record our analysis
             if(avg1 > FOUR_RING_THRESHOLD){
-                position = EasyOpenCVWebcam.SkystoneDeterminationPipeline.RingPosition.FOUR;
+                position = RingPosition.FOUR;
             }else if (avg1 > ONE_RING_THRESHOLD){
-                position = EasyOpenCVWebcam.SkystoneDeterminationPipeline.RingPosition.ONE;
+                position = RingPosition.ONE;
             }else{
-                position = EasyOpenCVWebcam.SkystoneDeterminationPipeline.RingPosition.NONE;
+                position = RingPosition.NONE;
             }
 
             Imgproc.rectangle(
@@ -309,7 +247,8 @@ public class LabBot extends MecanumDrive  {
         }
     }
 
-    class SamplePipeline extends OpenCvPipeline {
+    class SamplePipeline extends OpenCvPipeline
+    {
         boolean viewportPaused;
 
         /*
@@ -322,7 +261,8 @@ public class LabBot extends MecanumDrive  {
          */
 
         @Override
-        public Mat processFrame(Mat input) {
+        public Mat processFrame(Mat input)
+        {
             /*
              * IMPORTANT NOTE: the input Mat that is passed in as a parameter to this method
              * will only dereference to the same image for the duration of this particular
@@ -337,11 +277,11 @@ public class LabBot extends MecanumDrive  {
             Imgproc.rectangle(
                     input,
                     new Point(
-                            input.cols() / 4,
-                            input.rows() / 4),
+                            input.cols()/4,
+                            input.rows()/4),
                     new Point(
-                            input.cols() * (3f / 4f),
-                            input.rows() * (3f / 4f)),
+                            input.cols()*(3f/4f),
+                            input.rows()*(3f/4f)),
                     new Scalar(0, 255, 0), 4);
 
             /**
@@ -354,7 +294,8 @@ public class LabBot extends MecanumDrive  {
         }
 
         @Override
-        public void onViewportTapped() {
+        public void onViewportTapped()
+        {
             /*
              * The viewport (if one was specified in the constructor) can also be dynamically "paused"
              * and "resumed". The primary use case of this is to reduce CPU, memory, and power load
@@ -369,9 +310,12 @@ public class LabBot extends MecanumDrive  {
 
             viewportPaused = !viewportPaused;
 
-            if (viewportPaused) {
+            if(viewportPaused)
+            {
                 webcam.pauseViewport();
-            } else {
+            }
+            else
+            {
                 webcam.resumeViewport();
             }
         }

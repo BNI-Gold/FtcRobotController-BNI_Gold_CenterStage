@@ -26,8 +26,8 @@ public class AutoBlueLeft extends BlueLeft {
     @Override
     public void runOpMode() throws InterruptedException {
 //        Constructor to set up our hardware mapping.
-        Bot.initRobot(hardwareMap);
-//        Bot.initCamera();
+        Bot.initRobot(hardwareMap, "BlueLeft");
+        Bot.initCamera();
         Bot.setLinearOp(this);
 
 //        This is hard-coded for this auto.  May or may not use, but here just in case.
@@ -39,15 +39,15 @@ public class AutoBlueLeft extends BlueLeft {
 //            Change value in detectStarterStack to test different Auto paths.
 //            select the function call below and use "Cmd + B" to go direcrtly to that function.
             targetZone = detectStarterStack(Bot);
-//            telemetry.addData("SAMPLING VALUE #: ", Bot.pipeline.avg1);
-//            telemetry.addData("NUMBER OF RINGS: ", Bot.pipeline.position);
+            telemetry.addData("SAMPLING VALUE #: ", Bot.pipeline.avg1);
+            telemetry.addData("NUMBER OF RINGS: ", Bot.pipeline.position);
             telemetry.addData("TARGET ZONE: ", targetZone);
             telemetry.update();
 
             //STOP THE CAMERA! - closeCameraDevice does close the camera on RC
-//            Bot.webcam.closeCameraDevice();  //This does stop the camera.  Uncomment when ready to use Webcam.
+            Bot.webcam.closeCameraDevice();  //This does stop the camera.  Uncomment when ready to use Webcam.
 //OR
-//            Bot.webcam.pauseViewport();   // This line hasn't been used - so leave commented out.
+            //Bot.webcam.pauseViewport();   // This line hasn't been used - so leave commented out.
 
             sleep(1000);
 //            Drives robot to target Zone
@@ -55,8 +55,8 @@ public class AutoBlueLeft extends BlueLeft {
             sleep(sleepTime);
 
 //            Lower and raise the Servo to score the Wobble.
-//            ScoreWobble(Bot);
-//            sleep(sleepTime);
+//          ScoreWobble(Bot);
+           sleep(sleepTime);
 
 //            Park robot on the launch line.
             ParkLaunchLine(Bot, targetZone);

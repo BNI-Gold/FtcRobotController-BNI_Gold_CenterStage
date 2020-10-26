@@ -58,29 +58,49 @@ public class CompetitionBot extends MecanumDrive {
 
     Servo WobbleArm = null;
     Servo WobbleGrab = null;
+    Servo Camera =null;
 //    Servos servos = new Servos();
 
 
-//    public double servoOpenPos = 0.36;
-//    public double servoClosePos = 0.93;
-//    public double WobbleArmRaisedPos = 0.40;
-//    public double WobbleArmLowerPos = 0.14;
-//    public double WobbleGrabOpenPos = 0.72;
-//    public double WobbleGrabClosePos = 0.552;
+    public double servoOpenPos = 0.36;
+    public double servoClosePos = 0.93;
+    public double WobbleArmRaisedPos = 0.40;
+    public double WobbleArmLowerPos = 0.14;
+    public double WobbleGrabOpenPos = 0.72;
+    public double WobbleGrabClosePos = 0.552;
+    //Blue Left:
+    public double CameraServoPosBlueLeft = 0.382;
+    //Blue Right:
+    public double CameraServoPosBlueRight = 0.602;
 
     //LabBot constructor
     public CompetitionBot() {
 
     }
-    public void initRobot(HardwareMap hwMap){
+    public void initRobot(HardwareMap hwMap, String startPosition){
         hwBot = hwMap;
-//        Servos
-//        WobbleArm = hwBot.get(Servo.class, "wobble_arm");
-//        WobbleArm.setDirection(Servo.Direction.FORWARD);
-//        WobbleArm.setPosition(WobbleArmRaisedPos);
-//        WobbleGrab = hwBot.get(Servo.class, "wobble_grab");
-//        WobbleGrab.setDirection(Servo.Direction.FORWARD);
-//        WobbleGrab.setPosition(WobbleGrabClosePos);
+        WobbleArm = hwBot.get(Servo.class, "wobble_arm");
+        WobbleArm.setDirection(Servo.Direction.FORWARD);
+        WobbleArm.setPosition(WobbleArmRaisedPos);
+        WobbleGrab = hwBot.get(Servo.class, "wobble_grab");
+        WobbleGrab.setDirection(Servo.Direction.FORWARD);
+        WobbleGrab.setPosition(WobbleGrabClosePos);
+        Camera = hwBot.get(Servo.class, "camera_blue_left_servo");
+        Camera.setDirection(Servo.Direction.FORWARD);
+
+        switch (startPosition) {
+            case "BlueLeft":
+                Camera.setPosition(CameraServoPosBlueLeft);
+                break;
+            case "BlueRight":
+                break;
+            case "RedLeft":
+                break;
+            case "RedRight":
+                break;
+        }
+
+
 
 
         // define motors for robot
@@ -126,7 +146,6 @@ public class CompetitionBot extends MecanumDrive {
     public void initCamera () {
         int cameraMonitorViewId = hwBot.appContext.getResources().getIdentifier("cameraMonitorViewId", "id", hwBot.appContext.getPackageName());
         webcam = OpenCvCameraFactory.getInstance().createWebcam(hwBot.get(WebcamName.class, "Webcam 1"), cameraMonitorViewId);
-//        pipeline = new EasyOpenCVWebcam.SkystoneDeterminationPipeline();
         pipeline = new SkystoneDeterminationPipeline();
         webcam.setPipeline(pipeline);
         webcam.openCameraDeviceAsync(new OpenCvCamera.AsyncCameraOpenListener()
@@ -154,30 +173,30 @@ public class CompetitionBot extends MecanumDrive {
             }
         });
     }
-    //
-//    public void servoClosed () {
-//        WobbleArm.setPosition(servoClosePos);
-//    }
-//
-//    public void servoOpened(){
-//        WobbleArm.setPosition(servoOpenPos);
-//    }
-//
-//    public void WobbleLower() {
-//        WobbleArm.setPosition(WobbleArmLowerPos);
-//    }
-//    public void WobbleRaised() {
-//        WobbleArm.setPosition(WobbleArmRaisedPos);
-//    }
-//    public void WobbleOpen(){
-//        WobbleGrab.setPosition(WobbleGrabOpenPos);
-//    }
-//    public void WobbleClosed(){
-//        WobbleGrab.setPosition(WobbleGrabClosePos);
-//    }
-//    public void detectRings () {
 
-    // }
+    public void servoClosed () {
+        WobbleArm.setPosition(servoClosePos);
+    }
+
+    public void servoOpened(){
+        WobbleArm.setPosition(servoOpenPos);
+    }
+
+    public void WobbleLower() {
+        WobbleArm.setPosition(WobbleArmLowerPos);
+    }
+    public void WobbleRaised() {
+        WobbleArm.setPosition(WobbleArmRaisedPos);
+    }
+    public void WobbleOpen(){
+        WobbleGrab.setPosition(WobbleGrabOpenPos);
+    }
+    public void WobbleClosed(){
+        WobbleGrab.setPosition(WobbleGrabClosePos);
+    }
+    public void detectRings () {
+
+     }
 
     public void gyroCorrection (double speed, double angle) {
 
@@ -376,14 +395,9 @@ public class CompetitionBot extends MecanumDrive {
         }
     }
 
-    public void driveGyroStraight (double power, double rotations, String direction) throws InterruptedException {
-        double ticks = 0;
-        if (direction.equals("backward")) {
-            ticks = rotations * (-1) * TICKS_PER_ROTATION;
-        }
-        else {
-            ticks = rotations * TICKS_PER_ROTATION;
-        }
+    public void driveGyroBackward (double power, double rotations) throws InterruptedException {
+        double ticks = rotations * (+1) * TICKS_PER_ROTATION;
+
         angles = imu.getAngularOrientation(AxesReference.INTRINSIC, AxesOrder.ZYX, AngleUnit.DEGREES);
         double currentPos = 0;
         double leftSideSpeed;
@@ -392,58 +406,75 @@ public class CompetitionBot extends MecanumDrive {
 
         double target = angles.firstAngle;
         double startPosition = frontLeftMotor.getCurrentPosition();
-        //  linearOp.telemetry.addData("Angle to start: ", angles.firstAngle);
-        //  linearOp.telemetry.update();
+        linearOp.telemetry.addData("Angle to start: ", angles.firstAngle);
+        linearOp.telemetry.update();
         linearOp.sleep(100);
+//        while (currentPos < ticks + startPosition && linearOp.opModeIsActive()) {
         while (currentPos < ticks + startPosition && linearOp.opModeIsActive()) {
-
             angles = imu.getAngularOrientation(AxesReference.INTRINSIC, AxesOrder.ZYX, AngleUnit.DEGREES);
 
 
             currentPos = Math.abs(frontLeftMotor.getCurrentPosition());
 
-            switch (direction) {
-                case "forward":
-//                        currentPos = frontLeftMotor.getCurrentPosition();
-                    leftSideSpeed = power + (angles.firstAngle - target) / 100;            // they need to be different
-                    rightSideSpeed = power - (angles.firstAngle - target) / 100;
-
-                    leftSideSpeed = Range.clip(leftSideSpeed, -1, 1);        // helps prevent out of bounds error
-                    rightSideSpeed = Range.clip(rightSideSpeed, -1, 1);
-
-                    frontLeftMotor.setPower(leftSideSpeed);
-                    rearLeftMotor.setPower(leftSideSpeed);
-
-                    frontRightMotor.setPower(rightSideSpeed);
-                    rearRightMotor.setPower(rightSideSpeed);
-                    break;
-                case "backward":
-//                        currentPos = -frontLeftMotor.getCurrentPosition();
-                    leftSideSpeed = power - (angles.firstAngle - target) / 100;            // they need to be different
-                    rightSideSpeed = power + (angles.firstAngle - target) / 100;
-
-                    leftSideSpeed = Range.clip(leftSideSpeed, -1, 1);        // helps prevent out of bounds error
-                    rightSideSpeed = Range.clip(rightSideSpeed, -1, 1);
-
-                    frontLeftMotor.setPower(-leftSideSpeed);
-                    rearLeftMotor.setPower(-leftSideSpeed);
-
-                    frontRightMotor.setPower(-rightSideSpeed);
-                    rearRightMotor.setPower(-rightSideSpeed);
-                    break;
-            }
 
 
-/*
-            linearOp.telemetry.addData("Left Speed", frontLeftMotor.getPower());
-            linearOp.telemetry.addData("Right Speed", frontRightMotor.getPower());
-            linearOp.telemetry.addData("Distance till destination ", encoders + startPosition - frontLeftMotor.getCurrentPosition());
-            linearOp.telemetry.addData("Current Position", currentPos);
-            linearOp.telemetry.addData("Target Position", target);
-            linearOp.telemetry.addData("Angle: ", angles.firstAngle);
-            linearOp.telemetry.update();
+            leftSideSpeed = power - (angles.firstAngle - target) / 100;            // they need to be different
+            rightSideSpeed = power + (angles.firstAngle - target) / 100;
+
+            leftSideSpeed = Range.clip(leftSideSpeed, -1, 1);        // helps prevent out of bounds error
+            rightSideSpeed = Range.clip(rightSideSpeed, -1, 1);
+
+            frontLeftMotor.setPower(-leftSideSpeed);
+            rearLeftMotor.setPower(-leftSideSpeed);
+
+            frontRightMotor.setPower(-rightSideSpeed);
+            rearRightMotor.setPower(-rightSideSpeed);
+
+
+//            switch (direction) {
+//                case "forward":
+//                    currentPos = frontLeftMotor.getCurrentPosition();
+//                    leftSideSpeed = power + (angles.firstAngle - target) / 100;            // they need to be different
+//                    rightSideSpeed = power - (angles.firstAngle - target) / 100;
+//
+//                    leftSideSpeed = Range.clip(leftSideSpeed, -1, 1);        // helps prevent out of bounds error
+//                    rightSideSpeed = Range.clip(rightSideSpeed, -1, 1);
+//
+//                    frontLeftMotor.setPower(leftSideSpeed);
+//                    rearLeftMotor.setPower(leftSideSpeed);
+//
+//                    frontRightMotor.setPower(rightSideSpeed);
+//                    rearRightMotor.setPower(rightSideSpeed);
+//                    break;
+//                case "backward":
+//                    currentPos = -frontLeftMotor.getCurrentPosition();
+//                    leftSideSpeed = power - (angles.firstAngle - target) / 100;            // they need to be different
+//                    rightSideSpeed = power + (angles.firstAngle - target) / 100;
+//
+//                    leftSideSpeed = Range.clip(leftSideSpeed, -1, 1);        // helps prevent out of bounds error
+//                    rightSideSpeed = Range.clip(rightSideSpeed, -1, 1);
+//
+//                    frontLeftMotor.setPower(-leftSideSpeed);
+//                    rearLeftMotor.setPower(-leftSideSpeed);
+//
+//                    frontRightMotor.setPower(-rightSideSpeed);
+//                    rearRightMotor.setPower(-rightSideSpeed);
+//                    break;
+//            }
+//
+//
+//
+//
+//
+//            linearOp.telemetry.addData("Left Speed", frontLeftMotor.getPower());
+//            linearOp.telemetry.addData("Right Speed", frontRightMotor.getPower());
+//            linearOp.telemetry.addData("Distance till destination ", encoders + startPosition - frontLeftMotor.getCurrentPosition());
+//            linearOp.telemetry.addData("Current Position", currentPos);
+//            linearOp.telemetry.addData("Target Position", target);
+//            linearOp.telemetry.addData("Angle: ", angles.firstAngle);
+//            linearOp.telemetry.update();
             // missing waiting
-*/
+
             linearOp.idle();
         }
 
@@ -453,7 +484,100 @@ public class CompetitionBot extends MecanumDrive {
         rearRightMotor.setPower(0);
 
         linearOp.idle();
+
+    }
+
+
+    public void driveGyroForward (double power, double rotations) throws InterruptedException {
+        double ticks = rotations * (1) * TICKS_PER_ROTATION;
+
+        angles = imu.getAngularOrientation(AxesReference.INTRINSIC, AxesOrder.ZYX, AngleUnit.DEGREES);
+        double currentPos = 0;
+        double leftSideSpeed;
+        double rightSideSpeed;
+
+
+        double target = angles.firstAngle;
+        double startPosition = frontLeftMotor.getCurrentPosition();
+          linearOp.telemetry.addData("Angle to start: ", angles.firstAngle);
+          linearOp.telemetry.update();
+        linearOp.sleep(100);
+        while (currentPos < ticks + startPosition && linearOp.opModeIsActive()) {
+
+            angles = imu.getAngularOrientation(AxesReference.INTRINSIC, AxesOrder.ZYX, AngleUnit.DEGREES);
+
+
+            currentPos = Math.abs(frontLeftMotor.getCurrentPosition());
+
+
+
+            leftSideSpeed = power - (angles.firstAngle - target) / 100;            // they need to be different
+            rightSideSpeed = power + (angles.firstAngle - target) / 100;
+
+            leftSideSpeed = Range.clip(leftSideSpeed, -1, 1);        // helps prevent out of bounds error
+            rightSideSpeed = Range.clip(rightSideSpeed, -1, 1);
+
+            frontLeftMotor.setPower(+leftSideSpeed);
+            rearLeftMotor.setPower(+leftSideSpeed);
+
+            frontRightMotor.setPower(+rightSideSpeed);
+            rearRightMotor.setPower(+rightSideSpeed);
+
+
+//            switch (direction) {
+//                case "forward":
+//                    currentPos = frontLeftMotor.getCurrentPosition();
+//                    leftSideSpeed = power + (angles.firstAngle - target) / 100;            // they need to be different
+//                    rightSideSpeed = power - (angles.firstAngle - target) / 100;
 //
+//                    leftSideSpeed = Range.clip(leftSideSpeed, -1, 1);        // helps prevent out of bounds error
+//                    rightSideSpeed = Range.clip(rightSideSpeed, -1, 1);
+//
+//                    frontLeftMotor.setPower(leftSideSpeed);
+//                    rearLeftMotor.setPower(leftSideSpeed);
+//
+//                    frontRightMotor.setPower(rightSideSpeed);
+//                    rearRightMotor.setPower(rightSideSpeed);
+//                    break;
+//                case "backward":
+//                    currentPos = -frontLeftMotor.getCurrentPosition();
+//                    leftSideSpeed = power - (angles.firstAngle - target) / 100;            // they need to be different
+//                    rightSideSpeed = power + (angles.firstAngle - target) / 100;
+//
+//                    leftSideSpeed = Range.clip(leftSideSpeed, -1, 1);        // helps prevent out of bounds error
+//                    rightSideSpeed = Range.clip(rightSideSpeed, -1, 1);
+//
+//                    frontLeftMotor.setPower(-leftSideSpeed);
+//                    rearLeftMotor.setPower(-leftSideSpeed);
+//
+//                    frontRightMotor.setPower(-rightSideSpeed);
+//                    rearRightMotor.setPower(-rightSideSpeed);
+//                    break;
+//            }
+//
+//
+//
+//
+//
+//            linearOp.telemetry.addData("Left Speed", frontLeftMotor.getPower());
+//            linearOp.telemetry.addData("Right Speed", frontRightMotor.getPower());
+//            linearOp.telemetry.addData("Distance till destination ", ticks + startPosition - frontLeftMotor.getCurrentPosition());
+//            linearOp.telemetry.addData("Current Position", currentPos);
+//            linearOp.telemetry.addData("Target Position", target);
+//            linearOp.telemetry.addData("Angle: ", angles.firstAngle);
+//            linearOp.telemetry.update();
+            // missing waiting
+
+            linearOp.idle();
+        }
+
+        frontLeftMotor.setPower(0);
+        frontRightMotor.setPower(0);
+        rearLeftMotor.setPower(0);
+        rearRightMotor.setPower(0);
+
+        linearOp.idle();
+
     }
 
     public void driveGyroStrafe (double power, double rotations, String direction) throws InterruptedException {
@@ -469,8 +593,8 @@ public class CompetitionBot extends MecanumDrive {
 
         double target = angles.firstAngle;
         double startPosition = frontLeftMotor.getCurrentPosition();
-        //    linearOp.telemetry.addData("Angle to start: ", angles.firstAngle);
-        //    linearOp.telemetry.update();
+        linearOp.telemetry.addData("Angle to start: ", angles.firstAngle);
+        linearOp.telemetry.update();
         linearOp.sleep(2000);
         while (currentPos < ticks + startPosition && linearOp.opModeIsActive()) {
 
@@ -517,16 +641,16 @@ public class CompetitionBot extends MecanumDrive {
             }
 
 
-/*
-            linearOp.telemetry.addData("Left Speed", frontLeftMotor.getPower());
-            linearOp.telemetry.addData("Right Speed", frontRightMotor.getPower());
-            linearOp.telemetry.addData("Distance till destination ", encoders + startPosition - frontLeftMotor.getCurrentPosition());
-            linearOp.telemetry.addData("Current Position", currentPos);
-            linearOp.telemetry.addData("Target Position", target);
-            linearOp.telemetry.addData("Angle: ", angles.firstAngle);
 
-            linearOp.telemetry.update();
-*/
+//            linearOp.telemetry.addData("Left Speed", frontLeftMotor.getPower());
+//            linearOp.telemetry.addData("Right Speed", frontRightMotor.getPower());
+//            linearOp.telemetry.addData("Distance till destination ", encoders + startPosition - frontLeftMotor.getCurrentPosition());
+//            linearOp.telemetry.addData("Current Position", currentPos);
+//            linearOp.telemetry.addData("Target Position", target);
+//            linearOp.telemetry.addData("Angle: ", angles.firstAngle);
+//
+//            linearOp.telemetry.update();
+
             // missing waiting
             linearOp.idle();
         }
@@ -556,8 +680,8 @@ public class CompetitionBot extends MecanumDrive {
 
         double target = angle;
         double startPosition = frontLeftMotor.getCurrentPosition();
-        //    linearOp.telemetry.addData("Angle to start: ", angles.firstAngle);
-        //    linearOp.telemetry.update();
+        linearOp.telemetry.addData("Angle to start: ", angles.firstAngle);
+        linearOp.telemetry.update();
         linearOp.sleep(2000);
         while (currentPos < ticks + startPosition && linearOp.opModeIsActive()) {
 
@@ -604,16 +728,16 @@ public class CompetitionBot extends MecanumDrive {
             }
 
 
-/*
-           linearOp.telemetry.addData("Left Speed", frontLeftMotor.getPower());
-           linearOp.telemetry.addData("Right Speed", frontRightMotor.getPower());
-           linearOp.telemetry.addData("Distance till destination ", encoders + startPosition - frontLeftMotor.getCurrentPosition());
-           linearOp.telemetry.addData("Current Position", currentPos);
-           linearOp.telemetry.addData("Target Position", target);
-           linearOp.telemetry.addData("Angle: ", angles.firstAngle);
 
-           linearOp.telemetry.update();
-*/
+//           linearOp.telemetry.addData("Left Speed", frontLeftMotor.getPower());
+//           linearOp.telemetry.addData("Right Speed", frontRightMotor.getPower());
+//           linearOp.telemetry.addData("Distance till destination ", encoders + startPosition - frontLeftMotor.getCurrentPosition());
+//           linearOp.telemetry.addData("Current Position", currentPos);
+//           linearOp.telemetry.addData("Target Position", target);
+//           linearOp.telemetry.addData("Angle: ", angles.firstAngle);
+//
+//           linearOp.telemetry.update();
+
             // missing waiting
             linearOp.idle();
         }
