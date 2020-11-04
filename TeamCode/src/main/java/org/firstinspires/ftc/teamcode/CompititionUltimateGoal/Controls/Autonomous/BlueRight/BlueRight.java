@@ -12,35 +12,53 @@ public abstract class BlueRight extends AutoMain {
                 Bot.strafeLeft(0.5, 1);
                 sleep(100);
                 Bot.gyroCorrection(0.2,0);
+                sleep(100);
                 Bot.driveGyroBackward(0.5, 7.5);
+                sleep(100);
+                Bot.gyroCorrection(0.2,0);
                 sleep(100);
                 Bot.strafeRight(0.5, 3);
                 sleep(100);
                 Bot.gyroCorrection(0.2,0);
+                sleep(100);
                 break;
             case B:
                 Bot.strafeLeft(0.5, 1);
                 sleep(100);
-                Bot.driveBackward(0.5, 7.5);
+                Bot.gyroCorrection(0.2, 0);
+                sleep(100);
+                Bot.driveGyroBackward(0.5, 7.5);
+                sleep(100);
+                Bot.gyroCorrection(0.2,0);
                 sleep(100);
                 Bot.strafeRight(0.5, 1);
+                sleep(100);
+                Bot.gyroCorrection(0.2, 0);
                 sleep(100);
                 break;
 
             case C:
                 Bot.strafeLeft(0.5, 1);
                 sleep(100);
-                Bot.driveBackward(0.5, 9.5);
+                Bot.gyroCorrection(0.2,0);
+                sleep(100);
+                Bot.driveGyroBackward(.5,9.5);
+                sleep(100);
+                Bot.gyroCorrection(0.2,0);
                 sleep(100);
                 Bot.strafeRight(0.5, 3);
                 sleep(100);
-                Bot.driveForward(0.4, 3.5);
+                Bot.gyroCorrection(0.2,0);
+                sleep(100);
+                Bot.driveGyroBackward(.4,3.5);
+                sleep(100);
+                Bot.gyroCorrection(0.2,0);
                 sleep(100);
                 break;
         }
     }
 
-    public void ParkLaunchLine(CompetitionBot Bot, TargetZone target) {
+    public void ParkLaunchLine(CompetitionBot Bot, TargetZone target) throws InterruptedException {
         switch (target) {
             case A:
                 Bot.strafeLeft(.5,1);
@@ -50,15 +68,13 @@ public abstract class BlueRight extends AutoMain {
                 break;
 
             case B:
-                Bot.driveForward(0.5, 2);
+                Bot.driveGyroForward(0.5,2);
                 sleep(250);
                 Bot.gyroCorrection(0.2, 0);
                 sleep(100);
                 break;
 
             case C:
-                Bot.driveForward(0.4, 3.5);
-                sleep(100);
                 break;
         }
     }

@@ -12,8 +12,6 @@ public abstract class BlueLeft extends AutoMain {
             case A:
                 Bot.driveGyroBackward(0.5,5.5);
                 sleep(100);
-                Bot.strafeLeft(0.5,1.25);
-                sleep(100);
                 Bot.gyroCorrection(0.2, 0);
                 sleep(100);
                 break;
@@ -25,15 +23,18 @@ public abstract class BlueLeft extends AutoMain {
                 Bot.strafeLeft(0.5,3.5);
                 sleep(100);
                 Bot.gyroCorrection(0.2, 0);
+                sleep(100);
                 break;
             case C:
 //                Bot.driveBackward(.5,5);
                 Bot.driveGyroBackward(0.5, 9.5);
                 sleep(500);
-
+                Bot.gyroCorrection(0.2, 0);
+                sleep(100);
                 Bot.strafeLeft(0.5,1);
-
                 sleep(500);
+                Bot.gyroCorrection(0.2, 0);
+                sleep(100);
                 break;
         }
     }
@@ -42,11 +43,13 @@ public abstract class BlueLeft extends AutoMain {
         switch (target) {
             case A:
                 Bot.strafeLeft(.5,1);
+                sleep(100);
                 Bot.gyroCorrection(0.2, 0);
+                sleep(100);
 //                No need to move - already parked on line ot score Wobble.
                 break;
             case B:
-                Bot.driveForward(0.5, 2);
+                Bot.driveGyroForward(0.5, 2);
                 sleep(250);
                 Bot.gyroCorrection(0.2, 0);
                 sleep(100);
