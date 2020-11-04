@@ -10,28 +10,28 @@ public abstract class BlueLeft extends AutoMain {
     public void driveToTargetZone (CompetitionBot Bot, TargetZone target) throws InterruptedException {
         switch (target) {
             case A:
-                Bot.driveGyroBackward(0.5,7.75);
-                sleep(500);
+                Bot.driveGyroBackward(0.5,5.5);
+                sleep(100);
+                Bot.strafeLeft(0.5,1.25);
+                sleep(100);
                 Bot.gyroCorrection(0.2, 0);
                 sleep(100);
-                Bot.strafeLeft(0.5,1);
-                sleep(500);
                 break;
             case B:
-                Bot.driveGyroBackward(.5,10.5);
-                sleep(500);
+                Bot.driveGyroBackward(.5,7.5);
+                sleep(100);
                 Bot.gyroCorrection(0.2, 0);
                 sleep(100);
                 Bot.strafeLeft(0.5,3.5);
-                sleep(500);
+                sleep(100);
                 Bot.gyroCorrection(0.2, 0);
                 break;
             case C:
 //                Bot.driveBackward(.5,5);
-                Bot.driveGyroBackward(0.5, 7.75);
+                Bot.driveGyroBackward(0.5, 9.5);
                 sleep(500);
 
-                Bot.strafeLeft(0.5,.5);
+                Bot.strafeLeft(0.5,1);
 
                 sleep(500);
                 break;
@@ -41,21 +41,21 @@ public abstract class BlueLeft extends AutoMain {
     public void ParkLaunchLine (CompetitionBot Bot, TargetZone target) throws InterruptedException {
         switch (target) {
             case A:
-                Bot.gyroCorrection(45, .5);
+                Bot.strafeLeft(.5,1);
+                Bot.gyroCorrection(0.2, 0);
 //                No need to move - already parked on line ot score Wobble.
                 break;
             case B:
-                Bot.driveGyroForward(0.5, 2.5);
+                Bot.driveForward(0.5, 2);
                 sleep(250);
                 Bot.gyroCorrection(0.2, 0);
                 sleep(100);
-                Bot.driveGyroForward(0.5, 0.5);
-                sleep(100);
-                Bot.gyroCorrection(0.2, 0);
                 break;
             case C:
 //                Bot.driveForward(0.5, 4.5);
                 Bot.driveGyroForward(0.4, 3.5);
+                sleep(250);
+                Bot.gyroCorrection(0.2, 0);
                 sleep(250);
                 break;
         }

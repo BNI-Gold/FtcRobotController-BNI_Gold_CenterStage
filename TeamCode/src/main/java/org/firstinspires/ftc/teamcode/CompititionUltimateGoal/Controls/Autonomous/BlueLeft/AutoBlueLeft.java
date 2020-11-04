@@ -55,7 +55,7 @@ public class AutoBlueLeft extends BlueLeft {
             sleep(sleepTime);
 
 //            Lower and raise the Servo to score the Wobble.
-//          ScoreWobble(Bot);
+          ScoreWobble(Bot);
            sleep(sleepTime);
 
 //            Park robot on the launch line.

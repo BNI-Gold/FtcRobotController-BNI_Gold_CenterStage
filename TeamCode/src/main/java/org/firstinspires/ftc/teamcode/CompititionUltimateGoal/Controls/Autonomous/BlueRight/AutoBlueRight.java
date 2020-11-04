@@ -4,6 +4,7 @@ import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
 
 import org.firstinspires.ftc.teamcode.CompititionUltimateGoal.Controls.Autonomous.StartPosition;
 import org.firstinspires.ftc.teamcode.CompititionUltimateGoal.Controls.Autonomous.TargetZone;
+import org.firstinspires.ftc.teamcode.CompititionUltimateGoal.Modules.EasyOpenCVWebcam;
 import org.firstinspires.ftc.teamcode.CompititionUltimateGoal.Robots.CompetitionBot;
 import org.firstinspires.ftc.teamcode.CompititionUltimateGoal.Robots.LabBot;
 
@@ -23,9 +24,8 @@ public class AutoBlueRight extends BlueRight {
     @Override
     public void runOpMode() throws InterruptedException {
 
-
-
-        Bot.initRobot(hardwareMap);
+        Bot.initRobot(hardwareMap, "TeleOp");
+        Bot.initCamera();
         Bot.setLinearOp(this);
 
 
@@ -37,6 +37,13 @@ public class AutoBlueRight extends BlueRight {
 
         while (opModeIsActive()){
 
+            targetZone = detectStarterStack(Bot);
+            telemetry.addData("SAMPLING VALUE #: ", Bot.pipeline.avg1);
+            telemetry.addData("NUMBER OF RINGS: ", Bot.pipeline.position);
+            telemetry.addData("TARGET ZONE: ", targetZone);
+            telemetry.update();
+
+            Bot.webcam.closeCameraDevice();
 
             targetZone = detectStarterStack(Bot);
             sleep(sleepTime);

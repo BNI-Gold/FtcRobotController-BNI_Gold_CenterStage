@@ -31,7 +31,7 @@ public class TeleopCompetitionBot extends OpMode {
 
     @Override
     public void init() {
-        Bot.initRobot(hardwareMap);
+        Bot.initRobot(hardwareMap,  "TeleOp");
     }
     @Override
     public void init_loop() {
@@ -42,6 +42,7 @@ public class TeleopCompetitionBot extends OpMode {
     @Override
     public void loop() {
         drive();
+        wobble();
 
     }
     @Override
@@ -98,6 +99,21 @@ public class TeleopCompetitionBot extends OpMode {
         }
 
         telemetryOutput();
+    }
+
+    public void wobble () {
+        if (gamepad2.right_trigger > 0.1) {
+            Bot.WobbleLower();
+        }
+        if (gamepad2.right_bumper == true) {
+            Bot.WobbleOpen();
+        }
+        if (gamepad2.left_trigger > 0.1) {
+            Bot.WobbleRaised();
+        }
+        if (gamepad2.left_bumper == true) {
+            Bot.WobbleClosed();
+        }
     }
 
 
