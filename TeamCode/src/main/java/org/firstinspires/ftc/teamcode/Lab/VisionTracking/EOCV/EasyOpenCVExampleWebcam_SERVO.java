@@ -58,7 +58,7 @@ public class EasyOpenCVExampleWebcam_SERVO extends LinearOpMode
     @Override
     public void runOpMode()
     {
-        myServo = hardwareMap.servo.get("camera_servo");
+        myServo = hardwareMap.servo.get("camera_blue_left_servo");
         myServo.setPosition(servoPos);
 
 
@@ -123,11 +123,25 @@ public class EasyOpenCVExampleWebcam_SERVO extends LinearOpMode
                 telemetry.addLine( "Decrease Servo Pos!");
             }
 
+
+            if (gamepad1.left_trigger > 0.5) {
+                servoPos = 0.358;
+                telemetry.addLine("Camera Servo - Blue Left");
+            }
+            if (gamepad1.right_trigger > 0.5) {
+                servoPos = 0.602;
+                telemetry.addLine("Camera Servo - Blue Right");
+
+            }
+
             myServo.setPosition(servoPos);
             telemetry.addLine("RB: increase, LB: Decrease");
             telemetry.addLine("x = set to .90, y = set to 0.10");
-            telemetry.addData("TestS ervo Positiom: ", myServo.getPosition());
+            telemetry.addLine("left trigger = Camera Servo - Blue Left");
+            telemetry.addLine("Right Trigger = Camera Servo - Blue Right");
+            telemetry.addData("TestS servo Positiom: ", myServo.getPosition());
             telemetry.addData("Servo Variable Position: ", servoPos);
+
 
             telemetry.addData("Analysis", pipeline.getAnalysis());
             telemetry.addData("Position", pipeline.position);
@@ -166,11 +180,14 @@ public class EasyOpenCVExampleWebcam_SERVO extends LinearOpMode
 //        ORIGINAL AREA
         static final int REGION_WIDTH = 35;
 //        Was 25 10/12 @ 4pm
-        static final int REGION_HEIGHT = 30;
+        static final int REGION_HEIGHT = 35;
 
 //        ORIGINAL THRESHOLDS
-        final int FOUR_RING_THRESHOLD = 150;
-        final int ONE_RING_THRESHOLD = 135;
+//        final int FOUR_RING_THRESHOLD = 150;
+//        final int ONE_RING_THRESHOLD = 135;
+
+        final int FOUR_RING_THRESHOLD = 140;
+        final int ONE_RING_THRESHOLD = 127;
 
         Point region1_pointA = new Point(
                 REGION1_TOPLEFT_ANCHOR_POINT.x,

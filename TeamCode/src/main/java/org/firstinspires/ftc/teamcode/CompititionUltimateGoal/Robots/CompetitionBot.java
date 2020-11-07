@@ -4,6 +4,7 @@ import com.qualcomm.hardware.bosch.BNO055IMU;
 import com.qualcomm.hardware.bosch.JustLoggingAccelerationIntegrator;
 import com.qualcomm.robotcore.hardware.ColorSensor;
 import com.qualcomm.robotcore.hardware.DcMotor;
+import com.qualcomm.robotcore.hardware.DcMotorSimple;
 import com.qualcomm.robotcore.hardware.DistanceSensor;
 import com.qualcomm.robotcore.hardware.HardwareMap;
 import com.qualcomm.robotcore.hardware.Servo;
@@ -64,14 +65,17 @@ public class CompetitionBot extends MecanumDrive {
 
     public double servoOpenPos = 0.36;
     public double servoClosePos = 0.93;
-    public double WobbleArmRaisedPos = 0.481;
+    public double WobbleArmRaisedPos = 0.5;
     public double WobbleArmLowerPos = 0.85;
     public double WobbleGrabOpenPos = 0.566;
     public double WobbleGrabClosePos = 0;
     //Blue Left:
-    public double CameraServoPosBlueLeft = 0.382;
+    public double CameraServoPosBlueLeft = 0.358;
     //Blue Right:
     public double CameraServoPosBlueRight = 0.602;
+    //Launcher Motor:
+    public DcMotor LauncherMotor = null;
+    public DcMotor IntakeMotor = null;
 
     //LabBot constructor
     public CompetitionBot() {
@@ -103,16 +107,34 @@ public class CompetitionBot extends MecanumDrive {
 
 
 
+
         // define motors for robot
         frontLeftMotor=hwBot.dcMotor.get("front_left_motor");
         frontRightMotor=hwBot.dcMotor.get("front_right_motor");
         rearLeftMotor = hwBot.dcMotor.get("rear_left_motor");
         rearRightMotor = hwBot.dcMotor.get("rear_right_motor");
 
+        LauncherMotor = hwBot.dcMotor.get("launcher_motor");
+
+        IntakeMotor = hwBot.dcMotor.get("intake_motor");
+
         frontLeftMotor.setDirection(DcMotor.Direction.REVERSE);
         rearLeftMotor.setDirection(DcMotor.Direction.REVERSE);
         frontRightMotor.setDirection(DcMotor.Direction.FORWARD);
         rearRightMotor.setDirection(DcMotor.Direction.FORWARD);
+//        frontLeftMotor.setDirection(DcMotor.Direction.FORWARD);
+//        rearLeftMotor.setDirection(DcMotor.Direction.FORWARD);
+//        frontRightMotor.setDirection(DcMotor.Direction.REVERSE);
+//        rearRightMotor.setDirection(DcMotor.Direction.REVERSE);
+
+        LauncherMotor.setDirection(DcMotor.Direction.REVERSE);
+//        LauncherMotor.setDirection(DcMotor.Direction.FORWARD);
+//        IntakeMotor.setDirection(DcMotor.Direction.REVERSE);
+        IntakeMotor.setDirection(DcMotor.Direction.FORWARD);
+
+
+
+
 
 
         //Initialize Motor Run Mode for Robot
@@ -123,7 +145,6 @@ public class CompetitionBot extends MecanumDrive {
         frontRightMotor.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
         rearRightMotor.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
         rearLeftMotor.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
-
 
         // Define and Initialize Gyro
         BNO055IMU.Parameters parametersimu = new BNO055IMU.Parameters();
@@ -194,10 +215,22 @@ public class CompetitionBot extends MecanumDrive {
     public void WobbleClosed(){
         WobbleGrab.setPosition(WobbleGrabClosePos);
     }
-    public void detectRings () {
+    public void detectRings () { }
 
+    public void LauncherOn(double power) {
+        LauncherMotor.setPower(power);
      }
+    public void LauncherOff(double power) {
+        LauncherMotor.setPower(power);
+    }
 
+    public void IntakeOn(double power){
+        IntakeMotor.setPower(power);
+    }
+    public void IntakeOff(double power){
+        IntakeMotor.setPower(power);
+
+    }
     public void gyroCorrection (double speed, double angle) {
 
         angles = imu.getAngularOrientation(AxesReference.INTRINSIC, AxesOrder.ZYX, AngleUnit.DEGREES);
@@ -218,6 +251,8 @@ public class CompetitionBot extends MecanumDrive {
 
         angles = imu.getAngularOrientation(AxesReference.INTRINSIC, AxesOrder.ZYX, AngleUnit.DEGREES);
     }
+
+
 
     public static class SkystoneDeterminationPipeline extends OpenCvPipeline
     {
@@ -246,11 +281,11 @@ public class CompetitionBot extends MecanumDrive {
 
         //        ORIGINAL AREA
         static final int REGION_WIDTH = 35;
-        static final int REGION_HEIGHT = 30;
+        static final int REGION_HEIGHT = 35;
 
         //        ORIGINAL THRESHOLDS
-        final int FOUR_RING_THRESHOLD = 145;
-        final int ONE_RING_THRESHOLD = 135;
+        final int FOUR_RING_THRESHOLD = 140;
+        final int ONE_RING_THRESHOLD = 127;
 
         Point region1_pointA = new Point(
                 REGION1_TOPLEFT_ANCHOR_POINT.x,

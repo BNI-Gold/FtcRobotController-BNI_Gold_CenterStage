@@ -15,7 +15,6 @@ public class MecanumDrive {
     public DcMotor rearRightMotor;
     public DcMotor rearLeftMotor;
     public static final double TICKS_PER_ROTATION = 383.6;   // GoBilda 13.7 Motor PPR
-
     public LinearOpMode linearOp = null;
 
 
@@ -28,7 +27,6 @@ public class MecanumDrive {
     public MecanumDrive() {
 
     }
-
 
     public void stopMotors() {
         frontLeftMotor.setPower(0);
@@ -300,10 +298,5 @@ public class MecanumDrive {
         }
         stopMotors();
     }
-
-
-
-
-
 
 }

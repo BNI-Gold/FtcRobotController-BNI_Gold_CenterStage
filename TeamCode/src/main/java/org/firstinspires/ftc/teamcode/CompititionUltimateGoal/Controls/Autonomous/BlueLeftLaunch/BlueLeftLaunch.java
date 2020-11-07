@@ -1,12 +1,10 @@
-package org.firstinspires.ftc.teamcode.CompititionUltimateGoal.Controls.Autonomous.BlueLeft;
+package org.firstinspires.ftc.teamcode.CompititionUltimateGoal.Controls.Autonomous.BlueLeftLaunch;
 
 import org.firstinspires.ftc.teamcode.CompititionUltimateGoal.Controls.Autonomous.AutoMain;
-import org.firstinspires.ftc.teamcode.CompititionUltimateGoal.Controls.Autonomous.StartPosition;
 import org.firstinspires.ftc.teamcode.CompititionUltimateGoal.Controls.Autonomous.TargetZone;
 import org.firstinspires.ftc.teamcode.CompititionUltimateGoal.Robots.CompetitionBot;
-import org.firstinspires.ftc.teamcode.CompititionUltimateGoal.Robots.LabBot;
 
-public abstract class BlueLeft extends AutoMain {
+public abstract class BlueLeftLaunch extends AutoMain {
     public void driveToTargetZone (CompetitionBot Bot, TargetZone target) throws InterruptedException {
         switch (target) {
             case A:
@@ -48,6 +46,8 @@ public abstract class BlueLeft extends AutoMain {
                 Bot.strafeLeft(.5,1);
                 sleep(100);
                 Bot.gyroCorrection(0.2, 0);
+                sleep(100);
+                Bot.driveGyroForward(.5,.5);
                 sleep(100);
 //                No need to move - already parked on line ot score Wobble.
                 break;

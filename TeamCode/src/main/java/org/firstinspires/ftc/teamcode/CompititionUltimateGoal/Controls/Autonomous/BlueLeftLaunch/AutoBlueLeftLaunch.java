@@ -1,19 +1,16 @@
-package org.firstinspires.ftc.teamcode.CompititionUltimateGoal.Controls.Autonomous.BlueLeft;
+package org.firstinspires.ftc.teamcode.CompititionUltimateGoal.Controls.Autonomous.BlueLeftLaunch;
 
 import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
-import com.qualcomm.robotcore.eventloop.opmode.Disabled;
 
 import org.firstinspires.ftc.teamcode.CompititionUltimateGoal.Controls.Autonomous.StartPosition;
 import org.firstinspires.ftc.teamcode.CompititionUltimateGoal.Controls.Autonomous.TargetZone;
-import org.firstinspires.ftc.teamcode.CompititionUltimateGoal.Modules.EasyOpenCVWebcam;
 import org.firstinspires.ftc.teamcode.CompititionUltimateGoal.Robots.CompetitionBot;
-import org.firstinspires.ftc.teamcode.CompititionUltimateGoal.Robots.LabBot;
 
-@Autonomous (name = "Remote:Blue:Left:", group = "BLUE")
+@Autonomous (name = "Remote:Blue:LeftLaunch:", group = "BLUE")
 //@Disabled
 
 
-public class AutoBlueLeft extends BlueLeft {
+public class AutoBlueLeftLaunch extends BlueLeftLaunch {
 
     // Initiailize our variables.
     public CompetitionBot Bot = new CompetitionBot();
@@ -67,6 +64,12 @@ public class AutoBlueLeft extends BlueLeft {
 //            Park robot on the launch line.
             ParkLaunchLine(Bot, targetZone);
             sleep(sleepTime);
+
+            ScoreLaunch(Bot);
+            sleep(5000);
+
+            StopLaunch(Bot);
+            sleep(500);
 
 //            Required to stop Autonomous!
             requestOpModeStop();

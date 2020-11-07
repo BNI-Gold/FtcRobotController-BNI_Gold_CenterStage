@@ -66,10 +66,10 @@ public class twoServo_Callibrate extends OpMode {
     public void updateTelemetry () {
         telemetry.addLine("RB: increase, LB: Decrease");
         telemetry.addLine("x = set to .90, y = set to 0.10");
-        telemetry.addData("TestS ervo Positiom: ", wobbleArm.getPosition());
-        telemetry.addData("Servo Variable Position: ", wobbleArmPos);
+        telemetry.addData("Test Servo Position:", wobbleArm.getPosition());
+        telemetry.addData("Servo Arm Position:", wobbleArmPos);
         telemetry.addData("Servo Wobble Position", wobbleGrab.getPosition());
-        telemetry.addData("Servo Wobble Grab Position ", wobbleGrabPos);
+        telemetry.addData("Servo Wobble Grab Position", wobbleGrabPos);
         telemetry.update();
     }
 }
