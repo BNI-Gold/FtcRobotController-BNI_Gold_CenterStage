@@ -14,6 +14,8 @@ public abstract class BlueLeftLaunch extends AutoMain {
                 sleep(100);
                 Bot.strafeLeft(.5,1);
                 sleep(100);
+                Bot.driveGyroBackward(.5,1);
+                sleep(100);
                 break;
             case B:
                 Bot.driveGyroBackward(.5,7.5);
@@ -24,7 +26,6 @@ public abstract class BlueLeftLaunch extends AutoMain {
                 sleep(100);
                 Bot.gyroCorrection(0.2, 0);
                 sleep(100);
-
                 break;
             case C:
 //                Bot.driveBackward(.5,5);

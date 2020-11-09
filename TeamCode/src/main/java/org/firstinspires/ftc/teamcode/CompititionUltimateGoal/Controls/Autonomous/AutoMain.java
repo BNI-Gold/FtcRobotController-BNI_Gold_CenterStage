@@ -36,7 +36,9 @@ public abstract class AutoMain extends LinearOpMode {
             Bot.WobbleOpen();
             sleep(1000);
             Bot.WobbleRaised();
+            Bot.WobbleClosed();
             sleep(1000);
+
         }
 
         public void ScoreLaunch (CompetitionBot Bot){
