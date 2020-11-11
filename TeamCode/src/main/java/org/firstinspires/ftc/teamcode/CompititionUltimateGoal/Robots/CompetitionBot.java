@@ -2,6 +2,8 @@ package org.firstinspires.ftc.teamcode.CompititionUltimateGoal.Robots;
 
 import com.qualcomm.hardware.bosch.BNO055IMU;
 import com.qualcomm.hardware.bosch.JustLoggingAccelerationIntegrator;
+import com.qualcomm.hardware.rev.RevBlinkinLedDriver;
+import com.qualcomm.robotcore.eventloop.opmode.OpMode;
 import com.qualcomm.robotcore.hardware.ColorSensor;
 import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.hardware.DcMotorSimple;
@@ -10,12 +12,15 @@ import com.qualcomm.robotcore.hardware.HardwareMap;
 import com.qualcomm.robotcore.hardware.Servo;
 import com.qualcomm.robotcore.util.Range;
 
+import org.firstinspires.ftc.robotcontroller.external.samples.SampleRevBlinkinLedDriver;
+import org.firstinspires.ftc.robotcore.external.Telemetry;
 import org.firstinspires.ftc.robotcore.external.hardware.camera.WebcamName;
 import org.firstinspires.ftc.robotcore.external.navigation.Acceleration;
 import org.firstinspires.ftc.robotcore.external.navigation.AngleUnit;
 import org.firstinspires.ftc.robotcore.external.navigation.AxesOrder;
 import org.firstinspires.ftc.robotcore.external.navigation.AxesReference;
 import org.firstinspires.ftc.robotcore.external.navigation.Orientation;
+import org.firstinspires.ftc.robotcore.internal.system.Deadline;
 import org.firstinspires.ftc.teamcode.CompititionUltimateGoal.DriveTrains.MecanumDrive;
 import org.firstinspires.ftc.teamcode.CompititionUltimateGoal.Modules.EasyOpenCVWebcam;
 import org.opencv.core.Core;
@@ -28,6 +33,9 @@ import org.openftc.easyopencv.OpenCvCamera;
 import org.openftc.easyopencv.OpenCvCameraFactory;
 import org.openftc.easyopencv.OpenCvCameraRotation;
 import org.openftc.easyopencv.OpenCvPipeline;
+import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
+
+import java.util.concurrent.TimeUnit;
 
 
 public class CompetitionBot extends MecanumDrive {
@@ -784,6 +792,48 @@ public class CompetitionBot extends MecanumDrive {
         rearRightMotor.setPower(0);
 
         linearOp.idle();
+
+
+
+    }
+
+
+    public class SampleRevBlinkinLedDriver extends OpMode {
+        private final static int LED_PERIOD = 10;
+        private final static int GAMEPAD_LOCKOUT = 500;
+
+        RevBlinkinLedDriver blinkinLedDriver;
+        RevBlinkinLedDriver.BlinkinPattern pattern;
+
+        Telemetry.Item patternName;
+        Telemetry.Item display;
+        DisplayKind displayKind;
+        Deadline ledCycleDeadline;
+        Deadline gamepadRateLimit;
+
+        protected enum DisplayKind {
+            MANUAL,
+            AUTO
+        }
+        @Override
+        public void init()
+        {
+            displayKind = DisplayKind.AUTO;
+
+            blinkinLedDriver = hardwareMap.get(RevBlinkinLedDriver.class, "blinkin");
+            pattern = RevBlinkinLedDriver.BlinkinPattern.RAINBOW_RAINBOW_PALETTE;
+            blinkinLedDriver.setPattern(pattern);
+
+            display = telemetry.addData("Display Kind:", displayKind.toString());
+            patternName = telemetry.addData("Patterm", pattern.toString());
+
+            ledCycleDeadline = new Deadline(LED_PERIOD, TimeUnit.SECONDS);
+            gamepadRateLimit = new Deadline(GAMEPAD_LOCKOUT, TimeUnit.MILLISECONDS);
+
+        }
+
+        @Override
+        public void loop() {
 
     }
 
