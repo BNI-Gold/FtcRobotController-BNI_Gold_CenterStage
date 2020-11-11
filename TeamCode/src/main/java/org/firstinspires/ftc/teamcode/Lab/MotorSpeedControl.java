@@ -15,7 +15,7 @@ public class MotorSpeedControl extends OpMode {
 
     public ElapsedTime TeleOpTime;
 
-    public double targetHighGoalEncoder = 1000;
+    public double targetHighGoalRPMs = 1000;
 
     public double encodersPerSecond = 0;
 
@@ -28,6 +28,8 @@ public class MotorSpeedControl extends OpMode {
     public boolean powerMode = true;
 
     public final static int ENCODER_PPR = 28;
+
+    public double RPMs = 0;
 
     @Override
     public void init() {
@@ -46,6 +48,8 @@ public class MotorSpeedControl extends OpMode {
     @Override
     public void loop() {
         encodersPerSecond = (myMotor.getCurrentPosition() / TeleOpTime.seconds());
+        RPMs = (encodersPerSecond / ENCODER_PPR) * 60;
+
 
         if (initTeleOpToggle == true) {
             initTeleOp();
@@ -66,19 +70,19 @@ public class MotorSpeedControl extends OpMode {
 
         else if (powerMode == false) {
             if (gamepad2.right_bumper) {
-                targetHighGoalEncoder += 10;
+                targetHighGoalRPMs += 10;
             }
             if (gamepad2.left_bumper) {
-                targetHighGoalEncoder -= 10;
+                targetHighGoalRPMs -= 10;
             }
 
 
-            if (encodersPerSecond < targetHighGoalEncoder) {
+            if (RPMs < targetHighGoalRPMs) {
                 telemetry.addLine("ENCODERS SLOW; INCREASING MOTOR SPEED");
                 motorSpeed += 0.01;
             }
 
-            if (encodersPerSecond > targetHighGoalEncoder) {
+            if (RPMs > targetHighGoalRPMs) {
                 telemetry.addLine("ENDCODERS FAST; DECREASING MOTOR SPEED");
                 motorSpeed -= 0.01;
             }
@@ -125,7 +129,7 @@ public class MotorSpeedControl extends OpMode {
             telemetry.addLine("ENCODER CONTROL MODE");
             telemetry.addLine("RB: Increase Encoders per Second");
             telemetry.addLine("LB: Decrease Encoders per Second");
-            telemetry.addData("TARGET ENCODERS PER SECOND: ", targetHighGoalEncoder);
+            telemetry.addData("TARGET ENCODERS PER SECOND: ", targetHighGoalRPMs);
         }
 
         telemetry.addData("Current Motor Power: ", myMotor.getPower());
