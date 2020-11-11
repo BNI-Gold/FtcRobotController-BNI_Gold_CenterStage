@@ -1,6 +1,8 @@
 package org.firstinspires.ftc.teamcode.CompititionUltimateGoal.Controls.Autonomous;
 
+import com.qualcomm.hardware.rev.RevBlinkinLedDriver;
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
+import com.qualcomm.robotcore.hardware.LED;
 
 import org.firstinspires.ftc.teamcode.CompititionUltimateGoal.Modules.EasyOpenCVWebcam;
 import org.firstinspires.ftc.teamcode.CompititionUltimateGoal.Robots.CompetitionBot;
@@ -51,6 +53,18 @@ public abstract class AutoMain extends LinearOpMode {
         public void StopLaunch (CompetitionBot Bot){
         Bot.LauncherOff(0);
         Bot.IntakeOff(0);
+        }
+
+        public void LEDs (CompetitionBot Bot, TargetZone target) {
+        if (TargetZone.A == target){
+            Bot.blinkinLedDriver.setPattern(RevBlinkinLedDriver.BlinkinPattern.BLUE);
+        }
+        else if (TargetZone.B == target){
+            Bot.blinkinLedDriver.setPattern(RevBlinkinLedDriver.BlinkinPattern.WHITE);
+        }
+        else {
+            Bot.blinkinLedDriver.setPattern(RevBlinkinLedDriver.BlinkinPattern.CONFETTI);
+        }
         }
 
     }

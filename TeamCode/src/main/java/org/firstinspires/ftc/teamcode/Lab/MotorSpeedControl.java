@@ -2,10 +2,11 @@ package org.firstinspires.ftc.teamcode.Lab;
 
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 import com.qualcomm.robotcore.eventloop.opmode.OpMode;
+import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.util.ElapsedTime;
 import com.qualcomm.robotcore.util.Range;
-
+@TeleOp(name = "MotorSpeedControl")
 public class MotorSpeedControl extends OpMode {
 
     //reset elepased time when press A
@@ -15,7 +16,7 @@ public class MotorSpeedControl extends OpMode {
 
     public ElapsedTime TeleOpTime;
 
-    public double targetHighGoalRPMs = 1000;
+    public double targetHighGoalRPMs = 5000;
 
     public double encodersPerSecond = 0;
 
@@ -35,13 +36,13 @@ public class MotorSpeedControl extends OpMode {
     public void init() {
 
 
-        myMotor = hardwareMap.dcMotor.get ("launch_motor");
+        myMotor = hardwareMap.dcMotor.get ("launcher_motor");
         myMotor.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.FLOAT);
         setMotorRunModes(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
         setMotorRunModes(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
+
         TeleOpTime = new ElapsedTime();
 
-        myMotor.setMode(DcMotor.RunMode.RESET_ENCODERS);
 
     }
 
@@ -137,7 +138,7 @@ public class MotorSpeedControl extends OpMode {
         telemetry.addData("Current Encoders: ", myMotor.getCurrentPosition());
         telemetry.addData("Encoders per second: ", encodersPerSecond);
 //        telemetry.addData("Encoders per 1 minute: ", (encodersPerSecond * 60));
-        telemetry.addData("RPMs!: ", (encodersPerSecond * ENCODER_PPR) / 60);
+        telemetry.addData("RPMs!: ", RPMs);
     }
 
     public void resetProgram () {

@@ -1,5 +1,6 @@
 package org.firstinspires.ftc.teamcode.CompititionUltimateGoal.Controls.Autonomous.BlueLeft;
 
+import com.qualcomm.hardware.rev.RevBlinkinLedDriver;
 import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
 import com.qualcomm.robotcore.eventloop.opmode.Disabled;
 
@@ -38,6 +39,7 @@ public class AutoBlueLeft extends BlueLeft {
         telemetry.addData("TARGET ZONE: ", targetZone);
 
         telemetry.addLine("WAITING FOR START >");
+        Bot.blinkinLedDriver.setPattern(RevBlinkinLedDriver.BlinkinPattern.BREATH_GRAY);
         telemetry.update();
         waitForStart();
 
@@ -58,11 +60,12 @@ public class AutoBlueLeft extends BlueLeft {
             sleep(1000);
 //            Drives robot to target Zone
             driveToTargetZone (Bot, targetZone);
+
             sleep(sleepTime);
 
 //            Lower and raise the Servo to score the Wobble.
           ScoreWobble(Bot);
-           sleep(sleepTime);
+            sleep(sleepTime);
 
 //            Park robot on the launch line.
             ParkLaunchLine(Bot, targetZone);

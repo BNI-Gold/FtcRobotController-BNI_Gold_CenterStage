@@ -86,6 +86,21 @@ public class CompetitionBot extends MecanumDrive {
     public DcMotor LauncherMotor = null;
     public DcMotor IntakeMotor = null;
 
+    private final static int    LED_PERIOD = 10;
+    private final static int GAMEPAD_LOCKOUT = 500;
+
+    public RevBlinkinLedDriver blinkinLedDriver;
+    public RevBlinkinLedDriver.BlinkinPattern pattern;
+
+    Telemetry.Item patternName;
+    Telemetry.Item display;
+    Deadline ledCycleDeadline;
+    Deadline gamepadRateLimit;
+
+    protected enum DisplayKind {
+        MANUAL,
+        AUTO
+    }
     //LabBot constructor
     public CompetitionBot() {
 
@@ -111,9 +126,14 @@ public class CompetitionBot extends MecanumDrive {
                 break;
             case "RedRight":
                 break;
+
+
+
         }
 
-
+        blinkinLedDriver = hwBot.get(RevBlinkinLedDriver.class, "Blinkin");
+        pattern = RevBlinkinLedDriver.BlinkinPattern.BREATH_GRAY;
+        blinkinLedDriver.setPattern(pattern);
 
 
 
@@ -596,7 +616,7 @@ public class CompetitionBot extends MecanumDrive {
 //
 //                    frontRightMotor.setPower(-rightSideSpeed);
 //                    rearRightMotor.setPower(-rightSideSpeed);
-//                    break;
+//                    break
 //            }
 //
 //
@@ -798,43 +818,6 @@ public class CompetitionBot extends MecanumDrive {
     }
 
 
-    public class SampleRevBlinkinLedDriver extends OpMode {
-        private final static int LED_PERIOD = 10;
-        private final static int GAMEPAD_LOCKOUT = 500;
 
-        RevBlinkinLedDriver blinkinLedDriver;
-        RevBlinkinLedDriver.BlinkinPattern pattern;
-
-        Telemetry.Item patternName;
-        Telemetry.Item display;
-        DisplayKind displayKind;
-        Deadline ledCycleDeadline;
-        Deadline gamepadRateLimit;
-
-        protected enum DisplayKind {
-            MANUAL,
-            AUTO
-        }
-        @Override
-        public void init()
-        {
-            displayKind = DisplayKind.AUTO;
-
-            blinkinLedDriver = hardwareMap.get(RevBlinkinLedDriver.class, "blinkin");
-            pattern = RevBlinkinLedDriver.BlinkinPattern.RAINBOW_RAINBOW_PALETTE;
-            blinkinLedDriver.setPattern(pattern);
-
-            display = telemetry.addData("Display Kind:", displayKind.toString());
-            patternName = telemetry.addData("Patterm", pattern.toString());
-
-            ledCycleDeadline = new Deadline(LED_PERIOD, TimeUnit.SECONDS);
-            gamepadRateLimit = new Deadline(GAMEPAD_LOCKOUT, TimeUnit.MILLISECONDS);
-
-        }
-
-        @Override
-        public void loop() {
-
-    }
 
 }
