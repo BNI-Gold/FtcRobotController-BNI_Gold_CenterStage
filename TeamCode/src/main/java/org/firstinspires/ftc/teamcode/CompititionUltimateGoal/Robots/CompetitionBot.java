@@ -74,10 +74,10 @@ public class CompetitionBot extends MecanumDrive {
     public double servoOpenPos = 0.36;
     public double servoClosePos = 0.93;
 //    was 0.446
-    public double WobbleArmRaisedPos = 0.446;
-    public double WobbleArmLowerPos = 0.85;
-    public double WobbleGrabOpenPos = 0.566;
-    public double WobbleGrabClosePos = 0;
+    public double WobbleArmRaisedPos = 0.509;
+    public double WobbleArmLowerPos = 0.83;
+    public double WobbleGrabOpenPos = 0.523;
+    public double WobbleGrabClosePos = 0.15;
     //Blue Left:
     public double CameraServoPosBlueLeft = 0.358;
     //Blue Right:

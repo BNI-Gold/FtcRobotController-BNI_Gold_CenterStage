@@ -64,8 +64,8 @@ public abstract class BlueLeft extends AutoMain {
             case C:
 //                Bot.driveForward(0.5, 4.5);
                 Bot.strafeLeft(.5,1);
-                sleep(100);
-                Bot.driveGyroForward(0.4, 3.5);
+                sleep(250);
+                Bot.driveGyroForward(0.4, 4);
                 sleep(250);
                 Bot.gyroCorrection(0.2, 0);
                 sleep(250);
