@@ -1,26 +1,22 @@
-package org.firstinspires.ftc.teamcode.CompititionUltimateGoal.Controls.Autonomous.BlueLeft;
+package org.firstinspires.ftc.teamcode.CompititionUltimateGoal.Controls.Autonomous.BlueLeftDoubleWobble;
 
-import com.qualcomm.hardware.rev.RevBlinkinLedDriver;
 import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
 import com.qualcomm.robotcore.eventloop.opmode.Disabled;
 
 import org.firstinspires.ftc.teamcode.CompititionUltimateGoal.Controls.Autonomous.StartPosition;
 import org.firstinspires.ftc.teamcode.CompititionUltimateGoal.Controls.Autonomous.TargetZone;
-import org.firstinspires.ftc.teamcode.CompititionUltimateGoal.Modules.EasyOpenCVWebcam;
 import org.firstinspires.ftc.teamcode.CompititionUltimateGoal.Robots.CompetitionBot;
-import org.firstinspires.ftc.teamcode.CompititionUltimateGoal.Robots.LabBot;
 
-@Autonomous (name = "Remote:Blue:Left:Basic", group = "BLUE")
-//@Disabled
+@Autonomous (name = "Remote:Blue:Left:DoubleWobble:", group = "BLUE")
+@Disabled
 
-
-public class AutoBlueLeft extends BlueLeft {
+public class AutoBlueLeftDoubleWobble extends BlueLeftDoubleWobble {
 
     // Initiailize our variables.
     public CompetitionBot Bot = new CompetitionBot();
     public StartPosition startPosition = null;
     public TargetZone targetZone = null;
-    public int sleepTime = 250;
+    public long sleepTime = 100;
 
 
 
@@ -39,7 +35,6 @@ public class AutoBlueLeft extends BlueLeft {
         telemetry.addData("TARGET ZONE: ", targetZone);
 
         telemetry.addLine("WAITING FOR START >");
-        Bot.blinkinLedDriver.setPattern(RevBlinkinLedDriver.BlinkinPattern.BREATH_GRAY);
         telemetry.update();
         waitForStart();
 
@@ -60,7 +55,6 @@ public class AutoBlueLeft extends BlueLeft {
             sleep(1000);
 //            Drives robot to target Zone
             driveToTargetZone (Bot, targetZone);
-
             sleep(sleepTime);
 
 //            Lower and raise the Servo to score the Wobble.
@@ -70,6 +64,12 @@ public class AutoBlueLeft extends BlueLeft {
 //            Park robot on the launch line.
             ParkLaunchLine(Bot, targetZone);
             sleep(sleepTime);
+
+            ScoreLaunch(Bot);
+            sleep(5000);
+
+            StopLaunch(Bot);
+            sleep(500);
 
 //            Required to stop Autonomous!
             requestOpModeStop();

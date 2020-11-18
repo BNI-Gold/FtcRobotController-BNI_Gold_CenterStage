@@ -1,14 +1,14 @@
 package org.firstinspires.ftc.teamcode.CompititionUltimateGoal.Controls.Autonomous.BlueLeftLaunch;
 
 import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
+import com.qualcomm.robotcore.eventloop.opmode.Disabled;
 
 import org.firstinspires.ftc.teamcode.CompititionUltimateGoal.Controls.Autonomous.StartPosition;
 import org.firstinspires.ftc.teamcode.CompititionUltimateGoal.Controls.Autonomous.TargetZone;
 import org.firstinspires.ftc.teamcode.CompititionUltimateGoal.Robots.CompetitionBot;
 
-@Autonomous (name = "Remote:Blue:LeftLaunch:", group = "BLUE")
-//@Disabled
-
+@Autonomous (name = "Remote:Blue:Left:Launch:", group = "BLUE")
+@Disabled
 
 public class AutoBlueLeftLaunch extends BlueLeftLaunch {
 
@@ -58,8 +58,8 @@ public class AutoBlueLeftLaunch extends BlueLeftLaunch {
             sleep(sleepTime);
 
 //            Lower and raise the Servo to score the Wobble.
-          ScoreWobble(Bot);
-           sleep(sleepTime);
+            ScoreWobble(Bot);
+            sleep(sleepTime);
 
 //            Park robot on the launch line.
             ParkLaunchLine(Bot, targetZone);

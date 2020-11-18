@@ -10,6 +10,8 @@ import org.firstinspires.ftc.teamcode.CompititionUltimateGoal.Robots.LabBot;
 
 public abstract class AutoMain extends LinearOpMode {
 
+    public int sleepTimeDrive = 250;
+
     public TargetZone zone = null;
 
 //    This will later detect our 0, 1, or 4 ring stacks!
