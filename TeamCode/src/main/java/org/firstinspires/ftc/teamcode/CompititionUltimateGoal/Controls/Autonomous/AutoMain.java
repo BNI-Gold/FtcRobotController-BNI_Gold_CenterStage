@@ -34,28 +34,48 @@ public abstract class AutoMain extends LinearOpMode {
     }
 
 //    Lower servo to score it, and then raise it to not damage anything.
-            public void ScoreWobble (CompetitionBot Bot){
-                    Bot.WobbleLower();
-            sleep(1000);
-            Bot.WobbleOpen();
-            sleep(1000);
-            Bot.WobbleRaised();
-            Bot.WobbleClosed();
-            sleep(1000);
+    public void ScoreWobble (CompetitionBot Bot){
+        Bot.WobbleLower();
+        sleep(1000);
+        Bot.WobbleOpen();
+        sleep(1000);
+        Bot.WobbleRaised();
+        sleep(1000);
+        Bot.WobbleClosed();
+        sleep(1000);
+    }
 
-        }
+
+
+    public void CollectWobble (CompetitionBot Bot){
+        Bot.WobbleLower();
+        sleep(1000);
+        Bot.WobbleOpen();
+        sleep(1000);
+        Bot.strafeLeft(.2,.5);
+        sleep(1000);
+        Bot.gyroCorrection(.2,0);
+        sleep(1000);
+        Bot.WobbleClosed();
+        sleep(1000);
+        Bot.WobbleRaised();
+        sleep(1000);
+    }
+
+
 
         public void ScoreLaunch (CompetitionBot Bot){
+
         Bot.LauncherOn(1);
         sleep(300);
         Bot.IntakeOn(1);
 
-        }
+    }
 
         public void StopLaunch (CompetitionBot Bot){
         Bot.LauncherOff(0);
         Bot.IntakeOff(0);
-        }
+    }
 
         public void LEDs (CompetitionBot Bot, TargetZone target) {
         if (TargetZone.A == target){
@@ -67,6 +87,5 @@ public abstract class AutoMain extends LinearOpMode {
         else {
             Bot.blinkinLedDriver.setPattern(RevBlinkinLedDriver.BlinkinPattern.CONFETTI);
         }
-        }
-
     }
+}

@@ -14,12 +14,6 @@ public abstract class BlueLeftDoubleWobble extends AutoMain {
                 sleep(sleepTimeDrive);
                 Bot.strafeLeft(.5,1);
                 sleep(sleepTimeDrive);
-                Bot.gyroCorrection(0.2, 0);
-                sleep(sleepTimeDrive);
-                Bot.driveGyroBackward(.5,1);
-                sleep(sleepTimeDrive);
-                Bot.gyroCorrection(0.2, 0);
-                sleep(sleepTimeDrive);
                 break;
             case B:
                 Bot.driveGyroBackward(.5,7.5);
@@ -52,10 +46,6 @@ public abstract class BlueLeftDoubleWobble extends AutoMain {
                 sleep(sleepTimeDrive);
                 Bot.gyroCorrection(0.2, 0);
                 sleep(sleepTimeDrive);
-                Bot.driveGyroForward(.5,.5);
-                sleep(sleepTimeDrive);
-                Bot.gyroCorrection(0.2, 0);
-                sleep(sleepTimeDrive);
 //                No need to move - already parked on line ot score Wobble.
                 break;
             case B:
@@ -77,6 +67,76 @@ public abstract class BlueLeftDoubleWobble extends AutoMain {
                 Bot.driveGyroForward(0.4, 3.5);
                 sleep(sleepTimeDrive);
                 Bot.gyroCorrection(0.2, 0);
+                sleep(sleepTimeDrive);
+                break;
+        }
+    }
+    public void driveToTargetZoneDouble (CompetitionBot Bot, TargetZone target) throws InterruptedException {
+        switch (target){
+            case A:
+                Bot.driveGyroBackward(.5,4.7);
+                sleep(sleepTimeDrive);
+                Bot.gyroCorrection(.2,0);
+                sleep(sleepTimeDrive);
+                Bot.strafeRight(.5,4);
+                sleep(sleepTimeDrive);
+                Bot.gyroCorrection(.2,0);
+                sleep(sleepTimeDrive);
+                break;
+            case B:
+                Bot.driveGyroBackward(.5,7.2);
+                sleep(sleepTimeDrive);
+                Bot.gyroCorrection(.2,0);
+                sleep(sleepTimeDrive);
+                Bot.strafeRight(.5,1.5);
+                sleep(sleepTimeDrive);
+                Bot.gyroCorrection(.2,0);
+                sleep(sleepTimeDrive);
+                break;
+            case C:
+                Bot.driveGyroBackward(.5,8.1);
+                sleep(sleepTimeDrive);
+                Bot.gyroCorrection(.2,0);
+                sleep(sleepTimeDrive);
+                Bot.strafeRight(.5,4);
+                sleep(sleepTimeDrive);
+                Bot.gyroCorrection(.2,0);
+                sleep(sleepTimeDrive);
+                break;
+
+
+        }
+
+    }
+    public void driveToWobble (CompetitionBot Bot, TargetZone target) throws InterruptedException {
+        switch (target){
+            case A:
+                Bot.strafeLeft(.5,4);
+                sleep(sleepTimeDrive);
+                Bot.gyroCorrection(0.2, 0);
+                sleep(sleepTimeDrive);
+//                Bot.driveGyroForward(.5,4.5);
+                Bot.driveForward(.5, 4.5);
+                sleep(sleepTimeDrive);
+                Bot.gyroCorrection(0.2, 0);
+                sleep(sleepTimeDrive);
+                break;
+            case B:
+                Bot.strafeLeft(.5,1.5);
+                sleep(sleepTimeDrive);
+                Bot.gyroCorrection(.2,0);
+                sleep(sleepTimeDrive);
+                Bot.driveGyroForward(.5,7);
+                sleep(sleepTimeDrive);
+                break;
+            case C:
+                Bot.strafeLeft(.5,1.5);
+                sleep(sleepTimeDrive);
+                Bot.gyroCorrection(.2,0);
+                sleep(sleepTimeDrive);
+                Bot.driveGyroForward(.5,8.3);
+                sleep(sleepTimeDrive);
+                Bot.gyroCorrection(.2,0);
                 sleep(sleepTimeDrive);
                 break;
         }

@@ -8,7 +8,7 @@ import org.firstinspires.ftc.teamcode.CompititionUltimateGoal.Controls.Autonomou
 import org.firstinspires.ftc.teamcode.CompititionUltimateGoal.Robots.CompetitionBot;
 
 @Autonomous (name = "Remote:Blue:Left:DoubleWobble:", group = "BLUE")
-@Disabled
+//@Disabled
 
 public class AutoBlueLeftDoubleWobble extends BlueLeftDoubleWobble {
 
@@ -27,7 +27,7 @@ public class AutoBlueLeftDoubleWobble extends BlueLeftDoubleWobble {
         Bot.initCamera();
         Bot.setLinearOp(this);
 //        This is hard-coded for this auto.  May or may not use, but here just in case.
-        sleep(5000);
+        sleep(4000);
         startPosition = StartPosition.BlueLeft;
         targetZone = detectStarterStack(Bot);
         telemetry.addData("SAMPLING VALUE #: ", Bot.pipeline.avg1);
@@ -53,23 +53,25 @@ public class AutoBlueLeftDoubleWobble extends BlueLeftDoubleWobble {
             //Bot.webcam.pauseViewport();   // This line hasn't been used - so leave commented out.
 
             sleep(1000);
+            LEDs(Bot, targetZone);
 //            Drives robot to target Zone
             driveToTargetZone (Bot, targetZone);
             sleep(sleepTime);
 
+
 //            Lower and raise the Servo to score the Wobble.
             ScoreWobble(Bot);
             sleep(sleepTime);
-
-//            Park robot on the launch line.
-            ParkLaunchLine(Bot, targetZone);
+            driveToWobble(Bot, targetZone);
             sleep(sleepTime);
 
-            ScoreLaunch(Bot);
-            sleep(5000);
+            //to collect 2nd wobble
+            CollectWobble(Bot);
+            sleep(sleepTime);
 
-            StopLaunch(Bot);
-            sleep(500);
+            ScoreWobble(Bot);
+            sleep(sleepTime);
+
 
 //            Required to stop Autonomous!
             requestOpModeStop();

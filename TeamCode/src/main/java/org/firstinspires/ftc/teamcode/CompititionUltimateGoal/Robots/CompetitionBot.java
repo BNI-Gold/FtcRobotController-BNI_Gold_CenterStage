@@ -76,8 +76,8 @@ public class CompetitionBot extends MecanumDrive {
 //    was 0.446
     public double WobbleArmRaisedPos = 0.509;
     public double WobbleArmLowerPos = 0.83;
-    public double WobbleGrabOpenPos = 0.523;
-    public double WobbleGrabClosePos = 0.15;
+    public double WobbleGrabOpenPos = 0.653;
+    public double WobbleGrabClosePos = 0.054;
     //Blue Left:
     public double CameraServoPosBlueLeft = 0.358;
     //Blue Right:
@@ -156,7 +156,7 @@ public class CompetitionBot extends MecanumDrive {
 //        frontRightMotor.setDirection(DcMotor.Direction.REVERSE);
 //        rearRightMotor.setDirection(DcMotor.Direction.REVERSE);
 
-        LauncherMotor.setDirection(DcMotor.Direction.REVERSE);
+        LauncherMotor.setDirection(DcMotor.Direction.FORWARD);
 //        LauncherMotor.setDirection(DcMotor.Direction.FORWARD);
 //        IntakeMotor.setDirection(DcMotor.Direction.REVERSE);
         IntakeMotor.setDirection(DcMotor.Direction.FORWARD);
@@ -553,6 +553,8 @@ public class CompetitionBot extends MecanumDrive {
 
 
     public void driveGyroForward (double power, double rotations) throws InterruptedException {
+//        setMotorRunModes(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
+//        setMotorRunModes(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
         double ticks = rotations * (1) * TICKS_PER_ROTATION;
 
         angles = imu.getAngularOrientation(AxesReference.INTRINSIC, AxesOrder.ZYX, AngleUnit.DEGREES);
