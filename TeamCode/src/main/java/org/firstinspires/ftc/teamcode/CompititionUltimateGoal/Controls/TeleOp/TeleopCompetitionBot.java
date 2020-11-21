@@ -263,7 +263,8 @@ public class TeleopCompetitionBot extends OpMode {
 
     public void launcher () {
         if (gamepad2.a == true) {
-            Bot.LauncherOn(.725);
+//            .75 always launched high.
+            Bot.LauncherOn(0.73);
         }
         if (gamepad2.y == true) {
             Bot.LauncherOff(0);

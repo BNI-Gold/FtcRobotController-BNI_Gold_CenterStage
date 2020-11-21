@@ -1,4 +1,4 @@
-package org.firstinspires.ftc.teamcode.CompititionUltimateGoal.Controls.Autonomous.GyroTest;
+package org.firstinspires.ftc.teamcode.CompititionUltimateGoal.Controls.Autonomous.DuValTest;
 
 import org.firstinspires.ftc.teamcode.CompititionUltimateGoal.Controls.Autonomous.AutoMain;
 import org.firstinspires.ftc.teamcode.CompititionUltimateGoal.Controls.Autonomous.TargetZone;
@@ -143,12 +143,14 @@ public abstract class BlueLeftTEST extends AutoMain {
     }
 
     public void gyroTEST (CompetitionBot Bot) throws InterruptedException {
-        Bot.driveGyroBackward(0.5,5.5);
+        Bot.driveGyroBackward(.5,5.5);
         sleep(sleepTimeDrive);
         Bot.gyroCorrection(0.2, 0);
         sleep(sleepTimeDrive);
         Bot.strafeLeft(.5,2);
         sleep(sleepTimeDrive);
         Bot.driveGyroForward( 0.5, 4);
+//        Bot.driveGyroStraight(2000, 0.4);
     }
+
 }

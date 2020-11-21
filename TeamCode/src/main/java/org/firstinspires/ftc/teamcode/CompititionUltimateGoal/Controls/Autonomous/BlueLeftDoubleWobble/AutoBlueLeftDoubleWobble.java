@@ -55,21 +55,32 @@ public class AutoBlueLeftDoubleWobble extends BlueLeftDoubleWobble {
             sleep(1000);
             LEDs(Bot, targetZone);
 //            Drives robot to target Zone
+            telemetry.addLine("Drive to first Wobble");
+            telemetry.update();
             driveToTargetZone (Bot, targetZone);
+
             sleep(sleepTime);
 
 
 //            Lower and raise the Servo to score the Wobble.
+            telemetry.addLine("Score first Wobble");
+            telemetry.update();
             ScoreWobble(Bot);
             sleep(sleepTime);
+            telemetry.addLine("Drive to second Wobble");
+            telemetry.update();
             driveToWobble(Bot, targetZone);
             sleep(sleepTime);
-
+            telemetry.addLine("Collect second Wobble");
+            telemetry.update();
             //to collect 2nd wobble
             CollectWobble(Bot);
             sleep(sleepTime);
-
+            driveToTargetZoneDouble(Bot, targetZone);
+            sleep(sleepTime);
             ScoreWobble(Bot);
+            sleep(sleepTime);
+            ParkLaunchLine(Bot, targetZone);
             sleep(sleepTime);
 
 

@@ -1,13 +1,14 @@
-package org.firstinspires.ftc.teamcode.CompititionUltimateGoal.Controls.Autonomous.GyroTest;
+package org.firstinspires.ftc.teamcode.CompititionUltimateGoal.Controls.Autonomous.DuValTest;
 
 import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
+import com.qualcomm.robotcore.eventloop.opmode.Disabled;
 
 import org.firstinspires.ftc.teamcode.CompititionUltimateGoal.Controls.Autonomous.StartPosition;
 import org.firstinspires.ftc.teamcode.CompititionUltimateGoal.Controls.Autonomous.TargetZone;
 import org.firstinspires.ftc.teamcode.CompititionUltimateGoal.Robots.CompetitionBot;
 
 @Autonomous (name = "Remote:Blue:Left:TEST:", group = "BLUE")
-//@Disabled
+@Disabled
 
 public class AutoBlueLeftTEST extends BlueLeftTEST {
 
@@ -26,7 +27,7 @@ public class AutoBlueLeftTEST extends BlueLeftTEST {
         Bot.initCamera();
         Bot.setLinearOp(this);
 //        This is hard-coded for this auto.  May or may not use, but here just in case.
-        sleep(4000);
+        sleep(1000);
         startPosition = StartPosition.BlueLeft;
         targetZone = detectStarterStack(Bot);
         telemetry.addData("SAMPLING VALUE #: ", Bot.pipeline.avg1);
@@ -53,6 +54,7 @@ public class AutoBlueLeftTEST extends BlueLeftTEST {
 
             sleep(1000);
             LEDs(Bot, targetZone);
+            gyroTEST(Bot);
 //            Drives robot to target Zone
 //            driveToTargetZone (Bot, targetZone);
 //            sleep(sleepTime);

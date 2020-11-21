@@ -10,7 +10,7 @@ import org.firstinspires.ftc.teamcode.CompititionUltimateGoal.Robots.LabBot;
 
 public abstract class AutoMain extends LinearOpMode {
 
-    public int sleepTimeDrive = 250;
+    public int sleepTimeDrive = 300;
 
     public TargetZone zone = null;
 
@@ -36,30 +36,32 @@ public abstract class AutoMain extends LinearOpMode {
 //    Lower servo to score it, and then raise it to not damage anything.
     public void ScoreWobble (CompetitionBot Bot){
         Bot.WobbleLower();
-        sleep(1000);
+        sleep(500);
         Bot.WobbleOpen();
         sleep(1000);
         Bot.WobbleRaised();
-        sleep(1000);
+        sleep(sleepTimeDrive);
         Bot.WobbleClosed();
-        sleep(1000);
+        sleep(sleepTimeDrive);
     }
 
 
 
     public void CollectWobble (CompetitionBot Bot){
         Bot.WobbleLower();
-        sleep(1000);
+        sleep(sleepTimeDrive);
         Bot.WobbleOpen();
-        sleep(1000);
-        Bot.strafeLeft(.2,.5);
-        sleep(1000);
+        sleep(sleepTimeDrive);
+        Bot.strafeRight(.3,.7);
+        sleep(sleepTimeDrive);
         Bot.gyroCorrection(.2,0);
-        sleep(1000);
+        sleep(sleepTimeDrive);
+        Bot.strafeLeft(.3,.05);
+        sleep(sleepTimeDrive);
         Bot.WobbleClosed();
-        sleep(1000);
+        sleep(sleepTimeDrive);
         Bot.WobbleRaised();
-        sleep(1000);
+        sleep(sleepTimeDrive);
     }
 
 
@@ -67,7 +69,7 @@ public abstract class AutoMain extends LinearOpMode {
         public void ScoreLaunch (CompetitionBot Bot){
 
         Bot.LauncherOn(1);
-        sleep(300);
+        sleep(sleepTimeDrive);
         Bot.IntakeOn(1);
 
     }
@@ -85,7 +87,7 @@ public abstract class AutoMain extends LinearOpMode {
             Bot.blinkinLedDriver.setPattern(RevBlinkinLedDriver.BlinkinPattern.WHITE);
         }
         else {
-            Bot.blinkinLedDriver.setPattern(RevBlinkinLedDriver.BlinkinPattern.CONFETTI);
+            Bot.blinkinLedDriver.setPattern(RevBlinkinLedDriver.BlinkinPattern.RED);
         }
     }
 }

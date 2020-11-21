@@ -74,10 +74,10 @@ public class CompetitionBot extends MecanumDrive {
     public double servoOpenPos = 0.36;
     public double servoClosePos = 0.93;
 //    was 0.446
-    public double WobbleArmRaisedPos = 0.509;
-    public double WobbleArmLowerPos = 0.83;
-    public double WobbleGrabOpenPos = 0.653;
-    public double WobbleGrabClosePos = 0.054;
+    public double WobbleArmRaisedPos = 0.23;
+    public double WobbleArmLowerPos = 0.613;
+    public double WobbleGrabOpenPos = 0.651;
+    public double WobbleGrabClosePos = 0.312;
     //Blue Left:
     public double CameraServoPosBlueLeft = 0.358;
     //Blue Right:
@@ -264,13 +264,13 @@ public class CompetitionBot extends MecanumDrive {
 
         angles = imu.getAngularOrientation(AxesReference.INTRINSIC, AxesOrder.ZYX, AngleUnit.DEGREES);
 
-        if (angles.firstAngle >= angle + TOLERANCE) {
+        if (angles.firstAngle >= angle + TOLERANCE && linearOp.opModeIsActive()) {
             while (angles.firstAngle >=  angle + TOLERANCE && linearOp.opModeIsActive()) {
                 rotateRight(speed);
                 angles = imu.getAngularOrientation(AxesReference.INTRINSIC, AxesOrder.ZYX, AngleUnit.DEGREES);
             }
         }
-        else if (angles.firstAngle <= angle - TOLERANCE) {
+        else if (angles.firstAngle <= angle - TOLERANCE && linearOp.opModeIsActive()) {
             while (angles.firstAngle <= angle - TOLERANCE && linearOp.opModeIsActive()) {
                 rotateLeft(speed);
                 angles = imu.getAngularOrientation(AxesReference.INTRINSIC, AxesOrder.ZYX, AngleUnit.DEGREES);
@@ -553,6 +553,63 @@ public class CompetitionBot extends MecanumDrive {
 
 
     public void driveGyroForward (double power, double rotations) throws InterruptedException {
+
+        double ticks = rotations * (1) * TICKS_PER_ROTATION;
+        angles = imu.getAngularOrientation(AxesReference.INTRINSIC, AxesOrder.ZYX, AngleUnit.DEGREES);
+        double currentPos = 0;
+        double leftSideSpeed;
+        double rightSideSpeed;
+
+
+        double target = angles.firstAngle;
+        double startPosition = frontLeftMotor.getCurrentPosition();
+        //  linearOp.telemetry.addData("Angle to start: ", angles.firstAngle);
+        //  linearOp.telemetry.update();
+        linearOp.sleep(100);
+        while (currentPos < ticks + startPosition && linearOp.opModeIsActive()) {
+
+            angles = imu.getAngularOrientation(AxesReference.INTRINSIC, AxesOrder.ZYX, AngleUnit.DEGREES);
+
+
+            currentPos = Math.abs(frontLeftMotor.getCurrentPosition());
+
+            currentPos = frontLeftMotor.getCurrentPosition();
+            leftSideSpeed = power + (angles.firstAngle - target) / 100;            // they need to be different
+            rightSideSpeed = power - (angles.firstAngle - target) / 100;
+
+            leftSideSpeed = Range.clip(leftSideSpeed, -1, 1);        // helps prevent out of bounds error
+            rightSideSpeed = Range.clip(rightSideSpeed, -1, 1);
+
+            frontLeftMotor.setPower(leftSideSpeed);
+            rearLeftMotor.setPower(leftSideSpeed);
+
+            frontRightMotor.setPower(rightSideSpeed);
+            rearRightMotor.setPower(rightSideSpeed);
+
+
+
+/*
+            linearOp.telemetry.addData("Left Speed", frontLeftMotor.getPower());
+            linearOp.telemetry.addData("Right Speed", frontRightMotor.getPower());
+            linearOp.telemetry.addData("Distance till destination ", encoders + startPosition - frontLeftMotor.getCurrentPosition());
+            linearOp.telemetry.addData("Current Position", currentPos);
+            linearOp.telemetry.addData("Target Position", target);
+            linearOp.telemetry.addData("Angle: ", angles.firstAngle);
+            linearOp.telemetry.update();
+            // missing waiting
+*/
+            linearOp.idle();
+        }
+
+        frontLeftMotor.setPower(0);
+        frontRightMotor.setPower(0);
+        rearLeftMotor.setPower(0);
+        rearRightMotor.setPower(0);
+
+        linearOp.idle();
+
+
+        /*
 //        setMotorRunModes(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
 //        setMotorRunModes(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
         double ticks = rotations * (1) * TICKS_PER_ROTATION;
@@ -643,7 +700,65 @@ public class CompetitionBot extends MecanumDrive {
         rearRightMotor.setPower(0);
 
         linearOp.idle();
+*/
+    }
 
+
+    public void driveGyroStraight (int encoders, double power) throws InterruptedException {
+
+        angles = imu.getAngularOrientation(AxesReference.INTRINSIC, AxesOrder.ZYX, AngleUnit.DEGREES);
+        double currentPos = 0;
+        double leftSideSpeed;
+        double rightSideSpeed;
+
+
+        double target = angles.firstAngle;
+        double startPosition = frontLeftMotor.getCurrentPosition();
+        //  linearOp.telemetry.addData("Angle to start: ", angles.firstAngle);
+        //  linearOp.telemetry.update();
+        linearOp.sleep(100);
+        while (currentPos < encoders + startPosition && linearOp.opModeIsActive()) {
+
+            angles = imu.getAngularOrientation(AxesReference.INTRINSIC, AxesOrder.ZYX, AngleUnit.DEGREES);
+
+
+            currentPos = Math.abs(frontLeftMotor.getCurrentPosition());
+
+                          currentPos = frontLeftMotor.getCurrentPosition();
+                    leftSideSpeed = power + (angles.firstAngle - target) / 100;            // they need to be different
+                    rightSideSpeed = power - (angles.firstAngle - target) / 100;
+
+                    leftSideSpeed = Range.clip(leftSideSpeed, -1, 1);        // helps prevent out of bounds error
+                    rightSideSpeed = Range.clip(rightSideSpeed, -1, 1);
+
+                    frontLeftMotor.setPower(leftSideSpeed);
+                    rearLeftMotor.setPower(leftSideSpeed);
+
+                    frontRightMotor.setPower(rightSideSpeed);
+                    rearRightMotor.setPower(rightSideSpeed);
+
+
+
+/*
+            linearOp.telemetry.addData("Left Speed", frontLeftMotor.getPower());
+            linearOp.telemetry.addData("Right Speed", frontRightMotor.getPower());
+            linearOp.telemetry.addData("Distance till destination ", encoders + startPosition - frontLeftMotor.getCurrentPosition());
+            linearOp.telemetry.addData("Current Position", currentPos);
+            linearOp.telemetry.addData("Target Position", target);
+            linearOp.telemetry.addData("Angle: ", angles.firstAngle);
+            linearOp.telemetry.update();
+            // missing waiting
+*/
+            linearOp.idle();
+        }
+
+        frontLeftMotor.setPower(0);
+        frontRightMotor.setPower(0);
+        rearLeftMotor.setPower(0);
+        rearRightMotor.setPower(0);
+
+        linearOp.idle();
+//
     }
 
     public void driveGyroStrafe (double power, double rotations, String direction) throws InterruptedException {
