@@ -105,14 +105,21 @@ public class CompetitionBot extends MecanumDrive {
     public CompetitionBot() {
 
     }
-    public void initRobot(HardwareMap hwMap, String startPosition){
+    public void initRobot(HardwareMap hwMap, String startPosition, String mode){
         hwBot = hwMap;
         WobbleArm = hwBot.get(Servo.class, "wobble_arm");
         WobbleArm.setDirection(Servo.Direction.FORWARD);
-        WobbleArm.setPosition(WobbleArmRaisedPos);
+        if (mode.equals("auto")) {
+            WobbleArm.setPosition(WobbleArmRaisedPos);
+
+        }
+
+
         WobbleGrab = hwBot.get(Servo.class, "wobble_grab");
         WobbleGrab.setDirection(Servo.Direction.FORWARD);
-        WobbleGrab.setPosition(WobbleGrabClosePos);
+        if (mode.equals("auto")){
+            WobbleGrab.setPosition(WobbleGrabClosePos);
+        }
         Camera = hwBot.get(Servo.class, "camera_blue_left_servo");
         Camera.setDirection(Servo.Direction.FORWARD);
 

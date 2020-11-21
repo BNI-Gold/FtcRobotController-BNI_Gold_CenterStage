@@ -24,7 +24,7 @@ public class AutoBlueRight extends BlueRight {
     @Override
     public void runOpMode() throws InterruptedException {
 
-        Bot.initRobot(hardwareMap, "TeleOp");
+        Bot.initRobot(hardwareMap, "TeleOp", "auto");
         Bot.initCamera();
         Bot.setLinearOp(this);
 

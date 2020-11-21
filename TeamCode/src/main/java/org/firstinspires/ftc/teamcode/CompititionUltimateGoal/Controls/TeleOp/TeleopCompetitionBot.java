@@ -38,13 +38,15 @@ public class TeleopCompetitionBot extends OpMode {
 
     @Override
     public void init() {
-        Bot.initRobot(hardwareMap,  "TeleOp");
+        Bot.initRobot(hardwareMap,  "TeleOp", "TeleOp");
     }
     @Override
     public void init_loop() {
     }
     @Override
     public void start() {
+        Bot.WobbleClosed();
+        Bot.WobbleRaised();
     }
     @Override
     public void loop() {

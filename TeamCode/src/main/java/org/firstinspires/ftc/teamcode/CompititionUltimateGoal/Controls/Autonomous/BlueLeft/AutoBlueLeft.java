@@ -27,7 +27,7 @@ public class AutoBlueLeft extends BlueLeft {
     @Override
     public void runOpMode() throws InterruptedException {
 //        Constructor to set up our hardware mapping.
-        Bot.initRobot(hardwareMap, "BlueLeft");
+        Bot.initRobot(hardwareMap, "BlueLeft","auto");
         Bot.initCamera();
         Bot.setLinearOp(this);
 //        This is hard-coded for this auto.  May or may not use, but here just in case.

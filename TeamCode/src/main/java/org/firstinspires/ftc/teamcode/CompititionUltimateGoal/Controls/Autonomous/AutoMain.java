@@ -56,7 +56,7 @@ public abstract class AutoMain extends LinearOpMode {
         sleep(sleepTimeDrive);
         Bot.gyroCorrection(.2,0);
         sleep(sleepTimeDrive);
-        Bot.strafeLeft(.3,.05);
+        Bot.strafeLeft(.3,.04);
         sleep(sleepTimeDrive);
         Bot.WobbleClosed();
         sleep(sleepTimeDrive);

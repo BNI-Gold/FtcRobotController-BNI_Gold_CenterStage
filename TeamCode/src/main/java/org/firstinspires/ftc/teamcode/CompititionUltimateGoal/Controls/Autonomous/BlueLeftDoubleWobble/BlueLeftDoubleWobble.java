@@ -13,7 +13,7 @@ public abstract class BlueLeftDoubleWobble extends AutoMain {
                 Bot.gyroCorrection(0.2, 0);
                 sleep(sleepTimeDrive);
 //                was 0.75
-                Bot.strafeLeft(.5,0.8);
+                Bot.strafeLeft(.5,1.1);
                 sleep(sleepTimeDrive);
                 Bot.gyroCorrection(0.2, 0);
                 sleep(sleepTimeDrive);
@@ -23,8 +23,7 @@ public abstract class BlueLeftDoubleWobble extends AutoMain {
                 sleep(sleepTimeDrive);
                 Bot.gyroCorrection(0.2, 0);
                 sleep(sleepTimeDrive);
-//                was 2.9
-                Bot.strafeLeft(0.5,2.8);
+                Bot.strafeLeft(0.5,2.9);
                 sleep(sleepTimeDrive);
                 Bot.gyroCorrection(0.2, 0);
                 sleep(sleepTimeDrive);
@@ -88,7 +87,7 @@ public abstract class BlueLeftDoubleWobble extends AutoMain {
                 sleep(sleepTimeDrive);
                 break;
             case B:
-                Bot.driveGyroBackward(.5,6.5);
+                Bot.driveGyroBackward(.5,6.1);
                 sleep(sleepTimeDrive);
                 Bot.gyroCorrection(.2,0);
                 sleep(sleepTimeDrive);
@@ -115,7 +114,7 @@ public abstract class BlueLeftDoubleWobble extends AutoMain {
     public void driveToWobble (CompetitionBot Bot, TargetZone target) throws InterruptedException {
         switch (target){
             case A:
-                Bot.strafeLeft(.5,3.7);
+                Bot.strafeLeft(.5,3.8);
                 sleep(sleepTimeDrive);
                 Bot.gyroCorrection(0.2, 0);
                 sleep(sleepTimeDrive);
@@ -125,7 +124,7 @@ public abstract class BlueLeftDoubleWobble extends AutoMain {
                 sleep(sleepTimeDrive);
                 break;
             case B:
-                Bot.strafeLeft(.5,1.5);
+                Bot.strafeLeft(.5,1.7);
                 sleep(sleepTimeDrive);
                 Bot.gyroCorrection(.2,0);
                 sleep(sleepTimeDrive);
