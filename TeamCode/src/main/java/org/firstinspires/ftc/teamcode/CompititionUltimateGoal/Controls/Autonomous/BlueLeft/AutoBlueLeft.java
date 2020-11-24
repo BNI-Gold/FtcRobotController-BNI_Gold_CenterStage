@@ -45,15 +45,6 @@ public class AutoBlueLeft extends BlueLeft {
 
         while (opModeIsActive()) {
 
-            Bot.frontLeftMotor.setPower(0.5);
-            sleep(2000);
-            Bot.frontLeftMotor.setPower(0);
-
-            
-
-
-
-
 //            Change value in detectStarterStack to test different Auto paths.
 //            select the function call below and use "Cmd + B" to go direcrtly to that function.
             targetZone = detectStarterStack(Bot);
