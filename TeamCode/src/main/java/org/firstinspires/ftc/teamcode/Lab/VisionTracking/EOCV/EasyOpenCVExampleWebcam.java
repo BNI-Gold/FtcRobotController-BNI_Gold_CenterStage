@@ -68,7 +68,7 @@ public class EasyOpenCVExampleWebcam extends LinearOpMode
         // landscape orientation, though.
 
 
-//        phoneCam.setViewportRenderingPolicy(OpenCvCamera.ViewportRenderingPolicy.OPTIMIZE_VIEW);
+//        webcam.setViewportRenderingPolicy(OpenCvCamera.ViewportRenderingPolicy.MAXIMIZE_EFFICIENCY);
 
 //        phoneCam.openCameraDeviceAsync(new OpenCvCamera.AsyncCameraOpenListener()
         webcam.openCameraDeviceAsync(new OpenCvCamera.AsyncCameraOpenListener()
