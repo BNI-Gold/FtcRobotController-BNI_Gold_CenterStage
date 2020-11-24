@@ -1,4 +1,4 @@
-package org.firstinspires.ftc.teamcode.CompititionUltimateGoal.Controls.Autonomous.DuValTest;
+package org.firstinspires.ftc.teamcode.CompititionUltimateGoal.Controls.Autonomous.Lab.DuValTest;
 
 import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
 import com.qualcomm.robotcore.eventloop.opmode.Disabled;

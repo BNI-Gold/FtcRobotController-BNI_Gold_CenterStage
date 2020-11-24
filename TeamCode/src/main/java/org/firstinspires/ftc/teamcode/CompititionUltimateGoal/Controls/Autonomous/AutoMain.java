@@ -36,6 +36,28 @@ public abstract class AutoMain extends LinearOpMode {
          */
     }
 
+    public TargetZone detectStarterStack (LabBot Bot) {
+
+//         Following 2 lines are for Hard Coding the Target Zone.  Uncomment to not use EOCV.  AND comment out the lines below them.
+        zone = TargetZone.A;
+        return zone;
+//    Line below are to use with EOCV
+        /*
+        Bot.pipeline.getAnalysis();
+        if (Bot.pipeline.position == EasyOpenCVWebcam.SkystoneDeterminationPipeline.RingPosition.NONE) {
+            return TargetZone.A;
+        }
+        else if (Bot.pipeline.position == EasyOpenCVWebcam.SkystoneDeterminationPipeline.RingPosition.ONE) {
+            return TargetZone.B;
+        }
+        else {
+            return TargetZone.C;
+        }
+
+         */
+    }
+
+
 //    Lower servo to score it, and then raise it to not damage anything.
     public void ScoreWobble (CompetitionBot Bot){
         Bot.WobbleLower();
@@ -82,7 +104,19 @@ public abstract class AutoMain extends LinearOpMode {
         Bot.IntakeOff(0);
     }
 
-        public void LEDs (CompetitionBot Bot, TargetZone target) {
+        public void LEDs (LabBot Bot, TargetZone target) {
+        if (TargetZone.A == target){
+            Bot.blinkinLedDriver.setPattern(RevBlinkinLedDriver.BlinkinPattern.BLUE);
+        }
+        else if (TargetZone.B == target){
+            Bot.blinkinLedDriver.setPattern(RevBlinkinLedDriver.BlinkinPattern.WHITE);
+        }
+        else {
+            Bot.blinkinLedDriver.setPattern(RevBlinkinLedDriver.BlinkinPattern.RED);
+        }
+    }
+
+    public void LEDs (CompetitionBot Bot, TargetZone target) {
         if (TargetZone.A == target){
             Bot.blinkinLedDriver.setPattern(RevBlinkinLedDriver.BlinkinPattern.BLUE);
         }

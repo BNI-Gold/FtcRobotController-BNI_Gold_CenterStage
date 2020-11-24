@@ -1,12 +1,13 @@
 package org.firstinspires.ftc.teamcode.CompititionUltimateGoal.Controls.Autonomous.Lab;
 
 import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
+import com.qualcomm.robotcore.eventloop.opmode.Disabled;
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 
 import org.firstinspires.ftc.teamcode.CompititionUltimateGoal.Robots.LabBot;
 
 @Autonomous(name = "Auto Roll Out")
-
+@Disabled
 public class AutoRollOut extends LinearOpMode {
 
     public LabBot Bot = new LabBot();
@@ -16,6 +17,8 @@ public class AutoRollOut extends LinearOpMode {
 
     @Override
     public void runOpMode() throws InterruptedException {
+
+        /*
         Bot.initRobot(hardwareMap);
         Bot.setLinearOp(this);
         Bot.servoClosed();
@@ -66,7 +69,9 @@ public class AutoRollOut extends LinearOpMode {
                     break;
 
             }
+
+         */
         requestOpModeStop();
-        }
+
     }
 }

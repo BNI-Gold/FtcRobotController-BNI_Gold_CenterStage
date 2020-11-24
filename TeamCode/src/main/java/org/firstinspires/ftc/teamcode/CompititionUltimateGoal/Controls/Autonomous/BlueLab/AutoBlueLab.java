@@ -1,18 +1,19 @@
-package org.firstinspires.ftc.teamcode.CompititionUltimateGoal.Controls.Autonomous.Lab.BlueMecanumBot;
+package org.firstinspires.ftc.teamcode.CompititionUltimateGoal.Controls.Autonomous.BlueLab;
 
 import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
 
 import org.firstinspires.ftc.teamcode.CompititionUltimateGoal.Controls.Autonomous.StartPosition;
 import org.firstinspires.ftc.teamcode.CompititionUltimateGoal.Controls.Autonomous.TargetZone;
 import org.firstinspires.ftc.teamcode.CompititionUltimateGoal.Robots.CompetitionBot;
+import org.firstinspires.ftc.teamcode.CompititionUltimateGoal.Robots.LabBot;
 
-@Autonomous (name = "Blue:Mecanum:", group = "BLUE")
+@Autonomous (name = "Blue:Lab:", group = "BLUE")
 //@Disabled
 
-public class AutoBlueMecanum extends BlueMecanum {
+public class AutoBlueLab extends BlueLab {
 
     // Initiailize our variables.
-    public CompetitionBot Bot = new CompetitionBot();
+    public LabBot Bot = new LabBot();
     public StartPosition startPosition = null;
     public TargetZone targetZone = null;
     public long sleepTime = 100;
@@ -26,11 +27,11 @@ public class AutoBlueMecanum extends BlueMecanum {
 //        Bot.initCamera();
         Bot.setLinearOp(this);
 //        This is hard-coded for this auto.  May or may not use, but here just in case.
-        sleep(4000);
+        sleep(100);
         startPosition = StartPosition.BlueLeft;
         targetZone = detectStarterStack(Bot);
-        telemetry.addData("SAMPLING VALUE #: ", Bot.pipeline.avg1);
-        telemetry.addData("NUMBER OF RINGS: ", Bot.pipeline.position);
+//        telemetry.addData("SAMPLING VALUE #: ", Bot.pipeline.avg1);
+//        telemetry.addData("NUMBER OF RINGS: ", Bot.pipeline.position);
         telemetry.addData("TARGET ZONE: ", targetZone);
 
         telemetry.addLine("WAITING FOR START >");
@@ -41,8 +42,8 @@ public class AutoBlueMecanum extends BlueMecanum {
 //            Change value in detectStarterStack to test different Auto paths.
 //            select the function call below and use "Cmd + B" to go direcrtly to that function.
             targetZone = detectStarterStack(Bot);
-            telemetry.addData("SAMPLING VALUE #: ", Bot.pipeline.avg1);
-            telemetry.addData("NUMBER OF RINGS: ", Bot.pipeline.position);
+//            telemetry.addData("SAMPLING VALUE #: ", Bot.pipeline.avg1);
+//            telemetry.addData("NUMBER OF RINGS: ", Bot.pipeline.position);
             telemetry.addData("TARGET ZONE: ", targetZone);
             telemetry.update();
 

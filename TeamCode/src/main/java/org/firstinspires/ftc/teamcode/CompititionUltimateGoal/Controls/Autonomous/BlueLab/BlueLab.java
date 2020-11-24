@@ -1,19 +1,18 @@
-package org.firstinspires.ftc.teamcode.CompititionUltimateGoal.Controls.Autonomous.Lab.BlueMecanumBot;
-
-import android.widget.Button;
+package org.firstinspires.ftc.teamcode.CompititionUltimateGoal.Controls.Autonomous.BlueLab;
 
 import org.firstinspires.ftc.teamcode.CompititionUltimateGoal.Controls.Autonomous.AutoMain;
 import org.firstinspires.ftc.teamcode.CompititionUltimateGoal.Controls.Autonomous.TargetZone;
 import org.firstinspires.ftc.teamcode.CompititionUltimateGoal.Robots.CompetitionBot;
+import org.firstinspires.ftc.teamcode.CompititionUltimateGoal.Robots.LabBot;
 
-public abstract class BlueMecanum extends AutoMain {
+public abstract class BlueLab extends AutoMain {
 
 
 
-    public void driveToLaunch (CompetitionBot Bot) throws InterruptedException {
+    public void driveToLaunch (LabBot Bot) throws InterruptedException {
         Bot.driveGyroBackward(0.5, 4);
         sleep(sleepTimeDrive);
-        Bot.rotateLeft(0.5, 2);
+        Bot.rotateLeft(0.5, 1.75);
         sleep(sleepTimeDrive);
         Bot.gyroCorrection(0.2, 180);
         sleep(100);

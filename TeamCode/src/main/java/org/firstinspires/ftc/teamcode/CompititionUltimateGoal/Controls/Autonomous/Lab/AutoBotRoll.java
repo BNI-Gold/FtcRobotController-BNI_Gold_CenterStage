@@ -17,6 +17,8 @@ public class AutoBotRoll extends LinearOpMode {
 
     @Override
     public void runOpMode() throws InterruptedException {
+
+        /*
         Bot.initRobot(hardwareMap);
         Bot.setLinearOp(this);
 
@@ -62,6 +64,8 @@ public class AutoBotRoll extends LinearOpMode {
         }
         idle();
 
+
+         */
 
     }
 }

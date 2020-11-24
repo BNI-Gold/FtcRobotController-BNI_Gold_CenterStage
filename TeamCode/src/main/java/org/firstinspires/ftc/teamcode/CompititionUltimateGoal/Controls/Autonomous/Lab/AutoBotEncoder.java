@@ -16,6 +16,7 @@ public class AutoBotEncoder extends LinearOpMode {
 
     @Override
     public void runOpMode() throws InterruptedException {
+        /*
         Bot.initRobot(hardwareMap);
         Bot.setLinearOp(this);
 
@@ -37,5 +38,7 @@ public class AutoBotEncoder extends LinearOpMode {
 
 
         }
+
+         */
     }
 }

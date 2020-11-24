@@ -6,7 +6,7 @@ import com.qualcomm.robotcore.util.Range;
 
 import org.firstinspires.ftc.teamcode.CompititionUltimateGoal.Robots.LabBot;
 
-@TeleOp(name = "Teleop_LabBot")
+@TeleOp(name = "Teleop_LabBot", group = "Lab")
 public class TeleopLabBot extends OpMode {
 
     // Variables & Constants specific to TeleLabBot
@@ -29,7 +29,8 @@ public class TeleopLabBot extends OpMode {
 
     @Override
     public void init() {
-        Bot.initRobot(hardwareMap);
+        Bot.initRobot(hardwareMap, "BlueLeft",  "Auto");
+
     }
     @Override
     public void init_loop() {
