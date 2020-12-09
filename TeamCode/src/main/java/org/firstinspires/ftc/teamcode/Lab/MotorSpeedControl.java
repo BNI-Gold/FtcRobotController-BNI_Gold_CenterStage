@@ -64,7 +64,7 @@ public class MotorSpeedControl extends OpMode {
             normalizeEncodersManually();
         }
 
-        normalizeEncoders();
+//        normalizeEncoders();
 
         if (powerMode) {
             if (gamepad2.right_bumper) {

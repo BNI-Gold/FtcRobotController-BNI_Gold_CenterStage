@@ -23,7 +23,7 @@ public class twoServo_Callibrate extends OpMode {
 
     @Override
     public void init () {
-        wobbleArm = hardwareMap.servo.get("wobble_arm");
+        wobbleArm = hardwareMap.servo.get("ring_mag");
         wobbleArm.setPosition(wobbleArmPos);
         wobbleGrab = hardwareMap.servo.get("wobble_grab");
         wobbleGrab.setPosition((wobbleGrabPos));

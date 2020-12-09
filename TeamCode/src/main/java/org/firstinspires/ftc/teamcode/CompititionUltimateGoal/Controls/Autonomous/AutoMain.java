@@ -10,7 +10,7 @@ import org.firstinspires.ftc.teamcode.CompititionUltimateGoal.Robots.LabBot;
 
 public abstract class AutoMain extends LinearOpMode {
 
-    public int sleepTimeDrive = 300;
+    public int sleepTimeDrive = 250;
 
     public TargetZone zone = null;
 
@@ -18,10 +18,10 @@ public abstract class AutoMain extends LinearOpMode {
     public TargetZone detectStarterStack (CompetitionBot Bot) {
 
 //         Following 2 lines are for Hard Coding the Target Zone.  Uncomment to not use EOCV.  AND comment out the lines below them.
-                zone = TargetZone.A;
-                return zone;
+//                zone = TargetZone.B;
+//                return zone;
 //    Line below are to use with EOCV
-        /*
+
         Bot.pipeline.getAnalysis();
         if (Bot.pipeline.position == EasyOpenCVWebcam.SkystoneDeterminationPipeline.RingPosition.NONE) {
             return TargetZone.A;
@@ -33,13 +33,13 @@ public abstract class AutoMain extends LinearOpMode {
             return TargetZone.C;
         }
 
-         */
+
     }
 
     public TargetZone detectStarterStack (LabBot Bot) {
 
 //         Following 2 lines are for Hard Coding the Target Zone.  Uncomment to not use EOCV.  AND comment out the lines below them.
-        zone = TargetZone.A;
+        zone = TargetZone.B;
         return zone;
 //    Line below are to use with EOCV
         /*
@@ -57,23 +57,64 @@ public abstract class AutoMain extends LinearOpMode {
          */
     }
 
+    public void driveToLaunch (CompetitionBot Bot) throws InterruptedException {
+        Bot.driveGyroBackward(0.5, 4.25);
+        sleep(sleepTimeDrive);
+//        IF SPINNING, MAKE HIGHER
+//        was 3.4
+        Bot.rotateRight(0.6, 3.6);
+        sleep(sleepTimeDrive);
+        Bot.gyroCorrection(0.2,179.5);
+        sleep(sleepTimeDrive);
+        Bot.strafeLeft(0.5, 1.5);
+        sleep(sleepTimeDrive);
+        Bot.gyroCorrection(0.2,179.5);
+        sleep(sleepTimeDrive);
+    }
+
+
+
 
 //    Lower servo to score it, and then raise it to not damage anything.
     public void ScoreWobble (CompetitionBot Bot){
-        Bot.WobbleLower();
-        sleep(500);
+        Bot.WobbleArmLower(1);
+        sleep(300);
         Bot.WobbleOpen();
-        sleep(1000);
-        Bot.WobbleRaised();
+        sleep(800);
+        Bot.WobbleArmRaised(1);
         sleep(sleepTimeDrive);
         Bot.WobbleClosed();
         sleep(sleepTimeDrive);
     }
 
 
+    public void ScoreWobbleSensor (CompetitionBot Bot) {
+        Bot.WobbleArmLowerColorSensor();
+        sleep(500);
+        Bot.WobbleOpen();
+        sleep(1000);
+        Bot.WobbleArmStopClose();
+        sleep(500);
+        Bot.driveForward(.5,1);
+        sleep(500);
+        Bot.WobbleArmRaiseColorSensor();
+        sleep(500);
 
+    }
+
+
+    public void CollectDoubleWobble (CompetitionBot Bot){
+        Bot.WobbleArmLower(1);
+        sleep(sleepTimeDrive);
+        Bot.WobbleClosed();
+        sleep(sleepTimeDrive);
+        Bot.WobbleArmRaised(1);
+        sleep(sleepTimeDrive);
+
+
+    }
     public void CollectWobble (CompetitionBot Bot){
-        Bot.WobbleLower();
+        Bot.WobbleArmLower(1);
         sleep(sleepTimeDrive);
         Bot.WobbleOpen();
         sleep(sleepTimeDrive);
@@ -85,23 +126,41 @@ public abstract class AutoMain extends LinearOpMode {
         sleep(sleepTimeDrive);
         Bot.WobbleClosed();
         sleep(sleepTimeDrive);
-        Bot.WobbleRaised();
+        Bot.WobbleArmRaised(1);
         sleep(sleepTimeDrive);
     }
-
+    public void RingPusher (CompetitionBot Bot) {
+        Bot.RingPush();
+        sleep(sleepTimeDrive);
+        Bot.RingPull();
+        sleep(sleepTimeDrive);
+    }
 
 
         public void ScoreLaunch (CompetitionBot Bot){
 
         Bot.LauncherOn(1);
-        sleep(sleepTimeDrive);
-        Bot.IntakeOn(1);
+        sleep(3000);
+        Bot.RingPush();
+        sleep(100);
+        Bot.RingPull();
+        sleep(100);
+        Bot.RingPush();
+        sleep(100);
+        Bot.RingPull();
+        sleep(100);
+        Bot.RingPush();
+        sleep(100);
+        Bot.RingPull();
+        sleep(100);
+//        Bot.IntakeOn(1);
 
     }
 
         public void StopLaunch (CompetitionBot Bot){
         Bot.LauncherOff(0);
-        Bot.IntakeOff(0);
+        sleep(1000);
+//        Bot.IntakeOff(0);
     }
 
         public void LEDs (LabBot Bot, TargetZone target) {

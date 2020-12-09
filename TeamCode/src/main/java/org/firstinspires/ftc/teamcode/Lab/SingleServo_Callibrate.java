@@ -15,7 +15,7 @@ public class SingleServo_Callibrate extends OpMode {
 
     @Override
     public void init () {
-        myServo = hardwareMap.servo.get("servo");
+        myServo = hardwareMap.servo.get("camera_blue_left_servo");
         myServo.setPosition(servoPos);
     }
 
@@ -45,3 +45,7 @@ public class SingleServo_Callibrate extends OpMode {
         telemetry.update();
     }
 }
+
+
+//mag arm down = 0
+// mag up = 0.171

@@ -11,7 +11,7 @@ import org.firstinspires.ftc.teamcode.CompititionUltimateGoal.Robots.LabBot;
 
 
 @Autonomous(name = "Remote:Blue:Right:", group = "BLUE")
-@Disabled
+//@Disabled
 
 public class AutoBlueRight extends BlueRight {
 
@@ -50,12 +50,30 @@ public class AutoBlueRight extends BlueRight {
             targetZone = detectStarterStack(Bot);
             sleep(sleepTime);
 
-            driveToTargetZone (Bot, targetZone);
+            driveToLaunch (Bot);
             sleep(sleepTime);
 
+            ScoreRings(Bot,targetZone);
+            sleep(sleepTime);
+
+            driveToZoneOne(Bot, targetZone);
+            sleep(sleepTime);
+//
+            ScoreWobbleSensor(Bot);
+            sleep(sleepTime);
+//
+//            driveToLeftWobble(Bot,targetZone);
+//            sleep(sleepTime);
+//
+//            CollectDoubleWobble(Bot);
+//            sleep(sleepTime);
+//
+//            driveToZoneTwo(Bot,targetZone);
+//            sleep(sleepTime);
+//
 //            ScoreWobble(Bot);
 //            sleep(sleepTime);
-
+//
             ParkLaunchLine(Bot,targetZone);
             sleep(sleepTime);
 

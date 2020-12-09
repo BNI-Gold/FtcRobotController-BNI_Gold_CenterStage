@@ -8,9 +8,10 @@ import com.qualcomm.robotcore.hardware.Servo;
 
 //Class is used for testing a single motor, using trigger for variable power.
 //WITHOUT
-@TeleOp(name = "one motor test", group="twowheel")
-public class SingleMotor_ButtonToggle extends OpMode {
-    private DcMotor motor = null;
+@TeleOp(name = "two motor launcher test", group="twowheel")
+public class TwoMotor_ButtonToggle extends OpMode {
+    private DcMotor motor_left = null;
+    private DcMotor motor_right = null;
     double r_trigger;
     double l_trigger;
 
@@ -18,10 +19,14 @@ public class SingleMotor_ButtonToggle extends OpMode {
 
     @Override
     public void init() {
-        motor = hardwareMap.dcMotor.get("motor");
-        motor.setDirection(DcMotorSimple.Direction.FORWARD);
-        motor.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.FLOAT);
-        motor.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
+        motor_left = hardwareMap.dcMotor.get("launcher_motor_l");
+        motor_left.setDirection(DcMotorSimple.Direction.FORWARD);
+        motor_left.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.FLOAT);
+        motor_left.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
+        motor_right = hardwareMap.dcMotor.get("launcher_motor_r");
+        motor_right.setDirection(DcMotorSimple.Direction.FORWARD);
+        motor_right.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.FLOAT);
+        motor_right.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
 
 
 
@@ -34,19 +39,23 @@ public class SingleMotor_ButtonToggle extends OpMode {
         telemetry.update();
     }
 
+
     @Override
     public void loop() {
         if (gamepad1.a == true && forward == true) {
-            motor.setPower(1);
+            motor_left.setPower(1);
+            motor_right.setPower(1);
         }
 // 1)
 //        Make motor go reverse? Valid values of motors are [-1, +1]
         if(gamepad1.a == true && forward == false){
-            motor.setPower(-1);
+            motor_left.setPower(-1);
+            motor_right.setPower(-1);
         }
 
         if(gamepad1.b == true){
-            motor.setPower(0);
+            motor_left.setPower(0);
+            motor_right.setPower(0);
         }
 
 
@@ -71,5 +80,7 @@ public class SingleMotor_ButtonToggle extends OpMode {
     public void update_telemetry () {
         telemetry.addData("Forward mode? ", forward);
         telemetry.addData("A being pressed? ", gamepad1.a);
+        telemetry.addData("left motor power: ", motor_left.getPower());
+        telemetry.addData("right motor power: ", motor_right.getPower());
     }
 }

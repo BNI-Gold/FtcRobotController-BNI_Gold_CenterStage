@@ -31,7 +31,7 @@ public class TeleopCompetitionBot extends OpMode {
     double speedMultiply = 1;
     boolean forwardMode = true;
 
-    boolean reverseModeToggle = true;
+    boolean reverseModeToggle = false;
 
     public CompetitionBot Bot=new CompetitionBot();
 
@@ -46,7 +46,11 @@ public class TeleopCompetitionBot extends OpMode {
     @Override
     public void start() {
         Bot.WobbleClosed();
-        Bot.WobbleRaised();
+        Bot.wobbleArmRaiseEngage = false;
+        Bot.wobbleArmLowerengage = false;
+        Bot.WobbleArmStopClose();
+        Bot.RingMagDown();
+
     }
     @Override
     public void loop() {
@@ -55,7 +59,7 @@ public class TeleopCompetitionBot extends OpMode {
         launcher();
         intake();
         driveMode();
-
+        telemetryOutput();
     }
 
 
@@ -249,29 +253,96 @@ public class TeleopCompetitionBot extends OpMode {
 
 
     public void wobble () {
-        if (gamepad2.right_trigger > 0.1) {
-            Bot.WobbleLower();
+
+
+//        Motor arm raise & lower controls.\
+
+        if (gamepad2.left_trigger > 0.1) {
+            Bot.wobbleArmRaiseEngage = true;
         }
+
+
+        if (Bot.wobbleArmRaiseEngage == true) {
+            if (Bot.sensorWobbleArmRaise() == false) {
+                Bot.WobbleArmRaised(0.6);
+            }
+            else if (Bot.sensorWobbleArmRaise() == true) {
+                Bot.WobbleArmStopMotors ();
+                Bot.wobbleArmRaiseEngage = false;
+                telemetry.addLine("RAISE STOP");
+            }
+        }
+
+        if (gamepad2.right_trigger > 0.1) {
+            Bot.wobbleArmLowerengage = true;
+        }
+
+        if (Bot.wobbleArmLowerengage == true) {
+            if (Bot.sensorWobbleArmLower() == false) {
+                Bot.WobbleArmLower(0.5);
+            }
+            else if (Bot.sensorWobbleArmLower() == true) {
+                Bot.WobbleArmStopMotors();
+                Bot.wobbleArmLowerengage = false;
+                telemetry.addLine("LOWER STOP");
+            }
+        }
+
+        if (gamepad2.dpad_up == true) {
+            Bot.WobbleArmRaised(0.6);
+        }
+        else if (gamepad2.dpad_down == true) {
+            Bot.WobbleArmLower(0.5);
+        }
+        else {
+            if (Bot.wobbleArmRaiseEngage == false && Bot.wobbleArmLowerengage == false) {
+                Bot.WobbleArmStopMotors();
+            }
+        }
+
+        /*
+        if (gamepad2.right_trigger > 0.1 && Bot.sensorWobbleArmLower() == false) {
+            Bot.WobbleArmLower(1);
+        }
+        else {
+            Bot.WobbleArmStopMotors ();
+        }
+
+        if (gamepad2.left_trigger > 0.1 && Bot.sensorWobbleArmRaise() == false) {
+            Bot.WobbleArmRaised(1);
+        }
+
+         */
+
+// Servo Grabber controls
         if (gamepad2.right_bumper == true) {
             Bot.WobbleOpen();
-        }
-        if (gamepad2.left_trigger > 0.1) {
-            Bot.WobbleRaised();
         }
         if (gamepad2.left_bumper == true) {
             Bot.WobbleClosed();
         }
+
+
+
+
     }
 
     public void launcher () {
         if (gamepad2.a == true) {
 //            .75 always launched high.
-            Bot.LauncherOn(0.73);
+            Bot.LauncherOn(1);
+            Bot.RingMagUp();
         }
         if (gamepad2.y == true) {
             Bot.LauncherOff(0);
+            Bot.RingMagDown();
         }
-
+        if (gamepad2.b == true) {
+            Bot.RingPush();
+        }
+        if (gamepad2.x == true) {
+            Bot.RingPull();
+        }
     }
     public void intake() {
         if (gamepad2.left_stick_y > 0.1 || gamepad2.left_stick_y < -.1) {
@@ -283,10 +354,11 @@ public class TeleopCompetitionBot extends OpMode {
 
     }
     public void telemetryOutput () {
-        telemetry.addData("front left motor ticks: ", Bot.frontLeftMotor.getCurrentPosition());
-//        telemetry.addData()
-        telemetry.addData("intake motor: ", Bot.IntakeMotor.getPower());
-//        telemetry.addData("gamepad 2 left stick y", gamepad2.left_stick_y);
-        telemetry.addData("launch motor: ", Bot.LauncherMotor.getPower());
+//        telemetry.addData("front left motor ticks: ", Bot.frontLeftMotor.getCurrentPosition());
+////        telemetry.addData()
+//        telemetry.addData("intake motor: ", Bot.IntakeMotor.getPower());
+////        telemetry.addData("gamepad 2 left stick y", gamepad2.left_stick_y);
+//        telemetry.addData("launch motor: ", Bot.LauncherMotor.getPower());
+        telemetry.addData("Hue! ", Bot.hsvValues[0]);
     }
 }
