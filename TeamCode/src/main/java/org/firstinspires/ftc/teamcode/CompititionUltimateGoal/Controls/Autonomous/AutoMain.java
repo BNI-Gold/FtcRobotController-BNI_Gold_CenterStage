@@ -7,6 +7,7 @@ import com.qualcomm.robotcore.hardware.LED;
 import org.firstinspires.ftc.teamcode.CompititionUltimateGoal.Modules.EasyOpenCVWebcam;
 import org.firstinspires.ftc.teamcode.CompititionUltimateGoal.Robots.CompetitionBot;
 import org.firstinspires.ftc.teamcode.CompititionUltimateGoal.Robots.LabBot;
+import org.firstinspires.ftc.teamcode.CompititionUltimateGoal.Robots.StraferKit;
 
 public abstract class AutoMain extends LinearOpMode {
 
@@ -57,6 +58,27 @@ public abstract class AutoMain extends LinearOpMode {
          */
     }
 
+    public TargetZone detectStarterStack (StraferKit Bot) {
+
+//         Following 2 lines are for Hard Coding the Target Zone.  Uncomment to not use EOCV.  AND comment out the lines below them.
+        zone = TargetZone.B;
+        return zone;
+//    Line below are to use with EOCV
+        /*
+        Bot.pipeline.getAnalysis();
+        if (Bot.pipeline.position == EasyOpenCVWebcam.SkystoneDeterminationPipeline.RingPosition.NONE) {
+            return TargetZone.A;
+        }
+        else if (Bot.pipeline.position == EasyOpenCVWebcam.SkystoneDeterminationPipeline.RingPosition.ONE) {
+            return TargetZone.B;
+        }
+        else {
+            return TargetZone.C;
+        }
+
+         */
+    }
+
     public void driveToLaunch (CompetitionBot Bot) throws InterruptedException {
         Bot.driveGyroBackward(0.5, 4.25);
         sleep(sleepTimeDrive);
@@ -70,6 +92,15 @@ public abstract class AutoMain extends LinearOpMode {
         sleep(sleepTimeDrive);
         Bot.gyroCorrection(0.2,179.5);
         sleep(sleepTimeDrive);
+    }
+
+    public void driveToLaunch (StraferKit Bot) throws InterruptedException {
+        Bot.driveGyroBackward(0.5, 4);
+        sleep(sleepTimeDrive);
+        Bot.rotateLeft(0.5, 1.75);
+        sleep(sleepTimeDrive);
+        Bot.gyroCorrection(0.2, 180);
+        sleep(100);
     }
 
 
