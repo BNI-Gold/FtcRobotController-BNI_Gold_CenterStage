@@ -1,8 +1,12 @@
 package org.firstinspires.ftc.teamcode.CompititionUltimateGoal.Controls.Autonomous.BlueStraferKit;
 
+import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
+
 import org.firstinspires.ftc.teamcode.CompititionUltimateGoal.Controls.Autonomous.StartPosition;
 import org.firstinspires.ftc.teamcode.CompititionUltimateGoal.Controls.Autonomous.TargetZone;
 import org.firstinspires.ftc.teamcode.CompititionUltimateGoal.Robots.StraferKit;
+
+@Autonomous(name = "Strafer:Blue:Right", group = "BLUE")
 
 public class AutoBlueStrafer extends BlueStrafer {
     public StraferKit Bot = new StraferKit ();
@@ -35,10 +39,8 @@ public class AutoBlueStrafer extends BlueStrafer {
 
             driveToLaunch(Bot);
             sleep(sleepTime);
-
-
-
-
+            driveToTargetZone(Bot,targetZone);
+            sleep(sleepTime);
 
             requestOpModeStop();
         }

@@ -24,14 +24,18 @@ public abstract class BlueStrafer extends AutoMain {
                 sleep(sleepTimeDrive);
                 break;
             case B:
-                Bot.driveGyroBackward(.5,7.5);
+                Bot.driveBackward(.3,1);
+                sleep(1000);
+                Bot.strafeLeft(.3,1.5);
                 sleep(sleepTimeDrive);
-                Bot.gyroCorrection(0.2, 0);
+                Bot.driveForward(.3,3);
                 sleep(sleepTimeDrive);
-                Bot.strafeLeft(0.5,2.9);
-                sleep(sleepTimeDrive);
-                Bot.gyroCorrection(0.2, 0);
-                sleep(sleepTimeDrive);
+//                Bot.gyroCorrection(0.2, 179);
+//                sleep(sleepTimeDrive);
+//                Bot.strafeRight(0.5,2.5);
+//                sleep(sleepTimeDrive);
+//                Bot.gyroCorrection(0.2, 0);
+//                sleep(sleepTimeDrive);
                 break;
             case C:
                 Bot.driveGyroBackward(0.7, 9.3);
