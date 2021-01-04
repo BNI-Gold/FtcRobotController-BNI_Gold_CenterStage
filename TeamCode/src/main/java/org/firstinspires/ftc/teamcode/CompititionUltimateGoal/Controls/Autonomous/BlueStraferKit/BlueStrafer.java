@@ -25,8 +25,10 @@ public abstract class BlueStrafer extends AutoMain {
                 break;
             case B:
                 Bot.driveBackward(.3,1);
-                sleep(1000);
-                Bot.strafeLeft(.3,1.5);
+                sleep(sleepTimeDrive);
+                Bot.gyroCorrection(0.2,180);
+                sleep(sleepTimeDrive);
+                Bot.strafeLeft(.3,3);
                 sleep(sleepTimeDrive);
                 Bot.driveForward(.3,3);
                 sleep(sleepTimeDrive);

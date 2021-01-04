@@ -95,16 +95,14 @@ public abstract class AutoMain extends LinearOpMode {
     }
 
     public void driveToLaunch (StraferKit Bot) throws InterruptedException {
-        Bot.driveForward(0.3, 6.5);
+        Bot.driveForward(0.35, 6.5);
         sleep(sleepTimeDrive);
 //        Bot.rotateLeft(0.3, 1.75);
 //        sleep(sleepTimeDrive);
         Bot.strafeLeft(0.4,2);
         sleep(sleepTimeDrive);
-        Bot.gyroCorrection(0.3, 179.7);
-        sleep(sleepTimeDrive);
-
-
+        Bot.gyroCorrection(0.3, 179.3);
+        sleep(350);
     }
 
 
