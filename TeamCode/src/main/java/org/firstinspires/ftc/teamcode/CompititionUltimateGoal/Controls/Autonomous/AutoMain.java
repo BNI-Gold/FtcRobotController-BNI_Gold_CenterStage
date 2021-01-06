@@ -40,7 +40,7 @@ public abstract class AutoMain extends LinearOpMode {
     public TargetZone detectStarterStack (LabBot Bot) {
 
 //         Following 2 lines are for Hard Coding the Target Zone.  Uncomment to not use EOCV.  AND comment out the lines below them.
-        zone = TargetZone.B;
+        zone = TargetZone.A;
         return zone;
 //    Line below are to use with EOCV
         /*
@@ -61,7 +61,7 @@ public abstract class AutoMain extends LinearOpMode {
     public TargetZone detectStarterStack (StraferKit Bot) {
 
 //         Following 2 lines are for Hard Coding the Target Zone.  Uncomment to not use EOCV.  AND comment out the lines below them.
-        zone = TargetZone.B;
+        zone = TargetZone.C;
         return zone;
 //    Line below are to use with EOCV
         /*
@@ -101,8 +101,9 @@ public abstract class AutoMain extends LinearOpMode {
 //        sleep(sleepTimeDrive);
         Bot.strafeLeft(0.4,2);
         sleep(sleepTimeDrive);
-        Bot.gyroCorrection(0.3, 179.3);
-        sleep(350);
+        Bot.gyroCorrection(0.2,0);
+        sleep(1000);
+
     }
 
 
