@@ -1,11 +1,12 @@
 package org.firstinspires.ftc.teamcode.Lab;
 
+import com.qualcomm.robotcore.eventloop.opmode.Disabled;
 import com.qualcomm.robotcore.eventloop.opmode.OpMode;
 import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.hardware.DcMotorSimple;
 
 //Class is used for testing a single motor, using trigger for variable power.
-
+@Disabled
 public class SingleMotor_Triggers extends OpMode {
     private DcMotor motor = null;
     double power;

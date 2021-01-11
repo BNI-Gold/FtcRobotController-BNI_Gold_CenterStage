@@ -59,9 +59,9 @@ public class CompetitionBot extends MecanumDrive {
     public float hsvValues[] = {0F, 0F, 0F};
     public final double SCALE_FACTOR = 1;
 //    Under 100 = red tape
-    public static final int WOBBLE_ARM_RAISE_THRESHOLD = 100;
+    public static final int WOBBLE_ARM_RAISE_THRESHOLD = 170;
 //    Looks for > 200 with blue tape
-    public static final int WOBBLE_ARM_LOWER_THRESHOLD = 200;
+    public static final int WOBBLE_ARM_LOWER_THRESHOLD = 100;
     //  Camera Initialization
     public OpenCvCamera webcam;
     public SkystoneDeterminationPipeline pipeline;
@@ -76,7 +76,7 @@ public class CompetitionBot extends MecanumDrive {
     Servo Camera = null;
     Servo ServoRingPusher = null;
     Servo RingMag = null;
-    Servo WobbleArmStop = null;
+//    Servo WobbleArmStop = null;
 //    Servos servos = new Servos();
 
 
@@ -88,23 +88,24 @@ public class CompetitionBot extends MecanumDrive {
     public double WobbleGrabOpenPos = 0.619;
     public double WobbleGrabClosePos = 0.215;
     //Blue Left:
-    public double CameraServoPosBlueLeft = 0.358;
+    public double CameraServoPosBlueLeft = 0.26;
     //Blue Right:
     public double CameraServoPosBlueRight = 0.602;
     //Launcher Motor:
     public DcMotor IntakeMotor = null;
-    public double RingPushPos = 0.559;
-    public double RingPullPos = 0.95;
-    public double RingMagUpPos = 0.171;
+    public double RingPushPos = 0.525;
+    public double RingPullPos = 0.785;
+    public double RingMagUpPos = 0.166;
     public double RingMagDownPos = 0;
-    public double WobbleArmStopOpen = 0.02;
-    public double WobbleArmStopClose = 0.48;
+//    public double WobbleArmStopOpen = 0.02;
+//    public double WobbleArmStopClose = 0.48;
 //    Wobble Arm Motor Data
 
     public DcMotor WobbleArmMotor = null;
 //    public DcMotor motor_left = null;
 //    public DcMotor motor_right = null;
-    public DcMotor launcherMotor = null;
+    public DcMotor launcherMotor1 = null;
+    public DcMotor launcherMotor2 = null;
     public boolean wobbleArmRaiseEngage;
     public boolean wobbleArmLowerengage;
 
@@ -142,14 +143,18 @@ public class CompetitionBot extends MecanumDrive {
         WobbleGrab.setDirection(Servo.Direction.FORWARD);
         RingMag = hwBot.get(Servo.class, "ring_mag");
         ServoRingPusher = hwBot.get(Servo.class, "servo_ring_pusher");
-        WobbleArmStop = hwBot.get(Servo.class, "wobble_arm_stopper");
+//        WobbleArmStop = hwBot.get(Servo.class, "wobble_arm_stopper");
+        Camera = hwBot.get(Servo.class, "camera_servo");
+        Camera.setDirection(Servo.Direction.FORWARD);
         if (mode.equals("auto")){
             WobbleGrab.setPosition(WobbleGrabClosePos);
-            WobbleArmStopOpen();
+//            WobbleArmStopOpen();
             RingMagUp();
+            RingPush();
 
+            Camera.setPosition(CameraServoPosBlueLeft);
         }
-        Camera = hwBot.get(Servo.class, "camera_blue_left_servo");
+        Camera = hwBot.get(Servo.class, "camera_servo");
         Camera.setDirection(Servo.Direction.FORWARD);
 
         switch (startPosition) {
@@ -204,10 +209,17 @@ public class CompetitionBot extends MecanumDrive {
 //        motor_right.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.FLOAT);
 //        motor_right.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
 
-        launcherMotor = hwMap.dcMotor.get("launcher_motor");
-        launcherMotor.setDirection(DcMotorSimple.Direction.FORWARD);
-        launcherMotor.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.FLOAT);
-        launcherMotor.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
+
+
+        launcherMotor1 = hwMap.dcMotor.get("launcher_motor_1");
+        launcherMotor1.setDirection(DcMotorSimple.Direction.REVERSE);
+        launcherMotor1.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.FLOAT);
+        launcherMotor1.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
+
+        launcherMotor2 = hwMap.dcMotor.get("launcher_motor_2");
+        launcherMotor2.setDirection(DcMotorSimple.Direction.REVERSE);
+        launcherMotor2.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.FLOAT);
+        launcherMotor2.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
 
 //        LauncherMotor.setDirection(DcMotor.Direction.FORWARD);
 //        IntakeMotor.setDirection(DcMotor.Direction.REVERSE);
@@ -215,7 +227,7 @@ public class CompetitionBot extends MecanumDrive {
         IntakeMotor.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
 
 
-        WobbleArmMotor.setDirection(DcMotor.Direction.REVERSE);
+        WobbleArmMotor.setDirection(DcMotor.Direction.FORWARD);
         WobbleArmMotor.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
 
 
@@ -306,10 +318,12 @@ public class CompetitionBot extends MecanumDrive {
     public void detectRings () { }
 
     public void LauncherOn(double power) {
-        launcherMotor.setPower(power);
+        launcherMotor1.setPower(power);
+        launcherMotor2.setPower(power);
      }
     public void LauncherOff(double power) {
-        launcherMotor.setPower(power);
+        launcherMotor1.setPower(power);
+        launcherMotor2.setPower(power);
     }
 
     public void IntakeOn(double power){
@@ -323,14 +337,14 @@ public class CompetitionBot extends MecanumDrive {
 
     public void WobbleArmLowerColorSensor () {
         while (sensorWobbleArmLower() == false && linearOp.opModeIsActive()) {
-            WobbleArmLower(0.6);
+            WobbleArmLower(1.0);
         }
         WobbleArmStopMotors();
     }
 
     public void WobbleArmRaiseColorSensor () {
         while (sensorWobbleArmRaise() == false && linearOp.opModeIsActive()) {
-            WobbleArmRaised(0.6);
+            WobbleArmRaised(0.8);
         }
         WobbleArmStopMotors();
     }
@@ -350,21 +364,20 @@ public class CompetitionBot extends MecanumDrive {
     public void RingMagDown(){
         RingMag.setPosition(RingMagDownPos);
     }
-    public void WobbleArmStopClose() {
-        WobbleArmStop.setPosition(WobbleArmStopClose);
-    }
-    public void WobbleArmStopOpen() {
-        WobbleArmStop.setPosition(WobbleArmStopOpen);
-    }
+//    public void WobbleArmStopClose() {
+//        WobbleArmStop.setPosition(WobbleArmStopClose);
+//    }
+//    public void WobbleArmStopOpen() {
+//        WobbleArmStop.setPosition(WobbleArmStopOpen);
+//    }
     public boolean sensorWobbleArmRaise () {
         Color.RGBToHSV((int) (sensorColorWobbleArm.red() * SCALE_FACTOR),
                 (int) (sensorColorWobbleArm.green() * SCALE_FACTOR),
                 (int) (sensorColorWobbleArm.blue() * SCALE_FACTOR),
                 hsvValues);
-        // over 100 = blue
-        // Under 100 = red
 
-        if (hsvValues[0] > WOBBLE_ARM_RAISE_THRESHOLD) {
+//WOBBLE_ARM_RAISE_THRESHOLD = 200
+        if (hsvValues[0] < WOBBLE_ARM_RAISE_THRESHOLD) {
             return false;
         }
         else {
@@ -377,8 +390,10 @@ public class CompetitionBot extends MecanumDrive {
                 (int) (sensorColorWobbleArm.green() * SCALE_FACTOR),
                 (int) (sensorColorWobbleArm.blue() * SCALE_FACTOR),
                 hsvValues);
-
-        if (hsvValues[0] < 200) {
+//        linearOp.telemetry.addData("function hue ", hsvValues[0]);
+//        linearOp.telemetry.update();
+//        WOBBLE_ARM_LOWER_THRESHOLD = 50
+        if (hsvValues[0] > WOBBLE_ARM_LOWER_THRESHOLD) {
             return false;
         }
         else {
@@ -392,12 +407,12 @@ public class CompetitionBot extends MecanumDrive {
         angles = imu.getAngularOrientation(AxesReference.INTRINSIC, AxesOrder.ZYX, AngleUnit.DEGREES);
         linearOp.telemetry.addData("current angle to start: ", angles.firstAngle);
         linearOp.telemetry.update();
-        linearOp.sleep(1000);
+//        linearOp.sleep(1000);
         if (angles.firstAngle >= angle + TOLERANCE && linearOp.opModeIsActive()) {
             while (angles.firstAngle >=  angle + TOLERANCE && linearOp.opModeIsActive()) {
                 rotateRight(speed);
                 angles = imu.getAngularOrientation(AxesReference.INTRINSIC, AxesOrder.ZYX, AngleUnit.DEGREES);
-                linearOp.telemetry.addData("current angle: ", angles.firstAngle);
+                linearOp.telemetry.addData("current angle > : ", angles.firstAngle);
                 linearOp.telemetry.update();
             }
         }
@@ -405,7 +420,7 @@ public class CompetitionBot extends MecanumDrive {
             while (angles.firstAngle <= angle - TOLERANCE && linearOp.opModeIsActive()) {
                 rotateLeft(speed);
                 angles = imu.getAngularOrientation(AxesReference.INTRINSIC, AxesOrder.ZYX, AngleUnit.DEGREES);
-                linearOp.telemetry.addData("current angle: ", angles.firstAngle);
+                linearOp.telemetry.addData("current angle < : ", angles.firstAngle);
                 linearOp.telemetry.update();
             }
         }

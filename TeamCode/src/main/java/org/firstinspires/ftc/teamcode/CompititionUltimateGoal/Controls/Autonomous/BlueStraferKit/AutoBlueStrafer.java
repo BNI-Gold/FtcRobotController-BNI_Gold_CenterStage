@@ -1,12 +1,14 @@
 package org.firstinspires.ftc.teamcode.CompititionUltimateGoal.Controls.Autonomous.BlueStraferKit;
 
 import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
+import com.qualcomm.robotcore.eventloop.opmode.Disabled;
 
 import org.firstinspires.ftc.teamcode.CompititionUltimateGoal.Controls.Autonomous.StartPosition;
 import org.firstinspires.ftc.teamcode.CompititionUltimateGoal.Controls.Autonomous.TargetZone;
 import org.firstinspires.ftc.teamcode.CompititionUltimateGoal.Robots.StraferKit;
 
 @Autonomous(name = "Strafer:Blue:Right", group = "BLUE")
+@Disabled
 
 public class AutoBlueStrafer extends BlueStrafer {
     public StraferKit Bot = new StraferKit ();

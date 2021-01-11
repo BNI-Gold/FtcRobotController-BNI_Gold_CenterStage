@@ -11,8 +11,7 @@ import org.firstinspires.ftc.teamcode.CompititionUltimateGoal.Robots.Competition
 import org.firstinspires.ftc.teamcode.CompititionUltimateGoal.Robots.LabBot;
 
 @Autonomous (name = "Remote:Blue:Left:Basic", group = "BLUE")
-//@Disabled
-
+@Disabled
 
 public class AutoBlueLeft extends BlueLeft {
 

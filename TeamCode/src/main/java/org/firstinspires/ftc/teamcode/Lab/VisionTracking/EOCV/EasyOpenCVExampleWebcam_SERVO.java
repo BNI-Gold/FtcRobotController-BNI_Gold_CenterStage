@@ -58,7 +58,7 @@ public class EasyOpenCVExampleWebcam_SERVO extends LinearOpMode
     @Override
     public void runOpMode()
     {
-        myServo = hardwareMap.servo.get("camera_blue_left_servo");
+        myServo = hardwareMap.servo.get("camera_servo");
         myServo.setPosition(servoPos);
 
 

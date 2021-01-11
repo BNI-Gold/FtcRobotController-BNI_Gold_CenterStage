@@ -8,7 +8,7 @@ import org.firstinspires.ftc.teamcode.CompititionUltimateGoal.Controls.Autonomou
 import org.firstinspires.ftc.teamcode.CompititionUltimateGoal.Robots.CompetitionBot;
 
 @Autonomous (name = "Remote:Blue:Left:DoubleWobble:", group = "BLUE")
-//@Disabled
+@Disabled
 
 public class AutoBlueLeftDoubleWobble extends BlueLeftDoubleWobble {
 

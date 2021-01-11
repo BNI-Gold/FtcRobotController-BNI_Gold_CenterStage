@@ -21,6 +21,7 @@
 
 package org.firstinspires.ftc.teamcode.Lab.VisionTracking.EOCV;
 
+import com.qualcomm.robotcore.eventloop.opmode.Disabled;
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 
@@ -41,6 +42,7 @@ import org.openftc.easyopencv.OpenCvCameraRotation;
 import org.openftc.easyopencv.OpenCvPipeline;
 
 @TeleOp (name = "WebCam Exmaple - DUVAL", group = "DUVAL")
+@Disabled
 
 public class EasyOpenCVExampleWebcam extends LinearOpMode
 {

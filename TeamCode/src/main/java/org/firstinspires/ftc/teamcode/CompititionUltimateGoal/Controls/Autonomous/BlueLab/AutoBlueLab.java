@@ -1,6 +1,7 @@
 package org.firstinspires.ftc.teamcode.CompititionUltimateGoal.Controls.Autonomous.BlueLab;
 
 import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
+import com.qualcomm.robotcore.eventloop.opmode.Disabled;
 
 import org.firstinspires.ftc.teamcode.CompititionUltimateGoal.Controls.Autonomous.StartPosition;
 import org.firstinspires.ftc.teamcode.CompititionUltimateGoal.Controls.Autonomous.TargetZone;
@@ -8,8 +9,7 @@ import org.firstinspires.ftc.teamcode.CompititionUltimateGoal.Robots.Competition
 import org.firstinspires.ftc.teamcode.CompititionUltimateGoal.Robots.LabBot;
 
 @Autonomous (name = "Blue:Lab:", group = "BLUE")
-//@Disabled
-
+@Disabled
 public class AutoBlueLab extends BlueLab {
 
     // Initiailize our variables.

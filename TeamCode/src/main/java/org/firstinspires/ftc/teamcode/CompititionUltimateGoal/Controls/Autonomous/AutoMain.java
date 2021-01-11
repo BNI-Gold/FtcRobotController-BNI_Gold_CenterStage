@@ -19,7 +19,7 @@ public abstract class AutoMain extends LinearOpMode {
     public TargetZone detectStarterStack (CompetitionBot Bot) {
 
 //         Following 2 lines are for Hard Coding the Target Zone.  Uncomment to not use EOCV.  AND comment out the lines below them.
-//                zone = TargetZone.B;
+//                zone = TargetZone.C;
 //                return zone;
 //    Line below are to use with EOCV
 
@@ -80,22 +80,17 @@ public abstract class AutoMain extends LinearOpMode {
     }
 
     public void driveToLaunch (CompetitionBot Bot) throws InterruptedException {
-        Bot.driveGyroBackward(0.5, 4.25);
+        Bot.driveGyroForward(0.6, 4.2);
         sleep(sleepTimeDrive);
-//        IF SPINNING, MAKE HIGHER
-//        was 3.4
-        Bot.rotateRight(0.6, 3.6);
+        Bot.gyroCorrection(0.2,0);
+        Bot.strafeLeft(0.45, 2.4);
         sleep(sleepTimeDrive);
-        Bot.gyroCorrection(0.2,179.5);
-        sleep(sleepTimeDrive);
-        Bot.strafeLeft(0.5, 1.5);
-        sleep(sleepTimeDrive);
-        Bot.gyroCorrection(0.2,179.5);
+        Bot.gyroCorrection(0.2,0);
         sleep(sleepTimeDrive);
     }
 
     public void driveToLaunch (StraferKit Bot) throws InterruptedException {
-        Bot.driveForward(0.35, 6.5);
+        Bot.driveForward(0.35, 6.4);
         sleep(sleepTimeDrive);
 //        Bot.rotateLeft(0.3, 1.75);
 //        sleep(sleepTimeDrive);
@@ -127,8 +122,8 @@ public abstract class AutoMain extends LinearOpMode {
         sleep(500);
         Bot.WobbleOpen();
         sleep(1000);
-        Bot.WobbleArmStopClose();
-        sleep(500);
+//        Bot.WobbleArmStopClose();
+//        sleep(500);
         Bot.driveForward(.5,1);
         sleep(500);
         Bot.WobbleArmRaiseColorSensor();

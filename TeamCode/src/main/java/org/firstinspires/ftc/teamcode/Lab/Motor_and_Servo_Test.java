@@ -1,5 +1,6 @@
 package org.firstinspires.ftc.teamcode.Lab;
 
+import com.qualcomm.robotcore.eventloop.opmode.Disabled;
 import com.qualcomm.robotcore.eventloop.opmode.OpMode;
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 import com.qualcomm.robotcore.hardware.DcMotor;
@@ -8,6 +9,7 @@ import com.qualcomm.robotcore.hardware.Servo;
 
 import java.security.KeyStore;
 @TeleOp(name = "one motor and servo test", group="twowheel")
+@Disabled
 public class Motor_and_Servo_Test extends OpMode {
     private DcMotor motor = null;
     public Servo servoA = null;

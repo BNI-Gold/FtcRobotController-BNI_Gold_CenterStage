@@ -9,77 +9,67 @@ public abstract class BlueRight extends AutoMain {
     public void driveToZoneOne(CompetitionBot Bot, TargetZone target) throws InterruptedException {
         switch (target) {
             case A:
-                Bot.driveForward(0.5, 1);
+
+                Bot.gyroCorrection(0.5, -120);
                 sleep(sleepTimeDrive);
-//                Bot.gyroCorrection(0.2, 180);  NO NEED BECAUSE JUST DO AN ENCODER TURN AND THEN GYRO CHECK
-                sleep(sleepTimeDrive);
-                Bot.rotateRight(0.6, 1.8);
-                sleep(sleepTimeDrive);
-                Bot.gyroCorrection(0.2, 90);
+                Bot.gyroCorrection(0.2, -120);
                 sleep(sleepTimeDrive);
                 Bot.driveBackward(.3);
-                sleep (500);
+                sleep(550);
                 Bot.stopMotors();
-//                Bot.driveGyroBackward(.4,0.1);
                 sleep(sleepTimeDrive);
                 break;
             case B:
-//                  Bot.strafeLeft(0.5, 1);
-//                  sleep(100);
-//                  Bot.gyroCorrection(0.2, 0);
-//                  sleep(100);
-                Bot.rotateRight(0.6,3.4);
+                Bot.driveForward(0.3,2.3);
                 sleep(sleepTimeDrive);
-                Bot.driveBackward(.5);
-                sleep(700);
-                Bot.stopMotors();
+                Bot.gyroCorrection(.5,160);
                 sleep(sleepTimeDrive);
-
-//                Bot.strafeRight(0.3, 3);
-//                sleep(100);
-//                Bot.gyroCorrection(0.2, 0);
-//                sleep(100);
+                Bot.gyroCorrection(.2,170);
+                sleep(sleepTimeDrive);
                 break;
             case C:
-                Bot.driveForward(0.5, 4.5);
+                Bot.driveForward(0.5, 3.6);
                 sleep(sleepTimeDrive);
-//                Bot.gyroCorrection(0.2, 180);  NO NEED BECAUSE JUST DO AN ENCODER TURN AND THEN GYRO CHECK
+             Bot.gyroCorrection(0.5, -120);
                 sleep(sleepTimeDrive);
-                Bot.rotateRight(0.6, 1.8);
+                Bot.gyroCorrection(0.2, -120);
                 sleep(sleepTimeDrive);
-                Bot.gyroCorrection(0.2, 90);
-                sleep(sleepTimeDrive);
-                Bot.driveBackward(.3);
-                sleep (500);
+                Bot.driveBackward(.4);
+                sleep(230);
                 Bot.stopMotors();
-                sleep(sleepTimeDrive);
-////                Bot.driveBackward(.3,0.1);
-////                sleep(sleepTimeDrive);
                 break;
         }
     }
 
     public void ScoreRings (CompetitionBot Bot, TargetZone target) throws InterruptedException {
 //        launch 1
-        Bot.LauncherOn(.9);
-        sleep(1000);
+        int launchSleep = 900;
+        double launchPower = 0.6;
+        Bot.LauncherOn(launchPower);
+        sleep(launchSleep);
         Bot.RingPush();
-        sleep(750);
+        sleep(launchSleep);
         Bot.RingPull();
 //        Launch 2
-        Bot.LauncherOn(.9);
-        sleep(1000);
+        Bot.LauncherOn(launchPower);
+        sleep(launchSleep);
         Bot.RingPush();
-        sleep(750);
+        sleep(launchSleep);
         Bot.RingPull();
 //        Launch 3
-        Bot.LauncherOn(.9);
-        sleep(1000);
+        Bot.LauncherOn(launchPower);
+        sleep(launchSleep);
         Bot.RingPush();
-        sleep(750);
+        sleep(launchSleep);
         Bot.RingPull();
-        sleep(750);
+        sleep(launchSleep);
+        Bot.LauncherOn(launchPower);
+        sleep(launchSleep);
+        Bot.RingPush();
+        sleep(launchSleep);
+        Bot.RingPull();
         Bot.LauncherOff(0);
+        sleep(launchSleep);
     }
 
     public void driveToLeftWobble (CompetitionBot Bot, TargetZone target) throws InterruptedException {
@@ -181,14 +171,20 @@ public abstract class BlueRight extends AutoMain {
     public void ParkLaunchLine(CompetitionBot Bot, TargetZone target) throws InterruptedException {
         switch (target) {
             case A:
-                break;
-            case B:
-                Bot.stopMotors();
+                Bot.strafeLeft(.4,2.25);
                 sleep(sleepTimeDrive);
                 break;
+            case B:
+
+                break;
             case C:
-                Bot.strafeRight(.5,4);
-                sleep(100);
+//                Bot.strafeRight(.5,4);
+//                sleep(100);
+                Bot.gyroCorrection(0.5,20);
+                sleep(sleepTimeDrive);
+                Bot.driveBackward(0.6);
+                sleep(1000);
+                Bot.stopMotors();
                 break;
         }
     }

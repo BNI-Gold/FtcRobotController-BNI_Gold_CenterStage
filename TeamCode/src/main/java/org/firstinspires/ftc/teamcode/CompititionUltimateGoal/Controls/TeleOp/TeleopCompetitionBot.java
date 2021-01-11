@@ -48,7 +48,7 @@ public class TeleopCompetitionBot extends OpMode {
         Bot.WobbleClosed();
         Bot.wobbleArmRaiseEngage = false;
         Bot.wobbleArmLowerengage = false;
-        Bot.WobbleArmStopClose();
+//        Bot.WobbleArmStopClose();
         Bot.RingMagDown();
 
     }
@@ -264,7 +264,7 @@ public class TeleopCompetitionBot extends OpMode {
 
         if (Bot.wobbleArmRaiseEngage == true) {
             if (Bot.sensorWobbleArmRaise() == false) {
-                Bot.WobbleArmRaised(0.6);
+                Bot.WobbleArmRaised(0.8 );
             }
             else if (Bot.sensorWobbleArmRaise() == true) {
                 Bot.WobbleArmStopMotors ();
@@ -279,7 +279,7 @@ public class TeleopCompetitionBot extends OpMode {
 
         if (Bot.wobbleArmLowerengage == true) {
             if (Bot.sensorWobbleArmLower() == false) {
-                Bot.WobbleArmLower(0.5);
+                Bot.WobbleArmLower(0.4);
             }
             else if (Bot.sensorWobbleArmLower() == true) {
                 Bot.WobbleArmStopMotors();
@@ -289,10 +289,10 @@ public class TeleopCompetitionBot extends OpMode {
         }
 
         if (gamepad2.dpad_up == true) {
-            Bot.WobbleArmRaised(0.6);
+            Bot.WobbleArmRaised(1.0);
         }
         else if (gamepad2.dpad_down == true) {
-            Bot.WobbleArmLower(0.5);
+            Bot.WobbleArmLower(1.0);
         }
         else {
             if (Bot.wobbleArmRaiseEngage == false && Bot.wobbleArmLowerengage == false) {
@@ -330,7 +330,7 @@ public class TeleopCompetitionBot extends OpMode {
     public void launcher () {
         if (gamepad2.a == true) {
 //            .75 always launched high.
-            Bot.LauncherOn(1);
+            Bot.LauncherOn(.6);
             Bot.RingMagUp();
         }
         if (gamepad2.y == true) {
@@ -360,5 +360,6 @@ public class TeleopCompetitionBot extends OpMode {
 ////        telemetry.addData("gamepad 2 left stick y", gamepad2.left_stick_y);
 //        telemetry.addData("launch motor: ", Bot.LauncherMotor.getPower());
         telemetry.addData("Hue! ", Bot.hsvValues[0]);
+        telemetry.update();
     }
 }
