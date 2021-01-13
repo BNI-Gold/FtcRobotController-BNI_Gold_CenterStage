@@ -50,7 +50,7 @@ public class EasyOpenCVExampleWebcam_SERVO extends LinearOpMode
 
     public Servo myServo = null;
 
-    public double servoPos = 0.22;
+    public double servoPos = 0.25;
 
     private double incVal = 0.001;
 
@@ -180,7 +180,8 @@ public class EasyOpenCVExampleWebcam_SERVO extends LinearOpMode
 //        ORIGINAL AREA
         static final int REGION_WIDTH = 35;
 //        Was 25 10/12 @ 4pm
-        static final int REGION_HEIGHT = 35;
+//        Was 35 1/12/21 @ noon
+        static final int REGION_HEIGHT = 100;
 
 //        ORIGINAL THRESHOLDS
 //        final int FOUR_RING_THRESHOLD = 150;

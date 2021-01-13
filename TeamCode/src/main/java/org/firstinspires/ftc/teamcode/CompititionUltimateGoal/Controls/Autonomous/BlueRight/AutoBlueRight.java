@@ -19,7 +19,7 @@ public class AutoBlueRight extends BlueRight {
     public CompetitionBot Bot = new CompetitionBot();
     public StartPosition startPosition = null;
     public TargetZone targetZone = null;
-    public long sleepTime = 100;
+    public long sleepTime = 95;
 
 
 
@@ -64,7 +64,7 @@ public class AutoBlueRight extends BlueRight {
 //
             ScoreWobbleSensor(Bot);
             sleep(sleepTime);
-//////
+
             ParkLaunchLine(Bot,targetZone);
             sleep(sleepTime);
 

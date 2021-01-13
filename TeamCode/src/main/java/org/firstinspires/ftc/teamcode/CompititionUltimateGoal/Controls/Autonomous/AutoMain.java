@@ -11,7 +11,7 @@ import org.firstinspires.ftc.teamcode.CompititionUltimateGoal.Robots.StraferKit;
 
 public abstract class AutoMain extends LinearOpMode {
 
-    public int sleepTimeDrive = 250;
+    public int sleepTimeDrive = 200;
 
     public TargetZone zone = null;
 
@@ -80,9 +80,10 @@ public abstract class AutoMain extends LinearOpMode {
     }
 
     public void driveToLaunch (CompetitionBot Bot) throws InterruptedException {
-        Bot.driveGyroForward(0.6, 4.2);
+        Bot.driveGyroForward(0.6, 4.1);
         sleep(sleepTimeDrive);
         Bot.gyroCorrection(0.2,0);
+        sleep(sleepTimeDrive);
         Bot.strafeLeft(0.45, 2.4);
         sleep(sleepTimeDrive);
         Bot.gyroCorrection(0.2,0);

@@ -88,7 +88,7 @@ public class CompetitionBot extends MecanumDrive {
     public double WobbleGrabOpenPos = 0.619;
     public double WobbleGrabClosePos = 0.215;
     //Blue Left:
-    public double CameraServoPosBlueLeft = 0.26;
+    public double CameraServoPosBlueLeft = 0.25;
     //Blue Right:
     public double CameraServoPosBlueRight = 0.602;
     //Launcher Motor:
@@ -145,7 +145,7 @@ public class CompetitionBot extends MecanumDrive {
         ServoRingPusher = hwBot.get(Servo.class, "servo_ring_pusher");
 //        WobbleArmStop = hwBot.get(Servo.class, "wobble_arm_stopper");
         Camera = hwBot.get(Servo.class, "camera_servo");
-        Camera.setDirection(Servo.Direction.FORWARD);
+//        Camera.setDirection(Servo.Direction.FORWARD);
         if (mode.equals("auto")){
             WobbleGrab.setPosition(WobbleGrabClosePos);
 //            WobbleArmStopOpen();
@@ -458,7 +458,8 @@ public class CompetitionBot extends MecanumDrive {
 
         //        ORIGINAL AREA
         static final int REGION_WIDTH = 35;
-        static final int REGION_HEIGHT = 35;
+//        Was 35 for detecing from wall - this if for detecting from launch.  - 1/12/21 @ noon
+        static final int REGION_HEIGHT = 100;
 
         //        ORIGINAL THRESHOLDS
         final int FOUR_RING_THRESHOLD = 140;
@@ -924,7 +925,7 @@ public class CompetitionBot extends MecanumDrive {
         double startPosition = frontLeftMotor.getCurrentPosition();
         linearOp.telemetry.addData("Angle to start: ", angles.firstAngle);
         linearOp.telemetry.update();
-        linearOp.sleep(2000);
+//        linearOp.sleep(2000);
         while (currentPos < ticks + startPosition && linearOp.opModeIsActive()) {
 
             angles = imu.getAngularOrientation(AxesReference.INTRINSIC, AxesOrder.ZYX, AngleUnit.DEGREES);
