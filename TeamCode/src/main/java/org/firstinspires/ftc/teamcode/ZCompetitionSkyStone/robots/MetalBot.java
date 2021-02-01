@@ -76,7 +76,7 @@ public class MetalBot extends MecanumDrive {
     public DcMotor stackingLiftLeft;
     public DcMotor stackingLiftRight;
     public int stackingArmTargetPos = 100;
-    public double getMaxStackingArmTime = 1;
+    public double getMaxStackingArmTime = 3;
     public ElapsedTime stackingArmTimer;
 
 

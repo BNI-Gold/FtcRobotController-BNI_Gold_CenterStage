@@ -3,11 +3,9 @@ package org.firstinspires.ftc.teamcode.MrAcker;
 import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
 import com.qualcomm.robotcore.eventloop.opmode.Disabled;
 
-import org.firstinspires.ftc.teamcode.CompititionUltimateGoal.Controls.Autonomous.BlueLeft.BlueLeft;
 import org.firstinspires.ftc.teamcode.CompititionUltimateGoal.Controls.Autonomous.StartPosition;
 import org.firstinspires.ftc.teamcode.CompititionUltimateGoal.Controls.Autonomous.TargetZone;
 import org.firstinspires.ftc.teamcode.CompititionUltimateGoal.Modules.EasyOpenCVWebcam;
-import org.firstinspires.ftc.teamcode.CompititionUltimateGoal.Robots.LabBot;
 
 @Autonomous (name = "ACKER:Remote:Blue:Left:", group = "BLUE")
 @Disabled

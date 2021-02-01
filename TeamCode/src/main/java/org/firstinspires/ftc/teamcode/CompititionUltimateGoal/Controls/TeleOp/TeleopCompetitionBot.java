@@ -2,6 +2,8 @@ package org.firstinspires.ftc.teamcode.CompititionUltimateGoal.Controls.TeleOp;
 
 import com.qualcomm.robotcore.eventloop.opmode.OpMode;
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
+import com.qualcomm.robotcore.hardware.DcMotor;
+import com.qualcomm.robotcore.hardware.DcMotorEx;
 import com.qualcomm.robotcore.hardware.DcMotorSimple;
 import com.qualcomm.robotcore.util.Range;
 
@@ -35,10 +37,22 @@ public class TeleopCompetitionBot extends OpMode {
 
     public CompetitionBot Bot=new CompetitionBot();
 
+    private DcMotorEx motor_left = null;
+    private DcMotorEx motor_right = null;
+
 
     @Override
     public void init() {
         Bot.initRobot(hardwareMap,  "TeleOp", "TeleOp");
+
+        motor_left = hardwareMap.get(DcMotorEx.class, "launcher_motor_1");
+        motor_left.setDirection(DcMotorSimple.Direction.FORWARD);
+        motor_left.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.FLOAT);
+        motor_left.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
+        motor_right = hardwareMap.get(DcMotorEx.class, "launcher_motor_2");
+        motor_right.setDirection(DcMotorSimple.Direction.FORWARD);
+        motor_right.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.FLOAT);
+        motor_right.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
     }
     @Override
     public void init_loop() {
@@ -59,7 +73,7 @@ public class TeleopCompetitionBot extends OpMode {
         launcher();
         intake();
         driveMode();
-        telemetryOutput();
+//        telemetryOutput();
     }
 
 
@@ -264,7 +278,7 @@ public class TeleopCompetitionBot extends OpMode {
 
         if (Bot.wobbleArmRaiseEngage == true) {
             if (Bot.sensorWobbleArmRaise() == false) {
-                Bot.WobbleArmRaised(0.8 );
+                Bot.WobbleArmRaised(1 );
             }
             else if (Bot.sensorWobbleArmRaise() == true) {
                 Bot.WobbleArmStopMotors ();
@@ -279,7 +293,7 @@ public class TeleopCompetitionBot extends OpMode {
 
         if (Bot.wobbleArmLowerengage == true) {
             if (Bot.sensorWobbleArmLower() == false) {
-                Bot.WobbleArmLower(0.4);
+                Bot.WobbleArmLower(1);
             }
             else if (Bot.sensorWobbleArmLower() == true) {
                 Bot.WobbleArmStopMotors();
@@ -330,11 +344,16 @@ public class TeleopCompetitionBot extends OpMode {
     public void launcher () {
         if (gamepad2.a == true) {
 //            .75 always launched high.
-            Bot.LauncherOn(.6);
+//            Bot.LauncherOn(.6);
+            motor_left.setVelocity(1700);
+            motor_right.setVelocity(1700);
             Bot.RingMagUp();
+//            Bot.launcherMotor2.setV
         }
         if (gamepad2.y == true) {
-            Bot.LauncherOff(0);
+//            Bot.LauncherOff(0);
+            motor_left.setPower(0);
+            motor_right.setPower(0);
             Bot.RingMagDown();
         }
         if (gamepad2.b == true) {

@@ -1,4 +1,4 @@
-package org.firstinspires.ftc.teamcode.CompititionUltimateGoal.Controls.Autonomous.BlueLeftLaunch;
+package org.firstinspires.ftc.teamcode.CompititionUltimateGoal.Controls.Autonomous.Archive.BlueLeftLaunch;
 
 import org.firstinspires.ftc.teamcode.CompititionUltimateGoal.Controls.Autonomous.AutoMain;
 import org.firstinspires.ftc.teamcode.CompititionUltimateGoal.Controls.Autonomous.TargetZone;

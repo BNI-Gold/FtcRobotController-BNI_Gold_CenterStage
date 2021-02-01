@@ -1,11 +1,9 @@
-package org.firstinspires.ftc.teamcode.CompititionUltimateGoal.Controls.Autonomous.Lab;
+package org.firstinspires.ftc.teamcode.CompititionUltimateGoal.Controls.Autonomous.Archive.Lab;
 
 import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
 import com.qualcomm.robotcore.eventloop.opmode.Disabled;
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
-import com.qualcomm.robotcore.eventloop.opmode.OpMode;
 
-import org.firstinspires.ftc.robotcore.internal.tfod.BorderedText;
 import org.firstinspires.ftc.teamcode.CompititionUltimateGoal.Robots.LabBot;
 
 @Autonomous(name = "AutoBotEncoder")

@@ -1,9 +1,8 @@
-package org.firstinspires.ftc.teamcode.CompititionUltimateGoal.Controls.Autonomous.BlueRight;
+package org.firstinspires.ftc.teamcode.CompititionUltimateGoal.Controls.Autonomous.BlueRight_Launch_OneWobble;
 
 import org.firstinspires.ftc.teamcode.CompititionUltimateGoal.Controls.Autonomous.AutoMain;
 import org.firstinspires.ftc.teamcode.CompititionUltimateGoal.Controls.Autonomous.TargetZone;
 import org.firstinspires.ftc.teamcode.CompititionUltimateGoal.Robots.CompetitionBot;
-import org.firstinspires.ftc.teamcode.CompititionUltimateGoal.Robots.LabBot;
 
 public abstract class BlueRight extends AutoMain {
     public void driveToZoneOne(CompetitionBot Bot, TargetZone target) throws InterruptedException {

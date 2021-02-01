@@ -1,4 +1,4 @@
-package org.firstinspires.ftc.teamcode.CompititionUltimateGoal.Controls.Autonomous.Lab.DuValTest;
+package org.firstinspires.ftc.teamcode.CompititionUltimateGoal.Controls.Autonomous.Archive.Lab.DuValTest;
 
 import org.firstinspires.ftc.teamcode.CompititionUltimateGoal.Controls.Autonomous.AutoMain;
 import org.firstinspires.ftc.teamcode.CompititionUltimateGoal.Controls.Autonomous.TargetZone;

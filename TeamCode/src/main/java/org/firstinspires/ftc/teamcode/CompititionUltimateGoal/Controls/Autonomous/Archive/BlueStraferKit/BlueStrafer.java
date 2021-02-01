@@ -1,48 +1,87 @@
-package org.firstinspires.ftc.teamcode.CompititionUltimateGoal.Controls.Autonomous.BlueLeftDoubleWobble;
+package org.firstinspires.ftc.teamcode.CompititionUltimateGoal.Controls.Autonomous.Archive.BlueStraferKit;
 
 import org.firstinspires.ftc.teamcode.CompititionUltimateGoal.Controls.Autonomous.AutoMain;
 import org.firstinspires.ftc.teamcode.CompititionUltimateGoal.Controls.Autonomous.TargetZone;
-import org.firstinspires.ftc.teamcode.CompititionUltimateGoal.Robots.CompetitionBot;
+import org.firstinspires.ftc.teamcode.CompititionUltimateGoal.Robots.StraferKit;
 
-public abstract class BlueLeftDoubleWobble extends AutoMain {
-    public void driveToTargetZone (CompetitionBot Bot, TargetZone target) throws InterruptedException {
+public abstract class BlueStrafer extends AutoMain {
+
+
+
+    public void driveToTargetZone (StraferKit Bot, TargetZone target) throws InterruptedException {
         switch (target) {
             case A:
-                Bot.driveGyroBackward(0.5,5.5);
+                Bot.gyroCorrection(0.2,-120);
                 sleep(sleepTimeDrive);
-                Bot.gyroCorrection(0.2, 0);
+                Bot.driveBackward(.25);
+                sleep(600);
+                Bot.gyroCorrection(0.2,-135);
+                sleep(1000);
+                Bot.gyroCorrection(0.2,0);
                 sleep(sleepTimeDrive);
-//                was 0.75
-                Bot.strafeLeft(.5,1.1);
+                Bot.strafeRight(0.3,1.5);
                 sleep(sleepTimeDrive);
-                Bot.gyroCorrection(0.2, 0);
+                Bot.driveForward(0.3,0.75);
                 sleep(sleepTimeDrive);
+//                Bot.driveGyroBackward(0.5,5.5);
+//                sleep(sleepTimeDrive);
+//                Bot.gyroCorrection(0.2, 0);
+//                sleep(sleepTimeDrive);
+////                was 0.75
+//                Bot.strafeLeft(.5,1.1);
+//                sleep(sleepTimeDrive);
+//                Bot.gyroCorrection(0.2, 0);
+//                sleep(sleepTimeDrive);
                 break;
             case B:
-                Bot.driveGyroBackward(.5,7.5);
+                Bot.driveForward(.3,6);
                 sleep(sleepTimeDrive);
-                Bot.gyroCorrection(0.2, 0);
+                Bot.gyroCorrection(0.2,0);
+                sleep(1000);
+//                Bot.gyroCorrection(0.2,179.4);
+//                sleep(sleepTimeDrive);
+                Bot.strafeRight(.3,3);
                 sleep(sleepTimeDrive);
-                Bot.strafeLeft(0.5,2.9);
-                sleep(sleepTimeDrive);
-                Bot.gyroCorrection(0.2, 0);
-                sleep(sleepTimeDrive);
+//                Bot.gyroCorrection(0.2, 179);
+//                sleep(sleepTimeDrive);
+//                Bot.strafeRight(0.5,2.5);
+//                sleep(sleepTimeDrive);
+//                Bot.gyroCorrection(0.2, 0);
+//                sleep(sleepTimeDrive);
+//                Bot.driveBackward(.3,.5);
+//                sleep(sleepTimeDrive);
+                Bot.driveBackward(.5);
+                sleep(300);
                 break;
             case C:
-                Bot.driveGyroBackward(0.7, 9.3);
+                Bot.driveForward(0.3,5);
                 sleep(sleepTimeDrive);
-                Bot.gyroCorrection(0.2, 0);
+                Bot.gyroCorrection(0.2,-120);
                 sleep(sleepTimeDrive);
-//                was 1.0
-                Bot.strafeLeft(0.7,1.1);
+                Bot.driveBackward(0.25);
+                sleep(600);
+                Bot.gyroCorrection(0.2,-135);
+                sleep(1000);
+                Bot.gyroCorrection(0.2,0);
                 sleep(sleepTimeDrive);
-                Bot.gyroCorrection(0.2, 0);
+                Bot.driveBackward(.25);
+                sleep(1800);
+                Bot.gyroCorrection(0.2,0);
                 sleep(sleepTimeDrive);
+//                Bot.driveGyroBackward(0.7, 9.3);
+//                sleep(sleepTimeDrive);
+//                Bot.gyroCorrection(0.2, 0);
+//                sleep(sleepTimeDrive);
+////                was 1.0
+//                Bot.strafeLeft(0.7,1.1);
+//                sleep(sleepTimeDrive);
+//                Bot.gyroCorrection(0.2, 0);
+//                sleep(sleepTimeDrive);
                 break;
         }
     }
 
-    public void ParkLaunchLine (CompetitionBot Bot, TargetZone target) throws InterruptedException {
+    public void ParkLaunchLine (StraferKit Bot, TargetZone target) throws InterruptedException {
         switch (target) {
             case A:
                 Bot.strafeLeft(.5,1);
@@ -74,7 +113,7 @@ public abstract class BlueLeftDoubleWobble extends AutoMain {
         }
     }
 
-    public void driveToTargetZoneDouble (CompetitionBot Bot, TargetZone target) throws InterruptedException {
+    public void driveToTargetZoneDouble (StraferKit Bot, TargetZone target) throws InterruptedException {
         switch (target){
             case A:
                 Bot.driveGyroBackward(.4,4.8);
@@ -111,7 +150,7 @@ public abstract class BlueLeftDoubleWobble extends AutoMain {
         }
     }
 
-    public void driveToWobble (CompetitionBot Bot, TargetZone target) throws InterruptedException {
+    public void driveToWobble (StraferKit Bot, TargetZone target) throws InterruptedException {
         switch (target){
             case A:
                 Bot.strafeLeft(.5,3.8);

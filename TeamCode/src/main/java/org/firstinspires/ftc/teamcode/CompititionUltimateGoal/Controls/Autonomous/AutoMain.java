@@ -19,7 +19,7 @@ public abstract class AutoMain extends LinearOpMode {
     public TargetZone detectStarterStack (CompetitionBot Bot) {
 
 //         Following 2 lines are for Hard Coding the Target Zone.  Uncomment to not use EOCV.  AND comment out the lines below them.
-//                zone = TargetZone.C;
+//                zone = TargetZone.A;
 //                return zone;
 //    Line below are to use with EOCV
 
@@ -43,19 +43,19 @@ public abstract class AutoMain extends LinearOpMode {
         zone = TargetZone.A;
         return zone;
 //    Line below are to use with EOCV
-        /*
-        Bot.pipeline.getAnalysis();
-        if (Bot.pipeline.position == EasyOpenCVWebcam.SkystoneDeterminationPipeline.RingPosition.NONE) {
-            return TargetZone.A;
-        }
-        else if (Bot.pipeline.position == EasyOpenCVWebcam.SkystoneDeterminationPipeline.RingPosition.ONE) {
-            return TargetZone.B;
-        }
-        else {
-            return TargetZone.C;
-        }
 
-         */
+//        Bot.pipeline.getAnalysis();
+//        if (Bot.pipeline.position == EasyOpenCVWebcam.SkystoneDeterminationPipeline.RingPosition.NONE) {
+//            return TargetZone.A;
+//        }
+//        else if (Bot.pipeline.position == EasyOpenCVWebcam.SkystoneDeterminationPipeline.RingPosition.ONE) {
+//            return TargetZone.B;
+//        }
+//        else {
+//            return TargetZone.C;
+//        }
+
+
     }
 
     public TargetZone detectStarterStack (StraferKit Bot) {
@@ -64,27 +64,27 @@ public abstract class AutoMain extends LinearOpMode {
         zone = TargetZone.C;
         return zone;
 //    Line below are to use with EOCV
-        /*
-        Bot.pipeline.getAnalysis();
-        if (Bot.pipeline.position == EasyOpenCVWebcam.SkystoneDeterminationPipeline.RingPosition.NONE) {
-            return TargetZone.A;
-        }
-        else if (Bot.pipeline.position == EasyOpenCVWebcam.SkystoneDeterminationPipeline.RingPosition.ONE) {
-            return TargetZone.B;
-        }
-        else {
-            return TargetZone.C;
-        }
 
-         */
+//        Bot.pipeline.getAnalysis();
+//        if (Bot.pipeline.position == EasyOpenCVWebcam.SkystoneDeterminationPipeline.RingPosition.NONE) {
+//            return TargetZone.A;
+//        }
+//        else if (Bot.pipeline.position == EasyOpenCVWebcam.SkystoneDeterminationPipeline.RingPosition.ONE) {
+//            return TargetZone.B;
+//        }
+//        else {
+//            return TargetZone.C;
+//        }
+
+
     }
 
     public void driveToLaunch (CompetitionBot Bot) throws InterruptedException {
-        Bot.driveGyroForward(0.6, 4.1);
+        Bot.driveGyroForward(.8, 4.1);
         sleep(sleepTimeDrive);
         Bot.gyroCorrection(0.2,0);
         sleep(sleepTimeDrive);
-        Bot.strafeLeft(0.45, 2.4);
+        Bot.strafeLeft(0.6, 2.4);
         sleep(sleepTimeDrive);
         Bot.gyroCorrection(0.2,0);
         sleep(sleepTimeDrive);
@@ -120,15 +120,15 @@ public abstract class AutoMain extends LinearOpMode {
 
     public void ScoreWobbleSensor (CompetitionBot Bot) {
         Bot.WobbleArmLowerColorSensor();
-        sleep(500);
+        sleep(400);
         Bot.WobbleOpen();
-        sleep(1000);
+        sleep(500);
 //        Bot.WobbleArmStopClose();
 //        sleep(500);
         Bot.driveForward(.5,1);
-        sleep(500);
+        sleep(sleepTimeDrive);
         Bot.WobbleArmRaiseColorSensor();
-        sleep(500);
+        sleep(sleepTimeDrive);
 
     }
 

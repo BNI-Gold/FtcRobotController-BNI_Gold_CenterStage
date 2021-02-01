@@ -9,24 +9,28 @@ import com.qualcomm.robotcore.hardware.Servo;
 
 //Class is used for testing a single motor, using trigger for variable power.
 //WITHOUT
-@TeleOp(name = "two motor launcher test", group="twowheel")
-@Disabled
+@TeleOp(name = "two motor launcher test - NO ENCODERS", group="twowheel")
+
 public class TwoMotor_ButtonToggle extends OpMode {
     private DcMotor motor_left = null;
     private DcMotor motor_right = null;
     double r_trigger;
     double l_trigger;
 
-    boolean forward;
+    boolean forward = true;
+
+    boolean toggleLaunch = false;
+
+    double speed = 0.6;
 
     @Override
     public void init() {
-        motor_left = hardwareMap.dcMotor.get("launcher_motor_l");
-        motor_left.setDirection(DcMotorSimple.Direction.FORWARD);
+        motor_left = hardwareMap.dcMotor.get("launcher_motor_1");
+        motor_left.setDirection(DcMotorSimple.Direction.REVERSE);
         motor_left.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.FLOAT);
         motor_left.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
-        motor_right = hardwareMap.dcMotor.get("launcher_motor_r");
-        motor_right.setDirection(DcMotorSimple.Direction.FORWARD);
+        motor_right = hardwareMap.dcMotor.get("launcher_motor_2");
+        motor_right.setDirection(DcMotorSimple.Direction.REVERSE);
         motor_right.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.FLOAT);
         motor_right.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
 
@@ -44,15 +48,19 @@ public class TwoMotor_ButtonToggle extends OpMode {
 
     @Override
     public void loop() {
-        if (gamepad1.a == true && forward == true) {
-            motor_left.setPower(1);
-            motor_right.setPower(1);
+        if (toggleLaunch && forward == true) {
+            motor_left.setPower(speed);
+            motor_right.setPower(speed);
         }
 // 1)
 //        Make motor go reverse? Valid values of motors are [-1, +1]
-        if(gamepad1.a == true && forward == false){
-            motor_left.setPower(-1);
-            motor_right.setPower(-1);
+        if(toggleLaunch && forward == false){
+            motor_left.setPower(-speed);
+            motor_right.setPower(-speed);
+        }
+
+        if (gamepad1.a == true) {
+            toggleLaunch = true;
         }
 
         if(gamepad1.b == true){

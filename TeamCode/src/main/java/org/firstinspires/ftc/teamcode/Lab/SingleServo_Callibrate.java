@@ -15,7 +15,7 @@ public class SingleServo_Callibrate extends OpMode {
 
     @Override
     public void init () {
-        myServo = hardwareMap.servo.get("ring_mag");
+        myServo = hardwareMap.servo.get("servo_ring_pusher");
         myServo.setPosition(servoPos);
     }
 

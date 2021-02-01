@@ -1,4 +1,4 @@
-package org.firstinspires.ftc.teamcode.CompititionUltimateGoal.Controls.Autonomous.BlueLab;
+package org.firstinspires.ftc.teamcode.CompititionUltimateGoal.Controls.Autonomous.Archive.Lab.DuValTest;
 
 import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
 import com.qualcomm.robotcore.eventloop.opmode.Disabled;
@@ -6,14 +6,14 @@ import com.qualcomm.robotcore.eventloop.opmode.Disabled;
 import org.firstinspires.ftc.teamcode.CompititionUltimateGoal.Controls.Autonomous.StartPosition;
 import org.firstinspires.ftc.teamcode.CompititionUltimateGoal.Controls.Autonomous.TargetZone;
 import org.firstinspires.ftc.teamcode.CompititionUltimateGoal.Robots.CompetitionBot;
-import org.firstinspires.ftc.teamcode.CompititionUltimateGoal.Robots.LabBot;
 
-@Autonomous (name = "Blue:Lab:", group = "BLUE")
+@Autonomous (name = "Remote:Blue:Left:TEST:", group = "BLUE")
 @Disabled
-public class AutoBlueLab extends BlueLab {
+
+public class AutoBlueLeftTEST extends BlueLeftTEST {
 
     // Initiailize our variables.
-    public LabBot Bot = new LabBot();
+    public CompetitionBot Bot = new CompetitionBot();
     public StartPosition startPosition = null;
     public TargetZone targetZone = null;
     public long sleepTime = 100;
@@ -23,15 +23,15 @@ public class AutoBlueLab extends BlueLab {
     @Override
     public void runOpMode() throws InterruptedException {
 //        Constructor to set up our hardware mapping.
-        Bot.initRobot(hardwareMap, "BlueLeft","auto");
-//        Bot.initCamera();
+        Bot.initRobot(hardwareMap, "BlueLeft", "auto");
+        Bot.initCamera();
         Bot.setLinearOp(this);
 //        This is hard-coded for this auto.  May or may not use, but here just in case.
-        sleep(100);
+        sleep(1000);
         startPosition = StartPosition.BlueLeft;
         targetZone = detectStarterStack(Bot);
-//        telemetry.addData("SAMPLING VALUE #: ", Bot.pipeline.avg1);
-//        telemetry.addData("NUMBER OF RINGS: ", Bot.pipeline.position);
+        telemetry.addData("SAMPLING VALUE #: ", Bot.pipeline.avg1);
+        telemetry.addData("NUMBER OF RINGS: ", Bot.pipeline.position);
         telemetry.addData("TARGET ZONE: ", targetZone);
 
         telemetry.addLine("WAITING FOR START >");
@@ -42,23 +42,36 @@ public class AutoBlueLab extends BlueLab {
 //            Change value in detectStarterStack to test different Auto paths.
 //            select the function call below and use "Cmd + B" to go direcrtly to that function.
             targetZone = detectStarterStack(Bot);
-//            telemetry.addData("SAMPLING VALUE #: ", Bot.pipeline.avg1);
-//            telemetry.addData("NUMBER OF RINGS: ", Bot.pipeline.position);
+            telemetry.addData("SAMPLING VALUE #: ", Bot.pipeline.avg1);
+            telemetry.addData("NUMBER OF RINGS: ", Bot.pipeline.position);
             telemetry.addData("TARGET ZONE: ", targetZone);
             telemetry.update();
 
             //STOP THE CAMERA! - closeCameraDevice does close the camera on RC
-//            Bot.webcam.closeCameraDevice();  //This does stop the camera.  Uncomment when ready to use Webcam.
+            Bot.webcam.closeCameraDevice();  //This does stop the camera.  Uncomment when ready to use Webcam.
 //OR
             //Bot.webcam.pauseViewport();   // This line hasn't been used - so leave commented out.
 
             sleep(1000);
             LEDs(Bot, targetZone);
+            gyroTEST(Bot);
 //            Drives robot to target Zone
-            telemetry.addLine("Drive to Launch Line to Launch");
-            driveToLaunch(Bot);
-            sleep (sleepTime);
-
+//            driveToTargetZone (Bot, targetZone);
+//            sleep(sleepTime);
+//
+//
+////            Lower and raise the Servo to score the Wobble.
+//            ScoreWobble(Bot);
+//            sleep(sleepTime);
+//            driveToWobble(Bot, targetZone);
+//            sleep(sleepTime);
+//
+//            //to collect 2nd wobble
+//            CollectWobble(Bot);
+//            sleep(sleepTime);
+//
+//            ScoreWobble(Bot);
+//            sleep(sleepTime);
 
 
 //            Required to stop Autonomous!

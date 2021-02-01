@@ -8,10 +8,12 @@ import com.qualcomm.hardware.rev.RevBlinkinLedDriver;
 import com.qualcomm.robotcore.eventloop.opmode.OpMode;
 import com.qualcomm.robotcore.hardware.ColorSensor;
 import com.qualcomm.robotcore.hardware.DcMotor;
+import com.qualcomm.robotcore.hardware.DcMotorEx;
 import com.qualcomm.robotcore.hardware.DcMotorSimple;
 import com.qualcomm.robotcore.hardware.DistanceSensor;
 import com.qualcomm.robotcore.hardware.HardwareMap;
 import com.qualcomm.robotcore.hardware.Servo;
+import com.qualcomm.robotcore.util.ElapsedTime;
 import com.qualcomm.robotcore.util.Range;
 
 import org.firstinspires.ftc.robotcontroller.external.samples.SampleRevBlinkinLedDriver;
@@ -85,16 +87,16 @@ public class CompetitionBot extends MecanumDrive {
 //    was 0.446
 //    public double WobbleArmRaisedPos = 0.23;
 //    public double WobbleArmLowerPos = 0.613;
-    public double WobbleGrabOpenPos = 0.619;
-    public double WobbleGrabClosePos = 0.215;
+    public double WobbleGrabOpenPos = 0.514;
+    public double WobbleGrabClosePos = 0;
     //Blue Left:
     public double CameraServoPosBlueLeft = 0.25;
     //Blue Right:
     public double CameraServoPosBlueRight = 0.602;
     //Launcher Motor:
     public DcMotor IntakeMotor = null;
-    public double RingPushPos = 0.525;
-    public double RingPullPos = 0.785;
+    public double RingPushPos = 0.313;
+    public double RingPullPos = 0.632;
     public double RingMagUpPos = 0.166;
     public double RingMagDownPos = 0;
 //    public double WobbleArmStopOpen = 0.02;
@@ -106,6 +108,7 @@ public class CompetitionBot extends MecanumDrive {
 //    public DcMotor motor_right = null;
     public DcMotor launcherMotor1 = null;
     public DcMotor launcherMotor2 = null;
+    public double velocity = 1700;
     public boolean wobbleArmRaiseEngage;
     public boolean wobbleArmLowerengage;
 
@@ -115,6 +118,10 @@ public class CompetitionBot extends MecanumDrive {
 
     public RevBlinkinLedDriver blinkinLedDriver;
     public RevBlinkinLedDriver.BlinkinPattern pattern;
+
+    public double maxWobbleArmRaiseTime = 1;
+    public double maxWobbleArmLowerTime = 2.5;
+    public ElapsedTime wobbleArmTimer;
 
     Telemetry.Item patternName;
     Telemetry.Item display;
@@ -129,8 +136,11 @@ public class CompetitionBot extends MecanumDrive {
     public CompetitionBot() {
 
     }
-    public void initRobot(HardwareMap hwMap, String startPosition, String mode){
-        hwBot = hwMap;
+    public void initRobot(HardwareMap hardwareMap, String startPosition, String mode){
+//        HardwareMap hwMap, String startPosition, String mode
+
+//        hwBot = hwMap
+        hwBot = hardwareMap;
 //        WobbleArm = hwBot.get(Servo.class, "wobble_arm");
 //        WobbleArm.setDirection(Servo.Direction.FORWARD);
 //        if (mode.equals("auto")) {
@@ -211,15 +221,18 @@ public class CompetitionBot extends MecanumDrive {
 
 
 
-        launcherMotor1 = hwMap.dcMotor.get("launcher_motor_1");
-        launcherMotor1.setDirection(DcMotorSimple.Direction.REVERSE);
+//        launcherMotor1 = hwMap.dcMotor.get("launcher_motor_1");
+        launcherMotor1 = hwBot.get(DcMotorEx.class, "launcher_motor_1");
+        launcherMotor1.setDirection(DcMotorSimple.Direction.FORWARD);
         launcherMotor1.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.FLOAT);
-        launcherMotor1.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
+        launcherMotor1.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
 
-        launcherMotor2 = hwMap.dcMotor.get("launcher_motor_2");
-        launcherMotor2.setDirection(DcMotorSimple.Direction.REVERSE);
+//        launcherMotor2 = hwMap.dcMotor.get("launcher_motor_2");
+        launcherMotor2 = hwBot.get(DcMotorEx.class, "launcher_motor_2");
+        launcherMotor2.setDirection(DcMotorSimple.Direction.FORWARD);
         launcherMotor2.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.FLOAT);
-        launcherMotor2.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
+        launcherMotor2.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
+//        launcherMotor2.se
 
 //        LauncherMotor.setDirection(DcMotor.Direction.FORWARD);
 //        IntakeMotor.setDirection(DcMotor.Direction.REVERSE);
@@ -247,8 +260,13 @@ public class CompetitionBot extends MecanumDrive {
 
 //        Color distance sensor
 
-        sensorColorWobbleArm = hwMap.get(ColorSensor.class, "sensor_color_distance_wobblearm");
-        sensorDistanceWobbleArm = hwMap.get(DistanceSensor.class, "sensor_color_distance_wobblearm");
+        sensorColorWobbleArm = hwBot.get(ColorSensor.class, "sensor_color_distance_wobblearm");
+        sensorDistanceWobbleArm = hwBot.get(DistanceSensor.class, "sensor_color_distance_wobblearm");
+
+//      Timers
+        wobbleArmTimer = new ElapsedTime();
+        wobbleArmTimer.reset();
+
 
         // Define and Initialize Gyro
         BNO055IMU.Parameters parametersimu = new BNO055IMU.Parameters();
@@ -335,15 +353,19 @@ public class CompetitionBot extends MecanumDrive {
     public void WobbleArmRaised(double power){WobbleArmMotor.setPower(power);}
     public void WobbleArmLower(double power){WobbleArmMotor.setPower(-power);}
 
+
+
+//    sensorWobbleArmLower() == false &&
     public void WobbleArmLowerColorSensor () {
-        while (sensorWobbleArmLower() == false && linearOp.opModeIsActive()) {
+        wobbleArmTimer.reset();
+        while (linearOp.opModeIsActive() && wobbleArmTimer.time() < maxWobbleArmLowerTime) {
             WobbleArmLower(1.0);
         }
         WobbleArmStopMotors();
     }
 
     public void WobbleArmRaiseColorSensor () {
-        while (sensorWobbleArmRaise() == false && linearOp.opModeIsActive()) {
+        while (sensorWobbleArmRaise() == false && linearOp.opModeIsActive()  && wobbleArmTimer.time() < maxWobbleArmRaiseTime) {
             WobbleArmRaised(0.8);
         }
         WobbleArmStopMotors();

@@ -18,6 +18,8 @@ public class MecanumDrive {
     public LinearOpMode linearOp = null;
 
 
+
+
     public void setLinearOp(LinearOpMode linearOp) {
 
         this.linearOp = linearOp;
@@ -126,24 +128,25 @@ public class MecanumDrive {
             double ticks = rotations * (-1) * TICKS_PER_ROTATION;
             setMotorRunModes(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
             setMotorRunModes(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
-            linearOp.telemetry.addData("Current ticks: ", frontLeftMotor.getCurrentPosition());
-            linearOp.telemetry.addData("Target ticks: ", ticks);
-            linearOp.telemetry.addLine("Going into drive backwards loop");
-            linearOp.telemetry.update();
-            linearOp.sleep(1000);
+//            linearOp.telemetry.addData("Current ticks: ", frontLeftMotor.getCurrentPosition());
+//            linearOp.telemetry.addData("Target ticks: ", ticks);
+//            linearOp.telemetry.addLine("Going into drive backwards loop");
+//            linearOp.telemetry.update();
+//            linearOp.sleep(1000);
 //            Switched from NR 20s to Go Bilda 13.7
             while (frontLeftMotor.getCurrentPosition() > ticks && linearOp.opModeIsActive()) {
                 driveBackward(speed);
-                linearOp.telemetry.addData("Current ticks: ", frontLeftMotor.getCurrentPosition());
-                linearOp.telemetry.addData("Target ticks: ", ticks);
-                linearOp.telemetry.addLine("INSIDE drive backwards loop");
-                linearOp.telemetry.update();
+//                linearOp.telemetry.addData("Current ticks: ", frontLeftMotor.getCurrentPosition());
+//                linearOp.telemetry.addData("Target ticks: ", ticks);
+//                linearOp.telemetry.addLine("INSIDE drive backwards loop");
+//                linearOp.telemetry.update();
             }
-            linearOp.telemetry.addData("Current ticks: ", frontLeftMotor.getCurrentPosition());
-            linearOp.telemetry.addData("Target ticks: ", ticks);
-            linearOp.telemetry.addLine("Finished with drive backwards loop");
-            linearOp.telemetry.update();
-            linearOp.sleep(1000);
+            stopMotors();
+//            linearOp.telemetry.addData("Current ticks: ", frontLeftMotor.getCurrentPosition());
+//            linearOp.telemetry.addData("Target ticks: ", ticks);
+//            linearOp.telemetry.addLine("Finished with drive backwards loop");
+//            linearOp.telemetry.update();
+//            linearOp.sleep(1000);
         }
     }
 

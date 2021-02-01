@@ -1,4 +1,4 @@
-package org.firstinspires.ftc.teamcode.CompititionUltimateGoal.Controls.Autonomous.BlueLeftDoubleWobble;
+package org.firstinspires.ftc.teamcode.CompititionUltimateGoal.Controls.Autonomous.Archive.BlueLeftLaunch;
 
 import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
 import com.qualcomm.robotcore.eventloop.opmode.Disabled;
@@ -7,10 +7,10 @@ import org.firstinspires.ftc.teamcode.CompititionUltimateGoal.Controls.Autonomou
 import org.firstinspires.ftc.teamcode.CompititionUltimateGoal.Controls.Autonomous.TargetZone;
 import org.firstinspires.ftc.teamcode.CompititionUltimateGoal.Robots.CompetitionBot;
 
-@Autonomous (name = "Remote:Blue:Left:DoubleWobble:", group = "BLUE")
+@Autonomous (name = "Remote:Blue:Left:Launch:", group = "BLUE")
 @Disabled
 
-public class AutoBlueLeftDoubleWobble extends BlueLeftDoubleWobble {
+public class AutoBlueLeftLaunch extends BlueLeftLaunch {
 
     // Initiailize our variables.
     public CompetitionBot Bot = new CompetitionBot();
@@ -23,11 +23,11 @@ public class AutoBlueLeftDoubleWobble extends BlueLeftDoubleWobble {
     @Override
     public void runOpMode() throws InterruptedException {
 //        Constructor to set up our hardware mapping.
-        Bot.initRobot(hardwareMap, "BlueLeft","auto");
+        Bot.initRobot(hardwareMap, "BlueLeft", "auto");
         Bot.initCamera();
         Bot.setLinearOp(this);
 //        This is hard-coded for this auto.  May or may not use, but here just in case.
-        sleep(4000);
+        sleep(5000);
         startPosition = StartPosition.BlueLeft;
         targetZone = detectStarterStack(Bot);
         telemetry.addData("SAMPLING VALUE #: ", Bot.pipeline.avg1);
@@ -53,36 +53,23 @@ public class AutoBlueLeftDoubleWobble extends BlueLeftDoubleWobble {
             //Bot.webcam.pauseViewport();   // This line hasn't been used - so leave commented out.
 
             sleep(1000);
-            LEDs(Bot, targetZone);
 //            Drives robot to target Zone
-            telemetry.addLine("Drive to first Wobble");
-            telemetry.update();
             driveToTargetZone (Bot, targetZone);
-
             sleep(sleepTime);
-
 
 //            Lower and raise the Servo to score the Wobble.
-            telemetry.addLine("Score first Wobble");
-            telemetry.update();
             ScoreWobble(Bot);
             sleep(sleepTime);
-            telemetry.addLine("Drive to second Wobble");
-            telemetry.update();
-            driveToWobble(Bot, targetZone);
-            sleep(sleepTime);
-            telemetry.addLine("Collect second Wobble");
-            telemetry.update();
-            //to collect 2nd wobble
-            CollectWobble(Bot);
-            sleep(sleepTime);
-            driveToTargetZoneDouble(Bot, targetZone);
-            sleep(sleepTime);
-            ScoreWobble(Bot);
-            sleep(sleepTime);
+
+//            Park robot on the launch line.
             ParkLaunchLine(Bot, targetZone);
             sleep(sleepTime);
 
+            ScoreLaunch(Bot);
+            sleep(5000);
+
+            StopLaunch(Bot);
+            sleep(500);
 
 //            Required to stop Autonomous!
             requestOpModeStop();
