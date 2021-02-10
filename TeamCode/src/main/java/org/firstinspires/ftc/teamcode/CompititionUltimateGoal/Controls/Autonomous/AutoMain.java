@@ -80,14 +80,15 @@ public abstract class AutoMain extends LinearOpMode {
     }
 
     public void driveToLaunch (CompetitionBot Bot) throws InterruptedException {
-        Bot.driveGyroForward(.8, 4.1);
+        Bot.driveGyroForward(.8, 4);
         sleep(sleepTimeDrive);
         Bot.gyroCorrection(0.2,0);
         sleep(sleepTimeDrive);
         Bot.strafeLeft(0.6, 2.4);
         sleep(sleepTimeDrive);
-        Bot.gyroCorrection(0.2,0);
+        Bot.gyroCorrection(0.2,3);
         sleep(sleepTimeDrive);
+
     }
 
     public void driveToLaunch (StraferKit Bot) throws InterruptedException {
@@ -119,8 +120,9 @@ public abstract class AutoMain extends LinearOpMode {
 
 
     public void ScoreWobbleSensor (CompetitionBot Bot) {
-        Bot.WobbleArmLowerColorSensor();
-        sleep(400);
+//        Bot.WobbleArmLowerColorSensor();
+//        sleep(50);
+        sleep(sleepTimeDrive);
         Bot.WobbleOpen();
         sleep(500);
 //        Bot.WobbleArmStopClose();
@@ -215,5 +217,15 @@ public abstract class AutoMain extends LinearOpMode {
         else {
             Bot.blinkinLedDriver.setPattern(RevBlinkinLedDriver.BlinkinPattern.RED);
         }
+    }
+    public void RedPark (CompetitionBot Bot, TargetZone targetZone) {
+        Bot.driveForward(1, 1);
+        sleep(sleepTimeDrive);
+        Bot.strafeLeft(0.7, 2);
+        sleep(sleepTimeDrive);
+        Bot.driveForward(1, 4);
+        sleep(sleepTimeDrive);
+        Bot.gyroCorrection(0.2, 0);
+        sleep(sleepTimeDrive);
     }
 }

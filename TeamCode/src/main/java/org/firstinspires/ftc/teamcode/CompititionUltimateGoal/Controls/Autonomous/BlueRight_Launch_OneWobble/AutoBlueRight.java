@@ -35,35 +35,35 @@ public class AutoBlueRight extends BlueRight {
 
 
         while (opModeIsActive()){
-
-
-
-            driveToLaunch (Bot);
+            RedPark(Bot, targetZone);
             sleep(sleepTime);
 
-            ScoreRings(Bot,targetZone);
-            sleep(sleepTime);
-
-            targetZone = detectStarterStack(Bot);
-            telemetry.addData("SAMPLING VALUE #: ", Bot.pipeline.avg1);
-            telemetry.addData("NUMBER OF RINGS: ", Bot.pipeline.position);
-            telemetry.addData("TARGET ZONE: ", targetZone);
-            telemetry.update();
-
-            Bot.webcam.closeCameraDevice();
-            sleep(250);
+//            driveToLaunch (Bot);
+//            sleep(sleepTime);
 //
-            targetZone = detectStarterStack(Bot);
-            sleep(sleepTime);
-
-            driveToZoneOne(Bot, targetZone);
-            sleep(sleepTime);
+//            ScoreRings(Bot,targetZone);
+//            sleep(sleepTime);
 //
-            ScoreWobbleSensor(Bot);
-            sleep(sleepTime);
-
-            ParkLaunchLine(Bot,targetZone);
-            sleep(sleepTime);
+//            targetZone = detectStarterStack(Bot);
+//            telemetry.addData("SAMPLING VALUE #: ", Bot.pipeline.avg1);
+//            telemetry.addData("NUMBER OF RINGS: ", Bot.pipeline.position);
+//            telemetry.addData("TARGET ZONE: ", targetZone);
+//            telemetry.update();
+//
+//            Bot.webcam.closeCameraDevice();
+//            sleep(250);
+////
+//            targetZone = detectStarterStack(Bot);
+//            sleep(sleepTime);
+//
+//            driveToZoneOne(Bot, targetZone);
+//            sleep(sleepTime);
+////
+//            ScoreWobbleSensor(Bot);
+//            sleep(sleepTime);
+//
+//            ParkLaunchLine(Bot,targetZone);
+//            sleep(sleepTime);
 
 
             requestOpModeStop();

@@ -27,6 +27,12 @@ public class TeleopCompetitionBot extends OpMode {
     double rearRightSpeed;
     double LauncherSpeed;
 
+    double launcherPower = 0.6;
+    double launcherVelocity = 1560;
+
+
+    boolean PushToggle = false;
+
 
     double powerThreshold = 0;
     double encoders;
@@ -37,22 +43,12 @@ public class TeleopCompetitionBot extends OpMode {
 
     public CompetitionBot Bot=new CompetitionBot();
 
-    private DcMotorEx motor_left = null;
-    private DcMotorEx motor_right = null;
 
 
     @Override
     public void init() {
         Bot.initRobot(hardwareMap,  "TeleOp", "TeleOp");
 
-        motor_left = hardwareMap.get(DcMotorEx.class, "launcher_motor_1");
-        motor_left.setDirection(DcMotorSimple.Direction.FORWARD);
-        motor_left.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.FLOAT);
-        motor_left.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
-        motor_right = hardwareMap.get(DcMotorEx.class, "launcher_motor_2");
-        motor_right.setDirection(DcMotorSimple.Direction.FORWARD);
-        motor_right.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.FLOAT);
-        motor_right.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
     }
     @Override
     public void init_loop() {
@@ -64,6 +60,7 @@ public class TeleopCompetitionBot extends OpMode {
         Bot.wobbleArmLowerengage = false;
 //        Bot.WobbleArmStopClose();
         Bot.RingMagDown();
+        Bot.RingPush();
 
     }
     @Override
@@ -73,7 +70,7 @@ public class TeleopCompetitionBot extends OpMode {
         launcher();
         intake();
         driveMode();
-//        telemetryOutput();
+        telemetryOutput();
     }
 
 
@@ -271,36 +268,36 @@ public class TeleopCompetitionBot extends OpMode {
 
 //        Motor arm raise & lower controls.\
 
-        if (gamepad2.left_trigger > 0.1) {
-            Bot.wobbleArmRaiseEngage = true;
-        }
+//        if (gamepad2.left_trigger > 0.1) {
+//            Bot.wobbleArmRaiseEngage = true;
+//        }
 
 
-        if (Bot.wobbleArmRaiseEngage == true) {
-            if (Bot.sensorWobbleArmRaise() == false) {
-                Bot.WobbleArmRaised(1 );
-            }
-            else if (Bot.sensorWobbleArmRaise() == true) {
-                Bot.WobbleArmStopMotors ();
-                Bot.wobbleArmRaiseEngage = false;
-                telemetry.addLine("RAISE STOP");
-            }
-        }
+//        if (Bot.wobbleArmRaiseEngage == true) {
+//            if (Bot.sensorWobbleArmRaise() == false) {
+//                Bot.WobbleArmRaised(1 );
+//            }
+//            else if (Bot.sensorWobbleArmRaise() == true) {
+//                Bot.WobbleArmStopMotors ();
+//                Bot.wobbleArmRaiseEngage = false;
+//                telemetry.addLine("RAISE STOP");
+//            }
+//        }
 
-        if (gamepad2.right_trigger > 0.1) {
-            Bot.wobbleArmLowerengage = true;
-        }
+//        if (gamepad2.right_trigger > 0.1) {
+//            Bot.wobbleArmLowerengage = true;
+//        }
 
-        if (Bot.wobbleArmLowerengage == true) {
-            if (Bot.sensorWobbleArmLower() == false) {
-                Bot.WobbleArmLower(1);
-            }
-            else if (Bot.sensorWobbleArmLower() == true) {
-                Bot.WobbleArmStopMotors();
-                Bot.wobbleArmLowerengage = false;
-                telemetry.addLine("LOWER STOP");
-            }
-        }
+//        if (Bot.wobbleArmLowerengage == true) {
+//            if (Bot.sensorWobbleArmLower() == false) {
+//                Bot.WobbleArmLower(1);
+//            }
+//            else if (Bot.sensorWobbleArmLower() == true) {
+//                Bot.WobbleArmStopMotors();
+//                Bot.wobbleArmLowerengage = false;
+//                telemetry.addLine("LOWER STOP");
+//            }
+//        }
 
         if (gamepad2.dpad_up == true) {
             Bot.WobbleArmRaised(1.0);
@@ -340,27 +337,35 @@ public class TeleopCompetitionBot extends OpMode {
 
 
     }
-
     public void launcher () {
-        if (gamepad2.a == true) {
+        if (gamepad2.y == true) {
 //            .75 always launched high.
-//            Bot.LauncherOn(.6);
-            motor_left.setVelocity(1700);
-            motor_right.setVelocity(1700);
+//            Code for using just power without RUN_USING_ENCODERS.
+//            Bot.LauncherOn(launcherPower);
+            Bot.LauncherOn(launcherVelocity);
             Bot.RingMagUp();
 //            Bot.launcherMotor2.setV
         }
-        if (gamepad2.y == true) {
-//            Bot.LauncherOff(0);
-            motor_left.setPower(0);
-            motor_right.setPower(0);
+        if (gamepad2.a == true) {
+            Bot.LauncherOff(0);
+//            motor_left.setPower(0);
+//            motor_right.setPower(0);
             Bot.RingMagDown();
         }
-        if (gamepad2.b == true) {
+//        Pulls back pusher
+        if (gamepad2.b == true ) {
             Bot.RingPush();
+
         }
-        if (gamepad2.x == true) {
-            Bot.RingPull();
+//        Pushes ring to launch!  Zoom Zoom
+        if (gamepad2.x == true && PushToggle == false) {
+            PushToggle = true;
+        }
+        if (PushToggle == true) {
+            Bot.RingPullIncrement();
+        }
+        if (Bot.ServoRingPusher.getPosition() >= Bot.RingPullPos) {
+            PushToggle = false;
         }
     }
     public void intake() {
@@ -378,7 +383,15 @@ public class TeleopCompetitionBot extends OpMode {
 //        telemetry.addData("intake motor: ", Bot.IntakeMotor.getPower());
 ////        telemetry.addData("gamepad 2 left stick y", gamepad2.left_stick_y);
 //        telemetry.addData("launch motor: ", Bot.LauncherMotor.getPower());
-        telemetry.addData("Hue! ", Bot.hsvValues[0]);
+//        telemetry.addData("Hue! ", Bot.hsvValues[0]);
+
+        telemetry.addData("1 motor power: ", Bot.launcherMotor1.getPower());
+        telemetry.addData("2 motor power: ", Bot.launcherMotor2.getPower());
+        telemetry.addData("1 motor velocity: ", Bot.launcherMotor1.getVelocity());
+        telemetry.addData("2 motor velocity: ", Bot.launcherMotor2.getVelocity());
+        telemetry.addData("1 motor encoders: ", Bot.launcherMotor1.getCurrentPosition());
+        telemetry.addData("2 motor encoders: ", Bot.launcherMotor2.getCurrentPosition());
+        telemetry.addData("Velocity: ", launcherVelocity);
         telemetry.update();
     }
 }

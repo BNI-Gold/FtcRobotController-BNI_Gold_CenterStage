@@ -36,8 +36,6 @@ public class AutoBlueRightDoubleWobbleDoubleWobble extends BlueRightDoubleWobble
 
         while (opModeIsActive()){
 
-
-
             driveToLaunch (Bot);
             sleep(sleepTime);
 
@@ -56,18 +54,27 @@ public class AutoBlueRightDoubleWobbleDoubleWobble extends BlueRightDoubleWobble
             targetZone = detectStarterStack(Bot);
             sleep(sleepTime);
 
+            Bot.WobbleArmLowerColorSensor();
+            sleep(sleepTime);
+
             driveToZoneOne(Bot, targetZone);
             sleep(sleepTime);
 
             ScoreWobbleSensor(Bot);
             sleep(sleepTime);
 
-            driveToLeftWobble(Bot, targetZone);
-            sleep(sleepTime);
 
-            ParkLaunchLine(Bot,targetZone);
-            sleep(sleepTime);
-
+//
+//            Bot.WobbleArmLower(1);
+//            sleep(200);
+//            Bot.WobbleArmStopMotors();
+//            sleep(sleepTime);
+//
+//            driveToLeftWobble(Bot, targetZone);
+//            sleep(sleepTime);
+//
+//            ParkLaunchLine(Bot,targetZone);
+//            sleep(sleepTime);
 
             requestOpModeStop();
 

@@ -27,7 +27,7 @@ public class TwoMotor_RunUsingEncoder extends OpMode {
 //    double incValue = 0.001;
 
 //    When using setVelocity
-    double velocity = 2000;
+    double velocity = 1540;
     double incValue = 1;
 
     @Override
@@ -114,6 +114,13 @@ public class TwoMotor_RunUsingEncoder extends OpMode {
         telemetry.addData("left motor encoders: ", motor_left.getCurrentPosition());
         telemetry.addData("right motor encoders: ", motor_right.getCurrentPosition());
         telemetry.addData("Velocity: ", velocity);
+
+    }
+
+    public void encode () {
+        motor_left.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
+        motor_right.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
+
 
     }
 }
