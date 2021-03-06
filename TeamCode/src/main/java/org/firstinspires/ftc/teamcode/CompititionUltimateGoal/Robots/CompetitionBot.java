@@ -77,7 +77,7 @@ public class CompetitionBot extends MecanumDrive {
     Servo WobbleGrab = null;
     Servo Camera = null;
     public Servo ServoRingPusher = null;
-    Servo RingMag = null;
+    public Servo RingMag = null;
 //    Servo WobbleArmStop = null;
 //    Servos servos = new Servos();
 
@@ -87,22 +87,33 @@ public class CompetitionBot extends MecanumDrive {
 //    was 0.446
 //    public double WobbleArmRaisedPos = 0.23;
 //    public double WobbleArmLowerPos = 0.613;
-    public double WobbleGrabOpenPos = 0.514;
-    public double WobbleGrabClosePos = 0;
+    public double WobbleGrabOpenPos = .528;
+    public double WobbleGrabClosePos = 0.07;
     //Blue Left:
-    public double CameraServoPosBlueLeft = 0.20;
+    //was at .2
+    public double CameraServoPosBlueLeft = 0.25;
     //Blue Right:
     public double CameraServoPosBlueRight = 0.602;
     //Launcher Motor:
     public DcMotor IntakeMotor = null;
-    public double RingPushPos = 0.313;
-    public double RingPullPos = 0.632;
-    public double RingMagUpPos = 0.166;
-    public double RingMagDownPos = 0;
+    public double RingPushPos = 0;
+    //.196 before (Mar 3, 2021 3:40pm)
+    public double RingPullPos = 0.245;
+    //.460 before (Mar 3, 2021 3:40pm)
+    public double RingMagUpPos = 0.2;
+    //.13 before (Mar 3, 2021 3:42pm)
+    public double RingMagDownPos = 0.051;
+    //.058 before (Mar 3, 2021 3:42pm)
 
     public double DeltaRing = Math.abs(RingPullPos - RingPushPos);
-    int numLoops = 10;
+    int numLoops = 7;
     public double ringIncrement = DeltaRing/numLoops;
+
+    public double DeltaRingMag = Math.abs(RingMagUpPos - RingMagDownPos);
+    int numLoopsMag = 9;
+    //if numloops is high = servo is slower
+    //if numloops is low = servo is faster
+    public double ringIncrementMag = DeltaRingMag/numLoopsMag;
 
 //    public double WobbleArmStopOpen = 0.02;
 //    public double WobbleArmStopClose = 0.48;
@@ -243,7 +254,7 @@ public class CompetitionBot extends MecanumDrive {
 
 //        LauncherMotor.setDirection(DcMotor.Direction.FORWARD);
 //        IntakeMotor.setDirection(DcMotor.Direction.REVERSE);
-        IntakeMotor.setDirection(DcMotor.Direction.FORWARD);
+        IntakeMotor.setDirection(DcMotor.Direction.REVERSE);
         IntakeMotor.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
 
 
@@ -395,6 +406,11 @@ public class CompetitionBot extends MecanumDrive {
     public void RingPullIncrement(){
         if (ServoRingPusher.getPosition() <= RingPullPos) {
             ServoRingPusher.setPosition(ServoRingPusher.getPosition() + ringIncrement);
+        }
+    }
+    public void RingMagIncrement(){
+        if (RingMag.getPosition() <= RingMagUpPos){
+            RingMag.setPosition(RingMag.getPosition() + ringIncrementMag);
         }
     }
     public void RingMagUp(){

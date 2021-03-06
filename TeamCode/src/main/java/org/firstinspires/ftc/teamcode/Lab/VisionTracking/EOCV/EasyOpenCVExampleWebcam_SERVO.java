@@ -49,8 +49,8 @@ public class EasyOpenCVExampleWebcam_SERVO extends LinearOpMode
     SkystoneDeterminationPipeline pipeline;
 
     public Servo myServo = null;
-
-    public double servoPos = 0.22;
+//was .22 moved to .25 and went right
+    public double servoPos = 0.25;
 
     private double incVal = 0.001;
 

@@ -9,13 +9,16 @@ public class SingleServo_Callibrate extends OpMode {
 
     private Servo myServo = null;
 
+    //change back to 0.5 for any other servo, but should be 0.2 for ring_mag
     private double servoPos = 0.5;
 
     private double incVal = 0.001;
 
     @Override
     public void init () {
-        myServo = hardwareMap.servo.get("servo_ring_pusher");
+        //"servo_ring_pusher" = ring pusher
+        //"ring_mag" = mag servo
+        myServo = hardwareMap.servo.get("wobble_grab");
         myServo.setPosition(servoPos);
     }
 

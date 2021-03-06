@@ -63,18 +63,16 @@ public class AutoBlueRightDoubleWobbleDoubleWobble extends BlueRightDoubleWobble
             ScoreWobbleSensor(Bot);
             sleep(sleepTime);
 
+            Bot.WobbleArmLower(1);
+            sleep(200);
+            Bot.WobbleArmStopMotors();
+            sleep(sleepTime);
 
-//
-//            Bot.WobbleArmLower(1);
-//            sleep(200);
-//            Bot.WobbleArmStopMotors();
-//            sleep(sleepTime);
-//
-//            driveToLeftWobble(Bot, targetZone);
-//            sleep(sleepTime);
-//
-//            ParkLaunchLine(Bot,targetZone);
-//            sleep(sleepTime);
+            driveToLeftWobble(Bot, targetZone);
+            sleep(sleepTime);
+
+            ParkLaunchLine(Bot,targetZone);
+            sleep(sleepTime);
 
             requestOpModeStop();
 

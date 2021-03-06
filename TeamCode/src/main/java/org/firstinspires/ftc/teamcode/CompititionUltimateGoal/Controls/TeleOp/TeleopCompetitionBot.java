@@ -28,10 +28,13 @@ public class TeleopCompetitionBot extends OpMode {
     double LauncherSpeed;
 
     double launcherPower = 0.6;
-    double launcherVelocity = 1560;
+    double launcherVelocity = 1650;
+    //was at 1575
 
+    double PowerShotVelocity = 1450;
 
     boolean PushToggle = false;
+    boolean PushToggleMag = false;
 
 
     double powerThreshold = 0;
@@ -152,7 +155,7 @@ public class TeleopCompetitionBot extends OpMode {
 
         if (reverseModeToggle) {
 
-            leftStickYVal = -gamepad1.left_stick_y;
+            leftStickYVal = --gamepad1.left_stick_y;
             leftStickYVal = Range.clip(leftStickYVal, -1, 1);
             leftStickXVal = gamepad1.left_stick_x;
             leftStickXVal = Range.clip(leftStickXVal, -1, 1);
@@ -338,19 +341,27 @@ public class TeleopCompetitionBot extends OpMode {
 
     }
     public void launcher () {
-        if (gamepad2.y == true) {
+        if (gamepad2.y == true && PushToggleMag == false) {
 //            .75 always launched high.
 //            Code for using just power without RUN_USING_ENCODERS.
 //            Bot.LauncherOn(launcherPower);
             Bot.LauncherOn(launcherVelocity);
-            Bot.RingMagUp();
+//            Bot.RingMagUp();
+            PushToggleMag = true;
 //            Bot.launcherMotor2.setV
         }
+        if (PushToggleMag == true){
+            Bot.RingMagIncrement();
+        }
+
         if (gamepad2.a == true) {
             Bot.LauncherOff(0);
 //            motor_left.setPower(0);
 //            motor_right.setPower(0);
             Bot.RingMagDown();
+        }
+        if (Bot.RingMag.getPosition() >= Bot.RingMagUpPos){
+            PushToggleMag = false;
         }
 //        Pulls back pusher
         if (gamepad2.b == true ) {
@@ -367,9 +378,15 @@ public class TeleopCompetitionBot extends OpMode {
         if (Bot.ServoRingPusher.getPosition() >= Bot.RingPullPos) {
             PushToggle = false;
         }
+        if (gamepad1.a == true){
+            Bot.LauncherOn(PowerShotVelocity);
+        }
+        if (gamepad1.y == true){
+            Bot.LauncherOn(launcherVelocity);
+        }
     }
     public void intake() {
-        if (gamepad2.left_stick_y > 0.1 || gamepad2.left_stick_y < -.1) {
+        if (gamepad2.left_stick_y > 0.1 || gamepad2.left_stick_y < -0.1) {
             Bot.IntakeOn(gamepad2.left_stick_y);
         }
         else {
