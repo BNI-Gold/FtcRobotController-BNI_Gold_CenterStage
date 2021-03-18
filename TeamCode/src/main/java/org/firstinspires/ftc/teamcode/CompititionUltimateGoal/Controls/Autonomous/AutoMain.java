@@ -80,14 +80,22 @@ public abstract class AutoMain extends LinearOpMode {
     }
 
     public void driveToLaunch (CompetitionBot Bot) throws InterruptedException {
-        Bot.driveGyroForward(.8, 3.7);
+
+        Bot.driveGyroForward(.8, 3.8);
         sleep(sleepTimeDrive);
         Bot.gyroCorrection(0.2,0);
         sleep(sleepTimeDrive);
-        Bot.strafeLeft(0.6, 2.4);
-        sleep(sleepTimeDrive);
-        Bot.gyroCorrection(0.2,3);
-        sleep(sleepTimeDrive);
+
+
+//        old drive to launch for high goal double wobble
+//        Bot.driveGyroForward(.8, 3.5);
+//        sleep(sleepTimeDrive);
+//        Bot.gyroCorrection(0.2,0);
+//        sleep(sleepTimeDrive);
+//        Bot.strafeLeft(0.6, 2.4);
+//        sleep(sleepTimeDrive);
+//        Bot.gyroCorrection(0.2,3);
+//        sleep(sleepTimeDrive);
 
     }
 

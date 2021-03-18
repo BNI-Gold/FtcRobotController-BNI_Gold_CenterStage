@@ -28,7 +28,7 @@ public class TeleopCompetitionBot extends OpMode {
     double LauncherSpeed;
 
     double launcherPower = 0.6;
-    double launcherVelocity = 1650;
+    double launcherVelocity = 2000;
     //was at 1575
 
     double PowerShotVelocity = 1450;
@@ -379,11 +379,20 @@ public class TeleopCompetitionBot extends OpMode {
             PushToggle = false;
         }
         if (gamepad1.a == true){
-            Bot.LauncherOn(PowerShotVelocity);
+//            Bot.LauncherOn(PowerShotVelocity);
+
+            launcherVelocity -= 10;
+            Bot.LauncherOn(launcherVelocity);
+
+
         }
         if (gamepad1.y == true){
+//            Bot.LauncherOn(launcherVelocity);
+
+            launcherVelocity += 10;
             Bot.LauncherOn(launcherVelocity);
         }
+
     }
     public void intake() {
         if (gamepad2.left_stick_y > 0.1 || gamepad2.left_stick_y < -0.1) {

@@ -50,7 +50,7 @@ public class EasyOpenCVExampleWebcam_SERVO extends LinearOpMode
 
     public Servo myServo = null;
 //was .22 moved to .25 and went right
-    public double servoPos = 0.25;
+    public double servoPos = 0.5;
 
     private double incVal = 0.001;
 

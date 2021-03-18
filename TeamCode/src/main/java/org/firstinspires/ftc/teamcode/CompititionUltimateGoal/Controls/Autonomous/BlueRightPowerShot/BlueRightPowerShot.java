@@ -1,10 +1,10 @@
-package org.firstinspires.ftc.teamcode.CompititionUltimateGoal.Controls.Autonomous.BlueRight_Launch_DoubleWobble;
+package org.firstinspires.ftc.teamcode.CompititionUltimateGoal.Controls.Autonomous.BlueRightPowerShot;
 
 import org.firstinspires.ftc.teamcode.CompititionUltimateGoal.Controls.Autonomous.AutoMain;
 import org.firstinspires.ftc.teamcode.CompititionUltimateGoal.Controls.Autonomous.TargetZone;
 import org.firstinspires.ftc.teamcode.CompititionUltimateGoal.Robots.CompetitionBot;
 
-public abstract class BlueRightDoubleWobble extends AutoMain {
+public abstract class BlueRightPowerShot extends AutoMain {
     public void driveToZoneOne(CompetitionBot Bot, TargetZone target) throws InterruptedException {
         switch (target) {
             case A:
@@ -54,21 +54,33 @@ public abstract class BlueRightDoubleWobble extends AutoMain {
 //        launch 1
         int launchSleep = 750;
 //        double launchPower = 0.65;
-        double launchVelocity = 1650;
-        Bot.LauncherOn(1650);
-        sleep(1250);
+        double launchVelocity = 1800;
+        Bot.LauncherOn(1800);
+        sleep(2500);
+        Bot.gyroCorrection(.2,3);
+        sleep(sleepTimeDrive);
+        Bot.gyroCorrection(.2,3);
+        sleep(sleepTimeDrive);
         Bot.RingPull();
         sleep(launchSleep);
         Bot.RingPush();
 //        Launch 2
         Bot.LauncherOn(launchVelocity);
         sleep(launchSleep);
+        Bot.gyroCorrection(.2,12);
+        sleep(sleepTimeDrive);
+        Bot.gyroCorrection(.2,12);
+        sleep(sleepTimeDrive);
         Bot.RingPull();
         sleep(launchSleep);
         Bot.RingPush();
 //        Launch 3
         Bot.LauncherOn(launchVelocity);
         sleep(launchSleep);
+        Bot.gyroCorrection(.2,15);
+        sleep(sleepTimeDrive);
+        Bot.gyroCorrection(.2,15);
+        sleep(sleepTimeDrive);
         Bot.RingPull();
         sleep(launchSleep);
         Bot.RingPush();
@@ -78,8 +90,7 @@ public abstract class BlueRightDoubleWobble extends AutoMain {
         Bot.LauncherOff(0);
         Bot.RingMagDown();
         sleep(launchSleep);
-        Bot.gyroCorrection(0.2,0);
-        sleep(sleepTimeDrive);
+
     }
 
     public void driveToLeftWobble (CompetitionBot Bot, TargetZone target) throws InterruptedException {
