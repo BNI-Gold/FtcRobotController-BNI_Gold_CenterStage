@@ -28,10 +28,11 @@ public class TeleopCompetitionBot extends OpMode {
     double LauncherSpeed;
 
     double launcherPower = 0.6;
-    double launcherVelocity = 2000;
-    //was at 1575
+    double launcherVelocity = 1700;
+    //was at 1800, and 2000 before that, OG = 1575
 
-    double PowerShotVelocity = 1450;
+    double PowerShotVelocity = 1500;
+    //1450 before
 
     boolean PushToggle = false;
     boolean PushToggleMag = false;
@@ -379,18 +380,18 @@ public class TeleopCompetitionBot extends OpMode {
             PushToggle = false;
         }
         if (gamepad1.a == true){
-//            Bot.LauncherOn(PowerShotVelocity);
+            Bot.LauncherOn(PowerShotVelocity);
 
-            launcherVelocity -= 10;
-            Bot.LauncherOn(launcherVelocity);
+//            launcherVelocity -= 10;
+//            Bot.LauncherOn(launcherVelocity);
 
 
         }
         if (gamepad1.y == true){
-//            Bot.LauncherOn(launcherVelocity);
-
-            launcherVelocity += 10;
             Bot.LauncherOn(launcherVelocity);
+
+//            launcherVelocity += 10;
+//            Bot.LauncherOn(launcherVelocity);
         }
 
     }

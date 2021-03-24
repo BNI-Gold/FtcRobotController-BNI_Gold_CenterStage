@@ -1,5 +1,7 @@
 package org.firstinspires.ftc.teamcode.CompititionUltimateGoal.Controls.Autonomous.BlueRight_Launch_DoubleWobble;
 
+import android.graphics.Camera;
+
 import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
 
 import org.firstinspires.ftc.teamcode.CompititionUltimateGoal.Controls.Autonomous.StartPosition;
@@ -28,6 +30,7 @@ public class AutoBlueRightDoubleWobbleDoubleWobble extends BlueRightDoubleWobble
         Bot.setLinearOp(this);
 
 
+
         startPosition = StartPosition.BlueRight;
 
 
@@ -35,11 +38,13 @@ public class AutoBlueRightDoubleWobbleDoubleWobble extends BlueRightDoubleWobble
 
 
         while (opModeIsActive()){
+//            Bot.CameraInit();
+//
+//            Bot.CameraDetect();
+
+
 
             driveToLaunch (Bot);
-            sleep(sleepTime);
-
-            ScoreRings(Bot,targetZone);
             sleep(sleepTime);
 
             targetZone = detectStarterStack(Bot);
@@ -48,11 +53,21 @@ public class AutoBlueRightDoubleWobbleDoubleWobble extends BlueRightDoubleWobble
             telemetry.addData("TARGET ZONE: ", targetZone);
             telemetry.update();
 
+            sleep(250);
+
+            ScoreRings(Bot,targetZone);
+            sleep(sleepTime);
+
+//            Bot.CameraInit();
+
+
+
+
             Bot.webcam.closeCameraDevice();
             sleep(250);
 
-            targetZone = detectStarterStack(Bot);
-            sleep(sleepTime);
+//            targetZone = detectStarterStack(Bot);
+//            sleep(sleepTime);
 
             Bot.WobbleArmLowerColorSensor();
             sleep(sleepTime);

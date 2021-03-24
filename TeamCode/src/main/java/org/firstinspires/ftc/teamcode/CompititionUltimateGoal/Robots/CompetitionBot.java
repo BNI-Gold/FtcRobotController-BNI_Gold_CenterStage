@@ -128,6 +128,9 @@ public class CompetitionBot extends MecanumDrive {
     public boolean wobbleArmRaiseEngage;
     public boolean wobbleArmLowerengage;
 
+    public double cameraInitPos = 0.4;
+    public double cameraDetectPos = 0.75;
+
 
     private final static int LED_PERIOD = 10;
     private final static int GAMEPAD_LOCKOUT = 500;
@@ -153,6 +156,14 @@ public class CompetitionBot extends MecanumDrive {
     public CompetitionBot() {
 
     }
+    public void CameraDetect(){
+        Camera.setPosition(cameraDetectPos);
+    }
+
+    public void CameraInit(){
+        Camera.setPosition(cameraInitPos);
+    }
+
     public void initRobot(HardwareMap hardwareMap, String startPosition, String mode){
 //        HardwareMap hwMap, String startPosition, String mode
 
@@ -517,7 +528,7 @@ public class CompetitionBot extends MecanumDrive {
         static final int REGION_HEIGHT = 100;
 
         //        ORIGINAL THRESHOLDS
-        final int FOUR_RING_THRESHOLD = 140;
+        final int FOUR_RING_THRESHOLD = 145;
         final int ONE_RING_THRESHOLD = 127;
 
         Point region1_pointA = new Point(
