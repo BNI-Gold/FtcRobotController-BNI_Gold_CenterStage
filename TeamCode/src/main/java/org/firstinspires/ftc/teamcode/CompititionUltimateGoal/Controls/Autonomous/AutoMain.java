@@ -19,7 +19,7 @@ public abstract class AutoMain extends LinearOpMode {
     public TargetZone detectStarterStack (CompetitionBot Bot) {
 
 //         Following 2 lines are for Hard Coding the Target Zone.  Uncomment to not use EOCV.  AND comment out the lines below them.
-//                zone = TargetZone.A;
+//                zone = TargetZone.B;
 //                return zone;
 //    Line below are to use with EOCV
 
@@ -94,9 +94,9 @@ public abstract class AutoMain extends LinearOpMode {
         sleep(sleepTimeDrive);
         Bot.gyroCorrection(0.2,0);
         sleep(sleepTimeDrive);
-        Bot.strafeLeft(0.6, 2.5);
+        Bot.strafeLeft(0.6, 2.4);
         sleep(sleepTimeDrive);
-//        2.5 before
+//        2.35 before
         Bot.gyroCorrection(0.2,3);
         sleep(sleepTimeDrive);
 

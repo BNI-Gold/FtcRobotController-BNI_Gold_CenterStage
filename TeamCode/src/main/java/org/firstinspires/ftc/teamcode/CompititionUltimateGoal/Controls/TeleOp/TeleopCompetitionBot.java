@@ -28,11 +28,11 @@ public class TeleopCompetitionBot extends OpMode {
     double LauncherSpeed;
 
     double launcherPower = 0.6;
-    double launcherVelocity = 1700;
+    double launcherVelocity = 1800;
     //was at 1800, and 2000 before that, OG = 1575
 
-    double PowerShotVelocity = 1500;
-    //1450 before
+    double PowerShotVelocity = 1550;
+    //1500 before
 
     boolean PushToggle = false;
     boolean PushToggleMag = false;
@@ -366,7 +366,6 @@ public class TeleopCompetitionBot extends OpMode {
         }
 //        Pulls back pusher
         if (gamepad2.b == true ) {
-            Bot.RingPush();
 
         }
 //        Pushes ring to launch!  Zoom Zoom

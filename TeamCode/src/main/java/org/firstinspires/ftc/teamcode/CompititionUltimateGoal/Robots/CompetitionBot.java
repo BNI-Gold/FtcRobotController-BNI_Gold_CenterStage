@@ -129,8 +129,8 @@ public class CompetitionBot extends MecanumDrive {
     public boolean wobbleArmLowerengage;
 
     public double cameraInitPos = 0.4;
-    public double cameraDetectPos = 0.75;
-
+    public double cameraDetectPos = 0.78;
+//.75 before
 
     private final static int LED_PERIOD = 10;
     private final static int GAMEPAD_LOCKOUT = 500;
@@ -140,7 +140,12 @@ public class CompetitionBot extends MecanumDrive {
 
     public double maxWobbleArmRaiseTime = 0.3;
     public double maxWobbleArmLowerTime = 2.1;
+    public double maxRingPusherTime = 0.3;
+    public double maxRingPullerTime = 0.3;
+
     public ElapsedTime wobbleArmTimer;
+    public ElapsedTime ringPusherTimer;
+
 
 
     Telemetry.Item patternName;
@@ -296,6 +301,9 @@ public class CompetitionBot extends MecanumDrive {
         wobbleArmTimer = new ElapsedTime();
         wobbleArmTimer.reset();
 
+        ringPusherTimer = new ElapsedTime();
+        ringPusherTimer.reset();
+
 
 
         // Define and Initialize Gyro
@@ -392,6 +400,22 @@ public class CompetitionBot extends MecanumDrive {
             WobbleArmLower(1.0);
         }
         WobbleArmStopMotors();
+    }
+    public void RingPusherTimer(){
+        ringPusherTimer.reset();
+        while (linearOp.opModeIsActive() && ringPusherTimer.time() < maxRingPusherTime){
+            RingPush();
+        }
+    }
+    public void RingPullerTimer(){
+        while (linearOp.opModeIsActive() && ringPusherTimer.time() < maxRingPullerTime){
+            RingPull();
+        }
+    }
+
+    public void RingFullAuto(){
+//        sleeeeeeeeeeaaaaaspoprts its in the game3 = autonomousmonkey
+
     }
 
     public void WobbleArmRaiseColorSensor () {

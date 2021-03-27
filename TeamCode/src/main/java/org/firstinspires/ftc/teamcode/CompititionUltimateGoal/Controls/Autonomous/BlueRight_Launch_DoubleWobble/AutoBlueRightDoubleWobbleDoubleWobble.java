@@ -79,7 +79,8 @@ public class AutoBlueRightDoubleWobbleDoubleWobble extends BlueRightDoubleWobble
             sleep(sleepTime);
 
             Bot.WobbleArmLower(1);
-            sleep(200);
+            sleep(70);
+            // before 65 milliseconds
             Bot.WobbleArmStopMotors();
             sleep(sleepTime);
 
