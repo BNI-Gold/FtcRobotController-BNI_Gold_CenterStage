@@ -44,6 +44,7 @@ public class TeleopCompetitionBot extends OpMode {
     boolean forwardMode = true;
 
     boolean reverseModeToggle = false;
+    boolean rapidFireEngage = false;
 
     public CompetitionBot Bot=new CompetitionBot();
 
@@ -365,18 +366,45 @@ public class TeleopCompetitionBot extends OpMode {
             PushToggleMag = false;
         }
 //        Pulls back pusher
-        if (gamepad2.b == true ) {
+//        if (gamepad2.b == true ) {
+//
+//        }
+////        Pushes ring to launch!  Zoom Zoom
+//        if (gamepad2.x == true && PushToggle == false) {
+//            PushToggle = true;
+//        }
+//        if (PushToggle == true) {
+//            Bot.RingPullIncrement();
+//        }
+//        if (Bot.ServoRingPusher.getPosition() >= Bot.RingPullPos) {
+//            PushToggle = false;
+//        }
 
+        if (gamepad2.x == true){
+            Bot.rapidFireRing = 0;
+            rapidFireEngage = true;
         }
-//        Pushes ring to launch!  Zoom Zoom
-        if (gamepad2.x == true && PushToggle == false) {
-            PushToggle = true;
-        }
-        if (PushToggle == true) {
-            Bot.RingPullIncrement();
-        }
-        if (Bot.ServoRingPusher.getPosition() >= Bot.RingPullPos) {
-            PushToggle = false;
+        if (rapidFireEngage == true){
+            if (Bot.rapidFireRing == 5){
+                rapidFireEngage = false;
+                Bot.RingPush();
+            }
+            else{
+                Bot.rapidFire();
+            }
+
+//            else if (Bot.rapidFireRing == 3){
+//                rapidFireEngage = true;
+//                Bot.rapidFire();
+//            }
+//            else if (Bot.rapidFireRing == 2){
+//                rapidFireEngage = true;
+//                Bot.rapidFire();
+//            }
+//            else if (Bot.rapidFireRing == 1){
+//                rapidFireEngage = true;
+//                Bot.rapidFire();
+//            }
         }
         if (gamepad1.a == true){
             Bot.LauncherOn(PowerShotVelocity);
@@ -411,13 +439,15 @@ public class TeleopCompetitionBot extends OpMode {
 //        telemetry.addData("launch motor: ", Bot.LauncherMotor.getPower());
 //        telemetry.addData("Hue! ", Bot.hsvValues[0]);
 
-        telemetry.addData("1 motor power: ", Bot.launcherMotor1.getPower());
-        telemetry.addData("2 motor power: ", Bot.launcherMotor2.getPower());
-        telemetry.addData("1 motor velocity: ", Bot.launcherMotor1.getVelocity());
-        telemetry.addData("2 motor velocity: ", Bot.launcherMotor2.getVelocity());
-        telemetry.addData("1 motor encoders: ", Bot.launcherMotor1.getCurrentPosition());
-        telemetry.addData("2 motor encoders: ", Bot.launcherMotor2.getCurrentPosition());
-        telemetry.addData("Velocity: ", launcherVelocity);
+//        telemetry.addData("1 motor power: ", Bot.launcherMotor1.getPower());
+//        telemetry.addData("2 motor power: ", Bot.launcherMotor2.getPower());
+//        telemetry.addData("1 motor velocity: ", Bot.launcherMotor1.getVelocity());
+//        telemetry.addData("2 motor velocity: ", Bot.launcherMotor2.getVelocity());
+//        telemetry.addData("1 motor encoders: ", Bot.launcherMotor1.getCurrentPosition());
+//        telemetry.addData("2 motor encoders: ", Bot.launcherMotor2.getCurrentPosition());
+//        telemetry.addData("Velocity: ", launcherVelocity);
+        telemetry.addData("Rapid Fire Ring: ", Bot.rapidFireRing);
+        telemetry.addData("rapidFireEngage", rapidFireEngage);
         telemetry.update();
     }
 }

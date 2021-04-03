@@ -132,6 +132,12 @@ public class CompetitionBot extends MecanumDrive {
     public double cameraDetectPos = 0.78;
 //.75 before
 
+    public int rapidFireRing = 0;
+    public int rapidPushTimer = 150;
+    public int rapidPullTimer = 150;
+    public boolean launchModePush = false;
+    public boolean launchModePull = false;
+
     private final static int LED_PERIOD = 10;
     private final static int GAMEPAD_LOCKOUT = 500;
 
@@ -416,6 +422,55 @@ public class CompetitionBot extends MecanumDrive {
     public void RingFullAuto(){
 //        sleeeeeeeeeeaaaaaspoprts its in the game3 = autonomousmonkey
 
+    }
+
+    public void rapidFire(){
+        if (rapidFireRing == 0){
+            ringPusherTimer.reset();
+            rapidFireRing++;
+            launchModePush = true;
+            launchModePull = false;
+        }
+        else if (rapidFireRing == 1){
+            rapidFireOp();
+        }
+        else if (rapidFireRing == 2){
+            rapidFireOp();
+        }
+        else if (rapidFireRing == 3){
+            rapidFireOp();
+        }
+        else if (rapidFireRing == 4){
+            rapidFireOp();
+        }
+        else if (rapidFireRing == 5){
+            rapidFireOp();
+        }
+        else if (rapidFireRing == 6){
+            rapidFireOp();
+        }
+        else{
+            RingPull();
+        }
+
+    }
+
+    public void rapidFireOp(){
+        if (ringPusherTimer.milliseconds() > rapidPushTimer && launchModePush == true){
+            RingPush();
+            ringPusherTimer.reset();
+            launchModePush = false;
+            launchModePull = true;
+        }
+        else if (ringPusherTimer.milliseconds() > rapidPullTimer && launchModePull == true){
+            RingPull();
+            ringPusherTimer.reset();
+            rapidFireRing++;
+            launchModePush = true;
+            launchModePull = false;
+        }
+    }
+    public void RingPusherPullBack(){
     }
 
     public void WobbleArmRaiseColorSensor () {
