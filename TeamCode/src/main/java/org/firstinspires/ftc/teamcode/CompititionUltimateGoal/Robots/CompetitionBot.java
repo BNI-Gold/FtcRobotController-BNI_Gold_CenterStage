@@ -6,6 +6,7 @@ import com.qualcomm.hardware.bosch.BNO055IMU;
 import com.qualcomm.hardware.bosch.JustLoggingAccelerationIntegrator;
 import com.qualcomm.hardware.rev.RevBlinkinLedDriver;
 import com.qualcomm.robotcore.eventloop.opmode.OpMode;
+import com.qualcomm.robotcore.hardware.CRServo;
 import com.qualcomm.robotcore.hardware.ColorSensor;
 import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.hardware.DcMotorEx;
@@ -78,6 +79,8 @@ public class CompetitionBot extends MecanumDrive {
     Servo Camera = null;
     public Servo ServoRingPusher = null;
     public Servo RingMag = null;
+    public CRServo IntakeCorrector = null;
+
 //    Servo WobbleArmStop = null;
 //    Servos servos = new Servos();
 
@@ -133,8 +136,8 @@ public class CompetitionBot extends MecanumDrive {
 //.75 before
 
     public int rapidFireRing = 0;
-    public int rapidPushTimer = 150;
-    public int rapidPullTimer = 150;
+    public int rapidPushTimer = 200;
+    public int rapidPullTimer = 200;
     public boolean launchModePush = false;
     public boolean launchModePull = false;
 
@@ -224,6 +227,11 @@ public class CompetitionBot extends MecanumDrive {
         blinkinLedDriver = hwBot.get(RevBlinkinLedDriver.class, "Blinkin");
         pattern = RevBlinkinLedDriver.BlinkinPattern.BREATH_GRAY;
         blinkinLedDriver.setPattern(pattern);
+
+//        IntakeCorrector = hwBot.get(CRServo.class, "intake_corrector");
+        IntakeCorrector = hardwareMap.crservo.get ("intake_corrector");
+        IntakeCorrector.setDirection(DcMotorSimple.Direction.REVERSE);
+        IntakeCorrector.setPower(0);
 
 
 
@@ -421,9 +429,29 @@ public class CompetitionBot extends MecanumDrive {
 
     public void RingFullAuto(){
 //        sleeeeeeeeeeaaaaaspoprts its in the game3 = autonomousmonkey
-
     }
 
+    public void SpinInIntakeCorrector(){
+        IntakeCorrector.setPower(1);
+    }
+
+//    public void SpinOutIntakeCorrector(){
+//        IntakeCorrector.setPower(-1);
+//    }
+
+    public void StopIntakeCorrector(){
+        IntakeCorrector.setPower(0);
+    }
+
+    public void FirstLaunch(){
+        RingPull();
+        ringPusherTimer.reset();
+        launchModePush = true;
+        launchModePull = false;
+        rapidFireRing++;
+//        linearOp.telemetry.addLine("FIRST");
+//        linearOp.telemetry.update();
+    }
     public void rapidFire(){
         if (rapidFireRing == 0){
             ringPusherTimer.reset();
@@ -432,7 +460,7 @@ public class CompetitionBot extends MecanumDrive {
             launchModePull = false;
         }
         else if (rapidFireRing == 1){
-            rapidFireOp();
+            FirstLaunch();
         }
         else if (rapidFireRing == 2){
             rapidFireOp();
