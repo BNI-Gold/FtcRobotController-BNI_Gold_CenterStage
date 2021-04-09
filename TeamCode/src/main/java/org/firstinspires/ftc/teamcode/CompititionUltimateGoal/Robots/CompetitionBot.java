@@ -438,6 +438,7 @@ public class CompetitionBot extends MecanumDrive {
 
     public void RingFullAuto(){
 //        sleeeeeeeeeeaaaaaspoprts its in the game3 = autonomousmonkey
+//        what are these random words?
     }
 
     public void SpinInIntakeCorrector(){
