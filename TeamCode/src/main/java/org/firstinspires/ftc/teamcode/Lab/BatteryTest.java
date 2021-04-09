@@ -1,8 +1,10 @@
 package org.firstinspires.ftc.teamcode.Lab;
 
 import com.qualcomm.robotcore.eventloop.opmode.OpMode;
+import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 import com.qualcomm.robotcore.hardware.VoltageSensor;
 
+@TeleOp (name = "Bettery Test", group = "DUVAL")
 public class BatteryTest extends OpMode {
 
     VoltageSensor voltageSensor;

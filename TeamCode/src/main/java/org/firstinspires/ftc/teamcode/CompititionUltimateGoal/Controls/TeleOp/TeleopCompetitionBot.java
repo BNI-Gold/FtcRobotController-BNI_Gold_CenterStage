@@ -28,10 +28,11 @@ public class TeleopCompetitionBot extends OpMode {
     double LauncherSpeed;
 
     double launcherPower = 0.6;
-    double launcherVelocity = 2100;
-    //was at 1875, and 2000 before that, OG = 1575
+    double launcherVelocity = 1545;
+//    Before adding coeffiicent - was 1540
+    //was at 1650, and 2000 before that, OG = 1575
 
-    double PowerShotVelocity = 1550;
+    double PowerShotVelocity = 1400;
     //1500 before
 
     boolean PushToggle = false;
@@ -387,12 +388,12 @@ public class TeleopCompetitionBot extends OpMode {
         if (gamepad2.left_bumper == true) {
             Bot.WobbleClosed();
         }
-        if (gamepad2.dpad_left == true){
-            prankToggle = true;
-        }
-        else if (gamepad2.dpad_right == true){
-            prankToggle = false;
-        }
+//        if (gamepad2.dpad_left == true){
+//            prankToggle = true;
+//        }
+//        else if (gamepad2.dpad_right == true){
+//            prankToggle = false;
+//        }
 
 
     }
@@ -501,7 +502,11 @@ public class TeleopCompetitionBot extends OpMode {
 ////        telemetry.addData("gamepad 2 left stick y", gamepad2.left_stick_y);
 //        telemetry.addData("launch motor: ", Bot.LauncherMotor.getPower());
 //        telemetry.addData("Hue! ", Bot.hsvValues[0]);
-        telemetry.addData("1 motor power: ", Bot.launcherMotor1.getPower());
+            telemetry.addLine(String.format("Voltage: %.1f", Bot.voltageSensor.getVoltage()));
+            telemetry.addData("Launcher Coeeficnent", Bot.launchCoefficient);
+            telemetry.addData("Target Velocity", launcherPower * Bot.launchCoefficient);
+            telemetry.addData("1 motor power: ", Bot.launcherMotor1.getPower());
+
         telemetry.addData("2 motor power: ", Bot.launcherMotor2.getPower());
         telemetry.addData("1 motor velocity: ", Bot.launcherMotor1.getVelocity());
         telemetry.addData("2 motor velocity: ", Bot.launcherMotor2.getVelocity());

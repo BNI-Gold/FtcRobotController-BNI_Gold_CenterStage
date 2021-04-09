@@ -8,7 +8,7 @@ import com.qualcomm.robotcore.hardware.DcMotorSimple;
 import com.qualcomm.robotcore.hardware.Servo;
 
 import java.security.KeyStore;
-@TeleOp(name = "one motor and servo test", group="twowheel")
+@TeleOp(name = "one motor and servo test", group="DUVAL")
 @Disabled
 public class Motor_and_Servo_Test extends OpMode {
     private DcMotor motor = null;

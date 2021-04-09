@@ -14,6 +14,7 @@ import com.qualcomm.robotcore.hardware.DcMotorSimple;
 import com.qualcomm.robotcore.hardware.DistanceSensor;
 import com.qualcomm.robotcore.hardware.HardwareMap;
 import com.qualcomm.robotcore.hardware.Servo;
+import com.qualcomm.robotcore.hardware.VoltageSensor;
 import com.qualcomm.robotcore.util.ElapsedTime;
 import com.qualcomm.robotcore.util.Range;
 
@@ -47,6 +48,11 @@ public class CompetitionBot extends MecanumDrive {
 
     //hardware constructors
     public HardwareMap hwBot  =  null;
+
+
+    public VoltageSensor voltageSensor = null;
+
+    public double launchCoefficient;
 
 //GYRO INITIALIZATION
 
@@ -136,8 +142,8 @@ public class CompetitionBot extends MecanumDrive {
 //.75 before
 
     public int rapidFireRing = 0;
-    public int rapidPushTimer = 200;
-    public int rapidPullTimer = 200;
+    public int rapidPushTimer = 150; //200 before
+    public int rapidPullTimer = 175; //150 before
     public boolean launchModePush = false;
     public boolean launchModePull = false;
 
@@ -190,6 +196,9 @@ public class CompetitionBot extends MecanumDrive {
 //
 //        }
 
+
+        voltageSensor = hardwareMap.voltageSensor.iterator().next();
+        launchCoefficient = 12 / voltageSensor.getVoltage();
 
         WobbleGrab = hwBot.get(Servo.class, "wobble_grab");
         WobbleGrab.setDirection(Servo.Direction.FORWARD);
