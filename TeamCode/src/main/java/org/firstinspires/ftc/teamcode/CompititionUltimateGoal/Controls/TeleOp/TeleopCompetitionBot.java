@@ -28,11 +28,11 @@ public class TeleopCompetitionBot extends OpMode {
     double LauncherSpeed;
 
     double launcherPower = 0.6;
-    double launcherVelocity = 1545;
+    double launcherVelocity = 1350;
 //    Before adding coeffiicent - was 1540
     //was at 1650, and 2000 before that, OG = 1575
 
-    double PowerShotVelocity = 1400;
+    double PowerShotVelocity = 1275;
     //1500 before
 
     boolean PushToggle = false;

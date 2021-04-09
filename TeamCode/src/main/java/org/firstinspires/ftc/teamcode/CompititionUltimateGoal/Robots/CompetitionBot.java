@@ -105,9 +105,9 @@ public class CompetitionBot extends MecanumDrive {
     public double CameraServoPosBlueRight = 0.602;
     //Launcher Motor:
     public DcMotor IntakeMotor = null;
-    public double RingPushPos = 0;
+    public double RingPushPos = 0.26;
     //.196 before (Mar 3, 2021 3:40pm)
-    public double RingPullPos = 0.245;
+    public double RingPullPos = 0.40;
     //.460 before (Mar 3, 2021 3:40pm)
     public double RingMagUpPos = 0.2;
     //.13 before (Mar 3, 2021 3:42pm)
@@ -133,7 +133,7 @@ public class CompetitionBot extends MecanumDrive {
 //    public DcMotor motor_right = null;
     public DcMotorEx launcherMotor1 = null;
     public DcMotorEx launcherMotor2 = null;
-    public double velocity = 1700;
+    public double velocity = 1600;
     public boolean wobbleArmRaiseEngage;
     public boolean wobbleArmLowerengage;
 
