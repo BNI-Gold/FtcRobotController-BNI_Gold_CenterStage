@@ -1,6 +1,7 @@
 package org.firstinspires.ftc.teamcode.CompititionUltimateGoal.Controls.Autonomous.BlueRightPowerShot;
 
 import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
+import com.qualcomm.robotcore.eventloop.opmode.Disabled;
 
 import org.firstinspires.ftc.teamcode.CompititionUltimateGoal.Controls.Autonomous.StartPosition;
 import org.firstinspires.ftc.teamcode.CompititionUltimateGoal.Controls.Autonomous.TargetZone;
@@ -8,7 +9,7 @@ import org.firstinspires.ftc.teamcode.CompititionUltimateGoal.Robots.Competition
 
 
 @Autonomous(name = "Remote:Blue:Right:LaunchPowerShot:Wobble", group = "BLUE")
-
+@Disabled
 
 public class AutoBlueRightPowerShot extends BlueRightPowerShot {
 

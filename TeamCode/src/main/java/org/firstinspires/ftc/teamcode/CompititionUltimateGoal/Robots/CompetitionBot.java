@@ -138,8 +138,8 @@ public class CompetitionBot extends MecanumDrive {
     public boolean wobbleArmLowerengage;
 
     public double cameraInitPos = 0.4;
-    public double cameraDetectPos = 0.78;
-//.75 before
+    public double cameraDetectPos = 0.58;
+//.78 before
 
     public int rapidFireRing = 0;
     public int rapidPushTimer = 150; //200 before
@@ -154,7 +154,7 @@ public class CompetitionBot extends MecanumDrive {
     public RevBlinkinLedDriver.BlinkinPattern pattern;
 
     public double maxWobbleArmRaiseTime = 0.3;
-    public double maxWobbleArmLowerTime = 2.1;
+    public double maxWobbleArmLowerTime = 2.0;
     public double maxRingPusherTime = 0.3;
     public double maxRingPullerTime = 0.3;
 
@@ -480,6 +480,7 @@ public class CompetitionBot extends MecanumDrive {
         }
         else if (rapidFireRing == 4){
             rapidFireOp();
+
         }
         else if (rapidFireRing == 5){
             rapidFireOp();
@@ -590,6 +591,7 @@ public class CompetitionBot extends MecanumDrive {
         angles = imu.getAngularOrientation(AxesReference.INTRINSIC, AxesOrder.ZYX, AngleUnit.DEGREES);
         linearOp.telemetry.addData("current angle to start: ", angles.firstAngle);
         linearOp.telemetry.update();
+//        linearOp.sleep(2000);
 //        linearOp.sleep(1000);
         if (angles.firstAngle >= angle + TOLERANCE && linearOp.opModeIsActive()) {
             while (angles.firstAngle >=  angle + TOLERANCE && linearOp.opModeIsActive()) {

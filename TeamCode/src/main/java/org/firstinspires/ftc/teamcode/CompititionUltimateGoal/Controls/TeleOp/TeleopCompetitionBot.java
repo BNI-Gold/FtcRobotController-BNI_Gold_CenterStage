@@ -403,7 +403,13 @@ public class TeleopCompetitionBot extends OpMode {
 //            .75 always launched high.
 //            Code for using just power without RUN_USING_ENCODERS.
 //            Bot.LauncherOn(launcherPower);
-            Bot.LauncherOn(launcherVelocity);
+            if (Bot.ringIncrement <= 3) {
+                Bot.LauncherOn(launcherVelocity);
+            }
+            else {
+                Bot.LauncherOn(launcherVelocity-20);
+            }
+
 //            Bot.RingMagUp();
             PushToggleMag = true;
 //            Bot.launcherMotor2.setV

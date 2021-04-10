@@ -1,6 +1,7 @@
 package org.firstinspires.ftc.teamcode.CompititionUltimateGoal.Controls.Autonomous.BlueRight_Launch_OneWobble;
 
 import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
+import com.qualcomm.robotcore.eventloop.opmode.Disabled;
 
 import org.firstinspires.ftc.teamcode.CompititionUltimateGoal.Controls.Autonomous.StartPosition;
 import org.firstinspires.ftc.teamcode.CompititionUltimateGoal.Controls.Autonomous.TargetZone;
@@ -8,7 +9,7 @@ import org.firstinspires.ftc.teamcode.CompititionUltimateGoal.Robots.Competition
 
 
 @Autonomous(name = "Remote:Blue:Right:Launch", group = "BLUE")
-
+@Disabled
 
 public class AutoBlueRight extends BlueRight {
 

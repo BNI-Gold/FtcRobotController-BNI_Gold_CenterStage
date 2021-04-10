@@ -61,13 +61,12 @@ public class AutoBlueRightDoubleWobbleDoubleWobble extends BlueRightDoubleWobble
 //            Bot.CameraInit();
 
 
-
-
             Bot.webcam.closeCameraDevice();
             sleep(250);
 
-//            targetZone = detectStarterStack(Bot);
-//            sleep(sleepTime);
+            if (targetZone.equals(TargetZone.C)) {
+                Bot.driveForward(.5, .3);
+            }
 
             Bot.WobbleArmLowerColorSensor();
             sleep(sleepTime);
@@ -79,8 +78,8 @@ public class AutoBlueRightDoubleWobbleDoubleWobble extends BlueRightDoubleWobble
             sleep(sleepTime);
 
             Bot.WobbleArmLower(1);
-            sleep(70);
-            // before 65 milliseconds
+            sleep(100);
+            // before 75 milliseconds
             Bot.WobbleArmStopMotors();
             sleep(sleepTime);
 

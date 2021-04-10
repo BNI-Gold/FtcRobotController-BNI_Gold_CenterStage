@@ -88,16 +88,17 @@ public abstract class AutoMain extends LinearOpMode {
 
 
 //        old drive to launch for high goal double wobble
-        Bot.driveGyroForward(.8, 3.9);
+        Bot.LauncherOn(1340);  //to engage launcher before getting to launch point.
+        Bot.driveGyroForward(.8,3.90);
         sleep(sleepTimeDrive);
         Bot.CameraDetect();
         sleep(sleepTimeDrive);
         Bot.gyroCorrection(0.2,0);
         sleep(sleepTimeDrive);
-        Bot.strafeLeft(0.6, 2.4);
+        Bot.strafeLeft(0.6, 1.3);
         sleep(sleepTimeDrive);
 //        2.35 before
-        Bot.gyroCorrection(0.2,3);
+        Bot.gyroCorrection(0.2,0);
         sleep(sleepTimeDrive);
 
     }
