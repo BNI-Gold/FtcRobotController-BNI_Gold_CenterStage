@@ -32,7 +32,7 @@ public class TeleopCompetitionBot extends OpMode {
 //    Before adding coeffiicent - was 1540
     //was at 1650, and 2000 before that, OG = 1575
 
-    double PowerShotVelocity = 1275;
+    double PowerShotVelocity = 1235; //1255 reduced by 20
     //1500 before
 
     boolean PushToggle = false;
@@ -414,6 +414,7 @@ public class TeleopCompetitionBot extends OpMode {
             PushToggleMag = true;
 //            Bot.launcherMotor2.setV
         }
+
         if (PushToggleMag == true) {
             Bot.RingMagIncrement();
         }
@@ -467,6 +468,17 @@ public class TeleopCompetitionBot extends OpMode {
 //            }
             }
         }
+        if (gamepad2.right_trigger > 0.1){
+            Bot.LauncherOn(PowerShotVelocity);
+            Bot.RingMagUp();
+        }
+        if (gamepad2.dpad_left == true){
+            Bot.LauncherOn(PowerShotVelocity);
+        }
+        if (gamepad2.dpad_right == true){
+            Bot.LauncherOn(launcherVelocity);
+        }
+
         if (gamepad1.a == true) {
             Bot.LauncherOn(PowerShotVelocity);
 //            launcherVelocity -= 10;
