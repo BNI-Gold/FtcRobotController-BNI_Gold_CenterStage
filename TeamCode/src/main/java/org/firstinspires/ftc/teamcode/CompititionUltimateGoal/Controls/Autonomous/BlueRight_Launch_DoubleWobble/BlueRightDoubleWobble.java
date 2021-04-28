@@ -52,11 +52,10 @@ public abstract class BlueRightDoubleWobble extends AutoMain {
             case C:
                 Bot.rotateRight(1,2.8);
                 sleep(sleepTimeDrive);
-                Bot.gyroCorrection(.2,-155);
+                Bot.gyroCorrection(.2,-150); //-155 before
                 sleep(sleepTimeDrive);
-                //-150 before
                 // more positive = leads robot toward wall
-                Bot.driveBackward(.7,3.4); //3.5 before
+                Bot.driveBackward(.7,3.35); //3.5 before
                 sleep(sleepTimeDrive);
 //                Bot.driveForward(0.5, 3.6);
 //                sleep(sleepTimeDrive);
@@ -75,7 +74,7 @@ public abstract class BlueRightDoubleWobble extends AutoMain {
 //        launch 1
         int launchSleep = 300;
 //        double launchPower = 0.65;
-        double launchVelocity = 1320;
+        double launchVelocity = 1370; //1380 before
 //        was 1725
 //        Bot.LauncherOn(1350);
         //1750 before
@@ -90,7 +89,7 @@ public abstract class BlueRightDoubleWobble extends AutoMain {
         sleep(launchSleep);
         Bot.RingPush();
 //        Launch 3
-        Bot.LauncherOn(1315);
+        Bot.LauncherOn(1330); //1340 before
         sleep(launchSleep);
         Bot.RingPull();
         sleep(launchSleep);
@@ -116,9 +115,9 @@ public abstract class BlueRightDoubleWobble extends AutoMain {
                 Bot.rotateLeft(1, 1.4);
                 sleep(sleepTimeDrive);
                 // was at -18 - too far to the left changed to -24 to go to the right
-                Bot.gyroCorrection(0.3, -31);
+                Bot.gyroCorrection(0.3, -32);
                 sleep(sleepTimeDrive);
-                Bot.gyroCorrection(0.2, -31);
+                Bot.gyroCorrection(0.2, -32);
                 sleep(sleepTimeDrive);
                 //-18 before too far left
 //                Bot.WobbleArmLower(1);
@@ -126,7 +125,7 @@ public abstract class BlueRightDoubleWobble extends AutoMain {
                 Bot.driveBackward(1,1);
                 sleep(sleepTimeDrive);
                 //.9 before
-                Bot.driveBackward(.2,.4);
+                Bot.driveBackward(.2,.85);
                 sleep(sleepTimeDrive);
                 //.55 before
                 Bot.WobbleClosed();
@@ -137,29 +136,29 @@ public abstract class BlueRightDoubleWobble extends AutoMain {
                 Bot.rotateRight(.5,2);
                 sleep(sleepTimeDrive);
                 //1.6 before
-                Bot.gyroCorrection(.2,-148);
+                Bot.gyroCorrection(.2,-153);
                 sleep(sleepTimeDrive);
                 //-150 before
                 //less negative = more toward targetzone A
-                Bot.driveBackward(.8,2.4);
+                Bot.driveBackward(.6,2.4); //speed before = 0.8
                 sleep(sleepTimeDrive);
                 Bot.WobbleOpen();
                 sleep(sleepTimeDrive);
                 break;
             case B:
-                Bot.driveForward(.8,.3);
+                Bot.driveForward(.8,.15); //.3 before
                 sleep(sleepTimeDrive);
-                Bot.strafeLeft(.85,2.4);
+                Bot.strafeLeft(.85,2.45); //2.6 before
                 sleep(sleepTimeDrive);
-                //2.25 before
                 Bot.gyroCorrection(.2,0);
                 sleep(sleepTimeDrive);
                 Bot.driveBackward(.8,5.6);
                 sleep(sleepTimeDrive);
 //                7.0 - was slightly to left
 //                7.5 went more to left - updating to 6.5.
-                Bot.gyroCorrection(.3,5); //16 before
+                Bot.gyroCorrection(.3,18); //2 before
                 sleep(sleepTimeDrive);
+                //greater angle = moving right
                 //angle = 8 before the angles.
                 //angles will be 0-25
 //                Bot.gyroCorrection(.2,24);
@@ -176,15 +175,14 @@ public abstract class BlueRightDoubleWobble extends AutoMain {
                 sleep(sleepTimeDrive);
                 Bot.driveForward(.8,3);
                 sleep(sleepTimeDrive);
-                Bot.rotateLeft(.8,2.3);
+                Bot.rotateLeft(.8,2.45);
                 sleep(sleepTimeDrive);
                 //was 1.8 before and right
-                Bot.driveBackward(0.6,0.7);
+                Bot.driveBackward(0.6,1.1); //1.05 before
                 sleep(sleepTimeDrive);
                 //1.6 before
                 Bot.WobbleOpen();
                 sleep(sleepTimeDrive);
-
                 break;
             case C:
                 Bot.gyroCorrection(.2,-170);
@@ -197,9 +195,9 @@ public abstract class BlueRightDoubleWobble extends AutoMain {
                 //4 before
 //                to far to right - was angle 4
                 //7 before
-                Bot.gyroCorrection(0.2,24);
+                Bot.gyroCorrection(0.2,27);
                 sleep(sleepTimeDrive);
-                Bot.driveBackward(.4,.8); //1.4 before
+                Bot.driveBackward(.4,.83); //.8 before
                 sleep(sleepTimeDrive);
                 Bot.WobbleClosed();
                 sleep(600);
@@ -209,19 +207,21 @@ public abstract class BlueRightDoubleWobble extends AutoMain {
                 sleep(200);
                 Bot.driveForward(1,1.4);
                 sleep(sleepTimeDrive);
-                Bot.rotateLeft(1,3.35);
+                Bot.rotateLeft(1,3);
                 sleep(sleepTimeDrive);
                 //was 3.5
-                Bot.gyroCorrection(.3,-165);
+                Bot.gyroCorrection(.3,-169);
                 sleep(sleepTimeDrive);
                 //was -175 and went right changed to -170 and went left
 //                Bot.rotateRight(.3,0.25);
 //                sleep(sleepTimeDrive);
                 //-165 before (more right)
                 //-185 and 178 spirals robot outta control
-                Bot.driveBackward(1,3.5);
+                Bot.driveBackward(1,3.9); //3.65 before
                 sleep(sleepTimeDrive);
                 Bot.WobbleOpen();
+                sleep(sleepTimeDrive);
+                Bot.gyroCorrection(.2,-150);
                 sleep(sleepTimeDrive);
                 break;
     }
@@ -282,7 +282,7 @@ public abstract class BlueRightDoubleWobble extends AutoMain {
 
                 break;
             case C:
-                Bot.driveForward(1,2.2);
+                Bot.driveForward(1,2.4);
                 break;
         }
     }

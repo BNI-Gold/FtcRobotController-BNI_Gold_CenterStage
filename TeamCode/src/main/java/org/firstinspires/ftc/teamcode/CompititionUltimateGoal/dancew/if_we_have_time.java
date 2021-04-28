@@ -42,12 +42,11 @@ public abstract class if_we_have_time extends OpMode {
     boolean rapidFireEngage = false;
     boolean rapidFireEngage2 = false;
 
-    public CompetitionBot Bot = new CompetitionBot();
+    public IfWeHaveTimeBot Bot = new IfWeHaveTimeBot();
 
     @Override
     public void init() {
-        Bot.initRobot(hardwareMap, "TeleOp", "TeleOp");
-
+        Bot.initRobot(hardwareMap, "BlueLeft", "auto");
     }
 
     @Override

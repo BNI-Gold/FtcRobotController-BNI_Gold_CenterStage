@@ -28,7 +28,7 @@ public class TeleopCompetitionBot extends OpMode {
     double LauncherSpeed;
 
     double launcherPower = 0.6;
-    double launcherVelocity = 1350;
+    double launcherVelocity = 1400; //1370 before
 //    Before adding coeffiicent - was 1540
     //was at 1650, and 2000 before that, OG = 1575
 

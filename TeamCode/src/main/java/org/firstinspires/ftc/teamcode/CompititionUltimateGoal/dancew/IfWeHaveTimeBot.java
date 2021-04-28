@@ -1,26 +1,19 @@
-package org.firstinspires.ftc.teamcode.CompititionUltimateGoal.Robots;
-
-//import android.graphics.Color;
+package org.firstinspires.ftc.teamcode.CompititionUltimateGoal.dancew;
 
 import com.qualcomm.hardware.bosch.BNO055IMU;
 import com.qualcomm.hardware.bosch.JustLoggingAccelerationIntegrator;
 import com.qualcomm.hardware.rev.RevBlinkinLedDriver;
-import com.qualcomm.robotcore.eventloop.opmode.OpMode;
 import com.qualcomm.robotcore.hardware.CRServo;
-import com.qualcomm.robotcore.hardware.ColorSensor;
 import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.hardware.DcMotorEx;
 import com.qualcomm.robotcore.hardware.DcMotorSimple;
-import com.qualcomm.robotcore.hardware.DistanceSensor;
 import com.qualcomm.robotcore.hardware.HardwareMap;
 import com.qualcomm.robotcore.hardware.Servo;
 import com.qualcomm.robotcore.hardware.VoltageSensor;
 import com.qualcomm.robotcore.util.ElapsedTime;
 import com.qualcomm.robotcore.util.Range;
 
-import org.firstinspires.ftc.robotcontroller.external.samples.SampleRevBlinkinLedDriver;
 import org.firstinspires.ftc.robotcore.external.Telemetry;
-import org.firstinspires.ftc.robotcore.external.hardware.camera.WebcamName;
 import org.firstinspires.ftc.robotcore.external.navigation.Acceleration;
 import org.firstinspires.ftc.robotcore.external.navigation.AngleUnit;
 import org.firstinspires.ftc.robotcore.external.navigation.AxesOrder;
@@ -29,6 +22,7 @@ import org.firstinspires.ftc.robotcore.external.navigation.Orientation;
 import org.firstinspires.ftc.robotcore.internal.system.Deadline;
 import org.firstinspires.ftc.teamcode.CompititionUltimateGoal.DriveTrains.MecanumDrive;
 import org.firstinspires.ftc.teamcode.CompititionUltimateGoal.Modules.EasyOpenCVWebcam;
+import org.firstinspires.ftc.teamcode.CompititionUltimateGoal.Robots.CompetitionBot;
 import org.opencv.core.Core;
 import org.opencv.core.Mat;
 import org.opencv.core.Point;
@@ -36,17 +30,11 @@ import org.opencv.core.Rect;
 import org.opencv.core.Scalar;
 import org.opencv.imgproc.Imgproc;
 import org.openftc.easyopencv.OpenCvCamera;
-import org.openftc.easyopencv.OpenCvCameraFactory;
 import org.openftc.easyopencv.OpenCvCameraRotation;
 import org.openftc.easyopencv.OpenCvPipeline;
-import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 
-import java.util.concurrent.TimeUnit;
+public class IfWeHaveTimeBot extends MecanumDrive {
 
-
-public class CompetitionBot extends MecanumDrive {
-
-    //hardware constructors
     public HardwareMap hwBot  =  null;
 
 
@@ -67,20 +55,20 @@ public class CompetitionBot extends MecanumDrive {
 //    public DistanceSensor sensorDistanceWobbleArm;
     public float hsvValues[] = {0F, 0F, 0F};
     public final double SCALE_FACTOR = 1;
-//    Under 100 = red tape
+    //    Under 100 = red tape
     public static final int WOBBLE_ARM_RAISE_THRESHOLD = 170;
-//    Looks for > 200 with blue tape
+    //    Looks for > 200 with blue tape
     public static final int WOBBLE_ARM_LOWER_THRESHOLD = 100;
     //  Camera Initialization
     public OpenCvCamera webcam;
-    public SkystoneDeterminationPipeline pipeline;
+    public CompetitionBot.SkystoneDeterminationPipeline pipeline;
 
 //    public static final double TICKS_PER_ROTATION = 383.6;   // GoBilda 13.7 Motor PPR
 
 
 
 
-//    Servo WobbleArm = null;
+    //    Servo WobbleArm = null;
     Servo WobbleGrab = null;
     Servo Camera = null;
     public Servo ServoRingPusher = null;
@@ -93,7 +81,7 @@ public class CompetitionBot extends MecanumDrive {
 
     public double servoOpenPos = 0.36;
     public double servoClosePos = 0.93;
-//    was 0.446
+    //    was 0.446
 //    public double WobbleArmRaisedPos = 0.23;
 //    public double WobbleArmLowerPos = 0.613;
     public double WobbleGrabOpenPos = .59;
@@ -130,7 +118,7 @@ public class CompetitionBot extends MecanumDrive {
 //    Wobble Arm Motor Data
 
     public DcMotor WobbleArmMotor = null;
-//    public DcMotor motor_left = null;
+    //    public DcMotor motor_left = null;
 //    public DcMotor motor_right = null;
     public DcMotorEx launcherMotor1 = null;
     public DcMotorEx launcherMotor2 = null;
@@ -174,7 +162,7 @@ public class CompetitionBot extends MecanumDrive {
         AUTO
     }
     //LabBot constructor
-    public CompetitionBot() {
+    public IfWeHaveTimeBot() {
 
     }
     public void CameraDetect(){
@@ -347,7 +335,7 @@ public class CompetitionBot extends MecanumDrive {
     public void initCamera () {
 //        int cameraMonitorViewId = hwBot.appContext.getResources().getIdentifier("cameraMonitorViewId", "id", hwBot.appContext.getPackageName());
 //        webcam = OpenCvCameraFactory.getInstance().createWebcam(hwBot.get(WebcamName.class, "Webcam 1"), cameraMonitorViewId);
-        pipeline = new SkystoneDeterminationPipeline();
+        pipeline = new CompetitionBot.SkystoneDeterminationPipeline();
         webcam.setPipeline(pipeline);
         webcam.openCameraDeviceAsync(new OpenCvCamera.AsyncCameraOpenListener()
         {
@@ -375,7 +363,7 @@ public class CompetitionBot extends MecanumDrive {
         });
     }
 
-//    public void servoClosed () {
+    //    public void servoClosed () {
 //        WobbleArm.setPosition(servoClosePos);
 //    }
 //
@@ -400,7 +388,7 @@ public class CompetitionBot extends MecanumDrive {
     public void LauncherOn(double power) {
         launcherMotor1.setVelocity(power);
         launcherMotor2.setVelocity(power);
-     }
+    }
     public void LauncherOff(double power) {
         launcherMotor1.setPower(power);
         launcherMotor2.setPower(power);
@@ -417,7 +405,7 @@ public class CompetitionBot extends MecanumDrive {
 
 
 
-//    sensorWobbleArmLower() == false &&
+    //    sensorWobbleArmLower() == false &&
     public void WobbleArmLowerColorSensor () {
         wobbleArmTimer.reset();
         while (linearOp.opModeIsActive() && wobbleArmTimer.time() < maxWobbleArmLowerTime) {
@@ -644,7 +632,7 @@ public class CompetitionBot extends MecanumDrive {
 
         //        ORIGINAL AREA
         static final int REGION_WIDTH = 35;
-//        Was 35 for detecing from wall - this if for detecting from launch.  - 1/12/21 @ noon
+        //        Was 35 for detecing from wall - this if for detecting from launch.  - 1/12/21 @ noon
         static final int REGION_HEIGHT = 100;
 
         //        ORIGINAL THRESHOLDS
@@ -1059,18 +1047,18 @@ public class CompetitionBot extends MecanumDrive {
 
             currentPos = Math.abs(frontLeftMotor.getCurrentPosition());
 
-                          currentPos = frontLeftMotor.getCurrentPosition();
-                    leftSideSpeed = power + (angles.firstAngle - target) / 100;            // they need to be different
-                    rightSideSpeed = power - (angles.firstAngle - target) / 100;
+            currentPos = frontLeftMotor.getCurrentPosition();
+            leftSideSpeed = power + (angles.firstAngle - target) / 100;            // they need to be different
+            rightSideSpeed = power - (angles.firstAngle - target) / 100;
 
-                    leftSideSpeed = Range.clip(leftSideSpeed, -1, 1);        // helps prevent out of bounds error
-                    rightSideSpeed = Range.clip(rightSideSpeed, -1, 1);
+            leftSideSpeed = Range.clip(leftSideSpeed, -1, 1);        // helps prevent out of bounds error
+            rightSideSpeed = Range.clip(rightSideSpeed, -1, 1);
 
-                    frontLeftMotor.setPower(leftSideSpeed);
-                    rearLeftMotor.setPower(leftSideSpeed);
+            frontLeftMotor.setPower(leftSideSpeed);
+            rearLeftMotor.setPower(leftSideSpeed);
 
-                    frontRightMotor.setPower(rightSideSpeed);
-                    rearRightMotor.setPower(rightSideSpeed);
+            frontRightMotor.setPower(rightSideSpeed);
+            rearRightMotor.setPower(rightSideSpeed);
 
 
 
@@ -1266,10 +1254,6 @@ public class CompetitionBot extends MecanumDrive {
         linearOp.idle();
 
 
-
     }
-
-
-
 
 }
