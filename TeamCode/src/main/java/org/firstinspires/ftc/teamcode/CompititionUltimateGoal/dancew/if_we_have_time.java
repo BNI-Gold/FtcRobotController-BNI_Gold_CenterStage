@@ -9,7 +9,7 @@ import org.firstinspires.ftc.teamcode.CompititionUltimateGoal.Controls.Autonomou
 import org.firstinspires.ftc.teamcode.CompititionUltimateGoal.Robots.CompetitionBot;
 
 @TeleOp(name = "If_We_Have_Time")
-public abstract class if_we_have_time extends OpMode {
+public class if_we_have_time extends OpMode {
     double leftStickYVal;
     double leftStickXVal;
     double rightStickXVal;
