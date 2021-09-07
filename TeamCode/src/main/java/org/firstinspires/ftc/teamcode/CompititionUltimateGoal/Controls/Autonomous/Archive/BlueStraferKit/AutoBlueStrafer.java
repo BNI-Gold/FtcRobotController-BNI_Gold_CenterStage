@@ -39,10 +39,12 @@ public class AutoBlueStrafer extends BlueStrafer {
             telemetry.addData("TARGET ZONE: ", targetZone);
             telemetry.update();
 
-            driveToLaunch(Bot);
-            sleep(sleepTime);
-            driveToTargetZone(Bot,targetZone);
-            sleep(sleepTime);
+        
+
+//            driveToLaunch(Bot);
+//            sleep(sleepTime);
+//            driveToTargetZone(Bot,targetZone);
+//            sleep(sleepTime);
 
             requestOpModeStop();
         }
