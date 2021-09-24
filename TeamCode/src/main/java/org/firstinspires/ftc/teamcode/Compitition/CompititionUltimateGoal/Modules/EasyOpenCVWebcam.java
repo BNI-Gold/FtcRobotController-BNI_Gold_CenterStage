@@ -19,13 +19,10 @@
  * SOFTWARE.
  */
 
-package org.firstinspires.ftc.teamcode.Lab.VisionTracking.EOCV;
+package org.firstinspires.ftc.teamcode.Compitition.CompititionUltimateGoal.Modules;
 
 import com.qualcomm.robotcore.eventloop.opmode.Disabled;
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
-import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
-import com.qualcomm.robotcore.hardware.Servo;
-import com.qualcomm.robotcore.util.Range;
 
 import org.firstinspires.ftc.robotcore.external.hardware.camera.WebcamName;
 import org.firstinspires.ftc.teamcode.Lab.VisionTracking.EOCV.examples.PipelineStageSwitchingExample;
@@ -42,29 +39,16 @@ import org.openftc.easyopencv.OpenCvPipeline;
 
 //import org.firstinspires.ftc.teamcode.examples.PipelineStageSwitchingExample;
 
-@TeleOp (name = "WebCam Exmaple + Servo", group = "DUVAL")
+//@TeleOp (name = "WebCam Exmaple - DUVAL", group = "DUVAL")
 @Disabled
-
-public class EasyOpenCVExampleWebcam_SERVO extends LinearOpMode
+public class EasyOpenCVWebcam extends LinearOpMode
 {
     OpenCvCamera webcam;
     SkystoneDeterminationPipeline pipeline;
 
-    public Servo myServo = null;
-//was .22 moved to .25 and went right
-    public double servoPos = 0.55;
-
-    //.5 before
-
-    private double incVal = 0.001;
-
-
     @Override
     public void runOpMode()
     {
-        myServo = hardwareMap.servo.get("camera_servo");
-        myServo.setPosition(servoPos);
-
 
         int cameraMonitorViewId = hardwareMap.appContext.getResources().getIdentifier("cameraMonitorViewId", "id", hardwareMap.appContext.getPackageName());
         webcam = OpenCvCameraFactory.getInstance().createWebcam(hardwareMap.get(WebcamName.class, "Webcam 1"), cameraMonitorViewId);
@@ -115,38 +99,6 @@ public class EasyOpenCVExampleWebcam_SERVO extends LinearOpMode
 
         while (opModeIsActive())
         {
-            if (gamepad1.right_bumper) {
-                servoPos += incVal;
-                servoPos = Range.clip(servoPos,0,1);
-                telemetry.addLine("Increase Servo Pos!");
-            }
-
-            if (gamepad1.left_bumper){
-                servoPos -= incVal;
-                servoPos = Range.clip(servoPos, 0,  1);
-                telemetry.addLine( "Decrease Servo Pos!");
-            }
-
-
-            if (gamepad1.left_trigger > 0.5) {
-                servoPos = 0.358;
-                telemetry.addLine("Camera Servo - Blue Left");
-            }
-            if (gamepad1.right_trigger > 0.5) {
-                servoPos = 0.602;
-                telemetry.addLine("Camera Servo - Blue Right");
-
-            }
-
-            myServo.setPosition(servoPos);
-            telemetry.addLine("RB: increase, LB: Decrease");
-            telemetry.addLine("x = set to .90, y = set to 0.10");
-            telemetry.addLine("left trigger = Camera Servo - Blue Left");
-            telemetry.addLine("Right Trigger = Camera Servo - Blue Right");
-            telemetry.addData("TestS servo Positiom: ", myServo.getPosition());
-            telemetry.addData("Servo Variable Position: ", servoPos);
-
-
             telemetry.addData("Analysis", pipeline.getAnalysis());
             telemetry.addData("Position", pipeline.position);
             telemetry.update();
@@ -183,16 +135,12 @@ public class EasyOpenCVExampleWebcam_SERVO extends LinearOpMode
 
 //        ORIGINAL AREA
         static final int REGION_WIDTH = 35;
-//        Was 25 10/12 @ 4pm
-//        Was 35 1/12/21 @ noon
-        static final int REGION_HEIGHT = 100;
+        //was 25/josh 4:46pm 10/19/20
+        static final int REGION_HEIGHT = 35;
 
 //        ORIGINAL THRESHOLDS
-//        final int FOUR_RING_THRESHOLD = 150;
-//        final int ONE_RING_THRESHOLD = 135;
-
-        final int FOUR_RING_THRESHOLD = 140;
-        final int ONE_RING_THRESHOLD = 127;
+        final int FOUR_RING_THRESHOLD = 150;
+        final int ONE_RING_THRESHOLD = 135;
 
         Point region1_pointA = new Point(
                 REGION1_TOPLEFT_ANCHOR_POINT.x,

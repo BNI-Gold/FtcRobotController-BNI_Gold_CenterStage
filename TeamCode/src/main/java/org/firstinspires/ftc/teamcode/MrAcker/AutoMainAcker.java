@@ -2,11 +2,7 @@ package org.firstinspires.ftc.teamcode.MrAcker;
 
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 
-import org.firstinspires.ftc.teamcode.CompititionUltimateGoal.Controls.Autonomous.TargetZone;
-import org.firstinspires.ftc.teamcode.CompititionUltimateGoal.Modules.EasyOpenCVWebcam;
-import org.firstinspires.ftc.teamcode.CompititionUltimateGoal.Robots.LabBot;
-import org.openftc.easyopencv.OpenCvCamera;
-import org.openftc.easyopencv.OpenCvCameraRotation;
+import org.firstinspires.ftc.teamcode.Compitition.CompititionUltimateGoal.Controls.Autonomous.TargetZone;
 
 public abstract class AutoMainAcker extends LinearOpMode {
 

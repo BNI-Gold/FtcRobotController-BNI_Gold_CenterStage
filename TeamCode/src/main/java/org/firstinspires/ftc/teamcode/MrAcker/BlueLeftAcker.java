@@ -1,8 +1,7 @@
 package org.firstinspires.ftc.teamcode.MrAcker;
 
-//import org.firstinspires.ftc.teamcode.CompititionUltimateGoal.Controls.Autonomous.AutoMain;
-import org.firstinspires.ftc.teamcode.CompititionUltimateGoal.Controls.Autonomous.TargetZone;
-import org.firstinspires.ftc.teamcode.CompititionUltimateGoal.Robots.LabBot;
+//import org.firstinspires.ftc.teamcode.Compitition.CompititionUltimateGoal.Controls.Autonomous.AutoMain;
+import org.firstinspires.ftc.teamcode.Compitition.CompititionUltimateGoal.Controls.Autonomous.TargetZone;
 
 public abstract class BlueLeftAcker extends AutoMainAcker {
     public void driveToTargetZone (LabBotAcker Bot, TargetZone target) {
