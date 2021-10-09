@@ -14,8 +14,8 @@ import org.firstinspires.ftc.robotcore.external.navigation.AngleUnit;
 import org.firstinspires.ftc.robotcore.external.navigation.AxesOrder;
 import org.firstinspires.ftc.robotcore.external.navigation.AxesReference;
 import org.firstinspires.ftc.robotcore.external.navigation.Orientation;
-import org.firstinspires.ftc.teamcode.Compitition.CompititionUltimateGoal.DriveTrains.MecanumDrive;
-import org.firstinspires.ftc.teamcode.Compitition.CompititionUltimateGoal.Modules.EasyOpenCVWebcam;
+import org.firstinspires.ftc.teamcode.Compitition.ZCompititionUltimateGoal.DriveTrains.MecanumDrive;
+import org.firstinspires.ftc.teamcode.Compitition.ZCompititionUltimateGoal.Modules.EasyOpenCVWebcam;
 import org.opencv.core.Core;
 import org.opencv.core.Mat;
 import org.opencv.core.Point;
@@ -132,6 +132,11 @@ public class LabBotAcker extends MecanumDrive  {
                  * away from the user.
                  */
                 webcam.startStreaming(320, 240, OpenCvCameraRotation.UPRIGHT);
+            }
+
+            @Override
+            public void onError(int errorCode) {
+
             }
         });
 

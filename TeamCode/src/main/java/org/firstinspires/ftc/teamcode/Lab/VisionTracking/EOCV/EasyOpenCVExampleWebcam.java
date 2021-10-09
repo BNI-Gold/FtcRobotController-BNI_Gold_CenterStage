@@ -96,6 +96,13 @@ public class EasyOpenCVExampleWebcam extends LinearOpMode
                  */
                 webcam.startStreaming(320, 240, OpenCvCameraRotation.UPRIGHT);
             }
+
+
+            //THIS WAS NOT EHRE BEFORE 7.0
+            @Override
+            public void onError(int errorCode) {
+
+            }
         });
 
         waitForStart();

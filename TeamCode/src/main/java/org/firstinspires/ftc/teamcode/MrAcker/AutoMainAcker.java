@@ -2,7 +2,7 @@ package org.firstinspires.ftc.teamcode.MrAcker;
 
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 
-import org.firstinspires.ftc.teamcode.Compitition.CompititionUltimateGoal.Controls.Autonomous.TargetZone;
+import org.firstinspires.ftc.teamcode.Compitition.ZCompititionUltimateGoal.Controls.Autonomous.TargetZone;
 
 public abstract class AutoMainAcker extends LinearOpMode {
 

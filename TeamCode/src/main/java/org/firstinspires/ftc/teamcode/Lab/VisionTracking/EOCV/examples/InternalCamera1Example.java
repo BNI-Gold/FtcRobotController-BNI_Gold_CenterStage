@@ -96,6 +96,11 @@ public class InternalCamera1Example extends LinearOpMode
                  */
                 phoneCam.startStreaming(320, 240, OpenCvCameraRotation.UPRIGHT);
             }
+
+            @Override
+            public void onError(int errorCode) {
+
+            }
         });
 
         telemetry.addLine("Waiting for start");
