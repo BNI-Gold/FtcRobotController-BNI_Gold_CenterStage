@@ -7,7 +7,8 @@ import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 import org.firstinspires.ftc.teamcode.Compitition.ZCompititionUltimateGoal.Robots.ClawBot;
 
 @TeleOp (name = "Teleop_ClawBot")
-@Disabled
+//@Disabled
+
 public class TeleopClawBot extends OpMode {
     public ClawBot Bot = new ClawBot();
 
@@ -22,10 +23,12 @@ public class TeleopClawBot extends OpMode {
     }
     @Override
     public void loop() {
-        claw();
+
+        clawMovement();
+        clawControl();
     }
 
-    public void claw(){
+    public void clawMovement(){
         if (gamepad1.left_stick_y > 0.1){
             Bot.ClawForward(0.2);
         }
@@ -55,6 +58,15 @@ public class TeleopClawBot extends OpMode {
         else{
             Bot.ClawUp(0);
             Bot.ClawDown(0);
+        }
+    }
+
+    public void clawControl() {
+        if (gamepad1.left_bumper) {
+            Bot.ClawOpen();
+        }
+        if (gamepad1.right_bumper) {
+            Bot.ClawClose();
         }
     }
 }

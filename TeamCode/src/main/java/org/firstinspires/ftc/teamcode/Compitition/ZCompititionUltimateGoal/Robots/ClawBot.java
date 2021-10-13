@@ -10,7 +10,7 @@ import org.firstinspires.ftc.robotcore.external.navigation.Orientation;
 import org.firstinspires.ftc.teamcode.Compitition.ZCompititionUltimateGoal.DriveTrains.MecanumDrive;
 
 public class ClawBot extends MecanumDrive {
-    public HardwareMap hwBot  =  null;
+    public HardwareMap hwBot = null;
     public Orientation angles;
     public Acceleration gravity;
     public final double SPEED = .3;
@@ -19,9 +19,11 @@ public class ClawBot extends MecanumDrive {
     public DcMotor BackAndForth = null;
     public DcMotor UpAndDown = null;
     public Servo Claw = null;
-    public ClawBot(){
+
+    public ClawBot() {
 
     }
+
     public void initRobot(HardwareMap hardwareMap, String startPosition, String mode) {
         hwBot = hardwareMap;
 //        frontLeftMotor = hwBot.dcMotor.get("front_left_motor");
@@ -51,24 +53,37 @@ public class ClawBot extends MecanumDrive {
         UpAndDown.setDirection(DcMotorSimple.Direction.FORWARD);
 
     }
-    public void ClawDown(double power){
+
+    public void ClawDown(double power) {
         UpAndDown.setPower(-power);
     }
-    public void ClawUp(double power){
+
+    public void ClawUp(double power) {
         UpAndDown.setPower(power);
     }
 
-    public void ClawLeftSide(double power){
+    public void ClawLeftSide(double power) {
         SideToSide.setPower(power);
     }
-    public void ClawRightSide(double power){
+
+    public void ClawRightSide(double power) {
         SideToSide.setPower(-power);
     }
 
-    public void ClawBackward(double power){
+    public void ClawBackward(double power) {
         BackAndForth.setPower(power);
     }
-    public void ClawForward(double power){
+
+    public void ClawForward(double power) {
         BackAndForth.setPower(-power);
     }
+
+    public void ClawOpen() {
+        Claw.setPosition(0.1);
+    }
+
+    public void ClawClose() {
+        Claw.setPosition(0.9);
+    }
 }
+
