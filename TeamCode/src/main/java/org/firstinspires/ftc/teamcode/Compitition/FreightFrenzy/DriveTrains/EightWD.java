@@ -3,6 +3,7 @@ package org.firstinspires.ftc.teamcode.Compitition.FreightFrenzy.DriveTrains;
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 import com.qualcomm.robotcore.hardware.DcMotorEx;
 import com.qualcomm.robotcore.hardware.Gamepad;
+import com.qualcomm.robotcore.hardware.HardwareMap;
 
 public class EightWD {
 
@@ -29,6 +30,8 @@ public class EightWD {
 
 
     }
+
+
 
 
     public void DriveTankSquared (Gamepad gamepad1) {

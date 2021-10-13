@@ -21,15 +21,11 @@
 
 package org.firstinspires.ftc.teamcode.Lab.VisionTracking.EOCV;
 
-import com.qualcomm.robotcore.eventloop.opmode.Disabled;
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 
 import org.firstinspires.ftc.robotcore.external.hardware.camera.WebcamName;
-//import org.firstinspires.ftc.teamcode.examples.PipelineStageSwitchingExample;
-
 import org.firstinspires.ftc.teamcode.Lab.VisionTracking.EOCV.examples.PipelineStageSwitchingExample;
-
 import org.opencv.core.Core;
 import org.opencv.core.Mat;
 import org.opencv.core.Point;
@@ -41,12 +37,14 @@ import org.openftc.easyopencv.OpenCvCameraFactory;
 import org.openftc.easyopencv.OpenCvCameraRotation;
 import org.openftc.easyopencv.OpenCvPipeline;
 
+//import org.firstinspires.ftc.teamcode.examples.PipelineStageSwitchingExample;
+
 // from Ultimate GOAL
 
-@TeleOp (name = "WebCam Exmaple - Ultimate Goal", group = "DUVAL")
+@TeleOp (name = "WebCam Exmaple - Freight Frenzy (copy from Ultimate Goal)", group = "DUVAL")
 //@Disabled
 
-public class EasyOpenCVExampleWebcam extends LinearOpMode
+public class EasyOpenCVExampleWebcamFreightFrenzy extends LinearOpMode
 {
     OpenCvCamera webcam;
     SkystoneDeterminationPipeline pipeline;

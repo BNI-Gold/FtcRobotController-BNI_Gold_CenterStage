@@ -1,5 +1,6 @@
 package org.firstinspires.ftc.teamcode.Compitition.FreightFrenzy.Robots;
 
+import com.qualcomm.robotcore.hardware.CRServo;
 import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.hardware.DcMotorEx;
 import com.qualcomm.robotcore.hardware.DcMotorSimple;
@@ -10,6 +11,9 @@ import org.firstinspires.ftc.teamcode.Compitition.FreightFrenzy.DriveTrains.Eigh
 public class EightWheelBot extends EightWD {
 
     public HardwareMap hwBot = null;
+
+    public CRServo DuckTurner = null;
+
 
     public EightWheelBot () {
 
@@ -31,6 +35,22 @@ public class EightWheelBot extends EightWD {
 
         leftMotorA.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
         leftMotorA.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
+
+        //calling duck carasell spinner named "Duck_Turner"
+        DuckTurner = hardwareMap.crservo.get ("Duck_Turner");
+        DuckTurner.setDirection(DcMotorSimple.Direction.REVERSE);
+        DuckTurner.setPower(0);
+    }
+    public void SpinrightDuckTurner(){
+        DuckTurner.setPower(1);
+    }
+
+    public void SpinleftDuckTurner(){
+        DuckTurner.setPower(-1);
+    }
+
+    public void StopDuckTurner(){
+        DuckTurner.setPower(0);
     }
 
 
