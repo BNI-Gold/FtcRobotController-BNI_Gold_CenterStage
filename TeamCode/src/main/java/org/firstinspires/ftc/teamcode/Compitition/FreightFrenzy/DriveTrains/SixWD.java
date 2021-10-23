@@ -3,11 +3,8 @@ package org.firstinspires.ftc.teamcode.Compitition.FreightFrenzy.DriveTrains;
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 import com.qualcomm.robotcore.hardware.DcMotorEx;
 import com.qualcomm.robotcore.hardware.Gamepad;
-import com.qualcomm.robotcore.hardware.HardwareMap;
 
-import org.checkerframework.checker.units.qual.Speed;
-
-public class EightWD {
+public class SixWD {
 
    public DcMotorEx leftMotorA, leftMotorB, rightMotorA, rightMotorB;
    public LinearOpMode linearOp = null;
@@ -16,8 +13,8 @@ public class EightWD {
 
     this.linearOp = linearOp;
    }
-  // 私は疲れました
-    public EightWD(){
+
+    public SixWD(){
 
     }
 
@@ -50,11 +47,11 @@ public class EightWD {
 
 
     public void DriveTankSquared (Gamepad gamepad1) {
-       if (gamepad1.left_stick_y > 1) {
-           //sets motor power
-       }
+//       if (gamepad1.left_stick_y > 1) {
+//           //sets motor power
+//       }
 
-
+        linearOp.telemetry.addData("left stick: ", gamepad1.left_stick_y);
+        linearOp.telemetry.update();
     }
-
 }

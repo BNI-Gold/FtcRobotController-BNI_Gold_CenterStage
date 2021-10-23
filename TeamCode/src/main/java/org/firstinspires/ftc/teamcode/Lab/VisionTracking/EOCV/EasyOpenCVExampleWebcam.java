@@ -21,6 +21,7 @@
 
 package org.firstinspires.ftc.teamcode.Lab.VisionTracking.EOCV;
 
+import com.acmerobotics.dashboard.FtcDashboard;
 import com.qualcomm.robotcore.eventloop.opmode.Disabled;
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
@@ -106,6 +107,14 @@ public class EasyOpenCVExampleWebcam extends LinearOpMode
 
             }
         });
+
+
+        // FTC DASHBOARD CODE
+
+
+        FtcDashboard dashboard = FtcDashboard.getInstance();
+        telemetry = dashboard.getTelemetry();
+        FtcDashboard.getInstance().startCameraStream(webcam, 10);
 
         waitForStart();
 

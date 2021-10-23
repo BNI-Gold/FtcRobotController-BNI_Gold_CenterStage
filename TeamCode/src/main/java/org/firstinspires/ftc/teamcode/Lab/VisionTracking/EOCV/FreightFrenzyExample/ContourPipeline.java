@@ -18,10 +18,51 @@ import java.util.List;
 
 public class ContourPipeline extends OpenCvPipeline
 {
-    Scalar HOT_PINK = new Scalar(196, 23, 112);
-    // Pink, the default color                         Y      Cr     Cb
-    public static Scalar scalarLowerYCrCb = new Scalar(  0.0, 150.0, 120.0);
-    public static Scalar scalarUpperYCrCb = new Scalar(255.0, 255.0, 255.0); // pink
+//    Scalar HOT_PINK = new Scalar(196, 23, 112);
+//    // Pink, the default color                         Y      Cr     Cb
+//    public static Scalar scalarLowerYCrCb = new Scalar(  0.0, 150.0, 120.0);
+//    public static Scalar scalarUpperYCrCb = new Scalar(255.0, 255.0, 255.0); // pink
+
+
+
+//    box around image = green
+//    outline around image = pink
+
+
+    //Box around what the camera looks for.
+    // HOT PINK - top-right
+//    Scalar CAMERA_OUTLINE = new Scalar(255, 0, 255);
+
+//    LIGHT BLUE = lower right
+    Scalar CAMERA_OUTLINE = new Scalar(0, 255, 255);
+
+
+//    YELLOW = Left X - mid Y
+//    Scalar CAMERA_OUTLINE = new Scalar(255, 255, 0);
+
+//    WHITE
+//    Scalar CAMERA_OUTLINE = new Scalar(255, 255, 255);
+
+//    BLACK
+//    Scalar CAMERA_OUTLINE = new Scalar(0, 0, 0);
+
+//DARK BLUE - Right X - Mid Y
+//    Scalar CAMERA_OUTLINE = new Scalar(0, 0, 255);
+
+//    LIGHT GREEN - Lower Left
+//    Scalar CAMERA_OUTLINE = new Scalar(0, 255, 0);
+
+//    RED = Top Y - Mid X
+//    Scalar CAMERA_OUTLINE = new Scalar(255, 0, 0);
+
+//    GREY
+//    Scalar CAMERA_OUTLINE = new Scalar(127.5, 127.5, 127.5);
+
+
+
+    // Scalar Initialization,                                       Y      Cr     Cb
+    public static Scalar scalarLowerYCrCb = new Scalar(  0.0, 0, 0);
+    public static Scalar scalarUpperYCrCb = new Scalar(0, 0, 0);
 
     public boolean error = false;
     public Exception debug;
@@ -31,8 +72,8 @@ public class ContourPipeline extends OpenCvPipeline
     private int borderTopY    = 0;   //amount of pixels from the top of the cam to skip
     private int borderBottomY = 0;   //amount of pixels from the bottom of the cam to skip
 
-    private int CAMERA_WIDTH = 640;
-    private int CAMERA_HEIGHT = 360;
+    private int CAMERA_WIDTH = 0;
+    private int CAMERA_HEIGHT = 0;
 
     private int loopcounter = 0;
     private int ploopcounter = 0;
@@ -118,7 +159,7 @@ public class ContourPipeline extends OpenCvPipeline
                 Imgproc.rectangle(output, maxRect, new Scalar(0, 255, 0), 2);
             }
             // Draw Borders
-            Imgproc.rectangle(output, new Rect(borderLeftX, borderTopY, CAMERA_WIDTH - borderRightX - borderLeftX, CAMERA_HEIGHT - borderBottomY - borderTopY), HOT_PINK, 2);
+            Imgproc.rectangle(output, new Rect(borderLeftX, borderTopY, CAMERA_WIDTH - borderRightX - borderLeftX, CAMERA_HEIGHT - borderBottomY - borderTopY), CAMERA_OUTLINE, 2);
             // Display Data
             Imgproc.putText(output, "Area: " + getRectArea() + " Midpoint: " + getRectMidpointXY().x + " , " + getRectMidpointXY().y, new Point(5, CAMERA_HEIGHT - 5), 0, 0.6, new Scalar(255, 255, 255), 2);
 

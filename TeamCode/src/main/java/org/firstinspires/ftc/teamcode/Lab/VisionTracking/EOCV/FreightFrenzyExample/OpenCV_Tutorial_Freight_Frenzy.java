@@ -1,7 +1,7 @@
 package org.firstinspires.ftc.teamcode.Lab.VisionTracking.EOCV.FreightFrenzyExample;
 
-//import com.acmerobotics.dashboard.FtcDashboard;
-//import com.acmerobotics.dashboard.config.Config;
+import com.acmerobotics.dashboard.FtcDashboard;
+import com.acmerobotics.dashboard.config.Config;
 import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
@@ -22,8 +22,8 @@ public class OpenCV_Tutorial_Freight_Frenzy extends LinearOpMode {
     private static final int CAMERA_WIDTH  = 320; // width  of wanted camera resolution
     private static final int CAMERA_HEIGHT = 240; // height of wanted camera resolution
 
-    double CrLowerUpdate = 150;
-    double CbLowerUpdate = 120;
+    double CrLowerUpdate = 200;
+    double CbLowerUpdate = 200;
     double CrUpperUpdate = 255;
     double CbUpperUpdate = 255;
 
@@ -31,8 +31,21 @@ public class OpenCV_Tutorial_Freight_Frenzy extends LinearOpMode {
     double upperruntime = 0;
 
     // Pink Range                                      Y      Cr     Cb
-    public static Scalar scalarLowerYCrCb = new Scalar(  0.0, 150.0, 120.0);
+//    public static Scalar scalarLowerYCrCb = new Scalar(  0.0, 150.0, 120.0);
+//    public static Scalar scalarUpperYCrCb = new Scalar(255.0, 255.0, 255.0);
+
+//    TESTING    ****
+//    Just no.
+    //                                      Y      Cr     Cb
+//    public static Scalar scalarLowerYCrCb = new Scalar(  150.0, 0.0, 120.0);
+//    public static Scalar scalarUpperYCrCb = new Scalar(255.0, 255.0, 255.0);
+
+    public static Scalar scalarLowerYCrCb = new Scalar( 0.0, 200.0, 200.0);
     public static Scalar scalarUpperYCrCb = new Scalar(255.0, 255.0, 255.0);
+
+
+
+
 
     @Override
     public void runOpMode()
@@ -69,9 +82,9 @@ public class OpenCV_Tutorial_Freight_Frenzy extends LinearOpMode {
 
 
                 // Only if you are using ftcdashboard
-//        FtcDashboard dashboard = FtcDashboard.getInstance();
-//        telemetry = dashboard.getTelemetry();
-//        FtcDashboard.getInstance().startCameraStream(webcam, 10);
+        FtcDashboard dashboard = FtcDashboard.getInstance();
+        telemetry = dashboard.getTelemetry();
+        FtcDashboard.getInstance().startCameraStream(webcam, 10);
 
         telemetry.update();
         waitForStart();
@@ -87,6 +100,9 @@ public class OpenCV_Tutorial_Freight_Frenzy extends LinearOpMode {
             // Watch our YouTube Tutorial for the better explanation
 
             telemetry.addData("RectArea: ", myPipeline.getRectArea());
+            //jd
+            telemetry.addData("Rect Midpoint X",myPipeline.getRectMidpointX());
+            telemetry.addData("Rect Midpoint Y",myPipeline.getRectMidpointY());
             telemetry.update();
 
             if(myPipeline.getRectArea() > 2000){

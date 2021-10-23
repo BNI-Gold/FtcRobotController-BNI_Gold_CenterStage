@@ -10,8 +10,8 @@ import org.firstinspires.ftc.teamcode.Compitition.ZCompititionUltimateGoal.Robot
 //import org.firstinspires.ftc.teamcode.Compitition.CompititionUltimateGoal.Robots.LabBot;
 
 
-@TeleOp(name = "Teleop_CompetitionBot")
-@Disabled
+@TeleOp(name = "Teleop_CompetitionBot - Ringed Ranger")
+//@Disabled
 public class TeleopCompetitionBot extends OpMode {
 
     // Variables & Constants specific to TeleLabBot

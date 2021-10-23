@@ -2,11 +2,13 @@ package org.firstinspires.ftc.teamcode.Lab;
 
 import com.qualcomm.robotcore.eventloop.opmode.Disabled;
 import com.qualcomm.robotcore.eventloop.opmode.OpMode;
+import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.hardware.DcMotorSimple;
 
 //Class is used for testing a single motor, using trigger for variable power.
-@Disabled
+@TeleOp (name = "Single Motor test - Triggers to operate")
+//@Disabled
 public class SingleMotor_Triggers extends OpMode {
     private DcMotor motor = null;
     double power;
@@ -28,10 +30,13 @@ public class SingleMotor_Triggers extends OpMode {
     @Override
     public void loop() {
         if (gamepad1.right_trigger > 0.1) {
-            power = gamepad1.left_trigger;
+            power = gamepad1.right_trigger;
         }
-        if (gamepad1.left_trigger > 0.1) {
+        else if (gamepad1.left_trigger > 0.1) {
             power = -gamepad1.left_trigger;
+        }
+        else {
+            power = 0;
         }
 
         motor.setPower(power);

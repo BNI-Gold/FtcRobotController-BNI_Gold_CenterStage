@@ -1,10 +1,12 @@
-package org.firstinspires.ftc.teamcode.Compitition.FreightFrenzy.Controls;
+package org.firstinspires.ftc.teamcode.Compitition.FreightFrenzy.Controls.DriverControl;
 
 import com.qualcomm.robotcore.eventloop.opmode.OpMode;
+import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 import com.qualcomm.robotcore.hardware.CRServo;
 import com.qualcomm.robotcore.hardware.Gamepad;
 
 import org.firstinspires.ftc.teamcode.Compitition.FreightFrenzy.Robots.EightWheelBot;
+
 
 public class TeleOp8WD extends OpMode {
     public EightWheelBot Bot = new EightWheelBot();
