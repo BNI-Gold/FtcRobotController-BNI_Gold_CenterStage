@@ -6,7 +6,7 @@ import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 import com.qualcomm.robotcore.hardware.Servo;
 import com.qualcomm.robotcore.util.Range;
 @TeleOp(name = "servo calibration")
-@Disabled
+//@Disabled
 public class SingleServo_Callibrate extends OpMode {
 
     private Servo myServo = null;
@@ -20,7 +20,7 @@ public class SingleServo_Callibrate extends OpMode {
     public void init () {
         //"servo_ring_pusher" = ring pusher
         //"ring_mag" = mag servo
-        myServo = hardwareMap.servo.get("claw");
+        myServo = hardwareMap.servo.get("Intake_Lyft2");
         myServo.setPosition(servoPos);
     }
 
