@@ -81,12 +81,14 @@ public class TeleOpBeeLine6WD extends OpMode {
 //        Bot.driveFoward(gamepad1.left_stick_y);
 //        arcadesix();
         getController();
-        if (squaredDrive == true){
-            tankDriveSquared();
-        }
-        else if (squaredDrive == false){
-            tankDrive();
-        }
+//        if (squaredDrive == true){
+//            tankDriveSquared();
+//        }
+//        else if (squaredDrive == false){
+//            tankDrive();
+//        }
+
+        arcadesix();
 
         DuckSpinner();
 
@@ -118,6 +120,8 @@ public class TeleOpBeeLine6WD extends OpMode {
         if (gamepad1.b == true){
             squaredDrive = false;
         }
+
+        arcadesix();
     }
 
 
@@ -179,7 +183,7 @@ public class TeleOpBeeLine6WD extends OpMode {
 
     public void Intakecontroller () {
         if (leftStickY2 > 0.1){
-            Bot.Intake(leftStickY2);
+            Bot.Intake(-leftStickY2);
         }
         else if (leftStickY2 < -0.1){
             Bot.Intake(-leftStickY2);
@@ -215,6 +219,19 @@ public class TeleOpBeeLine6WD extends OpMode {
 
 
     public void arcadesix () {
+
+        if (leftStickY1 < .1){
+            Bot.driveFoward(leftStickY1);
+        }
+        else if (leftStickY1 > .1) {
+            Bot.driveBackward(leftStickY1);
+        }
+        if (leftStickX1 < .1){
+            Bot.rotateRight(leftStickX1);
+        }
+        else if (leftStickX1 > .1){
+            Bot.rotateLeft(leftStickX1);
+        }
 
 //        leftStickY = --gamepad1.left_stick_y;
 //        leftStickY = Range.clip(leftStickY, -1, 1);
