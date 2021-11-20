@@ -24,7 +24,7 @@ import org.openftc.easyopencv.OpenCvPipeline;
 import java.util.ArrayList;
 
 @Autonomous (name = "EOCV - TSE Detector")
-//@Disabled
+@Disabled
 
 
 public class opencvTSEDetector extends LinearOpMode {
@@ -40,9 +40,10 @@ public class opencvTSEDetector extends LinearOpMode {
     private static float rectWidth = 1.5f/8f;
 
     // CHANGE WHERE THE 3 CARGOS WOULD BE.  MOVES ALL 3 BOXES.
-    private static float offsetX = 0f/8f;//changing this moves the three rects and the three circles left or right, range : (-2, 2) not inclusive
-    private static float offsetY = 0f/8f;//changing this moves the three rects and circles up or down, range: (-4, 4) not inclusive
-
+//    private static float offsetX = 0f/8f;//changing this moves the three rects and the three circles left or right, range : (-2, 2) not inclusive
+//    private static float offsetY = 0f/8f;//changing this moves the three rects and circles up or down, range: (-4, 4) not inclusive
+    private static float offsetX = 4;//changing this moves the three rects and the three circles left or right, range : (-2, 2) not inclusive
+    private static float offsetY = 4;//changing this moves the three rects and circles up or down, range: (-4, 4) not inclusive
 
     // ORIGINAL POSITION OF THE RECTANGLES.
     private static float[] midPos = {4f/8f+offsetX, 4f/8f+offsetY};//0 = col, 1 = row
@@ -50,8 +51,10 @@ public class opencvTSEDetector extends LinearOpMode {
     private static float[] rightPos = {6f/8f+offsetX, 4f/8f+offsetY};
     //moves all rectangles right or left by amount. units are in ratio to monitor
 
-    private final int rows = 320;
-    private final int cols = 240;
+//    private final int rows = 320;
+//    private final int cols = 240;
+    private final int rows = 200;
+    private final int cols = 200;
 
     private static final int CAMERA_WIDTH  = 320; // width  of wanted camera resolution - was 320
     private static final int CAMERA_HEIGHT = 240; // height of wanted camera resolution - was 240
@@ -87,7 +90,7 @@ public class opencvTSEDetector extends LinearOpMode {
 
         FtcDashboard dashboard = FtcDashboard.getInstance();
         telemetry = dashboard.getTelemetry();
-        FtcDashboard.getInstance().startCameraStream(webcam, 10);
+        FtcDashboard.getInstance().startCameraStream(webcam, 5);
 
         waitForStart();
         while (opModeIsActive()) {
@@ -180,11 +183,13 @@ public class opencvTSEDetector extends LinearOpMode {
 
 
             //create three points
+            Point mypoint = new Point((int)(5), (int)(77));
             Point pointMid = new Point((int)(input.cols()* midPos[0]), (int)(input.rows()* midPos[1]));
             Point pointLeft = new Point((int)(input.cols()* leftPos[0]), (int)(input.rows()* leftPos[1]));
             Point pointRight = new Point((int)(input.cols()* rightPos[0]), (int)(input.rows()* rightPos[1]));
 
             //draw circles on those points
+            Imgproc.circle(all, mypoint, 20, new Scalar(155, 155, 155), 50);
             Imgproc.circle(all, pointMid,5, new Scalar( 255, 0, 0 ),1 );//draws circle
             Imgproc.circle(all, pointLeft,5, new Scalar( 255, 0, 0 ),1 );//draws circle
             Imgproc.circle(all, pointRight,5, new Scalar( 255, 0, 0 ),1 );//draws circle
@@ -244,6 +249,4 @@ public class opencvTSEDetector extends LinearOpMode {
             }
         }
     }
-
-
 }

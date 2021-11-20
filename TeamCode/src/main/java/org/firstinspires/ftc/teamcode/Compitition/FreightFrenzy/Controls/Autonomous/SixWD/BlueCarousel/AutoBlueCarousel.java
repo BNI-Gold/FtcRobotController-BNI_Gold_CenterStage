@@ -26,20 +26,7 @@ public class AutoBlueCarousel extends BlueCarousel {
 
         while (opModeIsActive()) {
 
-            Bot.driveForward(.5,1.5);
-            sleep(sleepTime);
-
-            Bot.rotateLeft(.5,1.1);
-            sleep(sleepTime);
-
-            Bot.driveBackward(.5,2.55);
-            sleep(sleepTime);
-
-            Bot.SpinDuckleftleft();
-            sleep(5000);
-
-            Bot.StopSpinningDuckleft();
-            sleep(sleepTime);
+            blue_carousel_spinDuck(Bot);
 
             Bot.driveForward(.5,4);
             sleep(sleepTime);

@@ -1,3 +1,49 @@
+//package org.firstinspires.ftc.teamcode.Compitition.FreightFrenzy.Controls.DriverControl;
+//
+//import com.qualcomm.robotcore.eventloop.opmode.OpMode;
+//import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
+//import com.qualcomm.robotcore.hardware.CRServo;
+//import com.qualcomm.robotcore.hardware.Gamepad;
+//
+//import org.firstinspires.ftc.teamcode.Compitition.FreightFrenzy.Robots.EightWheelBot;
+//
+//
+//public class TeleOp8WD extends OpMode {
+//    public EightWheelBot Bot = new EightWheelBot();
+//   // public Gamepad gamepad1;
+//
+//
+//    @Override
+//    public void init(){
+//        Bot.initRobot(hardwareMap);
+//        Bot.stopMotors();
+//    }
+//
+//    @Override
+//    public void loop() {
+//        Bot.DriveTankSquared(gamepad1);
+//        DuckSpinner();
+//    }
+//
+//
+//
+//    public void DuckSpinner () {
+//       if (gamepad2.dpad_left == true);
+//            Bot.SpinleftDuckTurner();
+//
+//       if (gamepad2.dpad_right == true);
+//            Bot.SpinrightDuckTurner();
+//
+//       if (gamepad2.dpad_down == true);
+//            Bot.StopDuckTurner();
+//    }
+//
+//
+//
+//
+//
+//}
+
 package org.firstinspires.ftc.teamcode.Compitition.FreightFrenzy.Controls.DriverControl;
 
 import com.acmerobotics.dashboard.FtcDashboard;
@@ -14,12 +60,12 @@ import org.firstinspires.ftc.teamcode.Compitition.FreightFrenzy.DriveTrains.SixW
 import org.firstinspires.ftc.teamcode.Compitition.FreightFrenzy.Robots.EightWheelBot;
 import org.firstinspires.ftc.teamcode.Compitition.FreightFrenzy.Robots.SixWheelBot;
 
-@TeleOp (name = "TeleOp 6WD_BeeLine")
+@TeleOp (name = "TeleOp 8WD_PunchIt")
 
-public class TeleOpBeeLine6WD extends OpMode {
+public class TeleOpPunchIt8WD extends OpMode {
 
 
-    public SixWheelBot Bot = new SixWheelBot();
+    public EightWheelBot Bot = new EightWheelBot();
 //    public Gamepad gamepad1;
 
     private float leftStickY1;
@@ -145,7 +191,7 @@ public class TeleOpBeeLine6WD extends OpMode {
     public double squared (double value) {
         double squaredValue = value * value;
         if (value >= 0){
-                return  squaredValue;
+            return  squaredValue;
         }
         else {
             return -squaredValue;

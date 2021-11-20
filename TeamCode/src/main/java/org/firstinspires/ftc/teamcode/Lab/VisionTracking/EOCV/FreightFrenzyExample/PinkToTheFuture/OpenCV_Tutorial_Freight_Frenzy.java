@@ -3,6 +3,7 @@ package org.firstinspires.ftc.teamcode.Lab.VisionTracking.EOCV.FreightFrenzyExam
 import com.acmerobotics.dashboard.FtcDashboard;
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
+import com.qualcomm.robotcore.util.ElapsedTime;
 
 import org.firstinspires.ftc.robotcore.external.hardware.camera.WebcamName;
 import org.opencv.core.Scalar;
@@ -28,9 +29,21 @@ public class OpenCV_Tutorial_Freight_Frenzy extends LinearOpMode {
     double lowerruntime = 0;
     double upperruntime = 0;
 
+    //ORIGINAL
     // Pink Range                                      Y      Cr     Cb
-    public static Scalar scalarLowerYCrCb = new Scalar(  0, 150, 120);
-    public static Scalar scalarUpperYCrCb = new Scalar(255, 255.0, 255.0);
+//    public static Scalar scalarLowerYCrCb = new Scalar(  0, 150, 120);
+//    public static Scalar scalarUpperYCrCb = new Scalar(255, 255.0, 255.0);
+//    NOTHING
+//    public static Scalar scalarLowerYCrCb = new Scalar(  0.0, 255.0, 0.0);
+//    NOTHING
+//    public static Scalar scalarLowerYCrCb = new Scalar(  0.0, 0.0, 255.0);
+
+// THESE ARE THE KEY VALUES!!!!!!!!!
+
+    public static Scalar scalarLowerYCrCb = new Scalar(  0.0, 0.0, 0.0);
+
+
+    public static Scalar scalarUpperYCrCb = new Scalar(255.0, 150.0, 120.0);
 
 //    TESTING    ****
 //    Just no.

@@ -26,23 +26,7 @@ public class AutoRedCarousel extends RedCarousel {
 
         while (opModeIsActive()) {
 
-            Bot.driveForward(.5,1.5);
-            sleep(sleepTime);
-
-//            Bot.rotateRight(.5,1.15);
-//            sleep(sleepTime);
-
-            Bot.rotateRight(.5,1.1);
-            sleep(sleepTime);
-
-            Bot.driveBackward(.5,2.65);
-            sleep(sleepTime);
-
-            Bot.SpinDuckRightRight();
-            sleep(5000);
-
-            Bot.StopSpinningDuckRight();
-            sleep(sleepTime);
+           red_carousel_spinDuck(Bot);
 
             Bot.driveForward(.5,5   );
             sleep(sleepTime);

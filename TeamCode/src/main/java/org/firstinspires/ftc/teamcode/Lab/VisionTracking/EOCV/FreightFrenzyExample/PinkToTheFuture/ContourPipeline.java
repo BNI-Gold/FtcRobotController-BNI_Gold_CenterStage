@@ -60,9 +60,10 @@ public class ContourPipeline extends OpenCvPipeline
 
 
 
-    // Scalar Initialization,                                       Y      Cr     Cb
-    public static Scalar scalarLowerYCrCb = new Scalar(  0, 0, 0);
-    public static Scalar scalarUpperYCrCb = new Scalar(0, 0, 0);
+    //   THIS DOES NOT SEEM TO DO ANYTHING!!!
+    // Scalar Initialization,                                       Y      Cr     Cb (DO NOT CHANGE Y)
+    public static Scalar scalarLowerYCrCb = new Scalar(  0.0, 150.0, 120.0);
+    public static Scalar scalarUpperYCrCb = new Scalar(255.0, 255.0, 255.0);
 
     public boolean error = false;
     public Exception debug;
@@ -98,8 +99,8 @@ public class ContourPipeline extends OpenCvPipeline
 
     public void ConfigureScalarLower(double Y, double Cr, double Cb) { scalarLowerYCrCb = new Scalar(Y, Cr, Cb); }
     public void ConfigureScalarUpper(double Y, double Cr, double Cb) { scalarUpperYCrCb = new Scalar(Y, Cr, Cb); }
-    public void ConfigureScalarLower(int Y, int Cr, int Cb) { scalarLowerYCrCb = new Scalar(Y, Cr, Cb); }
-    public void ConfigureScalarUpper(int Y, int Cr, int Cb) { scalarUpperYCrCb = new Scalar(Y, Cr, Cb); }
+//    public void ConfigureScalarLower(int Y, int Cr, int Cb) { scalarLowerYCrCb = new Scalar(Y, Cr, Cb); }
+//    public void ConfigureScalarUpper(int Y, int Cr, int Cb) { scalarUpperYCrCb = new Scalar(Y, Cr, Cb); }
 
     @Override
     public Mat processFrame(Mat input)

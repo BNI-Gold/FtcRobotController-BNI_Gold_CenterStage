@@ -1,9 +1,14 @@
 package org.firstinspires.ftc.teamcode.Compitition.FreightFrenzy.DriveTrains;
 
+import android.graphics.Color;
+
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
+import com.qualcomm.robotcore.hardware.ColorSensor;
 import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.hardware.DcMotorEx;
+import com.qualcomm.robotcore.hardware.DcMotorSimple;
 import com.qualcomm.robotcore.hardware.Gamepad;
+import com.qualcomm.robotcore.util.ElapsedTime;
 
 public class SixWD {
 
@@ -12,7 +17,10 @@ public class SixWD {
 
    public static final double TICKS_PER_ROTATION = 383.6;   // GoBilda 13.7 Motor PPR
 
-   public void setLinearOp(LinearOpMode linearOp){
+
+
+
+    public void setLinearOp(LinearOpMode linearOp){
 
     this.linearOp = linearOp;
    }
@@ -20,6 +28,40 @@ public class SixWD {
     public SixWD(){
 
     }
+
+
+
+
+
+//    public boolean senseLyftExtend () {
+//        senseLyftColor.argb((int) (senseLyftColor.red() * SCALE_FACTOR),
+//                (int) (senseLyftColor.green() * SCALE_FACTOR),
+//                (int) (senseLyftColor.blue() * SCALE_FACTOR),
+//                hsvValues);
+////        linearOp.telemetry.addData("function hue ", hsvValues[0]);
+////        linearOp.telemetry.update();
+////        WOBBLE_ARM_LOWER_THRESHOLD = 50
+//        if (hsvValues[0] > RED_THRESHOLD_HUE) {
+//            return false;
+//        }
+//        else {
+//            return true;
+//        }
+//    }
+//
+//    public boolean senseLyftcolapse () {
+//        senseLyftColor.argb((int) (senseLyftColor.red() * SCALE_FACTOR),
+//                (int) (senseLyftColor.green() * SCALE_FACTOR),
+//                (int) (senseLyftColor.blue() * SCALE_FACTOR),
+//                hsvValues);
+////        WOBBLE_ARM_LOWER_THRESHOLD = 50
+//        if (hsvValues[0] > BLUE_THRESHOLD_HUE) {
+//            return false;
+//        }
+//        else {
+//            return true;
+//        }
+//    }
 
     public void setMotorRunModes (DcMotor.RunMode mode) {
 
@@ -80,6 +122,8 @@ public class SixWD {
 
         }
     }
+
+
 
     public void driveBackward (double speed){
         leftMotorA.setPower(-speed);
@@ -191,6 +235,8 @@ public class SixWD {
 
         }
     }
+
+
 
 
 
