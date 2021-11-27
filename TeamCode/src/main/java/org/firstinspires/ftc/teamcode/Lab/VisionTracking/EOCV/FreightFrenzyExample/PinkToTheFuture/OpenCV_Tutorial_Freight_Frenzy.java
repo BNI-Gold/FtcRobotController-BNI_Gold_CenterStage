@@ -18,8 +18,8 @@ public class OpenCV_Tutorial_Freight_Frenzy extends LinearOpMode {
 
     private OpenCvCamera webcam;
 
-    private static final int CAMERA_WIDTH  = 320; // width  of wanted camera resolution
-    private static final int CAMERA_HEIGHT = 240; // height of wanted camera resolution
+    private static final int CAMERA_WIDTH  = 320; // width  of wanted camera resolution / originial: 320
+    private static final int CAMERA_HEIGHT = 240; // height of wanted camera resolution /original: 240
 
     double CrLowerUpdate = 200;
     double CbLowerUpdate = 200;
@@ -40,11 +40,11 @@ public class OpenCV_Tutorial_Freight_Frenzy extends LinearOpMode {
 
 // THESE ARE THE KEY VALUES!!!!!!!!!
 
-    public static Scalar scalarLowerYCrCb = new Scalar(  0.0, 0.0, 0.0);
+    //public static Scalar scalarLowerYCrCb = new Scalar(  0.0, 0.0, 0.0);  // duVals values
+    public static Scalar scalarLowerYCrCb = new Scalar(  62, 46, 71); // emmas values
 
-
-    public static Scalar scalarUpperYCrCb = new Scalar(255.0, 150.0, 120.0);
-
+    //public static Scalar scalarUpperYCrCb = new Scalar(255.0, 150.0, 120.0);    // duVals values
+    public static Scalar scalarUpperYCrCb = new Scalar(159, 88, 129); //emmas values
 //    TESTING    ****
 //    Just no.
     //                                      Y      Cr     Cb

@@ -60,9 +60,6 @@
 
 package org.firstinspires.ftc.teamcode.Compitition.FreightFrenzy.Robots;
 
-import android.graphics.Color;
-
-import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 import com.qualcomm.robotcore.hardware.CRServo;
 import com.qualcomm.robotcore.hardware.ColorSensor;
 import com.qualcomm.robotcore.hardware.DcMotor;
@@ -71,9 +68,14 @@ import com.qualcomm.robotcore.hardware.DcMotorSimple;
 import com.qualcomm.robotcore.hardware.HardwareMap;
 import com.qualcomm.robotcore.hardware.Servo;
 import com.qualcomm.robotcore.util.ElapsedTime;
-
+import org.firstinspires.ftc.robotcore.external.hardware.camera.WebcamName;
+import org.firstinspires.ftc.teamcode.Compitition.FreightFrenzy.Controls.mechanisms.CompContourPipeline;
+import org.firstinspires.ftc.teamcode.Compitition.FreightFrenzy.Controls.mechanisms.TSELocation;
+import org.opencv.core.Scalar;
+import org.openftc.easyopencv.OpenCvCamera;
+import org.openftc.easyopencv.OpenCvCameraFactory;
+import org.openftc.easyopencv.OpenCvCameraRotation;
 import org.firstinspires.ftc.teamcode.Compitition.FreightFrenzy.DriveTrains.EightWD;
-import org.firstinspires.ftc.teamcode.Compitition.FreightFrenzy.DriveTrains.SixWD;
 
 public class EightWheelBot extends EightWD {
 
@@ -89,9 +91,9 @@ public class EightWheelBot extends EightWD {
 
     // Higher value = gate higher
     // Lower value == gate goes down more.
-    public double boxHolder2up = 0.1 ;
+    public double boxHolder2up = 0.1;
 
-    public double boxHolder2down = 0.4 ;
+    public double boxHolder2down = 0.4;
     public CRServo LyftServo = null;
 
 // ^ !careful while changing! ^
@@ -101,7 +103,7 @@ public class EightWheelBot extends EightWD {
     public DcMotor lyft;
 
     double power;
-    double powerControl = 0.8 ;
+    double powerControl = 0.8;
 
     public ColorSensor senseLyftColor;
 
@@ -134,17 +136,29 @@ public class EightWheelBot extends EightWD {
 
     ElapsedTime timer;
 
+    // WEBCAM VARIABLES - EMMA
+    //declaring pipeline
+    CompContourPipeline myPipeline;
+    private OpenCvCamera webcam;
+    private static final int CAMERA_WIDTH = 320; // width  of wanted camera resolution
+    private static final int CAMERA_HEIGHT = 240; // height of wanted camera resolution
+    // WEBCAM - COLOR RANGE
+    public static Scalar scalarLowerYCrCb = new Scalar(0.0, 0.0, 0.0);
+    public static Scalar scalarUpperYCrCb = new Scalar(255.0, 150.0, 120.0);
+    //enum / detecting barcode
+    TSELocation barcode;
+
 
     public EightWheelBot() {
 
 
     }
 
-    public void initRobot(HardwareMap hardwareMap){
+    public void initRobot(HardwareMap hardwareMap) {
         hwBot = hardwareMap;
 
 
-        LyftExtender = hwBot.get(DcMotorEx.class, "Lyft_Extender");
+        LyftExtender = hwBot.get(DcMotorEx.class, "lyft_extender");
 
         leftMotorA = hwBot.get(DcMotorEx.class, "left_motor_a");
         leftMotorB = hwBot.get(DcMotorEx.class, "left_motor_b");
@@ -161,7 +175,7 @@ public class EightWheelBot extends EightWD {
         rightMotorB.setDirection(DcMotorEx.Direction.REVERSE);
 
 //        intakeLyft = hwBot.get(DcMotorEx.class,"Intake_Lyft");
-        intake = hardwareMap.dcMotor.get ("Intake");
+        intake = hardwareMap.dcMotor.get("intake");
 //        intake
 //        motor = hardwareMap.dcMotor.get("motor");
 
@@ -190,14 +204,14 @@ public class EightWheelBot extends EightWD {
         intake.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
 //        intakeLyft.setZeroPowerBehavior(DcMotorEx.ZeroPowerBehavior.BRAKE);
 
-        DuckTurnerleft = hardwareMap.crservo.get ("Duck_Turner_Left");
+        DuckTurnerleft = hardwareMap.crservo.get("duck_turner_left");
         DuckTurnerleft.setDirection(DcMotorSimple.Direction.REVERSE);
         DuckTurnerleft.setPower(0);
 
-        boxHolder2 = hwBot.get(Servo.class,"Box_Holder");
+        boxHolder2 = hwBot.get(Servo.class, "box_holder");
         boxHolder2.setPosition(boxHolder2up);
 
-        DuckTurnerright = hardwareMap.crservo.get ("Duck_Turner_Right");
+        DuckTurnerright = hardwareMap.crservo.get("duck_turner_right");
         DuckTurnerright.setDirection(DcMotorSimple.Direction.REVERSE);
         DuckTurnerright.setPower(0);
 
@@ -209,53 +223,76 @@ public class EightWheelBot extends EightWD {
 
     }
 
-    public void setboxHolder2up (){
+    public void setboxHolder2up() {
         boxHolder2.setPosition(boxHolder2up);
     }
-    public void setboxHolder2down (){
+
+    public void setboxHolder2down() {
         boxHolder2.setPosition(boxHolder2down);
     }
 
 
-    public void SpinDuckBRight(){
+    public void SpinDuckBRight() {
         DuckTurnerleft.setPower(-1);
     }
-    public void SpinDuckBLeft(){
+
+    public void SpinDuckBLeft() {
         DuckTurnerleft.setPower(1);
     }
-    public void SpinDuckALeft(){
+
+    public void SpinDuckALeft() {
         DuckTurnerright.setPower(1);
     }
-    public void SpinDuckARight(){ DuckTurnerright.setPower(-1); }
-    public void StopSpinningDuckRight(){
+
+    public void SpinDuckARight() {
+        DuckTurnerright.setPower(-1);
+    }
+
+    public void StopSpinningDuckRight() {
         DuckTurnerright.setPower(0);
     }
-    public void StopSpinningDuckLeft() {DuckTurnerleft.setPower(0);}
 
-    public void Intake (double speed){
+    public void StopSpinningDuckLeft() {
+        DuckTurnerleft.setPower(0);
+    }
+
+    public void Intake(double speed) {
         intake.setPower(speed);
     }
 
-    public void LyftUp() {LyftServo.setPower(1);}
-    public void LyftDown() {LyftServo.setPower(1);}
-    public void Lyft (double speed){
+    public void LyftUp() {
+        LyftServo.setPower(1);
+    }
+
+    public void LyftDown() {
+        LyftServo.setPower(1);
+    }
+
+    public void Lyft(double speed) {
         intake.setPower(speed);
     }
 
-    public void LyftExtend(double speed) {LyftExtender.setPower(speed);}
-    public void LyftRetract(double speed) {LyftExtender.setPower(-speed);}
+    public void LyftExtend(double speed) {
+        LyftExtender.setPower(speed);
+    }
 
-    public void SpinIntake (double speed){
+    public void LyftRetract(double speed) {
+        LyftExtender.setPower(-speed);
+    }
+
+    public void SpinIntake(double speed) {
         intake.setPower(1);
     }
-    public void StopIntake (double speed){
+
+    public void StopIntake(double speed) {
         intake.setPower(0);
     }
-    public void ReverseIntake (double speed){
+
+    public void ReverseIntake(double speed) {
         intake.setPower(-1);
     }
 
-    public void senseLyftExtend () {
+    public void senseLyftExtend() {
         timer.reset();
         while (timer.milliseconds() < OPEN_TIME_THRESHOLD && linearOp.opModeIsActive()) {
 //            Color.RGBToHSV((int) (senseLyftColor.red() * SCALE_FACTOR),
@@ -272,7 +309,7 @@ public class EightWheelBot extends EightWD {
         LyftExtender.setPower(0);
     }
 
-    public void senseLyftcolapse () {
+    public void senseLyftcolapse() {
         timer.reset();
         //was in the compound conditional
 //        hsvValues[0] < BLUE_THRESHOLD_HUE &&
@@ -291,7 +328,47 @@ public class EightWheelBot extends EightWD {
         LyftExtender.setPower(0);
     }
 
+    //emma
+    public void initWebcam() {
+        //OPENCV WEBCAM
+        int cameraMonitorViewId = hwBot.appContext.getResources().getIdentifier("cameraMonitorViewId", "id", hwBot.appContext.getPackageName());
+        webcam = OpenCvCameraFactory.getInstance().createWebcam(hwBot.get(WebcamName.class, "Webcam 1"), cameraMonitorViewId);
+        //OPENCV PIPELINE
+        webcam.setPipeline(myPipeline = new CompContourPipeline());
+        // CONFIGURATION OF PIPELINE
+        myPipeline.ConfigurePipeline(30, 30, 30, 30, CAMERA_WIDTH, CAMERA_HEIGHT);
+        myPipeline.ConfigureScalarLower(scalarLowerYCrCb.val[0], scalarLowerYCrCb.val[1], scalarLowerYCrCb.val[2]);
+        myPipeline.ConfigureScalarUpper(scalarUpperYCrCb.val[0], scalarUpperYCrCb.val[1], scalarUpperYCrCb.val[2]);
 
+        webcam.openCameraDeviceAsync(new OpenCvCamera.AsyncCameraOpenListener() {
+            @Override           //why is this override / does it need to disappear for auto
+            public void onOpened() {
+                webcam.startStreaming(CAMERA_WIDTH, CAMERA_HEIGHT, OpenCvCameraRotation.UPRIGHT);
+            }
 
+            @Override       // why is this ovrride / does it need to disappear for auto
+            public void onError(int errorCode) {
+
+            }
+        });
+    }
+
+    public void detectBarcode() {
+        //for testing
+        linearOp.telemetry.addData("RectArea: ", myPipeline.getRectArea());
+        linearOp.telemetry.addData("Rect Midpoint X", myPipeline.getRectMidpointX());
+        linearOp.telemetry.addData("Rect Midpoint Y", myPipeline.getRectMidpointY());
+        linearOp.telemetry.update();
+        //detection
+        if (myPipeline.getRectArea() > 2000) {      //values will probably need to be changed
+            if (myPipeline.getRectMidpointX() > 400) {
+                 barcode = TSELocation.barcode1;
+            } else if (myPipeline.getRectMidpointX() > 200) {
+                barcode = TSELocation.barcode2;
+            } else {
+                barcode = TSELocation.barcode3;
+            }
+        }
+    }
 }
 
