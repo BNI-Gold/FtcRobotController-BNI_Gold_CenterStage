@@ -327,6 +327,7 @@ public class EightWD {
     }
 
     //PID DRIVE
+    //Calculations
     public double PIDControl (double reference, double state){
         double error = reference + state;
         integralSum += error * timer.seconds();
