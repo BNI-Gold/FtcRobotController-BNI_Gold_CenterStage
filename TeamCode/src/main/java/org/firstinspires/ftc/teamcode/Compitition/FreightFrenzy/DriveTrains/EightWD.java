@@ -97,6 +97,15 @@ public class EightWD {
 
     }
 
+    //PID VARIABLES
+    double integralSum = 0;
+    double Kp = 0;
+    double Ki = 0;
+    double Kd = 0;
+    ElapsedTime timer = new ElapsedTime();
+    private double lastError;
+    double encoderAverage = (leftMotorA.getCurrentPosition() + rightMotorA.getCurrentPosition())/2;
+
 
 
 
@@ -316,6 +325,43 @@ public class EightWD {
         linearOp.telemetry.addData("left stick: ", gamepad1.left_stick_y);
         linearOp.telemetry.update();
     }
+
+    //PID DRIVE
+    public double PIDControl (double reference, double state){
+        double error = reference + state;
+        integralSum += error * timer.seconds();
+        double derivative = (error - lastError)/timer.seconds();
+        lastError = error;
+        double output = (error * Kp) + (derivative * Kd) + (integralSum * Ki);
+        return output;
+    }
+
+    public void driveForwardPID (double rotations) {
+        if (linearOp.opModeIsActive()) {
+            double ticks = rotations * TICKS_PER_ROTATION;
+            double speed = PIDControl(100, encoderAverage);     //100% power
+            setMotorRunModes(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
+            setMotorRunModes(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
+
+            while (encoderAverage < ticks && linearOp.opModeIsActive()) {
+                driveFoward(speed);
+            }
+        }
+    }
+    public void driveBackwardPID (double rotations) {
+        if (linearOp.opModeIsActive()) {
+            double ticks = rotations * TICKS_PER_ROTATION;
+            double speed = PIDControl(100, encoderAverage);     //100% power
+            setMotorRunModes(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
+            setMotorRunModes(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
+
+            while (encoderAverage < ticks && linearOp.opModeIsActive()) {
+                driveBackward(speed);
+            }
+        }
+    }
+
+
 
 
 
