@@ -104,7 +104,8 @@ public class EightWD {
     double Kd = 0;
     ElapsedTime timer = new ElapsedTime();
     private double lastError;
-    double encoderAverage = (leftMotorA.getCurrentPosition() + rightMotorA.getCurrentPosition())/2;
+//    double encoderAverage = (leftMotorA.getCurrentPosition() + rightMotorA.getCurrentPosition())/2;
+    double encoderAverage;
 
 
 

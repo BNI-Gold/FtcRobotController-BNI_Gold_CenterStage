@@ -27,16 +27,7 @@
 //
 //
 //
-//    public void DuckSpinner () {
-//       if (gamepad2.dpad_left == true);
-//            Bot.SpinleftDuckTurner();
-//
-//       if (gamepad2.dpad_right == true);
-//            Bot.SpinrightDuckTurner();
-//
-//       if (gamepad2.dpad_down == true);
-//            Bot.StopDuckTurner();
-//    }
+
 //
 //
 //
@@ -91,9 +82,11 @@ public class TeleOpPunchIt8WD extends OpMode {
     double speedMultiply = 1;
 
 
+    public double leftMotorValue;
+    public double rightMotorValue;
 
-    boolean squaredDrive = false;
-    FtcDashboard dashboard = FtcDashboard.getInstance();
+    boolean tankDrive = true;
+//    FtcDashboard dashboard = FtcDashboard.getInstance();
 
 
     @Override
@@ -113,7 +106,7 @@ public class TeleOpPunchIt8WD extends OpMode {
 
 
 
-        telemetry = dashboard.getTelemetry();
+//        telemetry = dashboard.getTelemetry();
 
 
         Bot.setboxHolder2up();
@@ -127,11 +120,12 @@ public class TeleOpPunchIt8WD extends OpMode {
 //        Bot.driveForward(gamepad1.left_stick_y);
 //        arcadesix();
         getController();
-        if (squaredDrive == true){
+
+        if (tankDrive == true){
             tankDriveSquared();
         }
-        else if (squaredDrive == false){
-            tankDrive();
+        else if (tankDrive == false){
+            arcadeDriveEight();
         }
 
 //        arcadesix();
@@ -140,7 +134,7 @@ public class TeleOpPunchIt8WD extends OpMode {
 
         Intakecontroller();
 
-        LyftIntake2();
+        BoxHolderControl();
 
         LyftExtender();
 
@@ -161,12 +155,12 @@ public class TeleOpPunchIt8WD extends OpMode {
         rightStickY2 = -gamepad2.right_stick_y;
         rightStickX2 = -gamepad2.right_stick_x;
 
-        if (gamepad1.a == true){
-            squaredDrive = true;
+        if (gamepad1.x == true){
+            tankDrive= true;
 
         }
         if (gamepad1.b == true){
-            squaredDrive = false;
+            tankDrive = false;
         }
 
 //        arcadesix();
@@ -199,42 +193,44 @@ public class TeleOpPunchIt8WD extends OpMode {
     }
 
     public void telemtryOutput () {
-        telemetry.addData("gp1 left stick: ", gamepad1.left_stick_y);
-        telemetry.addData("gp1 right stick: ", gamepad1.right_stick_y);
+        telemetry.addData("Tank Drive? (x/b to swap) ", tankDrive);
 
-        telemetry.addData("left stick value Y 1: ", leftStickY1);
-        telemetry.addData("right stick value Y 1: ", rightStickY1);
+//        telemetry.addData("gp1 left stick: ", gamepad1.left_stick_y);
+//        telemetry.addData("gp1 right stick: ", gamepad1.right_stick_y);
 
-        telemetry.addData("power output yeah:",Bot.leftMotorA.getPower());
+//        telemetry.addData("left stick value Y 1: ", leftStickY1);
+//        telemetry.addData("right stick value Y 1: ", rightStickY1);
+
+        telemetry.addData("power output Left A:",Bot.leftMotorA.getPower());
+        telemetry.addData("power output Left B:",Bot.leftMotorB.getPower());
+        telemetry.addData("power output Right A:",Bot.rightMotorA.getPower());
+        telemetry.addData("power output Left B:",Bot.rightMotorB.getPower());
+
+
     }
-
 
 
     public void DuckSpinner () {
-        if (gamepad2.dpad_left == true){
-            Bot.SpinDuckARight();
-            Bot.SpinDuckBRight();
+       if (gamepad2.dpad_left == true) {
+           Bot.duckspincounterclockwise();
+       }
+
+
+       else if (gamepad2.dpad_right == true) {
+            Bot.duckspinclockwise();
         }
+       else {
+           Bot.duckspinstop();
+       }
 
-
-
-        if (gamepad2.dpad_right == true){
-            Bot.SpinDuckBLeft();
-            Bot.SpinDuckBLeft();
-        }
-
-        if (gamepad2.dpad_down == true){
-            Bot.StopSpinningDuckLeft();
-            Bot.StopSpinningDuckRight();
-        }
-    }
+}
 
     public void Intakecontroller () {
         if (leftStickY2 > 0.1){
-            Bot.Intake(-0.9);
+            Bot.Intake(leftStickY2);
         }
         else if (leftStickY2 < -0.1){
-            Bot.Intake(0.9);
+            Bot.Intake(leftStickY2);
         }
         else {
             Bot.Intake (0);
@@ -242,7 +238,7 @@ public class TeleOpPunchIt8WD extends OpMode {
 
     }
 
-    public void LyftIntake2 () {
+    public void BoxHolderControl () {
         if (gamepad2.a == true){
             Bot.setboxHolder2down();
         }
@@ -254,19 +250,20 @@ public class TeleOpPunchIt8WD extends OpMode {
 
     public void Lyft () {
         if (gamepad2.x == true){
-            Bot.LyftUp();
+//            Bot.LyftUp();
         }
         else {
-            Bot.LyftDown();
+//            Bot.LyftDown();
         }
     }
 
+
     public void LyftExtender () {
         if (gamepad2.right_bumper == true) {
-            Bot.LyftExtend(0.7);
+            Bot.LyftExtend(0.6);
         }
         else if (gamepad2.left_bumper == true){
-            Bot.LyftRetract(.7);
+            Bot.LyftRetract(.6);
         }
         else {
             Bot.LyftExtend(0);
@@ -291,17 +288,17 @@ public class TeleOpPunchIt8WD extends OpMode {
 
     public void arcadesix () {
 
-        if (leftStickY1 > .1){
+        if (leftStickY1 < -.1){
             Bot.driveFoward(leftStickY1);
 
         }
-        else if (leftStickY1 < -.1) {
+        else if (leftStickY1 > .1) {
             Bot.driveBackward(-leftStickY1);
         }
-        if (leftStickX1 < -.1){
+        if (leftStickX1 > .1){
             Bot.rotateRight(leftStickX1);
         }
-        else if (leftStickX1 > .1){
+        else if (leftStickX1 < -.1){
             Bot.rotateLeft(-leftStickX1);
         }
 
@@ -356,6 +353,17 @@ public class TeleOpPunchIt8WD extends OpMode {
 //        }
 //
 //
+    }
+
+    public void arcadeDriveEight () {
+        leftMotorValue = leftStickY1 - leftStickX1;
+        rightMotorValue = leftStickY1 + leftStickX1;
+        leftMotorValue = Range.clip(leftMotorValue,-1, 1);
+        rightMotorValue = Range.clip(rightMotorValue, -1, 1);
+        Bot.leftMotorA.setPower(leftMotorValue);
+        Bot.leftMotorB.setPower(leftMotorValue);
+        Bot.rightMotorA.setPower(rightMotorValue);
+        Bot.rightMotorB.setPower(rightMotorValue);
     }
 
 

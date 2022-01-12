@@ -1,4 +1,4 @@
-package org.firstinspires.ftc.teamcode.Compitition.FreightFrenzy.Controls.mechanisms;
+package org.firstinspires.ftc.teamcode.Compitition.FreightFrenzy.mechanisms;
 
 import org.opencv.core.Core;
 import org.opencv.core.Mat;

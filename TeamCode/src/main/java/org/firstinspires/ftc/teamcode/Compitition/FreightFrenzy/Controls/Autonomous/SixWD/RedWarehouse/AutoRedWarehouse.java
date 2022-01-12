@@ -1,11 +1,13 @@
 package org.firstinspires.ftc.teamcode.Compitition.FreightFrenzy.Controls.Autonomous.SixWD.RedWarehouse;
 
 import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
+import com.qualcomm.robotcore.eventloop.opmode.Disabled;
 
 import org.firstinspires.ftc.teamcode.Compitition.FreightFrenzy.Controls.Autonomous.SixWD.BlueWarehouse.BlueWarehouse;
 import org.firstinspires.ftc.teamcode.Compitition.FreightFrenzy.Robots.SixWheelBot;
 
 @Autonomous(name = "Red Warhouse", group = "Programming Bot")
+@Disabled
 
 public class AutoRedWarehouse extends RedWarehouse {
 

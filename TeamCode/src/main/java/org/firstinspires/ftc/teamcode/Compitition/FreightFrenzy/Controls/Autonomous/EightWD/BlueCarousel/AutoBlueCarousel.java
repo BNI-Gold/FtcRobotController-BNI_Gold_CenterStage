@@ -1,17 +1,20 @@
-package org.firstinspires.ftc.teamcode.Compitition.FreightFrenzy.Controls.Autonomous.SixWD.BlueCarousel;
+package org.firstinspires.ftc.teamcode.Compitition.FreightFrenzy.Controls.Autonomous.EightWD.BlueCarousel;
 
 import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
 import com.qualcomm.robotcore.eventloop.opmode.Disabled;
 
+import org.firstinspires.ftc.teamcode.Compitition.FreightFrenzy.DriveTrains.EightWD;
 import org.firstinspires.ftc.teamcode.Compitition.FreightFrenzy.DriveTrains.SixWD;
+import org.firstinspires.ftc.teamcode.Compitition.FreightFrenzy.Robots.EightWheelBot;
 import org.firstinspires.ftc.teamcode.Compitition.FreightFrenzy.Robots.SixWheelBot;
 
-@Autonomous (name = "Blue Carousel 6WD", group = "Programming Bot")
+@Autonomous (name = "Blue Carousel 8WD", group = "Programming Bot")
 @Disabled
+
 public class AutoBlueCarousel extends BlueCarousel {
 
 
-    public SixWheelBot Bot = new SixWheelBot();
+    public EightWheelBot Bot = new EightWheelBot();
 
     public long sleepTime = 250;
 
@@ -29,14 +32,7 @@ public class AutoBlueCarousel extends BlueCarousel {
 
             blue_carousel_spinDuck(Bot);
 
-            Bot.driveForward(.5,4);
-            sleep(sleepTime);
-
-            Bot.rotateLeft(.5, 0.22);
-            sleep(sleepTime);
-
-            Bot.driveForward(1,7.5);
-            sleep(sleepTime);
+            CarouselToWarehouseBlue(Bot);
 
             idle();
             requestOpModeStop();

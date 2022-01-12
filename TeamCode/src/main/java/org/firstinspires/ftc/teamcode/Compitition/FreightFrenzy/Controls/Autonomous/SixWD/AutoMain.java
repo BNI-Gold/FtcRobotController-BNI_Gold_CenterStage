@@ -20,12 +20,7 @@ public abstract class AutoMain extends LinearOpMode {
         sleep(sleepTime);
 
         //second right/left is the pole the duck spinner is on
-        Bot.SpinDuckARight();
-        sleep(5000);
 
-        Bot.StopSpinningDuckLeft();
-        Bot.StopSpinningDuckRight();
-        sleep(sleepTime);
 
     }
 

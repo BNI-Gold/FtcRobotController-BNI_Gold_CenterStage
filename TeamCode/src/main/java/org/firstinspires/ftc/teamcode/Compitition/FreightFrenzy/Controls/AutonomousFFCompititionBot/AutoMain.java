@@ -2,7 +2,7 @@ package org.firstinspires.ftc.teamcode.Compitition.FreightFrenzy.Controls.Autono
 
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 
-import org.firstinspires.ftc.teamcode.Compitition.FreightFrenzy.Controls.mechanisms.TSELocation;
+import org.firstinspires.ftc.teamcode.Compitition.FreightFrenzy.mechanisms.TSELocation;
 import org.firstinspires.ftc.teamcode.Compitition.FreightFrenzy.Robots.EightWheelBot;
 import org.firstinspires.ftc.teamcode.Compitition.ZCompititionUltimateGoal.Controls.Autonomous.TargetZone;
 

@@ -184,13 +184,13 @@ public class TeleOpBeeLine6WD extends OpMode {
     }
 
     public void Intakecontroller () {
-        if (leftStickY2 > 0.1){
+        if (leftStickY2 > 0.1 || gamepad1.right_trigger > 0.2){
             Bot.Intake(-0.9);
         }
-        else if (leftStickY2 < -0.1){
+        else if (leftStickY2 < -0.1 || gamepad1.left_trigger > 0.2){
             Bot.Intake(0.9);
         }
-        else {
+        else if (gamepad1.b){
             Bot.Intake (0);
         }
 

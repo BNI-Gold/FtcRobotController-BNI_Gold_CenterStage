@@ -60,17 +60,15 @@
 
 package org.firstinspires.ftc.teamcode.Compitition.FreightFrenzy.Robots;
 
-import com.qualcomm.robotcore.hardware.CRServo;
 import com.qualcomm.robotcore.hardware.ColorSensor;
 import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.hardware.DcMotorEx;
-import com.qualcomm.robotcore.hardware.DcMotorSimple;
 import com.qualcomm.robotcore.hardware.HardwareMap;
 import com.qualcomm.robotcore.hardware.Servo;
 import com.qualcomm.robotcore.util.ElapsedTime;
 import org.firstinspires.ftc.robotcore.external.hardware.camera.WebcamName;
-import org.firstinspires.ftc.teamcode.Compitition.FreightFrenzy.Controls.mechanisms.CompContourPipeline;
-import org.firstinspires.ftc.teamcode.Compitition.FreightFrenzy.Controls.mechanisms.TSELocation;
+import org.firstinspires.ftc.teamcode.Compitition.FreightFrenzy.mechanisms.CompContourPipeline;
+import org.firstinspires.ftc.teamcode.Compitition.FreightFrenzy.mechanisms.TSELocation;
 import org.opencv.core.Scalar;
 import org.openftc.easyopencv.OpenCvCamera;
 import org.openftc.easyopencv.OpenCvCameraFactory;
@@ -81,9 +79,7 @@ public class EightWheelBot extends EightWD {
 
     public HardwareMap hwBot = null;
 
-
-    public CRServo DuckTurnerright = null;
-    public CRServo DuckTurnerleft = null;
+    public DcMotor DuckSpinner;
 
     public DcMotor LyftExtender;
 
@@ -91,10 +87,10 @@ public class EightWheelBot extends EightWD {
 
     // Higher value = gate higher
     // Lower value == gate goes down more.
-    public double boxHolder2up = 0.1;
+    public double boxHolder2up = 1.0;
 
-    public double boxHolder2down = 0.4;
-    public CRServo LyftServo = null;
+    public double boxHolder2down = 0.8;
+//    public CRServo LyftServo = null;
 
 // ^ !careful while changing! ^
 
@@ -132,7 +128,7 @@ public class EightWheelBot extends EightWD {
     //time to close before STOP
     // 1000 == 1 second
     public static final int CLOSE_TIME_THRESHOLD = 500;
-    public static final int OPEN_TIME_THRESHOLD = 1000;
+    public static final int OPEN_TIME_THRESHOLD = 500;
 
     ElapsedTime timer;
 
@@ -160,6 +156,8 @@ public class EightWheelBot extends EightWD {
 
         LyftExtender = hwBot.get(DcMotorEx.class, "lyft_extender");
 
+        DuckSpinner = hwBot.get(DcMotorEx.class, "duck_spinner");
+
         leftMotorA = hwBot.get(DcMotorEx.class, "left_motor_a");
         leftMotorB = hwBot.get(DcMotorEx.class, "left_motor_b");
         rightMotorA = hwBot.get(DcMotorEx.class, "right_motor_a");
@@ -169,10 +167,12 @@ public class EightWheelBot extends EightWD {
 
         LyftExtender.setDirection(DcMotorEx.Direction.FORWARD);
 
-        leftMotorA.setDirection(DcMotorEx.Direction.FORWARD);
-        leftMotorB.setDirection(DcMotorEx.Direction.FORWARD);
-        rightMotorA.setDirection(DcMotorEx.Direction.REVERSE);
-        rightMotorB.setDirection(DcMotorEx.Direction.REVERSE);
+        DuckSpinner.setDirection(DcMotorEx.Direction.FORWARD);
+
+        leftMotorA.setDirection(DcMotorEx.Direction.REVERSE);
+        leftMotorB.setDirection(DcMotorEx.Direction.REVERSE);
+        rightMotorA.setDirection(DcMotorEx.Direction.FORWARD);
+        rightMotorB.setDirection(DcMotorEx.Direction.FORWARD);
 
 //        intakeLyft = hwBot.get(DcMotorEx.class,"Intake_Lyft");
         intake = hardwareMap.dcMotor.get("intake");
@@ -196,6 +196,8 @@ public class EightWheelBot extends EightWD {
 
         LyftExtender.setZeroPowerBehavior(DcMotorEx.ZeroPowerBehavior.BRAKE);
 
+        DuckSpinner.setZeroPowerBehavior(DcMotorEx.ZeroPowerBehavior.BRAKE);
+
         leftMotorA.setZeroPowerBehavior(DcMotorEx.ZeroPowerBehavior.BRAKE);
         rightMotorA.setZeroPowerBehavior(DcMotorEx.ZeroPowerBehavior.BRAKE);
         leftMotorB.setZeroPowerBehavior(DcMotorEx.ZeroPowerBehavior.BRAKE);
@@ -204,19 +206,15 @@ public class EightWheelBot extends EightWD {
         intake.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
 //        intakeLyft.setZeroPowerBehavior(DcMotorEx.ZeroPowerBehavior.BRAKE);
 
-        DuckTurnerleft = hardwareMap.crservo.get("duck_turner_left");
-        DuckTurnerleft.setDirection(DcMotorSimple.Direction.REVERSE);
-        DuckTurnerleft.setPower(0);
+
 
         boxHolder2 = hwBot.get(Servo.class, "box_holder");
         boxHolder2.setPosition(boxHolder2up);
 
-        DuckTurnerright = hardwareMap.crservo.get("duck_turner_right");
-        DuckTurnerright.setDirection(DcMotorSimple.Direction.REVERSE);
-        DuckTurnerright.setPower(0);
 
 
-        senseLyftColor = hardwareMap.get(ColorSensor.class, "sensor_color_distance_1");
+
+      // senseLyftColor = hardwareMap.get(ColorSensor.class, "sensor_color_distance_1");
 
         timer = new ElapsedTime();
 
@@ -229,44 +227,36 @@ public class EightWheelBot extends EightWD {
 
     public void setboxHolder2down() {
         boxHolder2.setPosition(boxHolder2down);
+
     }
 
-
-    public void SpinDuckBRight() {
-        DuckTurnerleft.setPower(-1);
+    public void duckspinclockwise() {
+        DuckSpinner.setPower(.32);
     }
 
-    public void SpinDuckBLeft() {
-        DuckTurnerleft.setPower(1);
+    public void duckspincounterclockwise() {
+        DuckSpinner.setPower(-.32);
     }
 
-    public void SpinDuckALeft() {
-        DuckTurnerright.setPower(1);
+    public void duckspinstop() {
+        DuckSpinner.setPower(0);
     }
 
-    public void SpinDuckARight() {
-        DuckTurnerright.setPower(-1);
-    }
-
-    public void StopSpinningDuckRight() {
-        DuckTurnerright.setPower(0);
-    }
-
-    public void StopSpinningDuckLeft() {
-        DuckTurnerleft.setPower(0);
+    public void lyftextenderstop() {
+        LyftExtender.setPower(0);
     }
 
     public void Intake(double speed) {
         intake.setPower(speed);
     }
 
-    public void LyftUp() {
-        LyftServo.setPower(1);
-    }
-
-    public void LyftDown() {
-        LyftServo.setPower(1);
-    }
+//    public void LyftUp() {
+//        LyftServo.setPower(1);
+//    }
+//
+//    public void LyftDown() {
+//        LyftServo.setPower(1);
+//    }
 
     public void Lyft(double speed) {
         intake.setPower(speed);
@@ -301,10 +291,10 @@ public class EightWheelBot extends EightWD {
 //                    hsvValues);
             power = powerControl;
             LyftExtender.setPower(power);
-            linearOp.telemetry.addLine("OPENING EXTENDER");
-            linearOp.telemetry.addData("Hue", hsvValues[0]);
-            linearOp.telemetry.addData("TIME (ms)", timer.milliseconds());
-            linearOp.telemetry.update();
+//            linearOp.telemetry.addLine("OPENING EXTENDER");
+//            linearOp.telemetry.addData("Hue", hsvValues[0]);
+//            linearOp.telemetry.addData("TIME (ms)", timer.milliseconds());
+//            linearOp.telemetry.update();
         }
         LyftExtender.setPower(0);
     }
@@ -320,10 +310,10 @@ public class EightWheelBot extends EightWD {
 //                    hsvValues);
             power = -powerControl;
             LyftExtender.setPower(power);
-            linearOp.telemetry.addLine("CLOSING EXTENDER");
-            linearOp.telemetry.addData("Hue", hsvValues[0]);
-            linearOp.telemetry.addData("TIME (ms)", timer.milliseconds());
-            linearOp.telemetry.update();
+//            linearOp.telemetry.addLine("CLOSING EXTENDER");
+//            linearOp.telemetry.addData("Hue", hsvValues[0]);
+//            linearOp.telemetry.addData("TIME (ms)", timer.milliseconds());
+//            linearOp.telemetry.update();
         }
         LyftExtender.setPower(0);
     }
@@ -359,7 +349,7 @@ public class EightWheelBot extends EightWD {
         linearOp.telemetry.addData("Rect Midpoint X", myPipeline.getRectMidpointX());
         linearOp.telemetry.addData("Rect Midpoint Y", myPipeline.getRectMidpointY());
         linearOp.telemetry.update();
-        //detection
+        //detection of TSE/duck
         if (myPipeline.getRectArea() > 2000) {      //values will probably need to be changed
             if (myPipeline.getRectMidpointX() > 400) {
                  barcode = TSELocation.barcode1;

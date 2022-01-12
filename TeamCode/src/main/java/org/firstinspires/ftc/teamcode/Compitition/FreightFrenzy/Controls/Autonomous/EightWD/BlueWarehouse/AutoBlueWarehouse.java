@@ -1,16 +1,15 @@
-package org.firstinspires.ftc.teamcode.Compitition.FreightFrenzy.Controls.Autonomous.SixWD.BlueWarehouse;
+package org.firstinspires.ftc.teamcode.Compitition.FreightFrenzy.Controls.Autonomous.EightWD.BlueWarehouse;
 
 import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
 import com.qualcomm.robotcore.eventloop.opmode.Disabled;
 
-import org.firstinspires.ftc.teamcode.Compitition.FreightFrenzy.Robots.SixWheelBot;
+import org.firstinspires.ftc.teamcode.Compitition.FreightFrenzy.Robots.EightWheelBot;
 
-@Autonomous(name = "Blue Warhouse 6WD", group = "Programming Bot")
-@Disabled
+@Autonomous(name = "Blue Shipping Hub-Warehouse 8WD", group = "Programming Bot")
 
 public class AutoBlueWarehouse extends BlueWarehouse {
 
-    public SixWheelBot Bot = new SixWheelBot();
+    public EightWheelBot Bot = new EightWheelBot();
 
     public long sleepTime = 250;
 
@@ -20,20 +19,15 @@ public class AutoBlueWarehouse extends BlueWarehouse {
 //        Bot.initCamera();
         Bot.setLinearOp(this);
 
-
-
         waitForStart();
 
         while (opModeIsActive()) {
 
-            Bot.driveForward(.5,2.4);
-            sleep(sleepTime);
+//            driveShippingHub(Bot);
+//
+//            Shipping_Hub_Score(Bot);
 
-            Bot.rotateLeft(.5,1.5);
-            sleep(sleepTime);
-
-            Bot.driveForward(.5,6.5);
-            sleep(sleepTime);
+//            DriveToWarehouse(Bot);
 
             idle();
             requestOpModeStop();

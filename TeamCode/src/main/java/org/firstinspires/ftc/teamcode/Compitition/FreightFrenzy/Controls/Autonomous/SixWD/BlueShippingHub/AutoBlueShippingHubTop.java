@@ -4,11 +4,13 @@ package org.firstinspires.ftc.teamcode.Compitition.FreightFrenzy.Controls.Autono
 import android.graphics.Color;
 
 import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
+import com.qualcomm.robotcore.eventloop.opmode.Disabled;
 
 import org.firstinspires.ftc.teamcode.Compitition.FreightFrenzy.Controls.Autonomous.SixWD.BlueCarousel.BlueCarousel;
 import org.firstinspires.ftc.teamcode.Compitition.FreightFrenzy.Robots.SixWheelBot;
 
-@Autonomous(name = "Blue Carousel Shipping Hub", group = "Programming Bot")
+@Autonomous(name = "Blue Carousel Shipping Hub 6WD", group = "Programming Bot")
+@Disabled
 
 public class AutoBlueShippingHubTop extends BlueShippingHubTop {
 

@@ -1,11 +1,13 @@
 package org.firstinspires.ftc.teamcode.Compitition.FreightFrenzy.Controls.Autonomous.SixWD.RedCarousel;
 
 import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
+import com.qualcomm.robotcore.eventloop.opmode.Disabled;
 
 import org.firstinspires.ftc.teamcode.Compitition.FreightFrenzy.Controls.Autonomous.SixWD.BlueCarousel.BlueCarousel;
 import org.firstinspires.ftc.teamcode.Compitition.FreightFrenzy.Robots.SixWheelBot;
 
 @Autonomous(name = "Red Carousel", group = "Programming Bot")
+@Disabled
 
 public class AutoRedCarousel extends RedCarousel {
 
