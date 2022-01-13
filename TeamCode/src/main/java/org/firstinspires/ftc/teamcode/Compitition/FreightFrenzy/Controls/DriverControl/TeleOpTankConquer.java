@@ -74,6 +74,7 @@ public class TeleOpTankConquer extends OpMode {
 
         LyftExtender();
 
+        telemtryOutput();
 
     }
 
@@ -142,6 +143,17 @@ public class TeleOpTankConquer extends OpMode {
     }
 
 
+    public void BoxHolderControl () {
+        if (gamepad2.a == true){
+            Bot.setBoxHolder_Down();
+        }
+        if (gamepad2.y == true){
+            Bot.setBoxHolder_Up();
+        }
+
+    }
+
+
     public void telemtryOutput () {
         telemetry.addData("Tank Drive? (x/b to swap) ", tankDrive);
 
@@ -150,6 +162,8 @@ public class TeleOpTankConquer extends OpMode {
 
 //        telemetry.addData("left stick value Y 1: ", leftStickY1);
 //        telemetry.addData("right stick value Y 1: ", rightStickY1);
+telemetry.addData("left motor ticks ", Bot.leftMotorA.getCurrentPosition());
+telemetry.addData("right motor ticks", Bot.rightMotorA.getCurrentPosition());
 
         telemetry.addData("power output Left A:",Bot.leftMotorA.getPower());
         telemetry.addData("power output Left B:",Bot.leftMotorB.getPower());
