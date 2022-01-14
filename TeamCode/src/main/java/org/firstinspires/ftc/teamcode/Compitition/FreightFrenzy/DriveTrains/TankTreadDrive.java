@@ -4,6 +4,7 @@ import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.hardware.DcMotorEx;
 import com.qualcomm.robotcore.hardware.Gamepad;
+import com.qualcomm.robotcore.util.ElapsedTime;
 
 public class TankTreadDrive {
 
@@ -15,6 +16,10 @@ public class TankTreadDrive {
     public DcMotorEx leftMotorA, leftMotorB, rightMotorA, rightMotorB;
 
     public double encoderAvg;
+
+    ElapsedTime timer;
+
+
 
     public void setLinearOp(LinearOpMode linearOp){
 
@@ -94,6 +99,37 @@ public class TankTreadDrive {
 //            linearOp.telemetry.update();
 //            linearOp.sleep(1000);
             while (rightMotorA.getCurrentPosition() > -ticks && linearOp.opModeIsActive()) {
+                driveBackward(speed);
+//                linearOp.telemetry.addData("TARGET TICKS (in while): ", ticks);
+//                linearOp.telemetry.addData("CURRENT TICKS (left motor): ", leftMotorA.getCurrentPosition());
+//                linearOp.telemetry.addData("CURRENT TICKS (right motor): ", rightMotorA.getCurrentPosition());
+//                linearOp.telemetry.update();
+
+            }
+            stopMotors();
+//            linearOp.telemetry.addData("TARGET TICKS (stop motors): ", ticks);
+//            linearOp.telemetry.addData("CURRENT TICKS (left motor): ", leftMotorA.getCurrentPosition());
+//            linearOp.telemetry.addData("CURRENT TICKS (right motor): ", rightMotorA.getCurrentPosition());
+//            linearOp.telemetry.update();
+//            linearOp.sleep(2000);
+
+        }
+    }
+
+    public void driveBackward (double speed, double rotations, double timeThreshold) {
+        if (linearOp.opModeIsActive()) {
+            timer = new ElapsedTime();
+            timer.reset();
+            double ticks = rotations * TICKS_PER_ROTATION;
+            setMotorRunModes(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
+            setMotorRunModes(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
+//            linearOp.telemetry.addData("TARGET TICKS: ", ticks);
+//            linearOp.telemetry.update();
+//            linearOp.sleep(1000);
+            while (rightMotorA.getCurrentPosition() > -ticks && timer.milliseconds() <= timeThreshold && linearOp.opModeIsActive()) {
+                linearOp.telemetry.addData("current timer (ms): ", timer.milliseconds());
+                linearOp.telemetry.addData("threshold time: ", timeThreshold);
+                linearOp.telemetry.update();
                 driveBackward(speed);
 //                linearOp.telemetry.addData("TARGET TICKS (in while): ", ticks);
 //                linearOp.telemetry.addData("CURRENT TICKS (left motor): ", leftMotorA.getCurrentPosition());

@@ -15,16 +15,18 @@ public class TankBot extends TankTreadDrive {
     public DcMotor Lyft;
     public DcMotor intake;
 
-    public double LyftExtendPower = 0.6;
-    public double LyftRetractPower = -0.6;
+    public double duckSpinnerPower = 0.32;
+
+    public double LyftExtendPower = 1.0;
+    public double LyftRetractPower = -1.0;
 
     public Servo boxHolder = null;
 
     // Higher value = gate higher
     // Lower value == gate goes down more.
-    public double boxHolder_Up = 1.0;
-
-    public double boxHolder_Down = 0.8;
+    public double boxHolder_Up = .37;
+    public double boxHolder_Down = 0.46;
+    public double boxHolder_Release = 0.51;
 //    public CRServo LyftServo = null;
 
     public void initRobot(HardwareMap hardwareMap) {
@@ -57,6 +59,18 @@ public class TankBot extends TankTreadDrive {
 
     }
 
+    public void duckspinclockwise() {
+        DuckSpinner.setPower(duckSpinnerPower);
+    }
+
+    public void duckspincounterclockwise() {
+        DuckSpinner.setPower(-duckSpinnerPower);
+    }
+
+    public void duckspinstop() {
+        DuckSpinner.setPower(0);
+    }
+
     public void Intake(double speed) {
         intake.setPower(speed);
     }
@@ -80,6 +94,10 @@ public class TankBot extends TankTreadDrive {
 
     public void setBoxHolder_Down() {
         boxHolder.setPosition(boxHolder_Down);
+    }
+
+    public void setBoxHolder_Release () {
+        boxHolder.setPosition(boxHolder_Release);
     }
 
 }

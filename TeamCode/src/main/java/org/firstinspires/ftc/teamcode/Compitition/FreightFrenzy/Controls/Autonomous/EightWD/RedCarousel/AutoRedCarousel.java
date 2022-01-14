@@ -7,7 +7,7 @@ import org.firstinspires.ftc.teamcode.Compitition.FreightFrenzy.Robots.EightWhee
 
 @Autonomous(name = "Red Carousel 8WD", group = "Programming Bot")
 
-
+@Disabled
 
 public class AutoRedCarousel extends RedCarousel {
 

@@ -6,7 +6,7 @@ import com.qualcomm.robotcore.eventloop.opmode.Disabled;
 import org.firstinspires.ftc.teamcode.Compitition.FreightFrenzy.Robots.EightWheelBot;
 
 @Autonomous(name = "Blue Shipping Hub-Warehouse 8WD", group = "Programming Bot")
-
+@Disabled
 public class AutoBlueWarehouse extends BlueWarehouse {
 
     public EightWheelBot Bot = new EightWheelBot();

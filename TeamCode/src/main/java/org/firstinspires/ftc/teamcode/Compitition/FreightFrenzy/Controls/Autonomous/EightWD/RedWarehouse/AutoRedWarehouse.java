@@ -7,7 +7,7 @@ import org.firstinspires.ftc.teamcode.Compitition.FreightFrenzy.Robots.EightWhee
 
 @Autonomous(name = "Red Warehouse 8WD", group = "Programming Bot")
 
-
+@Disabled
 public class AutoRedWarehouse extends RedWarehouse {
 
     public EightWheelBot Bot = new EightWheelBot();

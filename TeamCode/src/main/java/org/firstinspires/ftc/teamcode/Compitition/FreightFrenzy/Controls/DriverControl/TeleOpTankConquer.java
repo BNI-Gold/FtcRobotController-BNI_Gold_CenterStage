@@ -69,10 +69,13 @@ public class TeleOpTankConquer extends OpMode {
             arcadeDrive();
         }
 
+        DuckSpinner();
 
         Intakecontroller();
 
         LyftExtender();
+
+        BoxHolderControl();
 
         telemtryOutput();
 
@@ -115,7 +118,17 @@ public class TeleOpTankConquer extends OpMode {
         Bot.rightMotorB.setPower(rightMotorValue);
     }
 
-
+    public void DuckSpinner () {
+        if (gamepad2.dpad_left == true) {
+            Bot.duckspincounterclockwise();
+        }
+        else if (gamepad2.dpad_right == true) {
+            Bot.duckspinclockwise();
+        }
+        else {
+            Bot.duckspinstop();
+        }
+    }
 
     public void Intakecontroller () {
         if (leftStickY2 > 0.1){
@@ -149,6 +162,9 @@ public class TeleOpTankConquer extends OpMode {
         }
         if (gamepad2.y == true){
             Bot.setBoxHolder_Up();
+        }
+        if (gamepad2.dpad_down) {
+            Bot.setBoxHolder_Release();
         }
 
     }
