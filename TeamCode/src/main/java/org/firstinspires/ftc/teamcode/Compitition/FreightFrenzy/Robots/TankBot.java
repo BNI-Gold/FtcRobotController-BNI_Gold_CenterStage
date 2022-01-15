@@ -4,6 +4,7 @@ import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.hardware.DcMotorEx;
 import com.qualcomm.robotcore.hardware.HardwareMap;
 import com.qualcomm.robotcore.hardware.Servo;
+import com.qualcomm.robotcore.util.ElapsedTime;
 
 import org.firstinspires.ftc.robotcore.external.hardware.camera.WebcamName;
 import org.firstinspires.ftc.teamcode.Compitition.FreightFrenzy.DriveTrains.TankTreadDrive;
@@ -13,6 +14,7 @@ import org.opencv.core.Scalar;
 import org.openftc.easyopencv.OpenCvCamera;
 import org.openftc.easyopencv.OpenCvCameraFactory;
 import org.openftc.easyopencv.OpenCvCameraRotation;
+import org.xml.sax.helpers.NamespaceSupport;
 
 public class TankBot extends TankTreadDrive {
 
@@ -22,7 +24,7 @@ public class TankBot extends TankTreadDrive {
     public DcMotor Lyft;
     public DcMotor intake;
 
-    public double duckSpinnerPower = 0.32;
+    public double duckSpinnerPower = 0.35;
 
     public double LyftExtendPower = 1.0;
     public double LyftRetractPower = -1.0;
@@ -51,6 +53,8 @@ public class TankBot extends TankTreadDrive {
 
     public void initRobot(HardwareMap hardwareMap) {
         hwBot = hardwareMap;
+
+        timer = new ElapsedTime();
 
         leftMotorA = hwBot.get(DcMotorEx.class, "left_motor_a");
         leftMotorB = hwBot.get(DcMotorEx.class, "left_motor_b");
@@ -121,6 +125,16 @@ public class TankBot extends TankTreadDrive {
     }
 
 
+    public static final int CLOSE_TIME_THRESHOLD = 500;
+    public static final int OPEN_TIME_THRESHOLD = 1000;
+
+    double power;
+    double powerControl = 0.3 ;
+
+    ElapsedTime timer;
+
+
+
     //emma
     public void initWebcam() {
         //OPENCV WEBCAM
@@ -163,6 +177,45 @@ public class TankBot extends TankTreadDrive {
                 barcode = TSELocation.barcode3;
             }
         }
+    }
+
+
+    public void senseLyftExtend () {
+        timer.reset();
+        //was in the compound conditional
+//        hsvValues[0] < BLUE_THRESHOLD_HUE &&
+        while (timer.milliseconds() < CLOSE_TIME_THRESHOLD && linearOp.opModeIsActive()) {
+//            Color.RGBToHSV((int) (senseLyftColor.red() * SCALE_FACTOR),
+//                    (int) (senseLyftColor.green() * SCALE_FACTOR),
+//                    (int) (senseLyftColor.blue() * SCALE_FACTOR),
+//                    hsvValues);
+            LyftExtend();
+//            linearOp.telemetry.addLine("CLOSING EXTENDER");
+//            linearOp.telemetry.addData("Hue", hsvValues[0]);
+//            linearOp.telemetry.addData("TIME (ms)", timer.milliseconds());
+//            linearOp.telemetry.update();
+        }
+        Lyft.setPower(0);
+
+
+    }
+
+    public void senseLyftColapse () {
+        timer.reset();
+        //was in the compound conditional
+//        hsvValues[0] < BLUE_THRESHOLD_HUE &&
+        while (timer.milliseconds() < CLOSE_TIME_THRESHOLD && linearOp.opModeIsActive()) {
+//            Color.RGBToHSV((int) (senseLyftColor.red() * SCALE_FACTOR),
+//                    (int) (senseLyftColor.green() * SCALE_FACTOR),
+//                    (int) (senseLyftColor.blue() * SCALE_FACTOR),
+//                    hsvValues);
+            LyftRetract();
+//            linearOp.telemetry.addLine("CLOSING EXTENDER");
+//            linearOp.telemetry.addData("Hue", hsvValues[0]);
+//            linearOp.telemetry.addData("TIME (ms)", timer.milliseconds());
+//            linearOp.telemetry.update();
+        }
+        Lyft.setPower(0);
     }
 
 }

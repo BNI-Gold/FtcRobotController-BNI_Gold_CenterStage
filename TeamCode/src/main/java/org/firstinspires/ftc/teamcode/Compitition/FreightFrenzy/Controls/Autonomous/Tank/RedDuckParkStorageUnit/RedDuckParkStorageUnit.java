@@ -1,18 +1,18 @@
-package org.firstinspires.ftc.teamcode.Compitition.FreightFrenzy.Controls.Autonomous.Tank.BlueDuckParkStorageUnit;
+package org.firstinspires.ftc.teamcode.Compitition.FreightFrenzy.Controls.Autonomous.Tank.RedDuckParkStorageUnit;
 
 import org.firstinspires.ftc.teamcode.Compitition.FreightFrenzy.Controls.Autonomous.Tank.AutoMain;
 import org.firstinspires.ftc.teamcode.Compitition.FreightFrenzy.Robots.TankBot;
 
-public abstract class BlueDuckParkStorageUnit extends AutoMain {
+public abstract class RedDuckParkStorageUnit extends AutoMain {
 
     public void StartToDuckSpinner (TankBot Bot) {
         Bot.driveForward(0.6, 2.6);
         sleep(500);
-        Bot.rotateLeft(.5, 1.60);
+        Bot.rotateRight(.5, 1.60);
         sleep(sleepTime);
         Bot.driveBackward(0.6, 2.25);
         sleep(sleepTime);
-        Bot.rotateRight(.5, 1);
+        Bot.rotateLeft(.5, 1);
         sleep(sleepTime);
         Bot.driveBackward(0.4, 0.7, 2000);
         sleep(sleepTime);
@@ -25,11 +25,11 @@ public abstract class BlueDuckParkStorageUnit extends AutoMain {
     public void DuckSpinnerToStorageUnit (TankBot Bot) {
         Bot.driveForward(0.6, 0.2);
         sleep(sleepTime);
-        Bot.rotateRight(.5, .9);
+        Bot.rotateLeft(0.5, 0.9);
         sleep(sleepTime);
         Bot.driveForward(0.6, 2.2);
         sleep(sleepTime);
-//        Bot.rotateLeft(.5, .1);
+//        Bot.rotateRight(0.5, 0.1);
 //        sleep(sleepTime);
         Bot.driveForward(0.6, 2);
         sleep(sleepTime);

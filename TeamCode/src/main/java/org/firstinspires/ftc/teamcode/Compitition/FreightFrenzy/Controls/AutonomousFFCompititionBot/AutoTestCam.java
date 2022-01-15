@@ -3,11 +3,12 @@ package org.firstinspires.ftc.teamcode.Compitition.FreightFrenzy.Controls.Autono
 import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
 
 import org.firstinspires.ftc.teamcode.Compitition.FreightFrenzy.Robots.EightWheelBot;
+import org.firstinspires.ftc.teamcode.Compitition.FreightFrenzy.Robots.TankBot;
 
 @Autonomous(name = "Auto Cam Test", group = "Programming Bot")
 public class AutoTestCam extends AutoMain {
 
-    EightWheelBot Bot = new EightWheelBot();
+    TankBot Bot = new TankBot();
     @Override
     public void runOpMode() throws InterruptedException {
         Bot.initRobot(hardwareMap);

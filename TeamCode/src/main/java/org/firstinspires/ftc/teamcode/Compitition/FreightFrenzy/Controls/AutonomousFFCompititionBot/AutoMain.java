@@ -2,6 +2,7 @@ package org.firstinspires.ftc.teamcode.Compitition.FreightFrenzy.Controls.Autono
 
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 
+import org.firstinspires.ftc.teamcode.Compitition.FreightFrenzy.Robots.TankBot;
 import org.firstinspires.ftc.teamcode.Compitition.FreightFrenzy.mechanisms.TSELocation;
 import org.firstinspires.ftc.teamcode.Compitition.FreightFrenzy.Robots.EightWheelBot;
 import org.firstinspires.ftc.teamcode.Compitition.ZCompititionUltimateGoal.Controls.Autonomous.TargetZone;
@@ -16,7 +17,7 @@ public abstract class AutoMain extends LinearOpMode {
     //CAMERA METHODS - emma
 
 
-    public void collectTSE (EightWheelBot Bot) {
+    public void collectTSE (TankBot Bot) {
         switch (tselocation) {
             case barcode1:
                 telemetry.addLine("barcode1");
@@ -26,6 +27,9 @@ public abstract class AutoMain extends LinearOpMode {
                 telemetry.addLine("barcode3");
         }
     }
+
+
+
 
 
 //    public void DriveForwardOffWall (EightWheelBot) {

@@ -1,10 +1,10 @@
-package org.firstinspires.ftc.teamcode.Compitition.FreightFrenzy.Controls.Autonomous.Tank.BlueShippingHubPark;
+package org.firstinspires.ftc.teamcode.Compitition.FreightFrenzy.Controls.Autonomous.Tank.RedShippingHubPark;
 
 import org.firstinspires.ftc.teamcode.Compitition.FreightFrenzy.Controls.Autonomous.Tank.AutoMain;
 import org.firstinspires.ftc.teamcode.Compitition.FreightFrenzy.Robots.TankBot;
 import org.firstinspires.ftc.teamcode.Compitition.FreightFrenzy.mechanisms.TSELocation;
 
-public abstract class BlueShippingHubPark extends AutoMain {
+public abstract class RedShippingHubPark extends AutoMain {
 
     public void DriveToShippingHub (TankBot Bot, TSELocation barcode) {
 
@@ -16,19 +16,19 @@ public abstract class BlueShippingHubPark extends AutoMain {
 
         Bot.driveForward(1, 2);
         sleep(sleepTime);
-        Bot.rotateLeft(1, 1);
+        Bot.rotateRight(1, 1);
         sleep(sleepTime);
         Bot.driveBackward(1, 3);
         sleep(sleepTime);
-        Bot.duckspinclockwise();
+        Bot.duckspincounterclockwise();
         sleep(sleepTime);
         Bot.driveForward(1, 2);
         sleep(sleepTime);
-        Bot.rotateLeft(1, 0.5);
+        Bot.rotateRight(1, 0.5);
         sleep(sleepTime);
         Bot.driveForward(1, 3);
         sleep(sleepTime);
-        Bot.rotateRight(1, 1);
+        Bot.rotateLeft(1, 1);
         sleep(sleepTime);
         Bot.driveForward(1, 0.5);
         sleep(sleepTime);
@@ -42,10 +42,11 @@ public abstract class BlueShippingHubPark extends AutoMain {
         sleep(500);
         Bot.driveBackward(1, 2);
         sleep(sleepTime);
-        Bot.rotateLeft(1, 1);
+        Bot.rotateRight(1, 1);
         sleep(sleepTime);
         Bot.driveForward(1, 5);
         sleep(sleepTime);
+
 
     }
 
