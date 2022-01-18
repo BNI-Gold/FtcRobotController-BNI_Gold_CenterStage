@@ -5,7 +5,7 @@ import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
 import org.firstinspires.ftc.teamcode.Compitition.FreightFrenzy.Robots.TankBot;
 import org.firstinspires.ftc.teamcode.Compitition.FreightFrenzy.mechanisms.TSELocation;
 
-@Autonomous (name = "Red: Shipping Hub: Warehouse Park", group = "Red")
+@Autonomous (name = "(DO NOT RUN) Red: Shipping Hub: Warehouse Park", group = "Red")
 public class AutoRedShippingHubPark extends RedShippingHubPark {
     public TankBot Bot =  new TankBot();
 
@@ -14,7 +14,7 @@ public class AutoRedShippingHubPark extends RedShippingHubPark {
     @Override
     public void runOpMode() throws InterruptedException {
         Bot.initRobot(hardwareMap);
-        Bot.initWebcam();
+//        Bot.initWebcam();
         Bot.setLinearOp(this);
 
         telemetry.addLine("WAITING FOR START >");

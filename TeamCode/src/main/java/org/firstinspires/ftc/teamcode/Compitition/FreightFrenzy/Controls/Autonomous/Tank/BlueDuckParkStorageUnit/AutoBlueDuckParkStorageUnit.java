@@ -3,7 +3,7 @@ package org.firstinspires.ftc.teamcode.Compitition.FreightFrenzy.Controls.Autono
 import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
 
 import org.firstinspires.ftc.teamcode.Compitition.FreightFrenzy.Robots.TankBot;
-@Autonomous (name = "Tank: Blue Duck: Park Storage", group = "BLUE")
+@Autonomous (name = "Tank: Blue Duck-Depot", group = "BLUE")
 public class AutoBlueDuckParkStorageUnit extends BlueDuckParkStorageUnit {
 
 

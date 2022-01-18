@@ -12,7 +12,7 @@ public class AutoTestCam extends AutoMain {
     @Override
     public void runOpMode() throws InterruptedException {
         Bot.initRobot(hardwareMap);
-        Bot.initWebcam();
+//        Bot.initWebcam();
         Bot.setLinearOp(this);
 
         waitForStart();

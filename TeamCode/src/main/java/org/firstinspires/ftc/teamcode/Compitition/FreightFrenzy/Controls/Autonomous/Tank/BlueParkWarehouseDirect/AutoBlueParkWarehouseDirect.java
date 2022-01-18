@@ -15,7 +15,7 @@ public class AutoBlueParkWarehouseDirect extends AutoMain {
     @Override
     public void runOpMode() throws InterruptedException {
         Bot.initRobot(hardwareMap);
-        Bot.initWebcam();
+//        Bot.initWebcam();
         Bot.setLinearOp(this);
 
         telemetry.addLine("WAITING FOR START >");
@@ -25,11 +25,11 @@ public class AutoBlueParkWarehouseDirect extends AutoMain {
 
         while (opModeIsActive()) {
 
-            Bot.driveForward(1, 1);
+            Bot.driveForward(1, 4);
             sleep(sleepTime);
-            Bot.rotateLeft(1, 1.5);
+            Bot.rotateRight(1, 1.5);
             sleep(sleepTime);
-            Bot.driveForward(1, 5);
+            Bot.driveBackward(1, 8.5);
             sleep(sleepTime);
 
             requestOpModeStop();

@@ -12,7 +12,7 @@ public abstract class BlueDuckParkStorageUnit extends AutoMain {
         sleep(sleepTime);
         Bot.driveBackward(0.6, 2.25);
         sleep(sleepTime);
-        Bot.rotateRight(.5, 1);
+        Bot.rotateRight(.5, 0.6);
         sleep(sleepTime);
         Bot.driveBackward(0.4, 0.7, 2000);
         sleep(sleepTime);
@@ -25,13 +25,13 @@ public abstract class BlueDuckParkStorageUnit extends AutoMain {
     public void DuckSpinnerToStorageUnit (TankBot Bot) {
         Bot.driveForward(0.6, 0.2);
         sleep(sleepTime);
-        Bot.rotateRight(.5, .9);
+        Bot.rotateRight(.5, .7);
         sleep(sleepTime);
-        Bot.driveForward(0.6, 2.2);
+        Bot.driveForward(0.6, 2.5);
         sleep(sleepTime);
 //        Bot.rotateLeft(.5, .1);
 //        sleep(sleepTime);
-        Bot.driveForward(0.6, 2);
+        Bot.driveForward(0.6, 2.4);
         sleep(sleepTime);
     }
 }
