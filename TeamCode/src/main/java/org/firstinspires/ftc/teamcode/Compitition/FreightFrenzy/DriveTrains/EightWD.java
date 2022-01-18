@@ -356,7 +356,6 @@ public class EightWD {
             double speed = PIDControl(100, encoderAverage);     //100% power
             setMotorRunModes(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
             setMotorRunModes(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
-
             while (encoderAverage < ticks && linearOp.opModeIsActive()) {
                 driveBackward(speed);
             }
