@@ -1,5 +1,7 @@
 package org.firstinspires.ftc.teamcode.Compitition.FreightFrenzy.Robots;
 
+import com.qualcomm.hardware.bosch.BNO055IMU;
+import com.qualcomm.hardware.bosch.JustLoggingAccelerationIntegrator;
 import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.hardware.DcMotorEx;
 import com.qualcomm.robotcore.hardware.HardwareMap;
@@ -7,6 +9,11 @@ import com.qualcomm.robotcore.hardware.Servo;
 import com.qualcomm.robotcore.util.ElapsedTime;
 
 import org.firstinspires.ftc.robotcore.external.hardware.camera.WebcamName;
+import org.firstinspires.ftc.robotcore.external.navigation.Acceleration;
+import org.firstinspires.ftc.robotcore.external.navigation.AngleUnit;
+import org.firstinspires.ftc.robotcore.external.navigation.AxesOrder;
+import org.firstinspires.ftc.robotcore.external.navigation.AxesReference;
+import org.firstinspires.ftc.robotcore.external.navigation.Orientation;
 import org.firstinspires.ftc.teamcode.Compitition.FreightFrenzy.DriveTrains.TankTreadDrive;
 import org.firstinspires.ftc.teamcode.Compitition.FreightFrenzy.mechanisms.CompContourPipeline;
 import org.firstinspires.ftc.teamcode.Compitition.FreightFrenzy.mechanisms.TSELocation;
@@ -50,6 +57,14 @@ public class TankBot extends TankTreadDrive {
     //enum / detecting barcode
     TSELocation barcode;
 
+    //Gyro Objects, Hardware & Variables
+    public BNO055IMU imu;
+    public Orientation angles;
+    public Acceleration gravity;
+    public final double SPEED = .3;
+    public final double TOLERANCE = .4;
+
+
 
     public void initRobot(HardwareMap hardwareMap) {
         hwBot = hardwareMap;
@@ -80,6 +95,18 @@ public class TankBot extends TankTreadDrive {
 
         boxHolder = hwBot.get(Servo.class, "box_holder");
         setBoxHolder_Up();
+
+        // Define and Initialize Gyro
+        BNO055IMU.Parameters parametersimu = new BNO055IMU.Parameters();
+        parametersimu.angleUnit = BNO055IMU.AngleUnit.DEGREES;
+        parametersimu.accelUnit = BNO055IMU.AccelUnit.METERS_PERSEC_PERSEC;
+        parametersimu.calibrationDataFile = "BNO055IMUCalibration.json"; // see the calibration sample opmode
+        parametersimu.loggingEnabled = true;
+        parametersimu.loggingTag = "IMU";
+        parametersimu.accelerationIntegrationAlgorithm = new JustLoggingAccelerationIntegrator();
+
+        imu = hwBot.get(BNO055IMU.class, "imu");
+        imu.initialize(parametersimu);
 
     }
 
@@ -217,5 +244,36 @@ public class TankBot extends TankTreadDrive {
         }
         Lyft.setPower(0);
     }
+
+
+    // ***********  Robot Gyro Controls and Gyro Correction Methods
+
+    public void gyroCorrection (double speed, double angle) {
+
+        angles = imu.getAngularOrientation(AxesReference.INTRINSIC, AxesOrder.ZYX, AngleUnit.DEGREES);
+
+        if (angles.firstAngle >= angle + TOLERANCE) {
+            while (angles.firstAngle >=  angle + TOLERANCE && linearOp.opModeIsActive()) {
+                rotateRight(speed);
+                angles = imu.getAngularOrientation(AxesReference.INTRINSIC, AxesOrder.ZYX, AngleUnit.DEGREES);
+            }
+        }
+        else if (angles.firstAngle <= angle - TOLERANCE) {
+            while (angles.firstAngle <= angle - TOLERANCE && linearOp.opModeIsActive()) {
+                rotateLeft(speed);
+                angles = imu.getAngularOrientation(AxesReference.INTRINSIC, AxesOrder.ZYX, AngleUnit.DEGREES);
+            }
+        }
+        stopMotors();
+
+        angles = imu.getAngularOrientation(AxesReference.INTRINSIC, AxesOrder.ZYX, AngleUnit.DEGREES);
+    }
+
+
+    public void gyroReset () {
+        BNO055IMU.Parameters parametersimu = new BNO055IMU.Parameters();
+        imu.initialize(parametersimu);
+    }
+
 
 }
