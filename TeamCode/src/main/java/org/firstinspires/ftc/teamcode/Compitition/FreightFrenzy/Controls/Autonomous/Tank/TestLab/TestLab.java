@@ -8,6 +8,9 @@ public abstract class TestLab extends AutoMain {
     public void driveOffWall (TankBot Bot) {
         Bot.driveForward(1, 2);
         sleep(sleepTime);
+    }
+
+    public void testGyroClockWise (TankBot Bot) {
         Bot.rotateRight(.6, 1);
         sleep(sleepTime);
         Bot.gyroCorrection(.2, 90);

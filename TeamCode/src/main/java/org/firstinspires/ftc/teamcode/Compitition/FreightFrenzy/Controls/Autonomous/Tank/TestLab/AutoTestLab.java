@@ -29,19 +29,13 @@ public class AutoTestLab extends TestLab {
 
             location = locator(Bot);
 
-
-
-
-//            switch (location){
-//                case TSELocation.barcode1:
-//
-//            break;
-//            }
-
+            driveOffWall(Bot);
+            sleep(sleepTime);
+            testGyroClockWise(Bot);
+            sleep(sleepTime);
 
             requestOpModeStop();
         }
         idle();
     }
-
 }
