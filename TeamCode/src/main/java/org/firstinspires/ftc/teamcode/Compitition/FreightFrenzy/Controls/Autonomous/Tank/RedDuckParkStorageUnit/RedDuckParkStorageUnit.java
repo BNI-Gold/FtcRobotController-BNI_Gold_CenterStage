@@ -5,6 +5,14 @@ import org.firstinspires.ftc.teamcode.Compitition.FreightFrenzy.Robots.TankBot;
 
 public abstract class RedDuckParkStorageUnit extends AutoMain {
 
+
+    private double straightSpd = 0.6;
+    private double turnEncoderSpd = 0.5;
+    //        Speed .2 == too low for gyro turn
+    private double turnGyro1 = 0.25;
+    private double turnGyro2 = 0.3;
+
+
     public void StartToDuckSpinner (TankBot Bot) {
         Bot.driveForward(0.6, 2.6);
         sleep(500);

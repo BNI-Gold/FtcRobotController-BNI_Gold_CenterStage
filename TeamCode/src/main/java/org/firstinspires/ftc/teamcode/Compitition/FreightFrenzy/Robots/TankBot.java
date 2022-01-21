@@ -2,6 +2,7 @@ package org.firstinspires.ftc.teamcode.Compitition.FreightFrenzy.Robots;
 
 import com.qualcomm.hardware.bosch.BNO055IMU;
 import com.qualcomm.hardware.bosch.JustLoggingAccelerationIntegrator;
+import com.qualcomm.hardware.rev.RevBlinkinLedDriver;
 import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.hardware.DcMotorEx;
 import com.qualcomm.robotcore.hardware.HardwareMap;
@@ -34,28 +35,32 @@ public class TankBot extends TankTreadDrive {
     public double duckSpinnerPower = 0.35;
 
     public double LyftExtendPower = 1.0;
-    public double LyftRetractPower = -1.0;
+    public double LyftRetractPower = -0.75;
 
     public Servo boxHolder = null;
 
     // Higher value = gate higher
     // Lower value == gate goes down more.
-    public double boxHolder_Up = .37;
+    public double boxHolder_Up = .40;
     public double boxHolder_Down = 0.46;
     public double boxHolder_Release = 0.51;
 //    public CRServo LyftServo = null;
 
+    // LEDs
+    public RevBlinkinLedDriver blinkinLedDriver;
+    public RevBlinkinLedDriver.BlinkinPattern pattern;
+
     // WEBCAM VARIABLES - EMMA
     //declaring pipeline
-    CompContourPipeline myPipeline;
-    private OpenCvCamera webcam;
+    public CompContourPipeline myPipeline;
+    public OpenCvCamera webcam;
     private static final int CAMERA_WIDTH = 320; // width  of wanted camera resolution
     private static final int CAMERA_HEIGHT = 240; // height of wanted camera resolution
     // WEBCAM - COLOR RANGE
     public static Scalar scalarLowerYCrCb = new Scalar(0.0, 0.0, 0.0);
     public static Scalar scalarUpperYCrCb = new Scalar(255.0, 150.0, 120.0);
     //enum / detecting barcode
-    TSELocation barcode;
+    public TSELocation barcode;
 
     //Gyro Objects, Hardware & Variables
     public BNO055IMU imu;
@@ -63,7 +68,6 @@ public class TankBot extends TankTreadDrive {
     public Acceleration gravity;
     public final double SPEED = .3;
     public final double TOLERANCE = .4;
-
 
 
     public void initRobot(HardwareMap hardwareMap) {
@@ -95,6 +99,11 @@ public class TankBot extends TankTreadDrive {
 
         boxHolder = hwBot.get(Servo.class, "box_holder");
         setBoxHolder_Up();
+
+        // SET UP LEDs
+        blinkinLedDriver = hardwareMap.get(RevBlinkinLedDriver.class, "blinkin");
+        pattern = RevBlinkinLedDriver.BlinkinPattern.RAINBOW_RAINBOW_PALETTE;
+        blinkinLedDriver.setPattern(pattern);
 
         // Define and Initialize Gyro
         BNO055IMU.Parameters parametersimu = new BNO055IMU.Parameters();
@@ -163,31 +172,34 @@ public class TankBot extends TankTreadDrive {
 
 
     //emma
-//    public void initWebcam() {
-//        //OPENCV WEBCAM
-//        int cameraMonitorViewId = hwBot.appContext.getResources().getIdentifier("cameraMonitorViewId", "id", hwBot.appContext.getPackageName());
-//
-//        webcam = OpenCvCameraFactory.getInstance().createWebcam(hwBot.get(WebcamName.class, "Webcam 1"), cameraMonitorViewId);
-//        //OPENCV PIPELINE
-//        webcam.setPipeline(myPipeline = new CompContourPipeline());
-//        // CONFIGURATION OF PIPELINE
-//        myPipeline.ConfigurePipeline(30, 30, 30, 30, CAMERA_WIDTH, CAMERA_HEIGHT);
-//        myPipeline.ConfigureScalarLower(scalarLowerYCrCb.val[0], scalarLowerYCrCb.val[1], scalarLowerYCrCb.val[2]);
-//        myPipeline.ConfigureScalarUpper(scalarUpperYCrCb.val[0], scalarUpperYCrCb.val[1], scalarUpperYCrCb.val[2]);
-//
-//        webcam.openCameraDeviceAsync(new OpenCvCamera.AsyncCameraOpenListener() {
-//            @Override           //why is this override / does it need to disappear for auto
-//            public void onOpened() {
-//                webcam.startStreaming(CAMERA_WIDTH, CAMERA_HEIGHT, OpenCvCameraRotation.UPRIGHT);
-//            }
-//
-//            @Override       // why is this ovrride / does it need to disappear for auto
-//            public void onError(int errorCode) {
-//
-//            }
-//        });
-//    }
+    public void initWebcam() {
+        //OPENCV WEBCAM
+        int cameraMonitorViewId = hwBot.appContext.getResources().getIdentifier("cameraMonitorViewId", "id", hwBot.appContext.getPackageName());
 
+        webcam = OpenCvCameraFactory.getInstance().createWebcam(hwBot.get(WebcamName.class, "Webcam 1"), cameraMonitorViewId);
+        //OPENCV PIPELINE
+        webcam.setPipeline(myPipeline = new CompContourPipeline());
+        // CONFIGURATION OF PIPELINE
+        myPipeline.ConfigurePipeline(30, 30, 30, 30, CAMERA_WIDTH, CAMERA_HEIGHT);
+        myPipeline.ConfigureScalarLower(scalarLowerYCrCb.val[0], scalarLowerYCrCb.val[1], scalarLowerYCrCb.val[2]);
+        myPipeline.ConfigureScalarUpper(scalarUpperYCrCb.val[0], scalarUpperYCrCb.val[1], scalarUpperYCrCb.val[2]);
+
+        webcam.openCameraDeviceAsync(new OpenCvCamera.AsyncCameraOpenListener() {
+            @Override           //why is this override / does it need to disappear for auto
+            public void onOpened() {
+                webcam.startStreaming(CAMERA_WIDTH, CAMERA_HEIGHT, OpenCvCameraRotation.UPRIGHT);
+            }
+
+            @Override       // why is this ovrride / does it need to disappear for auto
+            public void onError(int errorCode) {
+
+            }
+        });
+    }
+
+
+    /*
+    // Original - void with no return
     public void detectBarcode() {
         //for testing
         linearOp.telemetry.addData("RectArea: ", myPipeline.getRectArea());
@@ -204,6 +216,41 @@ public class TankBot extends TankTreadDrive {
                 barcode = TSELocation.barcode3;
             }
         }
+    }
+
+     */
+
+    public TSELocation detectBarcode() {
+        //for testing
+        // for some reason, this lineaOp.telemetry prevents any new telemetry from being added.
+//        linearOp.telemetry.addData("RectArea: ", myPipeline.getRectArea());
+//        linearOp.telemetry.addData("Rect Midpoint X", myPipeline.getRectMidpointX());
+//        linearOp.telemetry.addData("Rect Midpoint Y", myPipeline.getRectMidpointY());
+//        linearOp.telemetry.update();
+        //detection of TSE/duck
+
+        // HARDCODED LOCATION!
+        //comment line below if using camera!
+        return TSELocation.barcode1;
+
+
+        // CAMERA CODE BELOW!
+        // UNCOMMENT TO USE CAMERA!!!
+        /*
+        if (myPipeline.getRectArea() > 2000) {      //values will probably need to be changed
+            if (myPipeline.getRectMidpointX() > 400) {
+                return TSELocation.barcode1;
+            } else if (myPipeline.getRectMidpointX() > 200) {
+                return TSELocation.barcode2;
+            } else {
+                return TSELocation.barcode3;
+            }
+        }
+        else {
+            return TSELocation.barcode1;
+        }
+
+         */
     }
 
 
@@ -268,7 +315,6 @@ public class TankBot extends TankTreadDrive {
 
         angles = imu.getAngularOrientation(AxesReference.INTRINSIC, AxesOrder.ZYX, AngleUnit.DEGREES);
     }
-
 
     public void gyroReset () {
         BNO055IMU.Parameters parametersimu = new BNO055IMU.Parameters();

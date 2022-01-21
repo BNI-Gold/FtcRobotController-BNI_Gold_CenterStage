@@ -10,12 +10,26 @@ public abstract class AutoMain extends LinearOpMode {
 
     //90 degree LEFT turn =
     //         Bot.rotateLeft(.5, 1.68);
+    private double straightSpd = 0.6;
+    private double turnEncoderSpd = 0.5;
+    //        Speed .2 == too low for gyro turn
+    private double turnGyro1 = 0.25;
+    private double turnGyro2 = 0.3;
 
+
+
+    /*
+
+    NOW COLLECTING CAMERA DATA INSIDE TankBot.Java > TSELocation detectBarcode()
 
     public TSELocation locator (TankBot Bot) {
 
-        return TSELocation.barcode1;
+//        Bot.detectBarcode(Bot);
+
+        return TSELocation.barcode2;
     }
+
+     */
 
     public void TestAuto(TankBot Bot) {
         Bot.driveForward(1, 10);

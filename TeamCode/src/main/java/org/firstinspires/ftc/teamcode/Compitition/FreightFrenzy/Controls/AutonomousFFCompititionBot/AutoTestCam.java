@@ -17,7 +17,7 @@ public class AutoTestCam extends AutoMain {
 
         waitForStart();
         while (opModeIsActive()) {
-            Bot.detectBarcode();
+//            Bot.detectBarcode();
             collectTSE(Bot);
         }
     }

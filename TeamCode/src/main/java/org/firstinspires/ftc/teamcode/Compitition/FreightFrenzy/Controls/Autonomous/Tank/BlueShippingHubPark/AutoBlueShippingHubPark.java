@@ -20,7 +20,7 @@ public class AutoBlueShippingHubPark extends BlueShippingHubPark{
         telemetry.addLine("WAITING FOR START >");
         telemetry.update();
 
-        Bot.detectBarcode();
+//        Bot.detectBarcode();
 
         TSELocation location = null;
 
@@ -28,7 +28,7 @@ public class AutoBlueShippingHubPark extends BlueShippingHubPark{
 
         while (opModeIsActive()) {
 
-            location = locator(Bot);
+//            location = locator(Bot);
 
 
 

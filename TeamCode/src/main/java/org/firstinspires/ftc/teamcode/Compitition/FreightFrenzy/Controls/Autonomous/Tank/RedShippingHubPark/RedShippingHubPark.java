@@ -6,6 +6,14 @@ import org.firstinspires.ftc.teamcode.Compitition.FreightFrenzy.mechanisms.TSELo
 
 public abstract class RedShippingHubPark extends AutoMain {
 
+
+    private double straightSpd = 0.6;
+    private double turnEncoderSpd = 0.5;
+    //        Speed .2 == too low for gyro turn
+    private double turnGyro1 = 0.25;
+    private double turnGyro2 = 0.3;
+
+
     public void DriveToShippingHub (TankBot Bot, TSELocation barcode) {
 
 

@@ -20,15 +20,15 @@ public class AutoRedShippingHubPark extends RedShippingHubPark {
         telemetry.addLine("WAITING FOR START >");
         telemetry.update();
 
-        Bot.detectBarcode();
-
-        TSELocation location = null;
+//        Bot.detectBarcode();
+//
+//        TSELocation location = null;
 
         waitForStart();
 
         while (opModeIsActive()) {
 
-            location = locator(Bot);
+//            location = locator(Bot);
 
 
 
@@ -39,7 +39,7 @@ public class AutoRedShippingHubPark extends RedShippingHubPark {
 //            break;
 //            }
 
-            DriveToShippingHub(Bot, location);
+//            DriveToShippingHub(Bot, location);
 
             requestOpModeStop();
         }
