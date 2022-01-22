@@ -31,6 +31,7 @@ public abstract class TestLab extends AutoMain {
                 Bot.pattern = RevBlinkinLedDriver.BlinkinPattern.YELLOW;
                 Bot.blinkinLedDriver.setPattern(Bot.pattern);
                 telemetry.addData("LED: ", Bot.pattern);
+
                 Bot.driveForward(1, 2.6);
                 sleep(sleepTime);
                 Bot.LyftExtend();
@@ -48,16 +49,48 @@ public abstract class TestLab extends AutoMain {
                 sleep(sleepTime);
 
 
+
+
                 break;
             case barcode2:
                 Bot.pattern = RevBlinkinLedDriver.BlinkinPattern.BLUE;
                 Bot.blinkinLedDriver.setPattern(Bot.pattern);
                 telemetry.addData("LED: ", Bot.pattern);
+                Bot.driveForward(1, 2.6);
+                sleep(sleepTime);
+                Bot.LyftExtend();
+                sleep(2600);
+                Bot.LyftStopMotors();
+                // Motor retracts easily, so may slide back from sleep.
+//                sleep(100);
+                Bot.setBoxHolder_Release();
+                sleep(500);
+                Bot.setBoxHolder_Up();
+                sleep(100);
+                Bot.LyftRetract();
+                sleep(1100);
+                Bot.LyftStopMotors();
+                sleep(sleepTime);
                 break;
             case barcode3:
                 Bot.pattern = RevBlinkinLedDriver.BlinkinPattern.GREEN;
                 Bot.blinkinLedDriver.setPattern(Bot.pattern);
                 telemetry.addData("LED: ", Bot.pattern);
+                Bot.driveForward(1, 2.6);
+                sleep(sleepTime);
+                Bot.LyftExtend();
+                sleep(2600);
+                Bot.LyftStopMotors();
+                // Motor retracts easily, so may slide back from sleep.
+//                sleep(100);
+                Bot.setBoxHolder_Release();
+                sleep(500);
+                Bot.setBoxHolder_Up();
+                sleep(100);
+                Bot.LyftRetract();
+                sleep(1100);
+                Bot.LyftStopMotors();
+                sleep(sleepTime);
                 break;
             default:
                 Bot.pattern = RevBlinkinLedDriver.BlinkinPattern.RED;
@@ -130,11 +163,11 @@ public abstract class TestLab extends AutoMain {
             sleep(sleepTime);
             Bot.rotateRight(.5, 0.9);
             sleep(sleepTime);
-            Bot.driveForward(0.6, 2.6);
+            Bot.driveForward(0.6, 2.7);
             sleep(sleepTime);
-            Bot.rotateLeft(.5, .2);
+            Bot.rotateLeft(.5, .15);
             sleep(sleepTime);
-            Bot.driveForward(0.6, 2.4);
+            Bot.driveForward(0.6, 2.3);
             sleep(sleepTime);
         }
         if (Alliance.equals("Red")) {

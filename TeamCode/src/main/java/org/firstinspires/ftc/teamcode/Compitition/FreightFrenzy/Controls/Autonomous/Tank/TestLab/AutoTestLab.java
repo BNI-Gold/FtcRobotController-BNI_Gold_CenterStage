@@ -47,20 +47,21 @@ public class AutoTestLab extends TestLab {
 
 
 
-            sleep(5000);
+//            sleep(5000);
 
 
-            /*
+//            DUCKY SPINNER!
 
-
+/*
             DriveToDuckSpinner(Bot, Alliance);
             sleep(sleepTime);
             spinDuckBlue(Bot);
             sleep(sleepTime);
             DuckSpinnerToStorageUnit (Bot, Alliance);
-            requestOpModeStop();
 
-             */
+
+ */
+
             requestOpModeStop();
         }
         idle();

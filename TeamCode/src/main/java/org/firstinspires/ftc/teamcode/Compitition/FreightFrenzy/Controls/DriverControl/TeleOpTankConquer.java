@@ -66,7 +66,8 @@ public class TeleOpTankConquer extends OpMode {
             tankDrive();
         }
         else {
-            arcadeDrive();
+//            tankDrive();
+             arcadeDrive();
         }
 
         DuckSpinner();
@@ -77,10 +78,21 @@ public class TeleOpTankConquer extends OpMode {
 
         BoxHolderControl();
 
+        driveSpeed();
+
         telemtryOutput();
 
     }
 
+    public void driveSpeed () {
+        if (gamepad1.dpad_up) {
+            speedMultiply = 1;
+        }
+
+        if (gamepad1.dpad_down) {
+            speedMultiply = 0.5;
+        }
+    }
     public void getController () {
         leftStickY1 = -gamepad1.left_stick_y;
         leftStickX1 = -gamepad1.left_stick_x;
@@ -100,23 +112,29 @@ public class TeleOpTankConquer extends OpMode {
         }
     }
 
+
+
     public void tankDrive () {
-        Bot.leftMotorA.setPower(leftStickY1);
-        Bot.leftMotorB.setPower(leftStickY1);
-        Bot.rightMotorA.setPower(rightStickY1);
-        Bot.rightMotorB.setPower(rightStickY1);
+        Bot.leftMotorA.setPower(leftStickY1 * speedMultiply);
+        Bot.leftMotorB.setPower(leftStickY1 * speedMultiply);
+        Bot.rightMotorA.setPower(rightStickY1 * speedMultiply);
+        Bot.rightMotorB.setPower(rightStickY1 * speedMultiply);
     }
+
+
 
     public void arcadeDrive () {
         leftMotorValue = leftStickY1 - leftStickX1;
         rightMotorValue = leftStickY1 + leftStickX1;
         leftMotorValue = Range.clip(leftMotorValue,-1, 1);
         rightMotorValue = Range.clip(rightMotorValue, -1, 1);
-        Bot.leftMotorA.setPower(leftMotorValue);
-        Bot.leftMotorB.setPower(leftMotorValue);
-        Bot.rightMotorA.setPower(rightMotorValue);
-        Bot.rightMotorB.setPower(rightMotorValue);
+        Bot.leftMotorA.setPower(leftMotorValue * speedMultiply);
+        Bot.leftMotorB.setPower(leftMotorValue * speedMultiply);
+        Bot.rightMotorA.setPower(rightMotorValue * speedMultiply);
+        Bot.rightMotorB.setPower(rightMotorValue * speedMultiply);
     }
+
+
 
     public void DuckSpinner () {
         if (gamepad2.dpad_left == true) {
@@ -168,6 +186,8 @@ public class TeleOpTankConquer extends OpMode {
         }
 
     }
+
+
 
 
     public void telemtryOutput () {
