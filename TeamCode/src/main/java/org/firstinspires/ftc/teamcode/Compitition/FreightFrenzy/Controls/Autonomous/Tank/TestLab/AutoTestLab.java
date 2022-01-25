@@ -3,19 +3,26 @@ package org.firstinspires.ftc.teamcode.Compitition.FreightFrenzy.Controls.Autono
 import com.acmerobotics.dashboard.FtcDashboard;
 import com.qualcomm.hardware.rev.RevBlinkinLedDriver;
 import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
+import com.qualcomm.robotcore.eventloop.opmode.Disabled;
 
 import org.firstinspires.ftc.teamcode.Compitition.FreightFrenzy.Robots.TankBot;
 import org.firstinspires.ftc.teamcode.Compitition.FreightFrenzy.mechanisms.TSELocation;
-@Autonomous (name = "Lab Testing", group = "LAB")
+@Autonomous (name = "Lab Testing", group = "zLAB")
+@Disabled
 public class AutoTestLab extends TestLab {
     public TankBot Bot =  new TankBot();
 
     public long sleepTime = 250;
 
-    public String Alliance = "Blue";
+    public String Alliance;
+    public String AutoPath;
 
     @Override
     public void runOpMode() throws InterruptedException {
+        Alliance = "Blue";
+        AutoPath = "CameraShippingHubWarehouse";
+//        AutoPath = "DuckToStorage";
+
         Bot.initRobot(hardwareMap);
         Bot.initWebcam();
         Bot.setLinearOp(this);
@@ -38,30 +45,40 @@ public class AutoTestLab extends TestLab {
         waitForStart();
 
         while (opModeIsActive()) {
-            location = Bot.detectBarcode();  // uses webcam -- only midpoint telemetry shows
+
+
+            sleep(1000);
+
+            switch (AutoPath) {
+                case "CameraShippingHubWarehouse":
+                    location = Bot.detectBarcode();  // uses webcam -- only midpoint telemetry shows
 //            location = locator(Bot);            // does not use webcam - new telemetry shows
 //            Bot.detectBarcode();
 
-            driveTest(Bot, Alliance, location);  // use to test if robot functioning!
-            sleep(sleepTime);
+                    DriveShippingHubScore(Bot, Alliance, location);  // use to test if robot functioning!
+                    sleep(sleepTime);
+                    ShippingHubToWarehosue (Bot, Alliance, location);
+                    sleep(sleepTime);
+                    break;
+                case "DuckToStorage":
+                    DriveToDuckSpinner(Bot, Alliance);
+                    sleep(sleepTime);
+                    spinDuckBlue(Bot);
+                    sleep(sleepTime);
+                    DuckSpinnerToStorageUnit (Bot, Alliance);
+                    break;
+            }
+
+            if (AutoPath.equals("CameraShippingHubWarehouse")) {
+
+            }
 
 
+            if (AutoPath.equals("DuckToStorage")) {
 
-//            sleep(5000);
+            }
 
-
-//            DUCKY SPINNER!
-
-/*
-            DriveToDuckSpinner(Bot, Alliance);
-            sleep(sleepTime);
-            spinDuckBlue(Bot);
-            sleep(sleepTime);
-            DuckSpinnerToStorageUnit (Bot, Alliance);
-
-
- */
-
+            sleep(1000);
             requestOpModeStop();
         }
         idle();

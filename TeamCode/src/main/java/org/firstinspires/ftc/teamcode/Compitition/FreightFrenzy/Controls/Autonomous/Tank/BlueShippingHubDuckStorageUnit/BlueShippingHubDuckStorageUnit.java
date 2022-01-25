@@ -1,19 +1,20 @@
-package org.firstinspires.ftc.teamcode.Compitition.FreightFrenzy.Controls.Autonomous.Tank.TestLab;
+package org.firstinspires.ftc.teamcode.Compitition.FreightFrenzy.Controls.Autonomous.Tank.BlueShippingHubDuckStorageUnit;
 
 import com.qualcomm.hardware.rev.RevBlinkinLedDriver;
-import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 
 import org.firstinspires.ftc.teamcode.Compitition.FreightFrenzy.Controls.Autonomous.Tank.AutoMain;
 import org.firstinspires.ftc.teamcode.Compitition.FreightFrenzy.Robots.TankBot;
 import org.firstinspires.ftc.teamcode.Compitition.FreightFrenzy.mechanisms.TSELocation;
 
-public abstract class TestLab extends AutoMain {
+public abstract class BlueShippingHubDuckStorageUnit extends AutoMain {
 
+    //BlueShippingHubPark
     private double straightSpd = 0.6;
     private double turnEncoderSpd = 0.5;
     //        Speed .2 == too low for gyro turn
     private double turnGyro1 = 0.25;
     private double turnGyro2 = 0.3;
+
 
     public void DriveShippingHubScore (TankBot Bot, String Alliance, TSELocation location) {
 
@@ -32,7 +33,10 @@ public abstract class TestLab extends AutoMain {
                 Bot.blinkinLedDriver.setPattern(Bot.pattern);
                 telemetry.addData("LED: ", Bot.pattern);
 
-                Bot.driveForward(1, 2.0);
+                Bot.driveForward(straightSpd, 2.0);
+
+                // just commented out below so not raising lift every time.
+
                 sleep(1000);
                 Bot.LyftExtend();
                 sleep(1600);
@@ -48,13 +52,16 @@ public abstract class TestLab extends AutoMain {
                 sleep(1100);
                 Bot.LyftStopMotors();
                 Bot.setBoxHolder_Down();
+
+
                 sleep(sleepTime);
+
                 break;
             case barcode2:
                 Bot.pattern = RevBlinkinLedDriver.BlinkinPattern.BLUE;
                 Bot.blinkinLedDriver.setPattern(Bot.pattern);
                 telemetry.addData("LED: ", Bot.pattern);
-                Bot.driveForward(1, 2.3);
+                Bot.driveForward(straightSpd, 2.3);
                 sleep(1000);
                 Bot.LyftExtend();
                 sleep(700);
@@ -71,15 +78,18 @@ public abstract class TestLab extends AutoMain {
                 Bot.LyftStopMotors();
                 Bot.setBoxHolder_Down();
                 sleep(sleepTime);
+                Bot.driveBackward(straightSpd, 0.2);
+                sleep(sleepTime);
+
                 break;
             case barcode3:
                 Bot.pattern = RevBlinkinLedDriver.BlinkinPattern.GREEN;
                 Bot.blinkinLedDriver.setPattern(Bot.pattern);
                 telemetry.addData("LED: ", Bot.pattern);
-                Bot.driveForward(1, 2.3);
+                Bot.driveForward(straightSpd, 2.5);
                 sleep(1000);
                 Bot.LyftExtend();
-                sleep(700);
+                sleep(500);
                 Bot.setBoxHolder_Release();
                 sleep(100);  //this allows the servo to lower while the motor is still engaged.
                 Bot.LyftStopMotors();
@@ -89,10 +99,13 @@ public abstract class TestLab extends AutoMain {
                 Bot.setBoxHolder_Up();
                 sleep(100);
                 Bot.LyftRetract();
-                sleep(600);
+                sleep(400);
                 Bot.LyftStopMotors();
                 Bot.setBoxHolder_Down();
                 sleep(sleepTime);
+                Bot.driveBackward(straightSpd, 0.1);
+                sleep(sleepTime);
+
                 break;
             default:
                 Bot.pattern = RevBlinkinLedDriver.BlinkinPattern.RED;
@@ -100,81 +113,44 @@ public abstract class TestLab extends AutoMain {
                 telemetry.addData("LED: ", Bot.pattern);
                 break;
         }
-
         telemetry.update();
-
     }
 
-    public void ShippingHubToWarehosue (TankBot Bot, String Alliance, TSELocation location) {
+    public void ShippingHubToDuck (TankBot Bot, String Alliance, TSELocation location) {
 
+        Bot.rotateLeft(turnEncoderSpd, 1.7);
+        sleep(sleepTime);
+        Bot.gyroCorrection(turnGyro1, +90);
+        sleep(sleepTime);
+        Bot.driveBackward(straightSpd, 5.7);
+        sleep(sleepTime);
+        Bot.rotateRight(turnEncoderSpd, 0.6);
+        sleep(sleepTime);
+        Bot.gyroCorrection(turnGyro1, +45);
+        sleep(sleepTime);
+
+//            Drive to duck spinner.  Should be at it after this.
+        Bot.driveBackward(0.4, 0.4, 1500);
+        sleep(sleepTime);
+        Bot.driveBackward(0.2, 0.3, 800);
+        sleep(sleepTime);
+        Bot.driveBackward(0.15, 0.2, 500);
+        sleep(sleepTime);
         switch (location) {
             case barcode1:
-                Bot.rotateLeft(turnEncoderSpd, 1.50);
-                sleep(sleepTime);
-                Bot.driveForward(1);
-                sleep(1700);
-                Bot.stopMotors();
-                sleep(sleepTime);
 
                 break;
             case barcode2:
-                Bot.rotateLeft(turnEncoderSpd, 1.54);
-                sleep(sleepTime);
-                Bot.driveForward(1);
-                sleep(1800);
-                Bot.stopMotors();
-                sleep(sleepTime);
+
                 break;
             case barcode3:
                 break;
-            default:
-                break;
         }
 
 
     }
 
-
-
-    public void DriveToDuckSpinner (TankBot Bot, String Alliance) {
-        if (Alliance.equals("Blue")) {
-            Bot.driveForward(straightSpd, 2.6);
-            sleep(1000);
-            Bot.rotateLeft(turnEncoderSpd, 1.6);
-            sleep(sleepTime);
-            Bot.gyroCorrection(turnGyro1, +90);
-            sleep(sleepTime);
-//            Bot.gyroCorrection(turnGyro2, +90);
-//            sleep(sleepTime);
-
-//          drive towards duck spinner
-            Bot.driveBackward(straightSpd, 2.25);
-            sleep(sleepTime);
-
-//            spin towards duck spinner
-            Bot.rotateRight(turnEncoderSpd, 0.6);
-            sleep(sleepTime);
-
-            Bot.gyroCorrection(turnGyro1, +45);
-            sleep(sleepTime);
-//            Bot.gyroCorrection(turnGyro2, +46);
-//            sleep(sleepTime);
-
-//            Drive to duck spinner.  Should be at it after this.
-            Bot.driveBackward(0.4, 0.7, 2000);
-            sleep(sleepTime);
-            Bot.driveBackward(0.2, 0.4, 1000);
-            sleep(sleepTime);
-            Bot.driveBackward(0.15, 0.2, 500);
-            sleep(sleepTime);
-        }
-        if (Alliance.equals("Red")) {
-
-        }
-    }
-
-    public void DuckSpinnerToStorageUnit (TankBot Bot, String Alliance) {
-        if (Alliance.equals("Blue")) {
+    public void DuckSpinnerToStorageUnit (TankBot Bot) {
             Bot.driveForward(straightSpd, 0.4);
             sleep(sleepTime);
             Bot.rotateRight(turnEncoderSpd, 0.9);
@@ -185,28 +161,6 @@ public abstract class TestLab extends AutoMain {
             sleep(sleepTime);
             Bot.driveForward(straightSpd, 1.8);
             sleep(sleepTime);
-        }
-        if (Alliance.equals("Red")) {
-
-        }
     }
-
-
-
-//    IGNORE ME!!
-    public void testGyroClockWise (TankBot Bot) {
-        Bot.rotateRight(.6, 2.8);
-        sleep(sleepTime);
-//        Speed .2 == too low
-        Bot.gyroCorrection(.4, -90);
-        sleep(sleepTime);
-        Bot.gyroCorrection(.3, -90);
-        sleep(sleepTime);
-
-
-        Bot.driveBackward(.6, 2);
-    }
-
-
 
 }

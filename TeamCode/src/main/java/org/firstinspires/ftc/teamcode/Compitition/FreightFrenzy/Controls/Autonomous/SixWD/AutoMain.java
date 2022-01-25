@@ -7,7 +7,7 @@ import org.firstinspires.ftc.teamcode.Compitition.FreightFrenzy.Robots.SixWheelB
 public abstract class AutoMain extends LinearOpMode {
 
     int sleepTime = 100;
-
+/*
     public void blue_carousel_spinDuck(SixWheelBot Bot) {
 
         Bot.driveForward(0.5, 1.5);
@@ -57,5 +57,12 @@ public abstract class AutoMain extends LinearOpMode {
 
         Bot.senseLyftcolapse();
         sleep(sleepTime);
+
+
     }
+
+
+
+ */
+
 }

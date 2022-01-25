@@ -1,11 +1,14 @@
 package org.firstinspires.ftc.teamcode.Compitition.FreightFrenzy.Controls.Autonomous.Tank.RedParkWarehouseDirect;
 
 import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
+import com.qualcomm.robotcore.eventloop.opmode.Disabled;
 
 import org.firstinspires.ftc.teamcode.Compitition.FreightFrenzy.Controls.Autonomous.Tank.AutoMain;
 import org.firstinspires.ftc.teamcode.Compitition.FreightFrenzy.Robots.TankBot;
 
 @Autonomous (name = "Red: Warehouse Park", group = "RED")
+@Disabled
+
 public class AutoRedParkWarehouseDirect extends AutoMain {
     public TankBot Bot =  new TankBot();
 

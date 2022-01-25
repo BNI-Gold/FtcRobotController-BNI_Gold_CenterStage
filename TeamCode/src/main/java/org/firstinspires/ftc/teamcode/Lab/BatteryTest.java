@@ -4,7 +4,7 @@ import com.qualcomm.robotcore.eventloop.opmode.OpMode;
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 import com.qualcomm.robotcore.hardware.VoltageSensor;
 
-@TeleOp (name = "Bettery Test", group = "DUVAL")
+@TeleOp (name = "Battery Test", group = "LAB")
 public class BatteryTest extends OpMode {
 
     VoltageSensor voltageSensor;

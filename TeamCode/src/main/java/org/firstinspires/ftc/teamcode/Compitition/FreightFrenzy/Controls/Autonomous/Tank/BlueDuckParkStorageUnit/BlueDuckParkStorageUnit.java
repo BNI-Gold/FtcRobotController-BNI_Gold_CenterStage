@@ -1,10 +1,14 @@
 package org.firstinspires.ftc.teamcode.Compitition.FreightFrenzy.Controls.Autonomous.Tank.BlueDuckParkStorageUnit;
 
+import com.qualcomm.hardware.rev.RevBlinkinLedDriver;
+
 import org.firstinspires.ftc.teamcode.Compitition.FreightFrenzy.Controls.Autonomous.Tank.AutoMain;
 import org.firstinspires.ftc.teamcode.Compitition.FreightFrenzy.Robots.TankBot;
+import org.firstinspires.ftc.teamcode.Compitition.FreightFrenzy.mechanisms.TSELocation;
 
 public abstract class BlueDuckParkStorageUnit extends AutoMain {
 
+    //
     private double straightSpd = 0.6;
     private double turnEncoderSpd = 0.5;
     //        Speed .2 == too low for gyro turn
@@ -12,6 +16,65 @@ public abstract class BlueDuckParkStorageUnit extends AutoMain {
     private double turnGyro2 = 0.3;
 
 
+
+    public void DriveToDuckSpinner (TankBot Bot, String Alliance) {
+        if (Alliance.equals("Blue")) {
+            Bot.driveForward(straightSpd, 2.6);
+            sleep(1000);
+            Bot.rotateLeft(turnEncoderSpd, 1.6);
+            sleep(sleepTime);
+            Bot.gyroCorrection(turnGyro1, +90);
+            sleep(sleepTime);
+//            Bot.gyroCorrection(turnGyro2, +90);
+//            sleep(sleepTime);
+
+//          drive towards duck spinner
+            Bot.driveBackward(straightSpd, 2.25);
+            sleep(sleepTime);
+
+//            spin towards duck spinner
+            Bot.rotateRight(turnEncoderSpd, 0.6);
+            sleep(sleepTime);
+
+            Bot.gyroCorrection(turnGyro1, +45);
+            sleep(sleepTime);
+//            Bot.gyroCorrection(turnGyro2, +46);
+//            sleep(sleepTime);
+
+//            Drive to duck spinner.  Should be at it after this.
+            Bot.driveBackward(0.4, 0.7, 2000);
+            sleep(sleepTime);
+            Bot.driveBackward(0.2, 0.4, 1000);
+            sleep(sleepTime);
+            Bot.driveBackward(0.15, 0.2, 500);
+            sleep(sleepTime);
+        }
+        if (Alliance.equals("Red")) {
+
+        }
+    }
+
+    public void DuckSpinnerToStorageUnit (TankBot Bot, String Alliance) {
+        if (Alliance.equals("Blue")) {
+            Bot.driveForward(straightSpd, 0.4);
+            sleep(sleepTime);
+            Bot.rotateRight(turnEncoderSpd, 0.9);
+            sleep(sleepTime);
+            Bot.driveForward(straightSpd, 2.7);
+            sleep(sleepTime);
+            Bot.rotateLeft(turnEncoderSpd, .13);
+            sleep(sleepTime);
+            Bot.driveForward(straightSpd, 1.8);
+            sleep(sleepTime);
+        }
+        if (Alliance.equals("Red")) {
+
+        }
+    }
+
+
+
+/*
     public void StartToDuckSpinner (TankBot Bot) {
         Bot.driveForward(0.6, 2.6);
         sleep(500);
@@ -53,4 +116,10 @@ public abstract class BlueDuckParkStorageUnit extends AutoMain {
 //        Bot.driveForward(0.6, 2.4);
 //        sleep(sleepTime);
     }
+
+
+ */
+
+
 }
+

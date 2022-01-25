@@ -8,7 +8,7 @@ import com.qualcomm.robotcore.util.Range;
 import org.firstinspires.ftc.teamcode.Compitition.FreightFrenzy.Robots.SixWheelBot;
 import org.firstinspires.ftc.teamcode.Compitition.FreightFrenzy.Robots.TankBot;
 
-@TeleOp( name = "Tank Go Vroom")
+@TeleOp( name = "Tank Go Vroom", group = "1")
 
 public class TeleOpTankConquer extends OpMode {
 

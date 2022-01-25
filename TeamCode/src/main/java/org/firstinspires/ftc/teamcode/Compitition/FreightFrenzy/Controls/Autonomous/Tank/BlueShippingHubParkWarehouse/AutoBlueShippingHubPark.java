@@ -1,4 +1,4 @@
-package org.firstinspires.ftc.teamcode.Compitition.FreightFrenzy.Controls.Autonomous.Tank.BlueDuckParkStorageUnit;
+package org.firstinspires.ftc.teamcode.Compitition.FreightFrenzy.Controls.Autonomous.Tank.BlueShippingHubParkWarehouse;
 
 import com.acmerobotics.dashboard.FtcDashboard;
 import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
@@ -6,10 +6,13 @@ import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
 import org.firstinspires.ftc.teamcode.Compitition.FreightFrenzy.Robots.TankBot;
 import org.firstinspires.ftc.teamcode.Compitition.FreightFrenzy.mechanisms.TSELocation;
 
-@Autonomous (name = "Tank: Blue: Duck: Depot", group = "BLUE")
-public class AutoBlueDuckParkStorageUnit extends BlueDuckParkStorageUnit {
+@Autonomous (name = "Tank: Blue: Shipping Hub: Warehouse Park", group = "BLUE")
 
-//AutoBlueDuckParkStorageUnit
+public class AutoBlueShippingHubPark extends BlueShippingHubPark{
+
+    //AutoBlueShippingHubPark
+
+
     public TankBot Bot =  new TankBot();
 
     public long sleepTime = 250;
@@ -20,17 +23,19 @@ public class AutoBlueDuckParkStorageUnit extends BlueDuckParkStorageUnit {
     @Override
     public void runOpMode() throws InterruptedException {
         Bot.initRobot(hardwareMap);
+//        Bot.initWebcam();
         Bot.setLinearOp(this);
 
         telemetry.addLine("WAITING FOR START >");
         telemetry.update();
 
+//        Bot.detectBarcode();
         Alliance = "Blue";
-//        AutoPath = "CameraShippingHubWarehouse";
-        AutoPath = "DuckToStorage";
+        AutoPath = "CameraShippingHubWarehouse";
+//        AutoPath = "DuckToStorage";
 
         Bot.initRobot(hardwareMap);
-//        Bot.initWebcam();
+        Bot.initWebcam();
         Bot.setLinearOp(this);
 
         telemetry.addLine("WAITING FOR START >");
@@ -38,7 +43,7 @@ public class AutoBlueDuckParkStorageUnit extends BlueDuckParkStorageUnit {
         telemetry.addLine("http://192.168.43.1:8080/dash");
         telemetry.update();
 
-//        Bot.detectBarcode();
+        Bot.detectBarcode();
 
         TSELocation location = null;
 
@@ -49,24 +54,26 @@ public class AutoBlueDuckParkStorageUnit extends BlueDuckParkStorageUnit {
         telemetry.addLine("WAITING FOR START >");
         telemetry.update();
 
+
+
         waitForStart();
 
         while (opModeIsActive()) {
-
 
             sleep(1000);
 
             switch (AutoPath) {
                 case "CameraShippingHubWarehouse":
+                    location = Bot.detectBarcode();  // uses webcam -- only midpoint telemetry shows
+//            location = locator(Bot);            // does not use webcam - new telemetry shows
+//            Bot.detectBarcode();
 
-                    break;
-                case "DuckToStorage":
-                    DriveToDuckSpinner(Bot, Alliance);
+                    DriveShippingHubScore(Bot, Alliance, location);  // use to test if robot functioning!
                     sleep(sleepTime);
-                    spinDuckBlue(Bot);
+                    ShippingHubToWarehosue (Bot, Alliance, location);
                     sleep(sleepTime);
-                    DuckSpinnerToStorageUnit (Bot, Alliance);
                     break;
+
             }
 
             if (AutoPath.equals("CameraShippingHubWarehouse")) {
@@ -79,19 +86,19 @@ public class AutoBlueDuckParkStorageUnit extends BlueDuckParkStorageUnit {
             }
 
             sleep(1000);
+//            location = locator(Bot);
 
 
-            /*
-            StartToDuckSpinner(Bot);
-//            TestAuto(Bot);
-            sleep(sleepTime);
-            spinDuckBlue(Bot);
-           sleep(sleepTime);
-            DuckSpinnerToStorageUnit (Bot);
-            sleep(sleepTime);
 
-             */
-            idle();
+
+//            switch (location){
+//                case TSELocation.barcode1:
+//
+//            break;
+//            }
+
+           // DriveToShippingHub(Bot, location);
+
             requestOpModeStop();
         }
         idle();

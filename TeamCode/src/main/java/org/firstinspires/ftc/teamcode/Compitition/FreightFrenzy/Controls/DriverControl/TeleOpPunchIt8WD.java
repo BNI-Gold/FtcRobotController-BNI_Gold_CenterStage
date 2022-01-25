@@ -51,7 +51,7 @@ import org.firstinspires.ftc.teamcode.Compitition.FreightFrenzy.DriveTrains.SixW
 import org.firstinspires.ftc.teamcode.Compitition.FreightFrenzy.Robots.EightWheelBot;
 import org.firstinspires.ftc.teamcode.Compitition.FreightFrenzy.Robots.SixWheelBot;
 
-@TeleOp (name = "TeleOp 8WD_PunchIt")
+@TeleOp (name = "TeleOp 8WD_PunchIt", group = "2")
 
 public class TeleOpPunchIt8WD extends OpMode {
 

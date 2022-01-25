@@ -7,7 +7,7 @@ import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 
 import org.firstinspires.ftc.teamcode.Compitition.ZCompititionUltimateGoal.Robots.OutreachBot;
 
-@TeleOp (name = "Teleop_OutreachBot")
+@TeleOp (name = "Teleop_OutreachBot", group = "3")
 //@Disabled
 public class TeleopOutreachBot extends OpMode {
 //    double leftStickYVal;

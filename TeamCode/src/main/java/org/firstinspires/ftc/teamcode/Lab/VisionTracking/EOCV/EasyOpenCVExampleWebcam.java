@@ -45,7 +45,7 @@ import org.openftc.easyopencv.OpenCvPipeline;
 // from Ultimate GOAL
 
 @TeleOp (name = "WebCam Exmaple - Ultimate Goal", group = "DUVAL")
-//@Disabled
+@Disabled
 
 public class EasyOpenCVExampleWebcam extends LinearOpMode
 {

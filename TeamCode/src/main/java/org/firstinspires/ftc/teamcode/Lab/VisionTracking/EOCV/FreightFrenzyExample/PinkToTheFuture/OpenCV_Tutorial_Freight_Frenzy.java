@@ -1,6 +1,7 @@
 package org.firstinspires.ftc.teamcode.Lab.VisionTracking.EOCV.FreightFrenzyExample.PinkToTheFuture;
 
 import com.acmerobotics.dashboard.FtcDashboard;
+import com.qualcomm.robotcore.eventloop.opmode.Disabled;
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 import com.qualcomm.robotcore.util.ElapsedTime;
@@ -13,6 +14,7 @@ import org.openftc.easyopencv.OpenCvCameraRotation;
 
 //@Config
 @TeleOp(name="OpenCV_FF", group="Tutorials")
+@Disabled
 
 public class OpenCV_Tutorial_Freight_Frenzy extends LinearOpMode {
 

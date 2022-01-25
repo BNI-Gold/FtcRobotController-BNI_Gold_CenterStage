@@ -123,8 +123,16 @@ public class TankBot extends TankTreadDrive {
         DuckSpinner.setPower(duckSpinnerPower);
     }
 
+    public void duckspinclockwiseAuto() {
+        DuckSpinner.setPower(duckSpinnerPower * 0.75);
+    }
+
     public void duckspincounterclockwise() {
         DuckSpinner.setPower(-duckSpinnerPower);
+    }
+
+    public void duckspincounterclockwiseAuto () {
+        DuckSpinner.setPower(-duckSpinnerPower * 0.75);
     }
 
     public void duckspinstop() {
@@ -231,7 +239,9 @@ public class TankBot extends TankTreadDrive {
 
         // HARDCODED LOCATION!
         //comment line below if using camera!
-//        return TSELocation.barcode1;
+
+
+//        return TSELocation.barcode3;
 
 
         // CAMERA CODE BELOW!
@@ -249,6 +259,12 @@ public class TankBot extends TankTreadDrive {
         else {
             return TSELocation.barcode1;
         }
+
+
+
+
+
+
 
 
     }

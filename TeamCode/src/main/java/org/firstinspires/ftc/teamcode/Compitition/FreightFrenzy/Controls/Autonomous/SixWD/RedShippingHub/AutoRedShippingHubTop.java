@@ -31,7 +31,7 @@ public class AutoRedShippingHubTop extends RedShippingHub {
         while (opModeIsActive()) {
             Bot.boxHolder2.setPosition(Bot.boxHolder2up);
 
-           red_carousel_spinDuck(Bot);
+           //red_carousel_spinDuck(Bot);
 
             // ^ in AutoMain ^
 
@@ -50,7 +50,7 @@ public class AutoRedShippingHubTop extends RedShippingHub {
             Bot.driveForward(0.6, 1.5);
             sleep(sleepTime);
 
-            Shipping_Hub_Score (Bot);
+            //Shipping_Hub_Score (Bot);
 
             Bot.driveBackward(0.6, 0.35);
             sleep(sleepTime);
@@ -78,5 +78,9 @@ public class AutoRedShippingHubTop extends RedShippingHub {
 
         }
 
+
+
     }
+
+
 }

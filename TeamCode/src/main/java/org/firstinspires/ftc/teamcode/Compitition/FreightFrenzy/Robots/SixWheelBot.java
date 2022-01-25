@@ -84,7 +84,7 @@ public class SixWheelBot extends SixWD {
         hwBot = hardwareMap;
 
 
-        LyftExtender = hwBot.get(DcMotorEx.class, "Lyft_Extender");
+        //LyftExtender = hwBot.get(DcMotorEx.class, "Lyft_Extender");
 
         leftMotorA = hwBot.get(DcMotorEx.class, "left_motor_a");
         leftMotorB = hwBot.get(DcMotorEx.class, "left_motor_b");
@@ -93,7 +93,7 @@ public class SixWheelBot extends SixWD {
 
 //        leftMotorA.setMode(DcMotorEx.RunMode.STOP_AND_RESET_ENCODER);
 
-        LyftExtender.setDirection(DcMotorEx.Direction.FORWARD);
+        //LyftExtender.setDirection(DcMotorEx.Direction.FORWARD);
 
         leftMotorA.setDirection(DcMotorEx.Direction.FORWARD);
         leftMotorB.setDirection(DcMotorEx.Direction.FORWARD);
@@ -101,12 +101,12 @@ public class SixWheelBot extends SixWD {
         rightMotorB.setDirection(DcMotorEx.Direction.REVERSE);
 
 //        intakeLyft = hwBot.get(DcMotorEx.class,"Intake_Lyft");
-        intake = hardwareMap.dcMotor.get ("Intake");
+        //intake = hardwareMap.dcMotor.get ("Intake");
 //        intake
 //        motor = hardwareMap.dcMotor.get("motor");
 
 
-        intake.setDirection(DcMotor.Direction.FORWARD);
+        //intake.setDirection(DcMotor.Direction.FORWARD);
 //        intakeLyft.setDirection(DcMotorEx.Direction.FORWARD);
 
 //        rightMotorA.setDirection(DcMotorSimple.Direction.FORWARD);
@@ -120,16 +120,16 @@ public class SixWheelBot extends SixWD {
 //        setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
 //        Causing issues 0 not sure why yet.
 
-        LyftExtender.setZeroPowerBehavior(DcMotorEx.ZeroPowerBehavior.BRAKE);
+        //LyftExtender.setZeroPowerBehavior(DcMotorEx.ZeroPowerBehavior.BRAKE);
 
         leftMotorA.setZeroPowerBehavior(DcMotorEx.ZeroPowerBehavior.BRAKE);
         rightMotorA.setZeroPowerBehavior(DcMotorEx.ZeroPowerBehavior.BRAKE);
         leftMotorB.setZeroPowerBehavior(DcMotorEx.ZeroPowerBehavior.BRAKE);
         rightMotorB.setZeroPowerBehavior(DcMotorEx.ZeroPowerBehavior.BRAKE);
 
-        intake.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
+        //intake.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
 //        intakeLyft.setZeroPowerBehavior(DcMotorEx.ZeroPowerBehavior.BRAKE);
-
+/*
         DuckTurnerleft = hardwareMap.crservo.get ("Duck_Turner_Left");
         DuckTurnerleft.setDirection(DcMotorSimple.Direction.REVERSE);
         DuckTurnerleft.setPower(0);
@@ -144,11 +144,13 @@ public class SixWheelBot extends SixWD {
 
         senseLyftColor = hardwareMap.get(ColorSensor.class, "sensor_color_distance_1");
 
+ */
+
         timer = new ElapsedTime();
 
 
     }
-
+/*
     public void setboxHolder2up (){
         boxHolder2.setPosition(boxHolder2up);
     }
@@ -230,6 +232,8 @@ public class SixWheelBot extends SixWD {
         }
         LyftExtender.setPower(0);
     }
+
+ */
 
 
 

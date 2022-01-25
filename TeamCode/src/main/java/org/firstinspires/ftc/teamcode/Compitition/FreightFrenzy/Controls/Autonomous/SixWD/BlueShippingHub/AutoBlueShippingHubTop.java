@@ -32,7 +32,7 @@ public class AutoBlueShippingHubTop extends BlueShippingHubTop {
             Bot.boxHolder2.setPosition(Bot.boxHolder2up);
 
 
-            blue_carousel_spinDuck(Bot);
+            //blue_carousel_spinDuck(Bot);
 //                                                                                                                                                                        prosciutto
 //             ^ in AutoMain ^
 
@@ -51,7 +51,7 @@ public class AutoBlueShippingHubTop extends BlueShippingHubTop {
             Bot.driveForward(0.6, 1.5);
             sleep(sleepTime);
 
-            Shipping_Hub_Score (Bot);
+            //Shipping_Hub_Score (Bot);
 
             Bot.driveBackward(0.6, 0.35);
             sleep(sleepTime);

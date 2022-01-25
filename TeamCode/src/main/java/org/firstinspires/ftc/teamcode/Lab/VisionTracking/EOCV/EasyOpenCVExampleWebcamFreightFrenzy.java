@@ -22,6 +22,7 @@
 package org.firstinspires.ftc.teamcode.Lab.VisionTracking.EOCV;
 
 import com.acmerobotics.dashboard.FtcDashboard;
+import com.qualcomm.robotcore.eventloop.opmode.Disabled;
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 
@@ -43,7 +44,7 @@ import org.openftc.easyopencv.OpenCvPipeline;
 // from Ultimate GOAL
 
 @TeleOp (name = "WebCam Exmaple - Freight Frenzy (copy from Ultimate Goal)", group = "DUVAL")
-//@Disabled
+@Disabled
 
 public class EasyOpenCVExampleWebcamFreightFrenzy extends LinearOpMode
 {

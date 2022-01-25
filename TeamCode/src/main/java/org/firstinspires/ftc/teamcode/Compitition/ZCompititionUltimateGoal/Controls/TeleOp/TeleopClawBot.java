@@ -6,7 +6,7 @@ import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 
 import org.firstinspires.ftc.teamcode.Compitition.ZCompititionUltimateGoal.Robots.ClawBot;
 
-@TeleOp (name = "Teleop_ClawBot")
+@TeleOp (name = "Teleop_ClawBot", group = "3")
 //@Disabled
 
 public class TeleopClawBot extends OpMode {

@@ -28,7 +28,7 @@ public class AutoRedCarousel extends RedCarousel {
 
         while (opModeIsActive()) {
 
-           red_carousel_spinDuck(Bot);
+           //red_carousel_spinDuck(Bot);
 
             Bot.driveForward(.5,5   );
             sleep(sleepTime);

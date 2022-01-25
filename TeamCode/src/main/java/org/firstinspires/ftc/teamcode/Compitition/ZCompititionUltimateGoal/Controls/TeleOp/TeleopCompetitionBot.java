@@ -10,7 +10,7 @@ import org.firstinspires.ftc.teamcode.Compitition.ZCompititionUltimateGoal.Robot
 //import org.firstinspires.ftc.teamcode.Compitition.CompititionUltimateGoal.Robots.LabBot;
 
 
-@TeleOp(name = "Teleop_CompetitionBot - Ringed Ranger")
+@TeleOp(name = "Teleop_CompetitionBot - Ringed Ranger", group = "3")
 //@Disabled
 public class TeleopCompetitionBot extends OpMode {
 

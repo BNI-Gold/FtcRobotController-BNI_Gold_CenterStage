@@ -14,7 +14,7 @@ import org.firstinspires.ftc.teamcode.Compitition.FreightFrenzy.DriveTrains.SixW
 import org.firstinspires.ftc.teamcode.Compitition.FreightFrenzy.Robots.EightWheelBot;
 import org.firstinspires.ftc.teamcode.Compitition.FreightFrenzy.Robots.SixWheelBot;
 
-@TeleOp (name = "TeleOp 6WD_BeeLine")
+@TeleOp (name = "TeleOp 6WD_BeeLine", group = "2")
 
 public class TeleOpBeeLine6WD extends OpMode {
 
@@ -70,7 +70,7 @@ public class TeleOpBeeLine6WD extends OpMode {
         telemetry = dashboard.getTelemetry();
 
 
-        Bot.setboxHolder2up();
+       // Bot.setboxHolder2up();
 
     }
 
@@ -89,7 +89,7 @@ public class TeleOpBeeLine6WD extends OpMode {
         }
 
 //        arcadesix();
-
+/*
         DuckSpinner();
 
         Intakecontroller();
@@ -97,6 +97,8 @@ public class TeleOpBeeLine6WD extends OpMode {
         LyftIntake2();
 
         LyftExtender();
+
+ */
 
         telemtryOutput();
     }
@@ -163,7 +165,7 @@ public class TeleOpBeeLine6WD extends OpMode {
     }
 
 
-
+/*
     public void DuckSpinner () {
         if (gamepad2.dpad_left == true){
             Bot.SpinDuckARight();
@@ -311,6 +313,8 @@ public class TeleOpBeeLine6WD extends OpMode {
 //
 //
     }
+
+ */
 
 
 }
