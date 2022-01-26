@@ -110,6 +110,9 @@ public abstract class BlueShippingHubPark extends AutoMain {
 
         switch (location) {
             case barcode1:
+                // THIS IS HERE SO THE BOT CAN GO STRAIGHT OVER BARRIER INSTEAD OF GOING OVER TRIANGLE AND GETTING STUCK!
+                Bot.driveForward(straightSpd, 0.6);
+                sleep(sleepTime);
                 Bot.rotateLeft(turnEncoderSpd, 1.49);
                 sleep(sleepTime);
                 Bot.driveForward(1);
@@ -119,6 +122,9 @@ public abstract class BlueShippingHubPark extends AutoMain {
 
                 break;
             case barcode2:
+                // THIS IS HERE SO THE BOT CAN GO STRAIGHT OVER BARRIER INSTEAD OF GOING OVER TRIANGLE AND GETTING STUCK!
+                Bot.driveForward(straightSpd, 0.6);
+                sleep(sleepTime);
                 Bot.rotateLeft(turnEncoderSpd, 1.50);
                 sleep(sleepTime);
                 Bot.driveForward(1);
@@ -127,6 +133,9 @@ public abstract class BlueShippingHubPark extends AutoMain {
                 sleep(sleepTime);
                 break;
             case barcode3:
+                // THIS IS HERE SO THE BOT CAN GO STRAIGHT OVER BARRIER INSTEAD OF GOING OVER TRIANGLE AND GETTING STUCK!
+                Bot.driveForward(straightSpd, 0.6);
+                sleep(sleepTime);
                 Bot.rotateLeft(turnEncoderSpd, 1.58);
                 sleep(sleepTime);
                 Bot.driveForward(1);
