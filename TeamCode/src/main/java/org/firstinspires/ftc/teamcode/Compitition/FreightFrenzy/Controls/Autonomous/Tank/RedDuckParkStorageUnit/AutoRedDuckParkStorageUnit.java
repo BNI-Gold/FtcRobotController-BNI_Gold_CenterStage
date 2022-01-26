@@ -7,7 +7,7 @@ import com.qualcomm.robotcore.eventloop.opmode.Disabled;
 import org.firstinspires.ftc.teamcode.Compitition.FreightFrenzy.Robots.TankBot;
 import org.firstinspires.ftc.teamcode.Compitition.FreightFrenzy.mechanisms.TSELocation;
 
-@Autonomous (name = "Tank: Red: Duck: Depot", group = "Red")
+@Autonomous (name = "Tank: Red: Duck: Depot", group = "RED")
 
 public class AutoRedDuckParkStorageUnit extends RedDuckParkStorageUnit {
 

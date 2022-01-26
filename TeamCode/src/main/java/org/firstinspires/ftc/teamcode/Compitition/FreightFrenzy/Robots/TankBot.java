@@ -241,7 +241,7 @@ public class TankBot extends TankTreadDrive {
         //comment line below if using camera!
 
 
-//        return TSELocation.barcode2;
+//        return TSELocation.barcode1;
 
 
         // CAMERA CODE BELOW!
@@ -260,10 +260,6 @@ public class TankBot extends TankTreadDrive {
         else {
             return TSELocation.barcode1;
         }
-
-
-
-
 
 
 

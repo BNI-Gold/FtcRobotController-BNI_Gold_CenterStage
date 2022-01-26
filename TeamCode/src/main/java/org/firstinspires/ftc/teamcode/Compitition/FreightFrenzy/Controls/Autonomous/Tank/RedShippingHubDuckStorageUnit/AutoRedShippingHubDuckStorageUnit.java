@@ -1,4 +1,4 @@
-package org.firstinspires.ftc.teamcode.Compitition.FreightFrenzy.Controls.Autonomous.Tank.RedShippingHubParkWarehouse;
+package org.firstinspires.ftc.teamcode.Compitition.FreightFrenzy.Controls.Autonomous.Tank.RedShippingHubDuckStorageUnit;
 
 import com.acmerobotics.dashboard.FtcDashboard;
 import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
@@ -6,8 +6,9 @@ import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
 import org.firstinspires.ftc.teamcode.Compitition.FreightFrenzy.Robots.TankBot;
 import org.firstinspires.ftc.teamcode.Compitition.FreightFrenzy.mechanisms.TSELocation;
 
-@Autonomous (name = "Tank: Red: Shipping Hub: Warehouse Park", group = "RED")
-public class AutoRedShippingHubPark extends RedShippingHubPark {
+@Autonomous (name = "Tank: Red: Shipping Hub: Ducks: Storage", group = "RED")
+
+public class AutoRedShippingHubDuckStorageUnit extends RedShippingHubDuckStorageUnit {
     public TankBot Bot =  new TankBot();
 
     public long sleepTime = 250;
@@ -24,10 +25,8 @@ public class AutoRedShippingHubPark extends RedShippingHubPark {
         telemetry.addLine("WAITING FOR START >");
         telemetry.update();
 
-        Alliance = "Blue";
-        AutoPath = "CameraShippingHubWarehouse";
-//        AutoPath = "DuckToStorage";
-
+//        Bot.detectBarcode();
+        Alliance = "Red";
         Bot.initRobot(hardwareMap);
         Bot.initWebcam();
         Bot.setLinearOp(this);
@@ -48,54 +47,29 @@ public class AutoRedShippingHubPark extends RedShippingHubPark {
         telemetry.addLine("WAITING FOR START >");
         telemetry.update();
 
-
-//        Bot.detectBarcode();
-//
-//        TSELocation location = null;
-
         waitForStart();
 
         while (opModeIsActive()) {
 
             sleep(1000);
 
-            switch (AutoPath) {
-                case "CameraShippingHubWarehouse":
-                    location = Bot.detectBarcode();  // uses webcam -- only midpoint telemetry shows
-//            location = locator(Bot);            // does not use webcam - new telemetry shows
-//            Bot.detectBarcode();
+            location = Bot.detectBarcode();  // uses webcam -- only midpoint telemetry shows
+            sleep(sleepTime);
+            DriveShippingHubScore(Bot, Alliance, location);  // use to test if robot functioning!
+            sleep(sleepTime);
+            ShippingHubToDuck(Bot, Alliance, location);
+            sleep(sleepTime);
+            spinDuckRed(Bot);
+            sleep(sleepTime);
+            DuckSpinnerToStorageUnit (Bot);
+            sleep(sleepTime);
 
-                    DriveShippingHubScore(Bot, Alliance, location);  // use to test if robot functioning!
-                    sleep(sleepTime);
-                    ShippingHubToWarehosue (Bot, Alliance, location);
-                    sleep(sleepTime);
-                    break;
-                case "DuckToStorage":
-
-            }
-
-            if (AutoPath.equals("CameraShippingHubWarehouse")) {
-
-            }
-
-
-            if (AutoPath.equals("DuckToStorage")) {
-
-            }
-
-            sleep(1000);
-            //            location = locator(Bot);
 
 
 
 
-//            switch (location){
-//                case TSELocation.barcode1:
-//
-//            break;
-//            }
+            sleep(1000);
 
-//            DriveToShippingHub(Bot, location);
 
             requestOpModeStop();
         }
