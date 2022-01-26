@@ -14,7 +14,7 @@ import org.openftc.easyopencv.OpenCvCameraRotation;
 
 //@Config
 @TeleOp(name="OpenCV_FF", group="Tutorials")
-@Disabled
+//@Disabled
 
 public class OpenCV_Tutorial_Freight_Frenzy extends LinearOpMode {
 

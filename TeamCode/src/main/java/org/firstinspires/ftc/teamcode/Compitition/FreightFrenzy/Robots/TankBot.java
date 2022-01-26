@@ -241,11 +241,12 @@ public class TankBot extends TankTreadDrive {
         //comment line below if using camera!
 
 
-//        return TSELocation.barcode3;
+//        return TSELocation.barcode2;
 
 
         // CAMERA CODE BELOW!
         // UNCOMMENT TO USE CAMERA!!!
+
 
         if (myPipeline.getRectArea() > 2000) {      //values will probably need to be changed
             if (myPipeline.getRectMidpointX() < 100) {
@@ -259,6 +260,8 @@ public class TankBot extends TankTreadDrive {
         else {
             return TSELocation.barcode1;
         }
+
+
 
 
 

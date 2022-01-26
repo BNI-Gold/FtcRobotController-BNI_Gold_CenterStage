@@ -48,6 +48,8 @@ public abstract class BlueDuckParkStorageUnit extends AutoMain {
             sleep(sleepTime);
             Bot.driveBackward(0.15, 0.2, 500);
             sleep(sleepTime);
+            Bot.driveForward(0.15, .03);   //SPINNY IS GETTING CAUGHT ON DUCK SPINNER.  THIS IS TO GIVE A LITTLE SLACK.
+            sleep(sleepTime);
         }
         if (Alliance.equals("Red")) {
 

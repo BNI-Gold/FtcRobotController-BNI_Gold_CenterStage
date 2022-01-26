@@ -34,8 +34,9 @@ public abstract class RedShippingHubPark extends AutoMain {
                 Bot.blinkinLedDriver.setPattern(Bot.pattern);
                 telemetry.addData("LED: ", Bot.pattern);
 
-                Bot.driveForward(1, 2.0);
+                Bot.driveForward(straightSpd, 2.0);
                 sleep(1000);
+/*
                 Bot.LyftExtend();
                 sleep(1600);
                 Bot.setBoxHolder_Release();
@@ -50,13 +51,15 @@ public abstract class RedShippingHubPark extends AutoMain {
                 sleep(1100);
                 Bot.LyftStopMotors();
                 Bot.setBoxHolder_Down();
+
+ */
                 sleep(sleepTime);
                 break;
             case barcode2:
                 Bot.pattern = RevBlinkinLedDriver.BlinkinPattern.BLUE;
                 Bot.blinkinLedDriver.setPattern(Bot.pattern);
                 telemetry.addData("LED: ", Bot.pattern);
-                Bot.driveForward(1, 2.3);
+                Bot.driveForward(straightSpd, 2.3);
                 sleep(1000);
                 Bot.LyftExtend();
                 sleep(700);
@@ -78,7 +81,7 @@ public abstract class RedShippingHubPark extends AutoMain {
                 Bot.pattern = RevBlinkinLedDriver.BlinkinPattern.GREEN;
                 Bot.blinkinLedDriver.setPattern(Bot.pattern);
                 telemetry.addData("LED: ", Bot.pattern);
-                Bot.driveForward(1, 2.5);
+                Bot.driveForward(straightSpd, 2.5);
                 sleep(1000);
                 Bot.LyftExtend();
                 sleep(500);
@@ -111,23 +114,34 @@ public abstract class RedShippingHubPark extends AutoMain {
 
         switch (location) {
             case barcode1:
-                Bot.rotateRight(turnEncoderSpd, 1.50);
+                Bot.driveForward(straightSpd, 1.0);
                 sleep(sleepTime);
+                Bot.rotateRight(turnEncoderSpd, 1.5);
+                sleep(sleepTime);
+                Bot.gyroCorrection(turnGyro1, -92);
                 Bot.driveForward(1);
-                sleep(1800);
+                sleep(1600);
                 Bot.stopMotors();
                 sleep(sleepTime);
 
                 break;
             case barcode2:
+                Bot.driveForward(straightSpd, 1.0);
+                sleep(sleepTime);
                 Bot.rotateRight(turnEncoderSpd, 1.54);
                 sleep(sleepTime);
+                sleep(sleepTime);
+                Bot.gyroCorrection(turnGyro1, -92);
                 Bot.driveForward(1);
                 sleep(1900);
                 Bot.stopMotors();
                 sleep(sleepTime);
                 break;
             case barcode3:
+                Bot.driveForward(straightSpd, 0.8);
+                sleep(sleepTime);
+                Bot.gyroCorrection(turnGyro1, -92);
+                sleep(sleepTime);
                 Bot.rotateRight(turnEncoderSpd, 1.58);
                 sleep(sleepTime);
                 Bot.driveForward(1);

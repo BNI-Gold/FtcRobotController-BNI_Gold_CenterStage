@@ -16,6 +16,9 @@ public abstract class BlueShippingHubDuckStorageUnit extends AutoMain {
     private double turnGyro2 = 0.3;
 
 
+    private double ShippingHubDistance = 2.3;
+
+
     public void DriveShippingHubScore (TankBot Bot, String Alliance, TSELocation location) {
 
         telemetry.addData("RectArea: ", Bot.myPipeline.getRectArea());
@@ -33,13 +36,14 @@ public abstract class BlueShippingHubDuckStorageUnit extends AutoMain {
                 Bot.blinkinLedDriver.setPattern(Bot.pattern);
                 telemetry.addData("LED: ", Bot.pattern);
 
-                Bot.driveForward(straightSpd, 2.0);
+
+                Bot.driveForward(straightSpd, ShippingHubDistance);  //2.0 for variable distances
 
                 // just commented out below so not raising lift every time.
 
                 sleep(1000);
                 Bot.LyftExtend();
-                sleep(1600);
+                sleep(1600);  // TIME TO EXTEND LYFT - 1600 for var distances
                 Bot.setBoxHolder_Release();
                 sleep(100);  //this allows the servo to lower while the motor is still engaged.
                 Bot.LyftStopMotors();
@@ -56,15 +60,17 @@ public abstract class BlueShippingHubDuckStorageUnit extends AutoMain {
 
                 sleep(sleepTime);
 
+//                Bot.driveForward(straightSpd, 0.7);   // forward 0.7 for var distances
+
                 break;
             case barcode2:
                 Bot.pattern = RevBlinkinLedDriver.BlinkinPattern.BLUE;
                 Bot.blinkinLedDriver.setPattern(Bot.pattern);
                 telemetry.addData("LED: ", Bot.pattern);
-                Bot.driveForward(straightSpd, 2.3);
+                Bot.driveForward(straightSpd, ShippingHubDistance);   // 2.8 for variable distances
                 sleep(1000);
                 Bot.LyftExtend();
-                sleep(700);
+                sleep(750);  // TIME TO EXTEND LYFT - 700 for var distances
                 Bot.setBoxHolder_Release();
                 sleep(100);  //this allows the servo to lower while the motor is still engaged.
                 Bot.LyftStopMotors();
@@ -74,11 +80,11 @@ public abstract class BlueShippingHubDuckStorageUnit extends AutoMain {
                 Bot.setBoxHolder_Up();
                 sleep(100);
                 Bot.LyftRetract();
-                sleep(700);
+                sleep(800);
                 Bot.LyftStopMotors();
                 Bot.setBoxHolder_Down();
                 sleep(sleepTime);
-                Bot.driveBackward(straightSpd, 0.2);
+//                Bot.driveBackward(straightSpd, 0.2); // DO NOT USE FOR ANYTHING.  barcade 2 is the "control"
                 sleep(sleepTime);
 
                 break;
@@ -86,10 +92,10 @@ public abstract class BlueShippingHubDuckStorageUnit extends AutoMain {
                 Bot.pattern = RevBlinkinLedDriver.BlinkinPattern.GREEN;
                 Bot.blinkinLedDriver.setPattern(Bot.pattern);
                 telemetry.addData("LED: ", Bot.pattern);
-                Bot.driveForward(straightSpd, 2.5);
+                Bot.driveForward(straightSpd, ShippingHubDistance);   //2.6 for var distances
                 sleep(1000);
                 Bot.LyftExtend();
-                sleep(500);
+                sleep(550);  // TIME TO EXTEND LYFT - 550 for var distances
                 Bot.setBoxHolder_Release();
                 sleep(100);  //this allows the servo to lower while the motor is still engaged.
                 Bot.LyftStopMotors();
@@ -99,11 +105,11 @@ public abstract class BlueShippingHubDuckStorageUnit extends AutoMain {
                 Bot.setBoxHolder_Up();
                 sleep(100);
                 Bot.LyftRetract();
-                sleep(400);
+                sleep(500);
                 Bot.LyftStopMotors();
                 Bot.setBoxHolder_Down();
                 sleep(sleepTime);
-                Bot.driveBackward(straightSpd, 0.1);
+//                Bot.driveForward(straightSpd, 0.18);  // forward 1.8 for var distances
                 sleep(sleepTime);
 
                 break;
@@ -113,6 +119,7 @@ public abstract class BlueShippingHubDuckStorageUnit extends AutoMain {
                 telemetry.addData("LED: ", Bot.pattern);
                 break;
         }
+        telemetry.addData("BARCADE: ", location);
         telemetry.update();
     }
 
@@ -122,7 +129,7 @@ public abstract class BlueShippingHubDuckStorageUnit extends AutoMain {
         sleep(sleepTime);
         Bot.gyroCorrection(turnGyro1, +90);
         sleep(sleepTime);
-        Bot.driveBackward(straightSpd, 5.7);
+        Bot.driveBackward(straightSpd, 5.2);
         sleep(sleepTime);
         Bot.rotateRight(turnEncoderSpd, 0.6);
         sleep(sleepTime);
@@ -130,11 +137,13 @@ public abstract class BlueShippingHubDuckStorageUnit extends AutoMain {
         sleep(sleepTime);
 
 //            Drive to duck spinner.  Should be at it after this.
-        Bot.driveBackward(0.4, 0.4, 1500);
+        Bot.driveBackward(0.4, 0.6, 1500);
         sleep(sleepTime);
         Bot.driveBackward(0.2, 0.3, 800);
         sleep(sleepTime);
         Bot.driveBackward(0.15, 0.2, 500);
+        sleep(sleepTime);
+        Bot.driveForward(0.15, .03);   //SPINNY IS GETTING CAUGHT ON DUCK SPINNER.  THIS IS TO GIVE A LITTLE SLACK.
         sleep(sleepTime);
         switch (location) {
             case barcode1:
@@ -159,7 +168,7 @@ public abstract class BlueShippingHubDuckStorageUnit extends AutoMain {
             sleep(sleepTime);
             Bot.rotateLeft(turnEncoderSpd, .13);
             sleep(sleepTime);
-            Bot.driveForward(straightSpd, 1.8);
+            Bot.driveForward(straightSpd, 1.60);
             sleep(sleepTime);
     }
 

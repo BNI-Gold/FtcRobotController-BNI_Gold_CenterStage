@@ -16,7 +16,7 @@ public abstract class RedDuckParkStorageUnit extends AutoMain {
         if (Alliance.equals("Blue")) {
             Bot.driveForward(straightSpd, 2.6);
             sleep(1000);
-            Bot.rotateRight(turnEncoderSpd, 1.6);
+            Bot.rotateRight(turnEncoderSpd, 1.4);
             sleep(sleepTime);
             Bot.gyroCorrection(turnGyro1, -90);
             sleep(sleepTime);
@@ -24,7 +24,7 @@ public abstract class RedDuckParkStorageUnit extends AutoMain {
 //            sleep(sleepTime);
 
 //          drive towards duck spinner
-            Bot.driveBackward(straightSpd, 2.25);
+            Bot.driveBackward(straightSpd, 2.30);
             sleep(sleepTime);
 
 //            spin towards duck spinner
@@ -43,6 +43,8 @@ public abstract class RedDuckParkStorageUnit extends AutoMain {
             sleep(sleepTime);
             Bot.driveBackward(0.15, 0.2, 500);
             sleep(sleepTime);
+            Bot.driveForward(0.15, 0.03);
+            sleep(sleepTime);
         }
         if (Alliance.equals("Red")) {
 
@@ -53,13 +55,13 @@ public abstract class RedDuckParkStorageUnit extends AutoMain {
         if (Alliance.equals("Blue")) {
             Bot.driveForward(straightSpd, 0.4);
             sleep(sleepTime);
-            Bot.rotateLeft(turnEncoderSpd, 0.9);
+            Bot.rotateLeft(turnEncoderSpd, 1.1);
             sleep(sleepTime);
             Bot.driveForward(straightSpd, 2.7);
             sleep(sleepTime);
-            Bot.rotateRight(turnEncoderSpd, .13);
+            Bot.rotateRight(turnEncoderSpd, .2);
             sleep(sleepTime);
-            Bot.driveForward(straightSpd, 1.8);
+            Bot.driveForward(straightSpd, 1.6);
             sleep(sleepTime);
         }
         if (Alliance.equals("Red")) {

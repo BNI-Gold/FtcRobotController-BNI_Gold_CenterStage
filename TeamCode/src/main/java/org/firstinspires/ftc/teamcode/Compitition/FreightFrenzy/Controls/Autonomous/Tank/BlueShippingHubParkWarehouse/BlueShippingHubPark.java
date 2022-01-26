@@ -33,7 +33,7 @@ public abstract class BlueShippingHubPark extends AutoMain {
                 Bot.blinkinLedDriver.setPattern(Bot.pattern);
                 telemetry.addData("LED: ", Bot.pattern);
 
-                Bot.driveForward(1, 2.0);
+                Bot.driveForward(straightSpd, 2.0);
                 sleep(1000);
                 Bot.LyftExtend();
                 sleep(1600);
@@ -55,7 +55,7 @@ public abstract class BlueShippingHubPark extends AutoMain {
                 Bot.pattern = RevBlinkinLedDriver.BlinkinPattern.BLUE;
                 Bot.blinkinLedDriver.setPattern(Bot.pattern);
                 telemetry.addData("LED: ", Bot.pattern);
-                Bot.driveForward(1, 2.3);
+                Bot.driveForward(straightSpd, 2.8);
                 sleep(1000);
                 Bot.LyftExtend();
                 sleep(700);
@@ -77,7 +77,7 @@ public abstract class BlueShippingHubPark extends AutoMain {
                 Bot.pattern = RevBlinkinLedDriver.BlinkinPattern.GREEN;
                 Bot.blinkinLedDriver.setPattern(Bot.pattern);
                 telemetry.addData("LED: ", Bot.pattern);
-                Bot.driveForward(1, 2.5);
+                Bot.driveForward(straightSpd, 2.6);
                 sleep(1000);
                 Bot.LyftExtend();
                 sleep(500);
@@ -110,19 +110,19 @@ public abstract class BlueShippingHubPark extends AutoMain {
 
         switch (location) {
             case barcode1:
-                Bot.rotateLeft(turnEncoderSpd, 1.50);
+                Bot.rotateLeft(turnEncoderSpd, 1.49);
                 sleep(sleepTime);
                 Bot.driveForward(1);
-                sleep(1800);
+                sleep(1700);
                 Bot.stopMotors();
                 sleep(sleepTime);
 
                 break;
             case barcode2:
-                Bot.rotateLeft(turnEncoderSpd, 1.54);
+                Bot.rotateLeft(turnEncoderSpd, 1.50);
                 sleep(sleepTime);
                 Bot.driveForward(1);
-                sleep(1900);
+                sleep(1600);
                 Bot.stopMotors();
                 sleep(sleepTime);
                 break;
@@ -130,7 +130,7 @@ public abstract class BlueShippingHubPark extends AutoMain {
                 Bot.rotateLeft(turnEncoderSpd, 1.58);
                 sleep(sleepTime);
                 Bot.driveForward(1);
-                sleep(1900);
+                sleep(1600);
                 Bot.stopMotors();
                 sleep(sleepTime);
                 break;

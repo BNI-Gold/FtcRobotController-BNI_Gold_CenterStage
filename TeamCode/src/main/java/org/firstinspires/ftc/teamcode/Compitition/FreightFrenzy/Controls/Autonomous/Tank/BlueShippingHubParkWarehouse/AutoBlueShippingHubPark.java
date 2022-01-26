@@ -23,7 +23,7 @@ public class AutoBlueShippingHubPark extends BlueShippingHubPark{
     @Override
     public void runOpMode() throws InterruptedException {
         Bot.initRobot(hardwareMap);
-//        Bot.initWebcam();
+        Bot.initWebcam();
         Bot.setLinearOp(this);
 
         telemetry.addLine("WAITING FOR START >");
@@ -34,9 +34,7 @@ public class AutoBlueShippingHubPark extends BlueShippingHubPark{
         AutoPath = "CameraShippingHubWarehouse";
 //        AutoPath = "DuckToStorage";
 
-        Bot.initRobot(hardwareMap);
-        Bot.initWebcam();
-        Bot.setLinearOp(this);
+
 
         telemetry.addLine("WAITING FOR START >");
         telemetry.addLine("All my telemetry will be on FTC Dashboard");
