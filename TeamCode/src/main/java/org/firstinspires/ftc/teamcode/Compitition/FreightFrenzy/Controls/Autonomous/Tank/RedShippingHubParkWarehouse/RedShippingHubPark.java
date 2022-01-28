@@ -48,7 +48,7 @@ public abstract class RedShippingHubPark extends AutoMain {
                 Bot.setBoxHolder_Up();
                 sleep(100);
                 Bot.LyftRetract();
-                sleep(1100);
+                sleep(900);
                 Bot.LyftStopMotors();
                 Bot.setBoxHolder_Down();
                 sleep(sleepTime);
@@ -70,7 +70,7 @@ public abstract class RedShippingHubPark extends AutoMain {
                 Bot.setBoxHolder_Up();
                 sleep(100);
                 Bot.LyftRetract();
-                sleep(700);
+                sleep(400);
                 Bot.LyftStopMotors();
                 Bot.setBoxHolder_Down();
                 sleep(sleepTime);
@@ -92,7 +92,7 @@ public abstract class RedShippingHubPark extends AutoMain {
                 Bot.setBoxHolder_Up();
                 sleep(100);
                 Bot.LyftRetract();
-                sleep(400);
+                sleep(100);
                 Bot.LyftStopMotors();
                 Bot.setBoxHolder_Down();
                 sleep(sleepTime);

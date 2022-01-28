@@ -33,7 +33,7 @@ public abstract class BlueShippingHubPark extends AutoMain {
                 Bot.blinkinLedDriver.setPattern(Bot.pattern);
                 telemetry.addData("LED: ", Bot.pattern);
 
-                Bot.driveForward(straightSpd, 2.0);
+                Bot.driveForward(straightSpd, 1.9);
                 sleep(1000);
                 Bot.LyftExtend();
                 sleep(1600);
@@ -44,9 +44,9 @@ public abstract class BlueShippingHubPark extends AutoMain {
 //                sleep(100);
                 sleep(500);
                 Bot.setBoxHolder_Up();
-                sleep(100);
+                sleep(200);
                 Bot.LyftRetract();
-                sleep(1100);
+                sleep(900);
                 Bot.LyftStopMotors();
                 Bot.setBoxHolder_Down();
                 sleep(sleepTime);
@@ -68,7 +68,7 @@ public abstract class BlueShippingHubPark extends AutoMain {
                 Bot.setBoxHolder_Up();
                 sleep(100);
                 Bot.LyftRetract();
-                sleep(700);
+                sleep(400);
                 Bot.LyftStopMotors();
                 Bot.setBoxHolder_Down();
                 sleep(sleepTime);
@@ -90,7 +90,7 @@ public abstract class BlueShippingHubPark extends AutoMain {
                 Bot.setBoxHolder_Up();
                 sleep(100);
                 Bot.LyftRetract();
-                sleep(400);
+                sleep(100);
                 Bot.LyftStopMotors();
                 Bot.setBoxHolder_Down();
                 sleep(sleepTime);
@@ -111,7 +111,7 @@ public abstract class BlueShippingHubPark extends AutoMain {
         switch (location) {
             case barcode1:
                 // THIS IS HERE SO THE BOT CAN GO STRAIGHT OVER BARRIER INSTEAD OF GOING OVER TRIANGLE AND GETTING STUCK!
-                Bot.driveForward(straightSpd, 0.6);
+                Bot.driveForward(straightSpd, 0.3);
                 sleep(sleepTime);
                 Bot.rotateLeft(turnEncoderSpd, 1.49);
                 sleep(sleepTime);

@@ -53,15 +53,15 @@ public abstract class RedDuckParkStorageUnit extends AutoMain {
 
     public void DuckSpinnerToStorageUnit (TankBot Bot, String Alliance) {
         if (Alliance.equals("Blue")) {
-            Bot.driveForward(straightSpd, 0.4);
+            Bot.driveForward(straightSpd, 0.6);
             sleep(sleepTime);
             Bot.rotateLeft(turnEncoderSpd, 1.1);
             sleep(sleepTime);
-            Bot.driveForward(straightSpd, 2.7);
+            Bot.driveForward(straightSpd, 2.9);
             sleep(sleepTime);
             Bot.rotateRight(turnEncoderSpd, .2);
             sleep(sleepTime);
-            Bot.driveForward(straightSpd, 1.6);
+            Bot.driveForward(straightSpd, 1.4);
             sleep(sleepTime);
         }
         if (Alliance.equals("Red")) {

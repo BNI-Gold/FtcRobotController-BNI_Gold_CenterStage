@@ -32,7 +32,7 @@ public class TankBot extends TankTreadDrive {
     public DcMotor Lyft;
     public DcMotor intake;
 
-    public double duckSpinnerPower = 0.55;
+    public double duckSpinnerPower = 0.46;
 
     public double LyftExtendPower = 1.0;
     public double LyftRetractPower = -0.75;
@@ -240,8 +240,7 @@ public class TankBot extends TankTreadDrive {
         // HARDCODED LOCATION!
         //comment line below if using camera!
 
-
-//        return TSELocation.barcode1;
+        //return TSELocation.barcode2;
 
 
         // CAMERA CODE BELOW!
@@ -249,10 +248,10 @@ public class TankBot extends TankTreadDrive {
 
 
         if (myPipeline.getRectArea() > 2000) {      //values will probably need to be changed
-            if (myPipeline.getRectMidpointX() < 100) {
-                return TSELocation.barcode1;
-            } else if (myPipeline.getRectMidpointX() > 175) {
+            if (myPipeline.getRectMidpointX() < 110) {
                 return TSELocation.barcode3;
+            } else if (myPipeline.getRectMidpointX() > 175) {
+                return TSELocation.barcode1;
             } else {
                 return TSELocation.barcode2;
             }
@@ -260,6 +259,8 @@ public class TankBot extends TankTreadDrive {
         else {
             return TSELocation.barcode1;
         }
+
+
 
 
 
