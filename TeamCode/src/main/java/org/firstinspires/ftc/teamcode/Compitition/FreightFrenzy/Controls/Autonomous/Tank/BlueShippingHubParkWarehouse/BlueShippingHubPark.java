@@ -23,15 +23,19 @@ public abstract class BlueShippingHubPark extends AutoMain {
         telemetry.addData("Rect Midpoint Y", Bot.myPipeline.getRectMidpointY());
         telemetry.addData("Barcode Location: ", location);
 //        telemetry.addData("Barcode: ", Bot.barcode);
+//        telemetry.update();
+//        telemetry.addData("BARCODE:" , location);
         telemetry.update();
         sleep(1000);
-
+        Bot.webcam.closeCameraDevice();
 
         switch (location) {
+
+
             case barcode1:
-                Bot.pattern = RevBlinkinLedDriver.BlinkinPattern.YELLOW;
-                Bot.blinkinLedDriver.setPattern(Bot.pattern);
-                telemetry.addData("LED: ", Bot.pattern);
+//                Bot.pattern = RevBlinkinLedDriver.BlinkinPattern.YELLOW;
+//                Bot.blinkinLedDriver.setPattern(Bot.pattern);
+//                telemetry.addData("LED: ", Bot.pattern);
 
                 Bot.driveForward(straightSpd, 1.9);
                 sleep(1000);
@@ -46,15 +50,15 @@ public abstract class BlueShippingHubPark extends AutoMain {
                 Bot.setBoxHolder_Up();
                 sleep(200);
                 Bot.LyftRetract();
-                sleep(900);
+                sleep(800);
                 Bot.LyftStopMotors();
-                Bot.setBoxHolder_Down();
+//                Bot.setBoxHolder_Down();
                 sleep(sleepTime);
                 break;
             case barcode2:
-                Bot.pattern = RevBlinkinLedDriver.BlinkinPattern.BLUE;
-                Bot.blinkinLedDriver.setPattern(Bot.pattern);
-                telemetry.addData("LED: ", Bot.pattern);
+//                Bot.pattern = RevBlinkinLedDriver.BlinkinPattern.BLUE;
+//                Bot.blinkinLedDriver.setPattern(Bot.pattern);
+//                telemetry.addData("LED: ", Bot.pattern);
                 Bot.driveForward(straightSpd, 2.8);
                 sleep(1000);
                 Bot.LyftExtend();
@@ -68,19 +72,19 @@ public abstract class BlueShippingHubPark extends AutoMain {
                 Bot.setBoxHolder_Up();
                 sleep(100);
                 Bot.LyftRetract();
-                sleep(400);
+                sleep(500);
                 Bot.LyftStopMotors();
-                Bot.setBoxHolder_Down();
+//                Bot.setBoxHolder_Down();
                 sleep(sleepTime);
                 break;
             case barcode3:
-                Bot.pattern = RevBlinkinLedDriver.BlinkinPattern.GREEN;
-                Bot.blinkinLedDriver.setPattern(Bot.pattern);
-                telemetry.addData("LED: ", Bot.pattern);
-                Bot.driveForward(straightSpd, 2.6);
+//                Bot.pattern = RevBlinkinLedDriver.BlinkinPattern.GREEN;
+//                Bot.blinkinLedDriver.setPattern(Bot.pattern);
+//                telemetry.addData("LED: ", Bot.pattern);
+                Bot.driveForward(straightSpd, 2.9);
                 sleep(1000);
                 Bot.LyftExtend();
-                sleep(500);
+                sleep(475);
                 Bot.setBoxHolder_Release();
                 sleep(100);  //this allows the servo to lower while the motor is still engaged.
                 Bot.LyftStopMotors();
@@ -90,9 +94,9 @@ public abstract class BlueShippingHubPark extends AutoMain {
                 Bot.setBoxHolder_Up();
                 sleep(100);
                 Bot.LyftRetract();
-                sleep(100);
+                sleep(250);
                 Bot.LyftStopMotors();
-                Bot.setBoxHolder_Down();
+//                Bot.setBoxHolder_Down();
                 sleep(sleepTime);
                 break;
             default:
@@ -102,7 +106,6 @@ public abstract class BlueShippingHubPark extends AutoMain {
                 break;
         }
 
-        telemetry.update();
 
     }
 
@@ -111,12 +114,12 @@ public abstract class BlueShippingHubPark extends AutoMain {
         switch (location) {
             case barcode1:
                 // THIS IS HERE SO THE BOT CAN GO STRAIGHT OVER BARRIER INSTEAD OF GOING OVER TRIANGLE AND GETTING STUCK!
-                Bot.driveForward(straightSpd, 0.3);
+                Bot.driveForward(straightSpd, 0.4);
                 sleep(sleepTime);
                 Bot.rotateLeft(turnEncoderSpd, 1.49);
                 sleep(sleepTime);
                 Bot.driveForward(1);
-                sleep(1700);
+                sleep(1600);
                 Bot.stopMotors();
                 sleep(sleepTime);
 
@@ -128,18 +131,18 @@ public abstract class BlueShippingHubPark extends AutoMain {
                 Bot.rotateLeft(turnEncoderSpd, 1.50);
                 sleep(sleepTime);
                 Bot.driveForward(1);
-                sleep(1600);
+                sleep(1700);
                 Bot.stopMotors();
                 sleep(sleepTime);
                 break;
             case barcode3:
                 // THIS IS HERE SO THE BOT CAN GO STRAIGHT OVER BARRIER INSTEAD OF GOING OVER TRIANGLE AND GETTING STUCK!
-                Bot.driveForward(straightSpd, 0.6);
+//                Bot.driveForward(straightSpd, 0.2);
                 sleep(sleepTime);
                 Bot.rotateLeft(turnEncoderSpd, 1.58);
                 sleep(sleepTime);
                 Bot.driveForward(1);
-                sleep(1600);
+                sleep(1700);
                 Bot.stopMotors();
                 sleep(sleepTime);
                 break;

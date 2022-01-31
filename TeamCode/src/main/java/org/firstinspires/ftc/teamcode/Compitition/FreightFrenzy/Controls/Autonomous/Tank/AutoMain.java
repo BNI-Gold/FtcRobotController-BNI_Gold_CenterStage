@@ -45,7 +45,7 @@ public abstract class AutoMain extends LinearOpMode {
     public void spinDuckBlue(TankBot Bot) {
         Bot.duckspincounterclockwiseAuto();
         //Time to spin duck spinner!
-        sleep(5000);
+        sleep(6000);
         Bot.duckspinstop();
         sleep(sleepTime);
     }
@@ -53,7 +53,7 @@ public abstract class AutoMain extends LinearOpMode {
     public void spinDuckRed(TankBot Bot) {
         Bot.duckspinclockwiseAuto();
         //Time to spin duck spinner!
-        sleep(5000);
+        sleep(6000);
         Bot.duckspinstop();
         sleep(sleepTime);
     }

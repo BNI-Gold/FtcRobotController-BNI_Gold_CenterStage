@@ -5,6 +5,8 @@ import com.qualcomm.hardware.rev.RevBlinkinLedDriver;
 import org.firstinspires.ftc.teamcode.Compitition.FreightFrenzy.Controls.Autonomous.Tank.AutoMain;
 import org.firstinspires.ftc.teamcode.Compitition.FreightFrenzy.Robots.TankBot;
 import org.firstinspires.ftc.teamcode.Compitition.FreightFrenzy.mechanisms.TSELocation;
+import org.openftc.easyopencv.OpenCvCamera;
+import org.openftc.easyopencv.OpenCvCameraRotation;
 
 public abstract class BlueShippingHubDuckStorageUnit extends AutoMain {
 
@@ -28,7 +30,7 @@ public abstract class BlueShippingHubDuckStorageUnit extends AutoMain {
 //        telemetry.addData("Barcode: ", Bot.barcode);
         telemetry.update();
         sleep(1000);
-
+        Bot.webcam.closeCameraDevice();
 
         switch (location) {
             case barcode1:
@@ -53,9 +55,9 @@ public abstract class BlueShippingHubDuckStorageUnit extends AutoMain {
                 Bot.setBoxHolder_Up();
                 sleep(100);
                 Bot.LyftRetract();
-                sleep(1100);
+                sleep(800);
                 Bot.LyftStopMotors();
-                Bot.setBoxHolder_Down();
+//                Bot.setBoxHolder_Down();
 
 
                 sleep(sleepTime);
@@ -64,9 +66,9 @@ public abstract class BlueShippingHubDuckStorageUnit extends AutoMain {
 
                 break;
             case barcode2:
-                Bot.pattern = RevBlinkinLedDriver.BlinkinPattern.BLUE;
-                Bot.blinkinLedDriver.setPattern(Bot.pattern);
-                telemetry.addData("LED: ", Bot.pattern);
+//                Bot.pattern = RevBlinkinLedDriver.BlinkinPattern.BLUE;
+//                Bot.blinkinLedDriver.setPattern(Bot.pattern);
+//                telemetry.addData("LED: ", Bot.pattern);
                 Bot.driveForward(straightSpd, ShippingHubDistance);   // 2.8 for variable distances
                 sleep(1000);
                 Bot.LyftExtend();
@@ -80,22 +82,22 @@ public abstract class BlueShippingHubDuckStorageUnit extends AutoMain {
                 Bot.setBoxHolder_Up();
                 sleep(100);
                 Bot.LyftRetract();
-                sleep(800);
+                sleep(500);
                 Bot.LyftStopMotors();
-                Bot.setBoxHolder_Down();
+//                Bot.setBoxHolder_Down();
                 sleep(sleepTime);
 //                Bot.driveBackward(straightSpd, 0.2); // DO NOT USE FOR ANYTHING.  barcade 2 is the "control"
                 sleep(sleepTime);
 
                 break;
             case barcode3:
-                Bot.pattern = RevBlinkinLedDriver.BlinkinPattern.GREEN;
-                Bot.blinkinLedDriver.setPattern(Bot.pattern);
-                telemetry.addData("LED: ", Bot.pattern);
+//                Bot.pattern = RevBlinkinLedDriver.BlinkinPattern.GREEN;
+//                Bot.blinkinLedDriver.setPattern(Bot.pattern);
+//                telemetry.addData("LED: ", Bot.pattern);
                 Bot.driveForward(straightSpd, ShippingHubDistance);   //2.6 for var distances
                 sleep(1000);
                 Bot.LyftExtend();
-                sleep(550);  // TIME TO EXTEND LYFT - 550 for var distances
+                sleep(525);  // TIME TO EXTEND LYFT - 550 for var distances
                 Bot.setBoxHolder_Release();
                 sleep(100);  //this allows the servo to lower while the motor is still engaged.
                 Bot.LyftStopMotors();
@@ -105,9 +107,9 @@ public abstract class BlueShippingHubDuckStorageUnit extends AutoMain {
                 Bot.setBoxHolder_Up();
                 sleep(100);
                 Bot.LyftRetract();
-                sleep(500);
+                sleep(275);
                 Bot.LyftStopMotors();
-                Bot.setBoxHolder_Down();
+//                Bot.setBoxHolder_Down();
                 sleep(sleepTime);
 //                Bot.driveForward(straightSpd, 0.18);  // forward 1.8 for var distances
                 sleep(sleepTime);
@@ -119,8 +121,8 @@ public abstract class BlueShippingHubDuckStorageUnit extends AutoMain {
                 telemetry.addData("LED: ", Bot.pattern);
                 break;
         }
-        telemetry.addData("BARCADE: ", location);
-        telemetry.update();
+//        telemetry.addData("BARCADE: ", location);
+//        telemetry.update();
     }
 
     public void ShippingHubToDuck (TankBot Bot, String Alliance, TSELocation location) {
@@ -164,11 +166,11 @@ public abstract class BlueShippingHubDuckStorageUnit extends AutoMain {
             sleep(sleepTime);
             Bot.rotateRight(turnEncoderSpd, 0.9);
             sleep(sleepTime);
-            Bot.driveForward(straightSpd, 2.8);
+            Bot.driveForward(straightSpd, 3.1);
             sleep(sleepTime);
-            Bot.rotateLeft(turnEncoderSpd, .13);
+            Bot.rotateLeft(turnEncoderSpd, .11);
             sleep(sleepTime);
-            Bot.driveForward(straightSpd, 1.60);
+            Bot.driveForward(straightSpd, 1.40);
             sleep(sleepTime);
     }
 

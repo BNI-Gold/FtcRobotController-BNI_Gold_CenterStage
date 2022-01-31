@@ -61,7 +61,7 @@ public abstract class RedDuckParkStorageUnit extends AutoMain {
             sleep(sleepTime);
             Bot.rotateRight(turnEncoderSpd, .2);
             sleep(sleepTime);
-            Bot.driveForward(straightSpd, 1.4);
+            Bot.driveForward(straightSpd, 1.3);
             sleep(sleepTime);
         }
         if (Alliance.equals("Red")) {

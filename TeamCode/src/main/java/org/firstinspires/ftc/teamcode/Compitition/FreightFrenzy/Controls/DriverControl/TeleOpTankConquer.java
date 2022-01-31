@@ -1,6 +1,7 @@
 package org.firstinspires.ftc.teamcode.Compitition.FreightFrenzy.Controls.DriverControl;
 
 import com.acmerobotics.dashboard.FtcDashboard;
+import com.qualcomm.hardware.rev.RevBlinkinLedDriver;
 import com.qualcomm.robotcore.eventloop.opmode.OpMode;
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 import com.qualcomm.robotcore.util.Range;
@@ -164,6 +165,8 @@ public class TeleOpTankConquer extends OpMode {
     public void LyftExtender () {
         if (gamepad2.right_bumper == true) {
             Bot.LyftExtend();
+            Bot.pattern = RevBlinkinLedDriver.BlinkinPattern.YELLOW;
+            Bot.blinkinLedDriver.setPattern(Bot.pattern);
         }
         else if (gamepad2.left_bumper == true){
             Bot.LyftRetract();
@@ -177,12 +180,17 @@ public class TeleOpTankConquer extends OpMode {
     public void BoxHolderControl () {
         if (gamepad2.a == true){
             Bot.setBoxHolder_Down();
+
         }
         if (gamepad2.y == true){
             Bot.setBoxHolder_Up();
+            Bot.pattern = RevBlinkinLedDriver.BlinkinPattern.GREEN;
+            Bot.blinkinLedDriver.setPattern(Bot.pattern);
         }
         if (gamepad2.dpad_down) {
             Bot.setBoxHolder_Release();
+            Bot.pattern = RevBlinkinLedDriver.BlinkinPattern.RED;
+            Bot.blinkinLedDriver.setPattern(Bot.pattern);
         }
 
     }

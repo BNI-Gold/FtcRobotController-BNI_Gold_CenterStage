@@ -26,13 +26,14 @@ public abstract class RedShippingHubPark extends AutoMain {
 //        telemetry.addData("Barcode: ", Bot.barcode);
         telemetry.update();
         sleep(1000);
+        Bot.webcam.closeCameraDevice();
 
 
         switch (location) {
             case barcode1:
-                Bot.pattern = RevBlinkinLedDriver.BlinkinPattern.YELLOW;
-                Bot.blinkinLedDriver.setPattern(Bot.pattern);
-                telemetry.addData("LED: ", Bot.pattern);
+//                Bot.pattern = RevBlinkinLedDriver.BlinkinPattern.YELLOW;
+//                Bot.blinkinLedDriver.setPattern(Bot.pattern);
+//                telemetry.addData("LED: ", Bot.pattern);
 
                 Bot.driveForward(straightSpd, 2.0);
                 sleep(1000);
@@ -48,16 +49,16 @@ public abstract class RedShippingHubPark extends AutoMain {
                 Bot.setBoxHolder_Up();
                 sleep(100);
                 Bot.LyftRetract();
-                sleep(900);
+                sleep(800);
                 Bot.LyftStopMotors();
-                Bot.setBoxHolder_Down();
+//                Bot.setBoxHolder_Down();
                 sleep(sleepTime);
                 break;
             case barcode2:
-                Bot.pattern = RevBlinkinLedDriver.BlinkinPattern.BLUE;
-                Bot.blinkinLedDriver.setPattern(Bot.pattern);
-                telemetry.addData("LED: ", Bot.pattern);
-                Bot.driveForward(straightSpd, 2.3);
+//                Bot.pattern = RevBlinkinLedDriver.BlinkinPattern.BLUE;
+//                Bot.blinkinLedDriver.setPattern(Bot.pattern);
+//                telemetry.addData("LED: ", Bot.pattern);
+                Bot.driveForward(straightSpd, 2.7);
                 sleep(1000);
                 Bot.LyftExtend();
                 sleep(700);
@@ -70,16 +71,16 @@ public abstract class RedShippingHubPark extends AutoMain {
                 Bot.setBoxHolder_Up();
                 sleep(100);
                 Bot.LyftRetract();
-                sleep(400);
+                sleep(450);
                 Bot.LyftStopMotors();
-                Bot.setBoxHolder_Down();
+//                Bot.setBoxHolder_Down();
                 sleep(sleepTime);
                 break;
             case barcode3:
-                Bot.pattern = RevBlinkinLedDriver.BlinkinPattern.GREEN;
-                Bot.blinkinLedDriver.setPattern(Bot.pattern);
-                telemetry.addData("LED: ", Bot.pattern);
-                Bot.driveForward(straightSpd, 2.5);
+//                Bot.pattern = RevBlinkinLedDriver.BlinkinPattern.GREEN;
+//                Bot.blinkinLedDriver.setPattern(Bot.pattern);
+//                telemetry.addData("LED: ", Bot.pattern);
+                Bot.driveForward(straightSpd, 2.8);
                 sleep(1000);
                 Bot.LyftExtend();
                 sleep(500);
@@ -92,9 +93,9 @@ public abstract class RedShippingHubPark extends AutoMain {
                 Bot.setBoxHolder_Up();
                 sleep(100);
                 Bot.LyftRetract();
-                sleep(100);
+                sleep(250);
                 Bot.LyftStopMotors();
-                Bot.setBoxHolder_Down();
+//                Bot.setBoxHolder_Down();
                 sleep(sleepTime);
                 break;
             default:
@@ -104,7 +105,7 @@ public abstract class RedShippingHubPark extends AutoMain {
                 break;
         }
 
-        telemetry.update();
+//        telemetry.update();
 
     }
 
@@ -138,9 +139,9 @@ public abstract class RedShippingHubPark extends AutoMain {
             case barcode3:
                 Bot.driveForward(straightSpd, 0.8);
                 sleep(sleepTime);
-                Bot.gyroCorrection(turnGyro1, -92);
+                Bot.rotateRight(turnEncoderSpd, 1.56);
                 sleep(sleepTime);
-                Bot.rotateRight(turnEncoderSpd, 1.58);
+                Bot.gyroCorrection(turnGyro1, -92);
                 sleep(sleepTime);
                 Bot.driveForward(1);
                 sleep(1700);

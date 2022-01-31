@@ -32,7 +32,7 @@ public class TankBot extends TankTreadDrive {
     public DcMotor Lyft;
     public DcMotor intake;
 
-    public double duckSpinnerPower = 0.46;
+    public double duckSpinnerPower = 0.55;
 
     public double LyftExtendPower = 1.0;
     public double LyftRetractPower = -0.75;
@@ -124,7 +124,7 @@ public class TankBot extends TankTreadDrive {
     }
 
     public void duckspinclockwiseAuto() {
-        DuckSpinner.setPower(duckSpinnerPower * 0.75);
+        DuckSpinner.setPower(duckSpinnerPower * .6);
     }
 
     public void duckspincounterclockwise() {
@@ -132,7 +132,7 @@ public class TankBot extends TankTreadDrive {
     }
 
     public void duckspincounterclockwiseAuto () {
-        DuckSpinner.setPower(-duckSpinnerPower * 0.75);
+        DuckSpinner.setPower(-duckSpinnerPower * .6);
     }
 
     public void duckspinstop() {

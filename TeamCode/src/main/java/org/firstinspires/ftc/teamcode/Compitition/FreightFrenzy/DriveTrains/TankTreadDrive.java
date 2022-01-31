@@ -129,9 +129,9 @@ public class TankTreadDrive {
 //            linearOp.telemetry.update();
 //            linearOp.sleep(1000);
             while (rightMotorA.getCurrentPosition() > -ticks && timer.milliseconds() <= timeThreshold && linearOp.opModeIsActive()) {
-                linearOp.telemetry.addData("current timer (ms): ", timer.milliseconds());
-                linearOp.telemetry.addData("threshold time: ", timeThreshold);
-                linearOp.telemetry.update();
+//                linearOp.telemetry.addData("current timer (ms): ", timer.milliseconds());
+//                linearOp.telemetry.addData("threshold time: ", timeThreshold);
+//                linearOp.telemetry.update();
                 driveBackward(speed);
 //                linearOp.telemetry.addData("TARGET TICKS (in while): ", ticks);
 //                linearOp.telemetry.addData("CURRENT TICKS (left motor): ", leftMotorA.getCurrentPosition());

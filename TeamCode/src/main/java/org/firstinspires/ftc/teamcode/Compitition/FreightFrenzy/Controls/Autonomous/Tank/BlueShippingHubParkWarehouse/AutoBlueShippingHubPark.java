@@ -23,11 +23,10 @@ public class AutoBlueShippingHubPark extends BlueShippingHubPark{
     @Override
     public void runOpMode() throws InterruptedException {
         Bot.initRobot(hardwareMap);
-        Bot.initWebcam();
         Bot.setLinearOp(this);
 
-        telemetry.addLine("WAITING FOR START >");
-        telemetry.update();
+//        telemetry.addLine("WAITING FOR START >");
+//        telemetry.update();
 
 //        Bot.detectBarcode();
         Alliance = "Blue";
@@ -36,19 +35,19 @@ public class AutoBlueShippingHubPark extends BlueShippingHubPark{
 
 
 
-        telemetry.addLine("WAITING FOR START >");
-        telemetry.addLine("All my telemetry will be on FTC Dashboard");
-        telemetry.addLine("http://192.168.43.1:8080/dash");
-        telemetry.update();
+//        telemetry.addLine("WAITING FOR START >");
+//        telemetry.addLine("All my telemetry will be on FTC Dashboard");
+//        telemetry.addLine("http://192.168.43.1:8080/dash");
+//        telemetry.update();
 
-        Bot.detectBarcode();
+        //Bot.detectBarcode();
 
         TSELocation location = null;
 
 
-        FtcDashboard dashboard = FtcDashboard.getInstance();
-        telemetry = dashboard.getTelemetry();
-        FtcDashboard.getInstance().startCameraStream(Bot.webcam, 10);
+//        FtcDashboard dashboard = FtcDashboard.getInstance();
+//        telemetry = dashboard.getTelemetry();
+//        FtcDashboard.getInstance().startCameraStream(Bot.webcam, 10);
         telemetry.addLine("WAITING FOR START >");
         telemetry.update();
 
@@ -57,8 +56,9 @@ public class AutoBlueShippingHubPark extends BlueShippingHubPark{
         waitForStart();
 
         while (opModeIsActive()) {
+            Bot.initWebcam();
 
-            sleep(1000);
+            sleep(2000);
 
             switch (AutoPath) {
                 case "CameraShippingHubWarehouse":

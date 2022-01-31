@@ -18,40 +18,40 @@ public class AutoRedShippingHubDuckStorageUnit extends RedShippingHubDuckStorage
 
     @Override
     public void runOpMode() throws InterruptedException {
-        Bot.initRobot(hardwareMap);
+//        Bot.initRobot(hardwareMap);
 //        Bot.initWebcam();
-        Bot.setLinearOp(this);
+//        Bot.setLinearOp(this);
 
-        telemetry.addLine("WAITING FOR START >");
-        telemetry.update();
+//        telemetry.addLine("WAITING FOR START >");
+//        telemetry.update();
 
 //        Bot.detectBarcode();
-        Alliance = "Red";
         Bot.initRobot(hardwareMap);
-        Bot.initWebcam();
         Bot.setLinearOp(this);
+        Alliance = "Red";
 
-        telemetry.addLine("WAITING FOR START >");
-        telemetry.addLine("All my telemetry will be on FTC Dashboard");
-        telemetry.addLine("http://192.168.43.1:8080/dash");
-        telemetry.update();
+//        telemetry.addLine("WAITING FOR START >");
+//        telemetry.addLine("All my telemetry will be on FTC Dashboard");
+//        telemetry.addLine("http://192.168.43.1:8080/dash");
+//        telemetry.update();
 
-        Bot.detectBarcode();
+        //Bot.detectBarcode();
 
         TSELocation location = null;
 
 
-        FtcDashboard dashboard = FtcDashboard.getInstance();
-        telemetry = dashboard.getTelemetry();
-        FtcDashboard.getInstance().startCameraStream(Bot.webcam, 10);
+//        FtcDashboard dashboard = FtcDashboard.getInstance();
+//        telemetry = dashboard.getTelemetry();
+//        FtcDashboard.getInstance().startCameraStream(Bot.webcam, 10);
         telemetry.addLine("WAITING FOR START >");
         telemetry.update();
 
         waitForStart();
 
         while (opModeIsActive()) {
+            Bot.initWebcam();
 
-            sleep(1000);
+            sleep(2000);
 
             location = Bot.detectBarcode();  // uses webcam -- only midpoint telemetry shows
             sleep(sleepTime);

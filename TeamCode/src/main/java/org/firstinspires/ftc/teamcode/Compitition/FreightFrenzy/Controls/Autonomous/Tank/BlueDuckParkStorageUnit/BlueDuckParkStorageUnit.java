@@ -12,7 +12,7 @@ public abstract class BlueDuckParkStorageUnit extends AutoMain {
     private double straightSpd = 0.6;
     private double turnEncoderSpd = 0.5;
     //        Speed .2 == too low for gyro turn
-    private double turnGyro1 = 0.25;
+    private double turnGyro1 = .5;
     private double turnGyro2 = 0.3;
 
 
@@ -21,7 +21,7 @@ public abstract class BlueDuckParkStorageUnit extends AutoMain {
         if (Alliance.equals("Blue")) {
             Bot.driveForward(straightSpd, 2.6);
             sleep(1000);
-            Bot.rotateLeft(turnEncoderSpd, 1.6);
+//            Bot.rotateLeft(turnEncoderSpd, 1.6);
             sleep(sleepTime);
             Bot.gyroCorrection(turnGyro1, +90);
             sleep(sleepTime);
@@ -33,7 +33,7 @@ public abstract class BlueDuckParkStorageUnit extends AutoMain {
             sleep(sleepTime);
 
 //            spin towards duck spinner
-            Bot.rotateRight(turnEncoderSpd, 0.6);
+//            Bot.rotateRight(turnEncoderSpd, 0.6);
             sleep(sleepTime);
 
             Bot.gyroCorrection(turnGyro1, +45);
@@ -42,11 +42,11 @@ public abstract class BlueDuckParkStorageUnit extends AutoMain {
 //            sleep(sleepTime);
 
 //            Drive to duck spinner.  Should be at it after this.
-            Bot.driveBackward(0.4, 0.7, 2000);
+            Bot.driveBackward(0.4, 1.1, 3000);
             sleep(sleepTime);
-            Bot.driveBackward(0.2, 0.4, 1000);
+            Bot.driveBackward(0.3, 0.4, 1000);
             sleep(sleepTime);
-            Bot.driveBackward(0.15, 0.2, 500);
+            Bot.driveBackward(0.2, 0.2, 500);
             sleep(sleepTime);
             Bot.driveForward(0.15, .03);   //SPINNY IS GETTING CAUGHT ON DUCK SPINNER.  THIS IS TO GIVE A LITTLE SLACK.
             sleep(sleepTime);
@@ -58,9 +58,9 @@ public abstract class BlueDuckParkStorageUnit extends AutoMain {
 
     public void DuckSpinnerToStorageUnit (TankBot Bot, String Alliance) {
         if (Alliance.equals("Blue")) {
-            Bot.driveForward(straightSpd, 0.6);
+            Bot.driveForward(straightSpd, 0.8);
             sleep(sleepTime);
-            Bot.rotateRight(turnEncoderSpd, 0.9);
+            Bot.rotateRight(turnEncoderSpd, 0.7);
             sleep(sleepTime);
             Bot.driveForward(straightSpd, 2.9);
             sleep(sleepTime);
