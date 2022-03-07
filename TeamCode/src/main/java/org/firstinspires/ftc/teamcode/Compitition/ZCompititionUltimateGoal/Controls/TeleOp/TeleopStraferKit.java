@@ -8,7 +8,7 @@ import com.qualcomm.robotcore.util.Range;
 import org.firstinspires.ftc.teamcode.Compitition.ZCompititionUltimateGoal.Robots.StraferKit;
 
 @TeleOp(name = "Teleop_StraferKit",group = "Lab")
-@Disabled
+
 public class TeleopStraferKit extends OpMode{
 
     // Variables & Constants specific to TeleLabBot
