@@ -60,7 +60,7 @@ public class AutoRedShippingHubPark extends RedShippingHubPark {
 
         while (opModeIsActive()) {
             Bot.initWebcam();
-            sleep(2000);
+//            sleep(2000);
 
             switch (AutoPath) {
                 case "CameraShippingHubWarehouse":

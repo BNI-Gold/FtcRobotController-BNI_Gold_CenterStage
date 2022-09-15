@@ -1,10 +1,9 @@
-package org.firstinspires.ftc.teamcode.Compitition.FreightFrenzy.DriveTrains;
+package org.firstinspires.ftc.teamcode.Compitition.FreightFrenzy.Testing.DriveTrains;
 
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 import com.qualcomm.robotcore.hardware.DcMotor;
-import com.qualcomm.robotcore.hardware.HardwareMap;
 
-public class MecanumDrive {
+public class StraferBot {
 
     // Instance Variables & Constants
 
@@ -24,7 +23,7 @@ public class MecanumDrive {
     }
 
 
-    public MecanumDrive() {
+    public StraferBot() {
 
     }
 
@@ -301,6 +300,4 @@ public class MecanumDrive {
     }
 
 
-    public void initRobot(HardwareMap hardwareMap) {
-    }
 }
