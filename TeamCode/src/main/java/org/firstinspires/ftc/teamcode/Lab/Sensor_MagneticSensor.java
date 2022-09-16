@@ -1,5 +1,6 @@
 package org.firstinspires.ftc.teamcode.Lab;
 
+import android.inputmethodservice.Keyboard;
 import android.text.method.Touch;
 
 import com.qualcomm.hardware.rev.RevBlinkinLedDriver;
@@ -31,6 +32,10 @@ public class Sensor_MagneticSensor extends OpMode {
             pattern = RevBlinkinLedDriver.BlinkinPattern.RED;
         }
         else pattern = RevBlinkinLedDriver.BlinkinPattern.BLUE;
+
+        Keyboard keyboard;
+
+        keyboard.getKeys()
 
 
 

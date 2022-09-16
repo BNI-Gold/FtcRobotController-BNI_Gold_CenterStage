@@ -179,6 +179,35 @@ public class TankBot extends TankTreadDrive {
 
 
 
+    // ***********  Robot Gyro Controls and Gyro Correction Methods
+
+    public void gyroCorrection (double speed, double angle) {
+
+        angles = imu.getAngularOrientation(AxesReference.INTRINSIC, AxesOrder.ZYX, AngleUnit.DEGREES);
+
+        if (angles.firstAngle >= angle + TOLERANCE) {
+            while (angles.firstAngle >=  angle + TOLERANCE && linearOp.opModeIsActive()) {
+                rotateRight(speed);
+                angles = imu.getAngularOrientation(AxesReference.INTRINSIC, AxesOrder.ZYX, AngleUnit.DEGREES);
+            }
+        }
+        else if (angles.firstAngle <= angle - TOLERANCE) {
+            while (angles.firstAngle <= angle - TOLERANCE && linearOp.opModeIsActive()) {
+                rotateLeft(speed);
+                angles = imu.getAngularOrientation(AxesReference.INTRINSIC, AxesOrder.ZYX, AngleUnit.DEGREES);
+            }
+        }
+        stopMotors();
+
+        angles = imu.getAngularOrientation(AxesReference.INTRINSIC, AxesOrder.ZYX, AngleUnit.DEGREES);
+    }
+
+
+    public void gyroReset () {
+        BNO055IMU.Parameters parametersimu = new BNO055IMU.Parameters();
+        imu.initialize(parametersimu);
+    }
+
     //emma
     public void initWebcam() {
         //OPENCV WEBCAM
@@ -311,33 +340,6 @@ public class TankBot extends TankTreadDrive {
     }
 
 
-    // ***********  Robot Gyro Controls and Gyro Correction Methods
-
-    public void gyroCorrection (double speed, double angle) {
-
-        angles = imu.getAngularOrientation(AxesReference.INTRINSIC, AxesOrder.ZYX, AngleUnit.DEGREES);
-
-        if (angles.firstAngle >= angle + TOLERANCE) {
-            while (angles.firstAngle >=  angle + TOLERANCE && linearOp.opModeIsActive()) {
-                rotateRight(speed);
-                angles = imu.getAngularOrientation(AxesReference.INTRINSIC, AxesOrder.ZYX, AngleUnit.DEGREES);
-            }
-        }
-        else if (angles.firstAngle <= angle - TOLERANCE) {
-            while (angles.firstAngle <= angle - TOLERANCE && linearOp.opModeIsActive()) {
-                rotateLeft(speed);
-                angles = imu.getAngularOrientation(AxesReference.INTRINSIC, AxesOrder.ZYX, AngleUnit.DEGREES);
-            }
-        }
-        stopMotors();
-
-        angles = imu.getAngularOrientation(AxesReference.INTRINSIC, AxesOrder.ZYX, AngleUnit.DEGREES);
-    }
-
-    public void gyroReset () {
-        BNO055IMU.Parameters parametersimu = new BNO055IMU.Parameters();
-        imu.initialize(parametersimu);
-    }
 
 
 }
