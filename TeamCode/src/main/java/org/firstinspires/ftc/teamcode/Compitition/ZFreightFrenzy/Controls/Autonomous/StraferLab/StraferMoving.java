@@ -1,4 +1,4 @@
-package org.firstinspires.ftc.teamcode.Compitition.PowerPlay.controls.Autonomus;
+package org.firstinspires.ftc.teamcode.Compitition.ZFreightFrenzy.Controls.Autonomous.StraferLab;
 
 import org.firstinspires.ftc.teamcode.Compitition.ZFreightFrenzy.Controls.AutonomousFFCompititionBot.AutoMain;
 
