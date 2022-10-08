@@ -28,7 +28,7 @@ import org.openftc.easyopencv.OpenCvCameraRotation;
 import org.openftc.easyopencv.OpenCvPipeline;
 
 
-public class LabBotAcker extends MecanumDrive  {
+public class LabBotAcker extends AckerMecanumDrive  {
 
     //hardware constructors
     public HardwareMap hwBot  =  null;
