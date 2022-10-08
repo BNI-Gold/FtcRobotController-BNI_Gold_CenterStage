@@ -23,26 +23,20 @@ public class straferbot2test extends MecanumDrive {
         public final double SPEED = 0.3;
         public final double TOLERANCE = 0.4;
 
-        public void straferbot2test(){ }
+        //public void straferbot2test(){ }
 
         public void initRobot (HardwareMap hardwareMap) {
             hwBot = hardwareMap;
 
             frontLeftMotor=hwBot.dcMotor.get("front_left_motor");
-
             frontRightMotor=hwBot.dcMotor.get("front_right_motor");
-
             rearLeftMotor=hwBot.dcMotor.get("rear_left_motor");
-
             rearRightMotor=hwBot.dcMotor.get("rear_right_motor");
 
 
             frontLeftMotor.setDirection(DcMotor.Direction.REVERSE);
-
             rearLeftMotor.setDirection(DcMotor.Direction.REVERSE);
-
             frontRightMotor.setDirection(DcMotor.Direction.FORWARD);
-
             rearRightMotor.setDirection(DcMotor.Direction.FORWARD);
 
 

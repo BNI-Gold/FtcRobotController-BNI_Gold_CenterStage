@@ -119,14 +119,17 @@ public class TankBot extends TankTreadDrive {
     }
 
     public void duckspinclockwise() {
+
         DuckSpinner.setPower(duckSpinnerPower);
     }
 
     public void duckspinclockwiseAuto() {
+
         DuckSpinner.setPower(duckSpinnerPower * .6);
     }
 
     public void duckspincounterclockwise() {
+
         DuckSpinner.setPower(-duckSpinnerPower);
     }
 

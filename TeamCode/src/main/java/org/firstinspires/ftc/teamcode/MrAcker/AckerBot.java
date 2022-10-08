@@ -5,6 +5,7 @@ import com.qualcomm.hardware.bosch.JustLoggingAccelerationIntegrator;
 import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.hardware.HardwareMap;
 import com.qualcomm.robotcore.hardware.Servo;
+import com.qualcomm.robotcore.hardware.TouchSensor;
 
 import org.firstinspires.ftc.robotcore.external.navigation.Acceleration;
 import org.firstinspires.ftc.robotcore.external.navigation.AngleUnit;
@@ -15,74 +16,100 @@ import org.firstinspires.ftc.teamcode.Compitition.PowerPlay.DriveTrains.MecanumD
 
 public class AckerBot extends AckerMecanumDrive {
 
-        //Hardware Map
-        public HardwareMap hwBot = null;
+    //Hardware Map
+    public HardwareMap hwBot = null;
 
-        //Servo Controls
-        public Servo leftLinkage = null;
-        public Servo rightLinkage = null;
+    //Servo Controls
+    public Servo leftLinkage = null;
+    public Servo rightLinkage = null;
 
-        //Gyro Controls
-        public BNO055IMU imu;
-        public Orientation angles;
-        public Acceleration gravity;
-        public final double SPEED = 0.3;
-        public final double TOLERANCE = 0.4;
+    //Grabber
+    public DcMotor grabberLift = null;
 
-        public void initRobot (HardwareMap hardwareMap) {
+    //Magnetic Switch
+    TouchSensor magSwitch;
 
-            hwBot = hardwareMap;
+    //Gyro Controls
+    public BNO055IMU imu;
+    public Orientation angles;
+    public Acceleration gravity;
+    public final double SPEED = 0.3;
+    public final double TOLERANCE = 0.4;
 
-            frontLeftMotor=hwBot.dcMotor.get("front_left_motor");
-            frontRightMotor=hwBot.dcMotor.get("front_right_motor");
-            rearLeftMotor=hwBot.dcMotor.get("rear_left_motor");
-            rearRightMotor=hwBot.dcMotor.get("rear_right_motor");
+    public void initRobot(HardwareMap hardwareMap) {
 
-            frontLeftMotor.setDirection(DcMotor.Direction.REVERSE);
-            rearLeftMotor.setDirection(DcMotor.Direction.REVERSE);
-            frontRightMotor.setDirection(DcMotor.Direction.FORWARD);
-            rearRightMotor.setDirection(DcMotor.Direction.FORWARD);
+        hwBot = hardwareMap;
 
-            setMotorRunModes(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
-            setMotorRunModes(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
+        frontLeftMotor = hwBot.dcMotor.get("front_left_motor");
+        frontRightMotor = hwBot.dcMotor.get("front_right_motor");
+        rearLeftMotor = hwBot.dcMotor.get("rear_left_motor");
+        rearRightMotor = hwBot.dcMotor.get("rear_right_motor");
 
-            frontLeftMotor.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
-            frontRightMotor.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
-            rearRightMotor.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
-            rearLeftMotor.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
+        frontLeftMotor.setDirection(DcMotor.Direction.REVERSE);
+        rearLeftMotor.setDirection(DcMotor.Direction.REVERSE);
+        frontRightMotor.setDirection(DcMotor.Direction.FORWARD);
+        rearRightMotor.setDirection(DcMotor.Direction.FORWARD);
 
-            BNO055IMU.Parameters parametersimu = new BNO055IMU.Parameters();
-            parametersimu.angleUnit = BNO055IMU.AngleUnit.DEGREES;
-            parametersimu.accelUnit = BNO055IMU.AccelUnit.METERS_PERSEC_PERSEC;
-            parametersimu.calibrationDataFile = "BN0055IMUCalibration.json";
+        setMotorRunModes(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
+        setMotorRunModes(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
 
-            parametersimu.loggingEnabled = true;
-            parametersimu.loggingTag = "IMU";
-            parametersimu.accelerationIntegrationAlgorithm = new JustLoggingAccelerationIntegrator();
+        frontLeftMotor.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
+        frontRightMotor.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
+        rearRightMotor.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
+        rearLeftMotor.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
 
-            imu = hwBot.get(BNO055IMU.class,"imu");
-            imu.initialize(parametersimu);
+        grabberLift = hwBot.dcMotor.get("grabber_lift");
+        grabberLift.setDirection(DcMotor.Direction.FORWARD);
+        grabberLift.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
+        grabberLift.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
+        grabberLift.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
 
-            leftLinkage = hwBot.get(Servo.class, "grabber_left");
-            rightLinkage = hwBot.get(Servo.class, "grabber_right");
-            leftLinkage.setDirection(Servo.Direction.FORWARD);
-            rightLinkage.setDirection(Servo.Direction.FORWARD);
+        magSwitch = hardwareMap.get(TouchSensor.class, "magnetic_switch");
 
-        }
 
-        // Actuator Grabber Methods
+        BNO055IMU.Parameters parametersimu = new BNO055IMU.Parameters();
+        parametersimu.angleUnit = BNO055IMU.AngleUnit.DEGREES;
+        parametersimu.accelUnit = BNO055IMU.AccelUnit.METERS_PERSEC_PERSEC;
+        parametersimu.calibrationDataFile = "BN0055IMUCalibration.json";
 
-        void openGrabber(double posLeft, double posRight) {
+        parametersimu.loggingEnabled = true;
+        parametersimu.loggingTag = "IMU";
+        parametersimu.accelerationIntegrationAlgorithm = new JustLoggingAccelerationIntegrator();
 
-            leftLinkage.setPosition(posLeft);
-            rightLinkage.setPosition(posRight);
+        imu = hwBot.get(BNO055IMU.class,"imu");
+        imu.initialize(parametersimu);
 
-        }
-        void closeGrabber(double posLeft, double posRight) {
+        leftLinkage = hwBot.get(Servo.class, "grabber_arm_left");
+        rightLinkage = hwBot.get(Servo.class, "grabber_arm_right");
+        leftLinkage.setDirection(Servo.Direction.FORWARD);
+        rightLinkage.setDirection(Servo.Direction.FORWARD);
 
-            leftLinkage.setPosition(posLeft);
-            rightLinkage.setPosition(posRight);
-        }
+    }
 
+    // Actuator Grabber Methods
+
+    void openGrabber(double posLeft, double posRight) {
+        leftLinkage.setPosition(posLeft);
+        rightLinkage.setPosition(posRight);
+
+    }
+
+    void closeGrabber(double posLeft, double posRight) {
+        leftLinkage.setPosition(posLeft);
+        rightLinkage.setPosition(posRight);
+    }
+
+    void extendGrabberLift(double power) {
+        grabberLift.setPower(Math.abs(power));
+    }
+    void retractGrabberLift (double power) {
+        grabberLift.setPower(-Math.abs(power));
+    }
+
+    void stopGrabberLift () {
+        grabberLift.setPower(0);
+    }
 
 }
+
+

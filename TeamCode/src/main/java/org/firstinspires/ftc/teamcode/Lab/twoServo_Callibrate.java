@@ -1,78 +1,70 @@
 package org.firstinspires.ftc.teamcode.Lab;
 
-import com.qualcomm.robotcore.eventloop.opmode.Disabled;
 import com.qualcomm.robotcore.eventloop.opmode.OpMode;
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 import com.qualcomm.robotcore.hardware.Servo;
 import com.qualcomm.robotcore.util.Range;
 
-@TeleOp(name = "wobble arm calibration")
-@Disabled
+@TeleOp(name = "Grabber Arm")
 //@Disabled
+
 public class twoServo_Callibrate extends OpMode {
 
-    private Servo wobbleArm = null;
-
-    private double wobbleArmPos = 0.16;
-
+    private Servo grabberArmLeft = null;
+    private double grabberLeftArmPos = 0.4;
     private double incVal = 0.001;
-
-    private Servo wobbleGrab = null;
-
-    private double wobbleGrabPos = 0.5;
-
-
+    private Servo grabberArmRight = null;
+    private double grabberRightArmPos = 0.6;
 
 
     @Override
     public void init () {
-        wobbleArm = hardwareMap.servo.get("ring_mag");
-        wobbleArm.setPosition(wobbleArmPos);
-        wobbleGrab = hardwareMap.servo.get("wobble_grab");
-        wobbleGrab.setPosition((wobbleGrabPos));
+        grabberArmLeft = hardwareMap.servo.get("grabber_arm_left");
+        grabberArmLeft.setPosition(grabberLeftArmPos);
+        grabberArmRight = hardwareMap.servo.get("grabber_arm_right");
+        grabberArmRight.setPosition((grabberRightArmPos));
     }
 
     @Override
     public void loop () {
         if (gamepad1.right_bumper) {
-            wobbleArmPos += incVal;
-            wobbleArmPos = Range.clip(wobbleArmPos,0,1);
+            grabberLeftArmPos += incVal;
+            grabberLeftArmPos = Range.clip(grabberLeftArmPos,0,1);
             telemetry.addLine("Increase Servo Pos!");
         }
 
         if (gamepad1.left_bumper){
-            wobbleArmPos-= incVal;
-            wobbleArmPos = Range.clip(wobbleArmPos, 0,  1);
+            grabberLeftArmPos -= incVal;
+            grabberLeftArmPos = Range.clip(grabberLeftArmPos, 0,  1);
             telemetry.addLine( "Decrease Servo Pos!");
         }
 
-        wobbleArm.setPosition(wobbleArmPos);
+        grabberArmLeft.setPosition(grabberLeftArmPos);
 
         if (gamepad2.right_bumper) {
-            wobbleGrabPos += incVal;
-            wobbleGrabPos = Range.clip(wobbleGrabPos,0,1);
+            grabberRightArmPos += incVal;
+            grabberRightArmPos = Range.clip(grabberRightArmPos,0,1);
             telemetry.addLine("Increase Servo Pos!");
         }
 
         if (gamepad2.left_bumper){
-            wobbleGrabPos-= incVal;
-            wobbleGrabPos = Range.clip(wobbleGrabPos, 0,  1);
+            grabberRightArmPos -= incVal;
+            grabberRightArmPos = Range.clip(grabberRightArmPos, 0,  1);
             telemetry.addLine( "Decrease Servo Pos!");
         }
 
-        wobbleGrab.setPosition(wobbleGrabPos);
+        grabberArmRight.setPosition(grabberRightArmPos);
         updateTelemetry();
     }
-
 
 
     public void updateTelemetry () {
         telemetry.addLine("RB: increase, LB: Decrease");
         telemetry.addLine("x = set to .90, y = set to 0.10");
-        telemetry.addData("Test Servo Position:", wobbleArm.getPosition());
-        telemetry.addData("Servo Arm Position:", wobbleArmPos);
-        telemetry.addData("Servo Wobble Position", wobbleGrab.getPosition());
-        telemetry.addData("Servo Wobble Grab Position", wobbleGrabPos);
+        telemetry.addData("Grabber Left Arm Position:", grabberArmLeft.getPosition());
+        telemetry.addData("Grabber Left Arm Position:", grabberLeftArmPos);
+        telemetry.addData("Grabber Right Arm Position", grabberArmRight.getPosition());
+        telemetry.addData("Grabber Right Arm Position", grabberRightArmPos);
         telemetry.update();
     }
 }

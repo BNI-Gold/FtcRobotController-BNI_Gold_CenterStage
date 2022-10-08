@@ -1,6 +1,6 @@
 package org.firstinspires.ftc.teamcode.Lab.VisionTracking.EOCV.FreightFrenzyExample.BoltsOfSteel;
 
-import com.acmerobotics.dashboard.FtcDashboard;
+//import com.acmerobotics.dashboard.FtcDashboard;
 import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
 import com.qualcomm.robotcore.eventloop.opmode.Disabled;
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
@@ -88,9 +88,9 @@ public class opencvTSEDetector extends LinearOpMode {
             }
         });
 
-        FtcDashboard dashboard = FtcDashboard.getInstance();
-        telemetry = dashboard.getTelemetry();
-        FtcDashboard.getInstance().startCameraStream(webcam, 5);
+//        FtcDashboard dashboard = FtcDashboard.getInstance();
+//        telemetry = dashboard.getTelemetry();
+//        FtcDashboard.getInstance().startCameraStream(webcam, 5);
 
         waitForStart();
         while (opModeIsActive()) {

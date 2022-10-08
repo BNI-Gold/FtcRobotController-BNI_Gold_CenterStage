@@ -6,7 +6,7 @@ import com.qualcomm.robotcore.util.Range;
 
 import org.firstinspires.ftc.teamcode.Compitition.ZCompititionUltimateGoal.Robots.StraferKit;
 
-@TeleOp (name = "Teleop:AckerBot",group = "Acker")
+@TeleOp (name = "NamelessBot",group = "BNI")
 
 public class TeleOp_AckerBot extends OpMode {
 
@@ -20,9 +20,7 @@ public class TeleOp_AckerBot extends OpMode {
     double rearLeftSpeed;
     double rearRightSpeed;
 
-
     double powerThreshold = 0;
-    double encoders;
     double speedMultiply = 1;
 
     //Construct Robot from AckerBot Class
@@ -31,26 +29,38 @@ public class TeleOp_AckerBot extends OpMode {
 
     @Override
     public void init() {
+
         Bot.initRobot(hardwareMap);
     }
 
     @Override
     public void loop() {
         drive();
-        grabber();
+        grabberArms();
+        grabberLift();
     }
 
-
     //TeleOp Methods
-
-    public void grabber() {
+    public void grabberArms() {
         if (gamepad1.left_bumper) {
-            Bot.openGrabber(.45,.45);
+            Bot.openGrabber(.55,.45);
         }
         else if (gamepad1.right_bumper) {
-            Bot.closeGrabber(.55, .45);
+            Bot.closeGrabber(.45, .55);
         }
 
+    }
+
+    public void grabberLift() {
+        if (gamepad1.left_trigger > 0) {
+            Bot.extendGrabberLift(.50);
+        }
+        else if (gamepad1.right_trigger > 0 ) {
+            Bot.retractGrabberLift(.50);
+        }
+        else {
+            Bot.stopGrabberLift();
+        }
 
     }
 
