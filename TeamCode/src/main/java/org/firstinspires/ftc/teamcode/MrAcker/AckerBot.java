@@ -8,25 +8,17 @@ import com.qualcomm.robotcore.hardware.Servo;
 import com.qualcomm.robotcore.hardware.TouchSensor;
 
 import org.firstinspires.ftc.robotcore.external.navigation.Acceleration;
-import org.firstinspires.ftc.robotcore.external.navigation.AngleUnit;
-import org.firstinspires.ftc.robotcore.external.navigation.AxesOrder;
-import org.firstinspires.ftc.robotcore.external.navigation.AxesReference;
 import org.firstinspires.ftc.robotcore.external.navigation.Orientation;
-import org.firstinspires.ftc.teamcode.Compitition.PowerPlay.DriveTrains.MecanumDrive;
 
 public class AckerBot extends AckerMecanumDrive {
 
-    //Hardware Map
+    //Hardware Mapping
     public HardwareMap hwBot = null;
 
-    //Servo Controls
-    public Servo leftLinkage = null;
-    public Servo rightLinkage = null;
-
-    //Grabber
+    //Grabber Variables
     public DcMotor grabberLift = null;
-
-    //Magnetic Switch
+    public Servo grabberArmLeft = null;
+    public Servo grabberArmRight = null;
     TouchSensor magSwitch;
 
     //Gyro Controls
@@ -36,10 +28,12 @@ public class AckerBot extends AckerMecanumDrive {
     public final double SPEED = 0.3;
     public final double TOLERANCE = 0.4;
 
+    // Robot Initialization
     public void initRobot(HardwareMap hardwareMap) {
 
         hwBot = hardwareMap;
 
+        // Drivetrain Motor Hardware
         frontLeftMotor = hwBot.dcMotor.get("front_left_motor");
         frontRightMotor = hwBot.dcMotor.get("front_right_motor");
         rearLeftMotor = hwBot.dcMotor.get("rear_left_motor");
@@ -58,6 +52,7 @@ public class AckerBot extends AckerMecanumDrive {
         rearRightMotor.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
         rearLeftMotor.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
 
+        // Grabber Lift Motors Hardware
         grabberLift = hwBot.dcMotor.get("grabber_lift");
         grabberLift.setDirection(DcMotor.Direction.FORWARD);
         grabberLift.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
@@ -66,7 +61,13 @@ public class AckerBot extends AckerMecanumDrive {
 
         magSwitch = hardwareMap.get(TouchSensor.class, "magnetic_switch");
 
+        // Grabber Arm Hardware
+        grabberArmLeft = hwBot.get(Servo.class, "grabber_arm_left");
+        grabberArmRight = hwBot.get(Servo.class, "grabber_arm_right");
+        grabberArmLeft.setDirection(Servo.Direction.FORWARD);
+        grabberArmRight.setDirection(Servo.Direction.FORWARD);
 
+        // Gyro Hardware
         BNO055IMU.Parameters parametersimu = new BNO055IMU.Parameters();
         parametersimu.angleUnit = BNO055IMU.AngleUnit.DEGREES;
         parametersimu.accelUnit = BNO055IMU.AccelUnit.METERS_PERSEC_PERSEC;
@@ -79,25 +80,22 @@ public class AckerBot extends AckerMecanumDrive {
         imu = hwBot.get(BNO055IMU.class,"imu");
         imu.initialize(parametersimu);
 
-        leftLinkage = hwBot.get(Servo.class, "grabber_arm_left");
-        rightLinkage = hwBot.get(Servo.class, "grabber_arm_right");
-        leftLinkage.setDirection(Servo.Direction.FORWARD);
-        rightLinkage.setDirection(Servo.Direction.FORWARD);
+    }
+
+    // Grabber Arm Methods
+
+    void openGrabberArms(double posLeft, double posRight) {
+        grabberArmLeft.setPosition(posLeft);
+        grabberArmRight.setPosition(posRight);
 
     }
 
-    // Actuator Grabber Methods
-
-    void openGrabber(double posLeft, double posRight) {
-        leftLinkage.setPosition(posLeft);
-        rightLinkage.setPosition(posRight);
-
+    void closeGrabberArms(double posLeft, double posRight) {
+        grabberArmLeft.setPosition(posLeft);
+        grabberArmRight.setPosition(posRight);
     }
 
-    void closeGrabber(double posLeft, double posRight) {
-        leftLinkage.setPosition(posLeft);
-        rightLinkage.setPosition(posRight);
-    }
+    // Grabber Lift Methods
 
     void extendGrabberLift(double power) {
         grabberLift.setPower(Math.abs(power));

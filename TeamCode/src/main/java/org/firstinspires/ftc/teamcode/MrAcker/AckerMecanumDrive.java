@@ -14,21 +14,15 @@ public class AckerMecanumDrive {
     public static final double TICKS_PER_ROTATION = 383.6;   // Set for GoBilda 13.7 Motor
     public LinearOpMode linearOp = null;
 
-
+    // Required for Class Inheritance
     public void setLinearOp(LinearOpMode linearOp) {
         this.linearOp = linearOp;
     }
 
-
+    // Default constructor
     public AckerMecanumDrive() {}
 
-    public void stopMotors() {
-        frontLeftMotor.setPower(0);
-        frontRightMotor.setPower(0);
-        rearLeftMotor.setPower(0);
-        rearRightMotor.setPower(0);
-    }
-
+    // Drivetrain Control Methods
 
     public void setMotorRunModes (DcMotor.RunMode mode) {
         frontLeftMotor.setMode(mode);
@@ -38,7 +32,6 @@ public class AckerMecanumDrive {
 
     }
 
-    // Sets speed for all motors with one method
     public void setMotorSpeeds (double speed) {
         frontLeftMotor.setPower(speed);
         frontRightMotor.setPower(speed);
@@ -47,7 +40,28 @@ public class AckerMecanumDrive {
     }
 
 
-    // Powers Motors with Power/Speed Only
+    public void stopMotors() {
+        frontLeftMotor.setPower(0);
+        frontRightMotor.setPower(0);
+        rearLeftMotor.setPower(0);
+        rearRightMotor.setPower(0);
+    }
+
+    //Movement Methods: Powers Motors with Power/Speed
+
+    public void driveForward (double speed){
+        frontLeftMotor.setPower(speed);
+        frontRightMotor.setPower(speed);
+        rearLeftMotor.setPower(speed);
+        rearRightMotor.setPower(speed);
+    }
+
+    public void driveBackward (double speed){
+        frontLeftMotor.setPower(-speed);
+        frontRightMotor.setPower(-speed);
+        rearLeftMotor.setPower(-speed);
+        rearRightMotor.setPower(-speed);
+    }
 
     public void rotateRight (double speed) {
         frontLeftMotor.setPower(speed);
@@ -77,22 +91,7 @@ public class AckerMecanumDrive {
         rearRightMotor.setPower(speed);
     }
 
-    public void driveForward (double speed){
-        frontLeftMotor.setPower(speed);
-        frontRightMotor.setPower(speed);
-        rearLeftMotor.setPower(speed);
-        rearRightMotor.setPower(speed);
-    }
-
-    public void driveBackward (double speed){
-        frontLeftMotor.setPower(-speed);
-        frontRightMotor.setPower(-speed);
-        rearLeftMotor.setPower(-speed);
-        rearRightMotor.setPower(-speed);
-    }
-
-
-    // Powers Motors with Power/Speed and Encoder Counts
+    // Movement Methods: Powers Motors with Power/Speed and Encoder Counts
     public void driveForward( double speed, double rotations) {
 
         if (linearOp.opModeIsActive()) {
@@ -116,23 +115,10 @@ public class AckerMecanumDrive {
             double ticks = rotations * (-1) * TICKS_PER_ROTATION;
             setMotorRunModes(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
             setMotorRunModes(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
-//            linearOp.telemetry.addData("Current ticks: ", frontLeftMotor.getCurrentPosition());
-//            linearOp.telemetry.addData("Target ticks: ", ticks);
-//            linearOp.telemetry.addLine("Going into drive backwards loop");
-//            linearOp.telemetry.update();
-
             while (frontLeftMotor.getCurrentPosition() > ticks && linearOp.opModeIsActive()) {
                 driveBackward(speed);
-//                linearOp.telemetry.addData("Current ticks: ", frontLeftMotor.getCurrentPosition());
-//                linearOp.telemetry.addData("Target ticks: ", ticks);
-//                linearOp.telemetry.addLine("INSIDE drive backwards loop");
-//                linearOp.telemetry.update();
             }
             stopMotors();
-//            linearOp.telemetry.addData("Current ticks: ", frontLeftMotor.getCurrentPosition());
-//            linearOp.telemetry.addData("Target ticks: ", ticks);
-//            linearOp.telemetry.addLine("Finished with drive backwards loop");
-//            linearOp.telemetry.update();
         }
     }
 
@@ -140,11 +126,9 @@ public class AckerMecanumDrive {
     public void rotateLeft (double speed, double rotations) {
 
         if (linearOp.opModeIsActive()) {
-
             double ticks = Math.abs(rotations) * (-1) * TICKS_PER_ROTATION; //strafing left moves encoder towards positive infinity
             setMotorRunModes(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
             setMotorRunModes(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
-
             while (frontLeftMotor.getCurrentPosition() > ticks && linearOp.opModeIsActive()) {
                 rotateLeft(speed);
             }
@@ -159,7 +143,6 @@ public class AckerMecanumDrive {
             double ticks = Math.abs(rotations) * TICKS_PER_ROTATION; //strafing right moves encoder towards -infinity
             setMotorRunModes(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
             setMotorRunModes(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
-
             while (frontLeftMotor.getCurrentPosition() < ticks && linearOp.opModeIsActive() ) {
                 rotateRight(speed);
             }
@@ -175,7 +158,6 @@ public class AckerMecanumDrive {
             double ticks = Math.abs(rotations) * TICKS_PER_ROTATION;
             setMotorRunModes(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
             setMotorRunModes(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
-
             while (frontLeftMotor.getCurrentPosition() < ticks && linearOp.opModeIsActive()) {
                 strafeRight(speed);
             }
@@ -190,7 +172,6 @@ public class AckerMecanumDrive {
             double ticks = Math.abs(rotations) * (-1) * TICKS_PER_ROTATION;
             setMotorRunModes(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
             setMotorRunModes(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
-
             while (frontLeftMotor.getCurrentPosition() > ticks && linearOp.opModeIsActive()) {
                 strafeLeft(speed);
             }

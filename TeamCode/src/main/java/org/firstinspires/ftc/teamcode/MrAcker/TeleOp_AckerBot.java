@@ -4,8 +4,6 @@ import com.qualcomm.robotcore.eventloop.opmode.OpMode;
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 import com.qualcomm.robotcore.util.Range;
 
-import org.firstinspires.ftc.teamcode.Compitition.ZCompititionUltimateGoal.Robots.StraferKit;
-
 @TeleOp (name = "NamelessBot",group = "BNI")
 
 public class TeleOp_AckerBot extends OpMode {
@@ -40,13 +38,14 @@ public class TeleOp_AckerBot extends OpMode {
         grabberLift();
     }
 
-    //TeleOp Methods
+    //Assignment, Logic and Mapping of Methods and Buttons
+
     public void grabberArms() {
         if (gamepad1.left_bumper) {
-            Bot.openGrabber(.55,.45);
+            Bot.openGrabberArms(.55,.45);
         }
         else if (gamepad1.right_bumper) {
-            Bot.closeGrabber(.45, .55);
+            Bot.closeGrabberArms(.45, .55);
         }
 
     }
