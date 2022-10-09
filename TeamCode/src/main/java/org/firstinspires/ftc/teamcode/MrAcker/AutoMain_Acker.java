@@ -2,8 +2,6 @@ package org.firstinspires.ftc.teamcode.MrAcker;
 
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 
-import org.firstinspires.ftc.teamcode.Compitition.ZFreightFrenzy.Robots.TankBot;
-
 public abstract class AutoMain_Acker extends LinearOpMode {
 
     public long sleepTime = 250;
