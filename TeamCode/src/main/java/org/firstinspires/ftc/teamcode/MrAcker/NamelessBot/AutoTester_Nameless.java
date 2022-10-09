@@ -1,12 +1,15 @@
-package org.firstinspires.ftc.teamcode.MrAcker;
+// Autonomous Tester Class Learning Template for Competition 2022-2023
+// Revision: 09-Oct-22
+// Author: Jamie Acker
+
+package org.firstinspires.ftc.teamcode.MrAcker.NamelessBot;
 
 import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
-import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 
-@Autonomous(name = "NameLessBot", group = "BNI")
-public class AutoTest_Acker extends AutoMain_Acker {
+@Autonomous(name = "NameLessBot", group = "Lab")
+public class AutoTester_Nameless extends AutoMain_Nameless {
 
-    public AckerBot Bot = new AckerBot();
+    public NamelessBot Bot = new NamelessBot();
 
     @Override
     public void runOpMode() throws InterruptedException {

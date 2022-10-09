@@ -1,10 +1,13 @@
-package org.firstinspires.ftc.teamcode.MrAcker;
+// Drivetrain Class Learning Template for Competition 2022-2023
+// Revision: 09-Oct-22
+// Author: Jamie Acker
+
+package org.firstinspires.ftc.teamcode.MrAcker.ProgrammerBot;
 
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 import com.qualcomm.robotcore.hardware.DcMotor;
-import com.qualcomm.robotcore.hardware.HardwareMap;
 
-public class MecanumDrive_Acker {
+public class MecDrive_Programmer {
 
     // Instance Variables & Constants
     public DcMotor frontLeftMotor;
@@ -20,7 +23,7 @@ public class MecanumDrive_Acker {
     }
 
     // Default constructor
-    public MecanumDrive_Acker() {}
+    public MecDrive_Programmer() {}
 
     // Drivetrain Control Methods
 

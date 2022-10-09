@@ -1,12 +1,19 @@
-package org.firstinspires.ftc.teamcode.MrAcker;
+// Autonomous Abstract Class Learning Template for Competition 2022-2023
+// Revision: 09-Oct-22
+// Author: Jamie Acker
+
+package org.firstinspires.ftc.teamcode.MrAcker.NamelessBot;
 
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 
-public abstract class AutoMain_Acker extends LinearOpMode {
+public abstract class AutoMain_Nameless extends LinearOpMode {
 
+    // Autonomous Abstract
     public long sleepTime = 250;
 
-    public void TestAuto(AckerBot Bot) {
+    // Autonomous Tester Method
+
+    public void TestAuto(NamelessBot Bot) {
         Bot.driveForward(1, 3);
         sleep(sleepTime);
         Bot.driveBackward(1, 3);
@@ -17,7 +24,8 @@ public abstract class AutoMain_Acker extends LinearOpMode {
         sleep(sleepTime);
     }
 
-    public void grabCone(AckerBot Bot) {
+    // Resuable Cone Grabbing Method
+    public void grabCone(NamelessBot Bot) {
         double grabberPower = .50;
         long grabberSleep = 1000;
         Bot.openGrabberArms();
@@ -28,7 +36,8 @@ public abstract class AutoMain_Acker extends LinearOpMode {
 
     }
 
-    public void dropCone(AckerBot Bot) {
+    // Resuable Cone Dropping Method
+    public void dropCone(NamelessBot Bot) {
         double grabberPower = .50;
         long grabberSleep = 1000;
         Bot.retractGrabberLift(grabberPower);

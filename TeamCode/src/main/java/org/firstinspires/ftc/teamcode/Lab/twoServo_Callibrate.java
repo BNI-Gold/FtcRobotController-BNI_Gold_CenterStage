@@ -38,6 +38,14 @@ public class twoServo_Callibrate extends OpMode {
             grabberLeftArmPos = Range.clip(grabberLeftArmPos, 0,  1);
             telemetry.addLine( "Decrease Servo Pos!");
         }
+        if (gamepad1.x) {
+            grabberArmLeft.setPosition(.90);
+        }
+
+        if (gamepad1.y) {
+            grabberArmLeft.setPosition(.10);
+        }
+
 
         grabberArmLeft.setPosition(grabberLeftArmPos);
 
@@ -52,6 +60,15 @@ public class twoServo_Callibrate extends OpMode {
             grabberRightArmPos = Range.clip(grabberRightArmPos, 0,  1);
             telemetry.addLine( "Decrease Servo Pos!");
         }
+
+        if (gamepad2.x) {
+            grabberArmRight.setPosition(.90);
+        }
+
+        if (gamepad2.y) {
+            grabberArmRight.setPosition(.10);
+        }
+
 
         grabberArmRight.setPosition(grabberRightArmPos);
         updateTelemetry();

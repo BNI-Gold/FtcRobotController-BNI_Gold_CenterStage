@@ -1,12 +1,16 @@
-package org.firstinspires.ftc.teamcode.MrAcker;
+// TeleOp OpMode Class Learning Template for Competition 2022-2023
+// Revision: 09-Oct-22
+// Author: Jamie Acker
+
+package org.firstinspires.ftc.teamcode.MrAcker.ProgrammerBot;
 
 import com.qualcomm.robotcore.eventloop.opmode.OpMode;
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 import com.qualcomm.robotcore.util.Range;
 
-@TeleOp (name = "NamelessBot",group = "BNI")
+@TeleOp (name = "ProgrammerBot",group = "Lab")
 
-public class TeleOp_Acker extends OpMode {
+public class TeleOp_Programmer extends OpMode {
 
     // Variables & Constants for Mecanumum Driver Control
     double leftStickYVal;
@@ -22,7 +26,7 @@ public class TeleOp_Acker extends OpMode {
     double speedMultiply = 1;
 
     //Construct Robot from AckerBot Class
-    public AckerBot Bot = new AckerBot();
+    public ProgrammerBot Bot = new ProgrammerBot();
 
 
     @Override
@@ -33,36 +37,12 @@ public class TeleOp_Acker extends OpMode {
 
     @Override
     public void loop() {
+
         driveControl();
-        grabberArmControl();
-        grabberLiftControl();
-    }
-
-
-    // Grabber Arm Controls
-    public void grabberArmControl() {
-        if (gamepad1.left_bumper) {
-            Bot.openGrabberArms();
-        }
-        else if (gamepad1.right_bumper) {
-            Bot.closeGrabberArms();
-        }
 
     }
 
-    //Grabber Lift Controls
-    public void grabberLiftControl() {
-        if (gamepad1.left_trigger > 0) {
-            Bot.extendGrabberLift(.50);
-        }
-        else if (gamepad1.right_trigger > 0 ) {
-            Bot.retractGrabberLift(.50);
-        }
-        else {
-            Bot.stopGrabberLift();
-        }
 
-    }
 
     // Driver Control
     public void driveControl () {
