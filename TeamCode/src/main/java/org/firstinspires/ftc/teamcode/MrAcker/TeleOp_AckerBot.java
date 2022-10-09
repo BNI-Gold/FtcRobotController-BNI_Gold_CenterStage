@@ -33,14 +33,14 @@ public class TeleOp_AckerBot extends OpMode {
 
     @Override
     public void loop() {
-        drive();
-        grabberArms();
-        grabberLift();
+        driveControl();
+        grabberArmControl();
+        grabberLiftControl();
     }
 
-    //Assignment, Logic and Mapping of Methods and Buttons
 
-    public void grabberArms() {
+    // Grabber Arm Controls
+    public void grabberArmControl() {
         if (gamepad1.left_bumper) {
             Bot.openGrabberArms(.55,.45);
         }
@@ -50,7 +50,8 @@ public class TeleOp_AckerBot extends OpMode {
 
     }
 
-    public void grabberLift() {
+    //Grabber Lift Controls
+    public void grabberLiftControl() {
         if (gamepad1.left_trigger > 0) {
             Bot.extendGrabberLift(.50);
         }
@@ -63,7 +64,8 @@ public class TeleOp_AckerBot extends OpMode {
 
     }
 
-    public void drive () {
+    // Driver Control
+    public void driveControl () {
 
         leftStickYVal = -gamepad1.left_stick_y;
         leftStickYVal = Range.clip(leftStickYVal, -1, 1);
@@ -83,7 +85,6 @@ public class TeleOp_AckerBot extends OpMode {
 
         rearRightSpeed = leftStickYVal + leftStickXVal - rightStickXVal;
         rearRightSpeed = Range.clip(rearRightSpeed, -1, 1);
-
 
         if (frontLeftSpeed <= powerThreshold && frontLeftSpeed >= -powerThreshold) {
             frontLeftSpeed = 0;
