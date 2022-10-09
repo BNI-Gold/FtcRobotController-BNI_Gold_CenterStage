@@ -4,7 +4,7 @@ import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.hardware.HardwareMap;
 
-public class AckerMecanumDrive {
+public class MecanumDrive_Acker {
 
     // Instance Variables & Constants
     public DcMotor frontLeftMotor;
@@ -20,7 +20,7 @@ public class AckerMecanumDrive {
     }
 
     // Default constructor
-    public AckerMecanumDrive() {}
+    public MecanumDrive_Acker() {}
 
     // Drivetrain Control Methods
 

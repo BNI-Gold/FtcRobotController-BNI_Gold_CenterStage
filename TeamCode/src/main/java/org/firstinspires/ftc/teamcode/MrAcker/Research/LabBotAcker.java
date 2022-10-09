@@ -14,9 +14,8 @@ import org.firstinspires.ftc.robotcore.external.navigation.AngleUnit;
 import org.firstinspires.ftc.robotcore.external.navigation.AxesOrder;
 import org.firstinspires.ftc.robotcore.external.navigation.AxesReference;
 import org.firstinspires.ftc.robotcore.external.navigation.Orientation;
-import org.firstinspires.ftc.teamcode.Compitition.ZCompititionUltimateGoal.DriveTrains.MecanumDrive;
 import org.firstinspires.ftc.teamcode.Compitition.ZCompititionUltimateGoal.Modules.EasyOpenCVWebcam;
-import org.firstinspires.ftc.teamcode.MrAcker.AckerMecanumDrive;
+import org.firstinspires.ftc.teamcode.MrAcker.MecanumDrive_Acker;
 import org.opencv.core.Core;
 import org.opencv.core.Mat;
 import org.opencv.core.Point;
@@ -29,7 +28,7 @@ import org.openftc.easyopencv.OpenCvCameraRotation;
 import org.openftc.easyopencv.OpenCvPipeline;
 
 
-public class LabBotAcker extends AckerMecanumDrive {
+public class LabBotAcker extends MecanumDrive_Acker {
 
     //hardware constructors
     public HardwareMap hwBot  =  null;

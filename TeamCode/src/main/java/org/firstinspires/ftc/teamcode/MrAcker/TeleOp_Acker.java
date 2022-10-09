@@ -6,7 +6,7 @@ import com.qualcomm.robotcore.util.Range;
 
 @TeleOp (name = "NamelessBot",group = "BNI")
 
-public class TeleOp_AckerBot extends OpMode {
+public class TeleOp_Acker extends OpMode {
 
     // Variables & Constants for Mecanumum Driver Control
     double leftStickYVal;
@@ -42,10 +42,10 @@ public class TeleOp_AckerBot extends OpMode {
     // Grabber Arm Controls
     public void grabberArmControl() {
         if (gamepad1.left_bumper) {
-            Bot.openGrabberArms(.55,.45);
+            Bot.openGrabberArms();
         }
         else if (gamepad1.right_bumper) {
-            Bot.closeGrabberArms(.45, .55);
+            Bot.closeGrabberArms();
         }
 
     }

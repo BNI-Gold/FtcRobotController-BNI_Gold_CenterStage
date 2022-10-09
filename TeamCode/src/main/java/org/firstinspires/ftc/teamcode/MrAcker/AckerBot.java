@@ -10,7 +10,7 @@ import com.qualcomm.robotcore.hardware.TouchSensor;
 import org.firstinspires.ftc.robotcore.external.navigation.Acceleration;
 import org.firstinspires.ftc.robotcore.external.navigation.Orientation;
 
-public class AckerBot extends AckerMecanumDrive {
+public class AckerBot extends MecanumDrive_Acker {
 
     //Hardware Mapping
     public HardwareMap hwBot = null;
@@ -84,23 +84,37 @@ public class AckerBot extends AckerMecanumDrive {
 
     // Grabber Arm Methods
 
-    void openGrabberArms(double posLeft, double posRight) {
-        grabberArmLeft.setPosition(posLeft);
-        grabberArmRight.setPosition(posRight);
+    void openGrabberArms() {
+        grabberArmLeft.setPosition(.55);
+        grabberArmRight.setPosition(.45);
 
     }
 
-    void closeGrabberArms(double posLeft, double posRight) {
-        grabberArmLeft.setPosition(posLeft);
-        grabberArmRight.setPosition(posRight);
+    void closeGrabberArms() {
+        grabberArmLeft.setPosition(.45);
+        grabberArmRight.setPosition(.55);
+    }
+
+
+    void closeGrabberArms(double armLeftPos, double armRightPos) {
+        grabberArmLeft.setPosition(armLeftPos);
+        grabberArmRight.setPosition(armRightPos);
+    }
+
+    void openGrabberArms(double armLeftPos, double armRightPos) {
+        grabberArmLeft.setPosition(armLeftPos);
+        grabberArmRight.setPosition(armRightPos);
     }
 
     // Grabber Lift Methods
 
     void extendGrabberLift(double power) {
+
         grabberLift.setPower(Math.abs(power));
     }
+
     void retractGrabberLift (double power) {
+
         grabberLift.setPower(-Math.abs(power));
     }
 
