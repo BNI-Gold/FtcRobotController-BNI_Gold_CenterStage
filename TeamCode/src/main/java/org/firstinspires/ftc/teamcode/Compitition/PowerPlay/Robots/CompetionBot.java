@@ -4,6 +4,8 @@ import com.qualcomm.hardware.bosch.BNO055IMU;
 import com.qualcomm.hardware.bosch.JustLoggingAccelerationIntegrator;
 import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.hardware.HardwareMap;
+import com.qualcomm.robotcore.hardware.Servo;
+import com.qualcomm.robotcore.hardware.TouchSensor;
 
 import org.firstinspires.ftc.robotcore.external.navigation.Acceleration;
 import org.firstinspires.ftc.robotcore.external.navigation.AngleUnit;
@@ -12,7 +14,7 @@ import org.firstinspires.ftc.robotcore.external.navigation.AxesReference;
 import org.firstinspires.ftc.robotcore.external.navigation.Orientation;
 import org.firstinspires.ftc.teamcode.Compitition.PowerPlay.DriveTrains.MecanumDrive;
 
-public class straferbot2test extends MecanumDrive {
+public class CompetionBot extends MecanumDrive {
 
         public HardwareMap hwBot = null;
 
@@ -22,6 +24,12 @@ public class straferbot2test extends MecanumDrive {
         public Acceleration gravity;
         public final double SPEED = 0.3;
         public final double TOLERANCE = 0.4;
+
+
+        public DcMotor grabberLift = null;
+        public Servo grabberArmLeft = null;
+        public Servo grabberArmRight = null;
+        TouchSensor magSwitch;
 
         //public void straferbot2test(){ }
 
@@ -60,6 +68,22 @@ public class straferbot2test extends MecanumDrive {
 
             imu = hwBot.get(BNO055IMU.class,"imu");
             imu.initialize(parametersimu);
+
+            grabberLift = hwBot.dcMotor.get("grabber_lift");
+            grabberLift.setDirection(DcMotor.Direction.FORWARD);
+            grabberLift.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
+            grabberLift.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
+            grabberLift.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
+
+            // Grabber Lift Sensor Hardware Mapping & Configuration
+            magSwitch = hardwareMap.get(TouchSensor.class, "magnetic_switch");
+
+            // Grabber Arms Servo Hardware Mapping/Configuration
+            grabberArmLeft = hwBot.get(Servo.class, "grabber_arm_left");
+            grabberArmRight = hwBot.get(Servo.class, "grabber_arm_right");
+            grabberArmLeft.setDirection(Servo.Direction.FORWARD);
+            grabberArmRight.setDirection(Servo.Direction.FORWARD);
+
 
         }
 
