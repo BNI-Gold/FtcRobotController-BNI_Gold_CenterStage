@@ -5,6 +5,7 @@ import com.qualcomm.robotcore.eventloop.opmode.OpMode;
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 import com.qualcomm.robotcore.util.Range;
 
+import org.firstinspires.ftc.teamcode.Compitition.PowerPlay.Robots.CompetionBot;
 import org.firstinspires.ftc.teamcode.Compitition.ZCompititionUltimateGoal.Robots.StraferKit;
 
 @Disabled
@@ -23,14 +24,13 @@ public class TeleOp_CompetitionBot extends OpMode {
 
 
     double powerThreshold = 0;
-    double encoders;
     double speedMultiply = 1;
 
-    public StraferKit Bot=new StraferKit();
+    public CompetionBot Bot=new CompetionBot();
 
     @Override
     public void init() {
-        Bot.initRobot(hardwareMap, "BlueLeft",  "Auto");
+        Bot.initRobot(hardwareMap);
 
     }
 
@@ -43,8 +43,44 @@ public class TeleOp_CompetitionBot extends OpMode {
     @Override
     public void loop() {
         drive();
+        grabberArmControl();
+        grabberLiftControl();
 
     }
+
+    public void grabberArmControl() {
+        if (gamepad1.b) {
+            Bot.openGrabberArms();
+
+        }
+
+        if (gamepad1.x) {
+            Bot.closeGrabberArms();
+
+        }
+
+    }
+
+    public void grabberLiftControl() {
+        if (gamepad1.right_bumper) {
+            Bot.extendGrabberLift(0.5);
+
+        }
+
+        if (gamepad1.left_bumper) {
+            Bot.retractGrabberLift(0.5);
+
+        }
+
+        else {
+            Bot.stopGrabberLift();
+
+        }
+
+    }
+
+
+
     @Override
     public void stop() {
     }

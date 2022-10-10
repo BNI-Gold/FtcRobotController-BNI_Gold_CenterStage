@@ -36,6 +36,11 @@ public class CompetionBot extends MecanumDrive {
         public void initRobot (HardwareMap hardwareMap) {
             hwBot = hardwareMap;
 
+            grabberArmLeft = hwBot.get(Servo.class, "grabber_arm_left");
+            grabberArmRight = hwBot.get(Servo.class, "grabber_arm_right");
+            grabberArmLeft.setDirection(Servo.Direction.FORWARD);
+            grabberArmRight.setDirection(Servo.Direction.FORWARD);
+
             frontLeftMotor=hwBot.dcMotor.get("front_left_motor");
             frontRightMotor=hwBot.dcMotor.get("front_right_motor");
             rearLeftMotor=hwBot.dcMotor.get("rear_left_motor");
@@ -86,6 +91,34 @@ public class CompetionBot extends MecanumDrive {
 
 
         }
+
+        public void openGrabberArms() {
+
+            grabberArmLeft.setPosition(.5);
+            grabberArmRight.setPosition(.4);
+
+        }
+
+        public void closeGrabberArms() {
+
+        grabberArmLeft.setPosition(.4);
+        grabberArmRight.setPosition(.3);
+
+    }
+
+    public void extendGrabberLift(double power) {
+
+        grabberLift.setPower(Math.abs(power));
+    }
+
+    public void retractGrabberLift (double power) {
+
+        grabberLift.setPower(-Math.abs(power));
+    }
+
+    public void stopGrabberLift () {
+        grabberLift.setPower(0);
+    }
 
         public void gyroCorrection (double speed, double angle) {
 
