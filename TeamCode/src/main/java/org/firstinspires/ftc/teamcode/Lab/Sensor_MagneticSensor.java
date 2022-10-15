@@ -33,9 +33,9 @@ public class Sensor_MagneticSensor extends OpMode {
         }
         else pattern = RevBlinkinLedDriver.BlinkinPattern.BLUE;
 
-        Keyboard keyboard;
+        //Keyboard keyboard;
 
-        keyboard.getKeys()
+      //  keyboard.getKeys()
 
 
 

@@ -8,7 +8,7 @@ import com.qualcomm.robotcore.util.Range;
 import org.firstinspires.ftc.teamcode.Compitition.PowerPlay.Robots.CompetionBot;
 import org.firstinspires.ftc.teamcode.Compitition.ZCompititionUltimateGoal.Robots.StraferKit;
 
-@Disabled
+//@Disabled
 @TeleOp (name = "Teleop_StraferKit_2022",group = "Lab")
 
 public class TeleOp_CompetitionBot extends OpMode {
@@ -49,12 +49,12 @@ public class TeleOp_CompetitionBot extends OpMode {
     }
 
     public void grabberArmControl() {
-        if (gamepad1.b) {
+        if (gamepad2.b) {
             Bot.openGrabberArms();
 
         }
 
-        if (gamepad1.x) {
+        if (gamepad2.x) {
             Bot.closeGrabberArms();
 
         }
@@ -62,12 +62,12 @@ public class TeleOp_CompetitionBot extends OpMode {
     }
 
     public void grabberLiftControl() {
-        if (gamepad1.right_bumper) {
+        if (gamepad2.right_bumper) {
             Bot.extendGrabberLift(0.5);
 
         }
 
-        if (gamepad1.left_bumper) {
+        if (gamepad2.left_bumper) {
             Bot.retractGrabberLift(0.5);
 
         }

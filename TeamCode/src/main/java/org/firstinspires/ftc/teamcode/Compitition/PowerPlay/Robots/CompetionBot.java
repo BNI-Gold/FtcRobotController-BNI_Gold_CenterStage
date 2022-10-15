@@ -137,6 +137,7 @@ public class CompetionBot extends MecanumDrive {
             else if (angles.firstAngle <= angle - TOLERANCE && linearOp.opModeIsActive()); {
                 while (angles.firstAngle <= angle - TOLERANCE && linearOp.opModeIsActive()) {
                     rotateLeft(speed);
+
                     angles = imu.getAngularOrientation(AxesReference.INTRINSIC, AxesOrder.ZYX, AngleUnit.DEGREES);
                         linearOp.telemetry.addData("Current Angle ", angles.firstAngle);
                 }
