@@ -3,14 +3,14 @@ package org.firstinspires.ftc.teamcode.Compitition.PowerPlay.controls.Autonomus.
 import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
 
 import org.firstinspires.ftc.teamcode.Compitition.PowerPlay.Robots.CompetionBot;
+import org.firstinspires.ftc.teamcode.Compitition.PowerPlay.controls.Autonomus.ComptitionAutoPaths.AutoMain;
 import org.firstinspires.ftc.teamcode.Compitition.PowerPlay.controls.Autonomus.ComptitionAutoPaths.AutoTargetZone;
 
-@Autonomous (name = "AutoRed")
-public class AutoRed extends RedPark {
+@Autonomous (name = "RedTerminalPark")
+
+public class RedTerminalPark extends AutoMain {
 
     public CompetionBot Bot = new CompetionBot();
-
-    public AutoTargetZone targetZone = null;
 
     @Override
     public void runOpMode() throws InterruptedException {
@@ -18,32 +18,21 @@ public class AutoRed extends RedPark {
 
         Bot.setLinearOp(this);
 
-        targetZone = AutoTargetZone.C;
-
-        telemetry.addLine("WAITING FOR START >");
-        telemetry.addData("TARGET ZONE: ", targetZone);
-        telemetry.update();
-
         waitForStart();
 
         while (opModeIsActive()) {
 
-            //targetZone = AutoTargetZone.A;
+            Bot.driveForward(0.1, 0.1);
 
-            telemetry.addData("TARGET ZONE: ", targetZone);
-            telemetry.update();
+            Bot.strafeRight(0.4, 2.9);
 
-            sleep(1000);
-
-            parkplace(Bot, targetZone);
-            sleep(1000);
-
-
-
-
+            Bot.gyroCorrection(0.2, 0);
 
             idle();
             requestOpModeStop();
+
         }
+
     }
+
 }

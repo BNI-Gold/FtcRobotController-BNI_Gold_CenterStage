@@ -74,11 +74,11 @@ public class CompetionBot extends MecanumDrive {
             imu = hwBot.get(BNO055IMU.class,"imu");
             imu.initialize(parametersimu);
 
-            grabberLift = hwBot.dcMotor.get("grabber_lift");
-            grabberLift.setDirection(DcMotor.Direction.FORWARD);
-            grabberLift.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
-            grabberLift.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
-            grabberLift.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
+//            grabberLift = hwBot.dcMotor.get("grabber_lift");
+//            grabberLift.setDirection(DcMotor.Direction.FORWARD);
+//            grabberLift.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
+//            grabberLift.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
+//            grabberLift.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
 
             // Grabber Lift Sensor Hardware Mapping & Configuration
             magSwitch = hardwareMap.get(TouchSensor.class, "magnetic_switch");

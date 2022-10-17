@@ -8,13 +8,13 @@ public abstract class RedPark extends AutoMain {
     public void parkplace (CompetionBot Bot, AutoTargetZone target) throws InterruptedException{
         switch (target) {
             case A:
-                Bot.driveForward(.5,2);
+                Bot.driveForward(.5,3);
                 sleep(sleepTime);
 
                 Bot.gyroCorrection(.2,0);
                 sleep(sleepTime);
 
-                Bot.strafeRight(.5,1.5);
+                Bot.strafeRight(.5,2.85);
                 sleep(sleepTime);
 
                 Bot.gyroCorrection(.2,0);
@@ -22,7 +22,7 @@ public abstract class RedPark extends AutoMain {
                 break;
 
             case B:
-                Bot.driveForward(.5,2);
+                Bot.driveForward(.5,3);
                 sleep(sleepTime);
 
                 Bot.gyroCorrection(.2,0);
@@ -30,13 +30,13 @@ public abstract class RedPark extends AutoMain {
                 break;
 
             case C:
-                Bot.driveForward(.5,2);
+                Bot.driveForward(.5,3);
                 sleep(sleepTime);
 
                 Bot.gyroCorrection(.2,0);
                 sleep(sleepTime);
 
-                Bot.strafeLeft(.5,1.5);
+                Bot.strafeLeft(.5,2.85);
                 sleep(sleepTime);
 
                 Bot.gyroCorrection(.2,0);

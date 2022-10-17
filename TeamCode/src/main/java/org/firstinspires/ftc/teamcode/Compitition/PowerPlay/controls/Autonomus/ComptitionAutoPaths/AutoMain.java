@@ -7,16 +7,16 @@ import org.firstinspires.ftc.teamcode.Compitition.ZCompititionUltimateGoal.Contr
 
 public abstract class AutoMain extends LinearOpMode {
 
-    public AutoTargetZone zone = null;
+    public AutoTargetZone zone = AutoTargetZone.A;
 
     public long sleepTime = 250;
 
-    public AutoTargetZone DetectSleaveImage (CompetionBot Bot) {
-
-        zone = AutoTargetZone.A;
-
-        return null;
-    }
+//    public AutoTargetZone DetectSleaveImage (CompetionBot Bot) {
+//
+//        zone = AutoTargetZone.A;
+//
+//        return null;
+//    }
 
 
 

@@ -5,7 +5,7 @@ import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
 import org.firstinspires.ftc.teamcode.Compitition.PowerPlay.Robots.CompetionBot;
 import org.firstinspires.ftc.teamcode.Compitition.PowerPlay.controls.Autonomus.ComptitionAutoPaths.AutoTargetZone;
 
-@Autonomous (name = "AutoBlueLeft")
+@Autonomous (name = "AutoBlue")
 public class AutoBlue extends BluePark {
 
     public CompetionBot Bot = new CompetionBot();
@@ -18,7 +18,7 @@ public class AutoBlue extends BluePark {
 
         Bot.setLinearOp(this);
 
-        targetZone = DetectSleaveImage(Bot);
+        targetZone = AutoTargetZone.A;
 
         telemetry.addLine("WAITING FOR START >");
         telemetry.addData("TARGET ZONE: ", targetZone);
@@ -28,7 +28,7 @@ public class AutoBlue extends BluePark {
 
         while (opModeIsActive()) {
 
-            targetZone = DetectSleaveImage(Bot);
+            //targetZone = DetectSleaveImage(Bot);
 
             telemetry.addData("TARGET ZONE: ", targetZone);
             telemetry.update();
