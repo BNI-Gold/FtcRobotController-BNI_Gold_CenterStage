@@ -1,10 +1,10 @@
-package org.firstinspires.ftc.teamcode.Compitition.PowerPlay.controls.Autonomus.ComptitionAutoPaths.BlueLeft;
+package org.firstinspires.ftc.teamcode.Compitition.PowerPlay.controls.Autonomus.ComptitionAutoPaths.RedPark;
 
 import org.firstinspires.ftc.teamcode.Compitition.PowerPlay.Robots.CompetionBot;
 import org.firstinspires.ftc.teamcode.Compitition.PowerPlay.controls.Autonomus.ComptitionAutoPaths.AutoMain;
 import org.firstinspires.ftc.teamcode.Compitition.PowerPlay.controls.Autonomus.ComptitionAutoPaths.AutoTargetZone;
 
-public abstract class BlueLeftPark extends AutoMain {
+public abstract class RedPark extends AutoMain {
     public void parkplace (CompetionBot Bot, AutoTargetZone target) throws InterruptedException{
         switch (target) {
             case A:
@@ -14,7 +14,7 @@ public abstract class BlueLeftPark extends AutoMain {
                 Bot.gyroCorrection(.2,0);
                 sleep(sleepTime);
 
-                Bot.strafeLeft(.5,1.5);
+                Bot.strafeRight(.5,1.5);
                 sleep(sleepTime);
 
                 Bot.gyroCorrection(.2,0);
@@ -36,7 +36,7 @@ public abstract class BlueLeftPark extends AutoMain {
                 Bot.gyroCorrection(.2,0);
                 sleep(sleepTime);
 
-                Bot.strafeRight(.5,1.5);
+                Bot.strafeLeft(.5,1.5);
                 sleep(sleepTime);
 
                 Bot.gyroCorrection(.2,0);
