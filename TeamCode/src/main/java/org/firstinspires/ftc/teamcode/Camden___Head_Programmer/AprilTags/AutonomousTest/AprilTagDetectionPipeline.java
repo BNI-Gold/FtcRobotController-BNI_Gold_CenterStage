@@ -1,5 +1,7 @@
-package org.firstinspires.ftc.teamcode.Camden.AprilTags;
+package org.firstinspires.ftc.teamcode.Camden___Head_Programmer.AprilTags.AutonomousTest;
 
+import org.firstinspires.ftc.teamcode.Camden___Head_Programmer.AprilTags.AprilTagBaseCode.AprilTagDetection;
+import org.firstinspires.ftc.teamcode.Camden___Head_Programmer.AprilTags.AprilTagBaseCode.AprilTagDetectorJNI;
 import org.opencv.calib3d.Calib3d;
 import org.opencv.core.CvType;
 import org.opencv.core.Mat;
@@ -10,8 +12,6 @@ import org.opencv.core.Point;
 import org.opencv.core.Point3;
 import org.opencv.core.Scalar;
 import org.opencv.imgproc.Imgproc;
-import org.openftc.apriltag.AprilTagDetection;
-import org.openftc.apriltag.AprilTagDetectorJNI;
 import org.openftc.easyopencv.OpenCvPipeline;
 
 import java.util.ArrayList;
