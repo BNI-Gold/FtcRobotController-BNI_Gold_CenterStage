@@ -9,13 +9,30 @@ import com.qualcomm.hardware.bosch.JustLoggingAccelerationIntegrator;
 import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.hardware.HardwareMap;
 
+import org.firstinspires.ftc.robotcore.external.hardware.camera.WebcamName;
 import org.firstinspires.ftc.robotcore.external.navigation.Acceleration;
 import org.firstinspires.ftc.robotcore.external.navigation.Orientation;
+import org.firstinspires.ftc.teamcode.Compitition.ZFreightFrenzy.mechanisms.CompContourPipeline;
+import org.firstinspires.ftc.teamcode.Compitition.ZFreightFrenzy.mechanisms.TSELocation;
+import org.opencv.core.Scalar;
+import org.openftc.easyopencv.OpenCvCamera;
+import org.openftc.easyopencv.OpenCvCameraFactory;
+import org.openftc.easyopencv.OpenCvCameraRotation;
 
 public class ProgrammerBot extends MecDrive_Programmer {
 
-    //Hardware Mapping Variable
+    //Declare Hardware Mapping Variable
     public HardwareMap hwBot = null;
+
+    //Declare WebCam and OpenCV Variables
+    public CompContourPipeline myPipeline;      //OpenCV Task that generates a sequence of images from video frames
+    public OpenCvCamera webcam;
+    private static final int CAMERA_WIDTH = 320;
+    private static final int CAMERA_HEIGHT = 240;
+
+    // WEBCAM - COLOR RANGE
+    public static Scalar scalarLowerYCrCb = new Scalar(0.0, 0.0, 0.0);
+    public static Scalar scalarUpperYCrCb = new Scalar(255.0, 150.0, 120.0);
 
     //Gyro Control Variables
     public BNO055IMU imu;
@@ -59,6 +76,31 @@ public class ProgrammerBot extends MecDrive_Programmer {
         imu = hwBot.get(BNO055IMU.class,"imu");
         imu.initialize(parametersimu);
 
+    }
+
+    public void initWebcam() {
+
+        //OPENCV WEBCAM
+        int cameraMonitorViewId = hwBot.appContext.getResources().getIdentifier("cameraMonitorViewId", "id", hwBot.appContext.getPackageName());
+
+        webcam = OpenCvCameraFactory.getInstance().createWebcam(hwBot.get(WebcamName.class, "Webcam 1"), cameraMonitorViewId);
+
+        //OPENCV PIPELINE
+        webcam.setPipeline(myPipeline = new CompContourPipeline());
+
+        // CONFIGURATION OF PIPELINE
+        myPipeline.ConfigurePipeline(30, 30, 30, 30, CAMERA_WIDTH, CAMERA_HEIGHT);
+        myPipeline.ConfigureScalarLower(scalarLowerYCrCb.val[0], scalarLowerYCrCb.val[1], scalarLowerYCrCb.val[2]);
+        myPipeline.ConfigureScalarUpper(scalarUpperYCrCb.val[0], scalarUpperYCrCb.val[1], scalarUpperYCrCb.val[2]);
+
+            webcam.openCameraDeviceAsync(new OpenCvCamera.AsyncCameraOpenListener() {
+                @Override
+                public void onOpened() {webcam.startStreaming(CAMERA_WIDTH, CAMERA_HEIGHT, OpenCvCameraRotation.UPRIGHT);}
+
+                @Override
+                public void onError(int errorCode) {}
+            }
+            );
     }
 
 
