@@ -31,7 +31,6 @@ public abstract class AutoMain_Acker extends LinearOpMode {
     public AprilTagDetection tagOfInterest = null;
 
     // Method to Initialize Webcam and Start Pipeline
-    //
     public void initializePipeline () {
 
         int cameraMonitorViewId = hardwareMap.appContext.getResources().getIdentifier("cameraMonitorViewId", "id", hardwareMap.appContext.getPackageName());
