@@ -1,30 +1,9 @@
-/*
- * Copyright (c) 2020 OpenFTC Team
- *
- * Permission is hereby granted, free of charge, to any person obtaining a copy
- * of this software and associated documentation files (the "Software"), to deal
- * in the Software without restriction, including without limitation the rights
- * to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
- * copies of the Software, and to permit persons to whom the Software is
- * furnished to do so, subject to the following conditions:
- *
- * The above copyright notice and this permission notice shall be included in all
- * copies or substantial portions of the Software.
- * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
- * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
- * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
- * AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
- * LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
- * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
- * SOFTWARE.
- */
+package org.firstinspires.ftc.teamcode.Compitition.PowerPlay.Mechanisims;
 
-package org.firstinspires.ftc.teamcode.Compitition.ZCompititionUltimateGoal.Modules;
-
-import com.qualcomm.robotcore.eventloop.opmode.Disabled;
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 
 import org.firstinspires.ftc.robotcore.external.hardware.camera.WebcamName;
+import org.firstinspires.ftc.teamcode.Compitition.ZCompititionUltimateGoal.Modules.EasyOpenCVWebcam;
 import org.firstinspires.ftc.teamcode.Lab.VisionTracking.EOCV.examples.PipelineStageSwitchingExample;
 import org.opencv.core.Core;
 import org.opencv.core.Mat;
@@ -37,14 +16,15 @@ import org.openftc.easyopencv.OpenCvCameraFactory;
 import org.openftc.easyopencv.OpenCvCameraRotation;
 import org.openftc.easyopencv.OpenCvPipeline;
 
-//import org.firstinspires.ftc.teamcode.examples.PipelineStageSwitchingExample;
 
-//@TeleOp (name = "WebCam Exmaple - DUVAL", group = "DUVAL")
-@Disabled
-public class EasyOpenCVWebcam extends LinearOpMode
-{
+
+//HERE TO HELP ORGANISE AND UNDERSTAND
+
+
+public class EasyOpenCVWebcamFromUltimateGoal extends LinearOpMode {
+
     OpenCvCamera webcam;
-    SkystoneDeterminationPipeline pipeline;
+    EasyOpenCVWebcam.SkystoneDeterminationPipeline pipeline;
 
     @Override
     public void runOpMode()
@@ -54,7 +34,7 @@ public class EasyOpenCVWebcam extends LinearOpMode
         webcam = OpenCvCameraFactory.getInstance().createWebcam(hardwareMap.get(WebcamName.class, "Webcam 1"), cameraMonitorViewId);
 //        Used for SamplePipe from WebcamExample.  Going to change it to use "SkystoneDeterminationPipeline" based on Wizards.exe example.
 //        webcam.setPipeline(new SamplePipeline());
-        pipeline = new SkystoneDeterminationPipeline();
+        pipeline = new EasyOpenCVWebcam.SkystoneDeterminationPipeline();
         webcam.setPipeline(pipeline);
 
 
@@ -136,15 +116,15 @@ public class EasyOpenCVWebcam extends LinearOpMode
          * The core values which define the location and size of the sample regions
          */
 
-//        USE THIS TO FIGURE OUT NUMBER OF RINGS.
+        //        USE THIS TO FIGURE OUT NUMBER OF RINGS.
         static final Point REGION1_TOPLEFT_ANCHOR_POINT = new Point(181,98);
 
-//        ORIGINAL AREA
+        //        ORIGINAL AREA
         static final int REGION_WIDTH = 35;
         //was 25/josh 4:46pm 10/19/20
         static final int REGION_HEIGHT = 35;
 
-//        ORIGINAL THRESHOLDS
+        //        ORIGINAL THRESHOLDS
         final int FOUR_RING_THRESHOLD = 150;
         final int ONE_RING_THRESHOLD = 135;
 
@@ -164,7 +144,7 @@ public class EasyOpenCVWebcam extends LinearOpMode
         int avg1;
 
         // Volatile since accessed by OpMode thread w/o synchronization
-        public volatile RingPosition position = RingPosition.FOUR;
+        private volatile EasyOpenCVWebcam.SkystoneDeterminationPipeline.RingPosition position = EasyOpenCVWebcam.SkystoneDeterminationPipeline.RingPosition.FOUR;
 
         /*
          * This function takes the RGB frame, converts to YCrCb,
@@ -198,13 +178,13 @@ public class EasyOpenCVWebcam extends LinearOpMode
                     BLUE, // The color the rectangle is drawn in
                     2); // Thickness of the rectangle lines
 
-            position = RingPosition.FOUR; // Record our analysis
+            position = EasyOpenCVWebcam.SkystoneDeterminationPipeline.RingPosition.FOUR; // Record our analysis
             if(avg1 > FOUR_RING_THRESHOLD){
-                position = RingPosition.FOUR;
+                position = EasyOpenCVWebcam.SkystoneDeterminationPipeline.RingPosition.FOUR;
             }else if (avg1 > ONE_RING_THRESHOLD){
-                position = RingPosition.ONE;
+                position = EasyOpenCVWebcam.SkystoneDeterminationPipeline.RingPosition.ONE;
             }else{
-                position = RingPosition.NONE;
+                position = EasyOpenCVWebcam.SkystoneDeterminationPipeline.RingPosition.NONE;
             }
 
             Imgproc.rectangle(

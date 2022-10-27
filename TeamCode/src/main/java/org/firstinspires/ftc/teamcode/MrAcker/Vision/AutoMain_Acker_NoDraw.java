@@ -2,7 +2,8 @@ package org.firstinspires.ftc.teamcode.MrAcker.Vision;
 
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 import org.firstinspires.ftc.robotcore.external.hardware.camera.WebcamName;
-import org.firstinspires.ftc.teamcode.Camden___Head_Programmer.AprilTags.AprilTagBaseCode.AprilTagDetection;
+//import org.firstinspires.ftc.teamcode.Camden___Head_Programmer.AprilTags.AprilTagBaseCode.AprilTagDetection;
+import org.openftc.apriltag.AprilTagDetection;
 import org.openftc.easyopencv.OpenCvCamera;
 import org.openftc.easyopencv.OpenCvCameraFactory;
 import org.openftc.easyopencv.OpenCvCameraRotation;

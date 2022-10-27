@@ -1,9 +1,11 @@
 package org.firstinspires.ftc.teamcode.MrAcker.Vision;
 
-import org.firstinspires.ftc.teamcode.Camden___Head_Programmer.AprilTags.AprilTagBaseCode.AprilTagDetection;
-import org.firstinspires.ftc.teamcode.Camden___Head_Programmer.AprilTags.AprilTagBaseCode.AprilTagDetectorJNI;
+//import org.firstinspires.ftc.teamcode.Camden___Head_Programmer.AprilTags.AprilTagBaseCode.AprilTagDetection;
+//import org.firstinspires.ftc.teamcode.Camden___Head_Programmer.AprilTags.AprilTagBaseCode.AprilTagDetectorJNI;
 import org.opencv.core.Mat;
 import org.opencv.imgproc.Imgproc;
+import org.openftc.apriltag.AprilTagDetection;
+import org.openftc.apriltag.AprilTagDetectorJNI;
 import org.openftc.easyopencv.OpenCvPipeline;
 import java.util.ArrayList;
 //

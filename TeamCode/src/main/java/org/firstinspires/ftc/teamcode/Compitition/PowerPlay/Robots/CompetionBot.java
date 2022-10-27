@@ -13,6 +13,9 @@ import org.firstinspires.ftc.robotcore.external.navigation.AxesOrder;
 import org.firstinspires.ftc.robotcore.external.navigation.AxesReference;
 import org.firstinspires.ftc.robotcore.external.navigation.Orientation;
 import org.firstinspires.ftc.teamcode.Compitition.PowerPlay.DriveTrains.MecanumDrive;
+import org.firstinspires.ftc.teamcode.Compitition.ZCompititionUltimateGoal.Robots.CompetitionBot;
+import org.openftc.easyopencv.OpenCvCamera;
+import org.openftc.easyopencv.OpenCvCameraRotation;
 
 public class CompetionBot extends MecanumDrive {
 
@@ -31,9 +34,9 @@ public class CompetionBot extends MecanumDrive {
         public Servo grabberArmRight = null;
         TouchSensor magSwitch;
 
-        //public void straferbot2test(){ }
 
-        public void initRobot (HardwareMap hardwareMap) {
+
+    public void initRobot (HardwareMap hardwareMap) {
             hwBot = hardwareMap;
 
             grabberArmLeft = hwBot.get(Servo.class, "grabber_arm_left");

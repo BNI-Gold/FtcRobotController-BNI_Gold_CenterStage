@@ -3,7 +3,7 @@ package org.firstinspires.ftc.teamcode.MrAcker.Vision;
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 
 import org.firstinspires.ftc.robotcore.external.hardware.camera.WebcamName;
-import org.firstinspires.ftc.teamcode.Camden___Head_Programmer.AprilTags.AprilTagBaseCode.AprilTagDetection;
+import org.openftc.apriltag.AprilTagDetection;
 import org.openftc.easyopencv.OpenCvCamera;
 import org.openftc.easyopencv.OpenCvCameraFactory;
 import org.openftc.easyopencv.OpenCvCameraRotation;
@@ -54,8 +54,8 @@ public abstract class AutoMain_Acker extends LinearOpMode {
 
     //Method to Find the April Tags based on the tag family
     public void findTag () {
-
         ArrayList<AprilTagDetection> currentDetections = tagPipeline.getLatestDetections();
+//        ArrayList<AprilTagDetection> currentDetections = tagPipeline.getLatestDetections();
 
         if(currentDetections.size() != 0) {
             boolean tagFound = false;
