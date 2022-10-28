@@ -36,6 +36,8 @@ public class AutoBlue extends BluePark {
 //                sleep(20);
 //            }
 
+            //detect tags in auto main
+
             detectTags();
 
             Bot.closeGrabberArms();
