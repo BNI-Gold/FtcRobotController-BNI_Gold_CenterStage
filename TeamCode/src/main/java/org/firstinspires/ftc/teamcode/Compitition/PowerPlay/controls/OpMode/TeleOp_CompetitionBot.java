@@ -63,12 +63,12 @@ public class TeleOp_CompetitionBot extends OpMode {
 
     public void grabberLiftControl() {
         if (gamepad2.right_bumper) {
-            Bot.extendGrabberLift(0.5);
+            Bot.extendGrabberLift(0.3);
 
         }
 
         if (gamepad2.left_bumper) {
-            Bot.retractGrabberLift(0.5);
+            Bot.retractGrabberLift(0.15);
 
         }
 

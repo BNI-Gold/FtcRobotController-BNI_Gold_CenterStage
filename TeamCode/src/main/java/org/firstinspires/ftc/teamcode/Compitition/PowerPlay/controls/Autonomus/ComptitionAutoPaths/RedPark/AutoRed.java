@@ -1,12 +1,11 @@
 package org.firstinspires.ftc.teamcode.Compitition.PowerPlay.controls.Autonomus.ComptitionAutoPaths.RedPark;
 
 import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
-import com.qualcomm.robotcore.eventloop.opmode.Disabled;
-
 import org.firstinspires.ftc.teamcode.Compitition.PowerPlay.Robots.CompetionBot;
 import org.firstinspires.ftc.teamcode.Compitition.PowerPlay.controls.Autonomus.ComptitionAutoPaths.AutoTargetZone;
-@Disabled
-@Autonomous (name = "AutoRed")
+import org.firstinspires.ftc.teamcode.Compitition.PowerPlay.controls.Autonomus.ComptitionAutoPaths.RedPark.RedPark;
+
+@Autonomous (name = "RedDetectionPark")
 public class AutoRed extends RedPark {
 
     public CompetionBot Bot = new CompetionBot();
@@ -19,24 +18,42 @@ public class AutoRed extends RedPark {
 
         Bot.setLinearOp(this);
 
-        targetZone = AutoTargetZone.C;
+        // Initialize WebCam and Create Image Processing Pipeline
+        initializePipeline();
+
+        //targetZone = AutoTargetZone.A;
 
         telemetry.addLine("WAITING FOR START >");
-        telemetry.addData("TARGET ZONE: ", targetZone);
+        telemetry.addData("TARGET ZONE: ", TargetZone);
         telemetry.update();
 
+        // Find Tags During the Init Loop
+        while (!isStarted() && !isStopRequested()) {
+            findTag();
+            sleep(20);
+        }
         waitForStart();
 
         while (opModeIsActive()) {
 
-            //targetZone = AutoTargetZone.A;
+            Bot.closeGrabberArms();
 
-            telemetry.addData("TARGET ZONE: ", targetZone);
+            sleep(1000);
+
+            Bot.extendGrabberLift(0.3);
+
+            sleep(200);
+
+            Bot.stopGrabberLift();
+
+            //targetZone = DetectSleaveImage(Bot);
+
+            telemetry.addData("TARGET ZONE: ", TargetZone);
             telemetry.update();
 
             sleep(1000);
 
-            parkplace(Bot, targetZone);
+            parkplace(Bot, TargetZone);
             sleep(1000);
 
 

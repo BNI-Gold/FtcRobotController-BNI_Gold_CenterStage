@@ -2,6 +2,7 @@ package org.firstinspires.ftc.teamcode.Compitition.PowerPlay.controls.Autonomus.
 
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 import org.firstinspires.ftc.robotcore.external.hardware.camera.WebcamName;
+import org.firstinspires.ftc.teamcode.Compitition.PowerPlay.Robots.CompetionBot;
 import org.openftc.apriltag.AprilTagDetection;
 import org.openftc.easyopencv.OpenCvCamera;
 import org.openftc.easyopencv.OpenCvCameraFactory;
@@ -46,6 +47,7 @@ public abstract class AutoMain extends LinearOpMode {
         tagPipeline = new TagDetection(tagsize, fx, fy, cx, cy);
 
         camera.setPipeline(tagPipeline);
+
         camera.openCameraDeviceAsync(new OpenCvCamera.AsyncCameraOpenListener() {
 
             @Override
@@ -57,6 +59,34 @@ public abstract class AutoMain extends LinearOpMode {
             public void onError(int errorCode) { }
 
         });
+
+    }
+
+    public void stopCamera() {
+
+        camera.stopRecordingPipeline();
+        camera.stopStreaming();
+        camera.closeCameraDevice();
+
+    }
+
+    public void detectTags() {
+
+        findTag();
+
+        sleep(500);
+
+        findTag();
+
+        sleep(500);
+
+        findTag();
+
+        sleep(500);
+
+        stopCamera();
+
+        sleep(500);
 
     }
 
