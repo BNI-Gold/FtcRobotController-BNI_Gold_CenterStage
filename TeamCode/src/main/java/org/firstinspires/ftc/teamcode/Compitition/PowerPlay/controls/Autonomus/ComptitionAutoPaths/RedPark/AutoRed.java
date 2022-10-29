@@ -1,22 +1,38 @@
 package org.firstinspires.ftc.teamcode.Compitition.PowerPlay.controls.Autonomus.ComptitionAutoPaths.RedPark;
 
 import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
+import com.qualcomm.robotcore.eventloop.opmode.Disabled;
+
 import org.firstinspires.ftc.teamcode.Compitition.PowerPlay.Robots.CompetionBot;
+import org.firstinspires.ftc.teamcode.Compitition.PowerPlay.Robots.StraferBot;
 import org.firstinspires.ftc.teamcode.Compitition.PowerPlay.controls.Autonomus.ComptitionAutoPaths.AutoTargetZone;
-import org.firstinspires.ftc.teamcode.Compitition.PowerPlay.controls.Autonomus.ComptitionAutoPaths.RedPark.RedPark;
 
 @Autonomous (name = "RedDetectionPark")
 public class AutoRed extends RedPark {
 
     public CompetionBot Bot = new CompetionBot();
 
+    public StraferBot BotStrafer = new StraferBot();
+
     public AutoTargetZone targetZone = null;
+
+    public boolean isCompetition = true;
 
     @Override
     public void runOpMode() throws InterruptedException {
-        Bot.initRobot(hardwareMap);
 
-        Bot.setLinearOp(this);
+        if (isCompetition == true) {
+            Bot.initRobot(hardwareMap);
+
+            Bot.setLinearOp(this);
+
+        } else {
+
+            BotStrafer.initRobot(hardwareMap);
+
+            BotStrafer.setLinearOp(this);
+
+        }
 
         // Initialize WebCam and Create Image Processing Pipeline
         initializePipeline();
@@ -27,24 +43,33 @@ public class AutoRed extends RedPark {
         telemetry.addData("TARGET ZONE: ", TargetZone);
         telemetry.update();
 
-        // Find Tags During the Init Loop
-        while (!isStarted() && !isStopRequested()) {
-            findTag();
-            sleep(20);
-        }
         waitForStart();
 
         while (opModeIsActive()) {
 
-            Bot.closeGrabberArms();
+            // Find Tags During the Init Loop
+//            while (!isStarted() && !isStopRequested()) {
+//                findTag();
+//                sleep(20);
+//            }
 
-            sleep(1000);
+            //detect tags in auto main
 
-            Bot.extendGrabberLift(0.3);
+            detectTags();
 
-            sleep(200);
+            if (isCompetition == true) {
 
-            Bot.stopGrabberLift();
+                Bot.closeGrabberArms();
+
+                sleep(1000);
+
+                Bot.extendGrabberLift(0.5);
+
+                sleep(200);
+
+                Bot.stopGrabberLift();
+
+            }
 
             //targetZone = DetectSleaveImage(Bot);
 
@@ -53,10 +78,16 @@ public class AutoRed extends RedPark {
 
             sleep(1000);
 
-            parkplace(Bot, TargetZone);
-            sleep(1000);
+            if (isCompetition == true) {
 
+                parkplace(Bot, TargetZone);
+                sleep(1000);
 
+            } else {
+
+//                parkplace(BotStrafer, TargetZone);
+
+            }
 
 
 

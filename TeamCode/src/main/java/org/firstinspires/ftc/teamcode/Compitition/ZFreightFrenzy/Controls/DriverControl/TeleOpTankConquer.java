@@ -1,12 +1,13 @@
 package org.firstinspires.ftc.teamcode.Compitition.ZFreightFrenzy.Controls.DriverControl;
 
 import com.qualcomm.hardware.rev.RevBlinkinLedDriver;
+import com.qualcomm.robotcore.eventloop.opmode.Disabled;
 import com.qualcomm.robotcore.eventloop.opmode.OpMode;
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 import com.qualcomm.robotcore.util.Range;
 
 import org.firstinspires.ftc.teamcode.Compitition.ZFreightFrenzy.Robots.TankBot;
-
+@Disabled
 @TeleOp( name = "Tank Go Vroom", group = "1")
 
 public class TeleOpTankConquer extends OpMode {

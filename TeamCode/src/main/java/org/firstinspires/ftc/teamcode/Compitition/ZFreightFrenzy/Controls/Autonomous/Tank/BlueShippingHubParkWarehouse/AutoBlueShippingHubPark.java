@@ -1,10 +1,11 @@
 package org.firstinspires.ftc.teamcode.Compitition.ZFreightFrenzy.Controls.Autonomous.Tank.BlueShippingHubParkWarehouse;
 
 import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
+import com.qualcomm.robotcore.eventloop.opmode.Disabled;
 
 import org.firstinspires.ftc.teamcode.Compitition.ZFreightFrenzy.Robots.TankBot;
 import org.firstinspires.ftc.teamcode.Compitition.ZFreightFrenzy.mechanisms.TSELocation;
-
+@Disabled
 @Autonomous (name = "Tank: Blue: Shipping Hub: Warehouse Park", group = "BLUE")
 
 public class AutoBlueShippingHubPark extends BlueShippingHubPark{

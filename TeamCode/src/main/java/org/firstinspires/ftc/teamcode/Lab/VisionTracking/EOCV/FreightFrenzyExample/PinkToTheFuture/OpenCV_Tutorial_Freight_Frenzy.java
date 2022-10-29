@@ -13,6 +13,7 @@ import org.openftc.easyopencv.OpenCvCameraFactory;
 import org.openftc.easyopencv.OpenCvCameraRotation;
 
 //@Config
+@Disabled
 @TeleOp(name="OpenCV_FF", group="Tutorials")
 //@Disabled
 

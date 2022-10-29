@@ -54,6 +54,7 @@ import java.util.Locale;
  *
  * @see <a href="http://www.adafruit.com/products/2472">Adafruit IMU</a>
  */
+@Disabled
 @TeleOp(name = "IMU BUILT IN EXAMPLE CODE b reset", group = "LAB")
 //@Disabled
 public class GyroBuiltInExample extends LinearOpMode

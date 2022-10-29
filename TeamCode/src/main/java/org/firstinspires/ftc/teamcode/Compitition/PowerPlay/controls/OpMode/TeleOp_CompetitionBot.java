@@ -9,7 +9,7 @@ import org.firstinspires.ftc.teamcode.Compitition.PowerPlay.Robots.CompetionBot;
 import org.firstinspires.ftc.teamcode.Compitition.ZCompititionUltimateGoal.Robots.StraferKit;
 
 //@Disabled
-@TeleOp (name = "Teleop_StraferKit_2022",group = "Lab")
+@TeleOp (name = "Colonel Clap - Strafer",group = "Lab")
 
 public class TeleOp_CompetitionBot extends OpMode {
 
@@ -63,7 +63,7 @@ public class TeleOp_CompetitionBot extends OpMode {
 
     public void grabberLiftControl() {
         if (gamepad2.right_bumper) {
-            Bot.extendGrabberLift(0.3);
+            Bot.extendGrabberLift(1);
 
         }
 

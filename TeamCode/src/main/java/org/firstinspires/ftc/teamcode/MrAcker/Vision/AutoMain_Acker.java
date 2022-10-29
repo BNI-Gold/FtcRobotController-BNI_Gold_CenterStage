@@ -42,7 +42,7 @@ public abstract class AutoMain_Acker extends LinearOpMode {
 
             @Override
             public void onOpened() {
-                camera.startStreaming(800,448, OpenCvCameraRotation.UPRIGHT);   //original 800 x 448
+                camera.startStreaming(640,480, OpenCvCameraRotation.UPRIGHT);   //original 800 x 448
             }
 
             @Override

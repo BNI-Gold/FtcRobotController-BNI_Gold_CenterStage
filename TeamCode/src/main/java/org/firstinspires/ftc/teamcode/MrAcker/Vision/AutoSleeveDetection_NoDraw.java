@@ -1,9 +1,10 @@
 package org.firstinspires.ftc.teamcode.MrAcker.Vision;
 
 import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
+import com.qualcomm.robotcore.eventloop.opmode.Disabled;
 
 // April Tag Detection. No drawing of bounding boxes or cubes
-//
+@Disabled
 @Autonomous(name="Vision: Sleeve Detect No Draw")
 public class AutoSleeveDetection_NoDraw extends AutoMain_Acker_NoDraw {
 

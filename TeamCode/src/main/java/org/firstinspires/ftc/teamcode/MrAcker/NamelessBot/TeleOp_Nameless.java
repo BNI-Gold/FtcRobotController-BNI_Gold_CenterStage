@@ -4,10 +4,11 @@
 
 package org.firstinspires.ftc.teamcode.MrAcker.NamelessBot;
 
+import com.qualcomm.robotcore.eventloop.opmode.Disabled;
 import com.qualcomm.robotcore.eventloop.opmode.OpMode;
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 import com.qualcomm.robotcore.util.Range;
-
+@Disabled
 @TeleOp (name = "NamelessBot",group = "Lab")
 
 public class TeleOp_Nameless extends OpMode {

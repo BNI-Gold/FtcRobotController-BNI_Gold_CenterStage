@@ -4,11 +4,12 @@ import android.inputmethodservice.Keyboard;
 import android.text.method.Touch;
 
 import com.qualcomm.hardware.rev.RevBlinkinLedDriver;
+import com.qualcomm.robotcore.eventloop.opmode.Disabled;
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 import com.qualcomm.robotcore.eventloop.opmode.OpMode;
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 import com.qualcomm.robotcore.hardware.TouchSensor;
-
+@Disabled
 @TeleOp (name = "Magnetic Sensor", group = "LAB")
 
 public class Sensor_MagneticSensor extends OpMode {

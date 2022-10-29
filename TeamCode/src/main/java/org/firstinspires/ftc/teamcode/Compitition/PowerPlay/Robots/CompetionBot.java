@@ -3,6 +3,7 @@ package org.firstinspires.ftc.teamcode.Compitition.PowerPlay.Robots;
 import com.qualcomm.hardware.bosch.BNO055IMU;
 import com.qualcomm.hardware.bosch.JustLoggingAccelerationIntegrator;
 import com.qualcomm.robotcore.hardware.DcMotor;
+import com.qualcomm.robotcore.hardware.DcMotorSimple;
 import com.qualcomm.robotcore.hardware.HardwareMap;
 import com.qualcomm.robotcore.hardware.Servo;
 import com.qualcomm.robotcore.hardware.TouchSensor;
@@ -48,6 +49,12 @@ public class CompetionBot extends MecanumDrive {
             frontRightMotor=hwBot.dcMotor.get("front_right_motor");
             rearLeftMotor=hwBot.dcMotor.get("rear_left_motor");
             rearRightMotor=hwBot.dcMotor.get("rear_right_motor");
+
+            grabberLift = hwBot.dcMotor.get("grabber_lift");
+
+            grabberLift.setDirection(DcMotorSimple.Direction.REVERSE);
+
+            grabberLift.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
 
 
             frontLeftMotor.setDirection(DcMotor.Direction.REVERSE);
@@ -97,15 +104,15 @@ public class CompetionBot extends MecanumDrive {
 
         public void openGrabberArms() {
 
-            grabberArmLeft.setPosition(0.2149);
-            grabberArmRight.setPosition(0.625);
+            grabberArmLeft.setPosition(0.577);
+            grabberArmRight.setPosition(0.62);
 
         }
 
         public void closeGrabberArms() {
 
         grabberArmLeft.setPosition(0.45);
-        grabberArmRight.setPosition(0.459);
+        grabberArmRight.setPosition(0.79);
 
     }
 
@@ -120,8 +127,6 @@ public class CompetionBot extends MecanumDrive {
     }
 
     public void lowExtendGrabberLift(double power) {
-
-
 
     }
 

@@ -1,10 +1,11 @@
 package org.firstinspires.ftc.teamcode.Compitition.ZFreightFrenzy.Controls.Autonomous.Tank.RedShippingHubDuckStorageUnit;
 
 import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
+import com.qualcomm.robotcore.eventloop.opmode.Disabled;
 
 import org.firstinspires.ftc.teamcode.Compitition.ZFreightFrenzy.Robots.TankBot;
 import org.firstinspires.ftc.teamcode.Compitition.ZFreightFrenzy.mechanisms.TSELocation;
-
+@Disabled
 @Autonomous (name = "Tank: Red: Shipping Hub: Ducks: Storage", group = "RED")
 
 public class AutoRedShippingHubDuckStorageUnit extends RedShippingHubDuckStorageUnit {

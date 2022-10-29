@@ -9,7 +9,7 @@ import com.qualcomm.robotcore.util.Range;
 import org.firstinspires.ftc.teamcode.Compitition.ZCompititionUltimateGoal.Robots.CompetitionBot;
 //import org.firstinspires.ftc.teamcode.Compitition.CompititionUltimateGoal.Robots.LabBot;
 
-
+@Disabled
 @TeleOp(name = "Teleop_CompetitionBot - Ringed Ranger", group = "3")
 //@Disabled
 public class TeleopCompetitionBot extends OpMode {

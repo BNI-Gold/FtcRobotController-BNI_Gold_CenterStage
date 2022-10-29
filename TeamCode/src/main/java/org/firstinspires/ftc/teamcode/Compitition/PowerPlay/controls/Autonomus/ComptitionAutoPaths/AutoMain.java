@@ -13,9 +13,9 @@ import java.util.ArrayList;
 public abstract class AutoMain extends LinearOpMode {
 
     public AutoTargetZone Zone = null;
-
     OpenCvCamera camera;
-    TagDetection tagPipeline;
+    // Remove "_NoDraw" from below variable type in order to draw on image rendering
+    TagDetection_NoDraw tagPipeline;
     public AutoTargetZone TargetZone = AutoTargetZone.None;
 
     // in pixles
@@ -44,7 +44,9 @@ public abstract class AutoMain extends LinearOpMode {
 
         int cameraMonitorViewId = hardwareMap.appContext.getResources().getIdentifier("cameraMonitorViewId", "id", hardwareMap.appContext.getPackageName());
         camera = OpenCvCameraFactory.getInstance().createWebcam(hardwareMap.get(WebcamName.class, "Webcam 1"), cameraMonitorViewId);
-        tagPipeline = new TagDetection(tagsize, fx, fy, cx, cy);
+
+        // Remove "_NoDraw" from constructor in order to draw on image rendering
+        tagPipeline = new TagDetection_NoDraw(tagsize, fx, fy, cx, cy);
 
         camera.setPipeline(tagPipeline);
 
@@ -52,7 +54,7 @@ public abstract class AutoMain extends LinearOpMode {
 
             @Override
             public void onOpened() {
-                camera.startStreaming(800,448, OpenCvCameraRotation.UPRIGHT);   //original 800 x 448
+                camera.startStreaming(544,288, OpenCvCameraRotation.UPRIGHT);   //original 800 x 448
             }
 
             @Override

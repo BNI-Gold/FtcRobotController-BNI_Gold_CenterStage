@@ -5,7 +5,9 @@
 package org.firstinspires.ftc.teamcode.MrAcker.NamelessBot;
 
 import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
+import com.qualcomm.robotcore.eventloop.opmode.Disabled;
 
+@Disabled
 @Autonomous(name = "NameLessBot", group = "Lab")
 public class AutoTester_Nameless extends AutoMain_Nameless {
 

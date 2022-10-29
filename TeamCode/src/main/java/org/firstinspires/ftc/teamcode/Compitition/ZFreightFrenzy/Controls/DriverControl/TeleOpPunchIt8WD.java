@@ -37,12 +37,13 @@
 
 package org.firstinspires.ftc.teamcode.Compitition.ZFreightFrenzy.Controls.DriverControl;
 
+import com.qualcomm.robotcore.eventloop.opmode.Disabled;
 import com.qualcomm.robotcore.eventloop.opmode.OpMode;
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 import com.qualcomm.robotcore.util.Range;
 
 import org.firstinspires.ftc.teamcode.Compitition.ZFreightFrenzy.Robots.EightWheelBot;
-
+@Disabled
 @TeleOp (name = "TeleOp 8WD_PunchIt", group = "2")
 
 public class TeleOpPunchIt8WD extends OpMode {

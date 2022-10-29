@@ -4,10 +4,11 @@
 
 package org.firstinspires.ftc.teamcode.MrAcker.ProgrammerBot;
 
+import com.qualcomm.robotcore.eventloop.opmode.Disabled;
 import com.qualcomm.robotcore.eventloop.opmode.OpMode;
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 import com.qualcomm.robotcore.util.Range;
-
+@Disabled
 @TeleOp (name = "ProgrammerBot",group = "Lab")
 
 public class TeleOp_Programmer extends OpMode {

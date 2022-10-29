@@ -1,10 +1,11 @@
 package org.firstinspires.ftc.teamcode.Compitition.ZFreightFrenzy.Controls.DriverControl;
 
+import com.qualcomm.robotcore.eventloop.opmode.Disabled;
 import com.qualcomm.robotcore.eventloop.opmode.OpMode;
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 
 import org.firstinspires.ftc.teamcode.Compitition.ZFreightFrenzy.Robots.SixWheelBot;
-
+@Disabled
 @TeleOp (name = "TeleOp 6WD_BeeLine", group = "2")
 
 public class TeleOpBeeLine6WD extends OpMode {

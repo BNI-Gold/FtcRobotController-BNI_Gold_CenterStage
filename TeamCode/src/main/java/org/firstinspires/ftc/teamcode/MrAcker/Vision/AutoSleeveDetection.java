@@ -1,7 +1,9 @@
 package org.firstinspires.ftc.teamcode.MrAcker.Vision;
 
 import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
+import com.qualcomm.robotcore.eventloop.opmode.Disabled;
 
+@Disabled
 @Autonomous(name="Vision: Sleeve Detect Draw")
 public class AutoSleeveDetection extends AutoMain_Acker {
 //

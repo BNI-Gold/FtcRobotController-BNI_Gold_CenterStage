@@ -2,6 +2,7 @@ package org.firstinspires.ftc.teamcode.Compitition.PowerPlay.controls.Autonomus.
 
 import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
 import org.firstinspires.ftc.teamcode.Compitition.PowerPlay.Robots.CompetionBot;
+import org.firstinspires.ftc.teamcode.Compitition.PowerPlay.Robots.StraferBot;
 import org.firstinspires.ftc.teamcode.Compitition.PowerPlay.controls.Autonomus.ComptitionAutoPaths.AutoTargetZone;
 
 @Autonomous (name = "BlueDetectionPark")
@@ -9,13 +10,27 @@ public class AutoBlue extends BluePark {
 
     public CompetionBot Bot = new CompetionBot();
 
+    public StraferBot BotStrafer = new StraferBot();
+
     public AutoTargetZone targetZone = null;
+
+    public boolean isCompetition = true;
 
     @Override
     public void runOpMode() throws InterruptedException {
-        Bot.initRobot(hardwareMap);
 
-        Bot.setLinearOp(this);
+        if (isCompetition == true) {
+            Bot.initRobot(hardwareMap);
+
+            Bot.setLinearOp(this);
+
+        } else {
+
+            BotStrafer.initRobot(hardwareMap);
+
+            BotStrafer.setLinearOp(this);
+
+        }
 
         // Initialize WebCam and Create Image Processing Pipeline
         initializePipeline();
@@ -40,15 +55,19 @@ public class AutoBlue extends BluePark {
 
             detectTags();
 
-            Bot.closeGrabberArms();
+            if (isCompetition == true) {
 
-            sleep(1000);
+                Bot.closeGrabberArms();
 
-            Bot.extendGrabberLift(0.3);
+                sleep(1000);
 
-            sleep(200);
+                Bot.extendGrabberLift(0.5);
 
-            Bot.stopGrabberLift();
+                sleep(200);
+
+                Bot.stopGrabberLift();
+
+            }
 
             //targetZone = DetectSleaveImage(Bot);
 
@@ -57,10 +76,16 @@ public class AutoBlue extends BluePark {
 
             sleep(1000);
 
-            parkplace(Bot, TargetZone);
-            sleep(1000);
+            if (isCompetition == true) {
 
+                parkplace(Bot, TargetZone);
+                sleep(1000);
 
+            } else {
+
+                parkplace(BotStrafer, TargetZone);
+
+            }
 
 
 
