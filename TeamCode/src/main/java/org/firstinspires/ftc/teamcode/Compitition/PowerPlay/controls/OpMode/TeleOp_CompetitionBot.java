@@ -45,6 +45,15 @@ public class TeleOp_CompetitionBot extends OpMode {
         drive();
         grabberArmControl();
         grabberLiftControl();
+        turretControl();
+//        updateTelemetry();
+
+    }
+
+    public void updateTelemetry () {
+
+        telemetry.addData("Turret Encoder Position: ", Bot.turretPlatform.getCurrentPosition());
+        telemetry.addData("Lift Encoder Position: ", Bot.grabberLift.getCurrentPosition());
 
     }
 
@@ -62,18 +71,34 @@ public class TeleOp_CompetitionBot extends OpMode {
     }
 
     public void grabberLiftControl() {
-        if (gamepad2.right_bumper) {
-            Bot.extendGrabberLift(1);
+        if (gamepad2.left_stick_y >= 0.1) {
+            Bot.extendGrabberLift(leftStickYVal);
 
         }
 
-        if (gamepad2.left_bumper) {
-            Bot.retractGrabberLift(0.15);
+        else if (gamepad2.left_stick_y <= -0.1) {
+            Bot.retractGrabberLift(leftStickYVal);
 
         }
 
         else {
             Bot.stopGrabberLift();
+
+        }
+
+    }
+
+    public void turretControl() {
+        if (gamepad2.left_stick_x >= 0.1) {
+            Bot.turretClockwise(leftStickXVal);
+
+        }
+
+        else if (gamepad2.left_stick_x <= -0.1) {
+            Bot.turretCounterClockwise(leftStickXVal);
+
+        } else {
+            Bot.turretStop();
 
         }
 

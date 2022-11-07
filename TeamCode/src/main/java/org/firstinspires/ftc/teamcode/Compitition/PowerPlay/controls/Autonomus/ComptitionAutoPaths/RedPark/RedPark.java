@@ -49,6 +49,11 @@ public abstract class RedPark extends AutoMain {
                 Bot.driveForward(0.5, 0.5);
                 sleep(sleepTime);
 
+//            case None:
+//                Bot.driveForward(0.5, 2.75);
+//                sleep(sleepTime);
+                //(not tested yet)
+
                 break;
 
         }
@@ -59,4 +64,98 @@ public abstract class RedPark extends AutoMain {
 
 
     }
+
+    public void redStackA (CompetionBot Bot) {
+
+        Bot.strafeLeft(0.5, 0.3);
+        sleep(sleepTime);
+
+        Bot.gyroCorrection(0.5, 0);
+        sleep(sleepTime);
+
+        Bot.extendGrabberLift(0.5);
+        sleep(2500);
+
+        Bot.autoTurretCounterClockwise(0.3, 0.5);
+        sleep(sleepTime);
+
+        Bot.openGrabberArms();
+        sleep(sleepTime);
+
+        Bot.strafeRight(0.2, 0.35);
+        sleep(sleepTime);
+
+        Bot.gyroCorrection(0.5, 0);
+        sleep(sleepTime);
+
+        Bot.autoTurretClockwise(0.3, 0.5);
+        sleep(sleepTime);
+
+        Bot.retractGrabberLift(0.25);
+        sleep(2200);
+
+    }
+
+    public void redStackB (CompetionBot Bot) {
+
+        Bot.strafeLeft(0.5, 0.3);
+        sleep(sleepTime);
+
+        Bot.gyroCorrection(0.5, 0);
+        sleep(sleepTime);
+
+        Bot.extendGrabberLift(0.5);
+        sleep(3000);
+
+        Bot.autoTurretCounterClockwise(0.3, 0.5);
+        sleep(sleepTime);
+
+        Bot.openGrabberArms();
+        sleep(sleepTime);
+
+        Bot.strafeRight(0.2, 0.35);
+        sleep(sleepTime);
+
+        Bot.gyroCorrection(0.5, 0);
+        sleep(sleepTime);
+
+        Bot.autoTurretClockwise(0.3, 0.5);
+        sleep(sleepTime);
+
+        Bot.retractGrabberLift(0.25);
+        sleep(2200);
+
+    }
+
+    public void redStackC (CompetionBot Bot) {
+
+        Bot.strafeLeft(0.5, 0.3);
+        sleep(sleepTime);
+
+        Bot.gyroCorrection(0.5, 0);
+        sleep(sleepTime);
+
+        Bot.extendGrabberLift(0.5);
+        sleep(3500);
+
+        Bot.autoTurretCounterClockwise(0.3, 0.5);
+        sleep(sleepTime);
+
+        Bot.openGrabberArms();
+        sleep(sleepTime);
+
+        Bot.strafeRight(0.2, 0.35);
+        sleep(sleepTime);
+
+        Bot.gyroCorrection(0.5, 0);
+        sleep(sleepTime);
+
+        Bot.autoTurretClockwise(0.3, 0.5);
+        sleep(sleepTime);
+
+        Bot.retractGrabberLift(0.25);
+        sleep(2200);
+
+    }
+
 }

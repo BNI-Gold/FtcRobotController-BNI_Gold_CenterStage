@@ -1,4 +1,4 @@
-package org.firstinspires.ftc.teamcode.Camden___Head_Programmer.AprilTags.AprilTagBaseCode;
+package org.firstinspires.ftc.teamcode.Camden_Head_Programmer.AprilTags.AprilTagBaseCode;
 
 public class AprilTagPose
 {

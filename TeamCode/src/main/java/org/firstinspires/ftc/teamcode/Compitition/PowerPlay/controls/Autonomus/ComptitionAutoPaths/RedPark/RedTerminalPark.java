@@ -23,11 +23,27 @@ public class RedTerminalPark extends AutoMain {
 
         while (opModeIsActive()) {
 
+            //competition mechanism start
+
+            Bot.closeGrabberArms();
+
+            sleep(1000);
+
+            Bot.extendGrabberLift(0.5);
+
+            sleep(200);
+
+            Bot.stopGrabberLift();
+
+            sleep(sleepTime);
+
+            //end competition mechanism start
+
             Bot.driveForward(0.1, 0.1);
+            sleep(sleepTime);
 
-            Bot.strafeRight(0.4, 2.9);
-
-            Bot.gyroCorrection(0.2, 0);
+            Bot.strafeLeft(0.4, 3);
+            sleep(sleepTime);
 
             idle();
             requestOpModeStop();

@@ -31,6 +31,7 @@ public class CompetionBot extends MecanumDrive {
 
 
         public DcMotor grabberLift = null;
+        public DcMotor turretPlatform = null;
         public Servo grabberArmLeft = null;
         public Servo grabberArmRight = null;
         TouchSensor magSwitch;
@@ -55,6 +56,11 @@ public class CompetionBot extends MecanumDrive {
             grabberLift.setDirection(DcMotorSimple.Direction.REVERSE);
 
             grabberLift.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
+
+            turretPlatform = hwBot.dcMotor.get("turret_motor");
+
+            turretPlatform.setDirection(DcMotorSimple.Direction.FORWARD);
+            turretPlatform.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
 
 
             frontLeftMotor.setDirection(DcMotor.Direction.REVERSE);
@@ -126,12 +132,31 @@ public class CompetionBot extends MecanumDrive {
         grabberLift.setPower(-Math.abs(power));
     }
 
-    public void lowExtendGrabberLift(double power) {
+    public void stopGrabberLift () {
+        grabberLift.setPower(0);
+    }
+
+    public void turretClockwise (double power) {
+        turretPlatform.setPower(Math.abs(power));
 
     }
 
-    public void stopGrabberLift () {
-        grabberLift.setPower(0);
+    public void autoTurretClockwise (double power, double rotations) {
+        turretPlatform.setPower(Math.abs(power));
+    }
+
+    public void turretCounterClockwise (double power) {
+        turretPlatform.setPower(-Math.abs(power));
+
+    }
+
+    public void autoTurretCounterClockwise (double power, double rotations) {
+        turretPlatform.setPower(-Math.abs(power));
+
+    }
+
+    public void turretStop () {
+        turretPlatform.setPower(0);
     }
 
         public void gyroCorrection (double speed, double angle) {
