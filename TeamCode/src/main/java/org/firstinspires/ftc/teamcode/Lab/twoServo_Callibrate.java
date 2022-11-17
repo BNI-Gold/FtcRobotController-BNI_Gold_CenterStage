@@ -11,7 +11,7 @@ import com.qualcomm.robotcore.util.Range;
 public class twoServo_Callibrate extends OpMode {
 
     private Servo grabberArmLeft = null;
-    private double grabberLeftArmPos = 0.4;
+    private double grabberLeftArmPos = 0.6;
     private double incVal = 0.001;
     private Servo grabberArmRight = null;
     private double grabberRightArmPos = 0.6;

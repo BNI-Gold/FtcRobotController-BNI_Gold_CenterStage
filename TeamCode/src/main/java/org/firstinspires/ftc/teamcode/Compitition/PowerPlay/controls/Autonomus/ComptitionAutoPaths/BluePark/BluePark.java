@@ -9,25 +9,25 @@ public abstract class BluePark extends AutoMain {
     public void parkplace (CompetionBot Bot, AutoTargetZone target) throws InterruptedException{
         switch (target) {
             case A:
-                Bot.driveForward(.5,2.5);
+                Bot.driveForward(.5,1.42);
                 sleep(sleepTime);
 
-                Bot.gyroCorrection(.2,0);
+                Bot.gyroCorrection(.3,0);
                 sleep(sleepTime);
 
-                Bot.strafeLeft(.5,3);
+                Bot.rotateRight(0.3, 0.4);
                 sleep(sleepTime);
 
-                Bot.gyroCorrection(.2,0);
+                Bot.gyroCorrection(0.3, -45);
                 sleep(sleepTime);
 
-                Bot.driveForward(0.5, 0.5);
+                blueStackA(Bot);
                 sleep(sleepTime);
 
                 break;
 
             case B:
-                Bot.driveForward(.5,2.5);
+                Bot.driveForward(.5,1.5);
                 sleep(sleepTime);
 
                 Bot.gyroCorrection(.2,0);
@@ -39,13 +39,13 @@ public abstract class BluePark extends AutoMain {
                 break;
 
             case C:
-                Bot.driveForward(.5,2.5);
+                Bot.driveForward(.5,1.4);
                 sleep(sleepTime);
 
                 Bot.gyroCorrection(.2,0);
                 sleep(sleepTime);
 
-                Bot.strafeRight(.5,3);
+                Bot.strafeRight(.5,1.4);
                 sleep(sleepTime);
 
                 Bot.gyroCorrection(.2,0);
@@ -111,32 +111,36 @@ public abstract class BluePark extends AutoMain {
 
     public void blueStackA (CompetionBot Bot) {
 
-        Bot.strafeRight(0.5, 0.3);
+        Bot.extendGrabberLift(0.7);
+        sleep(2000);
+
+        Bot.stopGrabberLift();
         sleep(sleepTime);
 
-        Bot.gyroCorrection(0.5, 0);
+        sleep(700);
+
+        Bot.driveForward(.3,.25);
         sleep(sleepTime);
 
-        Bot.extendGrabberLift(0.5);
-        sleep(2500);
-
-        Bot.autoTurretClockwise(0.3, 0.5);
-        sleep(sleepTime);
+        Bot.gyroCorrection(.2,-45);
+        sleep(600);
 
         Bot.openGrabberArms();
         sleep(sleepTime);
 
-        Bot.strafeLeft(0.2, 0.35);
+        Bot.driveBackward(.2,.3);
         sleep(sleepTime);
 
-        Bot.gyroCorrection(0.5, 0);
+        Bot.rotateRight(.5,.4);
         sleep(sleepTime);
 
-        Bot.autoTurretCounterClockwise(0.3, 0.5);
+        Bot.gyroCorrection(.2,-90);
         sleep(sleepTime);
 
-        Bot.retractGrabberLift(0.25);
-        sleep(2200);
+        Bot.driveBackward(.5,1);
+        sleep(sleepTime);
+
+
 
     }
 

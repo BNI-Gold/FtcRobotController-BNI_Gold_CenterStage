@@ -8,8 +8,7 @@ import com.qualcomm.robotcore.util.Range;
 import org.firstinspires.ftc.teamcode.Compitition.PowerPlay.Robots.CompetionBot;
 import org.firstinspires.ftc.teamcode.Compitition.ZCompititionUltimateGoal.Robots.StraferKit;
 
-//@Disabled
-@TeleOp (name = "Colonel Clap - Strafer",group = "Lab")
+@TeleOp (name = "Colonel Clap",group = "1")
 
 public class TeleOp_CompetitionBot extends OpMode {
 
@@ -25,6 +24,8 @@ public class TeleOp_CompetitionBot extends OpMode {
 
     double powerThreshold = 0;
     double speedMultiply = 1;
+
+
 
     public CompetionBot Bot=new CompetionBot();
 
@@ -46,7 +47,7 @@ public class TeleOp_CompetitionBot extends OpMode {
         grabberArmControl();
         grabberLiftControl();
         turretControl();
-//        updateTelemetry();
+        updateTelemetry();
 
     }
 
@@ -54,16 +55,24 @@ public class TeleOp_CompetitionBot extends OpMode {
 
         telemetry.addData("Turret Encoder Position: ", Bot.turretPlatform.getCurrentPosition());
         telemetry.addData("Lift Encoder Position: ", Bot.grabberLift.getCurrentPosition());
+        telemetry.addData("leftA", Bot.frontLeftMotor.getCurrentPosition());
+        telemetry.addData("leftB", Bot.rearLeftMotor.getCurrentPosition());
+        telemetry.addData("rightA", Bot.frontRightMotor.getCurrentPosition());
+        telemetry.addData("rightB", Bot.rearRightMotor.getCurrentPosition());
+
 
     }
 
+
     public void grabberArmControl() {
         if (gamepad2.b) {
+
             Bot.openGrabberArms();
 
         }
 
         if (gamepad2.x) {
+
             Bot.closeGrabberArms();
 
         }
@@ -71,17 +80,45 @@ public class TeleOp_CompetitionBot extends OpMode {
     }
 
     public void grabberLiftControl() {
+
+        //just to find if lift works
+        if (gamepad2.left_bumper){
+            Bot.extendGrabberLift(1);
+        }
+        else if (gamepad2.right_bumper){
+            Bot.retractGrabberLift(.2);
+        }
+
+
+
         if (gamepad2.left_stick_y >= 0.1) {
-            Bot.extendGrabberLift(leftStickYVal);
+
+            leftStickYVal = gamepad2.left_stick_y;
+            Bot.retractGrabberLift(leftStickYVal * .25);
+
+            /*
+            "idea for encoder stop"
+            if grabberLiftExtnd.encoder <= number{
+            grabberLiftExtnd(power = 0 or brake power)
+
+            "gravity should bring it down. if not"
+
+            grabberLiftRetract(power = 0.05 or 0.1)
+
+            use same principles for retract
+             */
 
         }
 
         else if (gamepad2.left_stick_y <= -0.1) {
-            Bot.retractGrabberLift(leftStickYVal);
+
+            leftStickYVal = gamepad2.left_stick_y;
+            Bot.extendGrabberLift(leftStickYVal * 1);
 
         }
 
         else {
+
             Bot.stopGrabberLift();
 
         }
@@ -89,13 +126,15 @@ public class TeleOp_CompetitionBot extends OpMode {
     }
 
     public void turretControl() {
-        if (gamepad2.left_stick_x >= 0.1) {
-            Bot.turretClockwise(leftStickXVal);
+        if (gamepad2.right_stick_x >= 0.1) {
+            rightStickXVal = gamepad2.right_stick_x;
+            Bot.turretClockwise(rightStickXVal * 0.3);
 
         }
 
-        else if (gamepad2.left_stick_x <= -0.1) {
-            Bot.turretCounterClockwise(leftStickXVal);
+        else if (gamepad2.right_stick_x <= -0.1) {
+            rightStickXVal = gamepad2.right_stick_x;
+            Bot.turretCounterClockwise(rightStickXVal * 0.3);
 
         } else {
             Bot.turretStop();

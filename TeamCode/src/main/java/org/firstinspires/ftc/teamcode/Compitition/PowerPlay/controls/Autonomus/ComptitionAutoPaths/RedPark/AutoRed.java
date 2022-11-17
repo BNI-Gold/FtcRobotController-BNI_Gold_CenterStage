@@ -65,7 +65,7 @@ public class AutoRed extends RedPark {
 
                 Bot.extendGrabberLift(0.5);
 
-                sleep(200);
+                sleep(275);
 
                 Bot.stopGrabberLift();
 

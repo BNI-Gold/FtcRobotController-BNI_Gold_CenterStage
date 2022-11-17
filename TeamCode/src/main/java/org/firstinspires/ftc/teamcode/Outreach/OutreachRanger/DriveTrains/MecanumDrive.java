@@ -1,10 +1,12 @@
-package org.firstinspires.ftc.teamcode.Compitition.PowerPlay.DriveTrains;
+package org.firstinspires.ftc.teamcode.Outreach.OutreachRanger.DriveTrains;
+
 
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 import com.qualcomm.robotcore.hardware.DcMotor;
-import com.qualcomm.robotcore.hardware.HardwareMap;
+
 
 public class MecanumDrive {
+
 
     // Instance Variables & Constants
 
@@ -123,29 +125,13 @@ public class MecanumDrive {
     public void driveBackward ( double speed, double rotations){
 
         if (linearOp.opModeIsActive()) {
-//rotations * (-1) and a > before ticks line 136
-            double ticks = Math.abs(rotations) * TICKS_PER_ROTATION;
+            double ticks = rotations * (-1) * TICKS_PER_ROTATION;
             setMotorRunModes(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
             setMotorRunModes(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
-//            linearOp.telemetry.addData("Current ticks: ", frontLeftMotor.getCurrentPosition());
-//            linearOp.telemetry.addData("Target ticks: ", ticks);
-//            linearOp.telemetry.addLine("Going into drive backwards loop");
-//            linearOp.telemetry.update();
-//            linearOp.sleep(1000);
-//            Switched from NR 20s to Go Bilda 13.7
-            while (frontLeftMotor.getCurrentPosition() < ticks && linearOp.opModeIsActive()) {
+            while (frontLeftMotor.getCurrentPosition() > ticks && linearOp.opModeIsActive()) {
                 driveBackward(speed);
-//                linearOp.telemetry.addData("Current ticks: ", frontLeftMotor.getCurrentPosition());
-//                linearOp.telemetry.addData("Target ticks: ", ticks);
-//                linearOp.telemetry.addLine("INSIDE drive backwards loop");
-//                linearOp.telemetry.update();
             }
             stopMotors();
-//            linearOp.telemetry.addData("Current ticks: ", frontLeftMotor.getCurrentPosition());
-//            linearOp.telemetry.addData("Target ticks: ", ticks);
-//            linearOp.telemetry.addLine("Finished with drive backwards loop");
-//            linearOp.telemetry.update();
-//            linearOp.sleep(1000);
         }
     }
 
@@ -200,18 +186,12 @@ public class MecanumDrive {
 
         if (linearOp.opModeIsActive()) {
 
-            double ticks = Math.abs(rotations) * TICKS_PER_ROTATION;
+            double ticks = Math.abs(rotations) * (-1) * TICKS_PER_ROTATION;
             setMotorRunModes(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
             setMotorRunModes(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
 
-            while (frontLeftMotor.getCurrentPosition() < ticks && linearOp.opModeIsActive()) {
+            while (frontLeftMotor.getCurrentPosition() > ticks && linearOp.opModeIsActive()) {
                 strafeLeft(speed);
-
-                linearOp.telemetry.addData("Current ticks: ", frontLeftMotor.getCurrentPosition());
-            linearOp.telemetry.addData("Target ticks: ", ticks);
-//            linearOp.telemetry.addLine("Finished with drive backwards loop");
-            linearOp.telemetry.update();
-//            linearOp.sleep(1000);
             }
             stopMotors();
         }
@@ -307,7 +287,4 @@ public class MecanumDrive {
         stopMotors();
     }
 
-
-    public void initRobot(HardwareMap hardwareMap) {
-    }
 }

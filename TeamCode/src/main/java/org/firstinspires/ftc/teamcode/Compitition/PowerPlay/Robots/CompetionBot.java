@@ -53,13 +53,13 @@ public class CompetionBot extends MecanumDrive {
 
             grabberLift = hwBot.dcMotor.get("grabber_lift");
 
-            grabberLift.setDirection(DcMotorSimple.Direction.REVERSE);
+            grabberLift.setDirection(DcMotorSimple.Direction.FORWARD);
 
             grabberLift.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
 
             turretPlatform = hwBot.dcMotor.get("turret_motor");
 
-            turretPlatform.setDirection(DcMotorSimple.Direction.FORWARD);
+            turretPlatform.setDirection(DcMotorSimple.Direction.REVERSE);
             turretPlatform.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
 
 
@@ -110,17 +110,18 @@ public class CompetionBot extends MecanumDrive {
 
         public void openGrabberArms() {
 
-            grabberArmLeft.setPosition(0.577);
-            grabberArmRight.setPosition(0.62);
+            grabberArmLeft.setPosition(0.7);
+            grabberArmRight.setPosition(0.7);
 
         }
 
         public void closeGrabberArms() {
 
-        grabberArmLeft.setPosition(0.45);
-        grabberArmRight.setPosition(0.79);
+        grabberArmLeft.setPosition(0.6);
+        grabberArmRight.setPosition(0.9);
 
     }
+
 
     public void extendGrabberLift(double power) {
 
