@@ -11,7 +11,7 @@ import org.firstinspires.ftc.teamcode.Compitition.ZCompititionUltimateGoal.Robot
 
 
 @TeleOp(name = "Teleop_CompetitionBot - Ringed Ranger", group = "3")
-//@Disabled
+@Disabled
 public class TeleopCompetitionBot extends OpMode {
 
     // Variables & Constants specific to TeleLabBot

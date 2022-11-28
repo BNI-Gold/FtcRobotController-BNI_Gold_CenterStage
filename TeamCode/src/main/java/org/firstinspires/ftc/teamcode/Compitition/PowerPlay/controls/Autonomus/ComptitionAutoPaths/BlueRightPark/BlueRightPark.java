@@ -1,57 +1,37 @@
-package org.firstinspires.ftc.teamcode.Compitition.PowerPlay.controls.Autonomus.ComptitionAutoPaths.BluePark;
+package org.firstinspires.ftc.teamcode.Compitition.PowerPlay.controls.Autonomus.ComptitionAutoPaths.BlueRightPark;
 
 import org.firstinspires.ftc.teamcode.Compitition.PowerPlay.Robots.CompetionBot;
 import org.firstinspires.ftc.teamcode.Compitition.PowerPlay.Robots.StraferBot;
 import org.firstinspires.ftc.teamcode.Compitition.PowerPlay.controls.Autonomus.ComptitionAutoPaths.AutoMain;
 import org.firstinspires.ftc.teamcode.Compitition.PowerPlay.controls.Autonomus.ComptitionAutoPaths.AutoTargetZone;
 
-public abstract class BluePark extends AutoMain {
+public abstract class BlueRightPark extends AutoMain {
     public void parkplace (CompetionBot Bot, AutoTargetZone target) throws InterruptedException{
         switch (target) {
             case A:
-                Bot.driveForward(.5,1.42);
+                blueRightStack(Bot);
                 sleep(sleepTime);
 
-                Bot.gyroCorrection(.3,0);
-                sleep(sleepTime);
-
-                Bot.rotateRight(0.3, 0.4);
-                sleep(sleepTime);
-
-                Bot.gyroCorrection(0.3, -45);
-                sleep(sleepTime);
-
-                blueStackA(Bot);
+                Bot.driveForward(.5,1.2);
                 sleep(sleepTime);
 
                 break;
 
             case B:
-                Bot.driveForward(.5,1.5);
+                blueRightStack(Bot);
                 sleep(sleepTime);
 
-                Bot.gyroCorrection(.2,0);
+                Bot.driveForward(.5,.1);
                 sleep(sleepTime);
 
-                Bot.driveForward(0.5, 0.5);
-                sleep(sleepTime);
 
                 break;
 
             case C:
-                Bot.driveForward(.5,1.4);
+                blueRightStack(Bot);
                 sleep(sleepTime);
 
-                Bot.gyroCorrection(.2,0);
-                sleep(sleepTime);
-
-                Bot.strafeRight(.5,1.4);
-                sleep(sleepTime);
-
-                Bot.gyroCorrection(.2,0);
-                sleep(sleepTime);
-
-                Bot.driveForward(0.5, 0.5);
+                Bot.driveBackward(.5,1.15);
                 sleep(sleepTime);
 
                 break;
@@ -109,101 +89,48 @@ public abstract class BluePark extends AutoMain {
 
     }
 
-    public void blueStackA (CompetionBot Bot) {
+    public void blueRightStack (CompetionBot Bot) {
+
+        Bot.driveForward(.5,1.4);
+        sleep(sleepTime);
+
+        Bot.gyroCorrection(.3,0);
+        sleep(sleepTime);
+
+        Bot.rotateLeft(0.3, 0.4);
+        sleep(sleepTime);
+
+        Bot.gyroCorrection(0.3, 50);
+        sleep(sleepTime);
 
         Bot.extendGrabberLift(0.7);
-        sleep(2000);
+        sleep(1600);
 
         Bot.stopGrabberLift();
         sleep(sleepTime);
 
+        Bot.extendGrabberLift(.2);
         sleep(700);
 
         Bot.driveForward(.3,.25);
         sleep(sleepTime);
 
-        Bot.gyroCorrection(.2,-45);
+        Bot.gyroCorrection(.2,50);
         sleep(600);
 
         Bot.openGrabberArms();
         sleep(sleepTime);
 
+        Bot.stopGrabberLift();
+        sleep(sleepTime);
+
         Bot.driveBackward(.2,.3);
         sleep(sleepTime);
 
-        Bot.rotateRight(.5,.4);
+        Bot.rotateLeft(.5,.4);
         sleep(sleepTime);
 
-        Bot.gyroCorrection(.2,-90);
+        Bot.gyroCorrection(.2,90);
         sleep(sleepTime);
-
-        Bot.driveBackward(.5,1);
-        sleep(sleepTime);
-
-
-
     }
-
-    public void blueStackB (CompetionBot Bot) {
-
-        Bot.strafeRight(0.5, 0.3);
-        sleep(sleepTime);
-
-        Bot.gyroCorrection(0.5, 0);
-        sleep(sleepTime);
-
-        Bot.extendGrabberLift(0.5);
-        sleep(3000);
-
-        Bot.autoTurretClockwise(0.3, 0.5);
-        sleep(sleepTime);
-
-        Bot.openGrabberArms();
-        sleep(sleepTime);
-
-        Bot.strafeLeft(0.2, 0.35);
-        sleep(sleepTime);
-
-        Bot.gyroCorrection(0.5, 0);
-        sleep(sleepTime);
-
-        Bot.autoTurretCounterClockwise(0.3, 0.5);
-        sleep(sleepTime);
-
-        Bot.retractGrabberLift(0.25);
-        sleep(2200);
-
-    }
-
-    public void blueStackC (CompetionBot Bot) {
-
-        Bot.strafeRight(0.5, 0.3);
-        sleep(sleepTime);
-
-        Bot.gyroCorrection(0.5, 0);
-        sleep(sleepTime);
-
-        Bot.extendGrabberLift(0.5);
-        sleep(3500);
-
-        Bot.autoTurretClockwise(0.3, 0.5);
-        sleep(sleepTime);
-
-        Bot.openGrabberArms();
-        sleep(sleepTime);
-
-        Bot.strafeLeft(0.2, 0.35);
-        sleep(sleepTime);
-
-        Bot.gyroCorrection(0.5, 0);
-        sleep(sleepTime);
-
-        Bot.autoTurretCounterClockwise(0.3, 0.5);
-        sleep(sleepTime);
-
-        Bot.retractGrabberLift(0.25);
-        sleep(2200);
-
-    }
-
 }

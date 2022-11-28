@@ -6,8 +6,7 @@ import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 import com.qualcomm.robotcore.util.Range;
 
 import org.firstinspires.ftc.teamcode.Compitition.ZCompititionUltimateGoal.Robots.StraferKit;
-@Disabled
-@TeleOp(name = "Teleop_StraferKit",group = "Lab")
+@TeleOp(name = "C.H.I.R.P",group = "4")
 
 public class TeleopStraferKit extends OpMode{
 
@@ -24,7 +23,7 @@ public class TeleopStraferKit extends OpMode{
 
     double powerThreshold = 0;
     double encoders;
-    double speedMultiply = 1;
+    double speedMultiply = 0.75;
 
     public StraferKit Bot=new StraferKit();
 

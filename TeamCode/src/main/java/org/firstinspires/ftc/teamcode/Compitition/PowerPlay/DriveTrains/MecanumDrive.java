@@ -154,11 +154,11 @@ public class MecanumDrive {
 
         if (linearOp.opModeIsActive()) {
 
-            double ticks = Math.abs(rotations) * (-1) * TICKS_PER_ROTATION; //strafing left moves encoder towards positive infinity
+            double ticks = Math.abs(rotations) * TICKS_PER_ROTATION; //strafing left moves encoder towards positive infinity
             setMotorRunModes(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
             setMotorRunModes(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
 
-            while (frontLeftMotor.getCurrentPosition() > ticks && linearOp.opModeIsActive()) {
+            while (frontLeftMotor.getCurrentPosition() < ticks && linearOp.opModeIsActive()) {
                 rotateLeft(speed);
             }
             stopMotors();

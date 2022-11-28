@@ -1,14 +1,12 @@
-package org.firstinspires.ftc.teamcode.Compitition.PowerPlay.controls.Autonomus.ComptitionAutoPaths.RedPark;
+package org.firstinspires.ftc.teamcode.Compitition.PowerPlay.controls.Autonomus.ComptitionAutoPaths.BlueLeftPark;
 
 import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
-import com.qualcomm.robotcore.eventloop.opmode.Disabled;
-
 import org.firstinspires.ftc.teamcode.Compitition.PowerPlay.Robots.CompetionBot;
 import org.firstinspires.ftc.teamcode.Compitition.PowerPlay.Robots.StraferBot;
 import org.firstinspires.ftc.teamcode.Compitition.PowerPlay.controls.Autonomus.ComptitionAutoPaths.AutoTargetZone;
 
-@Autonomous (name = "RedDetectionPark")
-public class AutoRed extends RedPark {
+@Autonomous (name = "BlueLeftDetectionPark")
+public class AutoBlueLeftPark extends BlueLeftPark {
 
     public CompetionBot Bot = new CompetionBot();
 
@@ -85,7 +83,7 @@ public class AutoRed extends RedPark {
 
             } else {
 
-//                parkplace(BotStrafer, TargetZone);
+                parkplace(BotStrafer, TargetZone);
 
             }
 
