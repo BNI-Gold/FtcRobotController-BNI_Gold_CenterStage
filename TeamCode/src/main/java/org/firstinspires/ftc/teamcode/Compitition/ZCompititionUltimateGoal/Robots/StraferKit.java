@@ -5,6 +5,7 @@ import com.qualcomm.hardware.bosch.JustLoggingAccelerationIntegrator;
 //import com.qualcomm.hardware.rev.RevBlinkinLedDriver;
 import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.hardware.HardwareMap;
+import com.qualcomm.robotcore.hardware.Servo;
 import com.qualcomm.robotcore.util.Range;
 
 //import org.firstinspires.ftc.robotcontroller.external.samples.SampleRevBlinkinLedDriver;
@@ -19,6 +20,8 @@ import org.firstinspires.ftc.teamcode.Compitition.ZCompititionUltimateGoal.Drive
 
 public class StraferKit extends MecanumDrive {
     public HardwareMap hwBot  =  null;
+
+    public Servo flag = null;
 
 //GYRO INITIALIZATION
 
@@ -177,6 +180,9 @@ public class StraferKit extends MecanumDrive {
         rearRightMotor.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
         rearLeftMotor.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
 
+        flag = hwBot.get(Servo.class,"flag");
+        flag.setDirection(Servo.Direction.FORWARD);
+
         // Define and Initialize Gyro
         BNO055IMU.Parameters parametersimu = new BNO055IMU.Parameters();
         parametersimu.angleUnit = BNO055IMU.AngleUnit.DEGREES;
@@ -193,6 +199,23 @@ public class StraferKit extends MecanumDrive {
 
 
 
+    }
+
+    public void raiseFlag() {
+        flag.setPosition(0.5);
+    }
+    public void lowerFlag() {
+        flag.setPosition(0.9);
+    }
+
+    public void initFlag() {
+        flag.setPosition(0.2);
+    }
+    public void waveFlagRight() {
+        flag.setPosition(0.399);
+    }
+    public void waveFlagLeft() {
+        flag.setPosition(0.711);
     }
 
     public void initCamera () {

@@ -3,6 +3,7 @@ package org.firstinspires.ftc.teamcode.Compitition.ZCompititionUltimateGoal.Cont
 import com.qualcomm.robotcore.eventloop.opmode.Disabled;
 import com.qualcomm.robotcore.eventloop.opmode.OpMode;
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
+import com.qualcomm.robotcore.hardware.HardwareMap;
 import com.qualcomm.robotcore.util.Range;
 
 import org.firstinspires.ftc.teamcode.Compitition.ZCompititionUltimateGoal.Robots.StraferKit;
@@ -31,6 +32,7 @@ public class TeleopStraferKit extends OpMode{
     @Override
     public void init() {
         Bot.initRobot(hardwareMap, "BlueLeft",  "Auto");
+        Bot.lowerFlag();
 
     }
     @Override
@@ -42,6 +44,7 @@ public class TeleopStraferKit extends OpMode{
     @Override
     public void loop() {
         drive();
+        flagControl();
 
     }
     @Override
@@ -95,6 +98,21 @@ public class TeleopStraferKit extends OpMode{
             Bot.rearRightMotor.setPower(rearRightSpeed * speedMultiply);
         } else {
             Bot.rearRightMotor.setPower(rearRightSpeed * speedMultiply);
+        }
+    }
+
+    public void flagControl() {
+        if (gamepad1.y) {
+            Bot.raiseFlag();
+        }
+        else if (gamepad1.a) {
+            Bot.lowerFlag();
+        }
+        else if (gamepad1.b) {
+            Bot.waveFlagRight();
+        }
+        else if (gamepad1.x) {
+            Bot.waveFlagLeft();
         }
     }
 }
