@@ -587,7 +587,7 @@ public class StraferKit extends MecanumDrive {
         linearOp.idle();
 
     }
-
+//matthew did nothing
 
     public void driveGyroForward (double power, double rotations) throws InterruptedException {
 
