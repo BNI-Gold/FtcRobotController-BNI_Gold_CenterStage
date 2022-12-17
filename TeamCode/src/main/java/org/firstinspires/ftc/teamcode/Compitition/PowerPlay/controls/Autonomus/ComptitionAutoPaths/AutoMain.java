@@ -26,6 +26,8 @@ public abstract class AutoMain extends LinearOpMode {
     double cx = 402.145;
     double cy = 221.506;
 
+    double armInitPos = 0.36;
+
     static final double FEET_PER_METER = 3.28084;
     int ID_TAG_LIST [] = {0,1,2};
     double tagsize = 0.0445;

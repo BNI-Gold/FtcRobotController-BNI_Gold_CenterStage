@@ -5,10 +5,9 @@ import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
 import org.firstinspires.ftc.teamcode.Compitition.PowerPlay.Robots.CompetionBot;
 import org.firstinspires.ftc.teamcode.Compitition.PowerPlay.Robots.StraferBot;
 import org.firstinspires.ftc.teamcode.Compitition.PowerPlay.controls.Autonomus.ComptitionAutoPaths.AutoTargetZone;
-import org.firstinspires.ftc.teamcode.Compitition.PowerPlay.controls.Autonomus.ComptitionAutoPaths.BlueLeftPark.BlueLeftPark;
 
-@Autonomous (name = "RedLeftDetectionPark")
-public class AutoRedLeftPark extends RedLeftPark {
+@Autonomous (name = "Detection - Blue Right || Red Right")
+public class AutoRedRightPark extends RedRightPark {
 
     public CompetionBot Bot = new CompetionBot();
 
@@ -46,6 +45,8 @@ public class AutoRedLeftPark extends RedLeftPark {
         waitForStart();
 
         while (opModeIsActive()) {
+
+            Bot.turretPlatform.setPower(0);
 
             // Find Tags During the Init Loop
 //            while (!isStarted() && !isStopRequested()) {

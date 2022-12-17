@@ -14,9 +14,6 @@ import org.firstinspires.ftc.robotcore.external.navigation.AxesOrder;
 import org.firstinspires.ftc.robotcore.external.navigation.AxesReference;
 import org.firstinspires.ftc.robotcore.external.navigation.Orientation;
 import org.firstinspires.ftc.teamcode.Compitition.PowerPlay.DriveTrains.MecanumDrive;
-import org.firstinspires.ftc.teamcode.Compitition.ZCompititionUltimateGoal.Robots.CompetitionBot;
-import org.openftc.easyopencv.OpenCvCamera;
-import org.openftc.easyopencv.OpenCvCameraRotation;
 
 public class CompetionBot extends MecanumDrive {
 
@@ -30,10 +27,10 @@ public class CompetionBot extends MecanumDrive {
         public final double TOLERANCE = 0.4;
 
 
-        public DcMotor grabberLift = null;
+        public DcMotor grabberLiftOne = null;
+        public DcMotor grabberLiftTwo = null;
         public DcMotor turretPlatform = null;
-        public Servo grabberArmLeft = null;
-        public Servo grabberArmRight = null;
+        public Servo grabberArm = null;
         TouchSensor magSwitch;
 
 
@@ -41,27 +38,29 @@ public class CompetionBot extends MecanumDrive {
     public void initRobot (HardwareMap hardwareMap) {
             hwBot = hardwareMap;
 
-            grabberArmLeft = hwBot.get(Servo.class, "grabber_arm_left");
-            grabberArmRight = hwBot.get(Servo.class, "grabber_arm_right");
-            grabberArmLeft.setDirection(Servo.Direction.FORWARD);
-            grabberArmRight.setDirection(Servo.Direction.FORWARD);
+            grabberArm = hwBot.get(Servo.class, "grabber_arm");
+            grabberArm.setDirection(Servo.Direction.FORWARD);
 
             frontLeftMotor=hwBot.dcMotor.get("front_left_motor");
             frontRightMotor=hwBot.dcMotor.get("front_right_motor");
             rearLeftMotor=hwBot.dcMotor.get("rear_left_motor");
             rearRightMotor=hwBot.dcMotor.get("rear_right_motor");
 
-            grabberLift = hwBot.dcMotor.get("grabber_lift");
+            grabberLiftOne = hwBot.dcMotor.get("grabber_lift_one");
+            grabberLiftTwo = hwBot.dcMotor.get("grabber_lift_two");
 
-            grabberLift.setDirection(DcMotorSimple.Direction.FORWARD);
+            grabberLiftOne.setDirection(DcMotorSimple.Direction.FORWARD);
+            grabberLiftTwo.setDirection(DcMotorSimple.Direction.REVERSE);
 
-            grabberLift.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
+            grabberLiftOne.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
+            grabberLiftTwo.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
 
             turretPlatform = hwBot.dcMotor.get("turret_motor");
 
             turretPlatform.setDirection(DcMotorSimple.Direction.REVERSE);
             turretPlatform.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
-
+            turretPlatform.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
+            turretPlatform.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
 
             frontLeftMotor.setDirection(DcMotor.Direction.REVERSE);
             rearLeftMotor.setDirection(DcMotor.Direction.REVERSE);
@@ -100,44 +99,41 @@ public class CompetionBot extends MecanumDrive {
             magSwitch = hardwareMap.get(TouchSensor.class, "magnetic_switch");
 
             // Grabber Arms Servo Hardware Mapping/Configuration
-            grabberArmLeft = hwBot.get(Servo.class, "grabber_arm_left");
-            grabberArmRight = hwBot.get(Servo.class, "grabber_arm_right");
-            grabberArmLeft.setDirection(Servo.Direction.FORWARD);
-            grabberArmRight.setDirection(Servo.Direction.FORWARD);
-
 
         }
 
         public void openGrabberArms() {
 
-            grabberArmLeft.setPosition(0.7);
-            grabberArmRight.setPosition(0.7);
+            grabberArm.setPosition(0.18);   // 0.163 old servo value
 
         }
 
         public void closeGrabberArms() {
 
-        grabberArmLeft.setPosition(0.6);
-        grabberArmRight.setPosition(0.9);
+        grabberArm.setPosition(0);
 
-    }
+        }
 
 
     public void extendGrabberLift(double power) {
 
-        grabberLift.setPower(Math.abs(power));
+        grabberLiftOne.setPower(Math.abs(power));
+        grabberLiftTwo.setPower(Math.abs(power));
     }
 
     public void retractGrabberLift (double power) {
 
-        grabberLift.setPower(-Math.abs(power));
+        grabberLiftOne.setPower(-Math.abs(power));
+        grabberLiftTwo.setPower(-Math.abs(power));
     }
 
     public void stopGrabberLift () {
-        grabberLift.setPower(0);
+        grabberLiftOne.setPower(0);
+        grabberLiftTwo.setPower(0);
     }
 
     public void turretClockwise (double power) {
+
         turretPlatform.setPower(Math.abs(power));
 
     }

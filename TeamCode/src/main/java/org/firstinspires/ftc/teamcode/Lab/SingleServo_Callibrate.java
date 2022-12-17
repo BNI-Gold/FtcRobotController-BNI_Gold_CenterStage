@@ -5,9 +5,9 @@ import com.qualcomm.robotcore.eventloop.opmode.OpMode;
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 import com.qualcomm.robotcore.hardware.Servo;
 import com.qualcomm.robotcore.util.Range;
-@Disabled
-@TeleOp(name = "servo calibration", group = "LAB")
-//@Disabled
+
+@TeleOp(name = "single grabber arm", group = "LAB")
+
 public class SingleServo_Callibrate extends OpMode {
 
     private Servo myServo = null;

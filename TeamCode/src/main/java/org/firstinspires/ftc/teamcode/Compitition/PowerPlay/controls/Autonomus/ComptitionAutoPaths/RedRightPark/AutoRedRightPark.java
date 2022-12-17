@@ -1,12 +1,13 @@
 package org.firstinspires.ftc.teamcode.Compitition.PowerPlay.controls.Autonomus.ComptitionAutoPaths.RedRightPark;
 
 import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
+import com.qualcomm.robotcore.eventloop.opmode.Disabled;
 
 import org.firstinspires.ftc.teamcode.Compitition.PowerPlay.Robots.CompetionBot;
 import org.firstinspires.ftc.teamcode.Compitition.PowerPlay.Robots.StraferBot;
 import org.firstinspires.ftc.teamcode.Compitition.PowerPlay.controls.Autonomus.ComptitionAutoPaths.AutoTargetZone;
 import org.firstinspires.ftc.teamcode.Compitition.PowerPlay.controls.Autonomus.ComptitionAutoPaths.BlueRightPark.BlueRightPark;
-
+@Disabled
 @Autonomous(name = "RedRightDetectionPark")
 public class AutoRedRightPark extends RedRightPark {
 

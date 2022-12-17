@@ -9,13 +9,14 @@ import com.qualcomm.robotcore.hardware.DcMotorSimple;
 @TeleOp (name = "Encoder - Turntable Test - Camden", group = "LAB")
 
 
-public class Encoder_Turntable_Lift_Camdem extends OpMode {
+public class Encoder_Turntable_Lift_Camden extends OpMode {
 
     private DcMotorEx grabberLift = null;
     private DcMotorEx turretPlatform = null;
 
     boolean displayTelemetry = true;
 
+    int turretClockwise = 417;
     int turretCounterclockwise = -417;
     int turretReverse = -810;
 
@@ -31,6 +32,7 @@ public class Encoder_Turntable_Lift_Camdem extends OpMode {
     boolean liftToggle = true;
     boolean turretEncoder180 = false;
     boolean turretEncoder90CCW = false;
+    boolean turretEncoder90CW = false;
     boolean turretEncoderCollect = false;
 
     double turretPowerEncoder = 0.3;
@@ -38,7 +40,7 @@ public class Encoder_Turntable_Lift_Camdem extends OpMode {
     double liftPowerUp = 1.0;
     double liftPowerDown = 0.8;
 
-    public void init () {
+    public void init() {
         grabberLift = hardwareMap.get(DcMotorEx.class, "grabber_lift");
         grabberLift.setDirection(DcMotorSimple.Direction.FORWARD);
         grabberLift.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
@@ -46,7 +48,7 @@ public class Encoder_Turntable_Lift_Camdem extends OpMode {
 //        No idea what values to actually use, but it definitely does affect the lift!
         grabberLift.setPositionPIDFCoefficients(5);
 
-        turretPlatform = hardwareMap.get(DcMotorEx.class,"turret_motor");
+        turretPlatform = hardwareMap.get(DcMotorEx.class, "turret_motor");
         turretPlatform.setDirection(DcMotorSimple.Direction.REVERSE);
         turretPlatform.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
         turretPlatform.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
@@ -55,7 +57,7 @@ public class Encoder_Turntable_Lift_Camdem extends OpMode {
     @Override
     public void loop() {
 
-      //  liftControl();  // adjusts the lift level to be used in turrentMechanism
+        //  liftControl();  // adjusts the lift level to be used in turrentMechanism
 //        Moves Lift using values from liftControl()
         liftMechanismEncoder();
 //        Disabled - so notes above function.
@@ -63,30 +65,27 @@ public class Encoder_Turntable_Lift_Camdem extends OpMode {
         turretMechanism(); //Moves turret.
 
         if (displayTelemetry) {
-            telemetryOuput();
+            telemetryUpdate();
         }
     }
 
-//    Disabled - how to implement manual power control with RUN_TO_POSITION?
-    public void liftMechanism () {
+    //    Disabled - how to implement manual power control with RUN_TO_POSITION?
+    public void liftMechanism() {
         if (gamepad2.dpad_up) {
             grabberLift.setPower(0.5);
-        }
-        else if (gamepad2.dpad_down) {
+        } else if (gamepad2.dpad_down) {
             grabberLift.setPower(-0.2);
-        }
-        else {
+        } else {
             if (grabberLift.getCurrentPosition() > 500) {
                 grabberLift.setPower(0.1);
-            }
-            else {
+            } else {
                 grabberLift.setPower(0);
             }
 
         }
     }
 
-    public void liftMechanismEncoder () {
+    public void liftMechanismEncoder() {
 //        Only go to target position when press 'y'.
 //        Allows P2 to get lift "target" position ready.
         if (gamepad2.y) {
@@ -96,8 +95,7 @@ public class Encoder_Turntable_Lift_Camdem extends OpMode {
                     if (grabberLift.getCurrentPosition() > liftRest) {
 //                      Lift Down
 
-                    }
-                    else {
+                    } else {
 //                        lift up
                     }
                     grabberLift.setTargetPosition(liftRest);
@@ -155,7 +153,7 @@ public class Encoder_Turntable_Lift_Camdem extends OpMode {
         }
     }
 */
-    public void turretMechanism () {
+    public void turretMechanism() {
 
         //
         // ARE WE USING ENCODER TURN?
@@ -167,6 +165,12 @@ public class Encoder_Turntable_Lift_Camdem extends OpMode {
             turretEncoder90CCW = true;
 
         }
+
+        if (gamepad2.left_bumper) {
+
+            turretEncoder90CW = true;
+
+        }
 //        Game pad.b - set turretEncoderCW to "true".
         if (gamepad2.right_trigger > 0.2) {
 
@@ -175,7 +179,7 @@ public class Encoder_Turntable_Lift_Camdem extends OpMode {
         }
 
 //        IF gamepad.a - set  turretEncoderCollect to True
-        if (gamepad2.left_bumper) {
+        if (gamepad2.left_trigger > 0.2) {
 
             turretEncoderCollect = true;
 
@@ -209,8 +213,7 @@ public class Encoder_Turntable_Lift_Camdem extends OpMode {
 //            If our "turretPlatform.getCurrentPosition()" is less than the "turretClockwise", turn turretPlatform
             if (turretPlatform.getCurrentPosition() > turretReverse) {
                 turretPlatform.setPower(-turretPowerEncoder);
-            }
-            else {
+            } else {
 //                Need to set turretEncoderCW to "false" - this is how we know have reached target position.
                 turretEncoder180 = false;
             }
@@ -229,24 +232,38 @@ public class Encoder_Turntable_Lift_Camdem extends OpMode {
 
                 }
 
-            } else if (turretPlatform.getCurrentPosition() > turretCounterclockwise + turretErrorMargin || turretPlatform.getCurrentPosition() > turretCounterclockwise - turretErrorMargin) {
+            } else if (turretEncoder90CW) {
+                if (turretPlatform.getCurrentPosition() < turretClockwise - turretErrorMargin || turretPlatform.getCurrentPosition() < turretClockwise + turretErrorMargin) {
+                    if (turretPlatform.getCurrentPosition() < turretClockwise - turretErrorMargin || turretPlatform.getCurrentPosition() < turretClockwise + turretErrorMargin) {
 
-                if (turretPlatform.getCurrentPosition() > turretCounterclockwise + turretErrorMargin || turretPlatform.getCurrentPosition() > turretCounterclockwise - turretErrorMargin) {
+                        turretPlatform.setPower(-turretPowerEncoder);
 
-                    turretPlatform.setPower(-turretPowerEncoder);
+                    } else {
+
+                        turretEncoder90CW = false;
+
+                    }
+
+                } else if (turretPlatform.getCurrentPosition() > turretCounterclockwise + turretErrorMargin || turretPlatform.getCurrentPosition() > turretCounterclockwise - turretErrorMargin) {
+
+                    if (turretPlatform.getCurrentPosition() > turretCounterclockwise + turretErrorMargin || turretPlatform.getCurrentPosition() > turretCounterclockwise - turretErrorMargin) {
+
+                        turretPlatform.setPower(-turretPowerEncoder);
+
+                    } else {
+
+                        turretEncoder90CCW = false;
+
+                    }
 
                 } else {
-
+//                Set turretEncoderCCW to false
                     turretEncoder90CCW = false;
 
                 }
-
-            } else {
-//                Set turretEncoderCCW to false
-                turretEncoder90CCW = false;
-
             }
         }
+
 
 //      Same concept for "turretEncoderCollect"
 //      need TWO code blocks for the "turretEncoderCollect" position:
@@ -259,8 +276,7 @@ public class Encoder_Turntable_Lift_Camdem extends OpMode {
                 if (turretPlatform.getCurrentPosition() > 0) {
 //                    Set the turretPlatform power to "turretPowerEncoder"
                     turretPlatform.setPower(-turretPowerEncoder);
-                }
-                else {
+                } else {
 //                    set "turretEncoderCollect" to "False"
                     turretEncoderCollect = false;
                 }
@@ -271,42 +287,46 @@ public class Encoder_Turntable_Lift_Camdem extends OpMode {
                 if (turretPlatform.getCurrentPosition() < 0) {
 //                    Set the turretPlatform power to "turretPowerEncoder"
                     turretPlatform.setPower(turretPowerEncoder);
-                }
-                else {
+                } else {
 //                    set "turretEncoderCollect" to "False"
                     turretEncoderCollect = false;
                 }
             }
-        }
+
+
 //        Set power to 0!
-        else {
-            turretPlatform.setPower(0);
+            else {
+                turretPlatform.setPower(0);
 
+            }
         }
     }
 
-    public void telemetryOuput () {
-        telemetry.addData("TURNTABLE ENCODERS: ", turretPlatform.getCurrentPosition());
-        telemetry.addData("LIFT ENCODERS: ", grabberLift.getCurrentPosition());
-        telemetry.addData("Lift Level Allow? ", liftLevelAllow);
-        telemetry.addData("Current Lift Level: ", liftLevel);
+        public void telemetryUpdate () {
+            telemetry.addData("TURNTABLE ENCODERS: ", turretPlatform.getCurrentPosition());
+            telemetry.addData("LIFT ENCODERS: ", grabberLift.getCurrentPosition());
+            telemetry.addData("Lift Level Allow? ", liftLevelAllow);
+            telemetry.addData("Current Lift Level: ", liftLevel);
 
-        telemetry.addData("turret180 = ", turretEncoder180);
-        telemetry.addData("turret90 = ", turretEncoder90CCW);
-        telemetry.addData("turret0 = ", turretEncoderCollect);
+            telemetry.addData("turret180 = ", turretEncoder180);
+            telemetry.addData("turret90 = ", turretEncoder90CCW);
+            telemetry.addData("turret0 = ", turretEncoderCollect);
 
-    }
+        }
 
 
 //    Testing.  Ignore.
-    public void spdControl (double min_spd, double max_spd, int currentPos, int targetPos) {
-        min_spd = 0.1;
-        max_spd = 0.4;
-        currentPos = 410;
-        targetPos = -370;
-        int travelDistance_Total = Math.abs(currentPos) + Math.abs(targetPos);
-        int travelDistnce_Traversed;
+        public void spdControl ( double min_spd, double max_spd, int currentPos, int targetPos){
+            min_spd = 0.1;
+            max_spd = 0.4;
+            currentPos = 410;
+            targetPos = -370;
+            int travelDistance_Total = Math.abs(currentPos) + Math.abs(targetPos);
+            int travelDistnce_Traversed;
 
 
+        }
     }
-}
+
+
+
