@@ -281,6 +281,21 @@ public class TeleOpOutreachRanger extends OpMode {
             Bot.RingMagIncrement();
         }
 
+        if (gamepad1.left_bumper == true) {
+            Bot.LauncherOn(launcherVelocity);
+            Bot.RingMagUp();
+        } else {
+                Bot.LauncherOff(0);
+                Bot.RingMagDown();
+            }
+
+
+        if (gamepad1.right_bumper == true) {
+            Bot.RingPull();
+        } else {
+            Bot.RingPush();
+        }
+
         if (gamepad2.a == true) {
             Bot.LauncherOff(0);
             Bot.RingMagDown();
@@ -312,12 +327,12 @@ public class TeleOpOutreachRanger extends OpMode {
             Bot.LauncherOn(launcherVelocity);
         }
 
-        if (gamepad1.a == true) {
-            Bot.LauncherOn(PowerShotVelocity);
-            }
-        if (gamepad1.y == true) {
-            Bot.LauncherOn(launcherVelocity);
-            }
+//        if (gamepad1.a == true) {
+//            Bot.LauncherOn(PowerShotVelocity);
+//            }
+//        if (gamepad1.y == true) {
+//            Bot.LauncherOn(launcherVelocity);
+//            }
         if (gamepad2.b == true){
             Bot.rapidFireRing = 0;
             rapidFireEngage2 = true;
@@ -340,6 +355,24 @@ public class TeleOpOutreachRanger extends OpMode {
                 Bot.IntakeOff(0);
                 Bot.StopIntakeCorrector();
             }
+
+            if (gamepad1.right_trigger >= 0.2){
+                Bot.IntakeOn(1);
+                Bot.SpinInIntakeCorrector();
+            }
+            else {
+                Bot.IntakeOff(0);
+                Bot.StopIntakeCorrector();
+            }
+
+
+            if (gamepad1.left_trigger >= 0.2){
+                Bot.IntakeOn(-.8);
+            }
+            else {
+                Bot.IntakeOff(0);
+            }
+
         }
 
         public void telemetryOutput() {

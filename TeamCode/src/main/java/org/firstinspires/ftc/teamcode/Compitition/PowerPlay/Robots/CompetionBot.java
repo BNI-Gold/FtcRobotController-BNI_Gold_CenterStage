@@ -2,6 +2,7 @@ package org.firstinspires.ftc.teamcode.Compitition.PowerPlay.Robots;
 
 import com.qualcomm.hardware.bosch.BNO055IMU;
 import com.qualcomm.hardware.bosch.JustLoggingAccelerationIntegrator;
+import com.qualcomm.robotcore.hardware.CRServo;
 import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.hardware.DcMotorSimple;
 import com.qualcomm.robotcore.hardware.HardwareMap;
@@ -30,7 +31,8 @@ public class CompetionBot extends MecanumDrive {
         public DcMotor grabberLiftOne = null;
         public DcMotor grabberLiftTwo = null;
         public DcMotor turretPlatform = null;
-        public Servo grabberArm = null;
+        public Servo grabberArmServo = null;
+//        public CRServo bigConeSucker = null;
         TouchSensor magSwitch;
 
 
@@ -38,8 +40,11 @@ public class CompetionBot extends MecanumDrive {
     public void initRobot (HardwareMap hardwareMap) {
             hwBot = hardwareMap;
 
-            grabberArm = hwBot.get(Servo.class, "grabber_arm");
-            grabberArm.setDirection(Servo.Direction.FORWARD);
+            grabberArmServo = hwBot.get(Servo.class, "grabber_arm_left");
+            grabberArmServo.setDirection(Servo.Direction.FORWARD);
+
+//            bigConeSucker = hwBot.get(CRServo.class, "cone_sucker");
+//            bigConeSucker.setDirection(CRServo.Direction.FORWARD);
 
             frontLeftMotor=hwBot.dcMotor.get("front_left_motor");
             frontRightMotor=hwBot.dcMotor.get("front_right_motor");
@@ -102,18 +107,37 @@ public class CompetionBot extends MecanumDrive {
 
         }
 
+//        public void coneOuttake() {
+//
+//            bigConeSucker.setDirection(CRServo.Direction.REVERSE);
+//            bigConeSucker.setPower(0.5);
+//
+//        }
+//
+//        public void coneIntake() {
+//
+//            bigConeSucker.setDirection(CRServo.Direction.FORWARD);
+//            bigConeSucker.setPower(0.5);
+//
+//        }
+//
+//    public void intakeStop() {
+//
+//        bigConeSucker.setPower(0);
+//
+//    }
+
         public void openGrabberArms() {
 
-            grabberArm.setPosition(0.18);   // 0.163 old servo value
+            grabberArmServo.setPosition(0.2);
 
         }
 
         public void closeGrabberArms() {
 
-        grabberArm.setPosition(0);
+            grabberArmServo.setPosition(0);
 
         }
-
 
     public void extendGrabberLift(double power) {
 

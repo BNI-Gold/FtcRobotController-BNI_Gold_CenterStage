@@ -102,6 +102,20 @@ public class TeleOp_CompetitionBot extends OpMode {
 
         }
 
+//        if (gamepad2.a) {
+//
+//            Bot.coneIntake();
+//
+//        } else if (gamepad2.y) {
+//
+//            Bot.coneOuttake();
+//
+//        } else {
+//
+//            Bot.intakeStop();
+//
+//        }
+
     }
 
     public void grabberArmControlBumper() {
