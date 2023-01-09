@@ -92,6 +92,78 @@ public class MecanumDrive {
         rearRightMotor.setPower(speed);
     }
 
+    public void driveForward_PID (double rotations, double power) {
+        int ticks = (int) (rotations * TICKS_PER_ROTATION);
+
+        frontLeftMotor.setPower(power);
+        frontLeftMotor.setTargetPosition(ticks);
+
+        frontRightMotor.setPower(power);
+        frontRightMotor.setTargetPosition(ticks);
+
+        rearLeftMotor.setPower(power);
+        rearLeftMotor.setTargetPosition(ticks);
+
+        rearRightMotor.setPower(power);
+        rearRightMotor.setTargetPosition(ticks);
+
+        setMotorRunModes(DcMotor.RunMode.RUN_TO_POSITION);
+    }
+
+    public void driveBackward_PID (double rotations, double power) {
+        int ticks = (int) (rotations * TICKS_PER_ROTATION);
+
+        frontLeftMotor.setPower(-power);
+        frontLeftMotor.setTargetPosition(ticks);
+
+        frontRightMotor.setPower(-power);
+        frontRightMotor.setTargetPosition(ticks);
+
+        rearLeftMotor.setPower(-power);
+        rearLeftMotor.setTargetPosition(ticks);
+
+        rearRightMotor.setPower(-power);
+        rearRightMotor.setTargetPosition(ticks);
+
+        setMotorRunModes(DcMotor.RunMode.RUN_TO_POSITION);
+    }
+
+    public void strafeLeft_PID (double rotations, double power) {
+        int ticks = (int) (rotations * TICKS_PER_ROTATION);
+
+        frontLeftMotor.setPower(-power);
+        frontLeftMotor.setTargetPosition(ticks);
+
+        frontRightMotor.setPower(power);
+        frontRightMotor.setTargetPosition(ticks);
+
+        rearLeftMotor.setPower(power);
+        rearLeftMotor.setTargetPosition(ticks);
+
+        rearRightMotor.setPower(-power);
+        rearRightMotor.setTargetPosition(ticks);
+
+        setMotorRunModes(DcMotor.RunMode.RUN_TO_POSITION);
+    }
+
+    public void strafeRight_PID (double rotations, double power) {
+        int ticks = (int) (rotations * TICKS_PER_ROTATION);
+
+        frontLeftMotor.setPower(power);
+        frontLeftMotor.setTargetPosition(ticks);
+
+        frontRightMotor.setPower(-power);
+        frontRightMotor.setTargetPosition(ticks);
+
+        rearLeftMotor.setPower(-power);
+        rearLeftMotor.setTargetPosition(ticks);
+
+        rearRightMotor.setPower(power);
+        rearRightMotor.setTargetPosition(ticks);
+
+        setMotorRunModes(DcMotor.RunMode.RUN_TO_POSITION);
+    }
+
     public void driveBackward (double speed){
         frontLeftMotor.setPower(-speed);
         frontRightMotor.setPower(-speed);

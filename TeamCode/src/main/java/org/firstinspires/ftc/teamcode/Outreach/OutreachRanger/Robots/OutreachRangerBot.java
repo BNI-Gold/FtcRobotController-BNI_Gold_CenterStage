@@ -15,23 +15,12 @@ import com.qualcomm.robotcore.hardware.VoltageSensor;
 import com.qualcomm.robotcore.util.ElapsedTime;
 import com.qualcomm.robotcore.util.Range;
 
-import org.firstinspires.ftc.robotcore.external.Telemetry;
 import org.firstinspires.ftc.robotcore.external.navigation.Acceleration;
 import org.firstinspires.ftc.robotcore.external.navigation.AngleUnit;
 import org.firstinspires.ftc.robotcore.external.navigation.AxesOrder;
 import org.firstinspires.ftc.robotcore.external.navigation.AxesReference;
 import org.firstinspires.ftc.robotcore.external.navigation.Orientation;
-import org.firstinspires.ftc.robotcore.internal.system.Deadline;
 import org.firstinspires.ftc.teamcode.Compitition.ZCompititionUltimateGoal.DriveTrains.MecanumDrive;
-import org.firstinspires.ftc.teamcode.Compitition.ZCompititionUltimateGoal.Modules.EasyOpenCVWebcam;
-import org.opencv.core.Core;
-import org.opencv.core.Mat;
-import org.opencv.core.Point;
-import org.opencv.core.Rect;
-import org.opencv.core.Scalar;
-import org.opencv.imgproc.Imgproc;
-
-import org.openftc.easyopencv.OpenCvPipeline;
 
 
 public class OutreachRangerBot extends MecanumDrive {
@@ -85,7 +74,7 @@ public class OutreachRangerBot extends MecanumDrive {
     public ElapsedTime ringPusherTimer;
 
 
-    public void initRobot(HardwareMap hardwareMap, String startPosition, String mode){
+    public void initRobot(HardwareMap hardwareMap){
 
         hwBot = hardwareMap;
 
@@ -96,24 +85,24 @@ public class OutreachRangerBot extends MecanumDrive {
         RingMag = hwBot.get(Servo.class, "ring_mag");
         ServoRingPusher = hwBot.get(Servo.class, "servo_ring_pusher");
 
-        if (mode.equals("auto")){
-            RingMagUp();
-            RingPush();
-        }
+//        if (mode.equals("auto")){
+//            RingMagUp();
+//            RingPush();
+//        }
 
-        switch (startPosition) {
-            case "BlueLeft":
-                break;
-            case "BlueRight":
-                break;
-            case "RedLeft":
-                break;
-            case "RedRight":
-                break;
-
-
-
-        }
+//        switch (startPosition) {
+//            case "BlueLeft":
+//                break;
+//            case "BlueRight":
+//                break;
+//            case "RedLeft":
+//                break;
+//            case "RedRight":
+//                break;
+//
+//
+//
+//        }
 
         blinkinLedDriver = hwBot.get(RevBlinkinLedDriver.class, "Blinkin");
         pattern = RevBlinkinLedDriver.BlinkinPattern.BREATH_GRAY;

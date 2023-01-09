@@ -71,7 +71,7 @@ public class TeleOpOutreachRanger extends OpMode {
         drive();
         launcher();
         intake();
-        driveMode();
+//        driveMode();
         telemetryOutput();
     }
 
@@ -81,22 +81,22 @@ public class TeleOpOutreachRanger extends OpMode {
 
     }
 
-    public void driveMode() {
-        if (gamepad1.left_bumper) {
-            speedMultiply = 0.3;
-        } else if (gamepad1.right_bumper) {
-            speedMultiply = 1;
-        }
-
-
-        if (gamepad1.dpad_right) {
-            reverseModeToggle = true;
-        }
-        if (gamepad1.dpad_left) {
-            reverseModeToggle = false;
-        }
-
-    }
+//    public void driveMode() {
+//        if (gamepad1.left_bumper) {
+//            speedMultiply = 0.3;
+//        } else if (gamepad1.right_bumper) {
+//            speedMultiply = 1;
+//        }
+//
+//
+//        if (gamepad1.dpad_right) {
+//            reverseModeToggle = true;
+//        }
+//        if (gamepad1.dpad_left) {
+//            reverseModeToggle = false;
+//        }
+//
+//    }
 
     public void drive() {
 
@@ -347,30 +347,20 @@ public class TeleOpOutreachRanger extends OpMode {
         }
     }
         public void intake () {
-            if (gamepad2.left_stick_y > 0.1 || gamepad2.left_stick_y < -0.1) {
-                Bot.IntakeOn(gamepad2.left_stick_y);
-                Bot.SpinInIntakeCorrector();
-            }
-            else {
-                Bot.IntakeOff(0);
-                Bot.StopIntakeCorrector();
-            }
 
             if (gamepad1.right_trigger >= 0.2){
                 Bot.IntakeOn(1);
                 Bot.SpinInIntakeCorrector();
             }
+
+
+
+            else if (gamepad1.left_trigger <= -0.2){
+                Bot.IntakeOn(-1);
+            }
             else {
                 Bot.IntakeOff(0);
                 Bot.StopIntakeCorrector();
-            }
-
-
-            if (gamepad1.left_trigger >= 0.2){
-                Bot.IntakeOn(-.8);
-            }
-            else {
-                Bot.IntakeOff(0);
             }
 
         }

@@ -129,13 +129,13 @@ public class CompetionBot extends MecanumDrive {
 
         public void openGrabberArms() {
 
-            grabberArmServo.setPosition(0.2);
+            grabberArmServo.setPosition(0.23);
 
         }
 
         public void closeGrabberArms() {
 
-            grabberArmServo.setPosition(0);
+            grabberArmServo.setPosition(0.052);
 
         }
 

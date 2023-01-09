@@ -47,10 +47,17 @@ public abstract class BlueLeftPark extends AutoMain {
 
                 break;
 
-//            case None:
-//                Bot.driveForward(0.5, 2.75);
-//                sleep(sleepTime);
-            //(not tested yet)
+            case None:
+                blueleftStack(Bot);
+                sleep(sleepTime);
+
+                Bot.driveBackward(0.5, 0.1);
+                sleep(sleepTime);
+
+                Bot.rotateLeft(0.4, 2.2);
+                sleep(sleepTime);
+
+                break;
         }
     }
 

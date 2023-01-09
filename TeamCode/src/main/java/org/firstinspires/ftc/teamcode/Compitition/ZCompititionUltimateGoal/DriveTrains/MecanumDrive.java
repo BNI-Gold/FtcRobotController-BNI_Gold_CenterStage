@@ -112,6 +112,7 @@ public class MecanumDrive {
             double ticks = rotations * TICKS_PER_ROTATION;
             setMotorRunModes(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
             setMotorRunModes(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
+            frontRightMotor.setMode(DcMotor.RunMode.RUN_TO_POSITION);
 
             while (frontLeftMotor.getCurrentPosition() < ticks && linearOp.opModeIsActive()) {
                 driveForward(speed);
@@ -128,6 +129,7 @@ public class MecanumDrive {
             double ticks = rotations * (-1) * TICKS_PER_ROTATION;
             setMotorRunModes(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
             setMotorRunModes(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
+            frontRightMotor.setMode(DcMotor.RunMode.RUN_TO_POSITION);
 //            linearOp.telemetry.addData("Current ticks: ", frontLeftMotor.getCurrentPosition());
 //            linearOp.telemetry.addData("Target ticks: ", ticks);
 //            linearOp.telemetry.addLine("Going into drive backwards loop");
@@ -158,6 +160,7 @@ public class MecanumDrive {
             double ticks = Math.abs(rotations) * (-1) * TICKS_PER_ROTATION; //strafing left moves encoder towards positive infinity
             setMotorRunModes(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
             setMotorRunModes(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
+            frontRightMotor.setMode(DcMotor.RunMode.RUN_TO_POSITION);
 
             while (frontLeftMotor.getCurrentPosition() > ticks && linearOp.opModeIsActive()) {
                 rotateLeft(speed);
@@ -173,6 +176,7 @@ public class MecanumDrive {
             double ticks = Math.abs(rotations) * TICKS_PER_ROTATION; //strafing right moves encoder towards -infinity
             setMotorRunModes(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
             setMotorRunModes(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
+            frontRightMotor.setMode(DcMotor.RunMode.RUN_TO_POSITION);
 
             while (frontLeftMotor.getCurrentPosition() < ticks && linearOp.opModeIsActive() ) {
                 rotateRight(speed);
@@ -189,6 +193,7 @@ public class MecanumDrive {
             double ticks = Math.abs(rotations) * TICKS_PER_ROTATION;
             setMotorRunModes(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
             setMotorRunModes(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
+            frontRightMotor.setMode(DcMotor.RunMode.RUN_TO_POSITION);
 
             while (frontLeftMotor.getCurrentPosition() < ticks && linearOp.opModeIsActive()) {
                 strafeRight(speed);
@@ -204,6 +209,7 @@ public class MecanumDrive {
             double ticks = Math.abs(rotations) * (-1) * TICKS_PER_ROTATION;
             setMotorRunModes(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
             setMotorRunModes(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
+            frontRightMotor.setMode(DcMotor.RunMode.RUN_TO_POSITION);
 
             while (frontLeftMotor.getCurrentPosition() > ticks && linearOp.opModeIsActive()) {
                 strafeLeft(speed);
@@ -226,6 +232,7 @@ public class MecanumDrive {
         double ticks = rotations * TICKS_PER_ROTATION;
         setMotorRunModes(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
         setMotorRunModes(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
+        frontRightMotor.setMode(DcMotor.RunMode.RUN_TO_POSITION);
 
         while (frontLeftMotor.getCurrentPosition() < ticks) {
             driveForward(speed);
@@ -240,6 +247,7 @@ public class MecanumDrive {
         double ticks = rotations * (-1) * TICKS_PER_ROTATION;
         setMotorRunModes(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
         setMotorRunModes(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
+        frontRightMotor.setMode(DcMotor.RunMode.RUN_TO_POSITION);
 
         while (frontLeftMotor.getCurrentPosition() > ticks) {
             driveBackward(speed);
@@ -254,6 +262,7 @@ public class MecanumDrive {
         double ticks = Math.abs(rotations) * (-1) * TICKS_PER_ROTATION; //strafing left moves encoder towards positive infinity
         setMotorRunModes(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
         setMotorRunModes(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
+        frontRightMotor.setMode(DcMotor.RunMode.RUN_TO_POSITION);
 
         while (frontLeftMotor.getCurrentPosition() > ticks) {
             rotateLeft(speed);
@@ -268,6 +277,7 @@ public class MecanumDrive {
         double ticks = Math.abs(rotations) * TICKS_PER_ROTATION; //strafing right moves encoder towards -infinity
         setMotorRunModes(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
         setMotorRunModes(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
+        frontRightMotor.setMode(DcMotor.RunMode.RUN_TO_POSITION);
 
         while (frontLeftMotor.getCurrentPosition() < ticks ) {
             rotateRight(speed);
@@ -282,6 +292,7 @@ public class MecanumDrive {
         double ticks = Math.abs(rotations) * TICKS_PER_ROTATION;
         setMotorRunModes(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
         setMotorRunModes(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
+        frontRightMotor.setMode(DcMotor.RunMode.RUN_TO_POSITION);
 
         while (frontLeftMotor.getCurrentPosition() < ticks ) {
             strafeRight(speed);
@@ -295,6 +306,7 @@ public class MecanumDrive {
         double ticks = Math.abs(rotations) * (-1) * TICKS_PER_ROTATION;
         setMotorRunModes(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
         setMotorRunModes(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
+        frontRightMotor.setMode(DcMotor.RunMode.RUN_TO_POSITION);
 
         while (frontLeftMotor.getCurrentPosition() > ticks ) {
             strafeLeft(speed);

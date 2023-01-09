@@ -123,7 +123,7 @@ public class TeleOp_CompetitionBot extends OpMode {
         if (gamepad2.left_stick_y >= 0.1) {
 
             leftStickYVal = gamepad2.left_stick_y;
-            Bot.retractGrabberLift(leftStickYVal * .5);
+            Bot.retractGrabberLift(leftStickYVal * .7);
 
             /*
             "idea for encoder stop"

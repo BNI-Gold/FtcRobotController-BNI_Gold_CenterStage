@@ -47,10 +47,17 @@ public abstract class RedRightPark extends AutoMain {
 
                 break;
 
-//            case None:
-//                Bot.driveForward(0.5, 2.75);
-//                sleep(sleepTime);
-            //(not tested yet)
+            case None:
+                blueRightStack(Bot);
+                sleep(sleepTime);
+
+                Bot.driveBackward(.5,.1);
+                sleep(sleepTime);
+
+                Bot.rotateRight(0.4, 2.2);
+                sleep(sleepTime);
+
+                break;
         }
     }
 
