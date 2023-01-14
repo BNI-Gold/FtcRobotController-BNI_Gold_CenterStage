@@ -2,27 +2,30 @@ package org.firstinspires.ftc.teamcode.Lab;
 
 import com.qualcomm.robotcore.eventloop.opmode.OpMode;
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
+import com.qualcomm.robotcore.hardware.CRServo;
 import com.qualcomm.robotcore.hardware.Servo;
 import com.qualcomm.robotcore.util.Range;
 
-@TeleOp(name = "Grabber Arm")
+@TeleOp(name = "Grabber Arm - Continuous Servo")
 //@Disabled
 
-public class twoServo_Callibrate extends OpMode {
+public class twoServoChain_Callibrate extends OpMode {
 
     private Servo grabberArmLeft = null;
     private double grabberLeftArmPos = 0.5;
     private double incVal = 0.001;
-    private Servo grabberArmRight = null;
-    private double grabberRightArmPos = 0.5;
+    private CRServo grabberArmRight = null;
+    private double grabberRightArmPos = 0;
 
 
     @Override
     public void init () {
+//        Actual grabber server
         grabberArmLeft = hardwareMap.servo.get("grabber_arm_left");
         grabberArmLeft.setPosition(grabberLeftArmPos);
-        grabberArmRight = hardwareMap.servo.get("grabber_arm_right");
-        grabberArmRight.setPosition((grabberRightArmPos));
+//        Chain / Continious rotation servo.
+        grabberArmRight = hardwareMap.crservo.get("grabber_arm_right");
+        grabberArmRight.setPower(grabberRightArmPos);
     }
 
     @Override
@@ -52,29 +55,30 @@ public class twoServo_Callibrate extends OpMode {
         grabberArmLeft.setPosition(grabberLeftArmPos);
 
         if (gamepad2.right_bumper) {
-            grabberRightArmPos += incVal;
-            grabberRightArmPos = Range.clip(grabberRightArmPos,0,1);
+            grabberArmRight.setPower(1);
             telemetry.addLine("Increase Servo Pos!");
         }
 
-        if (gamepad2.left_bumper){
-            grabberRightArmPos -= incVal;
-            grabberRightArmPos = Range.clip(grabberRightArmPos, 0,  1);
+        else if (gamepad2.left_bumper){
+            grabberArmRight.setPower(-1);
             telemetry.addLine( "Decrease Servo Pos!");
         }
-
-        if (gamepad2.y) {
-            grabberRightArmPos = .4;
-        }
-        if (gamepad2.b) {
-            grabberRightArmPos = .35;
-        }
-        if (gamepad2.a) {
-            grabberRightArmPos = .32;
+        else {
+            grabberArmRight.setPower(grabberRightArmPos);
         }
 
+//        if (gamepad2.y) {
+//            grabberRightArmPos = .4;
+//        }
+//        if (gamepad2.b) {
+//            grabberRightArmPos = .35;
+//        }
+//        if (gamepad2.a) {
+//            grabberRightArmPos = .32;
+//        }
 
-        grabberArmRight.setPosition(grabberRightArmPos);
+
+//        grabberArmRight.setPosition(grabberRightArmPos);
         updateTelemetry();
     }
 
@@ -84,7 +88,7 @@ public class twoServo_Callibrate extends OpMode {
         telemetry.addLine("x = set to .90, y = set to 0.10");
         telemetry.addData("Grabber Left Arm Position:", grabberArmLeft.getPosition());
         telemetry.addData("Grabber Left Arm Position:", grabberLeftArmPos);
-        telemetry.addData("Grabber Right Arm Position", grabberArmRight.getPosition());
+//        telemetry.addData("Grabber Right Arm Position", grabberArmRight.getPosition());
         telemetry.addData("Grabber Right Arm Position", grabberRightArmPos);
         telemetry.update();
     }

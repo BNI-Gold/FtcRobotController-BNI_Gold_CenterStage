@@ -33,6 +33,7 @@ public class Encoder_Turntable_Lift extends OpMode {
     boolean turretEncoderCW = false;
     boolean turretEncoderCCW = false;
     boolean turretEncoderCollect = false;
+    boolean turrentEncoder180 = false;
 
     double turretPowerEncoder = 0.3;
     double turretPowerManual = 0.1;
@@ -43,6 +44,7 @@ public class Encoder_Turntable_Lift extends OpMode {
         grabberLift = hardwareMap.get(DcMotorEx.class, "grabber_lift");
         grabberLift.setDirection(DcMotorSimple.Direction.FORWARD);
         grabberLift.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
+        grabberLift.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
         grabberLift.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
 //        No idea what values to actually use, but it definitely does affect the lift!
         grabberLift.setPositionPIDFCoefficients(5);
@@ -50,6 +52,7 @@ public class Encoder_Turntable_Lift extends OpMode {
         turretPlatform = hardwareMap.get(DcMotorEx.class,"turret_motor");
         turretPlatform.setDirection(DcMotorSimple.Direction.REVERSE);
         turretPlatform.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
+        turretPlatform.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
         turretPlatform.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
     }
 
@@ -158,6 +161,7 @@ public class Encoder_Turntable_Lift extends OpMode {
     }
 
     public void turretMechanism () {
+        int currentTurretEncoder = turretPlatform.getCurrentPosition();
 
         //
         // ARE WE USING ENCODER TURN?
@@ -171,6 +175,9 @@ public class Encoder_Turntable_Lift extends OpMode {
         }
         if (gamepad2.a) {
             turretEncoderCollect = true;
+        }
+        if (gamepad2.y) {
+            turrentEncoder180 = true;
         }
 
         //
@@ -207,14 +214,35 @@ public class Encoder_Turntable_Lift extends OpMode {
             }
         }
 
+
         else if (turretEncoderCollect) {
-            if (turretPlatform.getCurrentPosition() > 0) {
-                if (turretPlatform.getCurrentPosition() > 0) {
+//            if (turretPlatform.getCurrentPosition() > 0) {
+//                if (turretPlatform.getCurrentPosition() > 0) {
+//                    turretPlatform.setPower(-turretPowerEncoder);
+//                }
+//                else {
+//                    turretEncoderCollect = false;
+//                }
+//            }
+//
+//            else if (turretPlatform.getCurrentPosition() < 0) {
+//                if (turretPlatform.getCurrentPosition() < 0) {
+//                    turretPlatform.setPower(+turretPowerEncoder);
+//                }
+//                else {
+//                    turretEncoderCollect = false;
+//                }
+//            }
+
+
+            if (turretPlatform.getCurrentPosition() >= 0) {
+                if (turretPlatform.getCurrentPosition() >= 0) {
                     turretPlatform.setPower(-turretPowerEncoder);
                 }
                 else {
-                    turretEncoderCollect = false;
+                        turretEncoderCollect = false;
                 }
+
             }
 
             else if (turretPlatform.getCurrentPosition() < 0) {
@@ -225,9 +253,35 @@ public class Encoder_Turntable_Lift extends OpMode {
                     turretEncoderCollect = false;
                 }
             }
+
+
+            if (!turretEncoderCollect) {
+                turretPlatform.setPower(0);
+            }
+
+        }
+        else if (turrentEncoder180 == true) {
+            if (turretPlatform.getCurrentPosition() >= 0) {
+
+                if (turretPlatform.getCurrentPosition() < turretClockwise*2) {
+                    turretPlatform.setPower(+turretPowerEncoder);
+                }
+                else {
+                    turrentEncoder180 = false;
+                }
+            }
+            else if (turretPlatform.getCurrentPosition() < 0) {
+                if (turretPlatform.getCurrentPosition() > turretCounterclocwise*2) {
+                    turretPlatform.setPower(-turretPowerEncoder);
+                }
+                else {
+                    turrentEncoder180 = false;
+                }
+            }
         }
         else {
             turretPlatform.setPower(0);
+            turrentEncoder180 = false;
         }
     }
 

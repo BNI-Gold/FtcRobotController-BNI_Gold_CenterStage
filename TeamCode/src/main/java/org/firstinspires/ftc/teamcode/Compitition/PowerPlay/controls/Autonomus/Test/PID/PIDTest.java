@@ -7,7 +7,7 @@ import com.qualcomm.robotcore.hardware.DcMotor;
 import org.firstinspires.ftc.teamcode.Compitition.PowerPlay.Robots.CompetionBot;
 import org.firstinspires.ftc.teamcode.Outreach.OutreachRanger.Robots.OutreachRangerBot;
 
-@Autonomous (name = "PID Test", group = "1")
+@Autonomous (name = "PID Test 1", group = "1")
 
 public class PIDTest extends BlueCarousel {
 
