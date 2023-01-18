@@ -16,9 +16,9 @@ public class Encoder_Turntable_Lift_Camden extends OpMode {
 
     boolean displayTelemetry = true;
 
-    int turretClockwise = 417;
-    int turretCounterclockwise = -417;
-    int turretReverse = -810;
+    int turretClockwise = 500;
+    int turretCounterclockwise = -500;
+    int turretReverse = 1000;
 
     int liftRest = 0;
     int liftLow = 600;
@@ -44,20 +44,22 @@ public class Encoder_Turntable_Lift_Camden extends OpMode {
         grabberLift = hardwareMap.get(DcMotorEx.class, "grabber_lift");
         grabberLift.setDirection(DcMotorSimple.Direction.FORWARD);
         grabberLift.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
+        grabberLift.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
         grabberLift.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
 //        No idea what values to actually use, but it definitely does affect the lift!
-        grabberLift.setPositionPIDFCoefficients(5);
+        grabberLift.setPositionPIDFCoefficients(10);
 
         turretPlatform = hardwareMap.get(DcMotorEx.class, "turret_motor");
         turretPlatform.setDirection(DcMotorSimple.Direction.REVERSE);
         turretPlatform.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
+        turretPlatform.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
         turretPlatform.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
     }
 
     @Override
     public void loop() {
 
-        //  liftControl();  // adjusts the lift level to be used in turrentMechanism
+        liftControl();  // adjusts the lift level to be used in turrentMechanism
 //        Moves Lift using values from liftControl()
         liftMechanismEncoder();
 //        Disabled - so notes above function.
@@ -88,26 +90,37 @@ public class Encoder_Turntable_Lift_Camden extends OpMode {
     public void liftMechanismEncoder() {
 //        Only go to target position when press 'y'.
 //        Allows P2 to get lift "target" position ready.
-        if (gamepad2.y) {
+        if (gamepad2.left_stick_button) {
             switch (liftLevel) {
                 case 0:
-                    // IF block - if the curret position is less the the liftRest, then go DOWN
                     if (grabberLift.getCurrentPosition() > liftRest) {
-//                      Lift Down
-
-                    } else {
-//                        lift up
+                        grabberLift.setPower(liftPowerDown);
+                    }
+                    else {
+                        grabberLift.setPower(liftPowerUp);
                     }
                     grabberLift.setTargetPosition(liftRest);
                     grabberLift.setMode(DcMotor.RunMode.RUN_TO_POSITION);
                     break;
-//                    Case 1
-//                Use "liftLow"
                 case 1:
-
+                    if (grabberLift.getCurrentPosition() > liftLow) {
+                        grabberLift.setPower(liftPowerDown);
+                    }
+                    else {
+                        grabberLift.setPower(liftPowerUp);
+                    }
+                    grabberLift.setTargetPosition(liftLow);
+                    grabberLift.setMode(DcMotor.RunMode.RUN_TO_POSITION);
                     break;
                 case 2:
-
+                    if (grabberLift.getCurrentPosition() > liftMid) {
+                        grabberLift.setPower(liftPowerDown);
+                    }
+                    else {
+                        grabberLift.setPower(liftPowerUp);
+                    }
+                    grabberLift.setTargetPosition(liftMid);
+                    grabberLift.setMode(DcMotor.RunMode.RUN_TO_POSITION);
                     break;
                 case 3:
                     grabberLift.setPower(liftPowerUp);
@@ -115,6 +128,29 @@ public class Encoder_Turntable_Lift_Camden extends OpMode {
                     grabberLift.setMode(DcMotor.RunMode.RUN_TO_POSITION);
                 default:
                     break;
+            }
+        }
+    }
+
+    public void liftControl () {
+        if (gamepad2.b == true && liftLevelAllow == true) {
+            if (liftLevel < 3) {
+                liftLevel += 1;
+            }
+            liftLevelAllow = false;
+            liftToggle = false;
+        }
+        else if (gamepad2.x == true && liftLevelAllow == true) {
+            if (liftLevel > 0) {
+                liftLevel -= 1;
+            }
+            liftToggle = false;
+            liftLevelAllow = false;
+        }
+        else {  // The IF here makes it so lift* goes back to default 'false' ONLY when not pressing Trigger.
+            if (gamepad2.b == false && gamepad2.x == false) {
+                liftLevelAllow = true;
+                liftToggle = true;
             }
         }
     }
@@ -211,58 +247,45 @@ public class Encoder_Turntable_Lift_Camden extends OpMode {
 
         else if (turretEncoder180) {
 //            If our "turretPlatform.getCurrentPosition()" is less than the "turretClockwise", turn turretPlatform
-            if (turretPlatform.getCurrentPosition() > turretReverse) {
-                turretPlatform.setPower(-turretPowerEncoder);
-            } else {
-//                Need to set turretEncoderCW to "false" - this is how we know have reached target position.
-                turretEncoder180 = false;
+            if (turretPlatform.getCurrentPosition() >= 0) {
+
+                if (turretPlatform.getCurrentPosition() < turretReverse) {
+                    turretPlatform.setPower(+turretPowerEncoder);
+                }
+                else {
+                    turretEncoder180 = false;
+                }
+            }
+            else if (turretPlatform.getCurrentPosition() < 0) {
+                if (turretPlatform.getCurrentPosition() > turretReverse) {
+                    turretPlatform.setPower(-turretPowerEncoder);
+                }
+                else {
+                    turretEncoder180 = false;
+                }
             }
         }
 
 //        Same concept for "turretEncoderCCW"
-        else if (turretEncoder90CCW) {
-            if (turretPlatform.getCurrentPosition() < turretCounterclockwise - turretErrorMargin || turretPlatform.getCurrentPosition() < turretCounterclockwise + turretErrorMargin) {
-                if (turretPlatform.getCurrentPosition() < turretCounterclockwise - turretErrorMargin || turretPlatform.getCurrentPosition() < turretCounterclockwise + turretErrorMargin) {
-
-                    turretPlatform.setPower(turretPowerEncoder);
-
-                } else {
-
-                    turretEncoder90CCW = false;
-
-                }
-
-            } else if (turretEncoder90CW) {
-                if (turretPlatform.getCurrentPosition() < turretClockwise - turretErrorMargin || turretPlatform.getCurrentPosition() < turretClockwise + turretErrorMargin) {
-                    if (turretPlatform.getCurrentPosition() < turretClockwise - turretErrorMargin || turretPlatform.getCurrentPosition() < turretClockwise + turretErrorMargin) {
-
-                        turretPlatform.setPower(-turretPowerEncoder);
-
-                    } else {
-
-                        turretEncoder90CW = false;
-
-                    }
-
-                } else if (turretPlatform.getCurrentPosition() > turretCounterclockwise + turretErrorMargin || turretPlatform.getCurrentPosition() > turretCounterclockwise - turretErrorMargin) {
-
-                    if (turretPlatform.getCurrentPosition() > turretCounterclockwise + turretErrorMargin || turretPlatform.getCurrentPosition() > turretCounterclockwise - turretErrorMargin) {
-
-                        turretPlatform.setPower(-turretPowerEncoder);
-
-                    } else {
-
-                        turretEncoder90CCW = false;
-
-                    }
-
-                } else {
-//                Set turretEncoderCCW to false
-                    turretEncoder90CCW = false;
-
-                }
+        else if (turretEncoder90CW) {
+            if (turretPlatform.getCurrentPosition() < turretClockwise) {
+                turretPlatform.setPower(+turretPowerEncoder);
+            }
+            else {
+                turretEncoder90CW = false;
             }
         }
+
+        else if (turretEncoder90CCW) {
+            if (turretPlatform.getCurrentPosition() > turretCounterclockwise) {
+                turretPlatform.setPower(-turretPowerEncoder);
+            }
+            else {
+                turretEncoder90CCW = false;
+            }
+        }
+
+
 
 
 //      Same concept for "turretEncoderCollect"
@@ -271,34 +294,56 @@ public class Encoder_Turntable_Lift_Camden extends OpMode {
 
         else if (turretEncoderCollect) {
 //            Checking if the current Turret Platform Position is on the left
-            if (turretPlatform.getCurrentPosition() > 0) {
-//                Checking AGAIN if the current Turret Platform Position is > 0
-                if (turretPlatform.getCurrentPosition() > 0) {
-//                    Set the turretPlatform power to "turretPowerEncoder"
+//            if (turretPlatform.getCurrentPosition() > 0) {
+////                Checking AGAIN if the current Turret Platform Position is > 0
+//                if (turretPlatform.getCurrentPosition() > 0) {
+////                    Set the turretPlatform power to "turretPowerEncoder"
+//                    turretPlatform.setPower(-turretPowerEncoder);
+//                } else {
+////                    set "turretEncoderCollect" to "False"
+//                    turretEncoderCollect = false;
+//                }
+//            }
+//
+////            Else if - same concept, but reverse (turret on right).
+//            else if (turretEncoderCollect) {
+//                if (turretPlatform.getCurrentPosition() < 0) {
+////                    Set the turretPlatform power to "turretPowerEncoder"
+//                    turretPlatform.setPower(turretPowerEncoder);
+//                } else {
+////                    set "turretEncoderCollect" to "False"
+//                    turretEncoderCollect = false;
+//                }
+//            }
+            if (turretPlatform.getCurrentPosition() >= 0) {
+                if (turretPlatform.getCurrentPosition() >= 0) {
                     turretPlatform.setPower(-turretPowerEncoder);
-                } else {
-//                    set "turretEncoderCollect" to "False"
+                }
+                else {
                     turretEncoderCollect = false;
                 }
+
             }
 
-//            Else if - same concept, but reverse (turret on right).
-            else if (turretEncoderCollect) {
+            else if (turretPlatform.getCurrentPosition() < 0) {
                 if (turretPlatform.getCurrentPosition() < 0) {
-//                    Set the turretPlatform power to "turretPowerEncoder"
-                    turretPlatform.setPower(turretPowerEncoder);
-                } else {
-//                    set "turretEncoderCollect" to "False"
+                    turretPlatform.setPower(+turretPowerEncoder);
+                }
+                else {
                     turretEncoderCollect = false;
                 }
             }
 
+
+            if (!turretEncoderCollect) {
+                turretPlatform.setPower(0);
+            }
 
 //        Set power to 0!
-            else {
-                turretPlatform.setPower(0);
 
-            }
+        } else {
+            turretPlatform.setPower(0);
+
         }
     }
 

@@ -114,16 +114,16 @@ public class MecanumDrive {
         int ticks = (int) (rotations * TICKS_PER_ROTATION);
 
         frontLeftMotor.setPower(-power);
-        frontLeftMotor.setTargetPosition(ticks);
+        frontLeftMotor.setTargetPosition(-ticks);
 
         frontRightMotor.setPower(-power);
-        frontRightMotor.setTargetPosition(ticks);
+        frontRightMotor.setTargetPosition(-ticks);
 
         rearLeftMotor.setPower(-power);
-        rearLeftMotor.setTargetPosition(ticks);
+        rearLeftMotor.setTargetPosition(-ticks);
 
         rearRightMotor.setPower(-power);
-        rearRightMotor.setTargetPosition(ticks);
+        rearRightMotor.setTargetPosition(-ticks);
 
         setMotorRunModes(DcMotor.RunMode.RUN_TO_POSITION);
     }
@@ -132,7 +132,7 @@ public class MecanumDrive {
         int ticks = (int) (rotations * TICKS_PER_ROTATION);
 
         frontLeftMotor.setPower(-power);
-        frontLeftMotor.setTargetPosition(ticks);
+        frontLeftMotor.setTargetPosition(-ticks);
 
         frontRightMotor.setPower(power);
         frontRightMotor.setTargetPosition(ticks);
@@ -141,7 +141,7 @@ public class MecanumDrive {
         rearLeftMotor.setTargetPosition(ticks);
 
         rearRightMotor.setPower(-power);
-        rearRightMotor.setTargetPosition(ticks);
+        rearRightMotor.setTargetPosition(-ticks);
 
         setMotorRunModes(DcMotor.RunMode.RUN_TO_POSITION);
     }
@@ -153,10 +153,10 @@ public class MecanumDrive {
         frontLeftMotor.setTargetPosition(ticks);
 
         frontRightMotor.setPower(-power);
-        frontRightMotor.setTargetPosition(ticks);
+        frontRightMotor.setTargetPosition(-ticks);
 
         rearLeftMotor.setPower(-power);
-        rearLeftMotor.setTargetPosition(ticks);
+        rearLeftMotor.setTargetPosition(-ticks);
 
         rearRightMotor.setPower(power);
         rearRightMotor.setTargetPosition(ticks);

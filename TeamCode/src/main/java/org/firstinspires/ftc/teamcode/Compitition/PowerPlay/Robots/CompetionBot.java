@@ -4,6 +4,7 @@ import com.qualcomm.hardware.bosch.BNO055IMU;
 import com.qualcomm.hardware.bosch.JustLoggingAccelerationIntegrator;
 import com.qualcomm.robotcore.hardware.CRServo;
 import com.qualcomm.robotcore.hardware.DcMotor;
+import com.qualcomm.robotcore.hardware.DcMotorEx;
 import com.qualcomm.robotcore.hardware.DcMotorSimple;
 import com.qualcomm.robotcore.hardware.HardwareMap;
 import com.qualcomm.robotcore.hardware.Servo;
@@ -32,7 +33,7 @@ public class CompetionBot extends MecanumDrive {
         public DcMotor grabberLiftTwo = null;
         public DcMotor turretPlatform = null;
         public Servo grabberArmServo = null;
-//        public CRServo bigConeSucker = null;
+        public CRServo bigConeSucker = null;
         TouchSensor magSwitch;
 
 
@@ -40,38 +41,21 @@ public class CompetionBot extends MecanumDrive {
     public void initRobot (HardwareMap hardwareMap) {
             hwBot = hardwareMap;
 
-            grabberArmServo = hwBot.get(Servo.class, "grabber_arm_left");
+            grabberArmServo = hwBot.get(Servo.class, "grabber_arm");
             grabberArmServo.setDirection(Servo.Direction.FORWARD);
 
-//            bigConeSucker = hwBot.get(CRServo.class, "cone_sucker");
-//            bigConeSucker.setDirection(CRServo.Direction.FORWARD);
+            bigConeSucker = hwBot.get(CRServo.class, "cone_sucker");
+            bigConeSucker.setDirection(CRServo.Direction.FORWARD);
 
             frontLeftMotor=hwBot.dcMotor.get("front_left_motor");
             frontRightMotor=hwBot.dcMotor.get("front_right_motor");
             rearLeftMotor=hwBot.dcMotor.get("rear_left_motor");
             rearRightMotor=hwBot.dcMotor.get("rear_right_motor");
 
-            grabberLiftOne = hwBot.dcMotor.get("grabber_lift_one");
-            grabberLiftTwo = hwBot.dcMotor.get("grabber_lift_two");
-
-            grabberLiftOne.setDirection(DcMotorSimple.Direction.FORWARD);
-            grabberLiftTwo.setDirection(DcMotorSimple.Direction.REVERSE);
-
-            grabberLiftOne.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
-            grabberLiftTwo.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
-
-            turretPlatform = hwBot.dcMotor.get("turret_motor");
-
-            turretPlatform.setDirection(DcMotorSimple.Direction.REVERSE);
-            turretPlatform.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
-            turretPlatform.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
-            turretPlatform.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
-
             frontLeftMotor.setDirection(DcMotor.Direction.REVERSE);
             rearLeftMotor.setDirection(DcMotor.Direction.REVERSE);
             frontRightMotor.setDirection(DcMotor.Direction.FORWARD);
             rearRightMotor.setDirection(DcMotor.Direction.FORWARD);
-
 
             setMotorRunModes(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
             setMotorRunModes(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
@@ -100,6 +84,26 @@ public class CompetionBot extends MecanumDrive {
 //            grabberLift.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
 //            grabberLift.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
 
+        grabberLiftOne = hardwareMap.get(DcMotorEx.class, "grabber_lift_one");
+        grabberLiftOne.setDirection(DcMotorSimple.Direction.REVERSE);
+        grabberLiftOne.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
+        grabberLiftOne.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
+        grabberLiftOne.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
+        //Bot.grabberLiftOne.setPositionPIDFCoefficients(5);
+
+        grabberLiftTwo = hardwareMap.get(DcMotorEx.class, "grabber_lift_two");
+        grabberLiftTwo.setDirection(DcMotorSimple.Direction.FORWARD);
+        grabberLiftTwo.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
+        grabberLiftTwo.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
+        grabberLiftTwo.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
+        //Bot.grabberLiftTwo.setPositionPIDFCoefficients(5);
+
+        turretPlatform = hardwareMap.get(DcMotorEx.class,"turret_motor");
+        turretPlatform.setDirection(DcMotorSimple.Direction.REVERSE);
+        turretPlatform.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
+        turretPlatform.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
+        turretPlatform.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
+
             // Grabber Lift Sensor Hardware Mapping & Configuration
             magSwitch = hardwareMap.get(TouchSensor.class, "magnetic_switch");
 
@@ -107,35 +111,41 @@ public class CompetionBot extends MecanumDrive {
 
         }
 
-//        public void coneOuttake() {
-//
-//            bigConeSucker.setDirection(CRServo.Direction.REVERSE);
-//            bigConeSucker.setPower(0.5);
-//
-//        }
-//
-//        public void coneIntake() {
-//
-//            bigConeSucker.setDirection(CRServo.Direction.FORWARD);
-//            bigConeSucker.setPower(0.5);
-//
-//        }
-//
-//    public void intakeStop() {
-//
-//        bigConeSucker.setPower(0);
-//
-//    }
+        public void coneOuttake() {
+
+            bigConeSucker.setDirection(CRServo.Direction.REVERSE);
+            bigConeSucker.setPower(1);
+
+        }
+
+        public void coneIntake() {
+
+            bigConeSucker.setDirection(CRServo.Direction.FORWARD);
+            bigConeSucker.setPower(1);
+
+        }
+
+    public void intakeStop() {
+
+        bigConeSucker.setPower(0);
+
+    }
 
         public void openGrabberArms() {
 
-            grabberArmServo.setPosition(0.23);
+            grabberArmServo.setPosition(0.87);
 
         }
 
         public void closeGrabberArms() {
 
-            grabberArmServo.setPosition(0.052);
+            grabberArmServo.setPosition(.72);
+
+        }
+
+        public void intakeGrabberArms() {
+
+            grabberArmServo.setPosition(0.75);
 
         }
 
