@@ -92,8 +92,10 @@ public class MecanumDrive {
         rearRightMotor.setPower(speed);
     }
 
-    public void driveForward_PID (double rotations, double power) {
+    public void driveForward_PID (double power, double rotations) {
         int ticks = (int) (rotations * TICKS_PER_ROTATION);
+
+        setMotorRunModes(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
 
         frontLeftMotor.setPower(power);
         frontLeftMotor.setTargetPosition(ticks);
@@ -110,8 +112,10 @@ public class MecanumDrive {
         setMotorRunModes(DcMotor.RunMode.RUN_TO_POSITION);
     }
 
-    public void driveBackward_PID (double rotations, double power) {
+    public void driveBackward_PID (double power, double rotations) {
         int ticks = (int) (rotations * TICKS_PER_ROTATION);
+
+        setMotorRunModes(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
 
         frontLeftMotor.setPower(-power);
         frontLeftMotor.setTargetPosition(-ticks);
@@ -128,8 +132,10 @@ public class MecanumDrive {
         setMotorRunModes(DcMotor.RunMode.RUN_TO_POSITION);
     }
 
-    public void strafeLeft_PID (double rotations, double power) {
+    public void strafeLeft_PID (double power, double rotations) {
         int ticks = (int) (rotations * TICKS_PER_ROTATION);
+
+        setMotorRunModes(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
 
         frontLeftMotor.setPower(-power);
         frontLeftMotor.setTargetPosition(-ticks);
@@ -146,8 +152,10 @@ public class MecanumDrive {
         setMotorRunModes(DcMotor.RunMode.RUN_TO_POSITION);
     }
 
-    public void strafeRight_PID (double rotations, double power) {
+    public void strafeRight_PID (double power, double rotations) {
         int ticks = (int) (rotations * TICKS_PER_ROTATION);
+
+        setMotorRunModes(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
 
         frontLeftMotor.setPower(power);
         frontLeftMotor.setTargetPosition(ticks);

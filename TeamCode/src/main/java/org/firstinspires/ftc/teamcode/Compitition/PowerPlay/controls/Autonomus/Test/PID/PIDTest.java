@@ -14,7 +14,7 @@ public class PIDTest extends BlueCarousel {
 
     public CompetionBot Bot = new CompetionBot();
 
-    public long sleepTime = 250;
+    public long sleepTime = 10000;
 
     @Override
     public void runOpMode() throws InterruptedException {
@@ -27,16 +27,16 @@ public class PIDTest extends BlueCarousel {
 
         while (opModeIsActive()) {
 
-            Bot.driveForward_PID(3,0.5);
+            Bot.driveForward_PID(.5,9);
             sleep(sleepTime);
 
-            Bot.strafeLeft_PID(0.3,0.5);
-            sleep(sleepTime);
+//            Bot.strafeRight_PID(0.5,0.5);
+//            sleep(sleepTime);
+//
+//            Bot.strafeLeft_PID(0.5,0.5);
+//            sleep(sleepTime);
 
-            Bot.strafeLeft_PID(0.3,0.5);
-            sleep(sleepTime);
-
-            Bot.driveBackward_PID(2, 0.5);
+            Bot.driveBackward_PID(0.5, 9);
             sleep(sleepTime);
 
             idle();
