@@ -46,7 +46,7 @@ public class TeleOp_CompetitionBot extends OpMode {
     double turretPowerEncoder = 0.3;
     double turretPowerManual = 0.1;
     double liftPowerUp = 1.0;
-    double liftPowerDown = 0.8;
+    double liftPowerDown = 0.2;
 
     public CompetionBot Bot = new CompetionBot();
 
@@ -114,10 +114,10 @@ public class TeleOp_CompetitionBot extends OpMode {
         telemetry.addData("Turret Encoder Position: ", Bot.turretPlatform.getCurrentPosition());
         telemetry.addData("Lift One Encoder Position: ", Bot.grabberLiftOne.getCurrentPosition());
         telemetry.addData("Lift Two Encoder Position: ", Bot.grabberLiftTwo.getCurrentPosition());
-        telemetry.addData("leftA", Bot.frontLeftMotor.getCurrentPosition());
-        telemetry.addData("leftB", Bot.rearLeftMotor.getCurrentPosition());
-        telemetry.addData("rightA", Bot.frontRightMotor.getCurrentPosition());
-        telemetry.addData("rightB", Bot.rearRightMotor.getCurrentPosition());
+        telemetry.addData("leftFront", Bot.frontLeftMotor.getCurrentPosition());
+        telemetry.addData("leftRear", Bot.rearLeftMotor.getCurrentPosition());
+        telemetry.addData("rightFront", Bot.frontRightMotor.getCurrentPosition());
+        telemetry.addData("rightRear", Bot.rearRightMotor.getCurrentPosition());
 
 
     }

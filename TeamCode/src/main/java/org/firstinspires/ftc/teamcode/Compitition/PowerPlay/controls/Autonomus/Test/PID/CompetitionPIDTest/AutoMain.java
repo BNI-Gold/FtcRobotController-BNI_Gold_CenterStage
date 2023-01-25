@@ -124,32 +124,32 @@ public abstract class AutoMain extends LinearOpMode {
                     TargetZone = AutoTargetZone.None;
                 }
 
-                telemetry.addLine("Tag Found!");
+                telemetry.addLine("Tag Detected");
                 parkingTelemetry();
                 tagTelemetry(tagOfInterest);
                 telemetry.update();
             }
             else {
-                telemetry.addLine("No Tag Found...");
+                telemetry.addLine("No Tag Detected");
 
                 if(tagOfInterest == null) {
-                    telemetry.addLine("Tag has not been found at all.");
+                    telemetry.addLine("Tag Detection Failed");
                 }
                 else {
-                    telemetry.addLine("\nTag was found before.Last seen at:");
+                    telemetry.addLine("\nTag Previously Detected: ");
                     tagTelemetry(tagOfInterest);
                 }
             }
 
         }
         else {
-            telemetry.addLine("No Tag Found...");
+            telemetry.addLine("No Tag Detected");
 
             if(tagOfInterest == null) {
-                telemetry.addLine("Tag has not been found at all.");
+                telemetry.addLine("Tag Detection Failed");
             }
             else {
-                telemetry.addLine("\n Tag was found before.Last seen at:");
+                telemetry.addLine("\nTag Previously Detected: ");
                 tagTelemetry(tagOfInterest);
             }
 

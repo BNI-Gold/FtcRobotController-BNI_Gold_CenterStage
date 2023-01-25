@@ -37,6 +37,7 @@ public class AutoBlueLeftPark extends BlueLeftPark {
         initializePipeline();
 
         //targetZone = AutoTargetZone.A;
+        Bot.openGrabberArms();
 
         telemetry.addLine("WAITING FOR START >");
         telemetry.addData("TARGET ZONE: ", TargetZone);
@@ -64,9 +65,9 @@ public class AutoBlueLeftPark extends BlueLeftPark {
 
                 sleep(1000);
 
-                Bot.extendGrabberLift(0.5);
+//                Bot.extendGrabberLift(.7);
 
-                sleep(275);
+                sleep(300);
 
                 Bot.stopGrabberLift();
 
