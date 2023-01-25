@@ -2,21 +2,19 @@ package org.firstinspires.ftc.teamcode.Compitition.PowerPlay.DriveTrains;
 
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 import com.qualcomm.robotcore.hardware.DcMotor;
+import com.qualcomm.robotcore.hardware.DcMotorEx;
 import com.qualcomm.robotcore.hardware.HardwareMap;
 
 public class MecanumDrive {
 
     // Instance Variables & Constants
 
-    public DcMotor frontLeftMotor;
-    public DcMotor frontRightMotor;
-    public DcMotor rearRightMotor;
-    public DcMotor rearLeftMotor;
+    public DcMotorEx frontLeftMotor;
+    public DcMotorEx frontRightMotor;
+    public DcMotorEx rearRightMotor;
+    public DcMotorEx rearLeftMotor;
     public static final double TICKS_PER_ROTATION = 383.6;   // GoBilda 13.7 Motor PPR
     public LinearOpMode linearOp = null;
-
-
-
 
     public void setLinearOp(LinearOpMode linearOp) {
 
@@ -111,7 +109,6 @@ public class MecanumDrive {
 
         rearRightMotor.setPower(power);
         rearRightMotor.setTargetPosition(ticks);
-
 
         setMotorRunModes(DcMotor.RunMode.RUN_TO_POSITION);
         while (frontLeftMotor.isBusy() && linearOp.opModeIsActive()) {

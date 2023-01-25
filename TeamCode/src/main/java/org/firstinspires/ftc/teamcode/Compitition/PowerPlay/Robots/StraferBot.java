@@ -2,6 +2,7 @@ package org.firstinspires.ftc.teamcode.Compitition.PowerPlay.Robots;
 import com.qualcomm.hardware.bosch.BNO055IMU;
 import com.qualcomm.hardware.bosch.JustLoggingAccelerationIntegrator;
 import com.qualcomm.robotcore.hardware.DcMotor;
+import com.qualcomm.robotcore.hardware.DcMotorEx;
 import com.qualcomm.robotcore.hardware.HardwareMap;
 import org.firstinspires.ftc.robotcore.external.navigation.Acceleration;
 import org.firstinspires.ftc.robotcore.external.navigation.AngleUnit;
@@ -22,11 +23,14 @@ public class StraferBot extends MecanumDrive {
 
     public void initRobot (HardwareMap hardwareMap) {
         hwBot = hardwareMap;
-
-        frontLeftMotor=hwBot.dcMotor.get("front_left_motor");
-        frontRightMotor=hwBot.dcMotor.get("front_right_motor");
-        rearLeftMotor=hwBot.dcMotor.get("rear_left_motor");
-        rearRightMotor=hwBot.dcMotor.get("rear_right_motor");
+        frontLeftMotor = hardwareMap.get(DcMotorEx.class, "front_left_motor");
+        frontRightMotor = hardwareMap.get(DcMotorEx.class, "front_right_motor");
+        rearLeftMotor = hardwareMap.get(DcMotorEx.class, "rear_left_motor");
+        rearRightMotor = hardwareMap.get(DcMotorEx.class, "rear_right_motor");
+//        frontLeftMotor=hwBot.dcMotor.get("front_left_motor");
+//        frontRightMotor=hwBot.dcMotor.get("front_right_motor");
+//        rearLeftMotor=hwBot.dcMotor.get("rear_left_motor");
+//        rearRightMotor=hwBot.dcMotor.get("rear_right_motor");
 
         frontLeftMotor.setDirection(DcMotor.Direction.REVERSE);
         rearLeftMotor.setDirection(DcMotor.Direction.REVERSE);

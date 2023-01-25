@@ -61,15 +61,25 @@ public class AutoBlueLeftPark extends BlueLeftPark {
 
             if (isCompetition == true) {
 
+                Bot.extendGrabberLift(0.6);
+
+                sleep(125);
+
+                Bot.stopGrabberLift();
+
+                sleep(sleepTime);
+
                 Bot.closeGrabberArms();
 
                 sleep(1000);
 
-//                Bot.extendGrabberLift(.7);
+                Bot.extendGrabberLift(.8);
 
-                sleep(300);
+                sleep(600);
 
                 Bot.stopGrabberLift();
+
+                Bot.extendGrabberLift(0.4);
 
             }
 

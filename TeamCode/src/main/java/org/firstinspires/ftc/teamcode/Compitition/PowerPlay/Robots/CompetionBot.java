@@ -7,6 +7,7 @@ import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.hardware.DcMotorEx;
 import com.qualcomm.robotcore.hardware.DcMotorSimple;
 import com.qualcomm.robotcore.hardware.HardwareMap;
+import com.qualcomm.robotcore.hardware.PIDFCoefficients;
 import com.qualcomm.robotcore.hardware.Servo;
 import com.qualcomm.robotcore.hardware.TouchSensor;
 
@@ -47,10 +48,14 @@ public class CompetionBot extends MecanumDrive {
             bigConeSucker = hwBot.get(CRServo.class, "cone_sucker");
             bigConeSucker.setDirection(CRServo.Direction.FORWARD);
 
-            frontLeftMotor=hwBot.dcMotor.get("front_left_motor");
-            frontRightMotor=hwBot.dcMotor.get("front_right_motor");
-            rearLeftMotor=hwBot.dcMotor.get("rear_left_motor");
-            rearRightMotor=hwBot.dcMotor.get("rear_right_motor");
+            frontLeftMotor = hardwareMap.get(DcMotorEx.class, "front_left_motor");
+        frontRightMotor = hardwareMap.get(DcMotorEx.class, "front_right_motor");
+        rearLeftMotor = hardwareMap.get(DcMotorEx.class, "rear_left_motor");
+        rearRightMotor = hardwareMap.get(DcMotorEx.class, "rear_right_motor");
+//            frontLeftMotor=hwBot.dcMotor.get("front_left_motor");
+//            frontRightMotor=hwBot.dcMotor.get("front_right_motor");
+//            rearLeftMotor=hwBot.dcMotor.get("rear_left_motor");
+//            rearRightMotor=hwBot.dcMotor.get("rear_right_motor");
 
             frontLeftMotor.setDirection(DcMotor.Direction.REVERSE);
             rearLeftMotor.setDirection(DcMotor.Direction.REVERSE);
@@ -60,13 +65,26 @@ public class CompetionBot extends MecanumDrive {
             setMotorRunModes(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
             setMotorRunModes(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
 
+
+
             frontLeftMotor.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
             frontRightMotor.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
             rearRightMotor.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
             rearLeftMotor.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
 
 
-            BNO055IMU.Parameters parametersimu = new BNO055IMU.Parameters();
+//            frontLeftMotor.setPositionPIDFCoefficients(1);
+//            frontRightMotor.setPositionPIDFCoefficients(1);
+//            rearRightMotor.setPositionPIDFCoefficients(1);
+//            rearLeftMotor.setPositionPIDFCoefficients(1);
+
+//            frontLeftMotor.setVelocityPIDFCoefficients(1,1,1,1);
+//            frontLeftMotor.setVelocityPIDFCoefficients(1,1,1,1);
+//            frontLeftMotor.setVelocityPIDFCoefficients(1,1,1,1);
+//            frontLeftMotor.setVelocityPIDFCoefficients(1,1,1,1);
+
+
+        BNO055IMU.Parameters parametersimu = new BNO055IMU.Parameters();
             parametersimu.angleUnit = BNO055IMU.AngleUnit.DEGREES;
             parametersimu.accelUnit = BNO055IMU.AccelUnit.METERS_PERSEC_PERSEC;
             parametersimu.calibrationDataFile = "BN0055IMUCalibration.json";

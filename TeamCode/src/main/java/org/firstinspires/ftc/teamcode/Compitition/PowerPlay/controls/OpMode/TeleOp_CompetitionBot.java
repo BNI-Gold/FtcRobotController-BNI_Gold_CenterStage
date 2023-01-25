@@ -282,12 +282,12 @@ public class TeleOp_CompetitionBot extends OpMode {
         if (gamepad2.right_stick_x >= 0.1) {
 
             leftStickYVal = gamepad2.left_stick_y;
-            Bot.turretClockwise(0.5);
+            Bot.turretClockwise(0.75);
 
         } else if (gamepad2.right_stick_x <= -0.1) {
 
             leftStickYVal = gamepad2.left_stick_y;
-            Bot.turretCounterClockwise(0.5);
+            Bot.turretCounterClockwise(0.75);
 
         } else {
 

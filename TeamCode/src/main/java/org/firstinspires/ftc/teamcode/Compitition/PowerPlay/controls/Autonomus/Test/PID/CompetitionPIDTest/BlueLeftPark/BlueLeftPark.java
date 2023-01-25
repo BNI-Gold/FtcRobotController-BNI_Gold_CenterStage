@@ -14,11 +14,20 @@ public abstract class BlueLeftPark extends AutoMain {
                 blueleftStack_PIDtest(Bot);
                 sleep(sleepTime);
 
+                Bot.strafeLeft_PID(0.4, 2.75);
+                sleep(sleepTime);
+
+                Bot.driveBackward_PID(0.4, 0.3);
+                sleep(sleepTime);
+
                 break;
 
             case B:
 
                 blueleftStack_PIDtest(Bot);
+                sleep(sleepTime);
+
+                Bot.driveBackward_PID(0.4, 0.3);
                 sleep(sleepTime);
 
                 break;
@@ -28,11 +37,20 @@ public abstract class BlueLeftPark extends AutoMain {
                 blueleftStack_PIDtest(Bot);
                 sleep(sleepTime);
 
+                Bot.strafeRight_PID(0.4, 2.5);
+                sleep(sleepTime);
+
+                Bot.driveBackward_PID(0.4, 0.3);
+                sleep(sleepTime);
+
                 break;
 
             case None:
 
                 blueleftStack_PIDtest(Bot);
+                sleep(sleepTime);
+
+                Bot.driveBackward_PID(0.4, 0.3);
                 sleep(sleepTime);
 
                 break;
@@ -147,7 +165,7 @@ public abstract class BlueLeftPark extends AutoMain {
 
     public void blueleftStack_PIDtest (CompetionBot Bot) {
 
-        Bot.driveForward_PID(0.5,5);
+        Bot.driveForward_PID(0.5,5.1);
         sleep(sleepTime);
 
         Bot.rotateRight(0.3, 1);
@@ -156,7 +174,61 @@ public abstract class BlueLeftPark extends AutoMain {
         Bot.gyroCorrection(0.15, -45);
         sleep(sleepTime);
 
-        Bot.driveForward_PID(0.5, 0.3);
+        Bot.driveForward_PID(0.4, 0.15);
+        sleep(sleepTime);
+
+        Bot.extendGrabberLift(0.95);
+        sleep(3250);
+        Bot.extendGrabberLift(0.4);
+        sleep(sleepTime);
+
+        Bot.driveForward_PID(0.1, 0.3);
+        sleep(sleepTime);
+
+        Bot.openGrabberArms();
+        sleep(sleepTime);
+
+        Bot.driveBackward_PID(0.2, 0.6);
+        sleep(sleepTime);
+
+        Bot.stopGrabberLift();
+        sleep(sleepTime);
+
+        Bot.retractGrabberLift(0.4);
+        sleep(1500);
+
+        Bot.stopGrabberLift();
+
+        Bot.driveBackward_PID(0.3, 0.1);
+        sleep(sleepTime);
+
+        Bot.rotateLeft(0.4, 1);
+        sleep(sleepTime);
+
+//        Bot.rotateLeft(0.4, 2.8);
+//        sleep(sleepTime);
+//
+//        Bot.strafeRight(0.5, 0.25);
+//        sleep(sleepTime);
+//
+//        Bot.driveForward_PID(0.4, 1.75);
+//        sleep(sleepTime);
+//
+//        Bot.retractGrabberLift(0.3);
+//        sleep(400);
+//        Bot.stopGrabberLift();
+//        sleep(sleepTime);
+//
+//        Bot.driveForward_PID(0.3, 0.3);
+//        sleep(sleepTime);
+//
+//        Bot.closeGrabberArms();
+//        sleep(sleepTime);
+//
+//        Bot.extendGrabberLift(0.7);
+//        sleep(800);
+//        Bot.stopGrabberLift();
+//        sleep(sleepTime);
 
 
     }
