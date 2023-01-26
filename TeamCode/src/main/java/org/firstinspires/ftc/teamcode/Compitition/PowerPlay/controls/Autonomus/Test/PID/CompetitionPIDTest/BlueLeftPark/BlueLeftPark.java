@@ -4,17 +4,16 @@ import org.firstinspires.ftc.teamcode.Compitition.PowerPlay.Robots.CompetionBot;
 import org.firstinspires.ftc.teamcode.Compitition.PowerPlay.Robots.StraferBot;
 import org.firstinspires.ftc.teamcode.Compitition.PowerPlay.controls.Autonomus.Test.PID.CompetitionPIDTest.AutoMain;
 import org.firstinspires.ftc.teamcode.Compitition.PowerPlay.controls.Autonomus.Test.PID.CompetitionPIDTest.AutoTargetZone;
-import org.firstinspires.ftc.teamcode.Compitition.PowerPlay.controls.Autonomus.Test.PID.PIDTest;
 
 public abstract class BlueLeftPark extends AutoMain {
     public void parkplace (CompetionBot Bot, AutoTargetZone target) throws InterruptedException{
         switch (target) {
             case A:
 
-                blueleftStack_PIDtest(Bot);
+                blueLeftStack_PIDtest(Bot);
                 sleep(sleepTime);
 
-                Bot.strafeLeft_PID(0.4, 2.75);
+                Bot.strafeLeft_PID(0.4, 2.9);
                 sleep(sleepTime);
 
                 Bot.driveBackward_PID(0.4, 0.3);
@@ -24,7 +23,7 @@ public abstract class BlueLeftPark extends AutoMain {
 
             case B:
 
-                blueleftStack_PIDtest(Bot);
+                blueLeftStack_PIDtest(Bot);
                 sleep(sleepTime);
 
                 Bot.driveBackward_PID(0.4, 0.3);
@@ -34,10 +33,10 @@ public abstract class BlueLeftPark extends AutoMain {
 
             case C:
 
-                blueleftStack_PIDtest(Bot);
+                blueLeftStack_PIDtest(Bot);
                 sleep(sleepTime);
 
-                Bot.strafeRight_PID(0.4, 2.5);
+                Bot.strafeRight_PID(0.4, 2.75);
                 sleep(sleepTime);
 
                 Bot.driveBackward_PID(0.4, 0.3);
@@ -47,7 +46,7 @@ public abstract class BlueLeftPark extends AutoMain {
 
             case None:
 
-                blueleftStack_PIDtest(Bot);
+                blueLeftStack_PIDtest(Bot);
                 sleep(sleepTime);
 
                 Bot.driveBackward_PID(0.4, 0.3);
@@ -163,26 +162,26 @@ public abstract class BlueLeftPark extends AutoMain {
 
     // CODE BELOW IS WHAT NEEDS TO BE CHANGED FOR TESTING PID AUTONOMOUS FOR LEAGUE CHAMPIONSHIP!
 
-    public void blueleftStack_PIDtest (CompetionBot Bot) {
+    public void blueLeftStack_PIDtest(CompetionBot Bot) {
 
-        Bot.driveForward_PID(0.5,5.1);
+        Bot.driveForward_PID(0.6,5.1);
         sleep(sleepTime);
 
-        Bot.rotateRight(0.3, 1);
+        Bot.rotateRight(0.2, 1);
         sleep(sleepTime);
 
-        Bot.gyroCorrection(0.15, -45);
+        Bot.gyroCorrection(0.2, -45);
         sleep(sleepTime);
 
-        Bot.driveForward_PID(0.4, 0.15);
-        sleep(sleepTime);
+//        Bot.driveForward_PID(0.6, 0.15);
+//        sleep(sleepTime);
 
-        Bot.extendGrabberLift(0.95);
-        sleep(3250);
+        Bot.extendGrabberLift(1);
+        sleep(3700);
         Bot.extendGrabberLift(0.4);
         sleep(sleepTime);
 
-        Bot.driveForward_PID(0.1, 0.3);
+        Bot.driveForward_PID(0.2, 0.25);
         sleep(sleepTime);
 
         Bot.openGrabberArms();
@@ -195,7 +194,7 @@ public abstract class BlueLeftPark extends AutoMain {
         sleep(sleepTime);
 
         Bot.retractGrabberLift(0.4);
-        sleep(1500);
+        sleep(1700);
 
         Bot.stopGrabberLift();
 

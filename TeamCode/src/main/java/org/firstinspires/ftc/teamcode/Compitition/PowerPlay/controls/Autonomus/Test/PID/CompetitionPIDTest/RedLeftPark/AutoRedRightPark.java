@@ -6,7 +6,6 @@ import com.qualcomm.robotcore.eventloop.opmode.Disabled;
 import org.firstinspires.ftc.teamcode.Compitition.PowerPlay.Robots.CompetionBot;
 import org.firstinspires.ftc.teamcode.Compitition.PowerPlay.Robots.StraferBot;
 import org.firstinspires.ftc.teamcode.Compitition.PowerPlay.controls.Autonomus.Test.PID.CompetitionPIDTest.AutoTargetZone;
-@Disabled
 @Autonomous (name = "Detection - Blue Right || Red Right (PID TEST - DONT USE IN COMP)")
 public class AutoRedRightPark extends RedRightPark {
 
@@ -61,15 +60,25 @@ public class AutoRedRightPark extends RedRightPark {
 
             if (isCompetition == true) {
 
+                Bot.extendGrabberLift(0.6);
+
+                sleep(125);
+
+                Bot.stopGrabberLift();
+
+                sleep(sleepTime);
+
                 Bot.closeGrabberArms();
 
                 sleep(1000);
 
-                Bot.extendGrabberLift(0.5);
+                Bot.extendGrabberLift(.8);
 
-                sleep(275);
+                sleep(600);
 
                 Bot.stopGrabberLift();
+
+                Bot.extendGrabberLift(0.4);
 
             }
 

@@ -49,9 +49,10 @@ public class CompetionBot extends MecanumDrive {
             bigConeSucker.setDirection(CRServo.Direction.FORWARD);
 
             frontLeftMotor = hardwareMap.get(DcMotorEx.class, "front_left_motor");
-        frontRightMotor = hardwareMap.get(DcMotorEx.class, "front_right_motor");
-        rearLeftMotor = hardwareMap.get(DcMotorEx.class, "rear_left_motor");
-        rearRightMotor = hardwareMap.get(DcMotorEx.class, "rear_right_motor");
+            frontRightMotor = hardwareMap.get(DcMotorEx.class, "front_right_motor");
+            rearLeftMotor = hardwareMap.get(DcMotorEx.class, "rear_left_motor");
+            rearRightMotor = hardwareMap.get(DcMotorEx.class, "rear_right_motor");
+
 //            frontLeftMotor=hwBot.dcMotor.get("front_left_motor");
 //            frontRightMotor=hwBot.dcMotor.get("front_right_motor");
 //            rearLeftMotor=hwBot.dcMotor.get("rear_left_motor");
@@ -77,11 +78,11 @@ public class CompetionBot extends MecanumDrive {
 //            frontRightMotor.setPositionPIDFCoefficients(1);
 //            rearRightMotor.setPositionPIDFCoefficients(1);
 //            rearLeftMotor.setPositionPIDFCoefficients(1);
-
-//            frontLeftMotor.setVelocityPIDFCoefficients(1,1,1,1);
-//            frontLeftMotor.setVelocityPIDFCoefficients(1,1,1,1);
-//            frontLeftMotor.setVelocityPIDFCoefficients(1,1,1,1);
-//            frontLeftMotor.setVelocityPIDFCoefficients(1,1,1,1);
+//
+//            frontLeftMotor.setVelocityPIDFCoefficients(0.8,0.4,1,1);
+//            frontRightMotor.setVelocityPIDFCoefficients(0.8,0.4,1,1);
+//            rearRightMotor.setVelocityPIDFCoefficients(0.8,0.4,1,1);
+//            rearLeftMotor.setVelocityPIDFCoefficients(0.8,0.4,1,1);
 
 
         BNO055IMU.Parameters parametersimu = new BNO055IMU.Parameters();
