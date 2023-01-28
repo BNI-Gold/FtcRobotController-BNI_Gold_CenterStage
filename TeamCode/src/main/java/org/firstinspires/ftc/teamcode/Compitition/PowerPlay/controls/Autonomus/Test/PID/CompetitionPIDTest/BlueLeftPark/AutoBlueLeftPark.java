@@ -6,7 +6,7 @@ import org.firstinspires.ftc.teamcode.Compitition.PowerPlay.Robots.CompetionBot;
 import org.firstinspires.ftc.teamcode.Compitition.PowerPlay.Robots.StraferBot;
 import org.firstinspires.ftc.teamcode.Compitition.PowerPlay.controls.Autonomus.Test.PID.CompetitionPIDTest.AutoTargetZone;
 
-@Autonomous (name = "Detection - Blue Left || Red Left (PID TEST - DONT USE IN COMP)")
+@Autonomous (name = "Detection - Blue Left || Red Left (P.I.D)")
 public class AutoBlueLeftPark extends BlueLeftPark {
 
     public CompetionBot Bot = new CompetionBot();

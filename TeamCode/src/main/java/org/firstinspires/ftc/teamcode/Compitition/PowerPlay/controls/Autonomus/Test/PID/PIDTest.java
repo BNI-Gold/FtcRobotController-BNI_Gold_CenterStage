@@ -7,7 +7,7 @@ import com.qualcomm.robotcore.hardware.DcMotor;
 import org.firstinspires.ftc.teamcode.Compitition.PowerPlay.Robots.CompetionBot;
 import org.firstinspires.ftc.teamcode.Outreach.OutreachRanger.Robots.OutreachRangerBot;
 
-@Autonomous (name = "PID Test 1", group = "1")
+@Autonomous (name = "lets win this tournament! i love programming!!!", group = "1")
 
 public class PIDTest extends BlueCarousel {
 
@@ -27,20 +27,20 @@ public class PIDTest extends BlueCarousel {
 
         while (opModeIsActive()) {
 
-            Bot.driveForward_PID(.5,9);
-            sleep(sleepTime);
-
-//            Bot.strafeRight_PID(0.5,0.5);
+//            Bot.driveForward_PID(.5,9);
 //            sleep(sleepTime);
 //
-//            Bot.strafeLeft_PID(0.5,0.5);
+////            Bot.strafeRight_PID(0.5,0.5);
+////            sleep(sleepTime);
+////
+////            Bot.strafeLeft_PID(0.5,0.5);
+////            sleep(sleepTime);
+//
+//            Bot.driveBackward_PID(0.5, 9);
 //            sleep(sleepTime);
-
-            Bot.driveBackward_PID(0.5, 9);
-            sleep(sleepTime);
-
-            idle();
-            requestOpModeStop();
+//
+//            idle();
+//            requestOpModeStop();
 
         }
         idle();

@@ -6,7 +6,7 @@ import com.qualcomm.robotcore.eventloop.opmode.Disabled;
 import org.firstinspires.ftc.teamcode.Compitition.PowerPlay.Robots.CompetionBot;
 import org.firstinspires.ftc.teamcode.Compitition.PowerPlay.Robots.StraferBot;
 import org.firstinspires.ftc.teamcode.Compitition.PowerPlay.controls.Autonomus.Test.PID.CompetitionPIDTest.AutoTargetZone;
-@Autonomous (name = "Detection - Blue Right || Red Right (PID TEST - DONT USE IN COMP)")
+@Autonomous (name = "Detection - Blue Right || Red Right (P.I.D)")
 public class AutoRedRightPark extends RedRightPark {
 
     public CompetionBot Bot = new CompetionBot();

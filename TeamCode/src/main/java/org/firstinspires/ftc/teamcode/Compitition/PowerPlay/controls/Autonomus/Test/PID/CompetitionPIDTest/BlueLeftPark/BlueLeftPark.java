@@ -13,7 +13,7 @@ public abstract class BlueLeftPark extends AutoMain {
                 blueLeftStack_PIDtest(Bot);
                 sleep(sleepTime);
 
-                Bot.strafeLeft_PID(0.4, 2.9);
+                Bot.strafeLeft_PID(0.4, 2.55);
                 sleep(sleepTime);
 
                 Bot.driveBackward_PID(0.4, 0.3);
@@ -170,7 +170,7 @@ public abstract class BlueLeftPark extends AutoMain {
         Bot.rotateRight(0.2, 1);
         sleep(sleepTime);
 
-        Bot.gyroCorrection(0.2, -45);
+        Bot.gyroCorrection(0.2, -44);
         sleep(sleepTime);
 
 //        Bot.driveForward_PID(0.6, 0.15);
@@ -184,7 +184,13 @@ public abstract class BlueLeftPark extends AutoMain {
         Bot.driveForward_PID(0.2, 0.25);
         sleep(sleepTime);
 
+        Bot.stopGrabberLift();
+        sleep(1200);
+
         Bot.openGrabberArms();
+        sleep(sleepTime * 2);
+
+        Bot.extendGrabberLift(0.4);
         sleep(sleepTime);
 
         Bot.driveBackward_PID(0.2, 0.6);
@@ -194,9 +200,10 @@ public abstract class BlueLeftPark extends AutoMain {
         sleep(sleepTime);
 
         Bot.retractGrabberLift(0.4);
-        sleep(1700);
+        sleep(1500);
 
         Bot.stopGrabberLift();
+        sleep(sleepTime);
 
         Bot.driveBackward_PID(0.3, 0.1);
         sleep(sleepTime);

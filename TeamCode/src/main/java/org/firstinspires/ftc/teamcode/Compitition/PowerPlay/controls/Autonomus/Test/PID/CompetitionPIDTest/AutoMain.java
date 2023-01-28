@@ -161,6 +161,7 @@ public abstract class AutoMain extends LinearOpMode {
     public void parkingTelemetry() {
         telemetry.addData("Tag ID: ", tagOfInterest.id);
         telemetry.addData("Parking Location: ", TargetZone);
+        telemetry.addData("LETS GET THIS W | GO BNI", null);
     }
 
     // Method for Full Telemetry including Tag ID, XYZ Translation and Rotation
