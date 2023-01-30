@@ -13,7 +13,7 @@ public abstract class BlueLeftPark extends AutoMain {
                 blueLeftStack_PIDtest(Bot);
                 sleep(sleepTime);
 
-                Bot.strafeLeft_PID(0.4, 2.55);
+                Bot.strafeLeft_PID(0.4, 2.5);
                 sleep(sleepTime);
 
                 Bot.driveBackward_PID(0.4, 0.3);
@@ -181,7 +181,7 @@ public abstract class BlueLeftPark extends AutoMain {
         Bot.extendGrabberLift(0.4);
         sleep(sleepTime);
 
-        Bot.driveForward_PID(0.2, 0.25);
+        Bot.driveForward_PID(0.2, 0.5);
         sleep(sleepTime);
 
         Bot.stopGrabberLift();

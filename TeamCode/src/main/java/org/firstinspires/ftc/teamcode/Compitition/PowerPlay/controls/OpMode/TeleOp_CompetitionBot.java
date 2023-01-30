@@ -3,8 +3,6 @@ package org.firstinspires.ftc.teamcode.Compitition.PowerPlay.controls.OpMode;
 import com.qualcomm.robotcore.eventloop.opmode.OpMode;
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 import com.qualcomm.robotcore.hardware.DcMotor;
-import com.qualcomm.robotcore.hardware.DcMotorEx;
-import com.qualcomm.robotcore.hardware.DcMotorSimple;
 import com.qualcomm.robotcore.util.Range;
 
 import org.firstinspires.ftc.teamcode.Compitition.PowerPlay.Robots.CompetionBot;
@@ -27,6 +25,8 @@ public class TeleOp_CompetitionBot extends OpMode {
 
     boolean driveNormal = true;
 
+    boolean turretSlowMode = false;
+
     int turretClockwise = 410;
     int turretCounterclocwise = -405;
 
@@ -48,31 +48,13 @@ public class TeleOp_CompetitionBot extends OpMode {
     double liftPowerUp = 1.0;
     double liftPowerDown = 0.2;
 
+    double turretSpeedMultiply = 0.45;
+
     public CompetionBot Bot = new CompetionBot();
 
     @Override
     public void init() {
         Bot.initRobot(hardwareMap);
-
-//            Bot.grabberLiftOne = hardwareMap.get(DcMotorEx.class, "grabber_lift_one");
-//            Bot.grabberLiftOne.setDirection(DcMotorSimple.Direction.FORWARD);
-//            Bot.grabberLiftOne.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
-//            Bot.grabberLiftOne.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
-//            Bot.grabberLiftOne.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
-//            //Bot.grabberLiftOne.setPositionPIDFCoefficients(5);
-//
-//            Bot.grabberLiftTwo = hardwareMap.get(DcMotorEx.class, "grabber_lift_two");
-//            Bot.grabberLiftTwo.setDirection(DcMotorSimple.Direction.REVERSE);
-//            Bot.grabberLiftTwo.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
-//            Bot.grabberLiftTwo.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
-//            Bot.grabberLiftTwo.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
-//            //Bot.grabberLiftTwo.setPositionPIDFCoefficients(5);
-//
-//            Bot.turretPlatform = hardwareMap.get(DcMotorEx.class,"turret_motor");
-//            Bot.turretPlatform.setDirection(DcMotorSimple.Direction.REVERSE);
-//            Bot.turretPlatform.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
-//            Bot.turretPlatform.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
-//            Bot.turretPlatform.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
 
 
     }
@@ -99,13 +81,29 @@ public class TeleOp_CompetitionBot extends OpMode {
             driveButton();
         }
 
+        if (gamepad2.left_trigger >= 0.2) {
+
+            turretSlowMode = true;
+
+        } else {
+
+            turretSlowMode = false;
+
+        }
+
         grabberArmControl();
-        grabberArmControlBumper();
+
+        liftControlManual();
+        turretControlManual();
+
+        turretSpeed();
+
         updateTelemetry();
-        //turretMechanism();
-        //liftMechanism();
-        //liftMechanismEncoder();
-        //liftControl();
+
+//        liftControlEncoder();
+//        turretControlEncoder();
+//
+//        liftMechanismEncoder();
 
     }
 
@@ -122,26 +120,18 @@ public class TeleOp_CompetitionBot extends OpMode {
 
     }
 
-    public void liftMechanism () {
-        if (gamepad2.left_stick_y >= 0.15) {
-            leftStickYVal = gamepad2.left_stick_y;
-            Bot.grabberLiftOne.setPower(-leftStickYVal);
-            Bot.grabberLiftTwo.setPower(-leftStickYVal);
-        }
-        else if (gamepad2.left_stick_y <= -0.15) {
-            leftStickYVal = gamepad2.left_stick_y;
-            Bot.grabberLiftOne.setPower(leftStickYVal);
-            Bot.grabberLiftTwo.setPower(leftStickYVal);
-        }
-        else {
-            if (Bot.grabberLiftOne.getCurrentPosition() > 500) {
-                Bot.grabberLiftOne.setPower(0.1);
-            }
-            else {
-                Bot.grabberLiftOne.setPower(0);
-            }
+    public void turretSpeed () {
+
+        if (turretSlowMode = true) {
+
+            turretSpeedMultiply = 0.3;
+
+        } else {
+
+            turretSpeedMultiply = 0.55;
 
         }
+
     }
 
     public void liftMechanismEncoder () {
@@ -152,44 +142,70 @@ public class TeleOp_CompetitionBot extends OpMode {
                 case 0:
                     if (Bot.grabberLiftOne.getCurrentPosition() > liftRest) {
                         Bot.grabberLiftOne.setPower(liftPowerDown);
+                        Bot.grabberLiftTwo.setPower(liftPowerDown);
                     }
                     else {
                         Bot.grabberLiftOne.setPower(liftPowerUp);
+                        Bot.grabberLiftTwo.setPower(liftPowerUp);
                     }
                     Bot.grabberLiftOne.setTargetPosition(liftRest);
                     Bot.grabberLiftOne.setMode(DcMotor.RunMode.RUN_TO_POSITION);
+
+                    Bot.grabberLiftTwo.setTargetPosition(liftRest);
+                    Bot.grabberLiftTwo.setMode(DcMotor.RunMode.RUN_TO_POSITION);
+
                     break;
+
                 case 1:
                     if (Bot.grabberLiftOne.getCurrentPosition() > liftLow) {
                         Bot.grabberLiftOne.setPower(liftPowerDown);
+                        Bot.grabberLiftTwo.setPower(liftPowerDown);
                     }
                     else {
                         Bot.grabberLiftOne.setPower(liftPowerUp);
+                        Bot.grabberLiftTwo.setPower(liftPowerUp);
                     }
                     Bot.grabberLiftOne.setTargetPosition(liftLow);
                     Bot.grabberLiftOne.setMode(DcMotor.RunMode.RUN_TO_POSITION);
+
+                    Bot.grabberLiftTwo.setTargetPosition(liftLow);
+                    Bot.grabberLiftTwo.setMode(DcMotor.RunMode.RUN_TO_POSITION);
+
                     break;
+
                 case 2:
                     if (Bot.grabberLiftOne.getCurrentPosition() > liftMid) {
                         Bot.grabberLiftOne.setPower(liftPowerDown);
+                        Bot.grabberLiftTwo.setPower(liftPowerDown);
                     }
                     else {
                         Bot.grabberLiftOne.setPower(liftPowerUp);
+                        Bot.grabberLiftTwo.setPower(liftPowerUp);
                     }
                     Bot.grabberLiftOne.setTargetPosition(liftMid);
                     Bot.grabberLiftOne.setMode(DcMotor.RunMode.RUN_TO_POSITION);
+
+                    Bot.grabberLiftTwo.setTargetPosition(liftMid);
+                    Bot.grabberLiftTwo.setMode(DcMotor.RunMode.RUN_TO_POSITION);
+
                     break;
+
                 case 3:
                     Bot.grabberLiftOne.setPower(liftPowerUp);
                     Bot.grabberLiftOne.setTargetPosition(liftHigh);
                     Bot.grabberLiftOne.setMode(DcMotor.RunMode.RUN_TO_POSITION);
+
+                    Bot.grabberLiftTwo.setPower(liftPowerUp);
+                    Bot.grabberLiftTwo.setTargetPosition(liftHigh);
+                    Bot.grabberLiftTwo.setMode(DcMotor.RunMode.RUN_TO_POSITION);
+
                 default:
                     break;
             }
         }
     }
 
-    public void liftControl () {
+    public void liftControlEncoder() {
         if (gamepad2.b == true && liftLevelAllow == true) {
             if (liftLevel < 3) {
                 liftLevel += 1;
@@ -225,22 +241,22 @@ public class TeleOp_CompetitionBot extends OpMode {
 //
 //        }
 
-        if (gamepad2.x) {
+        if (gamepad2.a) {
 
             Bot.coneIntake();
             Bot.intakeGrabberArms();
 
-        } else if (gamepad2.a) {
+        } else if (gamepad2.y) {
 
             Bot.coneOuttake();
             Bot.intakeGrabberArms();
 
-        } else if (gamepad2.b) {
+        } else if (gamepad2.x) {
 
             Bot.closeGrabberArms();
             Bot.intakeStop();
 
-        } else if (gamepad2.y) {
+        } else if (gamepad2.b) {
 
             Bot.intakeStop();
             Bot.openGrabberArms();
@@ -249,24 +265,12 @@ public class TeleOp_CompetitionBot extends OpMode {
 
     }
 
-    public void grabberArmControlBumper() {
+    public void liftControlManual() {
 
         if (gamepad2.left_stick_y >= 0.1) {
 
             leftStickYVal = gamepad2.left_stick_y;
-            Bot.retractGrabberLift(leftStickYVal * .7);
-
-            /*
-            "idea for encoder stop"
-            if grabberLiftExtnd.encoder <= number{
-            grabberLiftExtnd(power = 0 or brake power)
-
-            "gravity should bring it down. if not"
-
-            grabberLiftRetract(power = 0.05 or 0.1)
-
-            use same principles for retract
-             */
+            Bot.retractGrabberLift(leftStickYVal * .65);
 
         } else if (gamepad2.left_stick_y <= -0.1) {
 
@@ -279,15 +283,19 @@ public class TeleOp_CompetitionBot extends OpMode {
 
         }
 
+    }
+
+    public void turretControlManual () {
+
         if (gamepad2.right_stick_x >= 0.15) {
 
             rightStickXVal = gamepad2.right_stick_x;
-            Bot.turretClockwise(rightStickXVal * 0.75);
+            Bot.turretClockwise(rightStickXVal * turretSpeedMultiply);
 
         } else if (gamepad2.right_stick_x <= -0.15) {
 
             rightStickXVal = gamepad2.right_stick_x;
-            Bot.turretCounterClockwise(-rightStickXVal * 0.75);
+            Bot.turretCounterClockwise(-rightStickXVal * turretSpeedMultiply);
 
         } else {
 
@@ -297,7 +305,7 @@ public class TeleOp_CompetitionBot extends OpMode {
 
     }
 
-    public void turretMechanism () {
+    public void turretControlEncoder() {
         int currentTurretEncoder = Bot.turretPlatform.getCurrentPosition();
 
         //

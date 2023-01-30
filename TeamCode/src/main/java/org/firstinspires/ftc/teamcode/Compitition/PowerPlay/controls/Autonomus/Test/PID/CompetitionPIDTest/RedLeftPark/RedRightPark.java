@@ -37,7 +37,7 @@ public abstract class RedRightPark extends AutoMain {
                 blueRightStack_PIDtest(Bot);
                 sleep(sleepTime);
 
-                Bot.strafeRight_PID(0.4, 2.5);
+                Bot.strafeRight_PID(0.4, 2.4);
                 sleep(sleepTime);
 
                 Bot.driveBackward_PID(0.4, 0.3);
@@ -165,13 +165,13 @@ public abstract class RedRightPark extends AutoMain {
 
     public void blueRightStack_PIDtest (CompetionBot Bot) {
 
-        Bot.driveForward_PID(0.6,5.35);
+        Bot.driveForward_PID(0.6,5.2);
         sleep(sleepTime);
 
         Bot.rotateLeft(0.2, 0.9);
         sleep(sleepTime);
 
-        Bot.gyroCorrection(0.2, 42);
+        Bot.gyroCorrection(0.2, 44);
         sleep(sleepTime);
 
 //        Bot.driveForward_PID(0.6, 0.15);
@@ -183,7 +183,7 @@ public abstract class RedRightPark extends AutoMain {
         Bot.extendGrabberLift(0.4);
         sleep(sleepTime);
 
-        Bot.driveForward_PID(0.2, 0.62);
+        Bot.driveForward_PID(0.2, 0.52);
         sleep(sleepTime);
 
         Bot.stopGrabberLift();
@@ -211,6 +211,9 @@ public abstract class RedRightPark extends AutoMain {
         sleep(sleepTime);
 
         Bot.rotateRight(0.4, 1);
+        sleep(sleepTime);
+
+        Bot.gyroCorrection(0.2, 0);
         sleep(sleepTime);
 
 //        Bot.rotateLeft(0.4, 2.8);
