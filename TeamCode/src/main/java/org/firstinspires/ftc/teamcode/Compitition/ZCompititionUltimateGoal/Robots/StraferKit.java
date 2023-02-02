@@ -19,9 +19,9 @@ import org.firstinspires.ftc.robotcore.internal.system.Deadline;
 import org.firstinspires.ftc.teamcode.Compitition.ZCompititionUltimateGoal.DriveTrains.MecanumDrive;
 
 public class StraferKit extends MecanumDrive {
-    public HardwareMap hwBot  =  null;
+    public HardwareMap hwBot = null;
 
-    public Servo flag = null;
+//    public Servo flag = null;
 
 //GYRO INITIALIZATION
 
@@ -96,7 +96,7 @@ public class StraferKit extends MecanumDrive {
     public StraferKit() {
 
     }
-    public void initRobot(HardwareMap hwMap, String startPosition, String mode){
+    public void initRobot(HardwareMap hwMap){
         hwBot = hwMap;
         /*
         WobbleArm = hwBot.get(Servo.class, "wobble_arm");
@@ -180,8 +180,8 @@ public class StraferKit extends MecanumDrive {
         rearRightMotor.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
         rearLeftMotor.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
 
-        flag = hwBot.get(Servo.class,"flag");
-        flag.setDirection(Servo.Direction.FORWARD);
+//        flag = hwBot.get(Servo.class,"flag");
+//        flag.setDirection(Servo.Direction.FORWARD);
 
         // Define and Initialize Gyro
         BNO055IMU.Parameters parametersimu = new BNO055IMU.Parameters();
@@ -201,22 +201,22 @@ public class StraferKit extends MecanumDrive {
 
     }
 
-    public void raiseFlag() {
-        flag.setPosition(0.5);
-    }
-    public void lowerFlag() {
-        flag.setPosition(0.9);
-    }
-
-    public void initFlag() {
-        flag.setPosition(0.2);
-    }
-    public void waveFlagRight() {
-        flag.setPosition(0.399);
-    }
-    public void waveFlagLeft() {
-        flag.setPosition(0.711);
-    }
+//    public void raiseFlag() {
+//        flag.setPosition(0.5);
+//    }
+//    public void lowerFlag() {
+//        flag.setPosition(0.9);
+//    }
+//
+//    public void initFlag() {
+//        flag.setPosition(0.2);
+//    }
+//    public void waveFlagRight() {
+//        flag.setPosition(0.399);
+//    }
+//    public void waveFlagLeft() {
+//        flag.setPosition(0.711);
+//    }
 
     public void initCamera () {
 //        int cameraMonitorViewId = hwBot.appContext.getResources().getIdentifier("cameraMonitorViewId", "id", hwBot.appContext.getPackageName());

@@ -3,20 +3,38 @@ package org.firstinspires.ftc.teamcode.Compitition.ZCompititionUltimateGoal.Cont
 import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
 import com.qualcomm.robotcore.eventloop.opmode.Disabled;
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
+import com.qualcomm.robotcore.hardware.HardwareMap;
 
 import org.firstinspires.ftc.teamcode.Compitition.ZCompititionUltimateGoal.Robots.StraferKit;
 @Autonomous (name = "Strafer Auto")
-@Disabled
 public class StraferAuto extends LinearOpMode {
 
-    public StraferKit Bot = new StraferKit();
+    int sleepTime = 250;
+
+    StraferKit Bot = new StraferKit();
+
     @Override
     public void runOpMode() throws InterruptedException {
-//        Bot.frontLeftMotor.setPower(1);
-//        Bot.frontRightMotor.setPower(1);
-//        Bot.rearLeftMotor.setPower(1);
-//        Bot.rearRightMotor.setPower(1);
-//        sleep(1000);
-//        requestOpModeStop();
+
+        Bot.initRobot(hardwareMap);
+        Bot.setLinearOp(this);
+
+        waitForStart();
+
+        while (opModeIsActive()) {
+
+            Bot.driveGyroForward(0.5, 3);
+            sleep(sleepTime);
+
+            Bot.driveGyroBackward(0.5, 3);
+            sleep(sleepTime);
+
+            requestOpModeStop();
+
+        }
+
+        idle();
+
     }
+
 }

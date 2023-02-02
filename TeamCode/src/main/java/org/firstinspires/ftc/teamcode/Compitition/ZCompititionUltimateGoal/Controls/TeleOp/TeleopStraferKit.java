@@ -31,8 +31,8 @@ public class TeleopStraferKit extends OpMode{
 
     @Override
     public void init() {
-        Bot.initRobot(hardwareMap, "BlueLeft",  "Auto");
-        Bot.lowerFlag();
+        Bot.initRobot(hardwareMap);
+//        Bot.lowerFlag();
 
     }
     @Override
@@ -44,7 +44,7 @@ public class TeleopStraferKit extends OpMode{
     @Override
     public void loop() {
         drive();
-        flagControl();
+//        flagControl();
 
     }
     @Override
@@ -101,18 +101,18 @@ public class TeleopStraferKit extends OpMode{
         }
     }
 
-    public void flagControl() {
-        if (gamepad1.y) {
-            Bot.raiseFlag();
-        }
-        else if (gamepad1.a) {
-            Bot.lowerFlag();
-        }
-        else if (gamepad1.b) {
-            Bot.waveFlagRight();
-        }
-        else if (gamepad1.x) {
-            Bot.waveFlagLeft();
-        }
-    }
+//    public void flagControl() {
+//        if (gamepad1.y) {
+//            Bot.raiseFlag();
+//        }
+//        else if (gamepad1.a) {
+//            Bot.lowerFlag();
+//        }
+//        else if (gamepad1.b) {
+//            Bot.waveFlagRight();
+//        }
+//        else if (gamepad1.x) {
+//            Bot.waveFlagLeft();
+//        }
+//    }
 }
