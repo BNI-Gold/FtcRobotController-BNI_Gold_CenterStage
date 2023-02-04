@@ -1,4 +1,4 @@
-package org.firstinspires.ftc.teamcode.Compitition.PowerPlay.controls.Autonomus.Test.PID.CompetitionPIDTest;
+package org.firstinspires.ftc.teamcode.Compitition.PowerPlay.controls.Autonomus.Test.GyroDriveTest;
 
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 
@@ -161,10 +161,7 @@ public abstract class AutoMain extends LinearOpMode {
     public void parkingTelemetry() {
         telemetry.addData("Tag ID: ", tagOfInterest.id);
         telemetry.addData("Parking Location: ", TargetZone);
-        telemetry.addData("'Don't aspire to be the best on the team. Aspire to be the best for the team' -Ngan Tengyuen", null);
-
-        telemetry.addLine("'i like cereal, i like frosted flakes' -Yeat, -2022");
-
+        telemetry.addData("LETS GET THIS W | GO BNI", null);
     }
 
     // Method for Full Telemetry including Tag ID, XYZ Translation and Rotation

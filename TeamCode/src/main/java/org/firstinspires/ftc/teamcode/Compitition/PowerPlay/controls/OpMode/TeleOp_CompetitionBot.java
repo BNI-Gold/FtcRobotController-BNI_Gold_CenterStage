@@ -10,7 +10,10 @@ import org.firstinspires.ftc.teamcode.Compitition.PowerPlay.Robots.CompetionBot;
 @TeleOp (name = "Colonel Clap",group = "1")
 
 public class TeleOp_CompetitionBot extends OpMode {
-    
+
+    // (toggles between telemetry for encoders and a big BNI logo!)
+    boolean showSeriousTelemetry = false;
+
     double leftStickYVal;
     double leftStickXVal;
     double rightStickXVal;
@@ -21,11 +24,15 @@ public class TeleOp_CompetitionBot extends OpMode {
     double rearRightSpeed;
 
     double powerThreshold = 0;
+
+    // below var is used for driver 1's slow mode
     double speedMultiply = 1;
 
     boolean driveNormal = true;
 
     boolean turretSlowMode = false;
+
+    boolean driveSlowMode = false;
 
     int turretClockwise = 410;
     int turretCounterclocwise = -405;
@@ -48,48 +55,31 @@ public class TeleOp_CompetitionBot extends OpMode {
     double liftPowerUp = 1.0;
     double liftPowerDown = 0.2;
 
-    double turretSpeedMultiply = 0.45;
+    double turretSpeedMultiply = 0.55;
 
     public CompetionBot Bot = new CompetionBot();
 
     @Override
     public void init() {
-        Bot.initRobot(hardwareMap);
 
+        Bot.initRobot(hardwareMap);
 
     }
 
     @Override
     public void init_loop() {
+
     }
 
     @Override
     public void start() {
+
     }
 
     @Override
     public void loop() {
-        if (gamepad1.right_bumper) {
-            driveNormal = true;
-        }
-        if (gamepad1.left_bumper) {
-            driveNormal = false;
-        }
-        if (driveNormal) {
-            drive();
-        } else if (!driveNormal) {
-            driveButton();
-        }
 
-        if (gamepad2.left_trigger >= 0.2) {
-
-            turretSlowMode = true;
-
-        } else {
-
-            turretSlowMode = false;
-
-        }
+        driveNormal = true;
 
         grabberArmControl();
 
@@ -97,6 +87,10 @@ public class TeleOp_CompetitionBot extends OpMode {
         turretControlManual();
 
         turretSpeed();
+        turretSlowModeControl();
+
+        driveSpeed();
+        driveSlowModeControl();
 
         updateTelemetry();
 
@@ -109,22 +103,93 @@ public class TeleOp_CompetitionBot extends OpMode {
 
     public void updateTelemetry() {
 
-        telemetry.addData("Turret Encoder Position: ", Bot.turretPlatform.getCurrentPosition());
-        telemetry.addData("Lift One Encoder Position: ", Bot.grabberLiftOne.getCurrentPosition());
-        telemetry.addData("Lift Two Encoder Position: ", Bot.grabberLiftTwo.getCurrentPosition());
-        telemetry.addData("leftFront", Bot.frontLeftMotor.getCurrentPosition());
-        telemetry.addData("leftRear", Bot.rearLeftMotor.getCurrentPosition());
-        telemetry.addData("rightFront", Bot.frontRightMotor.getCurrentPosition());
-        telemetry.addData("rightRear", Bot.rearRightMotor.getCurrentPosition());
+        if (showSeriousTelemetry == true) {
 
+            telemetry.addLine("Encoder Values: ");
+
+            telemetry.addData("Turret: ", Bot.turretPlatform.getCurrentPosition());
+
+            telemetry.addData("Lift One: ", Bot.grabberLiftOne.getCurrentPosition());
+            telemetry.addData("Lift Two: ", Bot.grabberLiftTwo.getCurrentPosition());
+
+            telemetry.addData("leftFront: ", Bot.frontLeftMotor.getCurrentPosition());
+            telemetry.addData("leftRear: ", Bot.rearLeftMotor.getCurrentPosition());
+            telemetry.addData("rightFront: ", Bot.frontRightMotor.getCurrentPosition());
+            telemetry.addData("rightRear: ", Bot.rearRightMotor.getCurrentPosition());
+
+        } else {
+
+            telemetry.addLine("::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::\n" +
+                    ":::::::::::::::::::::::::::::::::::::::^::::::::::::::::^::::::^::::::::::::::^:::::::::::::::^:::::\n" +
+                    "::^:^~!!!!!!!!!!!!!!!!!!!!!!!~~^^::::^^^^~!!!!!!!!!!!!~^::^::::^^~!!!!!!!!!!~^:^~!!!!!!!!!!!^:^:::::\n" +
+                    "::::~JPPPPPPPPPPPPPPPPPPPPP55555Y?!^^::^^YPPPPPPPPPPPP5J~::^::::^75PPPPPPPP5?^:^?5PPPPPPPPPY!:^:::::\n" +
+                    "::::~JPPP55555PPPPPPPPPPPPPPPPPPPPPY7^:^^YPP555555555PPPY!^:^:::^75PP5555PP5?^:^?5PP5555PPPY!:^:::::\n" +
+                    "::::~JPP555555PP555555555PPP555555PP57^^^YPP5555555555PPP57^::^:^75P555555P5?^:^?5P5555555PY!:^:::::\n" +
+                    "::^:~JPP555555PPY~^^^^^^~?5PP555555PP?^:^YPP55555555555PPP5J~::^^75P555555P5?^:^?5P5555555PY!:^:::::\n" +
+                    "^^^:~JPP555555PPY~^^^^^^^75PP5555PPP57:^^YPP555555PPPP555PPPY7^:^75P555555P5?^:^?5P5555555PY!:^:::::\n" +
+                    "~:::~JPP555555PP5YYYYYYY55PP55PPP55J!^:^^YPP55555PP555PP555PP5?^^75P555555P5?^:^?5P5555555PY!:^:::::\n" +
+                    "!:::~JPP555555PPPPPPPPPPPPP555PP5J7^:::^^YPP555555PJ!75PP555PP5Y!75P555555P5?^:^?5P5555555PY!:^:::::\n" +
+                    "!:::~JPP555555PP5555555555PPP55PP55Y7~:^^YPP555555PY~^!YPPP55PPP5Y5P555555P5?^:^?5P5555555PY!:^:::::\n" +
+                    "^:::~JPP555555PPY~^^^^^^^!Y5P5555PPPPJ~:^YPP555555PY~:^~J5PP5555PPPP555555P5?^:^?5P5555555PY!:^:::::\n" +
+                    ":^^:~JPP555555P5Y~^^^^^^^~J5P555555PPY!:^YPP555555PY~:^:^75PPP555555555555P5?^:^?5P5555555PY!:^:::::\n" +
+                    "::^:~JPP555555PP5YYYYYYYY55PP55555PPPY~:^YPP555555PY~:^::^!YPP555555555555P5?^:^?5P5555555PY!:^:::::\n" +
+                    "::::~JPP55555555PPPPPPPPPPPP5555PPPPY!^^^YPP555555PY~:^:^::~?5PP5555555555P5?^:^?5P5555555PY!:^:::::\n" +
+                    "::::~JPPPPPPPPPPPPPPPPPPPPPPPPPP55J7~^:^^YPPPPPPPPPY~:^::^^:^75PPPPPPPPPPPP5?^:^?5PPPPPPPPP5!:^:::::\n" +
+                    "::^:^!777777777777777777777777!!~^^:::^^^!777777777!^:^::::^:^~7777777777777!^:^!77777777777~:^:::::\n" +
+                    "::^^::::::::::::::::::::::::::::::::::^^:::::::::::::^:::::::::::::::::::::::^^::::::::::::::^^:::::\n" +
+                    "::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::\n" +
+                    "::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::");
+
+        }
+    }
+
+    public void driveSlowModeControl() {
+
+        if (gamepad1.left_trigger >= 0.2 || gamepad1.right_trigger >= 0.2) {
+
+            driveSlowMode = true;
+
+        } else {
+
+            driveSlowMode = false;
+
+        }
 
     }
 
-    public void turretSpeed () {
+    public void driveSpeed() {
 
-        if (turretSlowMode = true) {
+        if (driveSlowMode == true) {
 
-            turretSpeedMultiply = 0.3;
+            speedMultiply = 0.6;
+
+        } else {
+
+            speedMultiply = 1;
+
+        }
+
+    }
+
+    public void turretSlowModeControl() {
+
+        if (gamepad2.left_trigger >= 0.2) {
+
+            turretSlowMode = true;
+
+        } else {
+
+            turretSlowMode = false;
+
+        }
+
+    }
+
+    public void turretSpeed() {
+
+        if (turretSlowMode == true) {
+
+            turretSpeedMultiply = 0.35;
 
         } else {
 
@@ -134,7 +199,7 @@ public class TeleOp_CompetitionBot extends OpMode {
 
     }
 
-    public void liftMechanismEncoder () {
+    public void liftMechanismEncoder() {
 //        Only go to target position when press 'y'.
 //        Allows P2 to get lift "target" position ready.
         if (gamepad2.left_stick_button) {
@@ -143,8 +208,7 @@ public class TeleOp_CompetitionBot extends OpMode {
                     if (Bot.grabberLiftOne.getCurrentPosition() > liftRest) {
                         Bot.grabberLiftOne.setPower(liftPowerDown);
                         Bot.grabberLiftTwo.setPower(liftPowerDown);
-                    }
-                    else {
+                    } else {
                         Bot.grabberLiftOne.setPower(liftPowerUp);
                         Bot.grabberLiftTwo.setPower(liftPowerUp);
                     }
@@ -160,8 +224,7 @@ public class TeleOp_CompetitionBot extends OpMode {
                     if (Bot.grabberLiftOne.getCurrentPosition() > liftLow) {
                         Bot.grabberLiftOne.setPower(liftPowerDown);
                         Bot.grabberLiftTwo.setPower(liftPowerDown);
-                    }
-                    else {
+                    } else {
                         Bot.grabberLiftOne.setPower(liftPowerUp);
                         Bot.grabberLiftTwo.setPower(liftPowerUp);
                     }
@@ -177,8 +240,7 @@ public class TeleOp_CompetitionBot extends OpMode {
                     if (Bot.grabberLiftOne.getCurrentPosition() > liftMid) {
                         Bot.grabberLiftOne.setPower(liftPowerDown);
                         Bot.grabberLiftTwo.setPower(liftPowerDown);
-                    }
-                    else {
+                    } else {
                         Bot.grabberLiftOne.setPower(liftPowerUp);
                         Bot.grabberLiftTwo.setPower(liftPowerUp);
                     }
@@ -212,15 +274,13 @@ public class TeleOp_CompetitionBot extends OpMode {
             }
             liftLevelAllow = false;
             liftToggle = false;
-        }
-        else if (gamepad2.x == true && liftLevelAllow == true) {
+        } else if (gamepad2.x == true && liftLevelAllow == true) {
             if (liftLevel > 0) {
                 liftLevel -= 1;
             }
             liftToggle = false;
             liftLevelAllow = false;
-        }
-        else {  // The IF here makes it so lift* goes back to default 'false' ONLY when not pressing Trigger.
+        } else {  // The IF here makes it so lift* goes back to default 'false' ONLY when not pressing Trigger.
             if (gamepad2.b == false && gamepad2.x == false) {
                 liftLevelAllow = true;
                 liftToggle = true;
@@ -285,7 +345,7 @@ public class TeleOp_CompetitionBot extends OpMode {
 
     }
 
-    public void turretControlManual () {
+    public void turretControlManual() {
 
         if (gamepad2.right_stick_x >= 0.15) {
 
@@ -344,23 +404,16 @@ public class TeleOp_CompetitionBot extends OpMode {
         else if (turretEncoderCW) {
             if (Bot.turretPlatform.getCurrentPosition() < turretClockwise) {
                 Bot.turretPlatform.setPower(+turretPowerEncoder);
-            }
-            else {
+            } else {
                 turretEncoderCW = false;
             }
-        }
-
-        else if (turretEncoderCCW) {
+        } else if (turretEncoderCCW) {
             if (Bot.turretPlatform.getCurrentPosition() > turretCounterclocwise) {
                 Bot.turretPlatform.setPower(-turretPowerEncoder);
-            }
-            else {
+            } else {
                 turretEncoderCCW = false;
             }
-        }
-
-
-        else if (turretEncoderCollect) {
+        } else if (turretEncoderCollect) {
 //            if (Bot.turretPlatform.getCurrentPosition() > 0) {
 //                if (Bot.turretPlatform.getCurrentPosition() > 0) {
 //                    Bot.turretPlatform.setPower(-turretPowerEncoder);
@@ -383,18 +436,14 @@ public class TeleOp_CompetitionBot extends OpMode {
             if (Bot.turretPlatform.getCurrentPosition() >= 0) {
                 if (Bot.turretPlatform.getCurrentPosition() >= 0) {
                     Bot.turretPlatform.setPower(-turretPowerEncoder);
-                }
-                else {
+                } else {
                     turretEncoderCollect = false;
                 }
 
-            }
-
-            else if (Bot.turretPlatform.getCurrentPosition() < 0) {
+            } else if (Bot.turretPlatform.getCurrentPosition() < 0) {
                 if (Bot.turretPlatform.getCurrentPosition() < 0) {
                     Bot.turretPlatform.setPower(+turretPowerEncoder);
-                }
-                else {
+                } else {
                     turretEncoderCollect = false;
                 }
             }
@@ -404,39 +453,32 @@ public class TeleOp_CompetitionBot extends OpMode {
                 Bot.turretPlatform.setPower(0);
             }
 
-        }
-        else if (turrentEncoder180 == true) {
+        } else if (turrentEncoder180 == true) {
             if (Bot.turretPlatform.getCurrentPosition() >= 0) {
 
-                if (Bot.turretPlatform.getCurrentPosition() < turretClockwise*2) {
+                if (Bot.turretPlatform.getCurrentPosition() < turretClockwise * 2) {
                     Bot.turretPlatform.setPower(+turretPowerEncoder);
-                }
-                else {
+                } else {
                     turrentEncoder180 = false;
                 }
-            }
-            else if (Bot.turretPlatform.getCurrentPosition() < 0) {
-                if (Bot.turretPlatform.getCurrentPosition() > turretCounterclocwise*2) {
+            } else if (Bot.turretPlatform.getCurrentPosition() < 0) {
+                if (Bot.turretPlatform.getCurrentPosition() > turretCounterclocwise * 2) {
                     Bot.turretPlatform.setPower(-turretPowerEncoder);
-                }
-                else {
+                } else {
                     turrentEncoder180 = false;
                 }
             }
-        }
-        else {
+        } else {
             Bot.turretPlatform.setPower(0);
             turrentEncoder180 = false;
         }
     }
 
-
-
     @Override
     public void stop() {
     }
 
-    public void drive () {
+    public void drive() {
 
         leftStickYVal = -gamepad1.left_stick_y;
         leftStickYVal = Range.clip(leftStickYVal, -1, 1);
@@ -465,7 +507,7 @@ public class TeleOp_CompetitionBot extends OpMode {
             Bot.frontLeftMotor.setPower(frontLeftSpeed * speedMultiply);
         }
 
-        if (frontRightSpeed <= powerThreshold && frontRightSpeed >= -powerThreshold){
+        if (frontRightSpeed <= powerThreshold && frontRightSpeed >= -powerThreshold) {
             frontRightSpeed = 0;
             Bot.frontRightMotor.setPower(frontRightSpeed * speedMultiply);
         } else {
@@ -479,7 +521,7 @@ public class TeleOp_CompetitionBot extends OpMode {
             Bot.rearLeftMotor.setPower(rearLeftSpeed * speedMultiply);
         }
 
-        if (rearRightSpeed <= powerThreshold && rearRightSpeed >= -powerThreshold){
+        if (rearRightSpeed <= powerThreshold && rearRightSpeed >= -powerThreshold) {
             rearRightSpeed = 0;
             Bot.rearRightMotor.setPower(rearRightSpeed * speedMultiply);
         } else {
@@ -487,33 +529,29 @@ public class TeleOp_CompetitionBot extends OpMode {
         }
     }
 
-    public void driveButton () {
+    public void driveButton() {
         double buttonPower = 1;
         if (gamepad1.y) {
             Bot.frontLeftMotor.setPower(buttonPower);
             Bot.frontRightMotor.setPower(buttonPower);
             Bot.rearLeftMotor.setPower(buttonPower);
             Bot.rearRightMotor.setPower(buttonPower);
-        }
-        else if (gamepad1.a) {
+        } else if (gamepad1.a) {
             Bot.frontLeftMotor.setPower(-buttonPower);
             Bot.frontRightMotor.setPower(-buttonPower);
             Bot.rearLeftMotor.setPower(-buttonPower);
             Bot.rearRightMotor.setPower(-buttonPower);
-        }
-        else if (gamepad1.x) {
+        } else if (gamepad1.x) {
             Bot.frontLeftMotor.setPower(-buttonPower);
             Bot.frontRightMotor.setPower(buttonPower);
             Bot.rearLeftMotor.setPower(buttonPower);
             Bot.rearRightMotor.setPower(-buttonPower);
-        }
-        else if (gamepad1.b) {
+        } else if (gamepad1.b) {
             Bot.frontLeftMotor.setPower(buttonPower);
             Bot.frontRightMotor.setPower(-buttonPower);
             Bot.rearLeftMotor.setPower(-buttonPower);
             Bot.rearRightMotor.setPower(buttonPower);
-        }
-        else {
+        } else {
             Bot.frontLeftMotor.setPower(0);
             Bot.frontRightMotor.setPower(0);
             Bot.rearLeftMotor.setPower(0);
@@ -521,4 +559,5 @@ public class TeleOp_CompetitionBot extends OpMode {
         }
 
     }
+
 }
