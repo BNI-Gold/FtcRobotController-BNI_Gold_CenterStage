@@ -12,7 +12,7 @@ import org.firstinspires.ftc.teamcode.Compitition.PowerPlay.Robots.CompetionBot;
 public class TeleOp_CompetitionBot extends OpMode {
 
     // (toggles between telemetry for encoders and a big BNI logo!)
-    boolean showSeriousTelemetry = false;
+    boolean showSeriousTelemetry = true;
 
     double leftStickYVal;
     double leftStickXVal;
@@ -94,10 +94,10 @@ public class TeleOp_CompetitionBot extends OpMode {
 
         updateTelemetry();
 
-//        liftControlEncoder();
+        liftControlEncoder();
 //        turretControlEncoder();
-//
-//        liftMechanismEncoder();
+
+        liftMechanismEncoder();
 
     }
 
@@ -117,30 +117,30 @@ public class TeleOp_CompetitionBot extends OpMode {
             telemetry.addData("rightFront: ", Bot.frontRightMotor.getCurrentPosition());
             telemetry.addData("rightRear: ", Bot.rearRightMotor.getCurrentPosition());
 
+            telemetry.addData("Lift Level Set: ", liftLevel);
+
         } else {
 
             telemetry.addLine("you got this! go team!");
 
-//            telemetry.addLine("::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::\n" +
-//                    ":::::::::::::::::::::::::::::::::::::::^::::::::::::::::^::::::^::::::::::::::^:::::::::::::::^:::::\n" +
-//                    "::^:^~!!!!!!!!!!!!!!!!!!!!!!!~~^^::::^^^^~!!!!!!!!!!!!~^::^::::^^~!!!!!!!!!!~^:^~!!!!!!!!!!!^:^:::::\n" +
-//                    "::::~JPPPPPPPPPPPPPPPPPPPPP55555Y?!^^::^^YPPPPPPPPPPPP5J~::^::::^75PPPPPPPP5?^:^?5PPPPPPPPPY!:^:::::\n" +
-//                    "::::~JPPP55555PPPPPPPPPPPPPPPPPPPPPY7^:^^YPP555555555PPPY!^:^:::^75PP5555PP5?^:^?5PP5555PPPY!:^:::::\n" +
-//                    "::::~JPP555555PP555555555PPP555555PP57^^^YPP5555555555PPP57^::^:^75P555555P5?^:^?5P5555555PY!:^:::::\n" +
-//                    "::^:~JPP555555PPY~^^^^^^~?5PP555555PP?^:^YPP55555555555PPP5J~::^^75P555555P5?^:^?5P5555555PY!:^:::::\n" +
-//                    "^^^:~JPP555555PPY~^^^^^^^75PP5555PPP57:^^YPP555555PPPP555PPPY7^:^75P555555P5?^:^?5P5555555PY!:^:::::\n" +
-//                    "~:::~JPP555555PP5YYYYYYY55PP55PPP55J!^:^^YPP55555PP555PP555PP5?^^75P555555P5?^:^?5P5555555PY!:^:::::\n" +
-//                    "!:::~JPP555555PPPPPPPPPPPPP555PP5J7^:::^^YPP555555PJ!75PP555PP5Y!75P555555P5?^:^?5P5555555PY!:^:::::\n" +
-//                    "!:::~JPP555555PP5555555555PPP55PP55Y7~:^^YPP555555PY~^!YPPP55PPP5Y5P555555P5?^:^?5P5555555PY!:^:::::\n" +
-//                    "^:::~JPP555555PPY~^^^^^^^!Y5P5555PPPPJ~:^YPP555555PY~:^~J5PP5555PPPP555555P5?^:^?5P5555555PY!:^:::::\n" +
-//                    ":^^:~JPP555555P5Y~^^^^^^^~J5P555555PPY!:^YPP555555PY~:^:^75PPP555555555555P5?^:^?5P5555555PY!:^:::::\n" +
-//                    "::^:~JPP555555PP5YYYYYYYY55PP55555PPPY~:^YPP555555PY~:^::^!YPP555555555555P5?^:^?5P5555555PY!:^:::::\n" +
-//                    "::::~JPP55555555PPPPPPPPPPPP5555PPPPY!^^^YPP555555PY~:^:^::~?5PP5555555555P5?^:^?5P5555555PY!:^:::::\n" +
-//                    "::::~JPPPPPPPPPPPPPPPPPPPPPPPPPP55J7~^:^^YPPPPPPPPPY~:^::^^:^75PPPPPPPPPPPP5?^:^?5PPPPPPPPP5!:^:::::\n" +
-//                    "::^:^!777777777777777777777777!!~^^:::^^^!777777777!^:^::::^:^~7777777777777!^:^!77777777777~:^:::::\n" +
-//                    "::^^::::::::::::::::::::::::::::::::::^^:::::::::::::^:::::::::::::::::::::::^^::::::::::::::^^:::::\n" +
-//                    "::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::\n" +
-//                    "::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::");
+          telemetry.addLine(
+
+                "BBBBBBBBBBBBBBBBB        NNNNNNNN        NNNNNNNN     IIIIIIIIII\n" +
+                "B::::::::::::::::B       N:::::::N       N::::::N     I::::::::I\n" +
+                "B::::::BBBBBB:::::B      N::::::::N      N::::::N     I::::::::I\n" +
+                "BB:::::B     B:::::B     N:::::::::N     N::::::N     II::::::II\n" +
+                "  B::::B     B:::::B     N::::::::::N    N::::::N       I::::I  \n" +
+                "  B::::B     B:::::B     N:::::::::::N   N::::::N       I::::I  \n" +
+                "  B::::BBBBBB:::::B      N:::::::N::::N  N::::::N       I::::I  \n" +
+                "  B:::::::::::::BB       N::::::N N::::N N::::::N       I::::I  \n" +
+                "  B::::BBBBBB:::::B      N::::::N  N::::N:::::::N       I::::I  \n" +
+                "  B::::B     B:::::B     N::::::N   N:::::::::::N       I::::I  \n" +
+                "  B::::B     B:::::B     N::::::N    N::::::::::N       I::::I  \n" +
+                "  B::::B     B:::::B     N::::::N     N:::::::::N       I::::I  \n" +
+                "BB:::::BBBBBB::::::B     N::::::N      N::::::::N     II::::::II\n" +
+                "B:::::::::::::::::B      N::::::N       N:::::::N     I::::::::I\n" +
+                "B::::::::::::::::B       N::::::N        N::::::N     I::::::::I\n" +
+                "BBBBBBBBBBBBBBBBB        NNNNNNNN         NNNNNNN     IIIIIIIIII");
 
         }
     }
@@ -163,7 +163,7 @@ public class TeleOp_CompetitionBot extends OpMode {
 
         if (driveSlowMode == true) {
 
-            speedMultiply = 0.6;
+            speedMultiply = 0.35;
 
         } else {
 
@@ -204,7 +204,7 @@ public class TeleOp_CompetitionBot extends OpMode {
     public void liftMechanismEncoder() {
 //        Only go to target position when press 'y'.
 //        Allows P2 to get lift "target" position ready.
-        if (gamepad2.left_stick_button) {
+        if (gamepad1.y) {
             switch (liftLevel) {
                 case 0:
                     if (Bot.grabberLiftOne.getCurrentPosition() > liftRest) {
@@ -270,20 +270,20 @@ public class TeleOp_CompetitionBot extends OpMode {
     }
 
     public void liftControlEncoder() {
-        if (gamepad2.b == true && liftLevelAllow == true) {
+        if (gamepad1.b == true && liftLevelAllow == true) {
             if (liftLevel < 3) {
                 liftLevel += 1;
             }
             liftLevelAllow = false;
             liftToggle = false;
-        } else if (gamepad2.x == true && liftLevelAllow == true) {
+        } else if (gamepad1.x == true && liftLevelAllow == true) {
             if (liftLevel > 0) {
                 liftLevel -= 1;
             }
             liftToggle = false;
             liftLevelAllow = false;
         } else {  // The IF here makes it so lift* goes back to default 'false' ONLY when not pressing Trigger.
-            if (gamepad2.b == false && gamepad2.x == false) {
+            if (gamepad1.b == false && gamepad1.x == false) {
                 liftLevelAllow = true;
                 liftToggle = true;
             }

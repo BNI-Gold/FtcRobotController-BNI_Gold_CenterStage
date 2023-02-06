@@ -34,59 +34,178 @@ public abstract class LeftLowConeStack extends AutoMain {
         //puts everything together
 
         //scores preloaded cone
-        scoreLow(Bot);
+        scoreHigh(Bot);
+
+        sleep(sleepTime);
 
         //stacks first cone
         moveToStack(Bot);
+
+        sleep(sleepTime);
+
         grabConeOne(Bot);
+
+        sleep(sleepTime);
+
         coneStackLow(Bot);
+
+        sleep(sleepTime);
 
         //stacks second cone
         moveToStack(Bot);
+
+        sleep(sleepTime);
+
         grabConeTwo(Bot);
+
+        sleep(sleepTime);
+
         coneStackLow(Bot);
+
+        sleep(sleepTime);
 
         //stacks third cone
         moveToStack(Bot);
+
+        sleep(sleepTime);
+
         grabConeThree(Bot);
+
+        sleep(sleepTime);
+
         coneStackLow(Bot);
+
+        sleep(sleepTime);
 
         //stacks fourth cone
         moveToStack(Bot);
+
+        sleep(sleepTime);
+
         grabConeFour(Bot);
+
+        sleep(sleepTime);
+
         coneStackLow(Bot);
+
+        sleep(sleepTime);
 
         //stacks fifth cone
         moveToStack(Bot);
+
+        sleep(sleepTime);
+
         grabConeFive(Bot);
+
+        sleep(sleepTime);
+
         coneStackLow(Bot);
+
+        sleep(sleepTime);
 
         //prepares for parking
         parkFromLow(Bot);
 
+        sleep(sleepTime);
+
     }
 
-    public void scoreLow(CompetionBot Bot) throws InterruptedException {
+    public void scoreHigh(CompetionBot Bot) throws InterruptedException {
 
         //start of auto - goes to low goal, scores preloaded cone, gets in position for stacking on low
 
-        Bot.driveForwardGyro(0.4, 5.1);
+        Bot.driveForwardGyro(0.6,5.1);
         sleep(sleepTime);
 
-        Bot.driveGyroStrafeAngle(0.4, 1, "right", 180);
+        Bot.rotateRight(0.2, 1);
+        sleep(sleepTime);
+
+        Bot.gyroCorrection(0.2, -39);
+        sleep(sleepTime);
+
+        Bot.extendGrabberLift(1);
+        sleep(3700);
+        Bot.extendGrabberLift(0.4);
+        sleep(sleepTime);
+
+        Bot.driveForwardGyro(0.2, 0.5);
+        sleep(sleepTime);
+
+        Bot.stopGrabberLift();
+        sleep(1200);
+
+        Bot.openGrabberArms();
+        sleep(sleepTime * 2);
+
+        Bot.extendGrabberLift(0.4);
+        sleep(sleepTime);
+
+        Bot.driveBackwardGyro(0.2, 0.6);
+        sleep(sleepTime);
+
+        Bot.stopGrabberLift();
+        sleep(sleepTime);
+
+        Bot.retractGrabberLift(0.4);
+        sleep(1500);
+
+        Bot.stopGrabberLift();
+        sleep(sleepTime);
+
+        Bot.driveBackwardGyro(0.3, 0.1);
+        sleep(sleepTime);
+
+        Bot.rotateLeft(0.4, 1);
+        sleep(sleepTime);
+
+        Bot.gyroCorrection(0.3, 0);
+        sleep(sleepTime);
+
+        Bot.driveForwardGyro(0.2, 0.15);
+        sleep(sleepTime);
+
+        Bot.rotateLeft(0.4, 2);
+        sleep(sleepTime);
+
+        Bot.gyroCorrection(0.3, 90);
+        sleep(sleepTime);
+
+        Bot.driveForwardGyro(0.3, 1);
+        sleep(sleepTime);
+
+        Bot.gyroCorrection(0.3, 90);
         sleep(sleepTime);
 
     }
 
-    public void moveToStack(CompetionBot Bot) {
+    public void moveToStack(CompetionBot Bot) throws InterruptedException {
 
         //moves from position of scoring on low to the stack
 
+        Bot.driveForwardGyro(0.4, 2.25);
+        sleep(sleepTime);
+
     }
 
-    public void coneStackLow(CompetionBot Bot) {
+    public void coneStackLow(CompetionBot Bot) throws InterruptedException {
 
         //moves to low goal, scores
+
+        Bot.driveBackwardGyro(0.4, 2);
+        sleep(sleepTime);
+
+        Bot.extendGrabberLift(0.7);
+        sleep(500);
+        Bot.stopGrabberLift();
+        Bot.extendGrabberLift(0.4);
+
+        Bot.turretCounterClockwise(0.5);
+        sleep(700);
+        Bot.turretStop();
+        sleep(1000);
+
+        Bot.openGrabberArms();
+        sleep(sleepTime);
 
     }
 
@@ -99,6 +218,15 @@ public abstract class LeftLowConeStack extends AutoMain {
     public void grabConeOne(CompetionBot Bot) {
 
         //grabs first cone (highest cone)
+
+        Bot.closeGrabberArms();
+        sleep(sleepTime);
+
+        Bot.extendGrabberLift(0.8);
+        sleep(600);
+
+        Bot.extendGrabberLift(0.4);
+        sleep(sleepTime);
 
     }
 
