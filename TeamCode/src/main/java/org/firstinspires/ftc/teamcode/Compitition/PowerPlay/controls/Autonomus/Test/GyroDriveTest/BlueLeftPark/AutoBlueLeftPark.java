@@ -6,7 +6,7 @@ import org.firstinspires.ftc.teamcode.Compitition.PowerPlay.Robots.CompetionBot;
 import org.firstinspires.ftc.teamcode.Compitition.PowerPlay.Robots.StraferBot;
 import org.firstinspires.ftc.teamcode.Compitition.PowerPlay.controls.Autonomus.Test.GyroDriveTest.AutoTargetZone;
 
-@Autonomous (name = "GyroDrive Test")
+@Autonomous (name = "GyroDrive Test - giughui")
 public class AutoBlueLeftPark extends BlueLeftPark {
 
     public CompetionBot Bot = new CompetionBot();
@@ -95,13 +95,7 @@ public class AutoBlueLeftPark extends BlueLeftPark {
                 parkplace(Bot, TargetZone);
                 sleep(1000);
 
-            } else {
-
-                parkplace(BotStrafer, TargetZone);
-
             }
-
-
 
             idle();
             requestOpModeStop();

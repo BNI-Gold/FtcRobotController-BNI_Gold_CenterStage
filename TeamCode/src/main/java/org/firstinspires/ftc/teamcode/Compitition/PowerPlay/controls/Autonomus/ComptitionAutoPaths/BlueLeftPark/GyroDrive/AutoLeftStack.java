@@ -1,14 +1,14 @@
-package org.firstinspires.ftc.teamcode.Compitition.PowerPlay.controls.Autonomus.Test.GyroDriveTest.RedLeftPark;
+package org.firstinspires.ftc.teamcode.Compitition.PowerPlay.controls.Autonomus.ComptitionAutoPaths.BlueLeftPark.GyroDrive;
 
 import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
-import com.qualcomm.robotcore.eventloop.opmode.Disabled;
 
 import org.firstinspires.ftc.teamcode.Compitition.PowerPlay.Robots.CompetionBot;
 import org.firstinspires.ftc.teamcode.Compitition.PowerPlay.Robots.StraferBot;
-import org.firstinspires.ftc.teamcode.Compitition.PowerPlay.controls.Autonomus.Test.GyroDriveTest.AutoTargetZone;
-@Disabled
-@Autonomous (name = "Detection - Blue Right || Red Right (P.I.D)bjghkj")
-public class AutoRedRightPark extends RedRightPark {
+import org.firstinspires.ftc.teamcode.Compitition.PowerPlay.controls.Autonomus.Test.PID.CompetitionPIDTest.AutoTargetZone;
+import org.firstinspires.ftc.teamcode.Compitition.PowerPlay.controls.Autonomus.Test.PID.CompetitionPIDTest.BlueLeftPark.BlueLeftPark;
+
+@Autonomous (name = "SIX CONE AUTO TEST")
+public class AutoLeftStack extends LeftLowConeStack {
 
     public CompetionBot Bot = new CompetionBot();
 
@@ -38,6 +38,7 @@ public class AutoRedRightPark extends RedRightPark {
         initializePipeline();
 
         //targetZone = AutoTargetZone.A;
+        Bot.openGrabberArms();
 
         telemetry.addLine("WAITING FOR START >");
         telemetry.addData("TARGET ZONE: ", TargetZone);
@@ -95,13 +96,7 @@ public class AutoRedRightPark extends RedRightPark {
                 parkplace(Bot, TargetZone);
                 sleep(1000);
 
-            } else {
-
-                parkplace(BotStrafer, TargetZone);
-
             }
-
-
 
             idle();
             requestOpModeStop();

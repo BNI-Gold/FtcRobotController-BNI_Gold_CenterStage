@@ -46,20 +46,32 @@ public abstract class BlueLeftPark extends AutoMain {
 
     public void competitionGyroDriveTest (CompetionBot Bot) throws InterruptedException {
 
-        Bot.driveForwardGyro(0.3, 3);
+        Bot.driveForwardGyro(0.4, 7);
         sleep(sleepTime);
 
-        Bot.driveBackwardGyro(0.3, 3);
+        Bot.gyroCorrection(0.25, 0);
+        sleep(sleepTime);
+
+        Bot.driveBackwardGyro(0.4, 7);
+        sleep(sleepTime);
+
+        Bot.gyroCorrection(0.25, 0);
         sleep(sleepTime);
 
     }
 
     public void competitionEncoderDriveTest (CompetionBot Bot) {
 
-        Bot.driveForward_PID(0.3, 3);
+        Bot.driveForward(0.4, 7);
         sleep(sleepTime);
 
-        Bot.driveBackward_PID(0.3, 3);
+        Bot.gyroCorrection(0.25, 0);
+        sleep(sleepTime);
+
+        Bot.driveBackward(0.4, 7);
+        sleep(sleepTime);
+
+        Bot.gyroCorrection(0.25, 0);
         sleep(sleepTime);
 
     }

@@ -1,14 +1,13 @@
-package org.firstinspires.ftc.teamcode.Compitition.PowerPlay.controls.Autonomus.Test.GyroDriveTest.RedLeftPark;
+package org.firstinspires.ftc.teamcode.Compitition.PowerPlay.controls.Autonomus.Test.GyroDriveTest.CompetitionGyroTest.BlueLeftPark;
 
 import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
-import com.qualcomm.robotcore.eventloop.opmode.Disabled;
 
 import org.firstinspires.ftc.teamcode.Compitition.PowerPlay.Robots.CompetionBot;
 import org.firstinspires.ftc.teamcode.Compitition.PowerPlay.Robots.StraferBot;
-import org.firstinspires.ftc.teamcode.Compitition.PowerPlay.controls.Autonomus.Test.GyroDriveTest.AutoTargetZone;
-@Disabled
-@Autonomous (name = "Detection - Blue Right || Red Right (P.I.D)bjghkj")
-public class AutoRedRightPark extends RedRightPark {
+import org.firstinspires.ftc.teamcode.Compitition.PowerPlay.controls.Autonomus.Test.GyroDriveTest.CompetitionGyroTest.AutoTargetZone;
+
+@Autonomous (name = "Gryo Competition Test")
+public class AutoBlueLeftPark extends BlueLeftPark {
 
     public CompetionBot Bot = new CompetionBot();
 
@@ -38,6 +37,7 @@ public class AutoRedRightPark extends RedRightPark {
         initializePipeline();
 
         //targetZone = AutoTargetZone.A;
+        Bot.openGrabberArms();
 
         telemetry.addLine("WAITING FOR START >");
         telemetry.addData("TARGET ZONE: ", TargetZone);

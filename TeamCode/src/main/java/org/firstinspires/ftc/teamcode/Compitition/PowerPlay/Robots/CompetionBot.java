@@ -21,58 +21,56 @@ import org.firstinspires.ftc.teamcode.Compitition.PowerPlay.DriveTrains.MecanumD
 
 public class CompetionBot extends MecanumDrive {
 
-        public HardwareMap hwBot = null;
+    public HardwareMap hwBot = null;
 
 
-        public BNO055IMU imu;
-        public Orientation angles;
-        public Acceleration gravity;
-        public final double SPEED = 0.3;
-        public final double TOLERANCE = 0.4;
+    public BNO055IMU imu;
+    public Orientation angles;
+    public Acceleration gravity;
+    public final double SPEED = 0.3;
+    public final double TOLERANCE = 0.4;
 
 
-        public DcMotor grabberLiftOne = null;
-        public DcMotor grabberLiftTwo = null;
-        public DcMotor turretPlatform = null;
-        public Servo grabberArmServo = null;
-        public CRServo bigConeSucker = null;
-        TouchSensor magSwitch;
+    public DcMotor grabberLiftOne = null;
+    public DcMotor grabberLiftTwo = null;
+    public DcMotor turretPlatform = null;
+    public Servo grabberArmServo = null;
+    public CRServo bigConeSucker = null;
+    TouchSensor magSwitch;
 
 
+    public void initRobot(HardwareMap hardwareMap) {
+        hwBot = hardwareMap;
 
-    public void initRobot (HardwareMap hardwareMap) {
-            hwBot = hardwareMap;
+        grabberArmServo = hwBot.get(Servo.class, "grabber_arm");
+        grabberArmServo.setDirection(Servo.Direction.FORWARD);
 
-            grabberArmServo = hwBot.get(Servo.class, "grabber_arm");
-            grabberArmServo.setDirection(Servo.Direction.FORWARD);
+        bigConeSucker = hwBot.get(CRServo.class, "cone_sucker");
+        bigConeSucker.setDirection(CRServo.Direction.FORWARD);
 
-            bigConeSucker = hwBot.get(CRServo.class, "cone_sucker");
-            bigConeSucker.setDirection(CRServo.Direction.FORWARD);
-
-            frontLeftMotor = hardwareMap.get(DcMotorEx.class, "front_left_motor");
-            frontRightMotor = hardwareMap.get(DcMotorEx.class, "front_right_motor");
-            rearLeftMotor = hardwareMap.get(DcMotorEx.class, "rear_left_motor");
-            rearRightMotor = hardwareMap.get(DcMotorEx.class, "rear_right_motor");
+        frontLeftMotor = hardwareMap.get(DcMotorEx.class, "front_left_motor");
+        frontRightMotor = hardwareMap.get(DcMotorEx.class, "front_right_motor");
+        rearLeftMotor = hardwareMap.get(DcMotorEx.class, "rear_left_motor");
+        rearRightMotor = hardwareMap.get(DcMotorEx.class, "rear_right_motor");
 
 //            frontLeftMotor=hwBot.dcMotor.get("front_left_motor");
 //            frontRightMotor=hwBot.dcMotor.get("front_right_motor");
 //            rearLeftMotor=hwBot.dcMotor.get("rear_left_motor");
 //            rearRightMotor=hwBot.dcMotor.get("rear_right_motor");
 
-            frontLeftMotor.setDirection(DcMotor.Direction.REVERSE);
-            rearLeftMotor.setDirection(DcMotor.Direction.REVERSE);
-            frontRightMotor.setDirection(DcMotor.Direction.FORWARD);
-            rearRightMotor.setDirection(DcMotor.Direction.FORWARD);
+        frontLeftMotor.setDirection(DcMotor.Direction.REVERSE);
+        rearLeftMotor.setDirection(DcMotor.Direction.REVERSE);
+        frontRightMotor.setDirection(DcMotor.Direction.FORWARD);
+        rearRightMotor.setDirection(DcMotor.Direction.FORWARD);
 
-            setMotorRunModes(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
-            setMotorRunModes(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
+        setMotorRunModes(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
+        setMotorRunModes(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
 
 
-
-            frontLeftMotor.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
-            frontRightMotor.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
-            rearRightMotor.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
-            rearLeftMotor.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
+        frontLeftMotor.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
+        frontRightMotor.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
+        rearRightMotor.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
+        rearLeftMotor.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
 
 
 //            frontLeftMotor.setPositionPIDFCoefficients(1);
@@ -87,16 +85,16 @@ public class CompetionBot extends MecanumDrive {
 
 
         BNO055IMU.Parameters parametersimu = new BNO055IMU.Parameters();
-            parametersimu.angleUnit = BNO055IMU.AngleUnit.DEGREES;
-            parametersimu.accelUnit = BNO055IMU.AccelUnit.METERS_PERSEC_PERSEC;
-            parametersimu.calibrationDataFile = "BN0055IMUCalibration.json";
+        parametersimu.angleUnit = BNO055IMU.AngleUnit.DEGREES;
+        parametersimu.accelUnit = BNO055IMU.AccelUnit.METERS_PERSEC_PERSEC;
+        parametersimu.calibrationDataFile = "BN0055IMUCalibration.json";
 
-            parametersimu.loggingEnabled = true;
-            parametersimu.loggingTag = "IMU";
-            parametersimu.accelerationIntegrationAlgorithm = new JustLoggingAccelerationIntegrator();
+        parametersimu.loggingEnabled = true;
+        parametersimu.loggingTag = "IMU";
+        parametersimu.accelerationIntegrationAlgorithm = new JustLoggingAccelerationIntegrator();
 
-            imu = hwBot.get(BNO055IMU.class,"imu");
-            imu.initialize(parametersimu);
+        imu = hwBot.get(BNO055IMU.class, "imu");
+        imu.initialize(parametersimu);
 
 //            grabberLift = hwBot.dcMotor.get("grabber_lift");
 //            grabberLift.setDirection(DcMotor.Direction.FORWARD);
@@ -118,32 +116,32 @@ public class CompetionBot extends MecanumDrive {
         grabberLiftTwo.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
         //Bot.grabberLiftTwo.setPositionPIDFCoefficients(5);
 
-        turretPlatform = hardwareMap.get(DcMotorEx.class,"turret_motor");
+        turretPlatform = hardwareMap.get(DcMotorEx.class, "turret_motor");
         turretPlatform.setDirection(DcMotorSimple.Direction.REVERSE);
         turretPlatform.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
         turretPlatform.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
         turretPlatform.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
 
-            // Grabber Lift Sensor Hardware Mapping & Configuration
-            magSwitch = hardwareMap.get(TouchSensor.class, "magnetic_switch");
+        // Grabber Lift Sensor Hardware Mapping & Configuration
+        magSwitch = hardwareMap.get(TouchSensor.class, "magnetic_switch");
 
-            // Grabber Arms Servo Hardware Mapping/Configuration
+        // Grabber Arms Servo Hardware Mapping/Configuration
 
-        }
+    }
 
-        public void coneOuttake() {
+    public void coneOuttake() {
 
-            bigConeSucker.setDirection(CRServo.Direction.REVERSE);
-            bigConeSucker.setPower(1);
+        bigConeSucker.setDirection(CRServo.Direction.REVERSE);
+        bigConeSucker.setPower(1);
 
-        }
+    }
 
-        public void coneIntake() {
+    public void coneIntake() {
 
-            bigConeSucker.setDirection(CRServo.Direction.FORWARD);
-            bigConeSucker.setPower(1);
+        bigConeSucker.setDirection(CRServo.Direction.FORWARD);
+        bigConeSucker.setPower(1);
 
-        }
+    }
 
     public void intakeStop() {
 
@@ -151,23 +149,23 @@ public class CompetionBot extends MecanumDrive {
 
     }
 
-        public void openGrabberArms() {
+    public void openGrabberArms() {
 
-            grabberArmServo.setPosition(0.76);
+        grabberArmServo.setPosition(0.76);
 
-        }
+    }
 
-        public void closeGrabberArms() {
+    public void closeGrabberArms() {
 
-            grabberArmServo.setPosition(.68);
+        grabberArmServo.setPosition(.68);
 
-        }
+    }
 
-        public void intakeGrabberArms() {
+    public void intakeGrabberArms() {
 
-            grabberArmServo.setPosition(0.723);
+        grabberArmServo.setPosition(0.723);
 
-        }
+    }
 
     public void extendGrabberLift(double power) {
 
@@ -175,73 +173,75 @@ public class CompetionBot extends MecanumDrive {
         grabberLiftTwo.setPower(Math.abs(power));
     }
 
-    public void retractGrabberLift (double power) {
+    public void retractGrabberLift(double power) {
 
         grabberLiftOne.setPower(-Math.abs(power));
         grabberLiftTwo.setPower(-Math.abs(power));
     }
 
-    public void stopGrabberLift () {
+    public void stopGrabberLift() {
         grabberLiftOne.setPower(0);
         grabberLiftTwo.setPower(0);
     }
 
-    public void turretClockwise (double power) {
+    public void turretClockwise(double power) {
 
         turretPlatform.setPower(Math.abs(power));
 
     }
 
-    public void autoTurretClockwise (double power, double rotations) {
+    public void autoTurretClockwise(double power, double rotations) {
         turretPlatform.setPower(Math.abs(power));
     }
 
-    public void turretCounterClockwise (double power) {
+    public void turretCounterClockwise(double power) {
         turretPlatform.setPower(-Math.abs(power));
 
     }
 
-    public void autoTurretCounterClockwise (double power, double rotations) {
+    public void autoTurretCounterClockwise(double power, double rotations) {
         turretPlatform.setPower(-Math.abs(power));
 
     }
 
-    public void turretStop () {
+    public void turretStop() {
         turretPlatform.setPower(0);
     }
 
-        public void gyroCorrection (double speed, double angle) {
+    public void gyroCorrection(double speed, double angle) {
 
-            angles = imu.getAngularOrientation(
-                    AxesReference.INTRINSIC, AxesOrder.ZYX, AngleUnit.DEGREES);
+        angles = imu.getAngularOrientation(
+                AxesReference.INTRINSIC, AxesOrder.ZYX, AngleUnit.DEGREES);
 
-            if (angles.firstAngle >= angle + TOLERANCE && linearOp.opModeIsActive()) {
-                while (angles.firstAngle >= angle + TOLERANCE && linearOp.opModeIsActive()) {
-                    rotateRight(speed);
-                    angles = imu.getAngularOrientation(AxesReference.INTRINSIC, AxesOrder.ZYX, AngleUnit.DEGREES);
+        if (angles.firstAngle >= angle + TOLERANCE && linearOp.opModeIsActive()) {
+            while (angles.firstAngle >= angle + TOLERANCE && linearOp.opModeIsActive()) {
+                rotateRight(speed);
+                angles = imu.getAngularOrientation(AxesReference.INTRINSIC, AxesOrder.ZYX, AngleUnit.DEGREES);
 
-             linearOp.telemetry.addData("Current Angle: ", angles.firstAngle);
-                }
+                linearOp.telemetry.addData("Current Angle: ", angles.firstAngle);
             }
+        } else if (angles.firstAngle <= angle - TOLERANCE && linearOp.opModeIsActive()) ;
+        {
+            while (angles.firstAngle <= angle - TOLERANCE && linearOp.opModeIsActive()) {
+                rotateLeft(speed);
 
-            else if (angles.firstAngle <= angle - TOLERANCE && linearOp.opModeIsActive()); {
-                while (angles.firstAngle <= angle - TOLERANCE && linearOp.opModeIsActive()) {
-                    rotateLeft(speed);
-
-                    angles = imu.getAngularOrientation(AxesReference.INTRINSIC, AxesOrder.ZYX, AngleUnit.DEGREES);
-                        linearOp.telemetry.addData("Current Angle ", angles.firstAngle);
-                }
+                angles = imu.getAngularOrientation(AxesReference.INTRINSIC, AxesOrder.ZYX, AngleUnit.DEGREES);
+                linearOp.telemetry.addData("Current Angle ", angles.firstAngle);
             }
-
-            stopMotors();
-
-                angles  = imu.getAngularOrientation(AxesReference.INTRINSIC, AxesOrder.ZYX, AngleUnit.DEGREES);
         }
 
-        // TESTING GYRODRIVE
+        stopMotors();
 
-    public void driveBackwardGyro (double power, double rotations) throws InterruptedException {
-        double ticks = rotations * (+1) * TICKS_PER_ROTATION;
+        angles = imu.getAngularOrientation(AxesReference.INTRINSIC, AxesOrder.ZYX, AngleUnit.DEGREES);
+    }
+
+    // TESTING GYRODRIVE
+
+    public void driveBackwardGyro(double power, double rotations) throws InterruptedException {
+        double ticks = rotations * (1) * TICKS_PER_ROTATION;
+
+        setMotorRunModes(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
+        setMotorRunModes(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
 
         angles = imu.getAngularOrientation(AxesReference.INTRINSIC, AxesOrder.ZYX, AngleUnit.DEGREES);
         double currentPos = 0;
@@ -260,7 +260,6 @@ public class CompetionBot extends MecanumDrive {
 
 
             currentPos = Math.abs(frontLeftMotor.getCurrentPosition());
-
 
 
             leftSideSpeed = power - (angles.firstAngle - target) / 100;            // they need to be different
@@ -286,9 +285,12 @@ public class CompetionBot extends MecanumDrive {
 
         linearOp.idle();
 
-            }
+    }
 
-    public void driveForwardGyro (double power, double rotations) throws InterruptedException {
+    public void driveForwardGyro(double power, double rotations) throws InterruptedException {
+
+        setMotorRunModes(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
+        setMotorRunModes(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
 
         double ticks = rotations * (1) * TICKS_PER_ROTATION;
         angles = imu.getAngularOrientation(AxesReference.INTRINSIC, AxesOrder.ZYX, AngleUnit.DEGREES);
@@ -333,9 +335,9 @@ public class CompetionBot extends MecanumDrive {
 
         linearOp.idle();
 
-             }
+    }
 
-    public void driveGyroStrafe (double power, double rotations, String direction) throws InterruptedException {
+    public void driveGyroStrafe(double power, double rotations, String direction) throws InterruptedException {
         double ticks = 0;
         ticks = rotations * TICKS_PER_ROTATION;
         angles = imu.getAngularOrientation(AxesReference.INTRINSIC, AxesOrder.ZYX, AngleUnit.DEGREES);
@@ -406,7 +408,70 @@ public class CompetionBot extends MecanumDrive {
 
         linearOp.idle();
 
-                }
+    }
+
+    public void driveGyroStrafeAngle(double power, double rotations, String direction, double angle) throws InterruptedException {
+        double ticks = 0;
+        ticks = rotations * TICKS_PER_ROTATION;
+
+        angles = imu.getAngularOrientation(AxesReference.INTRINSIC, AxesOrder.ZYX, AngleUnit.DEGREES);
+        double currentPos = 0;
+        double frontLeftSpeed;
+        double frontRightSpeed;
+        double rearLeftSpeed;
+        double rearRightSpeed;
+
+
+        double target = angle;
+        double startPosition = frontLeftMotor.getCurrentPosition();
+        linearOp.telemetry.addData("Angle to start: ", angles.firstAngle);
+        linearOp.telemetry.update();
+        linearOp.sleep(2000);
+        while (currentPos < ticks + startPosition && linearOp.opModeIsActive()) {
+
+            angles = imu.getAngularOrientation(AxesReference.INTRINSIC, AxesOrder.ZYX, AngleUnit.DEGREES);
+
+
+            currentPos = Math.abs(frontLeftMotor.getCurrentPosition());
+
+            switch (direction) {
+                case "left":
+                    frontLeftSpeed = power - (angles.firstAngle - target) / 100;            // they need to be different
+                    frontRightSpeed = power - (angles.firstAngle - target) / 100;
+                    rearLeftSpeed = power + (angles.firstAngle - target) / 100;            // they need to be different
+                    rearRightSpeed = power + (angles.firstAngle - target) / 100;
+
+                    frontLeftSpeed = Range.clip(frontLeftSpeed, -1, 1);        // helps prevent out of bounds error
+                    frontRightSpeed = Range.clip(frontRightSpeed, -1, 1);
+                    rearLeftSpeed = Range.clip(rearLeftSpeed, -1, 1);        // helps prevent out of bounds error
+                    rearRightSpeed = Range.clip(rearRightSpeed, -1, 1);
+
+                    frontLeftMotor.setPower(-frontLeftSpeed);
+                    frontRightMotor.setPower(frontRightSpeed);
+
+                    rearLeftMotor.setPower(rearLeftSpeed);
+                    rearRightMotor.setPower(-rearRightSpeed);
+                    break;
+                case "right":
+                    frontLeftSpeed = power + (angles.firstAngle - target) / 100;            // they need to be different
+                    frontRightSpeed = power + (angles.firstAngle - target) / 100;
+                    rearLeftSpeed = power - (angles.firstAngle - target) / 100;            // they need to be different
+                    rearRightSpeed = power - (angles.firstAngle - target) / 100;
+
+                    frontLeftSpeed = Range.clip(frontLeftSpeed, -1, 1);        // helps prevent out of bounds error
+                    frontRightSpeed = Range.clip(frontRightSpeed, -1, 1);
+                    rearLeftSpeed = Range.clip(rearLeftSpeed, -1, 1);        // helps prevent out of bounds error
+                    rearRightSpeed = Range.clip(rearRightSpeed, -1, 1);
+
+                    frontLeftMotor.setPower(frontLeftSpeed);
+                    frontRightMotor.setPower(-frontRightSpeed);
+
+                    rearLeftMotor.setPower(-rearLeftSpeed);
+                    rearRightMotor.setPower(rearRightSpeed);
+                    break;
+            }
 
 
         }
+    }
+}
