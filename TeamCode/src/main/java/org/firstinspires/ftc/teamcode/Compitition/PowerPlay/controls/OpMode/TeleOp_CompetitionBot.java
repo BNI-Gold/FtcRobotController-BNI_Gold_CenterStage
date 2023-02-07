@@ -12,7 +12,7 @@ import org.firstinspires.ftc.teamcode.Compitition.PowerPlay.Robots.CompetionBot;
 public class TeleOp_CompetitionBot extends OpMode {
 
     // (toggles between telemetry for encoders and a big BNI logo!)
-    boolean showSeriousTelemetry = true;
+    boolean showSeriousTelemetry = false;
 
     double leftStickYVal;
     double leftStickXVal;
@@ -79,7 +79,7 @@ public class TeleOp_CompetitionBot extends OpMode {
     @Override
     public void loop() {
 
-        drive();
+        driveNormal = true;
 
         grabberArmControl();
 
@@ -94,10 +94,10 @@ public class TeleOp_CompetitionBot extends OpMode {
 
         updateTelemetry();
 
-        liftControlEncoder();
+//        liftControlEncoder();
 //        turretControlEncoder();
-
-        liftMechanismEncoder();
+//
+//        liftMechanismEncoder();
 
     }
 
@@ -117,30 +117,21 @@ public class TeleOp_CompetitionBot extends OpMode {
             telemetry.addData("rightFront: ", Bot.frontRightMotor.getCurrentPosition());
             telemetry.addData("rightRear: ", Bot.rearRightMotor.getCurrentPosition());
 
-            telemetry.addData("Lift Level Set: ", liftLevel);
+            telemetry.addData("Lift Level Selected: ", liftLevel);
 
         } else {
 
-            telemetry.addLine("you got this! go team!");
+            telemetry.addLine(
 
-          telemetry.addLine(
+                                    " ######     #     #    ### \n" +
+                                    " #     #    ##    #     #  \n" +
+                                    " #     #    # #   #     #  \n" +
+                                    " ######     #  #  #     #  \n" +
+                                    " #     #    #   # #     #  \n" +
+                                    " #     #    #    ##     #  \n" +
+                                    " ######     #     #    ### "
 
-                "BBBBBBBBBBBBBBBBB        NNNNNNNN        NNNNNNNN     IIIIIIIIII\n" +
-                "B::::::::::::::::B       N:::::::N       N::::::N     I::::::::I\n" +
-                "B::::::BBBBBB:::::B      N::::::::N      N::::::N     I::::::::I\n" +
-                "BB:::::B     B:::::B     N:::::::::N     N::::::N     II::::::II\n" +
-                "  B::::B     B:::::B     N::::::::::N    N::::::N       I::::I  \n" +
-                "  B::::B     B:::::B     N:::::::::::N   N::::::N       I::::I  \n" +
-                "  B::::BBBBBB:::::B      N:::::::N::::N  N::::::N       I::::I  \n" +
-                "  B:::::::::::::BB       N::::::N N::::N N::::::N       I::::I  \n" +
-                "  B::::BBBBBB:::::B      N::::::N  N::::N:::::::N       I::::I  \n" +
-                "  B::::B     B:::::B     N::::::N   N:::::::::::N       I::::I  \n" +
-                "  B::::B     B:::::B     N::::::N    N::::::::::N       I::::I  \n" +
-                "  B::::B     B:::::B     N::::::N     N:::::::::N       I::::I  \n" +
-                "BB:::::BBBBBB::::::B     N::::::N      N::::::::N     II::::::II\n" +
-                "B:::::::::::::::::B      N::::::N       N:::::::N     I::::::::I\n" +
-                "B::::::::::::::::B       N::::::N        N::::::N     I::::::::I\n" +
-                "BBBBBBBBBBBBBBBBB        NNNNNNNN         NNNNNNN     IIIIIIIIII");
+            );
 
         }
     }
@@ -163,7 +154,7 @@ public class TeleOp_CompetitionBot extends OpMode {
 
         if (driveSlowMode == true) {
 
-            speedMultiply = 0.35;
+            speedMultiply = 0.6;
 
         } else {
 
@@ -204,7 +195,7 @@ public class TeleOp_CompetitionBot extends OpMode {
     public void liftMechanismEncoder() {
 //        Only go to target position when press 'y'.
 //        Allows P2 to get lift "target" position ready.
-        if (gamepad1.y) {
+        if (gamepad2.left_stick_button) {
             switch (liftLevel) {
                 case 0:
                     if (Bot.grabberLiftOne.getCurrentPosition() > liftRest) {
@@ -270,20 +261,20 @@ public class TeleOp_CompetitionBot extends OpMode {
     }
 
     public void liftControlEncoder() {
-        if (gamepad1.b == true && liftLevelAllow == true) {
+        if (gamepad2.b == true && liftLevelAllow == true) {
             if (liftLevel < 3) {
                 liftLevel += 1;
             }
             liftLevelAllow = false;
             liftToggle = false;
-        } else if (gamepad1.x == true && liftLevelAllow == true) {
+        } else if (gamepad2.x == true && liftLevelAllow == true) {
             if (liftLevel > 0) {
                 liftLevel -= 1;
             }
             liftToggle = false;
             liftLevelAllow = false;
         } else {  // The IF here makes it so lift* goes back to default 'false' ONLY when not pressing Trigger.
-            if (gamepad1.b == false && gamepad1.x == false) {
+            if (gamepad2.b == false && gamepad2.x == false) {
                 liftLevelAllow = true;
                 liftToggle = true;
             }
