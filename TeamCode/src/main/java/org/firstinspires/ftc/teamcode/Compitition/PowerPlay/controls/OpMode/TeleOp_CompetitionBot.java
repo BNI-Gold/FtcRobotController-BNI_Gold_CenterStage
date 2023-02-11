@@ -34,13 +34,13 @@ public class TeleOp_CompetitionBot extends OpMode {
 
     boolean driveSlowMode = false;
 
-    int turretClockwise = 410;
-    int turretCounterclocwise = -405;
+    int turretClockwise = 415;
+    int turretCounterclocwise = -415;
 
     int liftRest = 0;
-    int liftLow = 600;
-    int liftMid = 1300;
-    int liftHigh = 2000;
+    int liftLow = -1450;
+    int liftMid = -2200;
+    int liftHigh = -3030;
 
     int liftLevel = 0;
     boolean liftLevelAllow = true;
@@ -50,7 +50,7 @@ public class TeleOp_CompetitionBot extends OpMode {
     boolean turretEncoderCollect = false;
     boolean turrentEncoder180 = false;
 
-    double turretPowerEncoder = 0.3;
+    double turretPowerEncoder = 0.2;
     double turretPowerManual = 0.1;
     double liftPowerUp = 1.0;
     double liftPowerDown = 0.2;
@@ -84,7 +84,7 @@ public class TeleOp_CompetitionBot extends OpMode {
         grabberArmControl();
 
         liftControlManual();
-        turretControlManual();
+//        turretControlManual();
 
         turretSpeed();
         turretSlowModeControl();
@@ -95,7 +95,7 @@ public class TeleOp_CompetitionBot extends OpMode {
         updateTelemetry();
 
         liftControlEncoder();
-//        turretControlEncoder();
+        turretControlEncoder();
 
         liftMechanismEncoder();
 
@@ -123,24 +123,24 @@ public class TeleOp_CompetitionBot extends OpMode {
 
             telemetry.addLine("you got this! go team!");
 
-          telemetry.addLine(
+            telemetry.addLine(
 
-                "BBBBBBBBBBBBBBBBB        NNNNNNNN        NNNNNNNN     IIIIIIIIII\n" +
-                "B::::::::::::::::B       N:::::::N       N::::::N     I::::::::I\n" +
-                "B::::::BBBBBB:::::B      N::::::::N      N::::::N     I::::::::I\n" +
-                "BB:::::B     B:::::B     N:::::::::N     N::::::N     II::::::II\n" +
-                "  B::::B     B:::::B     N::::::::::N    N::::::N       I::::I  \n" +
-                "  B::::B     B:::::B     N:::::::::::N   N::::::N       I::::I  \n" +
-                "  B::::BBBBBB:::::B      N:::::::N::::N  N::::::N       I::::I  \n" +
-                "  B:::::::::::::BB       N::::::N N::::N N::::::N       I::::I  \n" +
-                "  B::::BBBBBB:::::B      N::::::N  N::::N:::::::N       I::::I  \n" +
-                "  B::::B     B:::::B     N::::::N   N:::::::::::N       I::::I  \n" +
-                "  B::::B     B:::::B     N::::::N    N::::::::::N       I::::I  \n" +
-                "  B::::B     B:::::B     N::::::N     N:::::::::N       I::::I  \n" +
-                "BB:::::BBBBBB::::::B     N::::::N      N::::::::N     II::::::II\n" +
-                "B:::::::::::::::::B      N::::::N       N:::::::N     I::::::::I\n" +
-                "B::::::::::::::::B       N::::::N        N::::::N     I::::::::I\n" +
-                "BBBBBBBBBBBBBBBBB        NNNNNNNN         NNNNNNN     IIIIIIIIII");
+                    "BBBBBBBBBBBBBBBBB        NNNNNNNN        NNNNNNNN     IIIIIIIIII\n" +
+                            "B::::::::::::::::B       N:::::::N       N::::::N     I::::::::I\n" +
+                            "B::::::BBBBBB:::::B      N::::::::N      N::::::N     I::::::::I\n" +
+                            "BB:::::B     B:::::B     N:::::::::N     N::::::N     II::::::II\n" +
+                            "  B::::B     B:::::B     N::::::::::N    N::::::N       I::::I  \n" +
+                            "  B::::B     B:::::B     N:::::::::::N   N::::::N       I::::I  \n" +
+                            "  B::::BBBBBB:::::B      N:::::::N::::N  N::::::N       I::::I  \n" +
+                            "  B:::::::::::::BB       N::::::N N::::N N::::::N       I::::I  \n" +
+                            "  B::::BBBBBB:::::B      N::::::N  N::::N:::::::N       I::::I  \n" +
+                            "  B::::B     B:::::B     N::::::N   N:::::::::::N       I::::I  \n" +
+                            "  B::::B     B:::::B     N::::::N    N::::::::::N       I::::I  \n" +
+                            "  B::::B     B:::::B     N::::::N     N:::::::::N       I::::I  \n" +
+                            "BB:::::BBBBBB::::::B     N::::::N      N::::::::N     II::::::II\n" +
+                            "B:::::::::::::::::B      N::::::N       N:::::::N     I::::::::I\n" +
+                            "B::::::::::::::::B       N::::::N        N::::::N     I::::::::I\n" +
+                            "BBBBBBBBBBBBBBBBB        NNNNNNNN         NNNNNNN     IIIIIIIIII");
 
         }
     }
@@ -208,10 +208,10 @@ public class TeleOp_CompetitionBot extends OpMode {
             switch (liftLevel) {
                 case 0:
                     if (Bot.grabberLiftOne.getCurrentPosition() > liftRest) {
-                        Bot.grabberLiftOne.setPower(liftPowerDown);
+                        Bot.grabberLiftOne.setPower(-liftPowerDown);
                         Bot.grabberLiftTwo.setPower(liftPowerDown);
                     } else {
-                        Bot.grabberLiftOne.setPower(liftPowerUp);
+                        Bot.grabberLiftOne.setPower(-liftPowerUp);
                         Bot.grabberLiftTwo.setPower(liftPowerUp);
                     }
                     Bot.grabberLiftOne.setTargetPosition(liftRest);
@@ -224,10 +224,10 @@ public class TeleOp_CompetitionBot extends OpMode {
 
                 case 1:
                     if (Bot.grabberLiftOne.getCurrentPosition() > liftLow) {
-                        Bot.grabberLiftOne.setPower(liftPowerDown);
+                        Bot.grabberLiftOne.setPower(-liftPowerDown);
                         Bot.grabberLiftTwo.setPower(liftPowerDown);
                     } else {
-                        Bot.grabberLiftOne.setPower(liftPowerUp);
+                        Bot.grabberLiftOne.setPower(-liftPowerUp);
                         Bot.grabberLiftTwo.setPower(liftPowerUp);
                     }
                     Bot.grabberLiftOne.setTargetPosition(liftLow);
@@ -240,10 +240,10 @@ public class TeleOp_CompetitionBot extends OpMode {
 
                 case 2:
                     if (Bot.grabberLiftOne.getCurrentPosition() > liftMid) {
-                        Bot.grabberLiftOne.setPower(liftPowerDown);
+                        Bot.grabberLiftOne.setPower(-liftPowerDown);
                         Bot.grabberLiftTwo.setPower(liftPowerDown);
                     } else {
-                        Bot.grabberLiftOne.setPower(liftPowerUp);
+                        Bot.grabberLiftOne.setPower(-liftPowerUp);
                         Bot.grabberLiftTwo.setPower(liftPowerUp);
                     }
                     Bot.grabberLiftOne.setTargetPosition(liftMid);
@@ -255,7 +255,7 @@ public class TeleOp_CompetitionBot extends OpMode {
                     break;
 
                 case 3:
-                    Bot.grabberLiftOne.setPower(liftPowerUp);
+                    Bot.grabberLiftOne.setPower(-liftPowerUp);
                     Bot.grabberLiftOne.setTargetPosition(liftHigh);
                     Bot.grabberLiftOne.setMode(DcMotor.RunMode.RUN_TO_POSITION);
 
@@ -403,78 +403,111 @@ public class TeleOp_CompetitionBot extends OpMode {
         //  ENCODER CONTROL OF TURRET
         //
 
-        else if (turretEncoderCW) {
-            if (Bot.turretPlatform.getCurrentPosition() < turretClockwise) {
-                Bot.turretPlatform.setPower(+turretPowerEncoder);
-            } else {
-                turretEncoderCW = false;
-            }
-        } else if (turretEncoderCCW) {
-            if (Bot.turretPlatform.getCurrentPosition() > turretCounterclocwise) {
-                Bot.turretPlatform.setPower(-turretPowerEncoder);
-            } else {
-                turretEncoderCCW = false;
-            }
-        } else if (turretEncoderCollect) {
-//            if (Bot.turretPlatform.getCurrentPosition() > 0) {
-//                if (Bot.turretPlatform.getCurrentPosition() > 0) {
-//                    Bot.turretPlatform.setPower(-turretPowerEncoder);
-//                }
-//                else {
-//                    turretEncoderCollect = false;
-//                }
-//            }
+        if (turretEncoderCW) {
+            if (Bot.turretPlatform.getCurrentPosition() >= turretClockwise) {
 //
-//            else if (Bot.turretPlatform.getCurrentPosition() < 0) {
-//                if (Bot.turretPlatform.getCurrentPosition() < 0) {
-//                    Bot.turretPlatform.setPower(+turretPowerEncoder);
-//                }
-//                else {
-//                    turretEncoderCollect = false;
-//                }
-//            }
+
+                if (Bot.turretPlatform.getCurrentPosition() >= turretClockwise) {
+                    Bot.turretPlatform.setPower(-turretPowerEncoder);
+                }
+
+                if (Bot.turretPlatform.getCurrentPosition() < turretClockwise) {
+                    turretEncoderCW = false;
+                    Bot.turretPlatform.setPower(0);
+                }
 
 
-            if (Bot.turretPlatform.getCurrentPosition() >= 0) {
+            } else if (Bot.turretPlatform.getCurrentPosition() < turretClockwise) {
+//
+                if (Bot.turretPlatform.getCurrentPosition() < turretClockwise) {
+                    Bot.turretPlatform.setPower(+turretPowerEncoder);
+                }
+
+                if (Bot.turretPlatform.getCurrentPosition() > turretClockwise) {
+                    turretEncoderCW = false;
+                    Bot.turretPlatform.setPower(0);
+                }
+
+
+            }
+
+        } else if (turretEncoderCCW) {
+            if (Bot.turretPlatform.getCurrentPosition() >= turretCounterclocwise) {
+//
+
+                if (Bot.turretPlatform.getCurrentPosition() >= turretCounterclocwise) {
+                    Bot.turretPlatform.setPower(-turretPowerEncoder);
+                }
+
+                if (Bot.turretPlatform.getCurrentPosition() < turretCounterclocwise) {
+                    turretEncoderCCW = false;
+                    Bot.turretPlatform.setPower(0);
+                }
+
+
+            } else if (Bot.turretPlatform.getCurrentPosition() < turretCounterclocwise) {
+//
+                if (Bot.turretPlatform.getCurrentPosition() < turretCounterclocwise) {
+                    Bot.turretPlatform.setPower(+turretPowerEncoder);
+                }
+
+                if (Bot.turretPlatform.getCurrentPosition() > turretCounterclocwise) {
+                    turretEncoderCCW = false;
+                    Bot.turretPlatform.setPower(0);
+                }
+
+            }
+
+            } else if (turretEncoderCollect) {
                 if (Bot.turretPlatform.getCurrentPosition() >= 0) {
-                    Bot.turretPlatform.setPower(-turretPowerEncoder);
-                } else {
-                    turretEncoderCollect = false;
+//
+
+                    if (Bot.turretPlatform.getCurrentPosition() >= 0) {
+                        Bot.turretPlatform.setPower(-turretPowerEncoder);
+                    }
+
+                    if (Bot.turretPlatform.getCurrentPosition() < 0) {
+                        turretEncoderCollect = false;
+                        Bot.turretPlatform.setPower(0);
+                    }
+
+
+                } else if (Bot.turretPlatform.getCurrentPosition() < 0) {
+//
+                    if (Bot.turretPlatform.getCurrentPosition() < 0) {
+                        Bot.turretPlatform.setPower(+turretPowerEncoder);
+                    }
+
+                    if (Bot.turretPlatform.getCurrentPosition() > 0) {
+                        turretEncoderCollect = false;
+                        Bot.turretPlatform.setPower(0);
+                    }
+
+
                 }
 
-            } else if (Bot.turretPlatform.getCurrentPosition() < 0) {
-                if (Bot.turretPlatform.getCurrentPosition() < 0) {
-                    Bot.turretPlatform.setPower(+turretPowerEncoder);
+            } else if (turrentEncoder180 == true) {
+                    if (Bot.turretPlatform.getCurrentPosition() >= 0) {
+
+                        if (Bot.turretPlatform.getCurrentPosition() < turretClockwise * 2) {
+                            Bot.turretPlatform.setPower(+turretPowerEncoder);
+                        }
+                    } else if (Bot.turretPlatform.getCurrentPosition() < 0) {
+                        if (Bot.turretPlatform.getCurrentPosition() > turretCounterclocwise * 2) {
+                            Bot.turretPlatform.setPower(-turretPowerEncoder);
+                        } else {
+                            turrentEncoder180 = false;
+                        }
+                    }
                 } else {
-                    turretEncoderCollect = false;
-                }
-            }
-
-
-            if (!turretEncoderCollect) {
-                Bot.turretPlatform.setPower(0);
-            }
-
-        } else if (turrentEncoder180 == true) {
-            if (Bot.turretPlatform.getCurrentPosition() >= 0) {
-
-                if (Bot.turretPlatform.getCurrentPosition() < turretClockwise * 2) {
-                    Bot.turretPlatform.setPower(+turretPowerEncoder);
-                } else {
+                    Bot.turretPlatform.setPower(0);
                     turrentEncoder180 = false;
                 }
-            } else if (Bot.turretPlatform.getCurrentPosition() < 0) {
-                if (Bot.turretPlatform.getCurrentPosition() > turretCounterclocwise * 2) {
-                    Bot.turretPlatform.setPower(-turretPowerEncoder);
-                } else {
-                    turrentEncoder180 = false;
-                }
             }
-        } else {
-            Bot.turretPlatform.setPower(0);
-            turrentEncoder180 = false;
-        }
-    }
+
+
+
+
 
     @Override
     public void stop() {

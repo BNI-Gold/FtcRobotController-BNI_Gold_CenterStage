@@ -1,7 +1,6 @@
 package org.firstinspires.ftc.teamcode.Compitition.PowerPlay.controls.Autonomus.ComptitionAutoPaths.BlueLeftPark.GyroDrive;
 
 import org.firstinspires.ftc.teamcode.Compitition.PowerPlay.Robots.CompetionBot;
-import org.firstinspires.ftc.teamcode.Compitition.PowerPlay.Robots.StraferBot;
 import org.firstinspires.ftc.teamcode.Compitition.PowerPlay.controls.Autonomus.ComptitionAutoPaths.AutoMain;
 import org.firstinspires.ftc.teamcode.Compitition.PowerPlay.controls.Autonomus.ComptitionAutoPaths.AutoTargetZone;
 
@@ -22,7 +21,19 @@ public abstract class LeftLowConeStack extends AutoMain {
 
             case None:
 
-                fiveConeAuto(Bot);
+                //fiveConeAuto(Bot);
+
+                Bot.driveForwardGyro(0.5, 1);
+                sleep(sleepTime);
+
+                sleep(500);
+
+                Bot.turretAuto90CW();
+
+                sleep(1000);
+
+                Bot.turretAutoCollect();
+                sleep(sleepTime);
 
                 break;
         }
@@ -39,74 +50,10 @@ public abstract class LeftLowConeStack extends AutoMain {
         sleep(sleepTime);
 
         //stacks first cone
-        moveToStack(Bot);
 
         sleep(sleepTime);
 
-        grabConeOne(Bot);
-
-        sleep(sleepTime);
-
-        coneStackLow(Bot);
-
-        sleep(sleepTime);
-
-        //stacks second cone
-        moveToStack(Bot);
-
-        sleep(sleepTime);
-
-        grabConeTwo(Bot);
-
-        sleep(sleepTime);
-
-        coneStackLow(Bot);
-
-        sleep(sleepTime);
-
-        //stacks third cone
-        moveToStack(Bot);
-
-        sleep(sleepTime);
-
-        grabConeThree(Bot);
-
-        sleep(sleepTime);
-
-        coneStackLow(Bot);
-
-        sleep(sleepTime);
-
-        //stacks fourth cone
-        moveToStack(Bot);
-
-        sleep(sleepTime);
-
-        grabConeFour(Bot);
-
-        sleep(sleepTime);
-
-        coneStackLow(Bot);
-
-        sleep(sleepTime);
-
-        //stacks fifth cone
-        moveToStack(Bot);
-
-        sleep(sleepTime);
-
-        grabConeFive(Bot);
-
-        sleep(sleepTime);
-
-        coneStackLow(Bot);
-
-        sleep(sleepTime);
-
-        //prepares for parking
-        parkFromLow(Bot);
-
-        sleep(sleepTime);
+        scoreConeOne(Bot);
 
     }
 
@@ -178,46 +125,18 @@ public abstract class LeftLowConeStack extends AutoMain {
 
     }
 
-    public void moveToStack(CompetionBot Bot) throws InterruptedException {
-
-        //moves from position of scoring on low to the stack
-
-        Bot.driveForwardGyro(0.4, 2.25);
-        sleep(sleepTime);
-
-    }
-
-    public void coneStackLow(CompetionBot Bot) throws InterruptedException {
-
-        //moves to low goal, scores
-
-        Bot.driveBackwardGyro(0.4, 2);
-        sleep(sleepTime);
-
-        Bot.extendGrabberLift(0.7);
-        sleep(500);
-        Bot.stopGrabberLift();
-        Bot.extendGrabberLift(0.4);
-
-        Bot.turretCounterClockwise(0.5);
-        sleep(700);
-        Bot.turretStop();
-        sleep(1000);
-
-        Bot.openGrabberArms();
-        sleep(sleepTime);
-
-    }
-
     public void parkFromLow(CompetionBot Bot) {
 
         //moves from position of stacking final cone --> parking position 1 (can go from there into zone 2 or 3)
 
     }
 
-    public void grabConeOne(CompetionBot Bot) {
+    public void scoreConeOne(CompetionBot Bot) throws InterruptedException {
 
         //grabs first cone (highest cone)
+
+        Bot.driveForwardGyro(0.35, 1.6);
+        sleep(sleepTime);
 
         Bot.closeGrabberArms();
         sleep(sleepTime);
@@ -226,6 +145,9 @@ public abstract class LeftLowConeStack extends AutoMain {
         sleep(600);
 
         Bot.extendGrabberLift(0.4);
+        sleep(sleepTime);
+
+        Bot.driveBackwardGyro(0.3, 1.5);
         sleep(sleepTime);
 
     }

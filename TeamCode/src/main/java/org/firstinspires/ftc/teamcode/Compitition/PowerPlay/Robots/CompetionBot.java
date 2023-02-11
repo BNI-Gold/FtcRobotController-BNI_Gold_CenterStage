@@ -474,4 +474,158 @@ public class CompetionBot extends MecanumDrive {
 
         }
     }
+
+    int turretClockwise = 415;
+    int turretCounterclocwise = -415;
+
+    boolean turretEncoderCW = false;
+    boolean turretEncoderCCW = false;
+    boolean turretEncoderCollect = false;
+    boolean turrentEncoder180 = false;
+
+    double turretPowerEncoder = 0.2;
+
+    public void turretAuto90CW () {
+
+        turretEncoderCW = true;
+
+    }
+
+    public void turretAuto90CCW () {
+
+        turretEncoderCCW = true;
+
+    }
+
+    public void turretAutoCollect () {
+
+        turretEncoderCollect = true;
+
+    }
+
+    public void turretControlEncoder() {
+        int currentTurretEncoder = turretPlatform.getCurrentPosition();
+
+        //
+        // ARE WE USING ENCODER TURN?
+        //
+
+        //
+        //  MANUAL CONTROL OF TURRET
+        //
+
+//        if (gamepad2.left_bumper) {
+//            Bot.turretPlatform.setPower(-turretPowerManual);
+//        }
+//        else if (gamepad2.right_bumper) {
+//            Bot.turretPlatform.setPower(+turretPowerManual);
+//        }
+
+
+        //
+        //  ENCODER CONTROL OF TURRET
+        //
+
+        if (turretEncoderCW) {
+            if (turretPlatform.getCurrentPosition() >= turretClockwise) {
+//
+
+                if (turretPlatform.getCurrentPosition() >= turretClockwise) {
+                    turretPlatform.setPower(-turretPowerEncoder);
+                }
+
+                if (turretPlatform.getCurrentPosition() < turretClockwise) {
+                    turretEncoderCW = false;
+                    turretPlatform.setPower(0);
+                }
+
+
+            } else if (turretPlatform.getCurrentPosition() < turretClockwise) {
+//
+                if (turretPlatform.getCurrentPosition() < turretClockwise) {
+                    turretPlatform.setPower(+turretPowerEncoder);
+                }
+
+                if (turretPlatform.getCurrentPosition() > turretClockwise) {
+                    turretEncoderCW = false;
+                    turretPlatform.setPower(0);
+                }
+
+
+            }
+
+        } else if (turretEncoderCCW) {
+            if (turretPlatform.getCurrentPosition() >= turretCounterclocwise) {
+//
+
+                if (turretPlatform.getCurrentPosition() >= turretCounterclocwise) {
+                    turretPlatform.setPower(-turretPowerEncoder);
+                }
+
+                if (turretPlatform.getCurrentPosition() < turretCounterclocwise) {
+                    turretEncoderCCW = false;
+                    turretPlatform.setPower(0);
+                }
+
+
+            } else if (turretPlatform.getCurrentPosition() < turretCounterclocwise) {
+//
+                if (turretPlatform.getCurrentPosition() < turretCounterclocwise) {
+                    turretPlatform.setPower(+turretPowerEncoder);
+                }
+
+                if (turretPlatform.getCurrentPosition() > turretCounterclocwise) {
+                    turretEncoderCCW = false;
+                    turretPlatform.setPower(0);
+                }
+
+            }
+
+        } else if (turretEncoderCollect) {
+            if (turretPlatform.getCurrentPosition() >= 0) {
+//
+
+                if (turretPlatform.getCurrentPosition() >= 0) {
+                    turretPlatform.setPower(-turretPowerEncoder);
+                }
+
+                if (turretPlatform.getCurrentPosition() < 0) {
+                    turretEncoderCollect = false;
+                    turretPlatform.setPower(0);
+                }
+
+
+            } else if (turretPlatform.getCurrentPosition() < 0) {
+//
+                if (turretPlatform.getCurrentPosition() < 0) {
+                    turretPlatform.setPower(+turretPowerEncoder);
+                }
+
+                if (turretPlatform.getCurrentPosition() > 0) {
+                    turretEncoderCollect = false;
+                    turretPlatform.setPower(0);
+                }
+
+
+            }
+
+        } else if (turrentEncoder180 == true) {
+            if (turretPlatform.getCurrentPosition() >= 0) {
+
+                if (turretPlatform.getCurrentPosition() < turretClockwise * 2) {
+                    turretPlatform.setPower(+turretPowerEncoder);
+                }
+            } else if (turretPlatform.getCurrentPosition() < 0) {
+                if (turretPlatform.getCurrentPosition() > turretCounterclocwise * 2) {
+                    turretPlatform.setPower(-turretPowerEncoder);
+                } else {
+                    turrentEncoder180 = false;
+                }
+            }
+        } else {
+            turretPlatform.setPower(0);
+            turrentEncoder180 = false;
+        }
+    }
+
 }
