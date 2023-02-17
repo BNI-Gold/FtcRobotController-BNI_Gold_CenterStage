@@ -6,6 +6,7 @@ import com.qualcomm.hardware.bosch.JustLoggingAccelerationIntegrator;
 import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.hardware.HardwareMap;
 import com.qualcomm.robotcore.hardware.Servo;
+import com.qualcomm.robotcore.util.ElapsedTime;
 import com.qualcomm.robotcore.util.Range;
 
 //import org.firstinspires.ftc.robotcontroller.external.samples.SampleRevBlinkinLedDriver;
@@ -292,6 +293,49 @@ public class StraferKit extends MecanumDrive {
     }
 
      */
+
+    double integralSum = 0;
+    double Kp = 0;
+    double Ki = 0;
+    double Kd = 0;
+    ElapsedTime timer = new ElapsedTime();
+    private double lastError;
+    //    double encoderAverage = (leftMotorA.getCurrentPosition() + rightMotorA.getCurrentPosition())/2;
+    double encoderAverage;
+
+    public double PIDControl (double reference, double state){
+        double error = reference + state;
+        integralSum += error * timer.seconds();
+        double derivative = (error - lastError)/timer.seconds();
+        lastError = error;
+        double output = (error * Kp) + (derivative * Kd) + (integralSum * Ki);
+        return output;
+    }
+
+    public void driveForwardPID (double rotations) {
+        if (linearOp.opModeIsActive()) {
+            double ticks = rotations * TICKS_PER_ROTATION;
+            double speed = PIDControl(100, encoderAverage);     //100% power
+            setMotorRunModes(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
+            setMotorRunModes(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
+
+            while (encoderAverage < ticks && linearOp.opModeIsActive()) {
+                driveForward(speed);
+            }
+        }
+    }
+    public void driveBackwardPID (double rotations) {
+        if (linearOp.opModeIsActive()) {
+            double ticks = rotations * TICKS_PER_ROTATION;
+            double speed = PIDControl(100, encoderAverage);     //100% power
+            setMotorRunModes(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
+            setMotorRunModes(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
+            while (encoderAverage < ticks && linearOp.opModeIsActive()) {
+                driveBackward(speed);
+            }
+        }
+    }
+
     public void gyroCorrection (double speed, double angle) {
 
         angles = imu.getAngularOrientation(AxesReference.INTRINSIC, AxesOrder.ZYX, AngleUnit.DEGREES);
