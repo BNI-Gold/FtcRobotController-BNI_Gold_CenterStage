@@ -1,8 +1,10 @@
 package org.firstinspires.ftc.teamcode.Compitition.PowerPlay.controls.OpMode;
 
+import com.acmerobotics.dashboard.FtcDashboard;
 import com.qualcomm.robotcore.eventloop.opmode.OpMode;
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 import com.qualcomm.robotcore.hardware.DcMotor;
+import com.qualcomm.robotcore.hardware.DcMotorEx;
 import com.qualcomm.robotcore.util.Range;
 
 import org.firstinspires.ftc.teamcode.Compitition.PowerPlay.Robots.CompetionBot;
@@ -10,6 +12,8 @@ import org.firstinspires.ftc.teamcode.Compitition.PowerPlay.Robots.CompetionBot;
 @TeleOp (name = "Colonel Clap",group = "1")
 
 public class TeleOp_CompetitionBot extends OpMode {
+
+    FtcDashboard dashboard;
 
     // (toggles between telemetry for encoders and a big BNI logo!)
     boolean showSeriousTelemetry = false;
@@ -28,14 +32,27 @@ public class TeleOp_CompetitionBot extends OpMode {
     // below var is used for driver 1's slow mode
     double speedMultiply = 1;
 
+    int turretPosition;
+
     boolean driveNormal = true;
 
     boolean turretSlowMode = false;
 
     boolean driveSlowMode = false;
+    
+    boolean liftStopAllow = true;
+    
+    boolean turretStopAllow = true;
 
     int turretClockwise = 410;
     int turretCounterclocwise = -405;
+
+    int turret90CW = 800;
+    int turret90CCW = -800;
+    int turretCenter = 0;
+
+    int turret180CW = 2000;
+    int turret180CCW = -2000;
 
     int liftRest = 0;
     int liftLow = 600;
@@ -94,16 +111,20 @@ public class TeleOp_CompetitionBot extends OpMode {
 
         updateTelemetry();
 
-//        liftControlEncoder();
-//        turretControlEncoder();
-//
-//        liftMechanismEncoder();
+        liftControlEncoder();
+        turretEncoderControlNew();
+
+        liftMechanismEncoderNew();
 
     }
 
     public void updateTelemetry() {
 
         if (showSeriousTelemetry == true) {
+
+            dashboard = FtcDashboard.getInstance();
+
+            telemetry = dashboard.getTelemetry();
 
             telemetry.addLine("Encoder Values: ");
 
@@ -118,6 +139,7 @@ public class TeleOp_CompetitionBot extends OpMode {
             telemetry.addData("rightRear: ", Bot.rearRightMotor.getCurrentPosition());
 
             telemetry.addData("Lift Level Selected: ", liftLevel);
+            telemetry.addData("Turret Position Selected: ", turretPosition);
 
         } else {
 
@@ -192,7 +214,8 @@ public class TeleOp_CompetitionBot extends OpMode {
 
     }
 
-    public void liftMechanismEncoder() {
+
+    public void liftMechanismEncoderNew() {
 //        Only go to target position when press 'y'.
 //        Allows P2 to get lift "target" position ready.
         if (gamepad2.left_stick_button) {
@@ -320,19 +343,36 @@ public class TeleOp_CompetitionBot extends OpMode {
 
     public void liftControlManual() {
 
-        if (gamepad2.left_stick_y >= 0.1) {
+        if (gamepad2.left_stick_y >= 0.2) {
 
-            leftStickYVal = gamepad2.left_stick_y;
-            Bot.retractGrabberLift(leftStickYVal * .65);
+            Bot.grabberLiftOne.setMode(DcMotorEx.RunMode.RUN_WITHOUT_ENCODER);
+            Bot.grabberLiftOne.setPower(0.8);
 
-        } else if (gamepad2.left_stick_y <= -0.1) {
+            Bot.grabberLiftTwo.setMode(DcMotorEx.RunMode.RUN_WITHOUT_ENCODER);
+            Bot.grabberLiftTwo.setPower(0.8);
 
-            leftStickYVal = gamepad2.left_stick_y;
-            Bot.extendGrabberLift(leftStickYVal * 1);
+            liftStopAllow = true;
+
+        } else if (gamepad2.left_stick_y <= -0.2) {
+
+            Bot.grabberLiftOne.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
+            Bot.grabberLiftOne.setPower(-0.3);
+
+            Bot.grabberLiftTwo.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
+            Bot.grabberLiftTwo.setPower(-0.3);
+
+            liftStopAllow = true;
 
         } else {
 
-            Bot.stopGrabberLift();
+            if (liftStopAllow == true) {
+
+                Bot.grabberLiftOne.setPower(0);
+                Bot.grabberLiftTwo.setPower(0);
+
+            }
+
+            liftStopAllow = false;
 
         }
 
@@ -340,131 +380,119 @@ public class TeleOp_CompetitionBot extends OpMode {
 
     public void turretControlManual() {
 
-        if (gamepad2.right_stick_x >= 0.15) {
+        if (gamepad2.right_stick_x >= 0.2) {
 
-            rightStickXVal = gamepad2.right_stick_x;
-            Bot.turretClockwise(rightStickXVal * turretSpeedMultiply);
+            Bot.turretPlatform.setMode(DcMotorEx.RunMode.RUN_WITHOUT_ENCODER);
+            Bot.turretPlatform.setPower(0.5);
 
-        } else if (gamepad2.right_stick_x <= -0.15) {
+            turretStopAllow = true;
 
-            rightStickXVal = gamepad2.right_stick_x;
-            Bot.turretCounterClockwise(-rightStickXVal * turretSpeedMultiply);
+        } else if (gamepad2.right_stick_x <= -0.2) {
+
+            Bot.turretPlatform.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
+            Bot.turretPlatform.setPower(-0.5);
+
+            turretStopAllow = true;
 
         } else {
 
-            Bot.turretStop();
+            if (turretStopAllow == true) {
+
+                Bot.turretPlatform.setPower(0);
+
+            }
+
+            turretStopAllow = false;
 
         }
 
     }
 
-    public void turretControlEncoder() {
-        int currentTurretEncoder = Bot.turretPlatform.getCurrentPosition();
+    public void turretEncoderControlNew() {
 
-        //
-        // ARE WE USING ENCODER TURN?
-        //
+        if (gamepad2.dpad_up) {
 
-        if (gamepad2.left_trigger >= 0.2) {
-            turretEncoderCCW = true;
-        }
-        if (gamepad2.right_trigger >= 0.2) {
-            turretEncoderCW = true;
-        }
-        if (gamepad2.left_bumper) {
-            turretEncoderCollect = true;
-        }
-        if (gamepad2.right_bumper) {
-            turrentEncoder180 = true;
-        }
+            turretPosition = 1;
 
-        //
-        //  MANUAL CONTROL OF TURRET
-        //
+        } else if (gamepad2.dpad_left) {
 
-//        if (gamepad2.left_bumper) {
-//            Bot.turretPlatform.setPower(-turretPowerManual);
-//        }
-//        else if (gamepad2.right_bumper) {
-//            Bot.turretPlatform.setPower(+turretPowerManual);
-//        }
+            if (Bot.turretPlatform.getCurrentPosition() < 0) {
 
+                turretPosition = 3;
 
-        //
-        //  ENCODER CONTROL OF TURRET
-        //
+            } else if (Bot.turretPlatform.getCurrentPosition() >= 0) {
 
-        else if (turretEncoderCW) {
-            if (Bot.turretPlatform.getCurrentPosition() < turretClockwise) {
-                Bot.turretPlatform.setPower(+turretPowerEncoder);
-            } else {
-                turretEncoderCW = false;
+                turretPosition = 4;
+
             }
-        } else if (turretEncoderCCW) {
-            if (Bot.turretPlatform.getCurrentPosition() > turretCounterclocwise) {
-                Bot.turretPlatform.setPower(-turretPowerEncoder);
-            } else {
-                turretEncoderCCW = false;
-            }
-        } else if (turretEncoderCollect) {
-//            if (Bot.turretPlatform.getCurrentPosition() > 0) {
-//                if (Bot.turretPlatform.getCurrentPosition() > 0) {
-//                    Bot.turretPlatform.setPower(-turretPowerEncoder);
-//                }
-//                else {
-//                    turretEncoderCollect = false;
-//                }
-//            }
-//
-//            else if (Bot.turretPlatform.getCurrentPosition() < 0) {
-//                if (Bot.turretPlatform.getCurrentPosition() < 0) {
-//                    Bot.turretPlatform.setPower(+turretPowerEncoder);
-//                }
-//                else {
-//                    turretEncoderCollect = false;
-//                }
-//            }
-
-
-            if (Bot.turretPlatform.getCurrentPosition() >= 0) {
-                if (Bot.turretPlatform.getCurrentPosition() >= 0) {
-                    Bot.turretPlatform.setPower(-turretPowerEncoder);
-                } else {
-                    turretEncoderCollect = false;
-                }
-
-            } else if (Bot.turretPlatform.getCurrentPosition() < 0) {
-                if (Bot.turretPlatform.getCurrentPosition() < 0) {
-                    Bot.turretPlatform.setPower(+turretPowerEncoder);
-                } else {
-                    turretEncoderCollect = false;
-                }
-            }
-
-
-            if (!turretEncoderCollect) {
-                Bot.turretPlatform.setPower(0);
-            }
-
-        } else if (turrentEncoder180 == true) {
-            if (Bot.turretPlatform.getCurrentPosition() >= 0) {
-
-                if (Bot.turretPlatform.getCurrentPosition() < turretClockwise * 2) {
-                    Bot.turretPlatform.setPower(+turretPowerEncoder);
-                } else {
-                    turrentEncoder180 = false;
-                }
-            } else if (Bot.turretPlatform.getCurrentPosition() < 0) {
-                if (Bot.turretPlatform.getCurrentPosition() > turretCounterclocwise * 2) {
-                    Bot.turretPlatform.setPower(-turretPowerEncoder);
-                } else {
-                    turrentEncoder180 = false;
-                }
-            }
-        } else {
-            Bot.turretPlatform.setPower(0);
-            turrentEncoder180 = false;
         }
+    }
+
+    public void turretEncoderNew() {
+
+        if (gamepad2.dpad_down) {
+            switch (turretPosition) {
+                case 0:
+                    if (Bot.turretPlatform.getCurrentPosition() > turret90CCW) {
+                        Bot.turretPlatform.setPower(-turretPowerEncoder);
+                    } else {
+                        Bot.turretPlatform.setPower(turretPowerEncoder);
+                    }
+                    Bot.turretPlatform.setTargetPosition(turret90CCW);
+                    Bot.turretPlatform.setMode(DcMotor.RunMode.RUN_TO_POSITION);
+
+                    break;
+
+                case 1:
+                    if (Bot.turretPlatform.getCurrentPosition() > turretCenter) {
+                        Bot.turretPlatform.setPower(-turretPowerEncoder);
+                    } else {
+                        Bot.turretPlatform.setPower(turretPowerEncoder);
+                    }
+                    Bot.turretPlatform.setTargetPosition(turretCenter);
+                    Bot.turretPlatform.setMode(DcMotor.RunMode.RUN_TO_POSITION);
+
+                    break;
+
+                case 2:
+                    if (Bot.turretPlatform.getCurrentPosition() > turret90CW) {
+                        Bot.turretPlatform.setPower(-turretPowerEncoder);
+                    } else {
+                        Bot.turretPlatform.setPower(turretPowerEncoder);
+                    }
+                    Bot.turretPlatform.setTargetPosition(turret90CW);
+                    Bot.turretPlatform.setMode(DcMotor.RunMode.RUN_TO_POSITION);
+
+                    break;
+
+                case 3:
+
+                    if (Bot.turretPlatform.getCurrentPosition() > turret180CCW) {
+                        Bot.turretPlatform.setPower(-turretPowerEncoder);
+                    } else {
+                        Bot.turretPlatform.setPower(turretPowerEncoder);
+                    }
+                    Bot.turretPlatform.setTargetPosition(turret180CCW);
+                    Bot.turretPlatform.setMode(DcMotor.RunMode.RUN_TO_POSITION);
+
+                    break;
+
+                case 4:
+
+                    if (Bot.turretPlatform.getCurrentPosition() > turret180CW) {
+                        Bot.turretPlatform.setPower(-turretPowerEncoder);
+                    } else {
+                        Bot.turretPlatform.setPower(turretPowerEncoder);
+                    }
+                    Bot.turretPlatform.setTargetPosition(turret180CW);
+                    Bot.turretPlatform.setMode(DcMotor.RunMode.RUN_TO_POSITION);
+
+                default:
+                    break;
+
+            }
+        }
+
     }
 
     @Override

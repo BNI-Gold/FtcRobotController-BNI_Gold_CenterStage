@@ -31,9 +31,9 @@ public class CompetionBot extends MecanumDrive {
     public final double TOLERANCE = 0.4;
 
 
-    public DcMotor grabberLiftOne = null;
-    public DcMotor grabberLiftTwo = null;
-    public DcMotor turretPlatform = null;
+    public DcMotorEx grabberLiftOne = null;
+    public DcMotorEx grabberLiftTwo = null;
+    public DcMotorEx turretPlatform = null;
     public Servo grabberArmServo = null;
     public CRServo bigConeSucker = null;
     TouchSensor magSwitch;

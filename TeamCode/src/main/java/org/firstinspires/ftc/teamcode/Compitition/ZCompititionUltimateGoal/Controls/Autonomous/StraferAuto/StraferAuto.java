@@ -23,10 +23,7 @@ public class StraferAuto extends LinearOpMode {
 
         while (opModeIsActive()) {
 
-            Bot.driveGyroForward(0.5, 3);
-            sleep(sleepTime);
-
-            Bot.driveGyroBackward(0.5, 3);
+            Bot.driveForwardPID(1);
             sleep(sleepTime);
 
             requestOpModeStop();
