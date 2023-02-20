@@ -56,7 +56,7 @@ public class CustomPIDTest extends OpMode {
     double liftPowerUp = 1.0;
     double liftPowerDown = 0.2;
 
-    boolean turretMoveAllow = true;
+    boolean turretMoveAllow = false;
 
     boolean turretStopAllow = true;
 
@@ -179,18 +179,18 @@ public class CustomPIDTest extends OpMode {
 //
 //        telemetry.addData("Desired Angle: ", desiredAngle);
 
-        telemetry.addData("Lift Motor One: ", grabberLiftOne.getCurrentPosition());
-        telemetry.addData("Lift Motor Two: ", grabberLiftTwo.getCurrentPosition());
-
-        telemetry.addData("Lift Level Selected: ", liftLevel);
-        telemetry.addData("Lift Moving? ", liftLevelAllow);
-
-//        telemetry.addData("Turret Motor Position: ", turretMotor.getCurrentPosition());
-//        telemetry.addData("Turret Motor Velo: ", turretMotor.getVelocity());
+//        telemetry.addData("Lift Motor One: ", grabberLiftOne.getCurrentPosition());
+//        telemetry.addData("Lift Motor Two: ", grabberLiftTwo.getCurrentPosition());
 //
-//        telemetry.addData("Turret Position Input: ", turretPosition);
-//
-//        telemetry.addData("Right Stick X: ", gamepad2.right_stick_x);
+//        telemetry.addData("Lift Level Selected: ", liftLevel);
+//        telemetry.addData("Lift Moving? ", liftLevelAllow);
+
+        telemetry.addData("Turret Motor Position: ", turretMotor.getCurrentPosition());
+        telemetry.addData("Turret Motor Velo: ", turretMotor.getVelocity());
+
+        telemetry.addData("Turret Position Input: ", turretPosition);
+
+        telemetry.addData("Right Stick X: ", gamepad2.right_stick_x);
 
     }
 
@@ -213,154 +213,154 @@ public class CustomPIDTest extends OpMode {
 //        frontRightMotor.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
 //        frontRightMotor.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
 
-        grabberLiftOne = hardwareMap.get(DcMotorEx.class, "front_right_motor");
-
-        grabberLiftOne.setDirection(DcMotorSimple.Direction.FORWARD);
-
-        grabberLiftOne.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
-        grabberLiftOne.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
-
-        grabberLiftTwo = hardwareMap.get(DcMotorEx.class, "rear_right_motor");
-
-        grabberLiftTwo.setDirection(DcMotorSimple.Direction.FORWARD);
-
-        grabberLiftTwo.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
-        grabberLiftTwo.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
-
-//        turretMotor = hardwareMap.get(DcMotorEx.class, "null");
+//        grabberLiftOne = hardwareMap.get(DcMotorEx.class, "front_right_motor");
 //
-//        turretMotor.setDirection(DcMotorSimple.Direction.FORWARD);
+//        grabberLiftOne.setDirection(DcMotorSimple.Direction.FORWARD);
 //
-//        turretMotor.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
-//        turretMotor.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
+//        grabberLiftOne.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
+//        grabberLiftOne.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
+//
+//        grabberLiftTwo = hardwareMap.get(DcMotorEx.class, "rear_right_motor");
+//
+//        grabberLiftTwo.setDirection(DcMotorSimple.Direction.FORWARD);
+//
+//        grabberLiftTwo.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
+//        grabberLiftTwo.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
+
+        turretMotor = hardwareMap.get(DcMotorEx.class, "rear_right_motor");
+
+        turretMotor.setDirection(DcMotorSimple.Direction.FORWARD);
+
+        turretMotor.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
+        turretMotor.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
 
     }
 
-    public void liftMechanismEncoderNew() {
-//        Only go to target position when press 'y'.
-//        Allows P2 to get lift "target" position ready.
-        if (gamepad2.left_stick_button) {
-            switch (liftLevel) {
-                case 0:
-                    if (grabberLiftOne.getCurrentPosition() > liftRest) {
-                        grabberLiftOne.setPower(liftPowerDown);
-                        grabberLiftTwo.setPower(liftPowerDown);
-                    } else {
-                        grabberLiftOne.setPower(liftPowerUp);
-                        grabberLiftTwo.setPower(liftPowerUp);
-                    }
-                    grabberLiftOne.setTargetPosition(liftRest);
-                    grabberLiftOne.setMode(DcMotor.RunMode.RUN_TO_POSITION);
-
-                    grabberLiftTwo.setTargetPosition(liftRest);
-                    grabberLiftTwo.setMode(DcMotor.RunMode.RUN_TO_POSITION);
-
-                    break;
-
-                case 1:
-                    if (grabberLiftOne.getCurrentPosition() > liftLow) {
-                        grabberLiftOne.setPower(liftPowerDown);
-                        grabberLiftTwo.setPower(liftPowerDown);
-                    } else {
-                        grabberLiftOne.setPower(liftPowerUp);
-                        grabberLiftTwo.setPower(liftPowerUp);
-                    }
-                    grabberLiftOne.setTargetPosition(liftLow);
-                    grabberLiftOne.setMode(DcMotor.RunMode.RUN_TO_POSITION);
-
-                    grabberLiftTwo.setTargetPosition(liftLow);
-                    grabberLiftTwo.setMode(DcMotor.RunMode.RUN_TO_POSITION);
-
-                    break;
-
-                case 2:
-                    if (grabberLiftOne.getCurrentPosition() > liftMid) {
-                        grabberLiftOne.setPower(liftPowerDown);
-                        grabberLiftTwo.setPower(liftPowerDown);
-                    } else {
-                        grabberLiftOne.setPower(liftPowerUp);
-                        grabberLiftTwo.setPower(liftPowerUp);
-                    }
-                    grabberLiftOne.setTargetPosition(liftMid);
-                    grabberLiftOne.setMode(DcMotor.RunMode.RUN_TO_POSITION);
-
-                    grabberLiftTwo.setTargetPosition(liftMid);
-                    grabberLiftTwo.setMode(DcMotor.RunMode.RUN_TO_POSITION);
-
-                    break;
-
-                case 3:
-                    grabberLiftOne.setPower(liftPowerUp);
-                    grabberLiftOne.setTargetPosition(liftHigh);
-                    grabberLiftOne.setMode(DcMotor.RunMode.RUN_TO_POSITION);
-
-                    grabberLiftTwo.setPower(liftPowerUp);
-                    grabberLiftTwo.setTargetPosition(liftHigh);
-                    grabberLiftTwo.setMode(DcMotor.RunMode.RUN_TO_POSITION);
-
-                default:
-                    break;
-            }
-        }
-    }
-
-    public void liftControlEncoder() {
-        if (gamepad2.b == true && liftLevelAllow == true) {
-            if (liftLevel < 3) {
-                liftLevel += 1;
-            }
-            liftLevelAllow = false;
-            liftToggle = false;
-        } else if (gamepad2.x == true && liftLevelAllow == true) {
-            if (liftLevel > 0) {
-                liftLevel -= 1;
-            }
-            liftToggle = false;
-            liftLevelAllow = false;
-        } else {  // The IF here makes it so lift* goes back to default 'false' ONLY when not pressing Trigger.
-            if (gamepad2.b == false && gamepad2.x == false) {
-                liftLevelAllow = true;
-                liftToggle = true;
-            }
-        }
-    }
-
-    public void liftControlManual() {
-
-        if (gamepad2.left_stick_y >= 0.2) {
-
-            grabberLiftOne.setMode(DcMotorEx.RunMode.RUN_WITHOUT_ENCODER);
-            grabberLiftOne.setPower(0.8);
-
-            grabberLiftTwo.setMode(DcMotorEx.RunMode.RUN_WITHOUT_ENCODER);
-            grabberLiftTwo.setPower(0.8);
-
-            liftStopAllow = true;
-
-        } else if (gamepad2.left_stick_y <= -0.2) {
-
-            grabberLiftOne.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
-            grabberLiftOne.setPower(-0.3);
-
-            grabberLiftTwo.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
-            grabberLiftTwo.setPower(-0.3);
-
-            liftStopAllow = true;
-
-        } else {
-
-            if (liftStopAllow == true) {
-
-                grabberLiftOne.setPower(0);
-                grabberLiftTwo.setPower(0);
-
-            }
-
-            liftStopAllow = false;
-
-        }
-
-    }
+//    public void liftMechanismEncoderNew() {
+////        Only go to target position when press 'y'.
+////        Allows P2 to get lift "target" position ready.
+//        if (gamepad2.left_stick_button) {
+//            switch (liftLevel) {
+//                case 0:
+//                    if (grabberLiftOne.getCurrentPosition() > liftRest) {
+//                        grabberLiftOne.setPower(liftPowerDown);
+//                        grabberLiftTwo.setPower(liftPowerDown);
+//                    } else {
+//                        grabberLiftOne.setPower(liftPowerUp);
+//                        grabberLiftTwo.setPower(liftPowerUp);
+//                    }
+//                    grabberLiftOne.setTargetPosition(liftRest);
+//                    grabberLiftOne.setMode(DcMotor.RunMode.RUN_TO_POSITION);
+//
+//                    grabberLiftTwo.setTargetPosition(liftRest);
+//                    grabberLiftTwo.setMode(DcMotor.RunMode.RUN_TO_POSITION);
+//
+//                    break;
+//
+//                case 1:
+//                    if (grabberLiftOne.getCurrentPosition() > liftLow) {
+//                        grabberLiftOne.setPower(liftPowerDown);
+//                        grabberLiftTwo.setPower(liftPowerDown);
+//                    } else {
+//                        grabberLiftOne.setPower(liftPowerUp);
+//                        grabberLiftTwo.setPower(liftPowerUp);
+//                    }
+//                    grabberLiftOne.setTargetPosition(liftLow);
+//                    grabberLiftOne.setMode(DcMotor.RunMode.RUN_TO_POSITION);
+//
+//                    grabberLiftTwo.setTargetPosition(liftLow);
+//                    grabberLiftTwo.setMode(DcMotor.RunMode.RUN_TO_POSITION);
+//
+//                    break;
+//
+//                case 2:
+//                    if (grabberLiftOne.getCurrentPosition() > liftMid) {
+//                        grabberLiftOne.setPower(liftPowerDown);
+//                        grabberLiftTwo.setPower(liftPowerDown);
+//                    } else {
+//                        grabberLiftOne.setPower(liftPowerUp);
+//                        grabberLiftTwo.setPower(liftPowerUp);
+//                    }
+//                    grabberLiftOne.setTargetPosition(liftMid);
+//                    grabberLiftOne.setMode(DcMotor.RunMode.RUN_TO_POSITION);
+//
+//                    grabberLiftTwo.setTargetPosition(liftMid);
+//                    grabberLiftTwo.setMode(DcMotor.RunMode.RUN_TO_POSITION);
+//
+//                    break;
+//
+//                case 3:
+//                    grabberLiftOne.setPower(liftPowerUp);
+//                    grabberLiftOne.setTargetPosition(liftHigh);
+//                    grabberLiftOne.setMode(DcMotor.RunMode.RUN_TO_POSITION);
+//
+//                    grabberLiftTwo.setPower(liftPowerUp);
+//                    grabberLiftTwo.setTargetPosition(liftHigh);
+//                    grabberLiftTwo.setMode(DcMotor.RunMode.RUN_TO_POSITION);
+//
+//                default:
+//                    break;
+//            }
+//        }
+//    }
+//
+//    public void liftControlEncoder() {
+//        if (gamepad2.b == true && liftLevelAllow == true) {
+//            if (liftLevel < 3) {
+//                liftLevel += 1;
+//            }
+//            liftLevelAllow = false;
+//            liftToggle = false;
+//        } else if (gamepad2.x == true && liftLevelAllow == true) {
+//            if (liftLevel > 0) {
+//                liftLevel -= 1;
+//            }
+//            liftToggle = false;
+//            liftLevelAllow = false;
+//        } else {  // The IF here makes it so lift* goes back to default 'false' ONLY when not pressing Trigger.
+//            if (gamepad2.b == false && gamepad2.x == false) {
+//                liftLevelAllow = true;
+//                liftToggle = true;
+//            }
+//        }
+//    }
+//
+//    public void liftControlManual() {
+//
+//        if (gamepad2.left_stick_y >= 0.2) {
+//
+//            grabberLiftOne.setMode(DcMotorEx.RunMode.RUN_WITHOUT_ENCODER);
+//            grabberLiftOne.setPower(0.8);
+//
+//            grabberLiftTwo.setMode(DcMotorEx.RunMode.RUN_WITHOUT_ENCODER);
+//            grabberLiftTwo.setPower(0.8);
+//
+//            liftStopAllow = true;
+//
+//        } else if (gamepad2.left_stick_y <= -0.2) {
+//
+//            grabberLiftOne.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
+//            grabberLiftOne.setPower(-0.3);
+//
+//            grabberLiftTwo.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
+//            grabberLiftTwo.setPower(-0.3);
+//
+//            liftStopAllow = true;
+//
+//        } else {
+//
+//            if (liftStopAllow == true) {
+//
+//                grabberLiftOne.setPower(0);
+//                grabberLiftTwo.setPower(0);
+//
+//            }
+//
+//            liftStopAllow = false;
+//
+//        }
+//
+//    }
 
     public void turretControlManual() {
 
@@ -401,7 +401,11 @@ public class CustomPIDTest extends OpMode {
 
             turretPosition = 1;
 
+            turretMoveAllow = true;
+
         } else if (gamepad2.dpad_left) {
+
+            turretMoveAllow = true;
 
             if (turretMotor.getCurrentPosition() < 0) {
 
@@ -411,13 +415,18 @@ public class CustomPIDTest extends OpMode {
 
                 turretPosition = 4;
 
+            } else {
+
+                turretMoveAllow = false;
+
             }
+
         }
     }
 
     public void turretEncoderNew() {
 
-        if (gamepad2.dpad_down) {
+        if (turretMoveAllow) {
             switch (turretPosition) {
                 case 0:
                     if (turretMotor.getCurrentPosition() > turret90CCW) {
@@ -475,7 +484,7 @@ public class CustomPIDTest extends OpMode {
                     turretMotor.setMode(DcMotor.RunMode.RUN_TO_POSITION);
 
                 default:
-                break;
+                    break;
 
             }
         }
@@ -489,15 +498,15 @@ public class CustomPIDTest extends OpMode {
 
         //systemControl();
 
-        liftControlEncoder();
-        liftMechanismEncoderNew();
+        //liftControlEncoder();
+        //liftMechanismEncoderNew();
 
-//        turretEncoderNew();
-//        turretEncoderControlNew();
+        turretEncoderNew();
+        turretEncoderControlNew();
 
-//        turretControlManual();
+        turretControlManual();
 
-        liftControlManual();
+        //liftControlManual();
 
     }
 }
