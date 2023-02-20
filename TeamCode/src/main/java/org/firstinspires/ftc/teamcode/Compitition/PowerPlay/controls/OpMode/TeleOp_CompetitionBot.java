@@ -16,7 +16,7 @@ public class TeleOp_CompetitionBot extends OpMode {
     FtcDashboard dashboard;
 
     // (toggles between telemetry for encoders and a big BNI logo!)
-    boolean showSeriousTelemetry = false;
+    boolean showSeriousTelemetry = true;
 
     double leftStickYVal;
     double leftStickXVal;
@@ -58,6 +58,8 @@ public class TeleOp_CompetitionBot extends OpMode {
     int liftLow = 600;
     int liftMid = 1300;
     int liftHigh = 2000;
+
+    boolean turretMoveAllow = false;
 
     int liftLevel = 0;
     boolean liftLevelAllow = true;
@@ -106,15 +108,16 @@ public class TeleOp_CompetitionBot extends OpMode {
         turretSpeed();
         turretSlowModeControl();
 
+        drive();
         driveSpeed();
         driveSlowModeControl();
 
         updateTelemetry();
 
-        liftControlEncoder();
-        turretEncoderControlNew();
-
-        liftMechanismEncoderNew();
+//        liftControlEncoder();
+//        turretEncoderControlNew();
+//
+//        liftMechanismEncoderNew();
 
     }
 
@@ -281,6 +284,14 @@ public class TeleOp_CompetitionBot extends OpMode {
                     break;
             }
         }
+
+        if (liftLevel == 0 && (Bot.grabberLiftOne.getCurrentPosition() <= 100 || Bot.grabberLiftTwo.getCurrentPosition() <= 100)) {
+
+            Bot.grabberLiftOne.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
+            Bot.grabberLiftTwo.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
+
+        }
+
     }
 
     public void liftControlEncoder() {
@@ -345,21 +356,22 @@ public class TeleOp_CompetitionBot extends OpMode {
 
         if (gamepad2.left_stick_y >= 0.2) {
 
+
             Bot.grabberLiftOne.setMode(DcMotorEx.RunMode.RUN_WITHOUT_ENCODER);
-            Bot.grabberLiftOne.setPower(0.8);
+            Bot.grabberLiftOne.setPower(-gamepad2.left_stick_y * 1);
 
             Bot.grabberLiftTwo.setMode(DcMotorEx.RunMode.RUN_WITHOUT_ENCODER);
-            Bot.grabberLiftTwo.setPower(0.8);
+            Bot.grabberLiftTwo.setPower(-gamepad2.left_stick_y * 1);
 
             liftStopAllow = true;
 
         } else if (gamepad2.left_stick_y <= -0.2) {
 
             Bot.grabberLiftOne.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
-            Bot.grabberLiftOne.setPower(-0.3);
+            Bot.grabberLiftOne.setPower(-gamepad2.left_stick_y * 1);
 
             Bot.grabberLiftTwo.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
-            Bot.grabberLiftTwo.setPower(-0.3);
+            Bot.grabberLiftTwo.setPower(-gamepad2.left_stick_y * 1);
 
             liftStopAllow = true;
 
@@ -414,7 +426,11 @@ public class TeleOp_CompetitionBot extends OpMode {
 
             turretPosition = 1;
 
+            turretMoveAllow = true;
+
         } else if (gamepad2.dpad_left) {
+
+            turretMoveAllow = true;
 
             if (Bot.turretPlatform.getCurrentPosition() < 0) {
 
@@ -425,6 +441,11 @@ public class TeleOp_CompetitionBot extends OpMode {
                 turretPosition = 4;
 
             }
+
+        } else {
+
+            turretMoveAllow = false;
+
         }
     }
 

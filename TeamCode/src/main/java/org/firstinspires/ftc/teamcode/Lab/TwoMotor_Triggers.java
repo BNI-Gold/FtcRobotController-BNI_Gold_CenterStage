@@ -9,7 +9,7 @@ import com.qualcomm.robotcore.hardware.DcMotorSimple;
 //Class is used for testing a single motor, using trigger for variable power.
 //WITHOUT
 @TeleOp(name = "two motor test - TRIGGERS", group="lab")
-@Disabled
+
 
 public class TwoMotor_Triggers extends OpMode {
     private DcMotor motor_left = null;
@@ -25,11 +25,11 @@ public class TwoMotor_Triggers extends OpMode {
 
     @Override
     public void init() {
-        motor_left = hardwareMap.dcMotor.get("motor_a");
+        motor_left = hardwareMap.dcMotor.get("grabber_lift_one");
         motor_left.setDirection(DcMotorSimple.Direction.FORWARD);
         motor_left.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
         motor_left.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
-        motor_right = hardwareMap.dcMotor.get("motor_b");
+        motor_right = hardwareMap.dcMotor.get("grabber_lift_two");
         motor_right.setDirection(DcMotorSimple.Direction.FORWARD);
         motor_right.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
         motor_right.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
@@ -47,11 +47,11 @@ public class TwoMotor_Triggers extends OpMode {
     public void loop() {
         if (gamepad2.right_trigger > 0.1) {
             motor_left.setPower(gamepad2.right_trigger);
-            motor_right.setPower(gamepad2.right_trigger);
+            motor_right.setPower(-gamepad2.right_trigger);
         }
         else if (gamepad2.left_trigger > 0.1) {
             motor_left.setPower(-gamepad2.left_trigger);
-            motor_right.setPower(-gamepad2.left_trigger);
+            motor_right.setPower(gamepad2.left_trigger);
         }
         else {
             motor_left.setPower(0);

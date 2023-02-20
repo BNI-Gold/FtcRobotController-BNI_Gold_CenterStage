@@ -1014,6 +1014,36 @@ public class StraferKit extends MecanumDrive {
 
 
     }
+
+    public void driveForward_PIDRTP (double power, double rotations) {
+        int ticks = (int) (rotations * TICKS_PER_ROTATION);
+
+        setMotorRunModes(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
+        setMotorRunModes(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
+
+
+
+//        frontLeftMotor.setPower(power);
+//        frontLeftMotor.setTargetPosition(ticks);
+
+        frontRightMotor.setPower(power);
+        frontRightMotor.setTargetPosition(ticks);
+
+//        rearLeftMotor.setPower(power);
+//        rearLeftMotor.setTargetPosition(ticks);
+//
+//        rearRightMotor.setPower(power);
+//        rearRightMotor.setTargetPosition(ticks);
+
+        setMotorRunModes(DcMotor.RunMode.RUN_TO_POSITION);
+        while (frontLeftMotor.isBusy() && linearOp.opModeIsActive()) {
+            linearOp.idle();
+        }
+        stopMotors();
+
+//        linearOp.sleep(500);
+    }
+
 }
 
 

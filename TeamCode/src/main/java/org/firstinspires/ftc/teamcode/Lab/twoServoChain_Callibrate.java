@@ -28,6 +28,9 @@ public class twoServoChain_Callibrate extends OpMode {
         grabberArmRight.setPower(grabberRightArmPos);
     }
 
+    // LEFT ARM = arms servos
+    // RIGHT ARM = Continious rotation servo
+
     @Override
     public void loop () {
         if (gamepad1.right_bumper) {
@@ -47,11 +50,11 @@ public class twoServoChain_Callibrate extends OpMode {
         }
 //        intake
         if (gamepad1.b || gamepad2.b) {
-            grabberLeftArmPos = .75;
+            grabberLeftArmPos = .71;
         }
 //        open
         if (gamepad1.a || gamepad2.a) {
-            grabberLeftArmPos = .87;
+            grabberLeftArmPos = 0.875;
         }
 
 

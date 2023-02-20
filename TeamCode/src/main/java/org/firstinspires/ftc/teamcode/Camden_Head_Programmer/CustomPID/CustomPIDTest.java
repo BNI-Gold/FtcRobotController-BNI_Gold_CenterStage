@@ -8,11 +8,23 @@ import com.qualcomm.robotcore.hardware.DcMotorEx;
 import com.qualcomm.robotcore.hardware.DcMotorSimple;
 import com.qualcomm.robotcore.hardware.PIDCoefficients;
 import com.qualcomm.robotcore.util.ElapsedTime;
+import com.qualcomm.robotcore.hardware.PIDFCoefficients;
 
 import org.firstinspires.ftc.teamcode.Compitition.ZCompititionUltimateGoal.Robots.StraferKit;
 
 @TeleOp (name = "C PID Test",group = "2")
 public class CustomPIDTest extends OpMode {
+
+    double integral = 0;
+    double repetitions = 0;
+
+    public static final double TICKS_PER_ROTATION = 383.6;
+
+    public static PIDCoefficients testPID = new PIDCoefficients(0.4,0.6,0.2);
+
+    public static double TARGET_POS = 100; // 100 is default value
+
+    ElapsedTime PIDTimer = new ElapsedTime();
 
     public StraferKit Bot = new StraferKit();
 
@@ -42,6 +54,9 @@ public class CustomPIDTest extends OpMode {
     int turret180CCW = -2000;
 
     double turretEncoderPower = 0.5;
+    double referenceVariable;
+
+    boolean rtpTest = true;
 
     int liftLevel = 0;
     boolean liftLevelAllow = true;
@@ -70,67 +85,73 @@ public class CustomPIDTest extends OpMode {
 
     int turretPosition = 0;
 
-    public static double speed = 0.8; //arbitrary number; static to allow for analyzing how PID performs through multiple speeds in dashboard
+    public static double speed = 1200; //arbitrary number; static to allow for analyzing how PID performs through multiple speeds in dashboard
 
-    public static PIDCoefficients pidCoeffs = new PIDCoefficients(0.4, 0.3, 0.2); //PID coefficients that need to be tuned probably through FTC dashboard
-    public PIDCoefficients pidGains = new PIDCoefficients(0.4, 0.3, 0.2); //PID gains which we will define later in the process
-
-    ElapsedTime PIDTimer = new ElapsedTime(ElapsedTime.Resolution.MILLISECONDS); //timer
+    public static PIDCoefficients pidCoeffs = new PIDCoefficients(0.5, 0.4, 0.3); //PID coefficients that need to be tuned probably through FTC dashboard
+    public PIDCoefficients pidGains = new PIDCoefficients(0.5, 0.4, 0.3); //PID gains which we will define later in the process
 
     FtcDashboard dashboard;
 
-//    public void systemControl() {
-//
-//                if (gamepad1.x) {
-//
+    public void systemControl() {
+
+        frontRightMotor.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
+        frontRightMotor.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
+
+        if (gamepad1.right_bumper) {
+
+            frontRightMotor.setTargetPosition((int) (5 * TICKS_PER_ROTATION));
+
+            if (rtpTest == true) {
+
+                Bot.driveForward_PIDRTP(0.5, 5);
+                referenceVariable = 0.8;
+
+            }
+
+        }
+
+        frontRightMotor.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
+
+                if (gamepad1.x) {
+
 //                    PID(speed); //running the PID algorithm at defined speed
-//
-//                } else if (gamepad1.b) {
-//
-//                    frontLeftMotor.setPower(1);
-//                    frontRightMotor.setPower(1);
-//                    rearLeftMotor.setPower(1);
-//                    rearRightMotor.setPower(1);
-//
-//                } else {
-//
-//                    frontLeftMotor.setPower(0);
-//                    frontRightMotor.setPower(0);
-//                    rearLeftMotor.setPower(0);
-//                    rearRightMotor.setPower(0);
-//
-//                }
-//
-//                if (gamepad1.right_bumper) {
-//
-//                    telemetry.addData("Motor Velo Man: ", frontLeftMotor.getVelocity());
-//
-//                }
-//
-//                if (gamepad2.left_bumper) {
-//
-//                    testVariable = 50;
-//
-//                } else if (gamepad2.right_bumper) {
-//
-//                    testVariable = 100;
-//
-//                } else {
-//
-//                    testVariable = 0;
-//
-//                }
-//            }
 
+                } else {
 
-    double lastError = 0;
-    double integral = 0;
+                    referenceVariable = 0;
+
+                }
+
+            }
+
+    void moveTestMotor(double targetPosition) {
+        double error = frontRightMotor.getCurrentPosition();
+        double lastError = 0;
+
+        while (Math.abs(error) <= 9 * 500 /*Modify with above comments*/ && repetitions < 100 /*Modify*/) {
+            error = frontRightMotor.getCurrentPosition() - targetPosition;
+            double changeInError = lastError - error;
+            integral += changeInError * PIDTimer.time();
+            double derivative = changeInError / PIDTimer.time();
+            double P = testPID.p * error;
+            double I = testPID.i * integral;
+            double D = testPID.d * derivative;
+            frontRightMotor.setPower(P + I + D);
+            error = lastError;
+            PIDTimer.reset();
+            repetitions ++;
+        }
+
+    }
+
+//    double lastError = 0;
+//    double integral = 0;
     //initializing our variables
 
-//    public void PID(double targetVelocity) {
+//    public void PID(double targetVelocity){
 //        PIDTimer.reset(); //resets the timer
 //
-//        double currentVelocity = rearLeftMotor.getVelocity();
+//        double currentVelocity = frontRightMotor.getVelocity();
 //        double error = targetVelocity - currentVelocity; //pretty self explanatory--just finds the error
 //
 //        double deltaError = error - lastError; //finds how the error changes from the previous cycle
@@ -150,10 +171,7 @@ public class CustomPIDTest extends OpMode {
 //        //multiplies derivative by d-coefficient
 //        // d-coefficient (very high = increased volatility; very low = too little effect on dampening system)
 //
-////        frontLeftMotor.setVelocity(pidGains.p + pidGains.i + pidGains.d + targetVelocity);
-////        frontRightMotor.setVelocity(pidGains.p + pidGains.i + pidGains.d + targetVelocity);
-//        rearLeftMotor.setVelocity(pidGains.p + pidGains.i + pidGains.d + targetVelocity);
-////        rearRightMotor.setVelocity(pidGains.p + pidGains.i + pidGains.d + targetVelocity);
+//        frontRightMotor.setVelocity(pidGains.p + pidGains.i + pidGains.d + targetVelocity);
 //        //adds up the P I D gains with the targetVelocity bias
 //
 //        lastError = error;
@@ -185,12 +203,21 @@ public class CustomPIDTest extends OpMode {
 //        telemetry.addData("Lift Level Selected: ", liftLevel);
 //        telemetry.addData("Lift Moving? ", liftLevelAllow);
 
-        telemetry.addData("Turret Motor Position: ", turretMotor.getCurrentPosition());
-        telemetry.addData("Turret Motor Velo: ", turretMotor.getVelocity());
+//        telemetry.addData("Turret Motor Position: ", turretMotor.getCurrentPosition());
+//        telemetry.addData("Turret Motor Velo: ", turretMotor.getVelocity());
+//
+//        telemetry.addData("Turret Position Input: ", turretPosition);
+//
+//        telemetry.addData("Right Stick X: ", gamepad2.right_stick_x);
 
-        telemetry.addData("Turret Position Input: ", turretPosition);
+//        telemetry.addData("Robot Velocity: ", (frontRightMotor.getVelocity()) * -1);
+//        telemetry.addData("Target Velocity: ", 250);
 
-        telemetry.addData("Right Stick X: ", gamepad2.right_stick_x);
+        telemetry.addData("Robot Position: ", frontRightMotor.getCurrentPosition() / TICKS_PER_ROTATION);
+        telemetry.addData("Target Position: ", 5);
+
+        telemetry.addData("Robot Velocity: ", frontRightMotor.getVelocity());
+        telemetry.addData("Theoretical Linear Velocity: ", 0.5);
 
     }
 
@@ -206,12 +233,15 @@ public class CustomPIDTest extends OpMode {
 //        frontLeftMotor.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
 //        frontLeftMotor.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
 //
-//        frontRightMotor = hardwareMap.get(DcMotorEx.class, "null");
-//
-//        frontRightMotor.setDirection(DcMotorSimple.Direction.REVERSE);
-//
-//        frontRightMotor.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
-//        frontRightMotor.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
+        frontRightMotor = hardwareMap.get(DcMotorEx.class, "front_right_motor");
+
+        frontRightMotor.setDirection(DcMotorSimple.Direction.REVERSE);
+
+        frontRightMotor.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
+        frontRightMotor.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
+
+        frontRightMotor.setPositionPIDFCoefficients(1);
+        frontRightMotor.setVelocityPIDFCoefficients(0.8,0.4,1,1);
 
 //        grabberLiftOne = hardwareMap.get(DcMotorEx.class, "front_right_motor");
 //
@@ -227,140 +257,148 @@ public class CustomPIDTest extends OpMode {
 //        grabberLiftTwo.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
 //        grabberLiftTwo.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
 
-        turretMotor = hardwareMap.get(DcMotorEx.class, "rear_right_motor");
-
-        turretMotor.setDirection(DcMotorSimple.Direction.FORWARD);
-
-        turretMotor.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
-        turretMotor.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
+//        turretMotor = hardwareMap.get(DcMotorEx.class, "rear_right_motor");
+//
+//        turretMotor.setDirection(DcMotorSimple.Direction.FORWARD);
+//
+//        turretMotor.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
+//        turretMotor.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
 
     }
 
-//    public void liftMechanismEncoderNew() {
-////        Only go to target position when press 'y'.
-////        Allows P2 to get lift "target" position ready.
-//        if (gamepad2.left_stick_button) {
-//            switch (liftLevel) {
-//                case 0:
-//                    if (grabberLiftOne.getCurrentPosition() > liftRest) {
-//                        grabberLiftOne.setPower(liftPowerDown);
-//                        grabberLiftTwo.setPower(liftPowerDown);
-//                    } else {
-//                        grabberLiftOne.setPower(liftPowerUp);
-//                        grabberLiftTwo.setPower(liftPowerUp);
-//                    }
-//                    grabberLiftOne.setTargetPosition(liftRest);
-//                    grabberLiftOne.setMode(DcMotor.RunMode.RUN_TO_POSITION);
-//
-//                    grabberLiftTwo.setTargetPosition(liftRest);
-//                    grabberLiftTwo.setMode(DcMotor.RunMode.RUN_TO_POSITION);
-//
-//                    break;
-//
-//                case 1:
-//                    if (grabberLiftOne.getCurrentPosition() > liftLow) {
-//                        grabberLiftOne.setPower(liftPowerDown);
-//                        grabberLiftTwo.setPower(liftPowerDown);
-//                    } else {
-//                        grabberLiftOne.setPower(liftPowerUp);
-//                        grabberLiftTwo.setPower(liftPowerUp);
-//                    }
-//                    grabberLiftOne.setTargetPosition(liftLow);
-//                    grabberLiftOne.setMode(DcMotor.RunMode.RUN_TO_POSITION);
-//
-//                    grabberLiftTwo.setTargetPosition(liftLow);
-//                    grabberLiftTwo.setMode(DcMotor.RunMode.RUN_TO_POSITION);
-//
-//                    break;
-//
-//                case 2:
-//                    if (grabberLiftOne.getCurrentPosition() > liftMid) {
-//                        grabberLiftOne.setPower(liftPowerDown);
-//                        grabberLiftTwo.setPower(liftPowerDown);
-//                    } else {
-//                        grabberLiftOne.setPower(liftPowerUp);
-//                        grabberLiftTwo.setPower(liftPowerUp);
-//                    }
-//                    grabberLiftOne.setTargetPosition(liftMid);
-//                    grabberLiftOne.setMode(DcMotor.RunMode.RUN_TO_POSITION);
-//
-//                    grabberLiftTwo.setTargetPosition(liftMid);
-//                    grabberLiftTwo.setMode(DcMotor.RunMode.RUN_TO_POSITION);
-//
-//                    break;
-//
-//                case 3:
-//                    grabberLiftOne.setPower(liftPowerUp);
-//                    grabberLiftOne.setTargetPosition(liftHigh);
-//                    grabberLiftOne.setMode(DcMotor.RunMode.RUN_TO_POSITION);
-//
-//                    grabberLiftTwo.setPower(liftPowerUp);
-//                    grabberLiftTwo.setTargetPosition(liftHigh);
-//                    grabberLiftTwo.setMode(DcMotor.RunMode.RUN_TO_POSITION);
-//
-//                default:
-//                    break;
-//            }
-//        }
-//    }
-//
-//    public void liftControlEncoder() {
-//        if (gamepad2.b == true && liftLevelAllow == true) {
-//            if (liftLevel < 3) {
-//                liftLevel += 1;
-//            }
-//            liftLevelAllow = false;
-//            liftToggle = false;
-//        } else if (gamepad2.x == true && liftLevelAllow == true) {
-//            if (liftLevel > 0) {
-//                liftLevel -= 1;
-//            }
-//            liftToggle = false;
-//            liftLevelAllow = false;
-//        } else {  // The IF here makes it so lift* goes back to default 'false' ONLY when not pressing Trigger.
-//            if (gamepad2.b == false && gamepad2.x == false) {
-//                liftLevelAllow = true;
-//                liftToggle = true;
-//            }
-//        }
-//    }
-//
-//    public void liftControlManual() {
-//
-//        if (gamepad2.left_stick_y >= 0.2) {
-//
-//            grabberLiftOne.setMode(DcMotorEx.RunMode.RUN_WITHOUT_ENCODER);
-//            grabberLiftOne.setPower(0.8);
-//
-//            grabberLiftTwo.setMode(DcMotorEx.RunMode.RUN_WITHOUT_ENCODER);
-//            grabberLiftTwo.setPower(0.8);
-//
-//            liftStopAllow = true;
-//
-//        } else if (gamepad2.left_stick_y <= -0.2) {
-//
-//            grabberLiftOne.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
-//            grabberLiftOne.setPower(-0.3);
-//
-//            grabberLiftTwo.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
-//            grabberLiftTwo.setPower(-0.3);
-//
-//            liftStopAllow = true;
-//
-//        } else {
-//
-//            if (liftStopAllow == true) {
-//
-//                grabberLiftOne.setPower(0);
-//                grabberLiftTwo.setPower(0);
-//
-//            }
-//
-//            liftStopAllow = false;
-//
-//        }
-//
-//    }
+    public void liftMechanismEncoderNew() {
+//        Only go to target position when press 'y'.
+//        Allows P2 to get lift "target" position ready.
+        if (gamepad2.left_stick_button) {
+            switch (liftLevel) {
+                case 0:
+                    if (grabberLiftOne.getCurrentPosition() > liftRest) {
+                        grabberLiftOne.setPower(liftPowerDown);
+                        grabberLiftTwo.setPower(liftPowerDown);
+                    } else {
+                        grabberLiftOne.setPower(liftPowerUp);
+                        grabberLiftTwo.setPower(liftPowerUp);
+                    }
+                    grabberLiftOne.setTargetPosition(liftRest);
+                    grabberLiftOne.setMode(DcMotor.RunMode.RUN_TO_POSITION);
+
+                    grabberLiftTwo.setTargetPosition(liftRest);
+                    grabberLiftTwo.setMode(DcMotor.RunMode.RUN_TO_POSITION);
+
+                    break;
+
+                case 1:
+                    if (grabberLiftOne.getCurrentPosition() > liftLow) {
+                        grabberLiftOne.setPower(liftPowerDown);
+                        grabberLiftTwo.setPower(liftPowerDown);
+                    } else {
+                        grabberLiftOne.setPower(liftPowerUp);
+                        grabberLiftTwo.setPower(liftPowerUp);
+                    }
+                    grabberLiftOne.setTargetPosition(liftLow);
+                    grabberLiftOne.setMode(DcMotor.RunMode.RUN_TO_POSITION);
+
+                    grabberLiftTwo.setTargetPosition(liftLow);
+                    grabberLiftTwo.setMode(DcMotor.RunMode.RUN_TO_POSITION);
+
+                    break;
+
+                case 2:
+                    if (grabberLiftOne.getCurrentPosition() > liftMid) {
+                        grabberLiftOne.setPower(liftPowerDown);
+                        grabberLiftTwo.setPower(liftPowerDown);
+                    } else {
+                        grabberLiftOne.setPower(liftPowerUp);
+                        grabberLiftTwo.setPower(liftPowerUp);
+                    }
+                    grabberLiftOne.setTargetPosition(liftMid);
+                    grabberLiftOne.setMode(DcMotor.RunMode.RUN_TO_POSITION);
+
+                    grabberLiftTwo.setTargetPosition(liftMid);
+                    grabberLiftTwo.setMode(DcMotor.RunMode.RUN_TO_POSITION);
+
+                    break;
+
+                case 3:
+                    grabberLiftOne.setPower(liftPowerUp);
+                    grabberLiftOne.setTargetPosition(liftHigh);
+                    grabberLiftOne.setMode(DcMotor.RunMode.RUN_TO_POSITION);
+
+                    grabberLiftTwo.setPower(liftPowerUp);
+                    grabberLiftTwo.setTargetPosition(liftHigh);
+                    grabberLiftTwo.setMode(DcMotor.RunMode.RUN_TO_POSITION);
+
+                default:
+                    break;
+            }
+        }
+
+        if (liftLevel == 0 && (grabberLiftOne.getCurrentPosition() <= 100 || grabberLiftTwo.getCurrentPosition() <= 100)) {
+
+            grabberLiftOne.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
+            grabberLiftTwo.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
+
+        }
+
+    }
+
+    public void liftControlEncoder() {
+        if (gamepad2.b == true && liftLevelAllow == true) {
+            if (liftLevel < 3) {
+                liftLevel += 1;
+            }
+            liftLevelAllow = false;
+            liftToggle = false;
+        } else if (gamepad2.x == true && liftLevelAllow == true) {
+            if (liftLevel > 0) {
+                liftLevel -= 1;
+            }
+            liftToggle = false;
+            liftLevelAllow = false;
+        } else {  // The IF here makes it so lift* goes back to default 'false' ONLY when not pressing Trigger.
+            if (gamepad2.b == false && gamepad2.x == false) {
+                liftLevelAllow = true;
+                liftToggle = true;
+            }
+        }
+    }
+
+    public void liftControlManual() {
+
+        if (gamepad2.left_stick_y >= 0.2) {
+
+            grabberLiftOne.setMode(DcMotorEx.RunMode.RUN_WITHOUT_ENCODER);
+            grabberLiftOne.setPower(0.8);
+
+            grabberLiftTwo.setMode(DcMotorEx.RunMode.RUN_WITHOUT_ENCODER);
+            grabberLiftTwo.setPower(0.8);
+
+            liftStopAllow = true;
+
+        } else if (gamepad2.left_stick_y <= -0.2) {
+
+            grabberLiftOne.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
+            grabberLiftOne.setPower(-0.3);
+
+            grabberLiftTwo.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
+            grabberLiftTwo.setPower(-0.3);
+
+            liftStopAllow = true;
+
+        } else {
+
+            if (liftStopAllow == true) {
+
+                grabberLiftOne.setPower(0);
+                grabberLiftTwo.setPower(0);
+
+            }
+
+            liftStopAllow = false;
+
+        }
+
+    }
 
     public void turretControlManual() {
 
@@ -415,11 +453,11 @@ public class CustomPIDTest extends OpMode {
 
                 turretPosition = 4;
 
-            } else {
-
-                turretMoveAllow = false;
-
             }
+
+        } else {
+
+            turretMoveAllow = false;
 
         }
     }
@@ -496,17 +534,18 @@ public class CustomPIDTest extends OpMode {
 
         updateTelemetry();
 
-        //systemControl();
+        systemControl();
 
         //liftControlEncoder();
         //liftMechanismEncoderNew();
 
-        turretEncoderNew();
-        turretEncoderControlNew();
-
-        turretControlManual();
+//        turretEncoderNew();
+//        turretEncoderControlNew();
+//
+//        turretControlManual();
 
         //liftControlManual();
 
     }
+
 }
