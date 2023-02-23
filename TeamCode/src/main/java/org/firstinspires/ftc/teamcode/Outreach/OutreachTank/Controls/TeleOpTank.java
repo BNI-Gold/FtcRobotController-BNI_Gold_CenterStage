@@ -78,6 +78,8 @@ public class TeleOpTank extends OpMode {
         telemtryOutput();
 
         turntableControl();
+        flywheelControl();
+        launcherAngleControl();
 
     }
 
@@ -135,15 +137,47 @@ public class TeleOpTank extends OpMode {
 
         if (gamepad1.right_bumper) {
 
-            Bot.tableRight(0.5);
+            Bot.tableRight(0.6);
 
         } else if (gamepad1.left_bumper) {
 
-            Bot.tableLeft(0.5);
+            Bot.tableLeft(0.6);
 
         } else {
 
             Bot.stopTable();
+
+        }
+
+    }
+
+    public void launcherAngleControl () {
+
+        if (gamepad1.y) {
+
+            Bot.launcherAngleIncrease();
+
+        } else if (gamepad1.a) {
+
+            Bot.launcherAngleDecrease();
+
+        } else {
+
+            Bot.launcherAngleStop();
+
+        }
+
+    }
+
+    public void flywheelControl () {
+
+        if (gamepad1.right_trigger >= 0.2) {
+
+            Bot.flywheelSpeed(0.8);
+
+        } else {
+
+            Bot.flywheelStop();
 
         }
 

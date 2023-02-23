@@ -38,6 +38,9 @@ public class CompetionBot extends MecanumDrive {
     public CRServo bigConeSucker = null;
     TouchSensor magSwitch;
 
+    public double LiftEncoderAvg = 0;
+    public double stallPower = 0.25;
+
 
     public void initRobot(HardwareMap hardwareMap) {
         hwBot = hardwareMap;
@@ -102,19 +105,24 @@ public class CompetionBot extends MecanumDrive {
 //            grabberLift.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
 //            grabberLift.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
 
+
+
+
         grabberLiftOne = hardwareMap.get(DcMotorEx.class, "grabber_lift_one");
         grabberLiftOne.setDirection(DcMotorSimple.Direction.REVERSE);
         grabberLiftOne.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
         grabberLiftOne.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
         grabberLiftOne.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
-        //Bot.grabberLiftOne.setPositionPIDFCoefficients(5);
+//        grabberLiftOne.setPositionPIDFCoefficients(1);
 
         grabberLiftTwo = hardwareMap.get(DcMotorEx.class, "grabber_lift_two");
         grabberLiftTwo.setDirection(DcMotorSimple.Direction.FORWARD);
         grabberLiftTwo.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
         grabberLiftTwo.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
         grabberLiftTwo.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
-        //Bot.grabberLiftTwo.setPositionPIDFCoefficients(5);
+
+//        grabberLiftTwo.setPositionPIDFCoefficients(1);
+
 
         turretPlatform = hardwareMap.get(DcMotorEx.class, "turret_motor");
         turretPlatform.setDirection(DcMotorSimple.Direction.REVERSE);
@@ -151,7 +159,8 @@ public class CompetionBot extends MecanumDrive {
 
     public void openGrabberArms() {
 
-        grabberArmServo.setPosition(0.875);
+        //was 0.875 for fully open but camera was seeing servo pole.
+        grabberArmServo.setPosition(0.84);
 
     }
 

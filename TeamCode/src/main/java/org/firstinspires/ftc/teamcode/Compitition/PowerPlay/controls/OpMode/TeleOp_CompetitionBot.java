@@ -5,6 +5,7 @@ import com.qualcomm.robotcore.eventloop.opmode.OpMode;
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.hardware.DcMotorEx;
+import com.qualcomm.robotcore.hardware.DcMotorSimple;
 import com.qualcomm.robotcore.util.Range;
 
 import org.firstinspires.ftc.teamcode.Compitition.PowerPlay.Robots.CompetionBot;
@@ -47,17 +48,17 @@ public class TeleOp_CompetitionBot extends OpMode {
     int turretClockwise = 410;
     int turretCounterclocwise = -405;
 
-    int turret90CW = 800;
-    int turret90CCW = -800;
+    int turret90CW = 650;
+    int turret90CCW = -650;
     int turretCenter = 0;
 
-    int turret180CW = 2000;
-    int turret180CCW = -2000;
+    int turret180CW = 1300;
+    int turret180CCW = -1300;
 
     int liftRest = 0;
-    int liftLow = 600;
-    int liftMid = 1300;
-    int liftHigh = 2000;
+    int liftLow = 500;
+    int liftMid = 1000;
+    int liftHigh = 1500;
 
     boolean turretMoveAllow = false;
 
@@ -75,6 +76,9 @@ public class TeleOp_CompetitionBot extends OpMode {
     double liftPowerDown = 0.2;
 
     double turretSpeedMultiply = 0.55;
+
+    public DcMotorEx turretPlatform = null;
+
 
     public CompetionBot Bot = new CompetionBot();
 
@@ -112,12 +116,14 @@ public class TeleOp_CompetitionBot extends OpMode {
         driveSpeed();
         driveSlowModeControl();
 
-        updateTelemetry();
 
 //        liftControlEncoder();
-//        turretEncoderControlNew();
-//
 //        liftMechanismEncoderNew();
+//
+//        turretEncoderNew();
+//        turretEncoderControlNew();
+
+        updateTelemetry();
 
     }
 
@@ -131,18 +137,23 @@ public class TeleOp_CompetitionBot extends OpMode {
 
             telemetry.addLine("Encoder Values: ");
 
-            telemetry.addData("Turret: ", Bot.turretPlatform.getCurrentPosition());
-
-            telemetry.addData("Lift One: ", Bot.grabberLiftOne.getCurrentPosition());
-            telemetry.addData("Lift Two: ", Bot.grabberLiftTwo.getCurrentPosition());
+//            telemetry.addData("Turret: ", Bot.turretPlatform.getCurrentPosition());
+//
+//            telemetry.addData("Lift One: ", Bot.grabberLiftOne.getCurrentPosition());
+//            telemetry.addData("Lift Two: ", Bot.grabberLiftTwo.getCurrentPosition());
+//            telemetry.addData("Lift Average", Bot.LiftEncoderAvg);
 
             telemetry.addData("leftFront: ", Bot.frontLeftMotor.getCurrentPosition());
             telemetry.addData("leftRear: ", Bot.rearLeftMotor.getCurrentPosition());
             telemetry.addData("rightFront: ", Bot.frontRightMotor.getCurrentPosition());
             telemetry.addData("rightRear: ", Bot.rearRightMotor.getCurrentPosition());
 
-            telemetry.addData("Lift Level Selected: ", liftLevel);
-            telemetry.addData("Turret Position Selected: ", turretPosition);
+//            telemetry.addData("Lift Level Selected: ", liftLevel);
+//            telemetry.addData("Turret Position Selected: ", turretPosition);
+
+//            telemetry.addData("Lift One Velo: ", Bot.grabberLiftOne.getVelocity());
+//            telemetry.addData("Lift Two Velo: ", Bot.grabberLiftTwo.getVelocity());
+
 
         } else {
 
@@ -211,7 +222,7 @@ public class TeleOp_CompetitionBot extends OpMode {
 
         } else {
 
-            turretSpeedMultiply = 0.55;
+            turretSpeedMultiply = 0.7;
 
         }
 
@@ -221,6 +232,7 @@ public class TeleOp_CompetitionBot extends OpMode {
     public void liftMechanismEncoderNew() {
 //        Only go to target position when press 'y'.
 //        Allows P2 to get lift "target" position ready.
+        Bot.LiftEncoderAvg = (Bot.grabberLiftOne.getCurrentPosition() + Bot.grabberLiftTwo.getCurrentPosition()) / 2;
         if (gamepad2.left_stick_button) {
             switch (liftLevel) {
                 case 0:
@@ -240,13 +252,16 @@ public class TeleOp_CompetitionBot extends OpMode {
                     break;
 
                 case 1:
-                    if (Bot.grabberLiftOne.getCurrentPosition() > liftLow) {
-                        Bot.grabberLiftOne.setPower(liftPowerDown);
-                        Bot.grabberLiftTwo.setPower(liftPowerDown);
-                    } else {
-                        Bot.grabberLiftOne.setPower(liftPowerUp);
-                        Bot.grabberLiftTwo.setPower(liftPowerUp);
-                    }
+//                    if (Bot.grabberLiftOne.getCurrentPosition() > liftLow) {
+//                        Bot.grabberLiftOne.setPower(liftPowerDown);
+//                        Bot.grabberLiftTwo.setPower(liftPowerDown);
+//                    } else {
+//                        Bot.grabberLiftOne.setPower(liftPowerUp);
+//                        Bot.grabberLiftTwo.setPower(liftPowerUp);
+//                    }
+                    telemetry.addLine("I AM CASE 1");
+                    Bot.grabberLiftOne.setPower(liftPowerUp*.5);
+                    Bot.grabberLiftTwo.setPower(liftPowerUp*.5);
                     Bot.grabberLiftOne.setTargetPosition(liftLow);
                     Bot.grabberLiftOne.setMode(DcMotor.RunMode.RUN_TO_POSITION);
 
@@ -279,18 +294,19 @@ public class TeleOp_CompetitionBot extends OpMode {
                     Bot.grabberLiftTwo.setPower(liftPowerUp);
                     Bot.grabberLiftTwo.setTargetPosition(liftHigh);
                     Bot.grabberLiftTwo.setMode(DcMotor.RunMode.RUN_TO_POSITION);
+                    break;
 
                 default:
                     break;
             }
         }
 
-        if (liftLevel == 0 && (Bot.grabberLiftOne.getCurrentPosition() <= 100 || Bot.grabberLiftTwo.getCurrentPosition() <= 100)) {
-
-            Bot.grabberLiftOne.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
-            Bot.grabberLiftTwo.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
-
-        }
+//        if (liftLevel == 0 && (Bot.grabberLiftOne.getCurrentPosition() <= 100 || Bot.grabberLiftTwo.getCurrentPosition() <= 100)) {
+//
+//            Bot.grabberLiftOne.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
+//            Bot.grabberLiftTwo.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
+//
+//        }
 
     }
 
@@ -368,10 +384,10 @@ public class TeleOp_CompetitionBot extends OpMode {
         } else if (gamepad2.left_stick_y <= -0.2) {
 
             Bot.grabberLiftOne.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
-            Bot.grabberLiftOne.setPower(-gamepad2.left_stick_y * 1);
+            Bot.grabberLiftOne.setPower(-gamepad2.left_stick_y * 0.8);
 
             Bot.grabberLiftTwo.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
-            Bot.grabberLiftTwo.setPower(-gamepad2.left_stick_y * 1);
+            Bot.grabberLiftTwo.setPower(-gamepad2.left_stick_y * 0.8);
 
             liftStopAllow = true;
 
@@ -395,14 +411,14 @@ public class TeleOp_CompetitionBot extends OpMode {
         if (gamepad2.right_stick_x >= 0.2) {
 
             Bot.turretPlatform.setMode(DcMotorEx.RunMode.RUN_WITHOUT_ENCODER);
-            Bot.turretPlatform.setPower(0.5);
+            Bot.turretPlatform.setPower((gamepad2.right_stick_x * turretSpeedMultiply));
 
             turretStopAllow = true;
 
         } else if (gamepad2.right_stick_x <= -0.2) {
 
             Bot.turretPlatform.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
-            Bot.turretPlatform.setPower(-0.5);
+            Bot.turretPlatform.setPower((gamepad2.right_stick_x * turretSpeedMultiply));
 
             turretStopAllow = true;
 
@@ -451,7 +467,7 @@ public class TeleOp_CompetitionBot extends OpMode {
 
     public void turretEncoderNew() {
 
-        if (gamepad2.dpad_down) {
+        if (turretMoveAllow) {
             switch (turretPosition) {
                 case 0:
                     if (Bot.turretPlatform.getCurrentPosition() > turret90CCW) {
@@ -468,8 +484,9 @@ public class TeleOp_CompetitionBot extends OpMode {
                     if (Bot.turretPlatform.getCurrentPosition() > turretCenter) {
                         Bot.turretPlatform.setPower(-turretPowerEncoder);
                     } else {
-                        Bot.turretPlatform.setPower(turretPowerEncoder);
+                        Bot.turretPlatform.setPower(-turretPowerEncoder);
                     }
+
                     Bot.turretPlatform.setTargetPosition(turretCenter);
                     Bot.turretPlatform.setMode(DcMotor.RunMode.RUN_TO_POSITION);
 
@@ -507,6 +524,8 @@ public class TeleOp_CompetitionBot extends OpMode {
                     }
                     Bot.turretPlatform.setTargetPosition(turret180CW);
                     Bot.turretPlatform.setMode(DcMotor.RunMode.RUN_TO_POSITION);
+
+                    break;
 
                 default:
                     break;

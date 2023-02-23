@@ -38,6 +38,11 @@ public class OutreachTank extends OutreachTankDrive {
 
     public DcMotor turntableMotor = null;
 
+    public DcMotor flywheelOne = null;
+    public DcMotor flywheelTwo = null;
+
+    public DcMotorEx angleMotor = null;
+
     public void initRobot(HardwareMap hardwareMap) {
 
         hwBot = hardwareMap;
@@ -49,7 +54,12 @@ public class OutreachTank extends OutreachTankDrive {
         rightMotorA = hwBot.get(DcMotorEx.class, "right_motor_a");
         rightMotorB = hwBot.get(DcMotorEx.class, "right_motor_b");
 
-        turntableMotor = hwBot.get(DcMotorEx.class, "turntable_motor");
+        turntableMotor = hwBot.get(DcMotorEx.class, "plate");
+
+        angleMotor = hwBot.get(DcMotorEx.class, "angle");
+
+        flywheelOne = hwBot.get(DcMotorEx.class, "right_launch");
+        flywheelTwo = hwBot.get(DcMotorEx.class, "left_launch");
 
         leftMotorA.setDirection(DcMotorEx.Direction.FORWARD);
         leftMotorB.setDirection(DcMotorEx.Direction.FORWARD);
@@ -58,12 +68,22 @@ public class OutreachTank extends OutreachTankDrive {
 
         turntableMotor.setDirection(DcMotorSimple.Direction.FORWARD);
 
+        flywheelOne.setDirection(DcMotorEx.Direction.FORWARD);
+        flywheelTwo.setDirection(DcMotorEx.Direction.REVERSE);
+
+        angleMotor.setDirection(DcMotorEx.Direction.FORWARD);
+
         leftMotorA.setZeroPowerBehavior(DcMotorEx.ZeroPowerBehavior.BRAKE);
         rightMotorA.setZeroPowerBehavior(DcMotorEx.ZeroPowerBehavior.BRAKE);
         leftMotorB.setZeroPowerBehavior(DcMotorEx.ZeroPowerBehavior.BRAKE);
         rightMotorB.setZeroPowerBehavior(DcMotorEx.ZeroPowerBehavior.BRAKE);
 
         turntableMotor.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
+
+        flywheelOne.setZeroPowerBehavior(DcMotorEx.ZeroPowerBehavior.BRAKE);
+        flywheelTwo.setZeroPowerBehavior(DcMotorEx.ZeroPowerBehavior.BRAKE);
+
+        angleMotor.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
 
         // Define and Initialize Gyro
         BNO055IMU.Parameters parametersimu = new BNO055IMU.Parameters();
@@ -88,6 +108,38 @@ public class OutreachTank extends OutreachTankDrive {
     public void tableLeft(double power) {
 
         turntableMotor.setPower(-Math.abs(power));
+
+    }
+
+    public void flywheelSpeed(double power) {
+
+        flywheelOne.setPower(Math.abs(power));
+        flywheelTwo.setPower(Math.abs(power));
+
+    }
+
+    public void flywheelStop() {
+
+        flywheelOne.setPower(0);
+        flywheelTwo.setPower(0);
+
+    }
+
+    public void launcherAngleIncrease() {
+
+        angleMotor.setPower(0.25);
+
+    }
+
+    public void launcherAngleDecrease() {
+
+        angleMotor.setPower(-0.25);
+
+    }
+
+    public void launcherAngleStop() {
+
+        angleMotor.setPower(0);
 
     }
 

@@ -1,14 +1,13 @@
-package org.firstinspires.ftc.teamcode.Compitition.PowerPlay.controls.Autonomus.ComptitionAutoPaths.BlueLeftPark.GyroDrive;
+package org.firstinspires.ftc.teamcode.Compitition.PowerPlay.controls.Autonomus.ComptitionAutoPaths.RedLeftPark.GyroDriveRight;
 
 import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
 
 import org.firstinspires.ftc.teamcode.Compitition.PowerPlay.Robots.CompetionBot;
 import org.firstinspires.ftc.teamcode.Compitition.PowerPlay.Robots.StraferBot;
 import org.firstinspires.ftc.teamcode.Compitition.PowerPlay.controls.Autonomus.Test.PID.CompetitionPIDTest.AutoTargetZone;
-import org.firstinspires.ftc.teamcode.Compitition.PowerPlay.controls.Autonomus.Test.PID.CompetitionPIDTest.BlueLeftPark.BlueLeftPark;
 
-@Autonomous (name = "SIX CONE AUTO TEST")
-public class AutoLeftStack extends LeftLowConeStack {
+@Autonomous (name = "RIGHT AUTO")
+public class AutoRightStack extends RightLowConeStack {
 
     public CompetionBot Bot = new CompetionBot();
 
@@ -17,6 +16,7 @@ public class AutoLeftStack extends LeftLowConeStack {
     public AutoTargetZone targetZone = null;
 
     public boolean isCompetition = true;
+
 
     @Override
     public void runOpMode() throws InterruptedException {
@@ -50,37 +50,23 @@ public class AutoLeftStack extends LeftLowConeStack {
 
             Bot.turretPlatform.setPower(0);
 
+
             // Find Tags During the Init Loop
-//            while (!isStarted() && !isStopRequested()) {
-//                findTag();
-//                sleep(20);
-//            }
+            while (!isStarted() && !isStopRequested()) {
+                findTag();
+                sleep(20);
+            }
 
             //detect tags in auto main
 
             detectTags();
 
+
             if (isCompetition == true) {
 
-                Bot.extendGrabberLift(0.6);
-
-                sleep(125);
-
-                Bot.stopGrabberLift();
-
                 sleep(sleepTime);
-
                 Bot.closeGrabberArms();
-
                 sleep(1000);
-
-                Bot.extendGrabberLift(.8);
-
-                sleep(600);
-
-                Bot.stopGrabberLift();
-
-                Bot.extendGrabberLift(0.4);
 
             }
 
@@ -93,11 +79,14 @@ public class AutoLeftStack extends LeftLowConeStack {
 
             if (isCompetition == true) {
 
-                parkplace(Bot, TargetZone);
+                scoreHigh(Bot);
                 sleep(1000);
+                parkZone(Bot, TargetZone);
+                sleep(sleepTime);
 
             }
 
+            sleep(100);
             idle();
             requestOpModeStop();
         }
