@@ -173,7 +173,7 @@ public class TeleOpTank extends OpMode {
 
         if (gamepad1.right_trigger >= 0.2) {
 
-            Bot.flywheelSpeed(0.8);
+            Bot.flywheelSpeed(1);
 
         } else {
 

@@ -127,13 +127,13 @@ public class OutreachTank extends OutreachTankDrive {
 
     public void launcherAngleIncrease() {
 
-        angleMotor.setPower(0.25);
+        angleMotor.setPower(0.75);
 
     }
 
     public void launcherAngleDecrease() {
 
-        angleMotor.setPower(-0.25);
+        angleMotor.setPower(-0.75);
 
     }
 
