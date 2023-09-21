@@ -89,6 +89,24 @@ public class TeleOp_CompetitionBot extends OpMode {
             CompetitionBot.rearRightMotor.setPower(rearRightSpeed * speedMultiply);
         }
     }
+
+    public void pixelMechanismControl() {
+        if (gamepad2.right_stick_y >= 0.2){
+            CompetitionBot.viperSlideRight.setPower(.7);
+        }
+        else if (gamepad2.right_stick_y <= -0.2) {
+            CompetitionBot.viperSlideRight.setPower(-.7);
+        }
+        else {
+            CompetitionBot.viperSlideRight.setPower(0);
+        }
+        if (gamepad2.left_stick_y >= 0.2) {
+            CompetitionBot.wormgearRight.setPower(.7);
+        }
+        else if (gamepad2.left_stick_y <= -0.2) {
+            CompetitionBot.wormgearRight.setPower(-0.7);
+        }
+    }
     public void telemetryOutput() {
 
         telemetry.addData("pwr", "FL mtr: " + frontLeftSpeed);

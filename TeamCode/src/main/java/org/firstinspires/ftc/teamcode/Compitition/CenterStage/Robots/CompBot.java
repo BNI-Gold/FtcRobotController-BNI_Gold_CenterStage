@@ -4,6 +4,7 @@ import com.qualcomm.hardware.bosch.BNO055IMU;
 import com.qualcomm.hardware.bosch.JustLoggingAccelerationIntegrator;
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 import com.qualcomm.robotcore.hardware.DcMotor;
+import com.qualcomm.robotcore.hardware.DcMotorSimple;
 import com.qualcomm.robotcore.hardware.HardwareMap;
 import com.qualcomm.robotcore.util.ElapsedTime;
 
@@ -17,6 +18,10 @@ public class CompBot extends MecanumDrive {
 
         public HardwareMap hwBot = null;
 
+        public DcMotor viperSlideRight = null;
+        public DcMotor viperSlideLeft = null;
+        public DcMotor wormgearRight = null;
+        public DcMotor wormgearLeft = null;
         public ElapsedTime currentTime = new ElapsedTime();
 
         public ElapsedTime timer = new ElapsedTime();
@@ -51,6 +56,22 @@ public class CompBot extends MecanumDrive {
             frontRightMotor.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
             rearRightMotor.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
             rearLeftMotor.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
+
+            viperSlideRight = hwBot.dcMotor.get("viper_slide_right");
+            viperSlideRight.setDirection(DcMotor.Direction.FORWARD);
+            viperSlideRight.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
+
+            viperSlideLeft = hwBot.dcMotor.get("viper_slide_left");
+            viperSlideLeft.setDirection(DcMotorSimple.Direction.FORWARD);
+            viperSlideLeft.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
+
+            wormgearRight = hwBot.dcMotor.get("wormgear_right");
+            wormgearRight.setDirection(DcMotor.Direction.FORWARD); //check direction b/f testing
+            wormgearRight.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
+
+            wormgearLeft = hwBot.dcMotor.get("wormgear_left");
+            wormgearLeft.setDirection(DcMotor.Direction.FORWARD);  //check direction b/f testing
+            wormgearLeft.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
 
 
             currentTime.reset();
