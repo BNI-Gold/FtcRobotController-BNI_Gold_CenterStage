@@ -1,10 +1,12 @@
 package org.firstinspires.ftc.teamcode.Compitition.CenterStage.Controls.TeleOp;
 
 import com.qualcomm.robotcore.eventloop.opmode.OpMode;
+import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 import com.qualcomm.robotcore.util.Range;
 
 import org.firstinspires.ftc.teamcode.Compitition.CenterStage.Robots.CompBot;
 
+@TeleOp (name = "A_TeleOp_CompBot_Centerstage")
 public class TeleOp_CompetitionBot extends OpMode {
 
     double leftStickYVal;
@@ -19,6 +21,12 @@ public class TeleOp_CompetitionBot extends OpMode {
 
     double powerThreshold = 0;
     double speedMultiply = 1;
+
+    public double wormgearPower = 0.70;
+
+    public double viperSlidePower = .7;
+
+
 
 
 
@@ -36,6 +44,7 @@ public class TeleOp_CompetitionBot extends OpMode {
 
     public void loop(){
         speedControl();
+        pixelMechanismControl();
         drive();
         telemetryOutput();
     }
@@ -91,20 +100,23 @@ public class TeleOp_CompetitionBot extends OpMode {
     }
 
     public void pixelMechanismControl() {
-        if (gamepad2.right_stick_y >= 0.2){
-            CompetitionBot.viperSlideRight.setPower(.7);
+        if (gamepad2.right_stick_y > 0.1){
+            CompetitionBot.linearSlideUp(viperSlidePower);
         }
-        else if (gamepad2.right_stick_y <= -0.2) {
-            CompetitionBot.viperSlideRight.setPower(-.7);
+        else if (gamepad2.right_stick_y < -0.1) {
+            CompetitionBot.linearSlideDown(viperSlidePower);
         }
         else {
             CompetitionBot.viperSlideRight.setPower(0);
         }
-        if (gamepad2.left_stick_y >= 0.2) {
-            CompetitionBot.wormgearRight.setPower(.7);
+        if (gamepad2.left_stick_y > 0.1) {
+            CompetitionBot.rightWormgearLeft(wormgearPower);
         }
-        else if (gamepad2.left_stick_y <= -0.2) {
-            CompetitionBot.wormgearRight.setPower(-0.7);
+        else if (gamepad2.left_stick_y < -0.1) {
+            CompetitionBot.rightWormgearRight(wormgearPower);
+        }
+        else {
+            CompetitionBot.wormgearRight.setPower(0);
         }
     }
     public void telemetryOutput() {

@@ -77,17 +77,17 @@ public class CompBot extends MecanumDrive {
             currentTime.reset();
 
 
-            BNO055IMU.Parameters parametersimu = new BNO055IMU.Parameters();
-            parametersimu.angleUnit = BNO055IMU.AngleUnit.DEGREES;
-            parametersimu.accelUnit = BNO055IMU.AccelUnit.METERS_PERSEC_PERSEC;
-            parametersimu.calibrationDataFile = "BNO055IMUCalibration.json"; // see the calibration sample opmode
-
-            parametersimu.loggingEnabled = true;
-            parametersimu.loggingTag = "IMU";
-            parametersimu.accelerationIntegrationAlgorithm = new JustLoggingAccelerationIntegrator();
-
-            imu = hwBot.get(BNO055IMU.class, "imu");
-            imu.initialize(parametersimu);
+//            BNO055IMU.Parameters parametersimu = new BNO055IMU.Parameters();
+//            parametersimu.angleUnit = BNO055IMU.AngleUnit.DEGREES;
+//            parametersimu.accelUnit = BNO055IMU.AccelUnit.METERS_PERSEC_PERSEC;
+//            parametersimu.calibrationDataFile = "BNO055IMUCalibration.json"; // see the calibration sample opmode
+//
+//            parametersimu.loggingEnabled = true;
+//            parametersimu.loggingTag = "IMU";
+//            parametersimu.accelerationIntegrationAlgorithm = new JustLoggingAccelerationIntegrator();
+//
+//            imu = hwBot.get(BNO055IMU.class, "imu");
+//            imu.initialize(parametersimu);
 
 
         }
@@ -98,4 +98,20 @@ public class CompBot extends MecanumDrive {
             rearLeftMotor.setPower(0);
             rearRightMotor.setPower(0);
         }
+
+    public void linearSlideUp (double power) {
+        viperSlideRight.setPower(-Math.abs(power));
+    }
+
+    public void linearSlideDown (double power) {viperSlideRight.setPower(Math.abs(power));
+    }
+
+    public void rightWormgearLeft (double power) {
+        wormgearRight.setPower(Math.abs(power));
+    }
+
+    public void rightWormgearRight (double power) {
+        wormgearRight.setPower(-Math.abs(power));
+    }
+
 }
