@@ -133,13 +133,7 @@ public class TeleOp_CompetitionBot extends OpMode {
             CompetitionBot.wormgearRight.setPower(0);
         }
 
-        if (Math.abs(CompetitionBot.wormgearRight.getCurrentPosition()) > wormgearMaxTicks) {
-            CompetitionBot.wormgearRight.setPower(0);
-        }
 
-        else if (Math.abs(CompetitionBot.wormgearRight.getCurrentPosition()) <= wormgearMinTicks){
-            CompetitionBot.wormgearRight.setPower(0);
-        }
     }
     public void telemetryOutput() {
 
