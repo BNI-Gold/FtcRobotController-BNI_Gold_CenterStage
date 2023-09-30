@@ -26,6 +26,11 @@ public class TeleOp_CompetitionBot extends OpMode {
 
     public double viperSlidePower = .7;
 
+    public double viperSlideMaxTicks = 250;
+    public double viperSlideMinTicks = 1;
+    public double wormgearMaxTicks = 100;
+    public double wormgearMinTicks = 1;
+
 
 
 
@@ -109,6 +114,15 @@ public class TeleOp_CompetitionBot extends OpMode {
         else {
             CompetitionBot.viperSlideRight.setPower(0);
         }
+
+        if (Math.abs(CompetitionBot.viperSlideRight.getCurrentPosition()) > viperSlideMaxTicks) {
+            CompetitionBot.viperSlideRight.setPower(0);
+        }
+
+        else if (Math.abs(CompetitionBot.viperSlideRight.getCurrentPosition()) <= viperSlideMinTicks) {
+            CompetitionBot.viperSlideRight.setPower(0);
+        }
+
         if (gamepad2.left_stick_y > 0.1) {
             CompetitionBot.rightWormgearLeft(wormgearPower);
         }
@@ -116,6 +130,14 @@ public class TeleOp_CompetitionBot extends OpMode {
             CompetitionBot.rightWormgearRight(wormgearPower);
         }
         else {
+            CompetitionBot.wormgearRight.setPower(0);
+        }
+
+        if (Math.abs(CompetitionBot.wormgearRight.getCurrentPosition()) > wormgearMaxTicks) {
+            CompetitionBot.wormgearRight.setPower(0);
+        }
+
+        else if (Math.abs(CompetitionBot.wormgearRight.getCurrentPosition()) <= wormgearMinTicks){
             CompetitionBot.wormgearRight.setPower(0);
         }
     }

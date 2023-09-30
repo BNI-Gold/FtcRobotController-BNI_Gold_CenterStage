@@ -106,6 +106,30 @@ public class CompBot extends MecanumDrive {
     public void linearSlideDown (double power) {viperSlideRight.setPower(Math.abs(power));
     }
 
+    public void linearSlideUp (double power, double rotations)  {
+        double ticks = rotations * (1) * TICKS_PER_ROTATION;
+        viperSlideRight.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
+        viperSlideRight.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
+        while (Math.abs(viperSlideRight.getCurrentPosition()) < ticks && LinearOp.opModeIsActive()) {
+            linearSlideUp(power);
+        }
+        linearSlideStop();
+    }
+
+    public void linearSlideDown (double power, double rotations) {
+        double ticks = rotations * TICKS_PER_ROTATION;
+        viperSlideRight.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
+        viperSlideRight.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
+        while (Math.abs(viperSlideRight.getCurrentPosition())< ticks && LinearOp.opModeIsActive()) {
+            linearSlideDown(power);
+        }
+        linearSlideStop();
+    }
+
+    public void linearSlideStop() {
+        viperSlideRight.setPower(0);
+    }
+
     public void rightWormgearLeft (double power) {
         wormgearRight.setPower(Math.abs(power));
     }
