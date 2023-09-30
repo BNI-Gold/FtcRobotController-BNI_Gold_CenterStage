@@ -22,7 +22,7 @@ public class TeleOp_CompetitionBot extends OpMode {
     double powerThreshold = 0;
     double speedMultiply = 1;
 
-    public double wormgearPower = 0.70;
+    public double wormgearPower = 1;
 
     public double viperSlidePower = .7;
 
@@ -105,6 +105,9 @@ public class TeleOp_CompetitionBot extends OpMode {
     }
 
     public void pixelMechanismControl() {
+
+
+
         if (gamepad2.right_stick_y > 0.1){
             CompetitionBot.linearSlideUp(viperSlidePower);
         }
