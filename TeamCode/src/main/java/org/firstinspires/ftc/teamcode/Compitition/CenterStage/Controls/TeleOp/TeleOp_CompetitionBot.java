@@ -138,6 +138,22 @@ public class TeleOp_CompetitionBot extends OpMode {
 
 
     }
+
+    public void endgameArm(){
+        if (gamepad2.right_stick_x < -0.1) {
+            CompetitionBot.endgameArmUp();
+        }
+
+        else if (gamepad2.right_stick_x > 0.1) {
+            CompetitionBot.endgameArmDown();
+        }
+
+        else {
+            CompetitionBot.endgameArmStop();
+        }
+
+
+    }
     public void telemetryOutput() {
 
         telemetry.addData("pwr", "FL mtr: " + frontLeftSpeed);

@@ -22,6 +22,7 @@ public class CompBot extends MecanumDrive {
         public DcMotor viperSlideLeft = null;
         public DcMotor wormgearRight = null;
         public DcMotor wormgearLeft = null;
+        public DcMotor endgameArm = null;
         public ElapsedTime currentTime = new ElapsedTime();
 
         public ElapsedTime timer = new ElapsedTime();
@@ -72,6 +73,18 @@ public class CompBot extends MecanumDrive {
             wormgearLeft = hwBot.dcMotor.get("wormgear_left");
             wormgearLeft.setDirection(DcMotor.Direction.FORWARD);  //check direction b/f testing
             wormgearLeft.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
+
+            endgameArm = hwBot.dcMotor.get("endgameArm");
+
+            //Expantion Hub Port 0
+
+            endgameArm.setDirection(DcMotorSimple.Direction.FORWARD);
+
+
+            endgameArm.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
+
+            endgameArm.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
+            endgameArm.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
 
 
             currentTime.reset();
@@ -136,6 +149,17 @@ public class CompBot extends MecanumDrive {
 
     public void rightWormgearRight (double power) {
         wormgearRight.setPower(-Math.abs(power));
+    }
+
+    public void endgameArmUp (){
+        endgameArm.setPower(100);
+    }
+
+    public void endgameArmDown(){
+       endgameArm.setPower(-100);
+    }
+    public void endgameArmStop(){
+        endgameArm.setPower(0);
     }
 
 }
