@@ -127,10 +127,10 @@ public class TeleOp_CompetitionBot extends OpMode {
         }
 
         if (gamepad2.left_stick_y > 0.1) {
-            CompetitionBot.rightWormgearLeft(wormgearPower);
+            CompetitionBot.rightWormgearUp(wormgearPower);
         }
         else if (gamepad2.left_stick_y < -0.1) {
-            CompetitionBot.rightWormgearRight(wormgearPower);
+            CompetitionBot.rightWormgearDown(wormgearPower);
         }
         else {
             CompetitionBot.wormgearRight.setPower(0);
@@ -141,11 +141,11 @@ public class TeleOp_CompetitionBot extends OpMode {
 
     public void endgameArm(){
         if (gamepad2.right_stick_x < -0.1) {
-            CompetitionBot.endgameArmUp();
+            CompetitionBot.endgameArmExtend();
         }
 
         else if (gamepad2.right_stick_x > 0.1) {
-            CompetitionBot.endgameArmDown();
+            CompetitionBot.endgameArmRetract();
         }
 
         else {

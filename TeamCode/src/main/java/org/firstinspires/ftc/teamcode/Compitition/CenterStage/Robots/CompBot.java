@@ -1,11 +1,10 @@
 package org.firstinspires.ftc.teamcode.Compitition.CenterStage.Robots;
 
 import com.qualcomm.hardware.bosch.BNO055IMU;
-import com.qualcomm.hardware.bosch.JustLoggingAccelerationIntegrator;
-import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.hardware.DcMotorSimple;
 import com.qualcomm.robotcore.hardware.HardwareMap;
+import com.qualcomm.robotcore.hardware.Servo;
 import com.qualcomm.robotcore.util.ElapsedTime;
 
 import org.firstinspires.ftc.robotcore.external.navigation.Acceleration;
@@ -19,10 +18,12 @@ public class CompBot extends MecanumDrive {
         public HardwareMap hwBot = null;
 
         public DcMotor viperSlideRight = null;
-        public DcMotor viperSlideLeft = null;
+//        public DcMotor viperSlideLeft = null;
         public DcMotor wormgearRight = null;
         public DcMotor wormgearLeft = null;
         public DcMotor endgameArm = null;
+        public Servo pixelClaw = null;
+        public Servo endgameArmRotator = null;
         public ElapsedTime currentTime = new ElapsedTime();
 
         public ElapsedTime timer = new ElapsedTime();
@@ -62,9 +63,9 @@ public class CompBot extends MecanumDrive {
             viperSlideRight.setDirection(DcMotor.Direction.FORWARD);
             viperSlideRight.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
 
-            viperSlideLeft = hwBot.dcMotor.get("viper_slide_left");
-            viperSlideLeft.setDirection(DcMotorSimple.Direction.FORWARD);
-            viperSlideLeft.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
+//            viperSlideLeft = hwBot.dcMotor.get("viper_slide_left");
+//            viperSlideLeft.setDirection(DcMotorSimple.Direction.FORWARD);
+//            viperSlideLeft.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
 
             wormgearRight = hwBot.dcMotor.get("wormgear_right");
             wormgearRight.setDirection(DcMotor.Direction.FORWARD); //check direction b/f testing
@@ -78,13 +79,18 @@ public class CompBot extends MecanumDrive {
 
             //Expantion Hub Port 0
 
+            endgameArm = hwBot.dcMotor.get("endgame_arm");
             endgameArm.setDirection(DcMotorSimple.Direction.FORWARD);
-
-
             endgameArm.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
-
             endgameArm.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
             endgameArm.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
+
+
+            pixelClaw = hwBot.servo.get("pixel_claw");
+            pixelClaw.setDirection(Servo.Direction.FORWARD);
+
+            endgameArmRotator = hwBot.servo.get("end_game_arm_rotator");
+            endgameArmRotator.setDirection(Servo.Direction.FORWARD);
 
 
             currentTime.reset();
@@ -105,12 +111,6 @@ public class CompBot extends MecanumDrive {
 
         }
 
-        public void stopMotors(){
-            frontLeftMotor.setPower(0);
-            frontRightMotor.setPower(0);
-            rearLeftMotor.setPower(0);
-            rearRightMotor.setPower(0);
-        }
 
     public void linearSlideUp (double power) {
         viperSlideRight.setPower(-Math.abs(power));
@@ -143,23 +143,30 @@ public class CompBot extends MecanumDrive {
         viperSlideRight.setPower(0);
     }
 
-    public void rightWormgearLeft (double power) {
+    public void rightWormgearUp(double power) {
         wormgearRight.setPower(Math.abs(power));
     }
 
-    public void rightWormgearRight (double power) {
+    public void rightWormgearDown(double power) {
         wormgearRight.setPower(-Math.abs(power));
     }
 
-    public void endgameArmUp (){
+    public void rightWormgearStop (double power) {wormgearRight.setPower(0);}
+
+    public void endgameArmExtend(){
         endgameArm.setPower(100);
     }
 
-    public void endgameArmDown(){
+    public void endgameArmRetract(){
        endgameArm.setPower(-100);
     }
     public void endgameArmStop(){
         endgameArm.setPower(0);
+    }
+
+
+    public void endgameArmRotatorMovement (double position) {
+            endgameArmRotator.setPosition(position);
     }
 
 }

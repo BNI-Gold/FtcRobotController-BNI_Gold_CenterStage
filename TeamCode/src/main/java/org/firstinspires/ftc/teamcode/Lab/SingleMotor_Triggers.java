@@ -7,7 +7,7 @@ import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.hardware.DcMotorSimple;
 
 //Class is used for testing a single motor, using trigger for variable power.
-@TeleOp (name = "Single Motor test - Triggers to operate", group = "lab")
+@TeleOp (name = "Single Motor test - Triggers to operate")
 //@Disabled
 public class SingleMotor_Triggers extends OpMode {
     private DcMotor motor = null;
@@ -31,6 +31,7 @@ public class SingleMotor_Triggers extends OpMode {
 
     @Override
     public void loop() {
+
         if (gamepad1.right_trigger > 0.1) {
             power = powerControl;
         }
@@ -44,6 +45,21 @@ public class SingleMotor_Triggers extends OpMode {
         motor.setPower(power);
 
         update_telemetry();
+    }
+
+    public void speedControl(){
+        if (gamepad1.dpad_up) {
+            motor.setPower(.25);
+        }
+       else if (gamepad1.dpad_right) {
+           motor.setPower(.5);
+        }
+      else   if (gamepad1.dpad_down) {
+          motor.setPower(.75);
+        }
+       else if (gamepad1.dpad_left) {
+           motor.setPower(1);
+        }
     }
 
     public void update_telemetry () {
