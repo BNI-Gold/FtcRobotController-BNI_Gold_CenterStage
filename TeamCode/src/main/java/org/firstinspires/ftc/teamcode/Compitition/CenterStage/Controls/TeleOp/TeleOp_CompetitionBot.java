@@ -4,6 +4,7 @@ import com.qualcomm.robotcore.eventloop.opmode.OpMode;
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 import com.qualcomm.robotcore.util.Range;
 
+import org.checkerframework.checker.units.qual.C;
 import org.firstinspires.ftc.teamcode.Compitition.CenterStage.Robots.CompBot;
 
 @TeleOp (name = "A_TeleOp_CompBot_Centerstage")
@@ -22,7 +23,7 @@ public class TeleOp_CompetitionBot extends OpMode {
     double powerThreshold = 0;
     double speedMultiply = 1;
 
-    public double wormgearPower = 1;
+    public double   wormgearPower = 1;
 
     public double viperSlidePower = .7;
 
@@ -49,6 +50,7 @@ public class TeleOp_CompetitionBot extends OpMode {
 
     public void loop(){
         speedControl();
+        endgameArm();
         pixelMechanismControl();
         drive();
         telemetryOutput();
@@ -136,10 +138,17 @@ public class TeleOp_CompetitionBot extends OpMode {
             CompetitionBot.wormgearRight.setPower(0);
         }
 
+        if (gamepad2.left_bumper) {
+            CompetitionBot.pixelClaw.setPosition(.1);
+        }
+        else if (gamepad2.right_bumper){
+            CompetitionBot.pixelClaw.setPosition(.9);
+        }
+
 
     }
 
-    public void endgameArm(){
+    public void endgameArm() {
         if (gamepad2.right_stick_x < -0.1) {
             CompetitionBot.endgameArmExtend();
         }
@@ -152,6 +161,31 @@ public class TeleOp_CompetitionBot extends OpMode {
             CompetitionBot.endgameArmStop();
         }
 
+        if (gamepad2.x ) {
+            CompetitionBot.endgameArmRotatorMovement(.2);
+        }
+         if (gamepad2.y) {
+            CompetitionBot.endgameArmRotatorMovement(.8);
+        }
+
+
+//        if (gamepad2.a) {
+//            CompetitionBot.upTimer.reset();
+//            if (CompetitionBot.upTimer.seconds() >= 2.5) {
+//                CompetitionBot.endgameArmStop();
+//            } else if (CompetitionBot.upTimer.seconds() < 2.5) {
+//                CompetitionBot.endgameArmExtend();
+//
+//            }
+//
+//        } else if (gamepad2.b) {
+//            CompetitionBot.downTimer.reset();
+//            if (CompetitionBot.downTimer.seconds() >= 2.4) {
+//                CompetitionBot.endgameArmStop();
+//            } else if (CompetitionBot.downTimer.seconds() < 2.4) {
+//                CompetitionBot.endgameArmRetract();
+//            }
+//        }
 
     }
     public void telemetryOutput() {

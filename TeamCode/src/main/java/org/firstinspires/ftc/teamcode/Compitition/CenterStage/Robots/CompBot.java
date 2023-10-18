@@ -1,6 +1,7 @@
 package org.firstinspires.ftc.teamcode.Compitition.CenterStage.Robots;
 
 import com.qualcomm.hardware.bosch.BNO055IMU;
+import com.qualcomm.hardware.bosch.JustLoggingAccelerationIntegrator;
 import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.hardware.DcMotorSimple;
 import com.qualcomm.robotcore.hardware.HardwareMap;
@@ -8,6 +9,9 @@ import com.qualcomm.robotcore.hardware.Servo;
 import com.qualcomm.robotcore.util.ElapsedTime;
 
 import org.firstinspires.ftc.robotcore.external.navigation.Acceleration;
+import org.firstinspires.ftc.robotcore.external.navigation.AngleUnit;
+import org.firstinspires.ftc.robotcore.external.navigation.AxesOrder;
+import org.firstinspires.ftc.robotcore.external.navigation.AxesReference;
 import org.firstinspires.ftc.robotcore.external.navigation.Orientation;
 import org.firstinspires.ftc.teamcode.Compitition.CenterStage.Drivetrains.MecanumDrive;
 
@@ -20,13 +24,14 @@ public class CompBot extends MecanumDrive {
         public DcMotor viperSlideRight = null;
 //        public DcMotor viperSlideLeft = null;
         public DcMotor wormgearRight = null;
-        public DcMotor wormgearLeft = null;
+//        public DcMotor wormgearLeft = null;
         public DcMotor endgameArm = null;
         public Servo pixelClaw = null;
         public Servo endgameArmRotator = null;
         public ElapsedTime currentTime = new ElapsedTime();
 
-        public ElapsedTime timer = new ElapsedTime();
+        public ElapsedTime upTimer = new ElapsedTime();
+        public ElapsedTime downTimer = new ElapsedTime();
 
 
         public BNO055IMU imu;
@@ -71,11 +76,11 @@ public class CompBot extends MecanumDrive {
             wormgearRight.setDirection(DcMotor.Direction.FORWARD); //check direction b/f testing
             wormgearRight.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
 
-            wormgearLeft = hwBot.dcMotor.get("wormgear_left");
-            wormgearLeft.setDirection(DcMotor.Direction.FORWARD);  //check direction b/f testing
-            wormgearLeft.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
+//            wormgearLeft = hwBot.dcMotor.get("wormgear_left");
+//            wormgearLeft.setDirection(DcMotor.Direction.FORWARD);  //check direction b/f testing
+//            wormgearLeft.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
 
-            endgameArm = hwBot.dcMotor.get("endgameArm");
+
 
             //Expantion Hub Port 0
 
@@ -96,20 +101,53 @@ public class CompBot extends MecanumDrive {
             currentTime.reset();
 
 
-//            BNO055IMU.Parameters parametersimu = new BNO055IMU.Parameters();
-//            parametersimu.angleUnit = BNO055IMU.AngleUnit.DEGREES;
-//            parametersimu.accelUnit = BNO055IMU.AccelUnit.METERS_PERSEC_PERSEC;
-//            parametersimu.calibrationDataFile = "BNO055IMUCalibration.json"; // see the calibration sample opmode
-//
-//            parametersimu.loggingEnabled = true;
-//            parametersimu.loggingTag = "IMU";
-//            parametersimu.accelerationIntegrationAlgorithm = new JustLoggingAccelerationIntegrator();
-//
-//            imu = hwBot.get(BNO055IMU.class, "imu");
-//            imu.initialize(parametersimu);
+            BNO055IMU.Parameters parametersimu = new BNO055IMU.Parameters();
+            parametersimu.angleUnit = BNO055IMU.AngleUnit.DEGREES;
+            parametersimu.accelUnit = BNO055IMU.AccelUnit.METERS_PERSEC_PERSEC;
+            parametersimu.calibrationDataFile = "BNO055IMUCalibration.json"; // see the calibration sample opmode
+
+            parametersimu.loggingEnabled = true;
+            parametersimu.loggingTag = "IMU";
+            parametersimu.accelerationIntegrationAlgorithm = new JustLoggingAccelerationIntegrator();
+
+            imu = hwBot.get(BNO055IMU.class, "imu");
+            imu.initialize(parametersimu);
 
 
         }
+
+    public void gyroCorrection (double speed, double angle) {
+
+        angles = imu.getAngularOrientation(
+                AxesReference.INTRINSIC, AxesOrder.ZYX, AngleUnit.DEGREES);
+
+        if (angles.firstAngle >= angle + TOLERANCE && LinearOp.opModeIsActive()) {
+            while (angles.firstAngle >=  angle + TOLERANCE && LinearOp.opModeIsActive()) {
+                rotateRight(speed);
+                angles = imu.getAngularOrientation(AxesReference.INTRINSIC, AxesOrder.ZYX, AngleUnit.DEGREES);
+
+                LinearOp.telemetry.addData("Current Angle Est: ", angles.firstAngle);
+            }
+        }
+        else if (angles.firstAngle <= angle - TOLERANCE && LinearOp.opModeIsActive()) {
+            while (angles.firstAngle <= angle - TOLERANCE && LinearOp.opModeIsActive()) {
+                rotateLeft(speed);
+                angles = imu.getAngularOrientation(AxesReference.INTRINSIC, AxesOrder.ZYX, AngleUnit.DEGREES);
+
+                LinearOp.telemetry.addData("Current Angle Est:" , angles.firstAngle);
+            }
+        }
+        stopMotors();
+
+        angles = imu.getAngularOrientation(AxesReference.INTRINSIC, AxesOrder.ZYX, AngleUnit.DEGREES);
+    }
+
+
+    public void gyroReset () {
+        BNO055IMU.Parameters parametersimu = new BNO055IMU.Parameters();
+        imu.initialize(parametersimu);
+    }
+
 
 
     public void linearSlideUp (double power) {
@@ -154,11 +192,11 @@ public class CompBot extends MecanumDrive {
     public void rightWormgearStop (double power) {wormgearRight.setPower(0);}
 
     public void endgameArmExtend(){
-        endgameArm.setPower(100);
+        endgameArm.setPower(1);
     }
 
     public void endgameArmRetract(){
-       endgameArm.setPower(-100);
+       endgameArm.setPower(-1);
     }
     public void endgameArmStop(){
         endgameArm.setPower(0);
