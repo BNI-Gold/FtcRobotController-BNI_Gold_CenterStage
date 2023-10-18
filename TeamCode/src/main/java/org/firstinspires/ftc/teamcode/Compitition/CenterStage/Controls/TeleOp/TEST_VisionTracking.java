@@ -62,6 +62,7 @@ public class TEST_VisionTracking extends LinearOpMode {
 
     }
 
+    //Hello Connor.  I am messing with your code because I AM THE LEAD PROGRAMMER... Camden
     public void telemetrytFod(){
         List<Recognition> currentRecognitions = tFod.getRecognitions();
         telemetry.addData("# Objects Detected", currentRecognitions.size());
