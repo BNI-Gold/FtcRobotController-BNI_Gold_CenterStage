@@ -9,6 +9,15 @@ import org.firstinspires.ftc.teamcode.Compitition.CenterStage.Robots.CompBot;
 @TeleOp (name = "A_TeleOp_CompBot_Centerstage")
 public class TeleOp_CompetitionBot extends OpMode {
 
+    public double rotationPos = 0.5;
+    double incValue = 0.05;
+
+    double pixelRotationUp = 1.0;
+
+    double pixelRotationMiddle = 0.5;
+
+    double pixelRotationDown = 0.0;
+
     double leftStickYVal;
     double leftStickXVal;
     double rightStickXVal;
@@ -137,7 +146,7 @@ public class TeleOp_CompetitionBot extends OpMode {
             }
 
             if (gamepad2.left_bumper) {
-                CompetitionBot.pixelClaw.setPosition(.1);
+                CompetitionBot.pixelClaw.setPosition(.35);
             } else if (gamepad2.right_bumper) {
                 CompetitionBot.pixelClaw.setPosition(.9);
             }
@@ -145,18 +154,18 @@ public class TeleOp_CompetitionBot extends OpMode {
             break;
 
             case MITCHELL:
-                if (gamepad2.left_stick_y < -0.1) {
-                    CompetitionBot.rightWormgearUp(wormgearPower);
-                } else if (gamepad2.left_stick_y > 0.1) {
+                if (gamepad2.right_stick_y < -0.1) {
                     CompetitionBot.rightWormgearDown(wormgearPower);
+                } else if (gamepad2.right_stick_y > 0.1) {
+                    CompetitionBot.rightWormgearUp(wormgearPower);
                 } else {
                     CompetitionBot.wormgearRight.setPower(0);
                 }
 
 
-                if (gamepad2.left_stick_x > 0.1) {
+                if (gamepad2.right_stick_x > 0.1) {
                     CompetitionBot.linearSlideExtend(viperSlidePower);
-                } else if (gamepad2.left_stick_x < -0.1) {
+                } else if (gamepad2.right_stick_x < -0.1) {
                     CompetitionBot.linearSlideRetract(viperSlidePower);
                 } else {
                     CompetitionBot.viperSlideRight.setPower(0);
@@ -166,6 +175,33 @@ public class TeleOp_CompetitionBot extends OpMode {
                     CompetitionBot.viperSlideRight.setPower(0);
                 } else if (Math.abs(CompetitionBot.viperSlideRight.getCurrentPosition()) <= viperSlideMinTicks) {
                     CompetitionBot.viperSlideRight.setPower(0);
+                }
+
+                if (gamepad2.left_bumper) {
+                    CompetitionBot.pixelClaw.setPosition(.35);
+                } else if (gamepad2.right_bumper) {
+                    CompetitionBot.pixelClaw.setPosition(.9);
+                }
+
+                // DPAD UP SETS SERVO TO UP POSITION | UP POSITION MAY BE 0 OR 1 IDK
+                if (gamepad2.dpad_up) {
+
+                    CompetitionBot.pixelRotator.setPosition(pixelRotationUp);
+
+                }
+
+                // DPAD UP SETS SERVO TO DOWN POSITION | DOWN POSITION MAY BE 0 OR 1 IDK
+                if (gamepad2.dpad_down) {
+
+                    CompetitionBot.pixelRotator.setPosition(pixelRotationDown);
+
+                }
+
+                // DPAD RIGHT - MIDDLE POSITION
+                if (gamepad2.dpad_right) {
+
+                    CompetitionBot.pixelRotator.setPosition(pixelRotationMiddle);
+
                 }
 
 
@@ -179,16 +215,16 @@ public class TeleOp_CompetitionBot extends OpMode {
     public void endgameArm() {
        switch (driverControl) {
            case MITCHELL:
-           if (gamepad2.right_stick_y < -0.1) {
-               CompetitionBot.endgameArmExtend();
-           } else if (gamepad2.right_stick_y > 0.1) {
+           if (gamepad2.left_stick_y < -0.1) {
                CompetitionBot.endgameArmRetract();
+           } else if (gamepad2.left_stick_y > 0.1) {
+               CompetitionBot.endgameArmExtend();
            } else {
                CompetitionBot.endgameArmStop();
            }
 
            if (gamepad2.x) {
-               CompetitionBot.endgameArmRotatorMovement(.2);
+               CompetitionBot.endgameArmRotatorMovement(.3);
            }
            if (gamepad2.y) {
                CompetitionBot.endgameArmRotatorMovement(.8);
@@ -260,10 +296,10 @@ public class TeleOp_CompetitionBot extends OpMode {
 
 
     public void driverControlChanger(){
-        if (gamepad2.dpad_up) {
+        if (gamepad2.a) {
             driverControl = driverControl.BEN;
         }
-        else if (gamepad2.dpad_down) {
+        else if (gamepad2.b) {
             driverControl = driverControl.MITCHELL;
         }
     }

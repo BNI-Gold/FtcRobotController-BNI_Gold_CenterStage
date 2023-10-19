@@ -30,6 +30,7 @@ public class CompBot extends MecanumDrive {
         public DcMotor endgameArm = null;
         public Servo pixelClaw = null;
         public Servo endgameArmRotator = null;
+        public Servo pixelRotator = null;
         public ElapsedTime currentTime = new ElapsedTime();
 
         public ElapsedTime upTimer = new ElapsedTime();
@@ -106,6 +107,9 @@ public class CompBot extends MecanumDrive {
             endgameArmRotator = hwBot.servo.get("end_game_arm_rotator");
             endgameArmRotator.setDirection(Servo.Direction.FORWARD);
 
+
+            pixelRotator = hwBot.servo.get("pixel_rotator");
+            pixelRotator.setDirection(Servo.Direction.FORWARD);
 
             currentTime.reset();
 
@@ -205,11 +209,11 @@ public class CompBot extends MecanumDrive {
     public void rightWormgearStop (double power) {wormgearRight.setPower(0);}
 
     public void endgameArmExtend(){
-        endgameArm.setPower(1);
+        endgameArm.setPower(-1);
     }
 
     public void endgameArmRetract(){
-       endgameArm.setPower(-1);
+       endgameArm.setPower(1);
     }
     public void endgameArmStop(){
         endgameArm.setPower(0);
