@@ -26,7 +26,7 @@ public class AutoBlueAudience extends AutoMain {
         while (opModeIsActive()) {
 
 
-            BNIBot.gyroReset();
+            BNIBot.getHeading();
 
             BNIBot.driveForward(1,3.7);
             sleep(200);

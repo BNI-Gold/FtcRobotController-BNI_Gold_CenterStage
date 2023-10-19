@@ -2,6 +2,10 @@ package org.firstinspires.ftc.teamcode.Compitition.CenterStage.Drivetrains;
 
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 import com.qualcomm.robotcore.hardware.DcMotor;
+import com.qualcomm.robotcore.hardware.IMU;
+
+import org.firstinspires.ftc.robotcore.external.navigation.AngleUnit;
+import org.firstinspires.ftc.robotcore.external.navigation.YawPitchRollAngles;
 
 public class MecanumDrive {
     public DcMotor frontLeftMotor;
@@ -13,6 +17,12 @@ public class MecanumDrive {
     public LinearOpMode LinearOp = null;
 
     public static final double TICKS_PER_ROTATION = 386.3;
+
+    public IMU imu = null;
+    public double headingTolerance = 2;
+    public double currentHeading = 0;
+
+
 
     public MecanumDrive() {
 
@@ -221,6 +231,40 @@ public class MecanumDrive {
             diagonalRightBack(speed);
         }
         stopMotors();
+    }
+
+    public void gyroCorrection(double speed, double targetAngle) {
+        imu.resetYaw();
+        currentHeading = getHeading();
+        if (currentHeading >= targetAngle + headingTolerance && LinearOp.opModeIsActive()) {
+            while (currentHeading >= targetAngle + headingTolerance && LinearOp.opModeIsActive()) {
+                rotateRight(speed);
+
+                currentHeading = getHeading();
+                LinearOp.telemetry.addData("Current Angle: ", currentHeading);
+                LinearOp.telemetry.addData("Target Angle: ", targetAngle);
+                LinearOp.telemetry.update();
+            }
+        } else if (currentHeading <= targetAngle - headingTolerance && LinearOp.opModeIsActive()) ;
+        {
+            while (currentHeading <= targetAngle - headingTolerance && LinearOp.opModeIsActive()) {
+                rotateLeft(speed);
+
+                currentHeading = getHeading();
+                LinearOp.telemetry.addData("Current Angle: ", currentHeading);
+                LinearOp.telemetry.addData("Target Angle: ", targetAngle);
+                LinearOp.telemetry.update();
+            }
+        }
+
+        stopMotors();
+        currentHeading = getHeading();
+    }
+
+
+    public double getHeading() {
+        YawPitchRollAngles orientation = imu.getRobotYawPitchRollAngles();
+        return orientation.getYaw(AngleUnit.DEGREES);
     }
 
 }

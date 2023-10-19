@@ -31,22 +31,17 @@ public class TeleOp_CompetitionBot extends OpMode {
     public double wormgearMaxTicks = 100;
     public double wormgearMinTicks = 1;
 
-    public double rotationPos = 0.5;
-    double incValue = 0.05;
+    public enum DriverControl {BEN, MITCHELL}
+    public DriverControl driverControl = DriverControl.BEN;
 
 
 
-    double pixelRotationUp = 1.0;
-
-    double pixelRotationMiddle = 0.5;
-
-    double pixelRotationDown = 0.0;
 
 
-    public CompBot Bot = new CompBot();
+    public CompBot CompetitionBot = new CompBot();
 
     public void init () {
-        Bot.initRobot(hardwareMap);
+        CompetitionBot.initRobot(hardwareMap);
     }
     public void init_loop() {  }
 
@@ -56,21 +51,12 @@ public class TeleOp_CompetitionBot extends OpMode {
     }
 
     public void loop(){
-
         speedControl();
-
+        driverControlChanger();
         endgameArm();
-
         pixelMechanismControl();
-
         drive();
-
         telemetryOutput();
-
-        pixelRotationControl();
-
-        pixelTestTelemetry();
-
     }
 
     public void drive() {
@@ -96,145 +82,134 @@ public class TeleOp_CompetitionBot extends OpMode {
 
         if (frontLeftSpeed <= powerThreshold && frontLeftSpeed >= -powerThreshold) {
             frontLeftSpeed = 0;
-            Bot.frontLeftMotor.setPower(frontLeftSpeed);
+            CompetitionBot.frontLeftMotor.setPower(frontLeftSpeed);
         } else {
-            Bot.frontLeftMotor.setPower(frontLeftSpeed * speedMultiply);
+            CompetitionBot.frontLeftMotor.setPower(frontLeftSpeed * speedMultiply);
         }
 
         if (frontRightSpeed <= powerThreshold && frontRightSpeed >= -powerThreshold){
             frontRightSpeed = 0;
-            Bot.frontRightMotor.setPower(frontRightSpeed);
+            CompetitionBot.frontRightMotor.setPower(frontRightSpeed);
         } else {
-            Bot.frontRightMotor.setPower(frontRightSpeed * speedMultiply);
+            CompetitionBot.frontRightMotor.setPower(frontRightSpeed * speedMultiply);
         }
 
         if (rearLeftSpeed <= powerThreshold && rearLeftSpeed >= -powerThreshold) {
             rearLeftSpeed = 0;
-            Bot.rearLeftMotor.setPower(rearLeftSpeed);
+            CompetitionBot.rearLeftMotor.setPower(rearLeftSpeed);
         } else {
-            Bot.rearLeftMotor.setPower(rearLeftSpeed * speedMultiply);
+            CompetitionBot.rearLeftMotor.setPower(rearLeftSpeed * speedMultiply);
         }
 
         if (rearRightSpeed <= powerThreshold && rearRightSpeed >= -powerThreshold){
             rearRightSpeed = 0;
-            Bot.rearRightMotor.setPower(rearRightSpeed);
+            CompetitionBot.rearRightMotor.setPower(rearRightSpeed);
         } else {
-            Bot.rearRightMotor.setPower(rearRightSpeed * speedMultiply);
+            CompetitionBot.rearRightMotor.setPower(rearRightSpeed * speedMultiply);
         }
-    }
-
-    // CONTROL FOR PIXEL ARM ROTATION SERVO
-    public void pixelRotationControl() {
-
-        // DPAD UP SETS SERVO TO UP POSITION | UP POSITION MAY BE 0 OR 1 IDK
-        if (gamepad2.dpad_up) {
-
-            Bot.pixelRotator.setPosition(pixelRotationUp);
-
-        }
-
-        // DPAD UP SETS SERVO TO DOWN POSITION | DOWN POSITION MAY BE 0 OR 1 IDK
-        if (gamepad2.dpad_down) {
-
-            Bot.pixelRotator.setPosition(pixelRotationDown);
-
-        }
-
-        // DPAD RIGHT - MIDDLE POSITION
-        if (gamepad2.dpad_right) {
-
-            Bot.pixelRotator.setPosition(pixelRotationMiddle);
-
-        }
-
-
     }
 
     public void pixelMechanismControl() {
+        switch (driverControl) {
+            case BEN:
 
 
+            if (gamepad2.right_trigger > 0.2) {
+                CompetitionBot.linearSlideExtend(viperSlidePower);
+            } else if (gamepad2.left_trigger > 0.2) {
+                CompetitionBot.linearSlideRetract(viperSlidePower);
+            } else {
+                CompetitionBot.viperSlideRight.setPower(0);
+            }
 
-        if (gamepad2.right_stick_x > 0.1){
+            if (Math.abs(CompetitionBot.viperSlideRight.getCurrentPosition()) > viperSlideMaxTicks) {
+                CompetitionBot.viperSlideRight.setPower(0);
+            } else if (Math.abs(CompetitionBot.viperSlideRight.getCurrentPosition()) <= viperSlideMinTicks) {
+                CompetitionBot.viperSlideRight.setPower(0);
+            }
 
-            Bot.linearSlideUp(viperSlidePower);
+            if (gamepad2.left_stick_y < -0.1) {
+                CompetitionBot.rightWormgearUp(wormgearPower);
+            } else if (gamepad2.left_stick_y > 0.1) {
+                CompetitionBot.rightWormgearDown(wormgearPower);
+            } else {
+                CompetitionBot.wormgearRight.setPower(0);
+            }
+
+            if (gamepad2.left_bumper) {
+                CompetitionBot.pixelClaw.setPosition(.1);
+            } else if (gamepad2.right_bumper) {
+                CompetitionBot.pixelClaw.setPosition(.9);
+            }
+
+            break;
+
+            case MITCHELL:
+                if (gamepad2.left_stick_y < -0.1) {
+                    CompetitionBot.rightWormgearUp(wormgearPower);
+                } else if (gamepad2.left_stick_y > 0.1) {
+                    CompetitionBot.rightWormgearDown(wormgearPower);
+                } else {
+                    CompetitionBot.wormgearRight.setPower(0);
+                }
+
+
+                if (gamepad2.left_stick_x > 0.1) {
+                    CompetitionBot.linearSlideExtend(viperSlidePower);
+                } else if (gamepad2.left_stick_x < -0.1) {
+                    CompetitionBot.linearSlideRetract(viperSlidePower);
+                } else {
+                    CompetitionBot.viperSlideRight.setPower(0);
+                }
+
+                if (Math.abs(CompetitionBot.viperSlideRight.getCurrentPosition()) > viperSlideMaxTicks) {
+                    CompetitionBot.viperSlideRight.setPower(0);
+                } else if (Math.abs(CompetitionBot.viperSlideRight.getCurrentPosition()) <= viperSlideMinTicks) {
+                    CompetitionBot.viperSlideRight.setPower(0);
+                }
+
+
+                break;
 
         }
 
-        else if (gamepad2.right_stick_x < -0.1) {
-
-            Bot.linearSlideDown(viperSlidePower);
-
-        }
-
-        else {
-
-            Bot.viperSlideRight.setPower(0);
-
-        }
-
-        if (Math.abs(Bot.viperSlideRight.getCurrentPosition()) > viperSlideMaxTicks) {
-
-            Bot.viperSlideRight.setPower(0);
-
-        }
-
-        else if (Math.abs(Bot.viperSlideRight.getCurrentPosition()) <= viperSlideMinTicks) {
-
-            Bot.viperSlideRight.setPower(0);
-
-        }
-
-        if (gamepad2.right_stick_y > 0.1) {
-
-            Bot.rightWormgearUp(wormgearPower);
-
-        }
-
-        else if (gamepad2.right_stick_y < -0.1) {
-
-            Bot.rightWormgearDown(wormgearPower);
-
-        }
-
-        else {
-
-            Bot.wormgearRight.setPower(0);
-
-        }
-
-        if (gamepad2.left_bumper) {
-
-            Bot.pixelClaw.setPosition(.1);
-
-        }
-
-        else if (gamepad2.right_bumper) {
-
-            Bot.pixelClaw.setPosition(.9);
-
-        }
 
     }
 
     public void endgameArm() {
-        if (gamepad2.left_stick_y < -0.1) {
-            Bot.endgameArmRetract();
-        }
+       switch (driverControl) {
+           case MITCHELL:
+           if (gamepad2.right_stick_y < -0.1) {
+               CompetitionBot.endgameArmExtend();
+           } else if (gamepad2.right_stick_y > 0.1) {
+               CompetitionBot.endgameArmRetract();
+           } else {
+               CompetitionBot.endgameArmStop();
+           }
 
-        else if (gamepad2.left_stick_y > 0.1) {
-            Bot.endgameArmExtend();
-        }
+           if (gamepad2.x) {
+               CompetitionBot.endgameArmRotatorMovement(.2);
+           }
+           if (gamepad2.y) {
+               CompetitionBot.endgameArmRotatorMovement(.8);
+           }
 
-        else {
-            Bot.endgameArmStop();
-        }
+           break;
+           case BEN:
+               if (gamepad2.right_stick_y < -0.1) {
+                   CompetitionBot.endgameArmExtend();
+               } else if (gamepad2.right_stick_y > 0.1) {
+                   CompetitionBot.endgameArmRetract();
+               } else {
+                   CompetitionBot.endgameArmStop();
+               }
 
-        if (gamepad2.x ) {
-            Bot.endgameArmRotatorMovement(.2);
-        }
-         if (gamepad2.y) {
-            Bot.endgameArmRotatorMovement(.8);
-        }
+               if (gamepad2.y) {
+                   CompetitionBot.endgameArmRotatorMovement(.2);
+               }
+               if (gamepad2.b) {
+                   CompetitionBot.endgameArmRotatorMovement(.8);
+               }
 
 
 //        if (gamepad2.a) {
@@ -254,17 +229,22 @@ public class TeleOp_CompetitionBot extends OpMode {
 //                CompetitionBot.endgameArmRetract();
 //            }
 //        }
+               break;
+       }
 
     }
     public void telemetryOutput() {
-
-//        telemetry.addData("pwr", "FRONT LEFT: " + frontLeftSpeed);
-//        telemetry.addData("pwr", "FRONT RIGHT: " + frontRightSpeed);
-//        telemetry.addData("pwr", "REAR LEFT: " + rearLeftSpeed);
-//        telemetry.addData("pwr", "REAR RIGHT: " + rearRightSpeed);
-
+        if (driverControl == driverControl.BEN) {
+            telemetry.addLine("Driver Control = BEN");
+        }
+        else if (driverControl == driverControl.MITCHELL) {
+            telemetry.addLine("Driver Control = MITCHELL");
+        }
+        telemetry.addData("pwr", "FL mtr: " + frontLeftSpeed);
+        telemetry.addData("pwr", "FR mtr: " + frontRightSpeed);
+        telemetry.addData("pwr", "RL mtr: " + rearLeftSpeed);
+        telemetry.addData("pwr", "RR mtr: " + rearRightSpeed);
         telemetry.update();
-
     }
 
     public void speedControl() {
@@ -278,13 +258,14 @@ public class TeleOp_CompetitionBot extends OpMode {
         }
     }
 
-    public void pixelTestTelemetry() {
 
-        double pixelServoPos = Bot.pixelRotator.getPosition();
-
-        telemetry.addData("Pixel Rotation Servo Pos: ", pixelServoPos);
-        telemetry.update();
-
+    public void driverControlChanger(){
+        if (gamepad2.dpad_up) {
+            driverControl = driverControl.BEN;
+        }
+        else if (gamepad2.dpad_down) {
+            driverControl = driverControl.MITCHELL;
+        }
     }
 
 
