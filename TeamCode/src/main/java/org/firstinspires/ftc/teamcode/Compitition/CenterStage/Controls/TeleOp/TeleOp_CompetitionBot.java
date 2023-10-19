@@ -4,7 +4,6 @@ import com.qualcomm.robotcore.eventloop.opmode.OpMode;
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 import com.qualcomm.robotcore.util.Range;
 
-import org.checkerframework.checker.units.qual.C;
 import org.firstinspires.ftc.teamcode.Compitition.CenterStage.Robots.CompBot;
 
 @TeleOp (name = "A_TeleOp_CompBot_Centerstage")
@@ -32,14 +31,22 @@ public class TeleOp_CompetitionBot extends OpMode {
     public double wormgearMaxTicks = 100;
     public double wormgearMinTicks = 1;
 
+    public double rotationPos = 0.5;
+    double incValue = 0.05;
 
 
 
+    double pixelRotationUp = 1.0;
 
-    public CompBot CompetitionBot = new CompBot();
+    double pixelRotationMiddle = 0.5;
+
+    double pixelRotationDown = 0.0;
+
+
+    public CompBot Bot = new CompBot();
 
     public void init () {
-        CompetitionBot.initRobot(hardwareMap);
+        Bot.initRobot(hardwareMap);
     }
     public void init_loop() {  }
 
@@ -49,11 +56,21 @@ public class TeleOp_CompetitionBot extends OpMode {
     }
 
     public void loop(){
+
         speedControl();
+
         endgameArm();
+
         pixelMechanismControl();
+
         drive();
+
         telemetryOutput();
+
+        pixelRotationControl();
+
+        pixelTestTelemetry();
+
     }
 
     public void drive() {
@@ -79,93 +96,144 @@ public class TeleOp_CompetitionBot extends OpMode {
 
         if (frontLeftSpeed <= powerThreshold && frontLeftSpeed >= -powerThreshold) {
             frontLeftSpeed = 0;
-            CompetitionBot.frontLeftMotor.setPower(frontLeftSpeed);
+            Bot.frontLeftMotor.setPower(frontLeftSpeed);
         } else {
-            CompetitionBot.frontLeftMotor.setPower(frontLeftSpeed * speedMultiply);
+            Bot.frontLeftMotor.setPower(frontLeftSpeed * speedMultiply);
         }
 
         if (frontRightSpeed <= powerThreshold && frontRightSpeed >= -powerThreshold){
             frontRightSpeed = 0;
-            CompetitionBot.frontRightMotor.setPower(frontRightSpeed);
+            Bot.frontRightMotor.setPower(frontRightSpeed);
         } else {
-            CompetitionBot.frontRightMotor.setPower(frontRightSpeed * speedMultiply);
+            Bot.frontRightMotor.setPower(frontRightSpeed * speedMultiply);
         }
 
         if (rearLeftSpeed <= powerThreshold && rearLeftSpeed >= -powerThreshold) {
             rearLeftSpeed = 0;
-            CompetitionBot.rearLeftMotor.setPower(rearLeftSpeed);
+            Bot.rearLeftMotor.setPower(rearLeftSpeed);
         } else {
-            CompetitionBot.rearLeftMotor.setPower(rearLeftSpeed * speedMultiply);
+            Bot.rearLeftMotor.setPower(rearLeftSpeed * speedMultiply);
         }
 
         if (rearRightSpeed <= powerThreshold && rearRightSpeed >= -powerThreshold){
             rearRightSpeed = 0;
-            CompetitionBot.rearRightMotor.setPower(rearRightSpeed);
+            Bot.rearRightMotor.setPower(rearRightSpeed);
         } else {
-            CompetitionBot.rearRightMotor.setPower(rearRightSpeed * speedMultiply);
+            Bot.rearRightMotor.setPower(rearRightSpeed * speedMultiply);
         }
+    }
+
+    // CONTROL FOR PIXEL ARM ROTATION SERVO
+    public void pixelRotationControl() {
+
+        // DPAD UP SETS SERVO TO UP POSITION | UP POSITION MAY BE 0 OR 1 IDK
+        if (gamepad2.dpad_up) {
+
+            Bot.pixelRotator.setPosition(pixelRotationUp);
+
+        }
+
+        // DPAD UP SETS SERVO TO DOWN POSITION | DOWN POSITION MAY BE 0 OR 1 IDK
+        if (gamepad2.dpad_down) {
+
+            Bot.pixelRotator.setPosition(pixelRotationDown);
+
+        }
+
+        // DPAD RIGHT - MIDDLE POSITION
+        if (gamepad2.dpad_right) {
+
+            Bot.pixelRotator.setPosition(pixelRotationMiddle);
+
+        }
+
+
     }
 
     public void pixelMechanismControl() {
 
 
 
-        if (gamepad2.right_stick_y > 0.1){
-            CompetitionBot.linearSlideUp(viperSlidePower);
+        if (gamepad2.right_stick_x > 0.1){
+
+            Bot.linearSlideUp(viperSlidePower);
+
         }
+
+        else if (gamepad2.right_stick_x < -0.1) {
+
+            Bot.linearSlideDown(viperSlidePower);
+
+        }
+
+        else {
+
+            Bot.viperSlideRight.setPower(0);
+
+        }
+
+        if (Math.abs(Bot.viperSlideRight.getCurrentPosition()) > viperSlideMaxTicks) {
+
+            Bot.viperSlideRight.setPower(0);
+
+        }
+
+        else if (Math.abs(Bot.viperSlideRight.getCurrentPosition()) <= viperSlideMinTicks) {
+
+            Bot.viperSlideRight.setPower(0);
+
+        }
+
+        if (gamepad2.right_stick_y > 0.1) {
+
+            Bot.rightWormgearUp(wormgearPower);
+
+        }
+
         else if (gamepad2.right_stick_y < -0.1) {
-            CompetitionBot.linearSlideDown(viperSlidePower);
+
+            Bot.rightWormgearDown(wormgearPower);
+
         }
+
         else {
-            CompetitionBot.viperSlideRight.setPower(0);
-        }
 
-        if (Math.abs(CompetitionBot.viperSlideRight.getCurrentPosition()) > viperSlideMaxTicks) {
-            CompetitionBot.viperSlideRight.setPower(0);
-        }
+            Bot.wormgearRight.setPower(0);
 
-        else if (Math.abs(CompetitionBot.viperSlideRight.getCurrentPosition()) <= viperSlideMinTicks) {
-            CompetitionBot.viperSlideRight.setPower(0);
-        }
-
-        if (gamepad2.left_stick_y > 0.1) {
-            CompetitionBot.rightWormgearUp(wormgearPower);
-        }
-        else if (gamepad2.left_stick_y < -0.1) {
-            CompetitionBot.rightWormgearDown(wormgearPower);
-        }
-        else {
-            CompetitionBot.wormgearRight.setPower(0);
         }
 
         if (gamepad2.left_bumper) {
-            CompetitionBot.pixelClaw.setPosition(.1);
-        }
-        else if (gamepad2.right_bumper){
-            CompetitionBot.pixelClaw.setPosition(.9);
+
+            Bot.pixelClaw.setPosition(.1);
+
         }
 
+        else if (gamepad2.right_bumper) {
+
+            Bot.pixelClaw.setPosition(.9);
+
+        }
 
     }
 
     public void endgameArm() {
-        if (gamepad2.right_stick_x < -0.1) {
-            CompetitionBot.endgameArmExtend();
+        if (gamepad2.left_stick_y < -0.1) {
+            Bot.endgameArmRetract();
         }
 
-        else if (gamepad2.right_stick_x > 0.1) {
-            CompetitionBot.endgameArmRetract();
+        else if (gamepad2.left_stick_y > 0.1) {
+            Bot.endgameArmExtend();
         }
 
         else {
-            CompetitionBot.endgameArmStop();
+            Bot.endgameArmStop();
         }
 
         if (gamepad2.x ) {
-            CompetitionBot.endgameArmRotatorMovement(.2);
+            Bot.endgameArmRotatorMovement(.2);
         }
          if (gamepad2.y) {
-            CompetitionBot.endgameArmRotatorMovement(.8);
+            Bot.endgameArmRotatorMovement(.8);
         }
 
 
@@ -190,11 +258,13 @@ public class TeleOp_CompetitionBot extends OpMode {
     }
     public void telemetryOutput() {
 
-        telemetry.addData("pwr", "FL mtr: " + frontLeftSpeed);
-        telemetry.addData("pwr", "FR mtr: " + frontRightSpeed);
-        telemetry.addData("pwr", "RL mtr: " + rearLeftSpeed);
-        telemetry.addData("pwr", "RR mtr: " + rearRightSpeed);
+//        telemetry.addData("pwr", "FRONT LEFT: " + frontLeftSpeed);
+//        telemetry.addData("pwr", "FRONT RIGHT: " + frontRightSpeed);
+//        telemetry.addData("pwr", "REAR LEFT: " + rearLeftSpeed);
+//        telemetry.addData("pwr", "REAR RIGHT: " + rearRightSpeed);
+
         telemetry.update();
+
     }
 
     public void speedControl() {
@@ -206,6 +276,15 @@ public class TeleOp_CompetitionBot extends OpMode {
         else if (gamepad1.dpad_down) {
             speedMultiply = 1;
         }
+    }
+
+    public void pixelTestTelemetry() {
+
+        double pixelServoPos = Bot.pixelRotator.getPosition();
+
+        telemetry.addData("Pixel Rotation Servo Pos: ", pixelServoPos);
+        telemetry.update();
+
     }
 
 

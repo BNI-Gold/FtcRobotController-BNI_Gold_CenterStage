@@ -22,27 +22,41 @@ public class CompBot extends MecanumDrive {
         public HardwareMap hwBot = null;
 
         public DcMotor viperSlideRight = null;
+
 //        public DcMotor viperSlideLeft = null;
+
         public DcMotor wormgearRight = null;
+
 //        public DcMotor wormgearLeft = null;
+
         public DcMotor endgameArm = null;
+
         public Servo pixelClaw = null;
+
+        public Servo pixelRotator = null;
+
         public Servo endgameArmRotator = null;
+
         public ElapsedTime currentTime = new ElapsedTime();
 
         public ElapsedTime upTimer = new ElapsedTime();
+
         public ElapsedTime downTimer = new ElapsedTime();
 
-
         public BNO055IMU imu;
+
         public Orientation angles;
+
         public Acceleration gravity;
+
         public final double SPEED = .3;
+
         public final double TOLERANCE = .4;
 
         public CompBot (){}
 
         public void initRobot(HardwareMap hwMap) {
+
             hwBot = hwMap;
 
             frontLeftMotor = hwBot.dcMotor.get("front_left_motor");
@@ -65,7 +79,7 @@ public class CompBot extends MecanumDrive {
             rearLeftMotor.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
 
             viperSlideRight = hwBot.dcMotor.get("viper_slide_right");
-            viperSlideRight.setDirection(DcMotor.Direction.FORWARD);
+            viperSlideRight.setDirection(DcMotor.Direction.REVERSE);
             viperSlideRight.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
 
 //            viperSlideLeft = hwBot.dcMotor.get("viper_slide_left");
@@ -93,6 +107,9 @@ public class CompBot extends MecanumDrive {
 
             pixelClaw = hwBot.servo.get("pixel_claw");
             pixelClaw.setDirection(Servo.Direction.FORWARD);
+
+            pixelRotator = hwBot.servo.get("pixel_rotator");
+            pixelRotator.setDirection(Servo.Direction.FORWARD);
 
             endgameArmRotator = hwBot.servo.get("end_game_arm_rotator");
             endgameArmRotator.setDirection(Servo.Direction.FORWARD);
@@ -151,10 +168,10 @@ public class CompBot extends MecanumDrive {
 
 
     public void linearSlideUp (double power) {
-        viperSlideRight.setPower(-Math.abs(power));
+        viperSlideRight.setPower(Math.abs(power));
     }
 
-    public void linearSlideDown (double power) {viperSlideRight.setPower(Math.abs(power));
+    public void linearSlideDown (double power) {viperSlideRight.setPower(-Math.abs(power));
     }
 
     public void linearSlideUp (double power, double rotations)  {
@@ -192,11 +209,11 @@ public class CompBot extends MecanumDrive {
     public void rightWormgearStop (double power) {wormgearRight.setPower(0);}
 
     public void endgameArmExtend(){
-        endgameArm.setPower(1);
+        endgameArm.setPower(-1);
     }
 
     public void endgameArmRetract(){
-       endgameArm.setPower(-1);
+       endgameArm.setPower(1);
     }
     public void endgameArmStop(){
         endgameArm.setPower(0);
