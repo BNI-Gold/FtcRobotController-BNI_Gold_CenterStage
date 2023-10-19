@@ -3,10 +3,20 @@ package org.firstinspires.ftc.teamcode.Compitition.CenterStage.Controls.Auto;
 import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 
+import org.firstinspires.ftc.robotcore.external.hardware.camera.BuiltinCameraDirection;
+import org.firstinspires.ftc.robotcore.external.hardware.camera.WebcamName;
 import org.firstinspires.ftc.teamcode.Compitition.CenterStage.Robots.CompBot;
+import org.firstinspires.ftc.vision.VisionPortal;
+import org.firstinspires.ftc.vision.tfod.TfodProcessor;
 
 @Autonomous (name = "AutoBlueAudience")
 public class AutoBlueAudience extends AutoMain {
+
+    public static final boolean USE_WEBCAM = true;
+
+    public TfodProcessor tFod;
+
+    public VisionPortal visionPortal;
 
   public   CompBot BNIBot = new CompBot();
 
@@ -43,6 +53,23 @@ public class AutoBlueAudience extends AutoMain {
 
         idle();
 
+
+    }
+
+
+    private void initTfod() {
+
+        // Create the TensorFlow processor the easy way.
+        tFod = TfodProcessor.easyCreateWithDefaults();
+
+        // Create the vision portal the easy way.
+        if (USE_WEBCAM) {
+            visionPortal = VisionPortal.easyCreateWithDefaults(
+                    hardwareMap.get(WebcamName.class, "Webcam 1"), tFod);
+        } else {
+            visionPortal = VisionPortal.easyCreateWithDefaults(
+                    BuiltinCameraDirection.BACK, tFod);
+        }
 
     }
 
