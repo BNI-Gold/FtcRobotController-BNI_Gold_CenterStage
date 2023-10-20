@@ -6,7 +6,7 @@ import com.qualcomm.robotcore.util.Range;
 
 import org.firstinspires.ftc.teamcode.Compitition.CenterStage.Robots.CompBot;
 
-@TeleOp (name = "A_TeleOp_CompBot_Centerstage")
+@TeleOp (name = "A_CENTERSTAGE_TeleOp_Competition")
 public class TeleOp_CompetitionBot extends OpMode {
 
     public double rotationPos = 0.5;
@@ -61,7 +61,7 @@ public class TeleOp_CompetitionBot extends OpMode {
 
     public void loop(){
         speedControl();
-        driverControlChanger();
+//        driverControlChanger();
         endgameArm();
         pixelMechanismControl();
         drive();
@@ -240,10 +240,10 @@ public class TeleOp_CompetitionBot extends OpMode {
                    CompetitionBot.endgameArmStop();
                }
 
-               if (gamepad2.y) {
+               if (gamepad2.b) {
                    CompetitionBot.endgameArmRotatorMovement(.2);
                }
-               if (gamepad2.b) {
+               if (gamepad2.y) {
                    CompetitionBot.endgameArmRotatorMovement(.8);
                }
 
