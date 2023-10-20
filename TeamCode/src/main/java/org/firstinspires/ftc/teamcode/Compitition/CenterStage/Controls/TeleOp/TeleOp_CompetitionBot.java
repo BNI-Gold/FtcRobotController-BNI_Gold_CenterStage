@@ -223,10 +223,10 @@ public class TeleOp_CompetitionBot extends OpMode {
                CompetitionBot.endgameArmStop();
            }
 
-           if (gamepad2.x) {
+           if (gamepad2.y) {
                CompetitionBot.endgameArmRotatorMovement(.3);
            }
-           if (gamepad2.y) {
+           if (gamepad2.a) {
                CompetitionBot.endgameArmRotatorMovement(.8);
            }
 
@@ -296,10 +296,10 @@ public class TeleOp_CompetitionBot extends OpMode {
 
 
     public void driverControlChanger(){
-        if (gamepad2.a) {
+        if (gamepad2.b) {
             driverControl = driverControl.BEN;
         }
-        else if (gamepad2.b) {
+        else if (gamepad2.x) {
             driverControl = driverControl.MITCHELL;
         }
     }

@@ -36,11 +36,15 @@ public class AutoBlueAudience extends AutoMain {
         while (opModeIsActive()) {
 
 
+
             BNIBot.getHeading();
 
+            telemetryUpdate("Drive FOrward");
             BNIBot.driveForward(1,3.7);
             sleep(200);
+            telemetryUpdate("Gyro COrrection");
             BNIBot.gyroCorrection(.5,0);
+            telemetryUpdate("Rotate Left 1 Rotation");
             sleep(200);
             BNIBot.rotateLeft(.5,1);
 
@@ -56,22 +60,6 @@ public class AutoBlueAudience extends AutoMain {
 
     }
 
-
-    private void initTfod() {
-
-        // Create the TensorFlow processor the easy way.
-        tFod = TfodProcessor.easyCreateWithDefaults();
-
-        // Create the vision portal the easy way.
-        if (USE_WEBCAM) {
-            visionPortal = VisionPortal.easyCreateWithDefaults(
-                    hardwareMap.get(WebcamName.class, "Webcam 1"), tFod);
-        } else {
-            visionPortal = VisionPortal.easyCreateWithDefaults(
-                    BuiltinCameraDirection.BACK, tFod);
-        }
-
-    }
 
 
 
