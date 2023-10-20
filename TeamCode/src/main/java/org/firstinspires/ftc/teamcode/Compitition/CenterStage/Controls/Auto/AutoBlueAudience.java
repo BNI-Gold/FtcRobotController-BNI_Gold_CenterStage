@@ -37,13 +37,13 @@ public class AutoBlueAudience extends AutoMain {
 
 
 
-            BNIBot.getHeading();
+//            BNIBot.getHeading();
 
             telemetryUpdate("Drive FOrward");
             BNIBot.driveForward(1,3.7);
             sleep(200);
             telemetryUpdate("Gyro COrrection");
-            BNIBot.gyroCorrection(.5,0);
+//            BNIBot.gyroCorrection(.5,0);
             telemetryUpdate("Rotate Left 1 Rotation");
             sleep(200);
             BNIBot.rotateLeft(.5,1);

@@ -233,39 +233,39 @@ public class MecanumDrive {
         stopMotors();
     }
 
-    public void gyroCorrection(double speed, double targetAngle) {
-        imu.resetYaw();
-        currentHeading = getHeading();
-        if (currentHeading >= targetAngle + headingTolerance && LinearOp.opModeIsActive()) {
-            while (currentHeading >= targetAngle + headingTolerance && LinearOp.opModeIsActive()) {
-                rotateRight(speed);
-
-                currentHeading = getHeading();
-                LinearOp.telemetry.addData("Current Angle: ", currentHeading);
-                LinearOp.telemetry.addData("Target Angle: ", targetAngle);
-                LinearOp.telemetry.update();
-            }
-        } else if (currentHeading <= targetAngle - headingTolerance && LinearOp.opModeIsActive()) ;
-        {
-            while (currentHeading <= targetAngle - headingTolerance && LinearOp.opModeIsActive()) {
-                rotateLeft(speed);
-
-                currentHeading = getHeading();
-                LinearOp.telemetry.addData("Current Angle: ", currentHeading);
-                LinearOp.telemetry.addData("Target Angle: ", targetAngle);
-                LinearOp.telemetry.update();
-            }
-        }
-
-        stopMotors();
-        currentHeading = getHeading();
-    }
-
-
-    public double getHeading() {
-        YawPitchRollAngles orientation = imu.getRobotYawPitchRollAngles();
-        return orientation.getYaw(AngleUnit.DEGREES);
-    }
+//    public void gyroCorrection(double speed, double targetAngle) {
+//        imu.resetYaw();
+//        currentHeading = getHeading();
+//        if (currentHeading >= targetAngle + headingTolerance && LinearOp.opModeIsActive()) {
+//            while (currentHeading >= targetAngle + headingTolerance && LinearOp.opModeIsActive()) {
+//                rotateRight(speed);
+//
+//                currentHeading = getHeading();
+//                LinearOp.telemetry.addData("Current Angle: ", currentHeading);
+//                LinearOp.telemetry.addData("Target Angle: ", targetAngle);
+//                LinearOp.telemetry.update();
+//            }
+//        } else if (currentHeading <= targetAngle - headingTolerance && LinearOp.opModeIsActive()) ;
+//        {
+//            while (currentHeading <= targetAngle - headingTolerance && LinearOp.opModeIsActive()) {
+//                rotateLeft(speed);
+//
+//                currentHeading = getHeading();
+//                LinearOp.telemetry.addData("Current Angle: ", currentHeading);
+//                LinearOp.telemetry.addData("Target Angle: ", targetAngle);
+//                LinearOp.telemetry.update();
+//            }
+//        }
+//
+//        stopMotors();
+//        currentHeading = getHeading();
+//    }
+//
+//
+//    public double getHeading() {
+//        YawPitchRollAngles orientation = imu.getRobotYawPitchRollAngles();
+//        return orientation.getYaw(AngleUnit.DEGREES);
+//    }
 
 }
 
