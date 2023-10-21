@@ -21,6 +21,9 @@ public class AutoBlueAudience extends AutoMain {
     public   CompBot Bot = new CompBot();
 
 
+
+
+
     @Override
     public void runOpMode() throws InterruptedException{
         Bot.initRobot(hardwareMap);
@@ -29,16 +32,17 @@ public class AutoBlueAudience extends AutoMain {
         telemetry.addLine("Robot Awaiting Start Procedure");
         telemetry.update();
 
+        Bot.endgameArmRotatorMovement(0.2);
+
         waitForStart();
 
 
 
         while (opModeIsActive()) {
+            Bot.endgameArmRotatorMovement(0.2);
 
-            Bot.driveForward(0.5, 4.9);
+            Bot.driveForward(0.5,0.1);
             sleep(oneSecond);
-
-            Bot.strafeRight(0.5,2);
 
             requestOpModeStop();
         }

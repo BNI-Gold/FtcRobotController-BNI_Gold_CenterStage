@@ -28,6 +28,7 @@ public class AutoBlueBackstage extends AutoMain {
 
         telemetry.addLine("Robot Awaiting Start Procedure");
         telemetry.update();
+        Bot.endgameArmRotatorMovement(0.2);
 
         waitForStart();
 
@@ -35,6 +36,7 @@ public class AutoBlueBackstage extends AutoMain {
 
         while (opModeIsActive()) {
 
+            Bot.endgameArmRotatorMovement(0.2);
             Bot.driveForward(0.5, 2.3);
             sleep(oneSecond);
             Bot.rotateLeft(0.4,2.2);

@@ -47,10 +47,10 @@ public class TeleOp_CompetitionBot extends OpMode {
 
 
 
-    public CompBot CompetitionBot = new CompBot();
+    public CompBot Bot = new CompBot();
 
     public void init () {
-        CompetitionBot.initRobot(hardwareMap);
+        Bot.initRobot(hardwareMap);
     }
     public void init_loop() {  }
 
@@ -91,30 +91,30 @@ public class TeleOp_CompetitionBot extends OpMode {
 
         if (frontLeftSpeed <= powerThreshold && frontLeftSpeed >= -powerThreshold) {
             frontLeftSpeed = 0;
-            CompetitionBot.frontLeftMotor.setPower(frontLeftSpeed);
+            Bot.frontLeftMotor.setPower(frontLeftSpeed);
         } else {
-            CompetitionBot.frontLeftMotor.setPower(frontLeftSpeed * speedMultiply);
+            Bot.frontLeftMotor.setPower(frontLeftSpeed * speedMultiply);
         }
 
         if (frontRightSpeed <= powerThreshold && frontRightSpeed >= -powerThreshold){
             frontRightSpeed = 0;
-            CompetitionBot.frontRightMotor.setPower(frontRightSpeed);
+            Bot.frontRightMotor.setPower(frontRightSpeed);
         } else {
-            CompetitionBot.frontRightMotor.setPower(frontRightSpeed * speedMultiply);
+            Bot.frontRightMotor.setPower(frontRightSpeed * speedMultiply);
         }
 
         if (rearLeftSpeed <= powerThreshold && rearLeftSpeed >= -powerThreshold) {
             rearLeftSpeed = 0;
-            CompetitionBot.rearLeftMotor.setPower(rearLeftSpeed);
+            Bot.rearLeftMotor.setPower(rearLeftSpeed);
         } else {
-            CompetitionBot.rearLeftMotor.setPower(rearLeftSpeed * speedMultiply);
+            Bot.rearLeftMotor.setPower(rearLeftSpeed * speedMultiply);
         }
 
         if (rearRightSpeed <= powerThreshold && rearRightSpeed >= -powerThreshold){
             rearRightSpeed = 0;
-            CompetitionBot.rearRightMotor.setPower(rearRightSpeed);
+            Bot.rearRightMotor.setPower(rearRightSpeed);
         } else {
-            CompetitionBot.rearRightMotor.setPower(rearRightSpeed * speedMultiply);
+            Bot.rearRightMotor.setPower(rearRightSpeed * speedMultiply);
         }
     }
 
@@ -124,83 +124,83 @@ public class TeleOp_CompetitionBot extends OpMode {
 
 
             if (gamepad2.right_trigger > 0.2) {
-                CompetitionBot.linearSlideExtend(viperSlidePower);
+                Bot.linearSlideExtend(viperSlidePower);
             } else if (gamepad2.left_trigger > 0.2) {
-                CompetitionBot.linearSlideRetract(viperSlidePower);
+                Bot.linearSlideRetract(viperSlidePower);
             } else {
-                CompetitionBot.viperSlideRight.setPower(0);
+                Bot.viperSlideRight.setPower(0);
             }
 
-            if (Math.abs(CompetitionBot.viperSlideRight.getCurrentPosition()) > viperSlideMaxTicks) {
-                CompetitionBot.viperSlideRight.setPower(0);
-            } else if (Math.abs(CompetitionBot.viperSlideRight.getCurrentPosition()) <= viperSlideMinTicks) {
-                CompetitionBot.viperSlideRight.setPower(0);
+            if (Math.abs(Bot.viperSlideRight.getCurrentPosition()) > viperSlideMaxTicks) {
+                Bot.viperSlideRight.setPower(0);
+            } else if (Math.abs(Bot.viperSlideRight.getCurrentPosition()) <= viperSlideMinTicks) {
+                Bot.viperSlideRight.setPower(0);
             }
 
-            if (gamepad2.left_stick_y < -0.1) {
-                CompetitionBot.rightWormgearUp(wormgearPower);
-            } else if (gamepad2.left_stick_y > 0.1) {
-                CompetitionBot.rightWormgearDown(wormgearPower);
+            if (gamepad2.right_stick_y < -0.1) {
+                Bot.rightWormgearUp(wormgearPower);
+            } else if (gamepad2.right_stick_y > 0.1) {
+                Bot.rightWormgearDown(wormgearPower);
             } else {
-                CompetitionBot.wormgearRight.setPower(0);
+                Bot.wormgearRight.setPower(0);
             }
 
             if (gamepad2.left_bumper) {
-                CompetitionBot.pixelClaw.setPosition(.35);
+                Bot.pixelClaw.setPosition(.35);
             } else if (gamepad2.right_bumper) {
-                CompetitionBot.pixelClaw.setPosition(.9);
+                Bot.pixelClaw.setPosition(.9);
             }
 
             break;
 
             case MITCHELL:
                 if (gamepad2.right_stick_y < -0.1) {
-                    CompetitionBot.rightWormgearDown(wormgearPower);
+                    Bot.rightWormgearDown(wormgearPower);
                 } else if (gamepad2.right_stick_y > 0.1) {
-                    CompetitionBot.rightWormgearUp(wormgearPower);
+                    Bot.rightWormgearUp(wormgearPower);
                 } else {
-                    CompetitionBot.wormgearRight.setPower(0);
+                    Bot.wormgearRight.setPower(0);
                 }
 
 
                 if (gamepad2.right_stick_x > 0.1) {
-                    CompetitionBot.linearSlideExtend(viperSlidePower);
+                    Bot.linearSlideExtend(viperSlidePower);
                 } else if (gamepad2.right_stick_x < -0.1) {
-                    CompetitionBot.linearSlideRetract(viperSlidePower);
+                    Bot.linearSlideRetract(viperSlidePower);
                 } else {
-                    CompetitionBot.viperSlideRight.setPower(0);
+                    Bot.viperSlideRight.setPower(0);
                 }
 
-                if (Math.abs(CompetitionBot.viperSlideRight.getCurrentPosition()) > viperSlideMaxTicks) {
-                    CompetitionBot.viperSlideRight.setPower(0);
-                } else if (Math.abs(CompetitionBot.viperSlideRight.getCurrentPosition()) <= viperSlideMinTicks) {
-                    CompetitionBot.viperSlideRight.setPower(0);
+                if (Math.abs(Bot.viperSlideRight.getCurrentPosition()) > viperSlideMaxTicks) {
+                    Bot.viperSlideRight.setPower(0);
+                } else if (Math.abs(Bot.viperSlideRight.getCurrentPosition()) <= viperSlideMinTicks) {
+                    Bot.viperSlideRight.setPower(0);
                 }
 
                 if (gamepad2.left_bumper) {
-                    CompetitionBot.pixelClaw.setPosition(.35);
+                    Bot.pixelClaw.setPosition(.35);
                 } else if (gamepad2.right_bumper) {
-                    CompetitionBot.pixelClaw.setPosition(.9);
+                    Bot.pixelClaw.setPosition(.9);
                 }
 
                 // DPAD UP SETS SERVO TO UP POSITION | UP POSITION MAY BE 0 OR 1 IDK
                 if (gamepad2.dpad_up) {
 
-                    CompetitionBot.pixelRotator.setPosition(pixelRotationUp);
+                    Bot.pixelRotator.setPosition(pixelRotationUp);
 
                 }
 
                 // DPAD UP SETS SERVO TO DOWN POSITION | DOWN POSITION MAY BE 0 OR 1 IDK
                 if (gamepad2.dpad_down) {
 
-                    CompetitionBot.pixelRotator.setPosition(pixelRotationDown);
+                    Bot.pixelRotator.setPosition(pixelRotationDown);
 
                 }
 
                 // DPAD RIGHT - MIDDLE POSITION
                 if (gamepad2.dpad_right) {
 
-                    CompetitionBot.pixelRotator.setPosition(pixelRotationMiddle);
+                    Bot.pixelRotator.setPosition(pixelRotationMiddle);
 
                 }
 
@@ -216,35 +216,35 @@ public class TeleOp_CompetitionBot extends OpMode {
        switch (driverControl) {
            case MITCHELL:
            if (gamepad2.left_stick_y < -0.1) {
-               CompetitionBot.endgameArmRetract();
+               Bot.endgameArmRetract();
            } else if (gamepad2.left_stick_y > 0.1) {
-               CompetitionBot.endgameArmExtend();
+               Bot.endgameArmExtend();
            } else {
-               CompetitionBot.endgameArmStop();
+               Bot.endgameArmStop();
            }
 
            if (gamepad2.y) {
-               CompetitionBot.endgameArmRotatorMovement(.3);
+               Bot.endgameArmRotatorMovement(.0);
            }
            if (gamepad2.a) {
-               CompetitionBot.endgameArmRotatorMovement(.8);
+               Bot.endgameArmRotatorMovement(.8);
            }
 
            break;
            case BEN:
-               if (gamepad2.right_stick_y < -0.1) {
-                   CompetitionBot.endgameArmExtend();
-               } else if (gamepad2.right_stick_y > 0.1) {
-                   CompetitionBot.endgameArmRetract();
+               if (gamepad2.left_stick_y < -0.1) {
+                   Bot.endgameArmRetract();
+               } else if (gamepad2.left_stick_y > 0.1) {
+                   Bot.endgameArmExtend();
                } else {
-                   CompetitionBot.endgameArmStop();
+                   Bot.endgameArmStop();
                }
 
-               if (gamepad2.b) {
-                   CompetitionBot.endgameArmRotatorMovement(.2);
+               if (gamepad2.a) {
+                   Bot.endgameArmRotatorMovement(.0);
                }
                if (gamepad2.y) {
-                   CompetitionBot.endgameArmRotatorMovement(.8);
+                   Bot.endgameArmRotatorMovement(.8);
                }
 
 
@@ -280,6 +280,7 @@ public class TeleOp_CompetitionBot extends OpMode {
         telemetry.addData("pwr", "FR mtr: " + frontRightSpeed);
         telemetry.addData("pwr", "RL mtr: " + rearLeftSpeed);
         telemetry.addData("pwr", "RR mtr: " + rearRightSpeed);
+        telemetry.addData("Encoder Count: ", Bot.endgameArmRotator.getPosition());
         telemetry.update();
     }
 
