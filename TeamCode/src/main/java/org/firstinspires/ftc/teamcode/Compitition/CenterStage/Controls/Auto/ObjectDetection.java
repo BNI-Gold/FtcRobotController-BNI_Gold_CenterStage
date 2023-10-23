@@ -41,6 +41,7 @@ public class ObjectDetection extends BNIVision_Adapted{
             public void onError(int errorCode) {}
         });
 
+        // CONNOR WHAT DID YOU DOOOOOOO???
 
         waitForStart();
 
