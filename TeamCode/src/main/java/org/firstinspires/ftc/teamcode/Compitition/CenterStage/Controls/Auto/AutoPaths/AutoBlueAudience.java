@@ -7,7 +7,7 @@ import org.firstinspires.ftc.teamcode.Compitition.CenterStage.Robots.CompBot;
 import org.firstinspires.ftc.vision.VisionPortal;
 import org.firstinspires.ftc.vision.tfod.TfodProcessor;
 
-@Autonomous (name = "Blue Audience")
+@Autonomous (name = "A - Blue Audience")
 public class AutoBlueAudience extends AutoMain {
 
     public static final boolean USE_WEBCAM = true;
@@ -32,17 +32,25 @@ public class AutoBlueAudience extends AutoMain {
         telemetry.addLine("Robot Awaiting Start Procedure");
         telemetry.update();
 
-        Bot.endgameArmRotatorMovement(0.2);
+
 
         waitForStart();
 
 
 
         while (opModeIsActive()) {
-            Bot.endgameArmRotatorMovement(0.2);
 
-            Bot.driveForward(0.5,0.1);
+            telemetry.addLine("Robot Autonomous Control Initialized");
+
+            Bot.endgameArmRotator.setPosition(.1);
             sleep(oneSecond);
+            Bot.driveForward(0.5,0.3);
+            sleep(oneSecond);
+            Bot.rotateLeft(0.5,2.25);
+            sleep(oneSecond);
+            Bot.driveForward(0.5,8);
+
+            telemetry.addLine("Robot Autonomous Control Complete");
 
             requestOpModeStop();
         }

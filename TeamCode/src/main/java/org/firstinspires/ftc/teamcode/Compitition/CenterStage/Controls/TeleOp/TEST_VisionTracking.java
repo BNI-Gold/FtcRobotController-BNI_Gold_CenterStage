@@ -1,6 +1,7 @@
 package org.firstinspires.ftc.teamcode.Compitition.CenterStage.Controls.TeleOp;
 
 
+import com.qualcomm.robotcore.eventloop.opmode.Disabled;
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 
@@ -12,6 +13,7 @@ import org.firstinspires.ftc.vision.tfod.TfodProcessor;
 
 import java.util.List;
 
+@Disabled
 @TeleOp (name = "TEST_Vision Tracking Center Stage")
 public class TEST_VisionTracking extends LinearOpMode {
 

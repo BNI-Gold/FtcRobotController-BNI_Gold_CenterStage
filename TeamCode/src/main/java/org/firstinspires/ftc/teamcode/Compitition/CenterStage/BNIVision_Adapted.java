@@ -20,6 +20,9 @@ public class BNIVision_Adapted extends LinearOpMode {
     OpenCvCamera webcam;
     TeamPropPositionPipeline pipeline;
 
+    public static double blueThreshold = 140.0;
+    public static double redThreshold = 160.0;
+
     @Override
     public void runOpMode() {
 
@@ -62,7 +65,7 @@ public class BNIVision_Adapted extends LinearOpMode {
 
         // Enum for Team Prop Position
         public enum TeamPropPosition {ONE, TWO, THREE, FOUR, FIVE, SIX}
-        public boolean blue_alliance = true;
+        public boolean blue_alliance = false;
         public double colorThreshold = 100;
 
         // Constants for the Color Boxes
@@ -95,16 +98,17 @@ public class BNIVision_Adapted extends LinearOpMode {
 
         // Method to convert RGB to YCrCb to eliminate lighting, luminosty differences
         // Method to extact our the Cr channel and the Cb channel
+
         void inputToCbCr(Mat input) {
-            // COnve
+
             Imgproc.cvtColor(input, YCrCb, Imgproc.COLOR_RGB2YCrCb);
 
             if (blue_alliance) {
                 Core.extractChannel(YCrCb, chan, 2); //Index 2 is Cb Channel (Blue)
-                colorThreshold = 190.0;
+                colorThreshold = blueThreshold;
             } else {
                 Core.extractChannel(YCrCb, chan, 1); //Index 1 is Cr Channel (Red)
-                colorThreshold = 190.0;
+                colorThreshold = redThreshold;
             }
         }
 

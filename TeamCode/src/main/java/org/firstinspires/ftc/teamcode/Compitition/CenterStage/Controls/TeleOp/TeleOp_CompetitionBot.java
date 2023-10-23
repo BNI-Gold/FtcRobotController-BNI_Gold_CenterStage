@@ -6,7 +6,7 @@ import com.qualcomm.robotcore.util.Range;
 
 import org.firstinspires.ftc.teamcode.Compitition.CenterStage.Robots.CompBot;
 
-@TeleOp (name = "A_CENTERSTAGE_TeleOp_Competition")
+@TeleOp (name = "A - Center Stage - 'RANGER RATTLE'")
 public class TeleOp_CompetitionBot extends OpMode {
 
     public double rotationPos = 0.5;
@@ -40,12 +40,10 @@ public class TeleOp_CompetitionBot extends OpMode {
     public double wormgearMaxTicks = 100;
     public double wormgearMinTicks = 1;
 
+    public boolean slowMode = false;
+
     public enum DriverControl {BEN, MITCHELL}
     public DriverControl driverControl = DriverControl.BEN;
-
-
-
-
 
     public CompBot Bot = new CompBot();
 
@@ -53,7 +51,6 @@ public class TeleOp_CompetitionBot extends OpMode {
         Bot.initRobot(hardwareMap);
     }
     public void init_loop() {  }
-
 
     public void start() {
 
@@ -66,6 +63,43 @@ public class TeleOp_CompetitionBot extends OpMode {
         pixelMechanismControl();
         drive();
         telemetryOutput();
+    }
+
+    public void speedControl() {
+
+        if (gamepad1.left_trigger > 0.35) {
+
+            slowMode = true;
+
+        } else {
+
+            slowMode = false;
+
+        }
+
+//        if (gamepad1.left_bumper) {
+//
+//            if (slowMode) {
+//
+//                slowMode = false;
+//
+//            } else if (!slowMode) {
+//
+//                slowMode = true;
+//
+//            }
+//
+//        }
+
+        if (slowMode) {
+
+            speedMultiply = 0.3;
+
+        } else {
+
+            speedMultiply = 1;
+
+        }
     }
 
     public void drive() {
@@ -276,25 +310,13 @@ public class TeleOp_CompetitionBot extends OpMode {
         else if (driverControl == driverControl.MITCHELL) {
             telemetry.addLine("Driver Control = MITCHELL");
         }
-        telemetry.addData("pwr", "FL mtr: " + frontLeftSpeed);
-        telemetry.addData("pwr", "FR mtr: " + frontRightSpeed);
-        telemetry.addData("pwr", "RL mtr: " + rearLeftSpeed);
-        telemetry.addData("pwr", "RR mtr: " + rearRightSpeed);
-        telemetry.addData("Encoder Count: ", Bot.endgameArmRotator.getPosition());
+
+        telemetry.addData("Front Left: ", Bot.frontLeftMotor.getCurrentPosition());
+        telemetry.addData("Front Right: ", Bot.frontRightMotor.getCurrentPosition());
+        telemetry.addData("Rear Left: ", Bot.rearLeftMotor.getCurrentPosition());
+        telemetry.addData("Rear Right: ", Bot.rearRightMotor.getCurrentPosition());
         telemetry.update();
     }
-
-    public void speedControl() {
-
-        if (gamepad1.dpad_up) {
-            speedMultiply = 0.5;
-        }
-
-        else if (gamepad1.dpad_down) {
-            speedMultiply = 1;
-        }
-    }
-
 
     public void driverControlChanger(){
         if (gamepad2.b) {

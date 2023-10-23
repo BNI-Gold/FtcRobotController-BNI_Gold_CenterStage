@@ -7,7 +7,7 @@ import org.firstinspires.ftc.teamcode.Compitition.CenterStage.Robots.CompBot;
 import org.firstinspires.ftc.vision.VisionPortal;
 import org.firstinspires.ftc.vision.tfod.TfodProcessor;
 
-@Autonomous (name = "Blue Backstage Close")
+@Autonomous (name = "A - Blue Backstage Close")
 public class AutoBlueBackstageClose extends AutoMain {
 
     public static final boolean USE_WEBCAM = true;
@@ -28,7 +28,6 @@ public class AutoBlueBackstageClose extends AutoMain {
 
         telemetry.addLine("Robot Awaiting Start Procedure");
         telemetry.update();
-        Bot.endgameArmRotatorMovement(0.2);
 
         waitForStart();
 
@@ -36,12 +35,17 @@ public class AutoBlueBackstageClose extends AutoMain {
 
         while (opModeIsActive()) {
 
-            Bot.endgameArmRotatorMovement(0.2);
+            telemetry.addLine("Robot Autonomous Control Initialized");
+
+            Bot.endgameArmRotator.setPosition(.1);
+            sleep(oneSecond);
             Bot.driveForward(0.5, 0.3);
             sleep(oneSecond);
             Bot.rotateLeft(0.4,2.2);
             sleep(oneSecond);
             Bot.driveForward(0.5,2.8);
+
+            telemetry.addLine("Robot Autonomous Control Complete");
 
             requestOpModeStop();
         }

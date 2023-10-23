@@ -111,6 +111,8 @@ public class CompBot extends MecanumDrive {
             pixelRotator = hwBot.servo.get("pixel_rotator");
             pixelRotator.setDirection(Servo.Direction.FORWARD);
 
+            endgameArmRotator.setPosition(0.8);
+
             currentTime.reset();
 
 

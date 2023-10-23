@@ -7,8 +7,8 @@ import org.firstinspires.ftc.teamcode.Compitition.CenterStage.Robots.CompBot;
 import org.firstinspires.ftc.vision.VisionPortal;
 import org.firstinspires.ftc.vision.tfod.TfodProcessor;
 
-@Autonomous (name = "A - Red Backstage Middle")
-public class AutoRedBackstage extends AutoMain {
+@Autonomous (name = "A - Red Audience")
+public class AutoRedAudience extends AutoMain {
 
     public static final boolean USE_WEBCAM = true;
 
@@ -21,6 +21,9 @@ public class AutoRedBackstage extends AutoMain {
     public   CompBot Bot = new CompBot();
 
 
+
+
+
     @Override
     public void runOpMode() throws InterruptedException{
         Bot.initRobot(hardwareMap);
@@ -28,6 +31,7 @@ public class AutoRedBackstage extends AutoMain {
 
         telemetry.addLine("Robot Awaiting Start Procedure");
         telemetry.update();
+
 
 
         waitForStart();
@@ -40,11 +44,11 @@ public class AutoRedBackstage extends AutoMain {
 
             Bot.endgameArmRotator.setPosition(.1);
             sleep(oneSecond);
-            Bot.driveForward(0.5, 2.3);
+            Bot.driveForward(0.5,0.3);
             sleep(oneSecond);
-            Bot.rotateRight(0.4,2.2);
+            Bot.rotateRight(0.5,2.25);
             sleep(oneSecond);
-            Bot.driveForward(0.5,2.8);
+            Bot.driveForward(0.5,8);
 
             telemetry.addLine("Robot Autonomous Control Complete");
 

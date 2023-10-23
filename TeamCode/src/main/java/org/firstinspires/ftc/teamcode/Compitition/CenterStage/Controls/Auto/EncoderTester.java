@@ -1,10 +1,11 @@
 package org.firstinspires.ftc.teamcode.Compitition.CenterStage.Controls.Auto;
 
 import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
+import com.qualcomm.robotcore.eventloop.opmode.Disabled;
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 
 import org.firstinspires.ftc.teamcode.Compitition.CenterStage.Robots.CompBot;
-
+@Disabled
 @Autonomous (name = "Encoder Tester")
 public class EncoderTester extends LinearOpMode {
 

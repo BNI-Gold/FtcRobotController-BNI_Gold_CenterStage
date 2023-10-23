@@ -1,6 +1,7 @@
 package org.firstinspires.ftc.teamcode.Compitition.ZPowerPlay.controls.OpMode;
 
 //import com.acmerobotics.dashboard.FtcDashboard;
+import com.qualcomm.robotcore.eventloop.opmode.Disabled;
 import com.qualcomm.robotcore.eventloop.opmode.OpMode;
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 import com.qualcomm.robotcore.hardware.DcMotor;
@@ -8,7 +9,7 @@ import com.qualcomm.robotcore.hardware.DcMotorEx;
 import com.qualcomm.robotcore.util.Range;
 
 import org.firstinspires.ftc.teamcode.Compitition.ZPowerPlay.Robots.CompetionBot;
-
+@Disabled
 @TeleOp (name = "Colonel Clap",group = "1")
 
 public class TeleOp_CompetitionBot extends OpMode {
