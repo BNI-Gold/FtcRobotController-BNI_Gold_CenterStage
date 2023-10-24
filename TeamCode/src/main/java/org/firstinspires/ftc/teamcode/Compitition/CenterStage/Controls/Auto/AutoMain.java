@@ -10,6 +10,9 @@ import org.firstinspires.ftc.robotcore.external.hardware.camera.WebcamName;
 import org.firstinspires.ftc.vision.VisionPortal;
 import org.firstinspires.ftc.vision.apriltag.AprilTagDetection;
 import org.firstinspires.ftc.vision.apriltag.AprilTagProcessor;
+import org.openftc.easyopencv.OpenCvCamera;
+import org.openftc.easyopencv.OpenCvCameraFactory;
+import org.openftc.easyopencv.OpenCvCameraRotation;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -23,6 +26,8 @@ public abstract class AutoMain extends LinearOpMode {
     public static final boolean USE_WEBCAM = true;
 
 
+
+
     public AprilTagProcessor aprilTag;
 
 
@@ -30,7 +35,14 @@ public abstract class AutoMain extends LinearOpMode {
 
 
 
-    public void initAprilTag(){
+
+
+
+
+
+
+
+        public void initAprilTag(){
 
         aprilTag = new AprilTagProcessor.Builder()
                 .build();

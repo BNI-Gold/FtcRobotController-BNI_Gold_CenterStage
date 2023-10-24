@@ -1,4 +1,4 @@
-package org.firstinspires.ftc.teamcode.Compitition.CenterStage;
+package org.firstinspires.ftc.teamcode.Compitition.CenterStage.Vision;
 
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;

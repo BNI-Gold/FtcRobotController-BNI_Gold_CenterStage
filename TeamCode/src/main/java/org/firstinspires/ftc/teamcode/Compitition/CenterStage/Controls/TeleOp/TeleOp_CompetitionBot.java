@@ -42,8 +42,7 @@ public class TeleOp_CompetitionBot extends OpMode {
 
     public boolean slowMode = false;
 
-    public enum DriverControl {BEN, MITCHELL}
-    public DriverControl driverControl = DriverControl.BEN;
+
 
     public CompBot Bot = new CompBot();
 
@@ -153,8 +152,7 @@ public class TeleOp_CompetitionBot extends OpMode {
     }
 
     public void pixelMechanismControl() {
-        switch (driverControl) {
-            case BEN:
+
 
 
             if (gamepad2.right_trigger > 0.2) {
@@ -185,87 +183,17 @@ public class TeleOp_CompetitionBot extends OpMode {
                 Bot.pixelClaw.setPosition(.9);
             }
 
-            break;
-
-            case MITCHELL:
-                if (gamepad2.right_stick_y < -0.1) {
-                    Bot.rightWormgearDown(wormgearPower);
-                } else if (gamepad2.right_stick_y > 0.1) {
-                    Bot.rightWormgearUp(wormgearPower);
-                } else {
-                    Bot.wormgearRight.setPower(0);
-                }
 
 
-                if (gamepad2.right_stick_x > 0.1) {
-                    Bot.linearSlideExtend(viperSlidePower);
-                } else if (gamepad2.right_stick_x < -0.1) {
-                    Bot.linearSlideRetract(viperSlidePower);
-                } else {
-                    Bot.viperSlideRight.setPower(0);
-                }
-
-                if (Math.abs(Bot.viperSlideRight.getCurrentPosition()) > viperSlideMaxTicks) {
-                    Bot.viperSlideRight.setPower(0);
-                } else if (Math.abs(Bot.viperSlideRight.getCurrentPosition()) <= viperSlideMinTicks) {
-                    Bot.viperSlideRight.setPower(0);
-                }
-
-                if (gamepad2.left_bumper) {
-                    Bot.pixelClaw.setPosition(.35);
-                } else if (gamepad2.right_bumper) {
-                    Bot.pixelClaw.setPosition(.9);
-                }
-
-                // DPAD UP SETS SERVO TO UP POSITION | UP POSITION MAY BE 0 OR 1 IDK
-                if (gamepad2.dpad_up) {
-
-                    Bot.pixelRotator.setPosition(pixelRotationUp);
-
-                }
-
-                // DPAD UP SETS SERVO TO DOWN POSITION | DOWN POSITION MAY BE 0 OR 1 IDK
-                if (gamepad2.dpad_down) {
-
-                    Bot.pixelRotator.setPosition(pixelRotationDown);
-
-                }
-
-                // DPAD RIGHT - MIDDLE POSITION
-                if (gamepad2.dpad_right) {
-
-                    Bot.pixelRotator.setPosition(pixelRotationMiddle);
-
-                }
 
 
-                break;
-
-        }
 
 
     }
 
     public void endgameArm() {
-       switch (driverControl) {
-           case MITCHELL:
-           if (gamepad2.left_stick_y < -0.1) {
-               Bot.endgameArmRetract();
-           } else if (gamepad2.left_stick_y > 0.1) {
-               Bot.endgameArmExtend();
-           } else {
-               Bot.endgameArmStop();
-           }
 
-           if (gamepad2.y) {
-               Bot.endgameArmRotatorMovement(.0);
-           }
-           if (gamepad2.a) {
-               Bot.endgameArmRotatorMovement(.8);
-           }
 
-           break;
-           case BEN:
                if (gamepad2.left_stick_y < -0.1) {
                    Bot.endgameArmRetract();
                } else if (gamepad2.left_stick_y > 0.1) {
@@ -299,32 +227,18 @@ public class TeleOp_CompetitionBot extends OpMode {
 //                CompetitionBot.endgameArmRetract();
 //            }
 //        }
-               break;
-       }
+
+
 
     }
     public void telemetryOutput() {
-        if (driverControl == driverControl.BEN) {
-            telemetry.addLine("Driver Control = BEN");
-        }
-        else if (driverControl == driverControl.MITCHELL) {
-            telemetry.addLine("Driver Control = MITCHELL");
-        }
+
 
         telemetry.addData("Front Left: ", Bot.frontLeftMotor.getCurrentPosition());
         telemetry.addData("Front Right: ", Bot.frontRightMotor.getCurrentPosition());
         telemetry.addData("Rear Left: ", Bot.rearLeftMotor.getCurrentPosition());
         telemetry.addData("Rear Right: ", Bot.rearRightMotor.getCurrentPosition());
         telemetry.update();
-    }
-
-    public void driverControlChanger(){
-        if (gamepad2.b) {
-            driverControl = driverControl.BEN;
-        }
-        else if (gamepad2.x) {
-            driverControl = driverControl.MITCHELL;
-        }
     }
 
 

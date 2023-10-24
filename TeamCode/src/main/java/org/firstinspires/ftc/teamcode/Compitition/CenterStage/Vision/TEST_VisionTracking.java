@@ -1,4 +1,4 @@
-package org.firstinspires.ftc.teamcode.Compitition.CenterStage.Controls.TeleOp;
+package org.firstinspires.ftc.teamcode.Compitition.CenterStage.Vision;
 
 
 import com.qualcomm.robotcore.eventloop.opmode.Disabled;

@@ -1,9 +1,9 @@
-package org.firstinspires.ftc.teamcode.Compitition.CenterStage.Controls.Auto;
+package org.firstinspires.ftc.teamcode.Compitition.CenterStage.Vision;
 
 import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
 
 import org.firstinspires.ftc.robotcore.external.hardware.camera.WebcamName;
-import org.firstinspires.ftc.teamcode.Compitition.CenterStage.BNIVision_Adapted;
+import org.firstinspires.ftc.teamcode.Compitition.CenterStage.Vision.BNIVision_Adapted;
 import org.openftc.easyopencv.OpenCvCamera;
 import org.openftc.easyopencv.OpenCvCameraFactory;
 import org.openftc.easyopencv.OpenCvCameraRotation;
@@ -41,7 +41,7 @@ public class ObjectDetection extends BNIVision_Adapted{
             public void onError(int errorCode) {}
         });
 
-        // CONNOR WHAT DID YOU DOOOOOOO???
+
 
         waitForStart();
 
