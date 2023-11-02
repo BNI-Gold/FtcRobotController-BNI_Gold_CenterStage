@@ -1,13 +1,18 @@
 package org.firstinspires.ftc.teamcode.Compitition.CenterStage.Controls.TeleOp;
 
+import com.acmerobotics.dashboard.FtcDashboard;
 import com.qualcomm.robotcore.eventloop.opmode.OpMode;
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 import com.qualcomm.robotcore.util.Range;
 
+import org.firstinspires.ftc.robotcore.external.Telemetry;
 import org.firstinspires.ftc.teamcode.Compitition.CenterStage.Robots.CompBot;
 
 @TeleOp (name = "A - Center Stage - 'RANGER RATTLE'")
 public class TeleOp_CompetitionBot extends OpMode {
+
+    FtcDashboard dashboard = FtcDashboard.getInstance();
+    Telemetry dashboardTelemetry = dashboard.getTelemetry();
 
     public double rotationPos = 0.5;
     double incValue = 0.05;
@@ -57,7 +62,7 @@ public class TeleOp_CompetitionBot extends OpMode {
 
     public void loop(){
         speedControl();
-//        driverControlChanger();
+        //driverControlChanger();
         endgameArm();
         pixelMechanismControl();
         drive();
@@ -233,11 +238,17 @@ public class TeleOp_CompetitionBot extends OpMode {
     }
     public void telemetryOutput() {
 
-
         telemetry.addData("Front Left: ", Bot.frontLeftMotor.getCurrentPosition());
         telemetry.addData("Front Right: ", Bot.frontRightMotor.getCurrentPosition());
         telemetry.addData("Rear Left: ", Bot.rearLeftMotor.getCurrentPosition());
         telemetry.addData("Rear Right: ", Bot.rearRightMotor.getCurrentPosition());
+
+        dashboardTelemetry.addData("FRONT LEFT: ", Bot.frontLeftMotor.getPower());
+        dashboardTelemetry.addData("FRONT RIGHT: ", Bot.frontRightMotor.getPower());
+
+        dashboardTelemetry.addData("REAR LEFT: ", Bot.rearLeftMotor.getPower());
+        dashboardTelemetry.addData("REAR RIGHT: ", Bot.rearRightMotor.getPower());
+        dashboardTelemetry.update();
         telemetry.update();
     }
 
