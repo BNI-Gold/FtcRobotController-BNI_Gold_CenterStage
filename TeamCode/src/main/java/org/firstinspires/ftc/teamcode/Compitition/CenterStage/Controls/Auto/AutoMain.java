@@ -7,6 +7,8 @@ import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 import org.firstinspires.ftc.robotcore.external.hardware.camera.BuiltinCameraDirection;
 import org.firstinspires.ftc.robotcore.external.hardware.camera.WebcamName;
 
+import org.firstinspires.ftc.teamcode.Compitition.CenterStage.Vision.TeamPropPosition;
+import org.firstinspires.ftc.teamcode.Compitition.CenterStage.Vision.TeamPropPositionPipeline_Gold;
 import org.firstinspires.ftc.vision.VisionPortal;
 import org.firstinspires.ftc.vision.apriltag.AprilTagDetection;
 import org.firstinspires.ftc.vision.apriltag.AprilTagProcessor;
@@ -14,18 +16,21 @@ import org.openftc.easyopencv.OpenCvCamera;
 import org.openftc.easyopencv.OpenCvCameraFactory;
 import org.openftc.easyopencv.OpenCvCameraRotation;
 
-import java.util.ArrayList;
 import java.util.List;
 
 public abstract class AutoMain extends LinearOpMode {
 
-    public enum TagPosition {BLUE_LEFT, BLUE_MIDDLE, BLUE_RIGHT, RED_LEFT, RED_MIDDLE, RED_RIGHT, NONE}
-    public TagPosition tagPosition = TagPosition.NONE;
+    public int webCamWidth = 960;
+    public int webCamHeight = 720;
     public AprilTagDetection tagOfInterest = null;
 
     public static final boolean USE_WEBCAM = true;
 
 
+    public OpenCvCamera webcam;
+
+
+    public TeamPropPosition teamPropPosition;
 
 
     public AprilTagProcessor aprilTag;
@@ -41,6 +46,17 @@ public abstract class AutoMain extends LinearOpMode {
 
 
 
+
+    public void initCamera() {
+        int cameraMonitorViewId = hardwareMap.appContext.getResources().getIdentifier("cameraMonitorViewId", "id", hardwareMap.appContext.getPackageName());
+        webcam = OpenCvCameraFactory.getInstance().
+                createWebcam(hardwareMap.get(WebcamName.class, "Webcam 1"),cameraMonitorViewId);
+    }
+
+    public void stopCamera() {
+        webcam.stopStreaming();
+        webcam.closeCameraDevice();
+    }
 
         public void initAprilTag(){
 
@@ -60,6 +76,22 @@ public abstract class AutoMain extends LinearOpMode {
         builder.addProcessor(aprilTag);
 
         visionPortal = builder.build();
+
+    }
+
+    public void startObjectDetectionPipeline(TeamPropPositionPipeline_Gold pipe) {
+        webcam.setPipeline(pipe);
+        webcam.setViewportRenderingPolicy(OpenCvCamera.ViewportRenderingPolicy.MAXIMIZE_EFFICIENCY);
+        webcam.openCameraDeviceAsync(new OpenCvCamera.AsyncCameraOpenListener() {
+            @Override
+            public void onOpened() {
+                webcam.startStreaming(webCamWidth, webCamHeight, OpenCvCameraRotation.UPRIGHT);
+            }
+
+            @Override
+            public void onError(int errorCode) {
+            }
+        });
 
     }
 
@@ -86,27 +118,6 @@ public abstract class AutoMain extends LinearOpMode {
         telemetry.addLine("PRY = Pitch, Roll & Yaw (XYZ Rotation)");
         telemetry.addLine("RBE = Range, Bearing & Elevation");
         telemetry.addLine("LONG LIVE TACO");
-        if (tagPosition == TagPosition.BLUE_LEFT) {
-            telemetry.addLine("Tag Position = BLUE_LEFT");
-        }
-        else if (tagPosition == TagPosition.BLUE_MIDDLE) {
-            telemetry.addLine("Tag Position = BLUE_MIDDLE");
-        }
-        else if (tagPosition == TagPosition.BLUE_RIGHT) {
-            telemetry.addLine("Tag Position = BLUE_RIGHT");
-        }
-        else if (tagPosition == TagPosition.RED_LEFT) {
-            telemetry.addLine("Tag Position = RED_LEFT");
-        }
-        else if (tagPosition == TagPosition.RED_MIDDLE){
-            telemetry.addLine("Tag Position = RED_MIDDLE ");
-        }
-        else if (tagPosition == TagPosition.RED_RIGHT) {
-            telemetry.addLine("Tag Position = RED_RIGHT");
-        }
-        else if (tagPosition == TagPosition.NONE) {
-            telemetry.addLine("Tag Position = NONE");
-        }
 
 
     }
@@ -119,27 +130,7 @@ public abstract class AutoMain extends LinearOpMode {
         telemetry.addData("# AprilTags Detected", currentDetections.size());
 
 
-        if (tagOfInterest.id ==  1 ){
-            tagPosition = TagPosition.BLUE_LEFT;
-        }
-        else if (tagOfInterest.id == 2) {
-            tagPosition = TagPosition.BLUE_MIDDLE;
-        }
-        else if (tagOfInterest.id == 3) {
-            tagPosition = TagPosition.BLUE_RIGHT;
-        }
-        else if (tagOfInterest.id == 4) {
-            tagPosition = TagPosition.RED_LEFT;
-        }
-        else if (tagOfInterest.id == 5) {
-            tagPosition = TagPosition.RED_MIDDLE;
-        }
-        else if (tagOfInterest.id == 6) {
-            tagPosition = TagPosition.RED_RIGHT;
-        }
-        else {
-            tagPosition = TagPosition.NONE;
-        }
+
 
     }
 
