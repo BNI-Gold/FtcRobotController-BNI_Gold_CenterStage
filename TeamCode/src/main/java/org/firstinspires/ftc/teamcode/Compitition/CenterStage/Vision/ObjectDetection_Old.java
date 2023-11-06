@@ -3,13 +3,12 @@ package org.firstinspires.ftc.teamcode.Compitition.CenterStage.Vision;
 import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
 
 import org.firstinspires.ftc.robotcore.external.hardware.camera.WebcamName;
-import org.firstinspires.ftc.teamcode.Compitition.CenterStage.Vision.BNIVision_Adapted;
 import org.openftc.easyopencv.OpenCvCamera;
 import org.openftc.easyopencv.OpenCvCameraFactory;
 import org.openftc.easyopencv.OpenCvCameraRotation;
 
 @Autonomous(name = "Object Detection")
-public class ObjectDetection extends BNIVision_Adapted{
+public class ObjectDetection_Old extends BNIVision_Adapted{
 
 
     OpenCvCamera webcam;
@@ -23,7 +22,7 @@ public class ObjectDetection extends BNIVision_Adapted{
         int cameraMonitorViewId = hardwareMap.appContext.getResources().getIdentifier("cameraMonitorViewId", "id", hardwareMap.appContext.getPackageName());
         webcam = OpenCvCameraFactory.getInstance().createWebcam(hardwareMap.get(WebcamName.class, "Webcam 1"), cameraMonitorViewId);
 
-        // Used for SamplePipe from WebcamExample.  Going to change it to use "SkystoneDeterminationPipeline" based on Wizards.exe example.
+
         pipeline = new TeamPropPositionPipeline();
         webcam.setPipeline(pipeline);
         webcam.setViewportRenderingPolicy(OpenCvCamera.ViewportRenderingPolicy.MAXIMIZE_EFFICIENCY);

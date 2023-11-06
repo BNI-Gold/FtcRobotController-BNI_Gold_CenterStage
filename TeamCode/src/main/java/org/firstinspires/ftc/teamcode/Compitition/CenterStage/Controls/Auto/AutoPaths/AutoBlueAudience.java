@@ -2,13 +2,14 @@ package org.firstinspires.ftc.teamcode.Compitition.CenterStage.Controls.Auto.Aut
 
 import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
 
+import org.firstinspires.ftc.teamcode.Compitition.CenterStage.Controls.Auto.AutoBlueAlliance;
 import org.firstinspires.ftc.teamcode.Compitition.CenterStage.Controls.Auto.AutoMain;
 import org.firstinspires.ftc.teamcode.Compitition.CenterStage.Robots.CompBot;
 import org.firstinspires.ftc.vision.VisionPortal;
 import org.firstinspires.ftc.vision.tfod.TfodProcessor;
 
 @Autonomous (name = "A - Blue Audience")
-public class AutoBlueAudience extends AutoMain {
+public class AutoBlueAudience extends AutoBlueAlliance {
 
     public static final boolean USE_WEBCAM = true;
 
@@ -16,9 +17,9 @@ public class AutoBlueAudience extends AutoMain {
 
     public TfodProcessor tFod;
 
-    public VisionPortal visionPortal;
 
-    public   CompBot Bot = new CompBot();
+
+
 
 
 
@@ -27,7 +28,12 @@ public class AutoBlueAudience extends AutoMain {
     @Override
     public void runOpMode() throws InterruptedException{
         Bot.initRobot(hardwareMap);
+        initCamera();
         Bot.setLinearOp(this);
+
+        startObjectDetectionPipeline(pipeline);
+        telemetry.addLine("Starting Vision Pipeline");
+
 
         telemetry.addLine("Robot Awaiting Start Procedure");
         telemetry.update();
@@ -42,13 +48,30 @@ public class AutoBlueAudience extends AutoMain {
 
             telemetry.addLine("Robot Autonomous Control Initialized");
 
-            Bot.endgameArmRotator.setPosition(.1);
-            sleep(oneSecond);
-            Bot.driveForward(0.5,0.3);
-            sleep(oneSecond);
-            Bot.rotateLeft(0.5,2.25);
-            sleep(oneSecond);
-            Bot.driveForward(0.5,8);
+            teamPropPosition = pipeline.getAnalysis();
+            telemetry.addData("Position Detected: ", teamPropPosition);
+            telemetry.update();
+            sleep(1000);
+
+            // Backup detection after first detection
+            teamPropPosition = pipeline.getAnalysis();
+            telemetry.addData("Position Detected: ", teamPropPosition);
+            telemetry.update();
+            sleep(1000);
+
+            // Stop Camera Detection
+            stopCamera();
+            telemetry.addLine("Stopping Camera");
+            telemetry.update();
+            sleep(1000);
+
+//            Bot.endgameArmRotator.setPosition(.1);
+//            sleep(oneSecond);
+//            Bot.driveForward(0.5,0.3);
+//            sleep(oneSecond);
+//            Bot.rotateLeft(0.5,2.25);
+//            sleep(oneSecond);
+//            Bot.driveForward(0.5,8);
 
             telemetry.addLine("Robot Autonomous Control Complete");
 
