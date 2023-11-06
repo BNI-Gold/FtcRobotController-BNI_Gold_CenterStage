@@ -7,22 +7,16 @@ import com.qualcomm.robotcore.util.Range;
 
 import org.firstinspires.ftc.robotcore.external.Telemetry;
 import org.firstinspires.ftc.teamcode.Compitition.CenterStage.Robots.CompBot;
+import org.firstinspires.ftc.teamcode.Compitition.CenterStage.Robots.ProgrammingBot;
 
-@TeleOp (name = "A - Center Stage - 'RANGER RATTLE'")
-public class TeleOp_CompetitionBot extends OpMode {
+@TeleOp(name = "A - RANGER RATTLE PROGRAMMING BOT")
+
+public class ProgramingBot_TeleOp extends OpMode {
+
+
 
     FtcDashboard dashboard = FtcDashboard.getInstance();
     Telemetry dashboardTelemetry = dashboard.getTelemetry();
-
-    public double rotationPos = 0.5;
-    double incValue = 0.05;
-
-    double pixelRotationUp = 1.0;
-
-    double pixelRotationMiddle = 0.5;
-
-    double pixelRotationDown = 0.0;
-
     double leftStickYVal;
     double leftStickXVal;
     double rightStickXVal;
@@ -36,22 +30,11 @@ public class TeleOp_CompetitionBot extends OpMode {
     double powerThreshold = 0;
     double speedMultiply = 1;
 
-    public double   wormgearPower = 1;
-
-    public double viperSlidePower = .7;
-
-    public double viperSlideMaxTicks = 250;
-    public double viperSlideMinTicks = 1;
-    public double wormgearMaxTicks = 100;
-    public double wormgearMinTicks = 1;
-
     public boolean slowMode = false;
 
     public boolean variableSlowMode = false;
 
-
-
-    public CompBot Bot = new CompBot();
+    public ProgrammingBot Bot = new ProgrammingBot();
 
     public void init () {
         Bot.initRobot(hardwareMap);
@@ -64,12 +47,10 @@ public class TeleOp_CompetitionBot extends OpMode {
 
     public void loop(){
         speedControl();
-        //driverControlChanger();
-        endgameArm();
-        pixelMechanismControl();
         drive();
         telemetryOutput();
     }
+
 
     public void speedControl() {
 
@@ -160,86 +141,7 @@ public class TeleOp_CompetitionBot extends OpMode {
         }
     }
 
-    public void pixelMechanismControl() {
 
-
-
-            if (gamepad2.right_trigger > 0.2) {
-                Bot.linearSlideExtend(viperSlidePower);
-            } else if (gamepad2.left_trigger > 0.2) {
-                Bot.linearSlideRetract(viperSlidePower);
-            } else {
-                Bot.viperSlideRight.setPower(0);
-            }
-
-            if (Math.abs(Bot.viperSlideRight.getCurrentPosition()) > viperSlideMaxTicks) {
-                Bot.viperSlideRight.setPower(0);
-            } else if (Math.abs(Bot.viperSlideRight.getCurrentPosition()) <= viperSlideMinTicks) {
-                Bot.viperSlideRight.setPower(0);
-            }
-
-            if (gamepad2.right_stick_y < -0.1) {
-                Bot.rightWormgearUp(wormgearPower);
-            } else if (gamepad2.right_stick_y > 0.1) {
-                Bot.rightWormgearDown(wormgearPower);
-            } else {
-                Bot.wormgearRight.setPower(0);
-            }
-
-            if (gamepad2.left_bumper) {
-                Bot.pixelClaw.setPosition(.35);
-            } else if (gamepad2.right_bumper) {
-                Bot.pixelClaw.setPosition(.9);
-            }
-
-
-
-
-
-
-
-    }
-
-    public void endgameArm() {
-
-
-               if (gamepad2.left_stick_y < -0.1) {
-                   Bot.endgameArmRetract();
-               } else if (gamepad2.left_stick_y > 0.1) {
-                   Bot.endgameArmExtend();
-               } else {
-                   Bot.endgameArmStop();
-               }
-
-               if (gamepad2.a) {
-                   Bot.endgameArmRotatorMovement(.0);
-               }
-               if (gamepad2.y) {
-                   Bot.endgameArmRotatorMovement(.8);
-               }
-
-
-//        if (gamepad2.a) {
-//            CompetitionBot.upTimer.reset();
-//            if (CompetitionBot.upTimer.seconds() >= 2.5) {
-//                CompetitionBot.endgameArmStop();
-//            } else if (CompetitionBot.upTimer.seconds() < 2.5) {
-//                CompetitionBot.endgameArmExtend();
-//
-//            }
-//
-//        } else if (gamepad2.b) {
-//            CompetitionBot.downTimer.reset();
-//            if (CompetitionBot.downTimer.seconds() >= 2.4) {
-//                CompetitionBot.endgameArmStop();
-//            } else if (CompetitionBot.downTimer.seconds() < 2.4) {
-//                CompetitionBot.endgameArmRetract();
-//            }
-//        }
-
-
-
-    }
     public void telemetryOutput() {
 
         telemetry.addData("Front Left: ", Bot.frontLeftMotor.getCurrentPosition());
@@ -256,8 +158,4 @@ public class TeleOp_CompetitionBot extends OpMode {
         telemetry.update();
     }
 
-
-
 }
-
-
