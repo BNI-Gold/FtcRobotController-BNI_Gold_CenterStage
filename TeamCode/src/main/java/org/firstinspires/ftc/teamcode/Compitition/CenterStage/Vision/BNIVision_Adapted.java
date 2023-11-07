@@ -1,8 +1,10 @@
 package org.firstinspires.ftc.teamcode.Compitition.CenterStage.Vision;
 
+import com.acmerobotics.dashboard.FtcDashboard;
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 
+import org.firstinspires.ftc.robotcore.external.Telemetry;
 import org.firstinspires.ftc.robotcore.external.hardware.camera.WebcamName;
 import org.opencv.core.Core;
 import org.opencv.core.Mat;
@@ -17,6 +19,10 @@ import org.openftc.easyopencv.OpenCvPipeline;
 
 @TeleOp(name = "Object DItection")
 public class BNIVision_Adapted extends LinearOpMode {
+
+    FtcDashboard dashboard = FtcDashboard.getInstance();
+    Telemetry dashboardTelemetry = dashboard.getTelemetry();
+
     OpenCvCamera webcam;
     TeamPropPositionPipeline pipeline;
 
@@ -33,6 +39,9 @@ public class BNIVision_Adapted extends LinearOpMode {
         pipeline = new TeamPropPositionPipeline();
         webcam.setPipeline(pipeline);
         webcam.setViewportRenderingPolicy(OpenCvCamera.ViewportRenderingPolicy.MAXIMIZE_EFFICIENCY);
+
+        FtcDashboard.getInstance().startCameraStream(webcam, 0);
+
         webcam.openCameraDeviceAsync(new OpenCvCamera.AsyncCameraOpenListener()
         {
             @Override

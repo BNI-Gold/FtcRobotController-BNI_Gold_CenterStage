@@ -3,6 +3,7 @@ package org.firstinspires.ftc.teamcode.Compitition.CenterStage.Robots;
 import com.qualcomm.hardware.rev.RevHubOrientationOnRobot;
 import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.hardware.DcMotorEx;
+import com.qualcomm.robotcore.hardware.DcMotorSimple;
 import com.qualcomm.robotcore.hardware.HardwareMap;
 import com.qualcomm.robotcore.hardware.IMU;
 
@@ -21,20 +22,18 @@ public class ProgrammingBot extends MecanumDrive {
 
     public void initRobot(HardwareMap hardwareMap) {
         hwBot = hardwareMap;
-        frontLeftMotor = hardwareMap.get(DcMotorEx.class, "front_left_motor");
-        frontRightMotor = hardwareMap.get(DcMotorEx.class, "front_right_motor");
-        rearLeftMotor = hardwareMap.get(DcMotorEx.class, "rear_left_motor");
-        rearRightMotor = hardwareMap.get(DcMotorEx.class, "rear_right_motor");
-//        frontLeftMotor=hwBot.dcMotor.get("front_left_motor");
-//        frontRightMotor=hwBot.dcMotor.get("front_right_motor");
-//        rearLeftMotor=hwBot.dcMotor.get("rear_left_motor");
-//        rearRightMotor=hwBot.dcMotor.get("rear_right_motor");
 
-        frontLeftMotor.setDirection(DcMotor.Direction.REVERSE);
-        rearLeftMotor.setDirection(DcMotor.Direction.REVERSE);
+        frontLeftMotor = hwBot.dcMotor.get("front_left_motor");
+        frontRightMotor = hwBot.dcMotor.get("front_right_motor");
+        rearLeftMotor = hwBot.dcMotor.get("rear_left_motor");
+        rearRightMotor = hwBot.dcMotor.get("rear_right_motor");
+
+        frontLeftMotor.setDirection(DcMotor.Direction.FORWARD);
+        rearLeftMotor.setDirection(DcMotor.Direction.FORWARD);
         frontRightMotor.setDirection(DcMotor.Direction.FORWARD);
         rearRightMotor.setDirection(DcMotor.Direction.FORWARD);
 
+        //Initialize Motor Run Mode for Robot
         setMotorRunModes(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
         setMotorRunModes(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
 
