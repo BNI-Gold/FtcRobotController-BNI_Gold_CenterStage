@@ -242,4 +242,12 @@ public class CompBot extends MecanumDrive {
         pixelClawLeft.setPosition(0.1);
     }
 
+    public void planeLauncherOn(){
+            planeLauncher.setPower(1);
+    }
+
+    public void planeLauncherOff(){
+            planeLauncher.setPower(0);
+    }
+
 }

@@ -17,6 +17,8 @@ public class TeleOp_CompetitionBot extends OpMode {
     public double rotationPos = 0.5;
     double incValue = 0.05;
 
+    boolean planeLauncherOn = false;
+
     double pixelRotationUp = 1.0;
 
     double pixelRotationMiddle = 0.5;
@@ -67,6 +69,7 @@ public class TeleOp_CompetitionBot extends OpMode {
         //driverControlChanger();
         endgameArm();
         pixelMechanismControl();
+        planeLauncher();
         drive();
         telemetryOutput();
     }
@@ -239,6 +242,26 @@ public class TeleOp_CompetitionBot extends OpMode {
 //        }
 
 
+
+    }
+
+    public void planeLauncher(){
+
+        if (gamepad2.dpad_down) {
+            if (planeLauncherOn == false) {
+                planeLauncherOn = true;
+            }
+            else {
+                planeLauncherOn = false;
+            }
+        }
+
+        if (planeLauncherOn == false) {
+            Bot.planeLauncherOff();
+        }
+        else if (planeLauncherOn) {
+            Bot.planeLauncherOn();
+        }
 
     }
     public void telemetryOutput() {
