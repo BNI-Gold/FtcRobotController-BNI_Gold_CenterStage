@@ -8,7 +8,7 @@ import org.firstinspires.ftc.teamcode.Compitition.CenterStage.Robots.CompBot;
 import org.firstinspires.ftc.vision.VisionPortal;
 import org.firstinspires.ftc.vision.tfod.TfodProcessor;
 
-@Autonomous (name = "A - Blue Audience")
+@Autonomous (name = "A - Blue Audience_CamTest")
 public class AutoBlueAudience extends AutoBlueAlliance {
 
     public static final boolean USE_WEBCAM = true;
