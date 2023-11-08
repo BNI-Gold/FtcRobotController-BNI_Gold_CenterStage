@@ -28,9 +28,13 @@ public class CompBot extends MecanumDrive {
         public DcMotor wormgearRight = null;
 //        public DcMotor wormgearLeft = null;
         public DcMotor endgameArm = null;
-        public Servo pixelClaw = null;
         public Servo endgameArmRotator = null;
         public Servo pixelRotator = null;
+
+        public Servo pixelClawLeft = null;
+        public Servo pixelClawRight = null;
+
+        public DcMotor planeLauncher = null;
         public ElapsedTime currentTime = new ElapsedTime();
 
         public ElapsedTime upTimer = new ElapsedTime();
@@ -100,10 +104,6 @@ public class CompBot extends MecanumDrive {
             endgameArm.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
             endgameArm.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
 
-
-            pixelClaw = hwBot.servo.get("pixel_claw");
-            pixelClaw.setDirection(Servo.Direction.FORWARD);
-
             endgameArmRotator = hwBot.servo.get("end_game_arm_rotator");
             endgameArmRotator.setDirection(Servo.Direction.FORWARD);
 
@@ -111,7 +111,15 @@ public class CompBot extends MecanumDrive {
             pixelRotator = hwBot.servo.get("pixel_rotator");
             pixelRotator.setDirection(Servo.Direction.FORWARD);
 
-            endgameArmRotator.setPosition(0.8);
+            pixelClawLeft = hwBot.servo.get("pixel_claw_left");
+            pixelClawLeft.setDirection(Servo.Direction.FORWARD);
+
+            pixelClawRight = hwBot.servo.get("pixel_claw_right");
+            pixelClawRight.setDirection(Servo.Direction.FORWARD);
+
+            planeLauncher = hwBot.dcMotor.get("plane_launcher");
+            planeLauncher.setDirection(DcMotor.Direction.FORWARD);
+            planeLauncher.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
 
             currentTime.reset();
 
@@ -221,9 +229,17 @@ public class CompBot extends MecanumDrive {
         endgameArm.setPower(0);
     }
 
-
     public void endgameArmRotatorMovement (double position) {
             endgameArmRotator.setPosition(position);
+    }
+
+    public void pixelClawOpen () {
+            pixelClawRight.setPosition(0.8);
+            pixelClawLeft.setPosition(0.8);
+    }
+    public void pixelClawClose(){
+        pixelClawRight.setPosition(0.1);
+        pixelClawLeft.setPosition(0.1);
     }
 
 }

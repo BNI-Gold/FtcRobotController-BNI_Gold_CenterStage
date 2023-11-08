@@ -6,8 +6,8 @@ import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 import com.qualcomm.robotcore.hardware.Servo;
 import com.qualcomm.robotcore.util.Range;
 
-@TeleOp(name = "Grabber Arm")
-@Disabled
+@TeleOp(name = "Grabber Arm - USE FOR CENTERSTAGE")
+
 public class twoServo_Callibrate extends OpMode {
 
     private Servo grabberArmLeft = null;

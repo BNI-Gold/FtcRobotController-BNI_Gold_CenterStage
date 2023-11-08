@@ -178,45 +178,46 @@ public class TeleOp_CompetitionBot extends OpMode {
                 Bot.viperSlideRight.setPower(0);
             }
 
-            if (gamepad2.right_stick_y < -0.1) {
-                Bot.rightWormgearUp(wormgearPower);
-            } else if (gamepad2.right_stick_y > 0.1) {
+            if (gamepad2.left_stick_y < -0.1) {
                 Bot.rightWormgearDown(wormgearPower);
+            } else if (gamepad2.left_stick_y > 0.1) {
+                Bot.rightWormgearUp(wormgearPower);
             } else {
                 Bot.wormgearRight.setPower(0);
             }
 
-            if (gamepad2.left_bumper) {
-                Bot.pixelClaw.setPosition(.35);
-            } else if (gamepad2.right_bumper) {
-                Bot.pixelClaw.setPosition(.9);
+
+            if (gamepad2.x) {
+                Bot.pixelClawOpen();
             }
-
-
-
-
-
+            else if (gamepad2.b) {
+                Bot.pixelClawClose();
+            }
 
 
     }
 
     public void endgameArm() {
 
-
-               if (gamepad2.left_stick_y < -0.1) {
+               if (gamepad2.right_stick_x < -0.1) {
                    Bot.endgameArmRetract();
-               } else if (gamepad2.left_stick_y > 0.1) {
+               } else if (gamepad2.right_stick_x > 0.1) {
                    Bot.endgameArmExtend();
                } else {
                    Bot.endgameArmStop();
                }
 
-               if (gamepad2.a) {
-                   Bot.endgameArmRotatorMovement(.0);
+               if (gamepad2.dpad_up) {
+                   Bot.endgameArmRotator.setPosition(0.8);
                }
-               if (gamepad2.y) {
-                   Bot.endgameArmRotatorMovement(.8);
+
+               else if (gamepad2.dpad_right) {
+                   Bot.endgameArmRotator.setPosition(0.4);
                }
+               else if (gamepad2.dpad_left) {
+                   Bot.endgameArmRotator.setPosition(0.0);
+               }
+
 
 
 //        if (gamepad2.a) {
