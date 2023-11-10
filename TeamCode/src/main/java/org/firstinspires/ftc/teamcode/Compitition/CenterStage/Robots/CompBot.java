@@ -237,11 +237,11 @@ public class CompBot extends MecanumDrive {
             pixelClawRight.setPosition(0.4);
     }
     public void rightPixelClawClose(){
-        pixelClawRight.setPosition(0.1);
+        pixelClawRight.setPosition(0.125);
     }
 
     public void leftPixelClawClose (){
-        pixelClawLeft.setPosition(0.1);
+        pixelClawLeft.setPosition(0.125);
     }
 
     public void leftPixelClawOpen (){
@@ -255,5 +255,22 @@ public class CompBot extends MecanumDrive {
     public void planeLauncherOff(){
             planeLauncher.setPower(0);
     }
+
+    public void collectorPosition(){
+            pixelRotator.setPosition(.2);
+    }
+
+    public void drivePosition(){
+            pixelRotator.setPosition(.35);
+    }
+
+    public void automousPosition(){
+            pixelRotator.setPosition(.9);
+    }
+
+
+    //collector position .22
+    //drive position .35
+    //auto pos .9
 
 }

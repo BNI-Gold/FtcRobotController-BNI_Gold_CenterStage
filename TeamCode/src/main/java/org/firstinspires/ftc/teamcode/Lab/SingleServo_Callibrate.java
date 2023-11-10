@@ -7,7 +7,7 @@ import com.qualcomm.robotcore.hardware.Servo;
 import com.qualcomm.robotcore.util.Range;
 
 @TeleOp(name = "single grabber arm", group = "LAB")
-@Disabled
+
 
 public class SingleServo_Callibrate extends OpMode {
 
@@ -38,6 +38,14 @@ public class SingleServo_Callibrate extends OpMode {
             servoPos -= incVal;
             servoPos = Range.clip(servoPos, 0,  1);
             telemetry.addLine( "Decrease Servo Pos!");
+        }
+
+
+        if (gamepad1.a) {
+            myServo.setPosition(0.2);
+        }
+        else if (gamepad1.b) {
+            myServo.setPosition(0.9);
         }
 
         myServo.setPosition(servoPos);

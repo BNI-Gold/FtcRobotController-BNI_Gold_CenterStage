@@ -166,6 +166,12 @@ public class TeleOp_CompetitionBot extends OpMode {
 
     public void pixelMechanismControl() {
 
+       if (gamepad2.y){
+           Bot.collectorPosition();
+       }
+       else {
+           Bot.drivePosition();
+       }
 
         if (gamepad2.right_trigger > 0.2) {
             Bot.linearSlideExtend(viperSlidePower);
@@ -190,7 +196,7 @@ public class TeleOp_CompetitionBot extends OpMode {
         }
 
 
-        if (gamepad2.x) {
+        if (gamepad2.left_bumper) {
 
             Bot.leftPixelClawOpen();
 
@@ -200,7 +206,7 @@ public class TeleOp_CompetitionBot extends OpMode {
 
         }
 
-        if (gamepad2.b) {
+        if (gamepad2.right_bumper) {
             Bot.rightPixelClawOpen();
         }
         else {
