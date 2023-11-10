@@ -233,13 +233,19 @@ public class CompBot extends MecanumDrive {
             endgameArmRotator.setPosition(position);
     }
 
-    public void pixelClawOpen () {
-            pixelClawRight.setPosition(0.8);
-            pixelClawLeft.setPosition(0.8);
+    public void rightPixelClawOpen () {
+            pixelClawRight.setPosition(0.4);
     }
-    public void pixelClawClose(){
+    public void rightPixelClawClose(){
         pixelClawRight.setPosition(0.1);
+    }
+
+    public void leftPixelClawClose (){
         pixelClawLeft.setPosition(0.1);
+    }
+
+    public void leftPixelClawOpen (){
+        pixelClawLeft.setPosition(0.4);
     }
 
     public void planeLauncherOn(){

@@ -38,7 +38,7 @@ public class TeleOp_CompetitionBot extends OpMode {
     double powerThreshold = 0;
     double speedMultiply = 1;
 
-    public double   wormgearPower = 1;
+    public double wormgearPower = 1;
 
     public double viperSlidePower = .7;
 
@@ -52,19 +52,20 @@ public class TeleOp_CompetitionBot extends OpMode {
     public boolean variableSlowMode = false;
 
 
-
     public CompBot Bot = new CompBot();
 
-    public void init () {
+    public void init() {
         Bot.initRobot(hardwareMap);
     }
-    public void init_loop() {  }
+
+    public void init_loop() {
+    }
 
     public void start() {
 
     }
 
-    public void loop(){
+    public void loop() {
         speedControl();
         //driverControlChanger();
         endgameArm();
@@ -141,7 +142,7 @@ public class TeleOp_CompetitionBot extends OpMode {
             Bot.frontLeftMotor.setPower(frontLeftSpeed * speedMultiply);
         }
 
-        if (frontRightSpeed <= powerThreshold && frontRightSpeed >= -powerThreshold){
+        if (frontRightSpeed <= powerThreshold && frontRightSpeed >= -powerThreshold) {
             frontRightSpeed = 0;
             Bot.frontRightMotor.setPower(frontRightSpeed);
         } else {
@@ -155,7 +156,7 @@ public class TeleOp_CompetitionBot extends OpMode {
             Bot.rearLeftMotor.setPower(rearLeftSpeed * speedMultiply);
         }
 
-        if (rearRightSpeed <= powerThreshold && rearRightSpeed >= -powerThreshold){
+        if (rearRightSpeed <= powerThreshold && rearRightSpeed >= -powerThreshold) {
             rearRightSpeed = 0;
             Bot.rearRightMotor.setPower(rearRightSpeed);
         } else {
@@ -166,61 +167,66 @@ public class TeleOp_CompetitionBot extends OpMode {
     public void pixelMechanismControl() {
 
 
+        if (gamepad2.right_trigger > 0.2) {
+            Bot.linearSlideExtend(viperSlidePower);
+        } else if (gamepad2.left_trigger > 0.2) {
+            Bot.linearSlideRetract(viperSlidePower);
+        } else {
+            Bot.viperSlideRight.setPower(0);
+        }
 
-            if (gamepad2.right_trigger > 0.2) {
-                Bot.linearSlideExtend(viperSlidePower);
-            } else if (gamepad2.left_trigger > 0.2) {
-                Bot.linearSlideRetract(viperSlidePower);
-            } else {
-                Bot.viperSlideRight.setPower(0);
-            }
+        if (Math.abs(Bot.viperSlideRight.getCurrentPosition()) > viperSlideMaxTicks) {
+            Bot.viperSlideRight.setPower(0);
+        } else if (Math.abs(Bot.viperSlideRight.getCurrentPosition()) <= viperSlideMinTicks) {
+            Bot.viperSlideRight.setPower(0);
+        }
 
-            if (Math.abs(Bot.viperSlideRight.getCurrentPosition()) > viperSlideMaxTicks) {
-                Bot.viperSlideRight.setPower(0);
-            } else if (Math.abs(Bot.viperSlideRight.getCurrentPosition()) <= viperSlideMinTicks) {
-                Bot.viperSlideRight.setPower(0);
-            }
-
-            if (gamepad2.left_stick_y < -0.1) {
-                Bot.rightWormgearDown(wormgearPower);
-            } else if (gamepad2.left_stick_y > 0.1) {
-                Bot.rightWormgearUp(wormgearPower);
-            } else {
-                Bot.wormgearRight.setPower(0);
-            }
+        if (gamepad2.left_stick_y < -0.1) {
+            Bot.rightWormgearDown(wormgearPower);
+        } else if (gamepad2.left_stick_y > 0.1) {
+            Bot.rightWormgearUp(wormgearPower);
+        } else {
+            Bot.wormgearRight.setPower(0);
+        }
 
 
-            if (gamepad2.x) {
-                Bot.pixelClawOpen();
-            }
-            else if (gamepad2.b) {
-                Bot.pixelClawClose();
-            }
+        if (gamepad2.x) {
+
+            Bot.leftPixelClawOpen();
+
+        } else {
+
+            Bot.leftPixelClawClose();
+
+        }
+
+        if (gamepad2.b) {
+            Bot.rightPixelClawOpen();
+        }
+        else {
+            Bot.rightPixelClawClose();
+        }
 
 
     }
 
     public void endgameArm() {
 
-               if (gamepad2.right_stick_x < -0.1) {
-                   Bot.endgameArmRetract();
-               } else if (gamepad2.right_stick_x > 0.1) {
-                   Bot.endgameArmExtend();
-               } else {
-                   Bot.endgameArmStop();
-               }
+        if (gamepad2.right_stick_x < -0.1) {
+            Bot.endgameArmRetract();
+        } else if (gamepad2.right_stick_x > 0.1) {
+            Bot.endgameArmExtend();
+        } else {
+            Bot.endgameArmStop();
+        }
 
-               if (gamepad2.dpad_up) {
-                   Bot.endgameArmRotator.setPosition(0.8);
-               }
-
-               else if (gamepad2.dpad_right) {
-                   Bot.endgameArmRotator.setPosition(0.4);
-               }
-               else if (gamepad2.dpad_left) {
-                   Bot.endgameArmRotator.setPosition(0.0);
-               }
-
+        if (gamepad2.dpad_up) {
+            Bot.endgameArmRotator.setPosition(0.8);
+        } else if (gamepad2.dpad_right) {
+            Bot.endgameArmRotator.setPosition(0.4);
+        } else if (gamepad2.dpad_left) {
+            Bot.endgameArmRotator.setPosition(0.0);
+        }
 
 
 //        if (gamepad2.a) {
@@ -242,46 +248,36 @@ public class TeleOp_CompetitionBot extends OpMode {
 //        }
 
 
-
     }
 
-    public void planeLauncher(){
+    public void planeLauncher() {
 
         if (gamepad2.dpad_down) {
-            if (planeLauncherOn == false) {
-                planeLauncherOn = true;
-            }
-            else {
-                planeLauncherOn = false;
-            }
-        }
-
-        if (planeLauncherOn == false) {
-            Bot.planeLauncherOff();
-        }
-        else if (planeLauncherOn) {
             Bot.planeLauncherOn();
+        } else {
+
+            Bot.planeLauncherOff();
+
+        }
+    }
+        public void telemetryOutput () {
+
+            telemetry.addData("Front Left: ", Bot.frontLeftMotor.getCurrentPosition());
+            telemetry.addData("Front Right: ", Bot.frontRightMotor.getCurrentPosition());
+            telemetry.addData("Rear Left: ", Bot.rearLeftMotor.getCurrentPosition());
+            telemetry.addData("Rear Right: ", Bot.rearRightMotor.getCurrentPosition());
+
+            dashboardTelemetry.addData("FRONT LEFT: ", Bot.frontLeftMotor.getPower());
+            dashboardTelemetry.addData("FRONT RIGHT: ", Bot.frontRightMotor.getPower());
+
+            dashboardTelemetry.addData("REAR LEFT: ", Bot.rearLeftMotor.getPower());
+            dashboardTelemetry.addData("REAR RIGHT: ", Bot.rearRightMotor.getPower());
+            dashboardTelemetry.update();
+            telemetry.update();
         }
 
-    }
-    public void telemetryOutput() {
 
-        telemetry.addData("Front Left: ", Bot.frontLeftMotor.getCurrentPosition());
-        telemetry.addData("Front Right: ", Bot.frontRightMotor.getCurrentPosition());
-        telemetry.addData("Rear Left: ", Bot.rearLeftMotor.getCurrentPosition());
-        telemetry.addData("Rear Right: ", Bot.rearRightMotor.getCurrentPosition());
-
-        dashboardTelemetry.addData("FRONT LEFT: ", Bot.frontLeftMotor.getPower());
-        dashboardTelemetry.addData("FRONT RIGHT: ", Bot.frontRightMotor.getPower());
-
-        dashboardTelemetry.addData("REAR LEFT: ", Bot.rearLeftMotor.getPower());
-        dashboardTelemetry.addData("REAR RIGHT: ", Bot.rearRightMotor.getPower());
-        dashboardTelemetry.update();
-        telemetry.update();
     }
 
-
-
-}
 
 

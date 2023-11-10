@@ -22,7 +22,7 @@ public class SingleServo_Callibrate extends OpMode {
     public void init () {
         //"servo_ring_pusher" = ring pusher
         //"ring_mag" = mag servo
-        myServo = hardwareMap.servo.get("box_holder");
+        myServo = hardwareMap.servo.get("pixel_rotator");
         myServo.setPosition(servoPos);
     }
 
