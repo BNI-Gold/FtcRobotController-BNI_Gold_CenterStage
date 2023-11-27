@@ -45,14 +45,33 @@ public class DSOB_TeleOp extends OpMode {
 
 
    public void drive(){
+//       leftStickYVal = gamepad1.left_stick_y;
+//       leftStickYVal = Range.clip(leftStickYVal, -1, 1);
+//
+//       rightStickYVal = gamepad1.right_stick_y;
+//       rightStickYVal = Range.clip(rightStickYVal, -1, 1);
+//
+//       leftSidePower = speedMultiply * leftStickYVal * (-1);
+//       rightSidePower = speedMultiply * rightStickYVal * (-1);
+//       dsob.tankDrive(leftSidePower, rightSidePower);
+
+
        leftStickYVal = gamepad1.left_stick_y;
        leftStickYVal = Range.clip(leftStickYVal, -1, 1);
 
-       rightStickYVal = gamepad1.right_stick_y;
-       rightStickYVal = Range.clip(rightStickYVal, -1, 1);
+       leftStickXVal = gamepad1.left_stick_x;
+       leftStickXVal = Range.clip(leftStickXVal, -1, 1);
 
-       leftSidePower = speedMultiply * leftStickYVal * (-1);
-       rightSidePower = speedMultiply * rightStickYVal * (-1);
-       dsob.tankDrive(leftSidePower, rightSidePower);
+       if (leftStickYVal < -0.1) {
+           dsob.driveForward(speedMultiply * leftStickYVal);
+       } else if (leftStickYVal > 0.1) {
+           dsob.driveBackwards(speedMultiply * leftStickYVal);
+       } else if (leftStickXVal > 0.1) {
+           dsob.rotateRight(speedMultiply * leftStickXVal);
+       } else if (leftStickXVal < -0.1) {
+           dsob.rotateLeft(speedMultiply * leftStickXVal);
+       } else {
+           dsob.stopMotors();
+       }
    }
 }
