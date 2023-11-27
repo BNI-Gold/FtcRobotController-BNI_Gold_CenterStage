@@ -5,6 +5,7 @@ import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
 import org.firstinspires.ftc.teamcode.Compitition.CenterStage.Controls.Auto.AutoBlueAlliance;
 import org.firstinspires.ftc.teamcode.Compitition.CenterStage.Controls.Auto.AutoMain;
 import org.firstinspires.ftc.teamcode.Compitition.CenterStage.Robots.CompBot;
+import org.firstinspires.ftc.teamcode.Compitition.CenterStage.Vision.TeamPropPosition;
 import org.firstinspires.ftc.vision.VisionPortal;
 import org.firstinspires.ftc.vision.tfod.TfodProcessor;
 
@@ -33,6 +34,9 @@ public class AutoBlueAudience extends AutoBlueAlliance {
 
         startObjectDetectionPipeline(pipeline);
         telemetry.addLine("Starting Vision Pipeline");
+
+        Bot.automousPosition();
+        Bot.endgameArmRotator.setPosition(0.8);
 
 
         telemetry.addLine("Robot Awaiting Start Procedure");
@@ -64,6 +68,10 @@ public class AutoBlueAudience extends AutoBlueAlliance {
             telemetry.addLine("Stopping Camera");
             telemetry.update();
             sleep(1000);
+
+            if (teamPropPosition == TeamPropPosition.BLUE_LEFT ) {
+                Bot.driveForward(.5,.3);
+            }
 
 //            Bot.endgameArmRotator.setPosition(.1);
 //            sleep(oneSecond);

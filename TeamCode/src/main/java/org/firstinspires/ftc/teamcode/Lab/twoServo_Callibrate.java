@@ -12,16 +12,25 @@ public class twoServo_Callibrate extends OpMode {
 
     private Servo grabberArmLeft = null;
     private double grabberLeftArmPos = 0.5;
+    // closed = .2
+    // open = 0.622
+    private double leftClose = 0.268;
+    private double leftOpen = 0.717;
+
     private double incVal = 0.001;
     private Servo grabberArmRight = null;
     private double grabberRightArmPos = 0.5;
+    // closed = 0.8
+    // open = 0.4
+    private double rightClose = 0.848;
+    private double rightOpen = 0.378;
 
 
     @Override
     public void init () {
-        grabberArmLeft = hardwareMap.servo.get("grabber_arm_left");
+        grabberArmLeft = hardwareMap.servo.get("pixel_claw_left");
         grabberArmLeft.setPosition(grabberLeftArmPos);
-        grabberArmRight = hardwareMap.servo.get("grabber_arm_right");
+        grabberArmRight = hardwareMap.servo.get("pixel_claw_right");
         grabberArmRight.setPosition((grabberRightArmPos));
     }
 
@@ -38,14 +47,20 @@ public class twoServo_Callibrate extends OpMode {
             grabberLeftArmPos = Range.clip(grabberLeftArmPos, 0,  1);
             telemetry.addLine( "Decrease Servo Pos!");
         }
-        if (gamepad1.y) {
-            grabberLeftArmPos = .4;
+//        if (gamepad1.y) {
+//            grabberLeftArmPos = .4;
+//        }
+//        if (gamepad1.b) {
+//            grabberLeftArmPos = .35;
+//        }
+//        if (gamepad1.a) {
+//            grabberLeftArmPos = .32;
+//        }
+        if (gamepad1.right_trigger > 0.2) {
+            grabberLeftArmPos = leftClose;
         }
-        if (gamepad1.b) {
-            grabberLeftArmPos = .35;
-        }
-        if (gamepad1.a) {
-            grabberLeftArmPos = .32;
+        if (gamepad1.left_trigger > 0.2) {
+            grabberLeftArmPos = leftOpen;
         }
 
 
@@ -63,15 +78,22 @@ public class twoServo_Callibrate extends OpMode {
             telemetry.addLine( "Decrease Servo Pos!");
         }
 
-        if (gamepad2.y) {
-            grabberRightArmPos = .4;
+        if (gamepad2.right_trigger > 0.2) {
+            grabberRightArmPos = rightClose;
         }
-        if (gamepad2.b) {
-            grabberRightArmPos = .35;
+        if (gamepad2.left_trigger > 0.2) {
+            grabberRightArmPos = rightOpen;
         }
-        if (gamepad2.a) {
-            grabberRightArmPos = .32;
-        }
+
+//        if (gamepad2.y) {
+//            grabberRightArmPos = .4;
+//        }
+//        if (gamepad2.b) {
+//            grabberRightArmPos = .35;
+//        }
+//        if (gamepad2.a) {
+//            grabberRightArmPos = .32;
+//        }
 
 
         grabberArmRight.setPosition(grabberRightArmPos);

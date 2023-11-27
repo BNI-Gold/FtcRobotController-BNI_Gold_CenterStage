@@ -2,13 +2,14 @@ package org.firstinspires.ftc.teamcode.Compitition.CenterStage.Controls.Auto.Aut
 
 import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
 
+import org.firstinspires.ftc.teamcode.Compitition.CenterStage.Controls.Auto.AutoBlueAlliance;
 import org.firstinspires.ftc.teamcode.Compitition.CenterStage.Controls.Auto.AutoMain;
 import org.firstinspires.ftc.teamcode.Compitition.CenterStage.Robots.CompBot;
 import org.firstinspires.ftc.vision.VisionPortal;
 import org.firstinspires.ftc.vision.tfod.TfodProcessor;
 
 @Autonomous (name = "A - Blue Backstage Middle")
-public class AutoBlueBackstage extends AutoMain {
+public class AutoBlueBackstage extends AutoBlueAlliance {
 
     public static final boolean USE_WEBCAM = true;
 
@@ -26,6 +27,12 @@ public class AutoBlueBackstage extends AutoMain {
         Bot.initRobot(hardwareMap);
         Bot.setLinearOp(this);
 
+        startObjectDetectionPipeline(pipeline);
+        telemetry.addLine("Starting Vision Pipeline");
+
+
+
+
         telemetry.addLine("Robot Awaiting Start Procedure");
         telemetry.update();
 
@@ -38,15 +45,24 @@ public class AutoBlueBackstage extends AutoMain {
 
             telemetry.addLine("Robot Autonomous Control Initialized");
 
-            Bot.endgameArmRotator.setPosition(.1);
+            teamPropPosition = pipeline.getAnalysis();
+            telemetry.addData("Position Detected: ", teamPropPosition);
+            telemetry.update();
+            sleep(1000);
 
-            sleep(oneSecond);
-            Bot.driveForward(0.5, 2.3);
-            sleep(oneSecond);
-            Bot.rotateLeft(0.4,2.2);
-            sleep(oneSecond);
-            Bot.driveForward(0.5,2.8);
 
+            teamPropPosition = pipeline.getAnalysis();
+            telemetry.addData("Position Detected: ", teamPropPosition);
+            telemetry.update();
+            sleep(1000);
+
+            // Stop Camera Detection
+            stopCamera();
+            telemetry.addLine("Stopping Camera");
+            telemetry.update();
+            sleep(1000);
+
+            
             telemetry.addLine("Robot Autonomous Control Complete");
 
             requestOpModeStop();

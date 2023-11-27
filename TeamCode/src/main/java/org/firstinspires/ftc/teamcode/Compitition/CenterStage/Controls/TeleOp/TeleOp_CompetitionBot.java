@@ -40,7 +40,7 @@ public class TeleOp_CompetitionBot extends OpMode {
 
     public double wormgearPower = 1;
 
-    public double viperSlidePower = .7;
+    public double viperSlidePower = 1;
 
     public double viperSlideMaxTicks = 250;
     public double viperSlideMinTicks = 1;
@@ -166,11 +166,21 @@ public class TeleOp_CompetitionBot extends OpMode {
 
     public void pixelMechanismControl() {
 
+        boolean hangPos = false;
        if (gamepad2.y){
+
            Bot.collectorPosition();
-       }
-       else {
+
+       } else if (gamepad2.b) {
+
+            Bot.automousPosition();
+
+        }
+
+       if (gamepad2.a) {
+
            Bot.drivePosition();
+
        }
 
         if (gamepad2.right_trigger > 0.2) {
@@ -181,11 +191,11 @@ public class TeleOp_CompetitionBot extends OpMode {
             Bot.viperSlideRight.setPower(0);
         }
 
-        if (Math.abs(Bot.viperSlideRight.getCurrentPosition()) > viperSlideMaxTicks) {
-            Bot.viperSlideRight.setPower(0);
-        } else if (Math.abs(Bot.viperSlideRight.getCurrentPosition()) <= viperSlideMinTicks) {
-            Bot.viperSlideRight.setPower(0);
-        }
+//        if (Math.abs(Bot.viperSlideRight.getCurrentPosition()) > viperSlideMaxTicks) {
+//            Bot.viperSlideRight.setPower(0);
+//        } else if (Math.abs(Bot.viperSlideRight.getCurrentPosition()) <= viperSlideMinTicks) {
+//            Bot.viperSlideRight.setPower(0);
+//        }
 
         if (gamepad2.left_stick_y < -0.1) {
             Bot.rightWormgearDown(wormgearPower);
@@ -218,20 +228,20 @@ public class TeleOp_CompetitionBot extends OpMode {
 
     public void endgameArm() {
 
-        if (gamepad2.right_stick_x < -0.1) {
+        if (gamepad2.right_stick_y < -0.1) {
             Bot.endgameArmRetract();
-        } else if (gamepad2.right_stick_x > 0.1) {
+        } else if (gamepad2.right_stick_y > 0.1) {
             Bot.endgameArmExtend();
         } else {
             Bot.endgameArmStop();
         }
 
         if (gamepad2.dpad_up) {
-            Bot.endgameArmRotator.setPosition(0.8);
-        } else if (gamepad2.dpad_right) {
-            Bot.endgameArmRotator.setPosition(0.4);
+            Bot.endgameArmRotator.setPosition(0.5);
+//        } else if (gamepad2.dpad_right) {
+//            Bot.endgameArmRotator.setPosition(0.4);
         } else if (gamepad2.dpad_left) {
-            Bot.endgameArmRotator.setPosition(0.0);
+            Bot.endgameArmRotator.setPosition(0.1);
         }
 
 
@@ -278,6 +288,8 @@ public class TeleOp_CompetitionBot extends OpMode {
 
             dashboardTelemetry.addData("REAR LEFT: ", Bot.rearLeftMotor.getPower());
             dashboardTelemetry.addData("REAR RIGHT: ", Bot.rearRightMotor.getPower());
+
+            dashboardTelemetry.addData("worm gear encoder: ", Bot.wormgearRight.getCurrentPosition());
             dashboardTelemetry.update();
             telemetry.update();
         }
