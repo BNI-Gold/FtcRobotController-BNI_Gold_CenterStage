@@ -256,16 +256,16 @@ public class CompBot extends MecanumDrive {
     }
 
     public void collectorPosition(){
-            pixelRotator.setPosition(.235);
+            pixelRotator.setPosition(.765);
     }
 
     public void drivePosition(){
-            pixelRotator.setPosition(.35);
+            pixelRotator.setPosition(.65);
     }
 
     public void autoPlacePosition() {
 
-            pixelRotator.setPosition(0.25);
+            pixelRotator.setPosition(0.75);
 
     }
 
