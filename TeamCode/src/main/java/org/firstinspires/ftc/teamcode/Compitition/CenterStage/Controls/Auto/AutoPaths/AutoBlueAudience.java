@@ -9,7 +9,7 @@ import org.firstinspires.ftc.teamcode.Compitition.CenterStage.Vision.TeamPropPos
 import org.firstinspires.ftc.vision.VisionPortal;
 import org.firstinspires.ftc.vision.tfod.TfodProcessor;
 
-@Autonomous (name = "A - Blue Audience_CamTest")
+@Autonomous (name = "A - Blue Audience-FOR COMP")
 public class AutoBlueAudience extends AutoBlueAlliance {
 
     public static final boolean USE_WEBCAM = true;
@@ -32,11 +32,11 @@ public class AutoBlueAudience extends AutoBlueAlliance {
         initCamera();
         Bot.setLinearOp(this);
 
-        startObjectDetectionPipeline(pipeline);
-        telemetry.addLine("Starting Vision Pipeline");
-
-        Bot.automousPosition();
-        Bot.endgameArmRotator.setPosition(0.8);
+//        startObjectDetectionPipeline(pipeline);
+//        telemetry.addLine("Starting Vision Pipeline");
+//
+//        Bot.automousPosition();
+//        Bot.endgameArmRotator.setPosition(0.8);
 
 
         telemetry.addLine("Robot Awaiting Start Procedure");
@@ -52,26 +52,40 @@ public class AutoBlueAudience extends AutoBlueAlliance {
 
             telemetry.addLine("Robot Autonomous Control Initialized");
 
-            teamPropPosition = pipeline.getAnalysis();
-            telemetry.addData("Position Detected: ", teamPropPosition);
-            telemetry.update();
+            Bot.wormgearRight.setPower(0.5);
+            sleep(1500);
+            Bot.wormgearRight.setPower(0);
+            sleep(300);
+            Bot.driveForward(0.5,0.8);
+            sleep (1000);
+            Bot.rotateRight(0.4, 2.2);
+            sleep(1000);
+            Bot.driveBack(0.5,1.35);
+            sleep(1000);
+            Bot.rotateLeft(0.4,4.4);
             sleep(1000);
 
-            // Backup detection after first detection
-            teamPropPosition = pipeline.getAnalysis();
-            telemetry.addData("Position Detected: ", teamPropPosition);
-            telemetry.update();
-            sleep(1000);
-
-            // Stop Camera Detection
-            stopCamera();
-            telemetry.addLine("Stopping Camera");
-            telemetry.update();
-            sleep(1000);
-
-            if (teamPropPosition == TeamPropPosition.BLUE_LEFT ) {
-                Bot.driveForward(.5,.3);
-            }
+//
+//            teamPropPosition = pipeline.getAnalysis();
+//            telemetry.addData("Position Detected: ", teamPropPosition);
+//            telemetry.update();
+//            sleep(1000);
+//
+//            // Backup detection after first detection
+//            teamPropPosition = pipeline.getAnalysis();
+//            telemetry.addData("Position Detected: ", teamPropPosition);
+//            telemetry.update();
+//            sleep(1000);
+//
+//            // Stop Camera Detection
+//            stopCamera();
+//            telemetry.addLine("Stopping Camera");
+//            telemetry.update();
+//            sleep(1000);
+//
+//            if (teamPropPosition == TeamPropPosition.BLUE_LEFT ) {
+//                Bot.driveForward(.5,.3);
+//            }
 
 //            Bot.endgameArmRotator.setPosition(.1);
 //            sleep(oneSecond);

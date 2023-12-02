@@ -8,7 +8,7 @@ import org.firstinspires.ftc.teamcode.Compitition.CenterStage.Robots.CompBot;
 import org.firstinspires.ftc.vision.VisionPortal;
 import org.firstinspires.ftc.vision.tfod.TfodProcessor;
 
-@Autonomous (name = "AAA - Red Backstage Auto")
+@Autonomous (name = "A - Red Backstage Auto- FOR COMP")
 public class AutoRedBackstagePlace extends AutoMain {
 
     public static final boolean USE_WEBCAM = true;
@@ -30,9 +30,9 @@ public class AutoRedBackstagePlace extends AutoMain {
         telemetry.addLine("Robot Awaiting Start Procedure");
         telemetry.update();
 
-        Bot.endgameArmRotator.setPosition(0.8);
-
-        Bot.automousPosition();
+//        Bot.endgameArmRotator.setPosition(0.8);
+//
+//        Bot.automousPosition();
 
 
         waitForStart();
@@ -43,47 +43,52 @@ public class AutoRedBackstagePlace extends AutoMain {
 
             telemetry.addLine("Robot Autonomous Control Initialized");
 
-
-            sleep(oneSecond);
-            Bot.driveForward(0.5, 0.5);
-            sleep(oneSecond);
-            Bot.rotateRight(0.4,2.4);
-            sleep(oneSecond);
-            Bot.driveForward(0.5,2.8);
-            sleep(oneSecond);
-            Bot.strafeLeft(0.5, 2.5);
-            sleep(oneSecond);
-            Bot.driveForward(0.15, 1);
-            sleep(oneSecond);
-
-            Bot.viperSlideRight.setPower(-1);
-            sleep(600);
-            Bot.viperSlideRight.setPower(-0.2);
-            sleep(oneSecond);
-
-            Bot.autoPlacePosition();
-            sleep(oneSecond);
-
-            Bot.rightPixelClawOpen();
-            sleep(oneSecond * 2);
-
-
-            Bot.rightPixelClawClose();
-            sleep(oneSecond);
-
-            Bot.rightPixelClawOpen();
-            sleep(oneSecond * 2);
-
-            Bot.viperSlideRight.setPower(0.75);
-            sleep(600);
-
-            Bot.viperSlideRight.setPower(0);
-            sleep(oneSecond);
-
-            Bot.rightPixelClawClose();
-            sleep(oneSecond);
-
-            sleep(oneSecond);
+            Bot.driveForward(0.5,0.35);
+            sleep(1000);
+            Bot.rotateRight(0.4,2.2);
+            sleep(1000);
+            Bot.driveForward(0.5,3.3);
+            sleep(1000);
+//            sleep(oneSecond);
+//            Bot.driveForward(0.5, 0.5);
+//            sleep(oneSecond);
+//            Bot.rotateRight(0.4,2.4);
+//            sleep(oneSecond);
+//            Bot.driveForward(0.5,2.8);
+//            sleep(oneSecond);
+//            Bot.strafeLeft(0.5, 2.5);
+//            sleep(oneSecond);
+//            Bot.driveForward(0.15, 1);
+//            sleep(oneSecond);
+//
+//            Bot.viperSlideRight.setPower(-1);
+//            sleep(600);
+//            Bot.viperSlideRight.setPower(-0.2);
+//            sleep(oneSecond);
+//
+//            Bot.autoPlacePosition();
+//            sleep(oneSecond);
+//
+//            Bot.rightPixelClawOpen();
+//            sleep(oneSecond * 2);
+//
+//
+//            Bot.rightPixelClawClose();
+//            sleep(oneSecond);
+//
+//            Bot.rightPixelClawOpen();
+//            sleep(oneSecond * 2);
+//
+//            Bot.viperSlideRight.setPower(0.75);
+//            sleep(600);
+//
+//            Bot.viperSlideRight.setPower(0);
+//            sleep(oneSecond);
+//
+//            Bot.rightPixelClawClose();
+//            sleep(oneSecond);
+//
+//            sleep(oneSecond);
 
             telemetry.addLine("Robot Autonomous Control Complete");
 

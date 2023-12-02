@@ -8,7 +8,7 @@ import org.firstinspires.ftc.teamcode.Compitition.CenterStage.Robots.CompBot;
 import org.firstinspires.ftc.vision.VisionPortal;
 import org.firstinspires.ftc.vision.tfod.TfodProcessor;
 
-@Autonomous (name = "A - Blue Backstage Middle")
+@Autonomous (name = "A - Blue Backstage FOR COMP")
 public class AutoBlueBackstage extends AutoBlueAlliance {
 
     public static final boolean USE_WEBCAM = true;
@@ -27,8 +27,8 @@ public class AutoBlueBackstage extends AutoBlueAlliance {
         Bot.initRobot(hardwareMap);
         Bot.setLinearOp(this);
 
-        startObjectDetectionPipeline(pipeline);
-        telemetry.addLine("Starting Vision Pipeline");
+//        startObjectDetectionPipeline(pipeline);
+//        telemetry.addLine("Starting Vision Pipeline");
 
 
 
@@ -44,23 +44,31 @@ public class AutoBlueBackstage extends AutoBlueAlliance {
         while (opModeIsActive()) {
 
             telemetry.addLine("Robot Autonomous Control Initialized");
+//
 
-            teamPropPosition = pipeline.getAnalysis();
-            telemetry.addData("Position Detected: ", teamPropPosition);
-            telemetry.update();
+
+            Bot.driveForward(0.5,0.35);
             sleep(1000);
-
-
-            teamPropPosition = pipeline.getAnalysis();
-            telemetry.addData("Position Detected: ", teamPropPosition);
-            telemetry.update();
+            Bot.rotateLeft(0.4,2.2);
             sleep(1000);
-
-            // Stop Camera Detection
-            stopCamera();
-            telemetry.addLine("Stopping Camera");
-            telemetry.update();
+            Bot.driveForward(0.5,3.0);
             sleep(1000);
+//            teamPropPosition = pipeline.getAnalysis();
+//            telemetry.addData("Position Detected: ", teamPropPosition);
+//            telemetry.update();
+//            sleep(1000);
+//
+//
+//            teamPropPosition = pipeline.getAnalysis();
+//            telemetry.addData("Position Detected: ", teamPropPosition);
+//            telemetry.update();
+//            sleep(1000);
+//
+//            // Stop Camera Detection
+//            stopCamera();
+//            telemetry.addLine("Stopping Camera");
+//            telemetry.update();
+//            sleep(1000);
 
             
             telemetry.addLine("Robot Autonomous Control Complete");

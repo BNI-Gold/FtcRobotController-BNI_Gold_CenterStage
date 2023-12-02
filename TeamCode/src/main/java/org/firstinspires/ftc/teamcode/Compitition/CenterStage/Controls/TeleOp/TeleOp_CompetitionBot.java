@@ -62,7 +62,7 @@ public class TeleOp_CompetitionBot extends OpMode {
     }
 
     public void start() {
-
+        Bot.endgameArmRotator.setPosition(0.5);
     }
 
     public void loop() {
@@ -70,7 +70,7 @@ public class TeleOp_CompetitionBot extends OpMode {
         //driverControlChanger();
         endgameArm();
         pixelMechanismControl();
-        planeLauncher();
+//        planeLauncher();
         drive();
         telemetryOutput();
     }
@@ -167,26 +167,43 @@ public class TeleOp_CompetitionBot extends OpMode {
     public void pixelMechanismControl() {
 
         boolean hangPos = false;
-       if (gamepad2.y){
+//       if (gamepad2.y){
+//
+//           Bot.collectorPosition();
+//
+//       } else if (gamepad2.b) {
+//
+//            Bot.automousPosition();
+//
+//        } else {
+//
+//           Bot.drivePosition();
+//
+//       }
 
-           Bot.collectorPosition();
 
-       } else if (gamepad2.b) {
-
-            Bot.automousPosition();
-
+        if (gamepad2.a) {
+            Bot.pixelRotatorButThisTimeItsAMotor.setPower(.5);
         }
+        else if (gamepad2.y) {
+            Bot.pixelRotatorButThisTimeItsAMotor.setPower(-0.6);
+        }
+            else {
+                Bot.pixelRotatorButThisTimeItsAMotor.setPower(0);
+            }
 
-       if (gamepad2.a) {
 
-           Bot.drivePosition();
 
-       }
+//       if (gamepad2.a) {
+//
+//           Bot.drivePosition();
+//
+//       }
 
         if (gamepad2.right_trigger > 0.2) {
             Bot.linearSlideExtend(viperSlidePower);
         } else if (gamepad2.left_trigger > 0.2) {
-            Bot.linearSlideRetract(viperSlidePower);
+            Bot.linearSlideRetract(viperSlidePower * 0.7);
         } else {
             Bot.viperSlideRight.setPower(0);
         }
@@ -196,11 +213,10 @@ public class TeleOp_CompetitionBot extends OpMode {
 //        } else if (Math.abs(Bot.viperSlideRight.getCurrentPosition()) <= viperSlideMinTicks) {
 //            Bot.viperSlideRight.setPower(0);
 //        }
-
         if (gamepad2.left_stick_y < -0.1) {
-            Bot.rightWormgearDown(wormgearPower);
+            Bot.rightWormgearDown(wormgearPower * 0.9);
         } else if (gamepad2.left_stick_y > 0.1) {
-            Bot.rightWormgearUp(wormgearPower);
+            Bot.rightWormgearUp(wormgearPower * 0.3);
         } else {
             Bot.wormgearRight.setPower(0);
         }
@@ -217,10 +233,10 @@ public class TeleOp_CompetitionBot extends OpMode {
         }
 
         if (gamepad2.right_bumper) {
-            Bot.rightPixelClawOpen();
+            Bot.rightPixelClawClose();
         }
         else {
-            Bot.rightPixelClawClose();
+            Bot.rightPixelClawOpen();
         }
 
 
@@ -236,11 +252,11 @@ public class TeleOp_CompetitionBot extends OpMode {
             Bot.endgameArmStop();
         }
 
-        if (gamepad2.dpad_up) {
+        if (gamepad2.x) {
             Bot.endgameArmRotator.setPosition(0.5);
 //        } else if (gamepad2.dpad_right) {
 //            Bot.endgameArmRotator.setPosition(0.4);
-        } else if (gamepad2.dpad_left) {
+        } else if (gamepad2.b) {
             Bot.endgameArmRotator.setPosition(0.1);
         }
 
@@ -266,22 +282,26 @@ public class TeleOp_CompetitionBot extends OpMode {
 
     }
 
-    public void planeLauncher() {
-
-        if (gamepad2.dpad_down) {
-            Bot.planeLauncherOn();
-        } else {
-
-            Bot.planeLauncherOff();
-
-        }
-    }
+//    public void planeLauncher() {
+//
+//        if (gamepad2.dpad_down) {
+//            Bot.planeLauncherOn();
+//        } else {
+//
+//            Bot.planeLauncherOff();
+//
+//        }
+//    }
         public void telemetryOutput () {
 
             telemetry.addData("Front Left: ", Bot.frontLeftMotor.getCurrentPosition());
             telemetry.addData("Front Right: ", Bot.frontRightMotor.getCurrentPosition());
             telemetry.addData("Rear Left: ", Bot.rearLeftMotor.getCurrentPosition());
             telemetry.addData("Rear Right: ", Bot.rearRightMotor.getCurrentPosition());
+
+            telemetry.addLine("");
+
+            telemetry.addData("DPAD SERVO ", Bot.endgameArmRotator.getPosition());
 
             dashboardTelemetry.addData("FRONT LEFT: ", Bot.frontLeftMotor.getPower());
             dashboardTelemetry.addData("FRONT RIGHT: ", Bot.frontRightMotor.getPower());

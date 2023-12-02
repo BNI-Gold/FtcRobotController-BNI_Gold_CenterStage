@@ -1,7 +1,5 @@
 package org.firstinspires.ftc.teamcode.Compitition.CenterStage.Robots;
 
-import com.qualcomm.hardware.bosch.BNO055IMU;
-import com.qualcomm.hardware.bosch.JustLoggingAccelerationIntegrator;
 import com.qualcomm.hardware.rev.RevHubOrientationOnRobot;
 import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.hardware.DcMotorSimple;
@@ -10,11 +8,6 @@ import com.qualcomm.robotcore.hardware.IMU;
 import com.qualcomm.robotcore.hardware.Servo;
 import com.qualcomm.robotcore.util.ElapsedTime;
 
-import org.firstinspires.ftc.robotcore.external.navigation.Acceleration;
-import org.firstinspires.ftc.robotcore.external.navigation.AngleUnit;
-import org.firstinspires.ftc.robotcore.external.navigation.AxesOrder;
-import org.firstinspires.ftc.robotcore.external.navigation.AxesReference;
-import org.firstinspires.ftc.robotcore.external.navigation.Orientation;
 import org.firstinspires.ftc.teamcode.Compitition.CenterStage.Drivetrains.MecanumDrive;
 
 public class CompBot extends MecanumDrive {
@@ -30,6 +23,8 @@ public class CompBot extends MecanumDrive {
         public DcMotor endgameArm = null;
         public Servo endgameArmRotator = null;
         public Servo pixelRotator = null;
+
+        public DcMotor pixelRotatorButThisTimeItsAMotor = null;
 
         public Servo pixelClawLeft = null;
         public Servo pixelClawRight = null;
@@ -90,6 +85,11 @@ public class CompBot extends MecanumDrive {
             wormgearRight.setDirection(DcMotor.Direction.FORWARD); //check direction b/f testing
             wormgearRight.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
 
+
+            pixelRotatorButThisTimeItsAMotor = hwBot.dcMotor.get("pixel_rotator_motor");
+            pixelRotatorButThisTimeItsAMotor.setDirection(DcMotorSimple.Direction.FORWARD);
+            pixelRotatorButThisTimeItsAMotor.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
+
 //            wormgearLeft = hwBot.dcMotor.get("wormgear_left");
 //            wormgearLeft.setDirection(DcMotor.Direction.FORWARD);  //check direction b/f testing
 //            wormgearLeft.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
@@ -109,17 +109,17 @@ public class CompBot extends MecanumDrive {
 
 
             pixelRotator = hwBot.servo.get("pixel_rotator");
-            pixelRotator.setDirection(Servo.Direction.FORWARD);
+            pixelRotator.setDirection(Servo.Direction.REVERSE);
 
             pixelClawLeft = hwBot.servo.get("pixel_claw_left");
             pixelClawLeft.setDirection(Servo.Direction.FORWARD);
 
             pixelClawRight = hwBot.servo.get("pixel_claw_right");
             pixelClawRight.setDirection(Servo.Direction.FORWARD);
-
-            planeLauncher = hwBot.dcMotor.get("plane_launcher");
-            planeLauncher.setDirection(DcMotor.Direction.FORWARD);
-            planeLauncher.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
+//
+//            planeLauncher = hwBot.dcMotor.get("plane_launcher");
+//            planeLauncher.setDirection(DcMotor.Direction.FORWARD);
+//            planeLauncher.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
 
             currentTime.reset();
 
@@ -233,11 +233,11 @@ public class CompBot extends MecanumDrive {
             endgameArmRotator.setPosition(position);
     }
 
-    public void rightPixelClawOpen () { pixelClawRight.setPosition(0.378);
+    public void rightPixelClawOpen () { pixelClawRight.setPosition(0.478);//378
     }
     public void rightPixelClawClose(){
-        pixelClawRight.setPosition(0.848);
-    }
+        pixelClawRight.setPosition(0.948);
+    }//848
 
     public void leftPixelClawOpen (){
         pixelClawLeft.setPosition(0.717);
@@ -256,16 +256,16 @@ public class CompBot extends MecanumDrive {
     }
 
     public void collectorPosition(){
-            pixelRotator.setPosition(.765);
+            pixelRotator.setPosition(.5);
     }
 
     public void drivePosition(){
-            pixelRotator.setPosition(.65);
+            pixelRotator.setPosition(.3);
     }
 
     public void autoPlacePosition() {
 
-            pixelRotator.setPosition(0.75);
+            pixelRotator.setPosition(0.7);
 
     }
 

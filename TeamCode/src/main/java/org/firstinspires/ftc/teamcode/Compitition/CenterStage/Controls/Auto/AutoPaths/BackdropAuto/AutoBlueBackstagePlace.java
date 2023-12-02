@@ -8,7 +8,7 @@ import org.firstinspires.ftc.teamcode.Compitition.CenterStage.Robots.CompBot;
 import org.firstinspires.ftc.vision.VisionPortal;
 import org.firstinspires.ftc.vision.tfod.TfodProcessor;
 
-@Autonomous (name = "AAA - Blue Backstage Auto - INIT TEST")
+@Autonomous (name = "AAATTT - Blue Backstage Auto - INIT TEST")
 public class AutoBlueBackstagePlace extends AutoMain {
 
     public static final boolean USE_WEBCAM = true;
@@ -30,9 +30,9 @@ public class AutoBlueBackstagePlace extends AutoMain {
         telemetry.addLine("Robot Awaiting Start Procedure");
         telemetry.update();
 
-        Bot.endgameArmRotator.setPosition(0.8);
+       // Bot.endgameArmRotator.setPosition(0.8);
 
-        Bot.automousPosition();
+        Bot.drivePosition();
 
         waitForStart();
 
@@ -61,7 +61,6 @@ public class AutoBlueBackstagePlace extends AutoMain {
             Bot.viperSlideRight.setPower(-0.2);
             sleep(oneSecond);
 
-            Bot.autoPlacePosition();
             sleep(oneSecond);
 
             Bot.rightPixelClawOpen();
@@ -73,7 +72,7 @@ public class AutoBlueBackstagePlace extends AutoMain {
             Bot.rightPixelClawOpen();
             sleep(oneSecond * 2);
 
-            Bot.viperSlideRight.setPower(0.75);
+            Bot.viperSlideRight.setPower(0.5);
             sleep(600);
 
             Bot.viperSlideRight.setPower(0);
