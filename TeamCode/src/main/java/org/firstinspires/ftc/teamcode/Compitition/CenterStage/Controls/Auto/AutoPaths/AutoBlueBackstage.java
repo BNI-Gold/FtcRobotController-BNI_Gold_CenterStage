@@ -26,7 +26,9 @@ public class AutoBlueBackstage extends AutoBlueAlliance {
     @Override
     public void runOpMode() {
         Bot.initRobot(hardwareMap);
+       initCamera();
         Bot.setLinearOp(this);
+        startObjectDetectionPipeline(pipeline);
 
 //        startObjectDetectionPipeline(pipeline);
 //        telemetry.addLine("Starting Vision Pipeline");
@@ -54,22 +56,7 @@ public class AutoBlueBackstage extends AutoBlueAlliance {
 //            sleep(1000);
 //            Bot.driveForward(0.5,3.0);
 //            sleep(1000);
-            teamPropPosition = pipeline.getAnalysis();
-            telemetry.addData("Position Detected: ", teamPropPosition);
-            telemetry.update();
-            sleep(1000);
-//
-//
-            teamPropPosition = pipeline.getAnalysis();
-            telemetry.addData("Position Detected: ", teamPropPosition);
-            telemetry.update();
-            sleep(1000);
-
-            // Stop Camera Detection
-//            stopCamera();
-//            telemetry.addLine("Stopping Camera");
-//            telemetry.update();
-//            sleep(1000);
+           CameraDetection();
 
             if (teamPropPosition == teamPropPosition.BLUE_LEFT) {
                 telemetryUpdate("Position : LEFT");

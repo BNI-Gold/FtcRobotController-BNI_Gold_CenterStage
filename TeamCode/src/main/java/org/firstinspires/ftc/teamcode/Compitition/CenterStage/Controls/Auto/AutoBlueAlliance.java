@@ -7,5 +7,20 @@ import org.firstinspires.ftc.teamcode.Compitition.CenterStage.Vision.TeamPropPos
 public abstract class AutoBlueAlliance extends AutoMain{
 
     public ProgrammingBot Bot = new ProgrammingBot();
-    public TeamPropPositionPipeline_Gold pipeline = new TeamPropPositionPipeline_Gold("Blue Alliance", 140);
+    public TeamPropPositionPipeline_Gold pipeline = new TeamPropPositionPipeline_Gold("Blue Alliance", 120);
+
+    public void CameraDetection () {
+        teamPropPosition = pipeline.getAnalysis();
+        telemetry.addData("Position Detected: ", teamPropPosition);
+        telemetry.update();
+        sleep(1000);
+
+        stopCamera();
+        telemetry.addLine("Stopping Camera");
+        telemetry.update();
+        sleep(1000);
+
+    }
+
+
 }
