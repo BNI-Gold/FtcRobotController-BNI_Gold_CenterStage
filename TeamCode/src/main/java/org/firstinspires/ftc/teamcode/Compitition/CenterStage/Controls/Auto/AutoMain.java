@@ -2,6 +2,9 @@ package org.firstinspires.ftc.teamcode.Compitition.CenterStage.Controls.Auto;
 
 
 
+import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
+import com.qualcomm.robotcore.eventloop.opmode.OpMode;
+
 import org.firstinspires.ftc.robotcore.external.hardware.camera.BuiltinCameraDirection;
 import org.firstinspires.ftc.robotcore.external.hardware.camera.WebcamName;
 
@@ -17,7 +20,7 @@ import org.openftc.easyopencv.OpenCvCameraRotation;
 
 import java.util.List;
 
-public abstract class AutoMain extends BNIVision_Adapted {
+public abstract class AutoMain extends LinearOpMode {
 
     public int webCamWidth = 960;
     public int webCamHeight = 720;
@@ -133,21 +136,21 @@ public abstract class AutoMain extends BNIVision_Adapted {
 
     }
 
-    public void detectTags() {
-        findTag();
-
-        sleep(500);
-
-        findTag();
-
-        sleep(500);
-
-        findTag();
-
-        sleep(500);
-
-        visionPortal.close();
-
-        sleep(500);
-    }
+//    public void detectTags() {
+//        findTag();
+//
+//        sleep(500);
+//
+//        findTag();
+//
+//        sleep(500);
+//
+//        findTag();
+//
+//        sleep(500);
+//
+//        visionPortal.close();
+//
+//        sleep(500);
+//    }
 }

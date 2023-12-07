@@ -18,7 +18,7 @@ public class AutoBlueBackstage extends AutoBlueAlliance {
 
     public TfodProcessor tFod;
 
-    public VisionPortal visionPortal;
+    //public VisionPortal visionPortal;
 
 
 
