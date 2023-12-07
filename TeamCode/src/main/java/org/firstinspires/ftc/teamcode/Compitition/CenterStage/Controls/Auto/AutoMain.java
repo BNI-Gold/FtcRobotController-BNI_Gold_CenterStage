@@ -2,11 +2,10 @@ package org.firstinspires.ftc.teamcode.Compitition.CenterStage.Controls.Auto;
 
 
 
-import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
-
 import org.firstinspires.ftc.robotcore.external.hardware.camera.BuiltinCameraDirection;
 import org.firstinspires.ftc.robotcore.external.hardware.camera.WebcamName;
 
+import org.firstinspires.ftc.teamcode.Compitition.CenterStage.Controls.Auto.VisionAuto.BNIVision_Adapted;
 import org.firstinspires.ftc.teamcode.Compitition.CenterStage.Vision.TeamPropPosition;
 import org.firstinspires.ftc.teamcode.Compitition.CenterStage.Vision.TeamPropPositionPipeline_Gold;
 import org.firstinspires.ftc.vision.VisionPortal;
@@ -18,7 +17,7 @@ import org.openftc.easyopencv.OpenCvCameraRotation;
 
 import java.util.List;
 
-public abstract class AutoMain extends LinearOpMode {
+public abstract class AutoMain extends BNIVision_Adapted {
 
     public int webCamWidth = 960;
     public int webCamHeight = 720;

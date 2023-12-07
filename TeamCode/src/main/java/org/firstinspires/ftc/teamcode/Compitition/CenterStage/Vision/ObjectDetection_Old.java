@@ -3,12 +3,13 @@ package org.firstinspires.ftc.teamcode.Compitition.CenterStage.Vision;
 import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
 
 import org.firstinspires.ftc.robotcore.external.hardware.camera.WebcamName;
+import org.firstinspires.ftc.teamcode.Compitition.CenterStage.Controls.Auto.VisionAuto.BNIVision_Adapted;
 import org.openftc.easyopencv.OpenCvCamera;
 import org.openftc.easyopencv.OpenCvCameraFactory;
 import org.openftc.easyopencv.OpenCvCameraRotation;
 
 @Autonomous(name = "Object Detection")
-public class ObjectDetection_Old extends BNIVision_Adapted{
+public class ObjectDetection_Old extends BNIVision_Adapted {
 
 
     OpenCvCamera webcam;

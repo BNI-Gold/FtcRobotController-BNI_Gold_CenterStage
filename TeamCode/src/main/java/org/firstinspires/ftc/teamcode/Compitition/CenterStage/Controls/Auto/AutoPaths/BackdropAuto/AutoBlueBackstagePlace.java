@@ -23,7 +23,7 @@ public class AutoBlueBackstagePlace extends AutoMain {
 
 
     @Override
-    public void runOpMode() throws InterruptedException{
+    public void runOpMode() {
         Bot.initRobot(hardwareMap);
         Bot.setLinearOp(this);
 

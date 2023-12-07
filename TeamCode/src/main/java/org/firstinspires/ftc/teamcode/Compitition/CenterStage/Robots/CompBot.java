@@ -105,7 +105,7 @@ public class CompBot extends MecanumDrive {
             endgameArm.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
 
             endgameArmRotator = hwBot.servo.get("end_game_arm_rotator");
-            endgameArmRotator.setDirection(Servo.Direction.FORWARD);
+//            endgameArmRotator.setDirection(Servo.Direction.FORWARD);
 
 
             pixelRotator = hwBot.servo.get("pixel_rotator");

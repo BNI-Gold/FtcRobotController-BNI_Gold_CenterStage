@@ -23,7 +23,7 @@ public class AutoRedBackstagePlace extends AutoMain {
 
 
     @Override
-    public void runOpMode() throws InterruptedException{
+    public void runOpMode() {
         Bot.initRobot(hardwareMap);
         Bot.setLinearOp(this);
 
@@ -43,7 +43,7 @@ public class AutoRedBackstagePlace extends AutoMain {
 
             telemetry.addLine("Robot Autonomous Control Initialized");
 
-            Bot.driveForward(0.5,0.35);
+            Bot.driveForward(0.5,0.55);
             sleep(1000);
             Bot.rotateRight(0.4,2.2);
             sleep(1000);

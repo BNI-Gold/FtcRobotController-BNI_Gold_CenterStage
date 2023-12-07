@@ -3,6 +3,7 @@ package org.firstinspires.ftc.teamcode.Compitition.CenterStage.Controls.TeleOp;
 import com.acmerobotics.dashboard.FtcDashboard;
 import com.qualcomm.robotcore.eventloop.opmode.OpMode;
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
+import com.qualcomm.robotcore.hardware.Servo;
 import com.qualcomm.robotcore.util.Range;
 
 import org.firstinspires.ftc.robotcore.external.Telemetry;
@@ -40,7 +41,7 @@ public class TeleOp_CompetitionBot extends OpMode {
 
     public double wormgearPower = 1;
 
-    public double viperSlidePower = 1;
+    public double viperSlidePower = 0.65;
 
     public double viperSlideMaxTicks = 250;
     public double viperSlideMinTicks = 1;
@@ -216,7 +217,7 @@ public class TeleOp_CompetitionBot extends OpMode {
         if (gamepad2.left_stick_y < -0.1) {
             Bot.rightWormgearDown(wormgearPower * 0.9);
         } else if (gamepad2.left_stick_y > 0.1) {
-            Bot.rightWormgearUp(wormgearPower * 0.3);
+            Bot.rightWormgearUp(wormgearPower * 0.6);
         } else {
             Bot.wormgearRight.setPower(0);
         }
@@ -253,11 +254,16 @@ public class TeleOp_CompetitionBot extends OpMode {
         }
 
         if (gamepad2.x) {
-            Bot.endgameArmRotator.setPosition(0.5);
+           Bot.endgameArmRotator.setDirection(Servo.Direction.REVERSE);
+           Bot.endgameArmRotator.setPosition(0.1);
 //        } else if (gamepad2.dpad_right) {
 //            Bot.endgameArmRotator.setPosition(0.4);
         } else if (gamepad2.b) {
+            Bot.endgameArmRotator.setDirection(Servo.Direction.FORWARD);
             Bot.endgameArmRotator.setPosition(0.1);
+        }
+        else if (gamepad2.back) {
+            Bot.endgameArmRotator.setPosition(0.5);
         }
 
 

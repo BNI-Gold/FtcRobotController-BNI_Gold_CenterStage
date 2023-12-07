@@ -27,13 +27,13 @@ public class AutoBlueAudience extends AutoBlueAlliance {
 
 
     @Override
-    public void runOpMode() throws InterruptedException{
+    public void runOpMode() {
         Bot.initRobot(hardwareMap);
         initCamera();
         Bot.setLinearOp(this);
 
-//        startObjectDetectionPipeline(pipeline);
-//        telemetry.addLine("Starting Vision Pipeline");
+        startObjectDetectionPipeline(pipeline);
+        telemetry.addLine("Starting Vision Pipeline");
 //
 //        Bot.automousPosition();
 //        Bot.endgameArmRotator.setPosition(0.8);
@@ -52,18 +52,18 @@ public class AutoBlueAudience extends AutoBlueAlliance {
 
             telemetry.addLine("Robot Autonomous Control Initialized");
 
-            Bot.wormgearRight.setPower(0.5);
-            sleep(1500);
-            Bot.wormgearRight.setPower(0);
-            sleep(300);
-            Bot.driveForward(0.5,0.8);
-            sleep (1000);
-            Bot.rotateRight(0.4, 2.2);
-            sleep(1000);
-            Bot.driveBack(0.5,1.35);
-            sleep(1000);
-            Bot.rotateLeft(0.4,4.4);
-            sleep(1000);
+//            Bot.wormgearRight.setPower(0.5);
+//            sleep(1500);
+//            Bot.wormgearRight.setPower(0);
+//            sleep(300);
+//            Bot.driveForward(0.5,0.8);
+//            sleep (1000);
+//            Bot.rotateRight(0.4, 2.2);
+//            sleep(1000);
+//            Bot.driveBack(0.5,1.35);
+//            sleep(1000);
+//            Bot.rotateLeft(0.4,4.4);
+//            sleep(1000);
 
 //
 //            teamPropPosition = pipeline.getAnalysis();

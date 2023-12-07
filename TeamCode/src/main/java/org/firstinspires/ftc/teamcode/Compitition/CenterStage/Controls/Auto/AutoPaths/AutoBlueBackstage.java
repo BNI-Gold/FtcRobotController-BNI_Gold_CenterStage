@@ -5,6 +5,7 @@ import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
 import org.firstinspires.ftc.teamcode.Compitition.CenterStage.Controls.Auto.AutoBlueAlliance;
 import org.firstinspires.ftc.teamcode.Compitition.CenterStage.Controls.Auto.AutoMain;
 import org.firstinspires.ftc.teamcode.Compitition.CenterStage.Robots.CompBot;
+import org.firstinspires.ftc.teamcode.Compitition.CenterStage.Robots.ProgrammingBot;
 import org.firstinspires.ftc.vision.VisionPortal;
 import org.firstinspires.ftc.vision.tfod.TfodProcessor;
 
@@ -19,11 +20,11 @@ public class AutoBlueBackstage extends AutoBlueAlliance {
 
     public VisionPortal visionPortal;
 
-  public   CompBot Bot = new CompBot();
+
 
 
     @Override
-    public void runOpMode() throws InterruptedException{
+    public void runOpMode() {
         Bot.initRobot(hardwareMap);
         Bot.setLinearOp(this);
 
@@ -47,28 +48,57 @@ public class AutoBlueBackstage extends AutoBlueAlliance {
 //
 
 
-            Bot.driveForward(0.5,0.35);
+//            Bot.driveForward(0.5,0.55);
+//            sleep(1000);
+//            Bot.rotateLeft(0.4,2.2);
+//            sleep(1000);
+//            Bot.driveForward(0.5,3.0);
+//            sleep(1000);
+            teamPropPosition = pipeline.getAnalysis();
+            telemetry.addData("Position Detected: ", teamPropPosition);
+            telemetry.update();
+            sleep(1000);
+//
+//
+            teamPropPosition = pipeline.getAnalysis();
+            telemetry.addData("Position Detected: ", teamPropPosition);
+            telemetry.update();
+            sleep(1000);
+
+            // Stop Camera Detection
+//            stopCamera();
+//            telemetry.addLine("Stopping Camera");
+//            telemetry.update();
+//            sleep(1000);
+
+            if (teamPropPosition == teamPropPosition.BLUE_LEFT) {
+                telemetryUpdate("Position : LEFT");
+                Bot.driveForward(0.5,0.7);
+                sleep(1000);
+                Bot.rotateLeft(0.3,1.1);
+            }
+            else if (teamPropPosition == teamPropPosition.BLUE_MIDDLE) {
+                telemetryUpdate("Position - CENTER");
+                Bot.driveForward(0.5,0.7);
+            }
+            else if (teamPropPosition == teamPropPosition.BLUE_RIGHT){
+                telemetryUpdate("Position : RIGHT");
+                Bot.driveForward(0.5,0.7);
+                sleep(1000);
+                Bot.rotateRight(0.3,1.1);
+            }
+            else {
+                telemetryUpdate("No Position Detected");
+                Bot.driveForward(0.5,0.55);
             sleep(1000);
             Bot.rotateLeft(0.4,2.2);
             sleep(1000);
             Bot.driveForward(0.5,3.0);
             sleep(1000);
-//            teamPropPosition = pipeline.getAnalysis();
-//            telemetry.addData("Position Detected: ", teamPropPosition);
-//            telemetry.update();
-//            sleep(1000);
-//
-//
-//            teamPropPosition = pipeline.getAnalysis();
-//            telemetry.addData("Position Detected: ", teamPropPosition);
-//            telemetry.update();
-//            sleep(1000);
-//
-//            // Stop Camera Detection
-//            stopCamera();
-//            telemetry.addLine("Stopping Camera");
-//            telemetry.update();
-//            sleep(1000);
+            }
+
+            stopCamera();
+
 
             
             telemetry.addLine("Robot Autonomous Control Complete");
