@@ -7,7 +7,10 @@ import com.qualcomm.robotcore.hardware.Servo;
 import com.qualcomm.robotcore.util.Range;
 
 import org.firstinspires.ftc.robotcore.external.Telemetry;
+import org.firstinspires.ftc.robotcore.external.navigation.DistanceUnit;
 import org.firstinspires.ftc.teamcode.Compitition.CenterStage.Robots.CompBot;
+
+import java.util.Locale;
 
 @TeleOp (name = "A - Center Stage - 'RANGER RATTLE'")
 public class TeleOp_CompetitionBot extends OpMode {
@@ -62,15 +65,14 @@ public class TeleOp_CompetitionBot extends OpMode {
     public void init_loop() {
     }
 
-    public void start() {
-        Bot.endgameArmRotator.setPosition(0.5);
-    }
+    public void start() {}
 
     public void loop() {
         speedControl();
         //driverControlChanger();
         endgameArm();
         pixelMechanismControl();
+        LEDControl();
 //        planeLauncher();
         drive();
         telemetryOutput();
@@ -184,14 +186,17 @@ public class TeleOp_CompetitionBot extends OpMode {
 
 
         if (gamepad2.a) {
-            Bot.pixelRotatorButThisTimeItsAMotor.setPower(.5);
+            Bot.collectorPosition();
         }
-        else if (gamepad2.y) {
-            Bot.pixelRotatorButThisTimeItsAMotor.setPower(-0.6);
+        /*else if (gamepad2.y) {
+            Bot.hangPosition();
+        }*/
+        else if (gamepad2.b) {
+            Bot.tuckPosition();
         }
-            else {
-                Bot.pixelRotatorButThisTimeItsAMotor.setPower(0);
-            }
+        else if (gamepad2.x){
+            Bot.drivePosition();
+        }
 
 
 
@@ -202,11 +207,11 @@ public class TeleOp_CompetitionBot extends OpMode {
 //       }
 
         if (gamepad2.right_trigger > 0.2) {
-            Bot.linearSlideExtend(viperSlidePower);
+            Bot.linearSlideExtend(viperSlidePower * 1.0);
         } else if (gamepad2.left_trigger > 0.2) {
-            Bot.linearSlideRetract(viperSlidePower * 0.7);
+            Bot.linearSlideRetract(viperSlidePower * 0.6);
         } else {
-            Bot.viperSlideRight.setPower(0);
+            Bot.stopLinearSlide();
         }
 
 //        if (Math.abs(Bot.viperSlideRight.getCurrentPosition()) > viperSlideMaxTicks) {
@@ -243,6 +248,18 @@ public class TeleOp_CompetitionBot extends OpMode {
 
     }
 
+    public void LEDControl () {
+        if (Bot.pixelDistanceSensor1.getDistance(DistanceUnit.INCH) > 0.8) {
+            Bot.pixelLEDNone();
+        }
+        else if (Bot.pixelDistanceSensor1.getDistance(DistanceUnit.INCH) > 0.4 && Bot.pixelDistanceSensor1.getDistance(DistanceUnit.INCH) < 0.8) {
+            Bot.pixelLEDIn();
+        }
+        else if (Bot.pixelDistanceSensor1.getDistance(DistanceUnit.INCH) < 0.4) {
+            Bot.pixelLEDCaptured();
+        }
+    }
+
     public void endgameArm() {
 
         if (gamepad2.right_stick_y < -0.1) {
@@ -253,7 +270,7 @@ public class TeleOp_CompetitionBot extends OpMode {
             Bot.endgameArmStop();
         }
 
-        if (gamepad2.x) {
+        /*if (gamepad2.x) {
            Bot.endgameArmRotator.setDirection(Servo.Direction.REVERSE);
            Bot.endgameArmRotator.setPosition(0.1);
 //        } else if (gamepad2.dpad_right) {
@@ -264,7 +281,7 @@ public class TeleOp_CompetitionBot extends OpMode {
         }
         else if (gamepad2.back) {
             Bot.endgameArmRotator.setPosition(0.5);
-        }
+        }*/
 
 
 //        if (gamepad2.a) {
@@ -317,6 +334,13 @@ public class TeleOp_CompetitionBot extends OpMode {
 
             dashboardTelemetry.addData("worm gear encoder: ", Bot.wormgearRight.getCurrentPosition());
             dashboardTelemetry.update();
+
+            telemetry.addData("Distance 1 (in)",
+                    String.format(Locale.US, "%.02f", Bot.pixelDistanceSensor1.getDistance(DistanceUnit.INCH)));
+
+            telemetry.addData("Distance 2 (in)",
+                    String.format(Locale.US, "%.02f", Bot.pixelDistanceSensor2.getDistance(DistanceUnit.INCH)));
+
             telemetry.update();
         }
 

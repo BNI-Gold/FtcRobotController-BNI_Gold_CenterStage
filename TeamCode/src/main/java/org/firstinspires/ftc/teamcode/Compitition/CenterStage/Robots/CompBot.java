@@ -1,14 +1,19 @@
 package org.firstinspires.ftc.teamcode.Compitition.CenterStage.Robots;
 
+import com.qualcomm.hardware.rev.RevBlinkinLedDriver;
 import com.qualcomm.hardware.rev.RevHubOrientationOnRobot;
 import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.hardware.DcMotorSimple;
+import com.qualcomm.robotcore.hardware.DistanceSensor;
 import com.qualcomm.robotcore.hardware.HardwareMap;
 import com.qualcomm.robotcore.hardware.IMU;
 import com.qualcomm.robotcore.hardware.Servo;
+import com.qualcomm.robotcore.hardware.TouchSensor;
 import com.qualcomm.robotcore.util.ElapsedTime;
 
 import org.firstinspires.ftc.teamcode.Compitition.CenterStage.Drivetrains.MecanumDrive;
+
+import kotlin._Assertions;
 
 public class CompBot extends MecanumDrive {
 
@@ -17,23 +22,29 @@ public class CompBot extends MecanumDrive {
         public HardwareMap hwBot = null;
 
         public DcMotor viperSlideRight = null;
-//        public DcMotor viperSlideLeft = null;
+        public DcMotor viperSlideLeft = null;
         public DcMotor wormgearRight = null;
 //        public DcMotor wormgearLeft = null;
         public DcMotor endgameArm = null;
         public Servo endgameArmRotator = null;
         public Servo pixelRotator = null;
 
-        public DcMotor pixelRotatorButThisTimeItsAMotor = null;
+//        public DcMotor pixelRotatorButThisTimeItsAMotor = null;
 
         public Servo pixelClawLeft = null;
         public Servo pixelClawRight = null;
 
         public DcMotor planeLauncher = null;
+
+        public DistanceSensor pixelDistanceSensor1;
+        public DistanceSensor pixelDistanceSensor2;
         public ElapsedTime currentTime = new ElapsedTime();
 
         public ElapsedTime upTimer = new ElapsedTime();
         public ElapsedTime downTimer = new ElapsedTime();
+
+        RevBlinkinLedDriver blinkinLedDriver;
+        RevBlinkinLedDriver.BlinkinPattern pattern;
 
 
     public IMU imu  = null;
@@ -77,18 +88,18 @@ public class CompBot extends MecanumDrive {
             viperSlideRight.setDirection(DcMotor.Direction.FORWARD);
             viperSlideRight.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
 
-//            viperSlideLeft = hwBot.dcMotor.get("viper_slide_left");
-//            viperSlideLeft.setDirection(DcMotorSimple.Direction.FORWARD);
-//            viperSlideLeft.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
+            viperSlideLeft = hwBot.dcMotor.get("viper_slide_left");
+            viperSlideLeft.setDirection(DcMotorSimple.Direction.FORWARD);
+            viperSlideLeft.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
 
             wormgearRight = hwBot.dcMotor.get("wormgear_right");
             wormgearRight.setDirection(DcMotor.Direction.FORWARD); //check direction b/f testing
             wormgearRight.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
 
 
-            pixelRotatorButThisTimeItsAMotor = hwBot.dcMotor.get("pixel_rotator_motor");
-            pixelRotatorButThisTimeItsAMotor.setDirection(DcMotorSimple.Direction.FORWARD);
-            pixelRotatorButThisTimeItsAMotor.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
+//            pixelRotatorButThisTimeItsAMotor = hwBot.dcMotor.get("pixel_rotator_motor");
+//            pixelRotatorButThisTimeItsAMotor.setDirection(DcMotorSimple.Direction.FORWARD);
+//            pixelRotatorButThisTimeItsAMotor.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
 
 //            wormgearLeft = hwBot.dcMotor.get("wormgear_left");
 //            wormgearLeft.setDirection(DcMotor.Direction.FORWARD);  //check direction b/f testing
@@ -109,7 +120,7 @@ public class CompBot extends MecanumDrive {
 
 
             pixelRotator = hwBot.servo.get("pixel_rotator");
-            pixelRotator.setDirection(Servo.Direction.REVERSE);
+            //pixelRotator.setDirection(Servo.Direction.REVERSE);
 
             pixelClawLeft = hwBot.servo.get("pixel_claw_left");
             pixelClawLeft.setDirection(Servo.Direction.FORWARD);
@@ -139,7 +150,11 @@ public class CompBot extends MecanumDrive {
             imu = hwBot.get(IMU.class, "imu");
             imu.initialize(new IMU.Parameters(orientationOnRobot));
 
+            pixelDistanceSensor1 = hwBot.get(DistanceSensor.class, "pixel_distance_1");
+            pixelDistanceSensor2 = hwBot.get(DistanceSensor.class, "pixel_distance_2");
 
+
+            blinkinLedDriver = hwBot.get(RevBlinkinLedDriver.class, "blinkin");
 
         }
 
@@ -179,9 +194,18 @@ public class CompBot extends MecanumDrive {
 
     public void linearSlideExtend(double power) {
         viperSlideRight.setPower(-Math.abs(power));
+        viperSlideLeft.setPower(-Math.abs(power));
     }
 
-    public void linearSlideRetract(double power) {viperSlideRight.setPower(Math.abs(power));
+    public void linearSlideRetract(double power) {
+            viperSlideRight.setPower(Math.abs(power));
+            viperSlideLeft.setPower(Math.abs(power));
+    }
+
+    public void stopLinearSlide () {
+            viperSlideLeft.setPower(0);
+            viperSlideRight.setPower(0);
+
     }
 
     public void linearSlideExtend(double power, double rotations)  {
@@ -233,18 +257,30 @@ public class CompBot extends MecanumDrive {
             endgameArmRotator.setPosition(position);
     }
 
-    public void rightPixelClawOpen () { pixelClawRight.setPosition(0.478);//378
+    public void rightPixelClawOpen () { pixelClawRight.setPosition(0.948);//378
     }
     public void rightPixelClawClose(){
-        pixelClawRight.setPosition(0.948);
+        pixelClawRight.setPosition(0.478);
     }//848
 
     public void leftPixelClawOpen (){
-        pixelClawLeft.setPosition(0.717);
+        pixelClawLeft.setPosition(0.948);
     }
 
     public void leftPixelClawClose (){
-        pixelClawLeft.setPosition(0.268);
+        pixelClawLeft.setPosition(0.478);
+    }
+
+    public void pixelLEDNone () {
+        blinkinLedDriver.setPattern(RevBlinkinLedDriver.BlinkinPattern.BLACK);
+    }
+
+    public void pixelLEDIn() {
+            blinkinLedDriver.setPattern(RevBlinkinLedDriver.BlinkinPattern.BLUE);
+    }
+
+    public void pixelLEDCaptured() {
+            blinkinLedDriver.setPattern(RevBlinkinLedDriver.BlinkinPattern.GREEN);
     }
 
     public void planeLauncherOn(){
@@ -256,11 +292,11 @@ public class CompBot extends MecanumDrive {
     }
 
     public void collectorPosition(){
-            pixelRotator.setPosition(.5);
+            pixelRotator.setPosition(.055);
     }
 
     public void drivePosition(){
-            pixelRotator.setPosition(.3);
+            pixelRotator.setPosition(.077);
     }
 
     public void autoPlacePosition() {
@@ -273,8 +309,13 @@ public class CompBot extends MecanumDrive {
             pixelRotator.setPosition(.9);
     }
 
+    //Need to determine new hang position based on how hang arm is mounted
     public void hangPosition(){
             pixelRotator.setPosition(.5);
+    }
+
+    public void tuckPosition(){
+            pixelRotator.setPosition(0);
     }
 
 
