@@ -7,7 +7,7 @@ public abstract class AutoRedAlliance extends AutoMain{
 
     public CompBot Bot = new CompBot();
 
-    public TeamPropPositionPipeline_Gold pipeline = new TeamPropPositionPipeline_Gold("Red Alliance", 120);
+    public TeamPropPositionPipeline_Gold pipeline = new TeamPropPositionPipeline_Gold("Red Alliance", 140);
 
     public void CameraDetection () {
         teamPropPosition = pipeline.getAnalysis();
