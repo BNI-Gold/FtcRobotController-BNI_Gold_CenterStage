@@ -27,7 +27,7 @@ public class AutoBlueAudience extends AutoBlueAlliance {
 
 
     @Override
-    public void runOpMode() {
+    public void runOpMode() throws InterruptedException {
         Bot.initRobot(hardwareMap);
         initCamera();
         Bot.setLinearOp(this);
@@ -51,6 +51,7 @@ public class AutoBlueAudience extends AutoBlueAlliance {
         while (opModeIsActive()) {
 
             telemetry.addLine("Robot Autonomous Control Initialized");
+            CameraDetection();
 
 //            Bot.wormgearRight.setPower(0.5);
 //            sleep(1500);
