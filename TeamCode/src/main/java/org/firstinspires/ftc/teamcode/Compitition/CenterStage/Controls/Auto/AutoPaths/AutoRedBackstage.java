@@ -4,9 +4,17 @@ package org.firstinspires.ftc.teamcode.Compitition.CenterStage.Controls.Auto.Aut
 import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
 
 import org.firstinspires.ftc.teamcode.Compitition.CenterStage.Controls.Auto.AutoRedAlliance;
+import org.firstinspires.ftc.vision.tfod.TfodProcessor;
 
 @Autonomous(name = "A - Red Backstage CAM TEST")
 public class AutoRedBackstage extends AutoRedAlliance {
+
+
+    public static final boolean USE_WEBCAM = true;
+
+    public static int oneSecond = 1000;
+
+    public TfodProcessor tFod;
 
     @Override
     public void runOpMode() throws InterruptedException {
