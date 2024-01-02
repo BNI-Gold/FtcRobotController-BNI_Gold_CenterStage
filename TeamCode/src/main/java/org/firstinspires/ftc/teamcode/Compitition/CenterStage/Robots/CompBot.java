@@ -8,12 +8,9 @@ import com.qualcomm.robotcore.hardware.DistanceSensor;
 import com.qualcomm.robotcore.hardware.HardwareMap;
 import com.qualcomm.robotcore.hardware.IMU;
 import com.qualcomm.robotcore.hardware.Servo;
-import com.qualcomm.robotcore.hardware.TouchSensor;
 import com.qualcomm.robotcore.util.ElapsedTime;
 
 import org.firstinspires.ftc.teamcode.Compitition.CenterStage.Drivetrains.MecanumDrive;
-
-import kotlin._Assertions;
 
 public class CompBot extends MecanumDrive {
 
@@ -35,6 +32,8 @@ public class CompBot extends MecanumDrive {
         public Servo pixelClawRight = null;
 
         public DcMotor planeLauncher = null;
+
+        public Servo planeLauncherServo = null;
 
         public DistanceSensor pixelDistanceSensor1;
         public DistanceSensor pixelDistanceSensor2;
@@ -127,6 +126,9 @@ public class CompBot extends MecanumDrive {
 
             pixelClawRight = hwBot.servo.get("pixel_claw_right");
             pixelClawRight.setDirection(Servo.Direction.FORWARD);
+
+            planeLauncherServo = hwBot.servo.get("plane_launcher_servo");
+            planeLauncherServo.setDirection(Servo.Direction.FORWARD);
 //
 //            planeLauncher = hwBot.dcMotor.get("plane_launcher");
 //            planeLauncher.setDirection(DcMotor.Direction.FORWARD);
@@ -283,13 +285,13 @@ public class CompBot extends MecanumDrive {
             blinkinLedDriver.setPattern(RevBlinkinLedDriver.BlinkinPattern.GREEN);
     }
 
-    public void planeLauncherOn(){
-            planeLauncher.setPower(1);
-    }
-
-    public void planeLauncherOff(){
-            planeLauncher.setPower(0);
-    }
+//    public void planeLauncherOn(){
+//            planeLauncherServo.setPower(1);
+//    }
+//
+//    public void planeLauncherOff(){
+//            planeLauncherServo.setPower(0);
+//    }
 
     public void collectorPosition(){
             pixelRotator.setPosition(.055);

@@ -305,16 +305,15 @@ public class TeleOp_CompetitionBot extends OpMode {
 
     }
 
-//    public void planeLauncher() {
-//
-//        if (gamepad2.dpad_down) {
-//            Bot.planeLauncherOn();
-//        } else {
-//
-//            Bot.planeLauncherOff();
-//
-//        }
-//    }
+    public void planeLauncher() {
+
+        if (gamepad2.dpad_down) {
+            Bot.planeLauncherServo.setPosition(1);
+        }
+        else if (gamepad2.dpad_up) {
+            Bot.planeLauncherServo.setPosition(0);
+        }
+    }
         public void telemetryOutput () {
 
             telemetry.addData("Front Left: ", Bot.frontLeftMotor.getCurrentPosition());
