@@ -96,7 +96,7 @@ public class TeamPropPositionPipeline_Gold extends OpenCvPipeline {
 
         // Determine which area equals the max area and place a solid green box over it.
 
-        if (teamAlliance.equals("Blue Alliance")) {
+        if (teamAlliance.equals("BLUE")) {
             if (maxArea == area1) {
                 position = TeamPropPosition.BLUE_LEFT;
                 Imgproc.rectangle(input, region1_pointA, region1_pointB, GREEN, -1);
