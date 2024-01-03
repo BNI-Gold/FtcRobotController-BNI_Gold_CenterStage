@@ -188,9 +188,9 @@ public class TeleOp_CompetitionBot extends OpMode {
         if (gamepad2.a) {
             Bot.collectorPosition();
         }
-        /*else if (gamepad2.y) {
-            Bot.hangPosition();
-        }*/
+       // else if (gamepad2.y) {
+        //   Bot.hangPosition();
+       // }
         else if (gamepad2.b) {
             Bot.tuckPosition();
         }
