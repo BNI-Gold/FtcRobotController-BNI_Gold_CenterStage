@@ -2,30 +2,17 @@ package org.firstinspires.ftc.teamcode.Compitition.CenterStage.Controls.Auto.Aut
 
 import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
 
-import org.firstinspires.ftc.teamcode.Compitition.CenterStage.Controls.Auto.AutoBlueAlliance;
-import org.firstinspires.ftc.teamcode.Compitition.CenterStage.Controls.Auto.AutoMain;
-import org.firstinspires.ftc.teamcode.Compitition.CenterStage.Robots.CompBot;
-import org.firstinspires.ftc.teamcode.Compitition.CenterStage.Vision.TeamPropPosition;
-import org.firstinspires.ftc.vision.VisionPortal;
+import org.firstinspires.ftc.teamcode.Compitition.CenterStage.Controls.Auto.AutoRedAlliance;
 import org.firstinspires.ftc.vision.tfod.TfodProcessor;
 
-@Autonomous (name = "A - Blue Audience-FOR COMP")
-public class AutoBlueAudience extends AutoBlueAlliance {
+@Autonomous(name = "A - RED Audience-FOR COMP")
+public class AutoRedAudience extends AutoRedAlliance {
 
     public static final boolean USE_WEBCAM = true;
 
     public static int oneSecond = 1000;
 
     public TfodProcessor tFod;
-
-
-
-
-
-
-
-
-
     @Override
     public void runOpMode() throws InterruptedException {
         Bot.initRobot(hardwareMap);
@@ -145,4 +132,8 @@ public class AutoBlueAudience extends AutoBlueAlliance {
         telemetry.addData("Encoder Count: ", Bot.frontLeftMotor.getCurrentPosition());
         telemetry.update();
     }
+
+
+
+
 }

@@ -3,7 +3,7 @@ package org.firstinspires.ftc.teamcode.Compitition.CenterStage.Controls.TeleOp;
 import com.acmerobotics.dashboard.FtcDashboard;
 import com.qualcomm.robotcore.eventloop.opmode.OpMode;
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
-import com.qualcomm.robotcore.hardware.Servo;
+import com.qualcomm.robotcore.util.ElapsedTime;
 import com.qualcomm.robotcore.util.Range;
 
 import org.firstinspires.ftc.robotcore.external.Telemetry;
@@ -58,6 +58,8 @@ public class TeleOp_CompetitionBot extends OpMode {
 
     public CompBot Bot = new CompBot();
 
+    ElapsedTime timer = new ElapsedTime();
+
     public void init() {
         Bot.initRobot(hardwareMap);
     }
@@ -73,6 +75,7 @@ public class TeleOp_CompetitionBot extends OpMode {
         endgameArm();
         pixelMechanismControl();
         LEDControl();
+        planeLauncher();
 //        planeLauncher();
         drive();
         telemetryOutput();
@@ -185,6 +188,8 @@ public class TeleOp_CompetitionBot extends OpMode {
 //       }
 
 
+
+
         if (gamepad2.a) {
             Bot.collectorPosition();
         }
@@ -250,14 +255,26 @@ public class TeleOp_CompetitionBot extends OpMode {
 
     public void LEDControl () {
         if (Bot.pixelDistanceSensor1.getDistance(DistanceUnit.INCH) > 0.8) {
-            Bot.pixelLEDNone();
+            Bot.leftPixelLEDNone();
         }
         else if (Bot.pixelDistanceSensor1.getDistance(DistanceUnit.INCH) > 0.4 && Bot.pixelDistanceSensor1.getDistance(DistanceUnit.INCH) < 0.8) {
-            Bot.pixelLEDIn();
+            Bot.leftPixelLEDIn();
         }
         else if (Bot.pixelDistanceSensor1.getDistance(DistanceUnit.INCH) < 0.4) {
-            Bot.pixelLEDCaptured();
+            Bot.leftPixelLEDCaptured();
         }
+
+
+        if (Bot.pixelDistanceSensor2.getDistance(DistanceUnit.INCH ) > 0.8) {
+            Bot.rightPixelLEDNone();
+        }
+        else if (Bot.pixelDistanceSensor2.getDistance(DistanceUnit.INCH) > 0.4 && Bot.pixelDistanceSensor2.getDistance(DistanceUnit.INCH) < 0.8) {
+            Bot.rightPixelLEDIn();
+        }
+        else if (Bot.pixelDistanceSensor2.getDistance(DistanceUnit.INCH) < 0.4) {
+            Bot.rightPixelLEDCaptured();
+        }
+
     }
 
     public void endgameArm() {
@@ -308,10 +325,10 @@ public class TeleOp_CompetitionBot extends OpMode {
     public void planeLauncher() {
 
         if (gamepad2.dpad_down) {
-            Bot.planeLauncherServo.setPosition(1);
+            Bot.planeLauncherServo.setPosition(1);//launch
         }
         else if (gamepad2.dpad_up) {
-            Bot.planeLauncherServo.setPosition(0);
+            Bot.planeLauncherServo.setPosition(0);   //reset
         }
     }
         public void telemetryOutput () {

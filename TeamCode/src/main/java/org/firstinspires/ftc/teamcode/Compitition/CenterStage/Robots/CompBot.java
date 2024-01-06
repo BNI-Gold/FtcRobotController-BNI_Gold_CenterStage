@@ -45,6 +45,9 @@ public class CompBot extends MecanumDrive {
         RevBlinkinLedDriver blinkinLedDriver;
         RevBlinkinLedDriver.BlinkinPattern pattern;
 
+        RevBlinkinLedDriver blinkinLedDriver2;
+        RevBlinkinLedDriver.BlinkinPattern pattern2;
+
 
     public IMU imu  = null;
     public double headingError  = 0;
@@ -156,7 +159,8 @@ public class CompBot extends MecanumDrive {
             pixelDistanceSensor2 = hwBot.get(DistanceSensor.class, "pixel_distance_2");
 
 
-            blinkinLedDriver = hwBot.get(RevBlinkinLedDriver.class, "blinkin");
+            blinkinLedDriver = hwBot.get(RevBlinkinLedDriver.class, "left_light");
+            blinkinLedDriver2 = hwBot.get(RevBlinkinLedDriver.class, "right_light");
 
         }
 
@@ -242,7 +246,7 @@ public class CompBot extends MecanumDrive {
         wormgearRight.setPower(-Math.abs(power));
     }
 
-    public void rightWormgearStop (double power) {wormgearRight.setPower(0);}
+    public void rightWormgearStop() {wormgearRight.setPower(0);}
 
     public void endgameArmExtend(){
         endgameArm.setPower(-1);
@@ -273,16 +277,26 @@ public class CompBot extends MecanumDrive {
         pixelClawLeft.setPosition(0.478);
     }
 
-    public void pixelLEDNone () {
+    public void leftPixelLEDNone() {
         blinkinLedDriver.setPattern(RevBlinkinLedDriver.BlinkinPattern.BLACK);
     }
 
-    public void pixelLEDIn() {
+    public void leftPixelLEDIn() {
             blinkinLedDriver.setPattern(RevBlinkinLedDriver.BlinkinPattern.BLUE);
     }
 
-    public void pixelLEDCaptured() {
+    public void leftPixelLEDCaptured() {
             blinkinLedDriver.setPattern(RevBlinkinLedDriver.BlinkinPattern.GREEN);
+    }
+
+    public void rightPixelLEDNone(){
+            blinkinLedDriver2.setPattern(RevBlinkinLedDriver.BlinkinPattern.BLACK);
+    }
+    public void rightPixelLEDIn(){
+            blinkinLedDriver2.setPattern(RevBlinkinLedDriver.BlinkinPattern.BLUE);
+    }
+    public void rightPixelLEDCaptured(){
+            blinkinLedDriver2.setPattern(RevBlinkinLedDriver.BlinkinPattern.GREEN);
     }
 
 //    public void planeLauncherOn(){
@@ -294,11 +308,11 @@ public class CompBot extends MecanumDrive {
 //    }
 
     public void collectorPosition(){
-            pixelRotator.setPosition(.055);
+            pixelRotator.setPosition(.4079);
     }
 
     public void drivePosition(){
-            pixelRotator.setPosition(.077);
+            pixelRotator.setPosition(.55);
     }
 
     public void autoPlacePosition() {
@@ -317,7 +331,7 @@ public class CompBot extends MecanumDrive {
     }
 
     public void tuckPosition(){
-            pixelRotator.setPosition(0);
+            pixelRotator.setPosition(0.15);
     }
 
 

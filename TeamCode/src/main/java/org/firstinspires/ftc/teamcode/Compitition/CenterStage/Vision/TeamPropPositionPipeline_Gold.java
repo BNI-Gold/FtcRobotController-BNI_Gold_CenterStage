@@ -52,7 +52,7 @@ public class TeamPropPositionPipeline_Gold extends OpenCvPipeline {
     void inputToCbCr(Mat input) {
         Imgproc.cvtColor(input, YCrCb, Imgproc.COLOR_RGB2YCrCb);
 
-        if (teamAlliance.equals("Blue Alliance")) {
+        if (teamAlliance.equals("BLUE")) {
             Core.extractChannel(YCrCb, chan, 2); //Index 2 is Cb Channel (Blue)
         } else {
             Core.extractChannel(YCrCb, chan, 1); //Index 1 is Cr Channel (Red)
