@@ -31,11 +31,11 @@ public abstract class AutoBlueAlliance extends AutoMain{
             Bot.rotateLeft(0.3,1.1);
             sleep(1000);
             Bot.leftPixelClawOpen();
-            sleep(500);
-            Bot.leftPixelClawClose();
-            sleep(500);
+            sleep(1500);
             Bot.rotateRight(0.3,1.1);
             sleep(1000);
+            Bot.leftPixelClawClose();
+            sleep(500);
             Bot.driveBack(0.5,1.7);
             sleep(500);
             Bot.driveForward(0.5,0.2);
@@ -43,13 +43,13 @@ public abstract class AutoBlueAlliance extends AutoMain{
             Bot.strafeLeft(0.5,5);
         }
         else if (teamPropPosition == TeamPropPosition.BLUE_MIDDLE) {
-            Bot.driveForward(0.5,0.55);
+            Bot.driveForward(0.5,0.65);
             sleep(1000);
             Bot.leftPixelClawOpen();
+            sleep(1500);
+            Bot.driveBack(0.5,1.7);
             sleep(500);
             Bot.leftPixelClawClose();
-            sleep(500);
-            Bot.driveBack(0.5,1.7);
             sleep(500);
             Bot.driveForward(0.5,0.2);
             sleep(1000);
@@ -61,10 +61,10 @@ public abstract class AutoBlueAlliance extends AutoMain{
             Bot.driveForward(0.3,0.3);
             sleep(500);
             Bot.leftPixelClawOpen();
+            sleep(1500);
+            Bot.driveBack(0.5,0.4);
             sleep(500);
             Bot.leftPixelClawClose();
-            sleep(500);
-            Bot.driveBack(0.5,0.4);
             sleep(500);
             Bot.rotateLeft(0.3,1.3);
             sleep(1000);
@@ -92,26 +92,27 @@ public abstract class AutoBlueAlliance extends AutoMain{
             Bot.rotateLeft(0.3,1.1);
             sleep(1000);
             Bot.leftPixelClawOpen();
-            sleep(500);
-            Bot.leftPixelClawClose();
-            sleep(500);
+            sleep(1500);
             Bot.rotateRight(0.3,1.1);
             sleep(1000);
+            Bot.leftPixelClawClose();
+            sleep(500);
+
 
 
 
         }
         else if (teamPropPosition == TeamPropPosition.BLUE_MIDDLE) {
-            Bot.driveForward(0.5,0.55);
+            Bot.driveForward(0.5,0.65);
             sleep(1000);
             Bot.leftPixelClawOpen();
-            sleep(500);
+            sleep(1500);
             Bot.leftPixelClawClose();
             sleep(500);
-            Bot.strafeRight(0.5,2.3);
-            sleep(500);
-            Bot.driveForward(0.5,2.7);
-            sleep(500);
+//            Bot.strafeRight(0.5,2.3);
+//            sleep(500);
+//            Bot.driveForward(0.5,2.7);
+//            sleep(500);
 
         }
         else if (teamPropPosition == TeamPropPosition.BLUE_RIGHT){
@@ -120,10 +121,10 @@ public abstract class AutoBlueAlliance extends AutoMain{
             Bot.driveForward(0.3,0.3);
             sleep(500);
             Bot.leftPixelClawOpen();
+            sleep(1500);
+            Bot.driveBack(0.5,0.4);
             sleep(500);
             Bot.leftPixelClawClose();
-            sleep(500);
-            Bot.driveBack(0.5,0.4);
             sleep(500);
             Bot.rotateLeft(0.3,1.3);
             sleep(1000);

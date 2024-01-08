@@ -24,7 +24,9 @@ public class CompBot extends MecanumDrive {
 //        public DcMotor wormgearLeft = null;
         public DcMotor endgameArm = null;
         public Servo endgameArmRotator = null;
-        public Servo pixelRotator = null;
+        public Servo pixelRotatorRight = null;
+
+        public Servo pixelRotatorLeft = null;
 
 //        public DcMotor pixelRotatorButThisTimeItsAMotor = null;
 
@@ -121,8 +123,10 @@ public class CompBot extends MecanumDrive {
 //            endgameArmRotator.setDirection(Servo.Direction.FORWARD);
 
 
-            pixelRotator = hwBot.servo.get("pixel_rotator");
+            pixelRotatorRight = hwBot.servo.get("pixel_rotator");
             //pixelRotator.setDirection(Servo.Direction.REVERSE);
+            pixelRotatorLeft = hwBot.servo.get("pixel_rotator_left");
+            pixelRotatorLeft.setDirection(Servo.Direction.REVERSE);
 
             pixelClawLeft = hwBot.servo.get("pixel_claw_left");
             pixelClawLeft.setDirection(Servo.Direction.FORWARD);
@@ -308,30 +312,33 @@ public class CompBot extends MecanumDrive {
 //    }
 
     public void collectorPosition(){
-            pixelRotator.setPosition(.4079);
+            pixelRotatorRight.setPosition(.4569);
+            pixelRotatorLeft.setPosition(.4569);
     }
 
     public void drivePosition(){
-            pixelRotator.setPosition(.55);
+            pixelRotatorRight.setPosition(.55);
+            pixelRotatorLeft.setPosition(.55);
     }
 
     public void autoPlacePosition() {
 
-            pixelRotator.setPosition(0.7);
+            pixelRotatorRight.setPosition(0.7);
 
     }
 
     public void automousPosition(){
-            pixelRotator.setPosition(.9);
+            pixelRotatorRight.setPosition(.9);
     }
 
     //Need to determine new hang position based on how hang arm is mounted
     public void hangPosition(){
-            pixelRotator.setPosition(.5);
+            pixelRotatorRight.setPosition(.5);
     }
 
     public void tuckPosition(){
-            pixelRotator.setPosition(0.15);
+            pixelRotatorRight.setPosition(0.15);
+            pixelRotatorLeft.setPosition(0.15);
     }
 
 

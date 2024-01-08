@@ -65,7 +65,7 @@ public class AutoBlueAudience extends AutoBlueAlliance {
             sleep(800);
             Bot.rotateLeft(0.2,0.15);
             CameraDetection();
-            Bot. pixelRotator.setPosition(.526);
+            Bot. drivePosition();
 
             Bot.rightWormgearUp(1);
             sleep(850);

@@ -65,7 +65,7 @@ public class AutoBlueBackstage extends AutoBlueAlliance {
 
             sleep(800);
            CameraDetection();
-            Bot. pixelRotator.setPosition(.526);
+            Bot. drivePosition();
 
            Bot.rightWormgearUp(1);
             sleep(850);

@@ -1,13 +1,14 @@
 package org.firstinspires.ftc.teamcode.Compitition.CenterStage.Controls.Auto.AutoPaths.BackdropAuto;
 
 import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
+import com.qualcomm.robotcore.eventloop.opmode.Disabled;
 import com.qualcomm.robotcore.hardware.DcMotorSimple;
 
 import org.firstinspires.ftc.teamcode.Compitition.CenterStage.Controls.Auto.AutoMain;
 import org.firstinspires.ftc.teamcode.Compitition.CenterStage.Robots.CompBot;
 import org.firstinspires.ftc.vision.VisionPortal;
 import org.firstinspires.ftc.vision.tfod.TfodProcessor;
-
+@Disabled
 @Autonomous (name = "AAATTT - Blue Backstage Auto - INIT TEST")
 public class AutoBlueBackstagePlace extends AutoMain {
 
