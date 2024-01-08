@@ -6,7 +6,7 @@ import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 import com.qualcomm.robotcore.hardware.Servo;
 import com.qualcomm.robotcore.util.Range;
 
-@TeleOp(name = "Grabber Arm - USE FOR CENTERSTAGE")
+@TeleOp(name = "TWO SERVO CALABRATE")
 
 public class twoServo_Callibrate extends OpMode {
 
@@ -28,9 +28,10 @@ public class twoServo_Callibrate extends OpMode {
 
     @Override
     public void init () {
-        grabberArmLeft = hardwareMap.servo.get("pixel_claw_left");
+        grabberArmLeft = hardwareMap.servo.get("pixelRotatorRight");
         grabberArmLeft.setPosition(grabberLeftArmPos);
-        grabberArmRight = hardwareMap.servo.get("pixel_claw_right");
+        grabberArmRight = hardwareMap.servo.get("pixelRotatorLeft");
+        grabberArmRight.setDirection(Servo.Direction.REVERSE);
         grabberArmRight.setPosition((grabberRightArmPos));
     }
 
