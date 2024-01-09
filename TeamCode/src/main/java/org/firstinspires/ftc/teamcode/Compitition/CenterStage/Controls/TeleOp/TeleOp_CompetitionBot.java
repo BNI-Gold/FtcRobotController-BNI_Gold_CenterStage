@@ -71,12 +71,10 @@ public class TeleOp_CompetitionBot extends OpMode {
 
     public void loop() {
         speedControl();
-        //driverControlChanger();
         endgameArm();
         pixelMechanismControl();
         LEDControl();
         planeLauncher();
-//        planeLauncher();
         drive();
         telemetryOutput();
     }
