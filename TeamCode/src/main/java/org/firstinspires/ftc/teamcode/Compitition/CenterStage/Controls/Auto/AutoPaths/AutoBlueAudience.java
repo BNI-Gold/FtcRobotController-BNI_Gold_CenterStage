@@ -56,22 +56,23 @@ public class AutoBlueAudience extends AutoBlueAlliance {
 
 
 
-            Bot.driveForward(0.5,0.7);
-            sleep(1000);
-            Bot.rightWormgearDown(1);
-            sleep(700);
-            Bot.rightWormgearStop();
+//            Bot.driveForward(0.5,0.7);
+//            sleep(1000);
+//            Bot.rightWormgearDown(1);
+//            sleep(700);
+//            Bot.rightWormgearStop();
 
-            sleep(800);
-            Bot.rotateLeft(0.2,0.15);
+//            sleep(800);
+//            Bot.rotateLeft(0.2,0.15);
             CameraDetection();
-            Bot. drivePosition();
-
+            Bot.drivePosition();
+            Bot.driveForward(0.5,0.2);
+            sleep(50);
             Bot.rightWormgearUp(1);
-            sleep(850);
+            sleep(300); //800
             Bot.rightWormgearStop();
-            sleep(1000);
-            Bot.driveForward(0.5,1.1);
+//            sleep(1000);
+            Bot.driveForward(0.5,1.3); //1.1
             sleep(1000);
             // Bot.driveForward(0.5,0.5);
             spikeMarkPlaceFar();

@@ -38,11 +38,15 @@ public ProgrammingBot Bot = new ProgrammingBot();
 
             telemetry.addLine("Robot Autonomous Control Initialized");
 
-            Bot.driveForward(0.5,2.0);
-            sleep(500);
+//            Bot.driveForward(0.5,2.0);
+//            telemetryUpdate("Driving Forward");
+
+            sleep(2000);
             Bot.gyroCorrection(0.5,90);
-            sleep(50);
+            telemetryUpdate("Gyro Correct Target Angle : 90");
+            sleep(2000);
             Bot.gyroCorrection(0.5,-179);
+            telemetryUpdate("Gyro Correct Target Angle : -179");
 
 
 
