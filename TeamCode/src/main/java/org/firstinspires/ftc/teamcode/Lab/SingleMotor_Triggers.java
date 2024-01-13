@@ -66,5 +66,6 @@ public class SingleMotor_Triggers extends OpMode {
         telemetry.addData("Right Trigger Value: ", gamepad1.right_trigger);
         telemetry.addData("Left Trigger Value: ", gamepad1.left_trigger);
         telemetry.addData("POWER: ", power);
+        telemetry.addData("encoder pos:",motor.getCurrentPosition());
     }
 }

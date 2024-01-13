@@ -44,6 +44,8 @@ public class CompBot extends MecanumDrive {
         public Servo pixelClawLeft = null;
         public Servo pixelClawRight = null;
 
+        public static final double TICKS_PER_ROTATION_WORMGEAR = 384.5;
+
         public DcMotor planeLauncher = null;
 
         public Servo planeLauncherServo = null;
@@ -614,6 +616,26 @@ public class CompBot extends MecanumDrive {
         linearSlideStop();
     }
 
+    public void rightWormgearUp (double power, double rotations) {
+        double ticks = rotations * TICKS_PER_ROTATION_WORMGEAR;
+        wormgearRight.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
+        wormgearRight.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
+        while (Math.abs(wormgearRight.getCurrentPosition()) < ticks && LinearOp.opModeIsActive()) {
+           rightWormgearDown(power);
+        }
+        rightWormgearStop();
+    }
+
+    public void rightWormgearDown(double power, double rotations){
+        double ticks = rotations * TICKS_PER_ROTATION_WORMGEAR;
+        wormgearRight.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
+        wormgearRight.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
+        while (Math.abs(wormgearRight.getCurrentPosition()) < ticks && LinearOp.opModeIsActive()) {
+            rightWormgearUp(power);
+        }
+        rightWormgearStop();
+    }
+
     public void linearSlideStop() {
         viperSlideRight.setPower(0);
     }
@@ -688,13 +710,13 @@ public class CompBot extends MecanumDrive {
 //    }
 
     public void collectorPosition(){
-            pixelRotatorRight.setPosition(.4569);
-            pixelRotatorLeft.setPosition(.4569);
+            pixelRotatorRight.setPosition(.437);
+            pixelRotatorLeft.setPosition(.437);
     }
 
     public void drivePosition(){
-            pixelRotatorRight.setPosition(.55);
-            pixelRotatorLeft.setPosition(.55);
+            pixelRotatorRight.setPosition(.5);
+            pixelRotatorLeft.setPosition(.5);
     }
 
     public void autoPlacePosition() {
@@ -713,8 +735,8 @@ public class CompBot extends MecanumDrive {
     }
 
     public void tuckPosition(){
-            pixelRotatorRight.setPosition(0.15);
-            pixelRotatorLeft.setPosition(0.15);
+            pixelRotatorRight.setPosition(0.283);
+            pixelRotatorLeft.setPosition(0.283);
     }
 
 
