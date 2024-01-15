@@ -49,6 +49,7 @@ public class AutoBlueAudience extends AutoBlueAlliance {
 
         while (opModeIsActive()) {
 
+
             telemetry.addLine("Robot Autonomous Control Initialized");
 
 
@@ -64,18 +65,23 @@ public class AutoBlueAudience extends AutoBlueAlliance {
 
 //            sleep(800);
 //            Bot.rotateLeft(0.2,0.15);
+
             CameraDetection();
-            Bot.drivePosition();
-            Bot.driveForward(0.5,0.2);
-            sleep(50);
-            Bot.rightWormgearUp(1);
-            sleep(300); //800
-            Bot.rightWormgearStop();
-//            sleep(1000);
-            Bot.driveForward(0.5,1.3); //1.1
             sleep(1000);
+            Bot.drivePosition();
+            sleep(100);
+//            Bot.rightWormgearDown(.5, +800);
+            sleep(100);
+//            Bot.driveForward(0.5,0.2);
+//            sleep(100); //800
+            Bot.driveForward(0.5,1.5); //1.1
+            sleep(100);
             // Bot.driveForward(0.5,0.5);
             spikeMarkPlaceFar();
+
+            sleep(100);
+            driveToBackdropFar();
+
 
 
 
@@ -124,6 +130,7 @@ public class AutoBlueAudience extends AutoBlueAlliance {
 
             telemetry.addLine("Robot Autonomous Control Complete");
 
+            sleep(1000);
             requestOpModeStop();
         }
 

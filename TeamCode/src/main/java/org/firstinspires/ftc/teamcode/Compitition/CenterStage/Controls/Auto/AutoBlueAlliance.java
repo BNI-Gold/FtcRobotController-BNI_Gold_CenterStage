@@ -27,6 +27,7 @@ public abstract class AutoBlueAlliance extends AutoMain{
 
 
     public void spikeMarkPlaceClose(){
+
         if (teamPropPosition == TeamPropPosition.BLUE_LEFT) {
             Bot.rotateLeft(0.3,1.1);
             sleep(1000);
@@ -88,16 +89,17 @@ public abstract class AutoBlueAlliance extends AutoMain{
 
 
     public void spikeMarkPlaceFar(){
+        teamPropPosition = TeamPropPosition.BLUE_MIDDLE;
         if (teamPropPosition == TeamPropPosition.BLUE_LEFT) {
-            Bot.rotateLeft(0.3,1.1);
+            Bot.rotateLeft(0.3,1.3);
             sleep(1000);
-            Bot.driveForward(0.5,0.45);
+            Bot.driveForward(0.5,0.2);
             sleep(500);
             Bot.leftPixelClawOpen();
             sleep(1500);
             Bot.driveBack(0.5,0.45);
-            sleep(50);
-            Bot.rotateRight(0.3,0.8);
+            sleep(100);
+            Bot.rotateRight(0.3,1.4);
             sleep(1000);
             Bot.leftPixelClawClose();
             sleep(500);
@@ -107,32 +109,81 @@ public abstract class AutoBlueAlliance extends AutoMain{
 
         }
         else if (teamPropPosition == TeamPropPosition.BLUE_MIDDLE) {
+
+//              CONNOR'S CODE
             Bot.driveForward(0.5,0.8);
             sleep(1000);
             Bot.leftPixelClawOpen();
             sleep(1500);
             Bot.leftPixelClawClose();
             sleep(500);
-//            Bot.strafeRight(0.5,2.3);
-//            sleep(500);
-//            Bot.driveForward(0.5,2.7);
-//            sleep(500);
+
+
+
+
+/*  DUVAL'S CODE
+            Bot.strafeRight(0.5, 0.3);
+            sleep(100);
+            Bot.rotateRight(0.3,1.2);
+            sleep(1000);
+            Bot.driveForward(0.5, 1.8);
+            sleep(100);
+            Bot.rotateLeft(0.3, 2);
+            sleep(100);
+
+ */
 
         }
         else if (teamPropPosition == TeamPropPosition.BLUE_RIGHT){
-            Bot.rotateRight(0.3,1.3);
+            Bot.strafeRight(0.5, 0.3);
+            sleep(100);
+            Bot.rotateRight(0.3,1.2);
             sleep(1000);
-            Bot.driveForward(0.3,0.3);
-            sleep(500);
+            Bot.driveForward(0.3,0.2);
+            sleep(100);
+            Bot.driveBack(0.3,0.1);
+            sleep(100);
             Bot.leftPixelClawOpen();
             sleep(1500);
-            Bot.driveBack(0.5,0.4);
+//            Bot.driveBack(0.3,0.1);
             sleep(500);
             Bot.leftPixelClawClose();
             sleep(500);
-            Bot.rotateLeft(0.3,1.3);
-            sleep(1000);
 
+
+
+
+        }
+    }
+
+    public void driveToBackdropFar () {
+        if (teamPropPosition == TeamPropPosition.BLUE_LEFT) {
+            Bot.driveForward(.5, 3.25);
+            sleep(200);
+            Bot.rotateLeft(.4, 2.5);
+            sleep(100);
+            Bot.driveForward(.5, 6);
+            sleep(100);
+
+        }
+        else if (teamPropPosition == TeamPropPosition.BLUE_MIDDLE) {
+
+
+        }
+        else if (teamPropPosition == TeamPropPosition.BLUE_RIGHT){
+            Bot.rotateLeft(0.3,0.7);
+            sleep(100);
+            Bot.driveBack(0.3, 0.2);
+            sleep(100);
+            Bot.rotateLeft(0.3, 0.575);
+            sleep(100);
+            Bot.strafeLeft(0.5, 0.2);
+            sleep(100);
+            Bot.driveForward(0.5, 3.2);
+            sleep(100);
+            Bot.rotateLeft(.4, 2.2);
+            sleep(100);
+            Bot.driveForward(0.5, 6);
 
 
         }

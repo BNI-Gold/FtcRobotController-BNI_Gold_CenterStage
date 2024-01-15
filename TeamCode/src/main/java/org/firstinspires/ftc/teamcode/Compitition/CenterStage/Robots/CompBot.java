@@ -616,8 +616,8 @@ public class CompBot extends MecanumDrive {
         linearSlideStop();
     }
 
-    public void rightWormgearUp (double power, double rotations) {
-        double ticks = rotations * TICKS_PER_ROTATION_WORMGEAR;
+    public void rightWormgearUp (double power, double ticks) {
+//        double ticks = rotations * TICKS_PER_ROTATION_WORMGEAR;
         wormgearRight.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
         wormgearRight.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
         while (Math.abs(wormgearRight.getCurrentPosition()) < ticks && LinearOp.opModeIsActive()) {
@@ -626,8 +626,8 @@ public class CompBot extends MecanumDrive {
         rightWormgearStop();
     }
 
-    public void rightWormgearDown(double power, double rotations){
-        double ticks = rotations * TICKS_PER_ROTATION_WORMGEAR;
+    public void rightWormgearDown(double power, double ticks){
+//        double ticks = rotations * TICKS_PER_ROTATION_WORMGEAR;
         wormgearRight.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
         wormgearRight.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
         while (Math.abs(wormgearRight.getCurrentPosition()) < ticks && LinearOp.opModeIsActive()) {

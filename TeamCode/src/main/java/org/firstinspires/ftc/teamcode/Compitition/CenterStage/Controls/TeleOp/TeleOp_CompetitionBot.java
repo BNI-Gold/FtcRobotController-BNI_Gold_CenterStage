@@ -331,6 +331,8 @@ public class TeleOp_CompetitionBot extends OpMode {
     }
         public void telemetryOutput () {
 
+            dashboardTelemetry.addData("worm gear encoder: ", Bot.wormgearRight.getCurrentPosition());
+
             telemetry.addData("Front Left: ", Bot.frontLeftMotor.getCurrentPosition());
             telemetry.addData("Front Right: ", Bot.frontRightMotor.getCurrentPosition());
             telemetry.addData("Rear Left: ", Bot.rearLeftMotor.getCurrentPosition());
@@ -346,7 +348,7 @@ public class TeleOp_CompetitionBot extends OpMode {
             dashboardTelemetry.addData("REAR LEFT: ", Bot.rearLeftMotor.getPower());
             dashboardTelemetry.addData("REAR RIGHT: ", Bot.rearRightMotor.getPower());
 
-            dashboardTelemetry.addData("worm gear encoder: ", Bot.wormgearRight.getCurrentPosition());
+//            dashboardTelemetry.addData("worm gear encoder: ", Bot.wormgearRight.getCurrentPosition());
             dashboardTelemetry.update();
 
             telemetry.addData("Distance 1 (in)",
