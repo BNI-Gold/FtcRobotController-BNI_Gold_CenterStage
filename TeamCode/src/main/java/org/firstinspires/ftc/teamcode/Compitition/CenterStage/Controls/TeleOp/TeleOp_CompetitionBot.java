@@ -3,6 +3,7 @@ package org.firstinspires.ftc.teamcode.Compitition.CenterStage.Controls.TeleOp;
 import com.acmerobotics.dashboard.FtcDashboard;
 import com.qualcomm.robotcore.eventloop.opmode.OpMode;
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
+import com.qualcomm.robotcore.hardware.TouchSensor;
 import com.qualcomm.robotcore.util.ElapsedTime;
 import com.qualcomm.robotcore.util.Range;
 
@@ -62,6 +63,7 @@ public class TeleOp_CompetitionBot extends OpMode {
 
     public void init() {
         Bot.initRobot(hardwareMap);
+
     }
 
     public void init_loop() {
@@ -69,12 +71,15 @@ public class TeleOp_CompetitionBot extends OpMode {
 
     public void start() {}
 
+
+
     public void loop() {
         speedControl();
         endgameArm();
         pixelMechanismControl();
         LEDControl();
         planeLauncher();
+        limitSwitch();
         drive();
         telemetryOutput();
     }
@@ -317,6 +322,17 @@ public class TeleOp_CompetitionBot extends OpMode {
 //            }
 //        }
 
+
+    }
+
+
+    public void limitSwitch(){
+        if (Bot.magSensor1.isPressed()) {
+            telemetry.addLine("Airplane Launcher - In Position");
+        }
+        else {
+            telemetry.addLine("Airplane Launcher - NOT In Position");
+        }
 
     }
 

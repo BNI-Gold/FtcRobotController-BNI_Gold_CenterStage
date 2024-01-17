@@ -58,6 +58,7 @@ public class SensorTouch extends LinearOpMode {
         // get a reference to our touchSensor object.
         touchSensor = hardwareMap.get(TouchSensor.class, "sensor_touch");
 
+
         // wait for the start button to be pressed.
         waitForStart();
 

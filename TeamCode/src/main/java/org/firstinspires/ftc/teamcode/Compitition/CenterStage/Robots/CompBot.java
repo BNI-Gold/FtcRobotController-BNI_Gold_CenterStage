@@ -12,6 +12,7 @@ import com.qualcomm.robotcore.hardware.DistanceSensor;
 import com.qualcomm.robotcore.hardware.HardwareMap;
 import com.qualcomm.robotcore.hardware.IMU;
 import com.qualcomm.robotcore.hardware.Servo;
+import com.qualcomm.robotcore.hardware.TouchSensor;
 import com.qualcomm.robotcore.util.ElapsedTime;
 import com.qualcomm.robotcore.util.Range;
 
@@ -22,6 +23,7 @@ import org.firstinspires.ftc.robotcore.external.navigation.AxesReference;
 import org.firstinspires.ftc.robotcore.external.navigation.Orientation;
 import org.firstinspires.ftc.robotcore.external.navigation.YawPitchRollAngles;
 import org.firstinspires.ftc.teamcode.Compitition.CenterStage.Drivetrains.MecanumDrive;
+import org.firstinspires.ftc.teamcode.Lab.Sensor_MagneticSensor;
 
 public class CompBot extends MecanumDrive {
 
@@ -43,6 +45,8 @@ public class CompBot extends MecanumDrive {
 
         public Servo pixelClawLeft = null;
         public Servo pixelClawRight = null;
+
+         public   TouchSensor magSensor1;
 
         public static final double TICKS_PER_ROTATION_WORMGEAR = 384.5;
 
@@ -86,6 +90,12 @@ public class CompBot extends MecanumDrive {
             frontRightMotor = hwBot.dcMotor.get("front_right_motor");
             rearLeftMotor = hwBot.dcMotor.get("rear_left_motor");
             rearRightMotor = hwBot.dcMotor.get("rear_right_motor");
+
+
+            magSensor1 = hwBot.get (TouchSensor.class, "MagSensor1");
+
+
+
 
             frontLeftMotor.setDirection(DcMotor.Direction.FORWARD);
             rearLeftMotor.setDirection(DcMotor.Direction.FORWARD);
