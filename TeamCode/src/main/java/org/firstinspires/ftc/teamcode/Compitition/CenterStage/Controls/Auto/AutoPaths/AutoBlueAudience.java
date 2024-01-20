@@ -67,7 +67,7 @@ public class AutoBlueAudience extends AutoBlueAlliance {
 //            Bot.rotateLeft(0.2,0.15);
 
             CameraDetection();
-            sleep(1000);
+            sleep(100);
             Bot.drivePosition();
             sleep(100);
 //            Bot.rightWormgearDown(.5, +800);
@@ -81,6 +81,7 @@ public class AutoBlueAudience extends AutoBlueAlliance {
 
             sleep(100);
             driveToBackdropFar();
+            placeOnBackdrop();
 
 
 

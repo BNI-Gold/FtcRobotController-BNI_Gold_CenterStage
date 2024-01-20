@@ -730,9 +730,8 @@ public class CompBot extends MecanumDrive {
     }
 
     public void autoPlacePosition() {
-
-            pixelRotatorRight.setPosition(0.7);
-
+            pixelRotatorRight.setPosition(0.585);
+            pixelRotatorLeft.setPosition((0.585));
     }
 
     public void automousPosition(){

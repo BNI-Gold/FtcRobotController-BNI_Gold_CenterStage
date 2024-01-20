@@ -79,7 +79,6 @@ public class TeleOp_CompetitionBot extends OpMode {
         pixelMechanismControl();
         LEDControl();
         planeLauncher();
-        limitSwitch();
         drive();
         telemetryOutput();
     }
@@ -326,15 +325,7 @@ public class TeleOp_CompetitionBot extends OpMode {
     }
 
 
-    public void limitSwitch(){
-        if (Bot.magSensor1.isPressed()) {
-            telemetry.addLine("Airplane Launcher - In Position");
-        }
-        else {
-            telemetry.addLine("Airplane Launcher - NOT In Position");
-        }
 
-    }
 
     public void planeLauncher() {
 
@@ -347,7 +338,10 @@ public class TeleOp_CompetitionBot extends OpMode {
     }
         public void telemetryOutput () {
 
-            dashboardTelemetry.addData("worm gear encoder: ", Bot.wormgearRight.getCurrentPosition());
+            telemetry.addData("worm gear encoder: ", Bot.wormgearRight.getCurrentPosition());
+
+            telemetry.addData("viperslide encoder RIGHT", Bot.viperSlideRight.getCurrentPosition());
+            telemetry.addData("viperslide encoder LEFT", Bot.viperSlideLeft.getCurrentPosition());
 
             telemetry.addData("Front Left: ", Bot.frontLeftMotor.getCurrentPosition());
             telemetry.addData("Front Right: ", Bot.frontRightMotor.getCurrentPosition());
@@ -372,6 +366,13 @@ public class TeleOp_CompetitionBot extends OpMode {
 
             telemetry.addData("Distance 2 (in)",
                     String.format(Locale.US, "%.02f", Bot.pixelDistanceSensor2.getDistance(DistanceUnit.INCH)));
+
+            if (Bot.magSensor1.isPressed()) {
+                telemetry.addLine("Airplane Launcher - In Position");
+            }
+            else {
+                telemetry.addLine("Airplane Launcher - NOT In Position");
+            }
 
             telemetry.update();
         }
