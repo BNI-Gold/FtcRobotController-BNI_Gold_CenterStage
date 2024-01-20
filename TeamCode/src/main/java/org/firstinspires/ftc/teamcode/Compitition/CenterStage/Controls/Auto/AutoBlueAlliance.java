@@ -90,7 +90,7 @@ public abstract class AutoBlueAlliance extends AutoMain{
 
 
     public void spikeMarkPlaceFar(){
-        teamPropPosition = TeamPropPosition.BLUE_MIDDLE;
+        teamPropPosition = TeamPropPosition.BLUE_RIGHT;
         if (teamPropPosition == TeamPropPosition.BLUE_LEFT) {
             Bot.rotateLeft(0.3,1.3);
             sleep(1000);
@@ -180,18 +180,13 @@ public abstract class AutoBlueAlliance extends AutoMain{
 
     public void driveToBackdropFar () {
         if (teamPropPosition == TeamPropPosition.BLUE_LEFT) {
-            Bot.driveForward(.5, 3.3);
+            Bot.driveForward(.5, 3.1);
             sleep(200);
-            Bot.rotateLeft(.4, 2.4);
+            Bot.rotateLeft(.4, 2.3);
             sleep(100);
-            Bot.driveForward(.5, 6);
+            Bot.driveForward(.5, 7);
             sleep(100);
-            Bot.rotateLeft(.4,.2);
-            sleep(100);
-            Bot.strafeLeft(.4,0.2);
-            sleep(100);
-            Bot.driveForward(.5,2.5);
-            sleep(100);
+
 
 
         }
@@ -211,9 +206,9 @@ public abstract class AutoBlueAlliance extends AutoMain{
             sleep(100);
             Bot.strafeLeft(0.5, 0.2);
             sleep(100);
-            Bot.driveForward(0.5, 3.35);
+            Bot.driveForward(0.5, 3.15);
             sleep(100);
-            Bot.rotateLeft(.4, 2.45);
+            Bot.rotateLeft(.4, 2.25);
             sleep(100);
             Bot.driveForward(0.5, 6);
             sleep(100);
@@ -225,35 +220,66 @@ public abstract class AutoBlueAlliance extends AutoMain{
 
     public void placeOnBackdrop(){
         if (teamPropPosition == TeamPropPosition.BLUE_LEFT) {
+            Bot.driveForward(.4,1.7);
+            sleep(100);
+            Bot.rightWormgearUp(1,480);
+            sleep(100);
+            Bot.strafeLeft(.5,3.85);
+            sleep(100);
+            Bot.autoPlacePosition();
+            sleep(100);
+            Bot.driveForward(.25);
+            sleep(360);
+            Bot.stopMotors();
+            sleep(100);
+            Bot.linearSlideExtend(.8);
+            sleep(25);
+            Bot.stopLinearSlide();
+            sleep(300);
+
+            Bot.rightPixelClawClose();
+            sleep(1500);
+            Bot.driveBack(.5);
+            sleep(300);
+            Bot.stopMotors();
+            Bot.rightPixelClawOpen();
+            sleep(100);
+//            Bot.linearSlideRetract(.8);
+//            sleep(100);
+            Bot.strafeRight(.5,3.6);
+            sleep(100);
+            Bot.driveForward(.5,.7);
+
 
         }
         else if (teamPropPosition == TeamPropPosition.BLUE_MIDDLE) {
             Bot.driveForward(.4,1.25);
             sleep(100);
-            Bot.rightWormgearUp(1,350);
+            Bot.rightWormgearUp(1,480);
             sleep(100);
-            Bot.strafeLeft(.5,3.3);
+            Bot.strafeLeft(.5,3.35);
             sleep(100);
             Bot.autoPlacePosition();
             sleep(100);
             Bot.driveForward(.25);
-            sleep(100);
+            sleep(360);
             Bot.stopMotors();
             sleep(1000);
-//            Bot.linearSlideExtend(.8);
-//            sleep(100);
-//            Bot.linearSlideStop();
-//            sleep(300);
-            Bot.rightPixelClawOpen();
+            Bot.linearSlideExtend(.8);
+            sleep(25);
+            Bot.stopLinearSlide();
+            sleep(300);
+
+            Bot.rightPixelClawClose();
             sleep(1500);
             Bot.driveBack(.5);
-            sleep(100);
+            sleep(300);
             Bot.stopMotors();
-            Bot.rightPixelClawClose();
+            Bot.rightPixelClawOpen();
             sleep(100);
 //            Bot.linearSlideRetract(.8);
-//            sleep(200);
-            Bot.strafeRight(.5,3);
+//            sleep(100);
+            Bot.strafeRight(.5,3.1);
             sleep(100);
             Bot.driveForward(.5,.7);
 
@@ -261,6 +287,35 @@ public abstract class AutoBlueAlliance extends AutoMain{
         }
 
         else if (teamPropPosition == TeamPropPosition.BLUE_RIGHT) {
+            Bot.driveForward(.4,2);
+            sleep(100);
+            Bot.rightWormgearUp(1,480);
+            sleep(100);
+            Bot.strafeLeft(.5,2.39);
+            sleep(100);
+            Bot.autoPlacePosition();
+            sleep(100);
+            Bot.driveForward(.25);
+            sleep(560);
+            Bot.stopMotors();
+
+            Bot.linearSlideExtend(.8);
+            sleep(25);
+            Bot.stopLinearSlide();
+            sleep(300);
+
+            Bot.rightPixelClawClose();
+            sleep(1500);
+            Bot.driveBack(.5);
+            sleep(300);
+            Bot.stopMotors();
+            Bot.rightPixelClawOpen();
+            sleep(100);
+//            Bot.linearSlideRetract(.8);
+//            sleep(100);
+            Bot.strafeRight(.5,2.1);
+            sleep(100);
+            Bot.driveForward(.5,.7);
 
         }
     }

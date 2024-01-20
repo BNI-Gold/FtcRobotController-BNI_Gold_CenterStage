@@ -613,7 +613,7 @@ public class CompBot extends MecanumDrive {
         while (Math.abs(viperSlideRight.getCurrentPosition()) < ticks && LinearOp.opModeIsActive()) {
             linearSlideExtend(power);
         }
-        linearSlideStop();
+        stopLinearSlide();
     }
 
     public void linearSlideRetract(double power, double rotations) {
@@ -623,7 +623,7 @@ public class CompBot extends MecanumDrive {
         while (Math.abs(viperSlideRight.getCurrentPosition())< ticks && LinearOp.opModeIsActive()) {
             linearSlideRetract(power);
         }
-        linearSlideStop();
+        stopLinearSlide();
     }
 
     public void rightWormgearUp (double power, double ticks) {
@@ -646,9 +646,10 @@ public class CompBot extends MecanumDrive {
         rightWormgearStop();
     }
 
-    public void linearSlideStop() {
-        viperSlideRight.setPower(0);
-    }
+//    public void linearSlideStop() {
+//        viperSlideRight.setPower(0);
+//        viperSlideLeft.setPower(0);
+//    }
 
     public void rightWormgearUp(double power) {
         wormgearRight.setPower(Math.abs(power));
