@@ -13,6 +13,15 @@ public class AutoRedAudience extends AutoRedAlliance {
     public static int oneSecond = 1000;
 
     public TfodProcessor tFod;
+
+
+
+
+
+
+
+
+
     @Override
     public void runOpMode() throws InterruptedException {
         Bot.initRobot(hardwareMap);
@@ -36,6 +45,7 @@ public class AutoRedAudience extends AutoRedAlliance {
 
         while (opModeIsActive()) {
 
+
             telemetry.addLine("Robot Autonomous Control Initialized");
 
 
@@ -43,25 +53,32 @@ public class AutoRedAudience extends AutoRedAlliance {
 
 
 
-            Bot.driveForward(0.5,0.7);
-            sleep(1000);
-            Bot.rightWormgearDown(1);
-            sleep(700);
-            Bot.rightWormgearStop();
+//            Bot.driveForward(0.5,0.7);
+//            sleep(1000);
+//            Bot.rightWormgearDown(1);
+//            sleep(700);
+//            Bot.rightWormgearStop();
 
-            sleep(800);
-            Bot.rotateLeft(0.2,0.15);
+//            sleep(800);
+//            Bot.rotateLeft(0.2,0.15);
+
             CameraDetection();
-            Bot. drivePosition();
-
-            Bot.rightWormgearUp(1);
-            sleep(850);
-            Bot.rightWormgearStop();
-            sleep(1000);
-            Bot.driveForward(0.5,1.1);
-            sleep(1000);
+            sleep(100);
+            Bot.drivePosition();
+            sleep(100);
+//            Bot.rightWormgearDown(.5, +800);
+            sleep(100);
+//            Bot.driveForward(0.5,0.2);
+//            sleep(100); //800
+            Bot.driveForward(0.5,1.5); //1.1
+            sleep(100);
             // Bot.driveForward(0.5,0.5);
             spikeMarkPlaceFar();
+
+            sleep(100);
+            driveToBackdropFar();
+            placeOnBackdrop();
+
 
 
 
@@ -110,6 +127,7 @@ public class AutoRedAudience extends AutoRedAlliance {
 
             telemetry.addLine("Robot Autonomous Control Complete");
 
+            sleep(1000);
             requestOpModeStop();
         }
 
@@ -132,7 +150,6 @@ public class AutoRedAudience extends AutoRedAlliance {
         telemetry.addData("Encoder Count: ", Bot.frontLeftMotor.getCurrentPosition());
         telemetry.update();
     }
-
 
 
 
