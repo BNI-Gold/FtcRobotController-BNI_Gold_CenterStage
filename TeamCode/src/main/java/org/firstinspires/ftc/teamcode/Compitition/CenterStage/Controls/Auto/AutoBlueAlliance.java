@@ -90,7 +90,7 @@ public abstract class AutoBlueAlliance extends AutoMain{
 
 
     public void spikeMarkPlaceFar(){
-        teamPropPosition = TeamPropPosition.BLUE_RIGHT;
+//        teamPropPosition = TeamPropPosition.BLUE_RIGHT;
         if (teamPropPosition == TeamPropPosition.BLUE_LEFT) {
             Bot.rotateLeft(0.3,1.3);
             sleep(1000);
@@ -138,8 +138,8 @@ public abstract class AutoBlueAlliance extends AutoMain{
             Bot.driveForward(.4,.355);
             sleep(100);
             Bot.rotateRight(.4,.2);
-            sleep(100);
-            Bot.collectorPosition();
+//            sleep(100);
+//            Bot.collectorPosition();
             sleep(250);
             Bot.leftPixelClawOpen();
             sleep(500);
