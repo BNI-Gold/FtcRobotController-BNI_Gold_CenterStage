@@ -259,9 +259,11 @@ public abstract class AutoBlueAlliance extends AutoMain{
         else if (teamPropPosition == TeamPropPosition.BLUE_MIDDLE) {
             Bot.driveForward(.4,1.25);
             sleep(100);
-            Bot.rightWormgearUp(1,480);
+            Bot.rightWormgearUp(1,490);
             sleep(100);
-            Bot.strafeLeft(.5,3.45);
+            Bot.rotateLeft(0.3,.2);
+            sleep(500);
+            Bot.strafeLeft(.5,4.15);
             sleep(100);
             Bot.autoPlacePosition();
             sleep(100);
@@ -269,8 +271,6 @@ public abstract class AutoBlueAlliance extends AutoMain{
             sleep(950);
             Bot.stopMotors();
             sleep(1000);
-            Bot.rotateLeft(0.3,.2);
-            sleep(500);
             Bot.linearSlideExtend(.8);
             sleep(265);
             Bot.stopLinearSlide();
