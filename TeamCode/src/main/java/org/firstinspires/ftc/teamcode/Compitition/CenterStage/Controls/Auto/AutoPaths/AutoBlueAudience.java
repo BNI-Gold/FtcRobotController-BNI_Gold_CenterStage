@@ -71,7 +71,7 @@ public class AutoBlueAudience extends AutoBlueAlliance {
             sleep(100);
             Bot.drivePosition();
             sleep(100);
-            Bot.rightWormgearDown(.5, 500);
+            Bot.rightWormgearDown(.5, 790);
             sleep(100);
 //            Bot.driveForward(0.5,0.2);
 //            sleep(100); //800

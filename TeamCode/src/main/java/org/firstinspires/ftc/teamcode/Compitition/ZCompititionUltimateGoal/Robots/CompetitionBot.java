@@ -35,7 +35,7 @@ import org.openftc.easyopencv.OpenCvCameraRotation;
 import org.openftc.easyopencv.OpenCvPipeline;
 
 
-public class CompetitionBot extends MecanumDrive {
+public class  CompetitionBot extends MecanumDrive {
 
     //hardware constructors
     public HardwareMap hwBot  =  null;

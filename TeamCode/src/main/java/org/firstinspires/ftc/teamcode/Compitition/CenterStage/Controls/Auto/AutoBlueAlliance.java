@@ -94,11 +94,11 @@ public abstract class AutoBlueAlliance extends AutoMain{
         if (teamPropPosition == TeamPropPosition.BLUE_LEFT) {
             Bot.rotateLeft(0.3,1.3);
             sleep(1000);
-            Bot.driveForward(0.5,0.2);
+            Bot.driveForward(0.5,0.3);
             sleep(500);
             Bot.leftPixelClawOpen();
             sleep(1500);
-            Bot.driveBack(0.5,0.45);
+            Bot.driveBack(0.5,0.55);
             sleep(100);
             Bot.rotateRight(0.3,1.3);
             sleep(1000);
@@ -138,8 +138,10 @@ public abstract class AutoBlueAlliance extends AutoMain{
             Bot.driveForward(.4,.355);
             sleep(100);
             Bot.rotateRight(.4,.2);
-//            sleep(100);
-//            Bot.collectorPosition();
+            sleep(100);
+            Bot.driveForward(0.3,.1);
+            sleep(100);
+            Bot.collectorPosition();
             sleep(250);
             Bot.leftPixelClawOpen();
             sleep(500);
@@ -147,9 +149,9 @@ public abstract class AutoBlueAlliance extends AutoMain{
             sleep(50);
             Bot.leftPixelClawClose();
             sleep(100);
-            Bot.driveBack(.5,.25);
+            Bot.driveBack(.5,.26);
             sleep(100);
-            Bot.rotateRight(.5,1.25);
+            Bot.rotateRight(.5,1.15);
             sleep(100);
 
 
@@ -180,9 +182,9 @@ public abstract class AutoBlueAlliance extends AutoMain{
 
     public void driveToBackdropFar () {
         if (teamPropPosition == TeamPropPosition.BLUE_LEFT) {
-            Bot.driveForward(.5, 3.1);
+            Bot.driveForward(.5, 3.25);
             sleep(200);
-            Bot.rotateLeft(.4, 2.3);
+            Bot.rotateLeft(.4, 2.5);
             sleep(100);
             Bot.driveForward(.5, 7);
             sleep(100);
@@ -204,11 +206,11 @@ public abstract class AutoBlueAlliance extends AutoMain{
             sleep(100);
             Bot.rotateLeft(0.3, 0.575);
             sleep(100);
-            Bot.strafeLeft(0.5, 0.2);
+            Bot.strafeLeft(0.5, 0.345);
             sleep(100);
             Bot.driveForward(0.5, 3.15);
             sleep(100);
-            Bot.rotateLeft(.4, 2.25);
+            Bot.rotateLeft(.4, 2.45);
             sleep(100);
             Bot.driveForward(0.5, 6);
             sleep(100);
@@ -224,16 +226,18 @@ public abstract class AutoBlueAlliance extends AutoMain{
             sleep(100);
             Bot.rightWormgearUp(1,480);
             sleep(100);
-            Bot.strafeLeft(.5,3.85);
+            Bot.rotateLeft(0.3,0.2);
+            sleep(500);
+            Bot.strafeLeft(.5,4.35);
             sleep(100);
             Bot.autoPlacePosition();
             sleep(100);
             Bot.driveForward(.25);
-            sleep(360);
+            sleep(850);
             Bot.stopMotors();
             sleep(100);
             Bot.linearSlideExtend(.8);
-            sleep(25);
+            sleep(265);
             Bot.stopLinearSlide();
             sleep(300);
 
@@ -257,16 +261,18 @@ public abstract class AutoBlueAlliance extends AutoMain{
             sleep(100);
             Bot.rightWormgearUp(1,480);
             sleep(100);
-            Bot.strafeLeft(.5,3.35);
+            Bot.strafeLeft(.5,3.45);
             sleep(100);
             Bot.autoPlacePosition();
             sleep(100);
             Bot.driveForward(.25);
-            sleep(360);
+            sleep(950);
             Bot.stopMotors();
             sleep(1000);
+            Bot.rotateLeft(0.3,.2);
+            sleep(500);
             Bot.linearSlideExtend(.8);
-            sleep(25);
+            sleep(265);
             Bot.stopLinearSlide();
             sleep(300);
 
@@ -291,16 +297,18 @@ public abstract class AutoBlueAlliance extends AutoMain{
             sleep(100);
             Bot.rightWormgearUp(1,480);
             sleep(100);
-            Bot.strafeLeft(.5,2.39);
+            Bot.rotateLeft(0.3,0.2);
+            sleep(500);
+            Bot.strafeLeft(.5,2.385);
             sleep(100);
             Bot.autoPlacePosition();
             sleep(100);
             Bot.driveForward(.25);
-            sleep(560);
+            sleep(900);
             Bot.stopMotors();
 
             Bot.linearSlideExtend(.8);
-            sleep(25);
+            sleep(265);
             Bot.stopLinearSlide();
             sleep(300);
 

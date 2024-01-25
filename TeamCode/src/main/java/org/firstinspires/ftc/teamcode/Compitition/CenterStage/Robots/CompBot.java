@@ -24,6 +24,7 @@ import org.firstinspires.ftc.robotcore.external.navigation.Orientation;
 import org.firstinspires.ftc.robotcore.external.navigation.YawPitchRollAngles;
 import org.firstinspires.ftc.teamcode.Compitition.CenterStage.Drivetrains.MecanumDrive;
 import org.firstinspires.ftc.teamcode.Lab.Sensor_MagneticSensor;
+import org.firstinspires.ftc.teamcode.Lab.SensorTouchTester;
 
 public class CompBot extends MecanumDrive {
 
@@ -47,6 +48,7 @@ public class CompBot extends MecanumDrive {
         public Servo pixelClawRight = null;
 
          public   TouchSensor magSensor1;
+         public TouchSensor touchLimit1;
 
         public static final double TICKS_PER_ROTATION_WORMGEAR = 384.5;
 
@@ -93,6 +95,7 @@ public class CompBot extends MecanumDrive {
 
 
             magSensor1 = hwBot.get (TouchSensor.class, "MagSensor1");
+            touchLimit1 = hwBot.get (TouchSensor.class, "TouchLimit1");
 
 
 
@@ -731,8 +734,8 @@ public class CompBot extends MecanumDrive {
     }
 
     public void autoPlacePosition() {
-            pixelRotatorRight.setPosition(0.585);
-            pixelRotatorLeft.setPosition((0.585));
+            pixelRotatorRight.setPosition(0.555);
+            pixelRotatorLeft.setPosition((0.555));
     }
 
     public void automousPosition(){

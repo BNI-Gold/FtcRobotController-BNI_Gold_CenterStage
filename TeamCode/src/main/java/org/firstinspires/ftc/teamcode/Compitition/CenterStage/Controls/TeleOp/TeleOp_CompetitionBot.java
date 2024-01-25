@@ -227,9 +227,9 @@ public class TeleOp_CompetitionBot extends OpMode {
 //            Bot.viperSlideRight.setPower(0);
 //        }
         if (gamepad2.left_stick_y < -0.1) {
-            Bot.rightWormgearDown(wormgearPower * 0.9);
-        } else if (gamepad2.left_stick_y > 0.1) {
-            Bot.rightWormgearUp(wormgearPower * 0.6);
+            Bot.rightWormgearDown(wormgearPower * 1);
+        } else if (gamepad2.left_stick_y > 0.1 && !Bot.magSensor1.isPressed()) {
+            Bot.rightWormgearUp(wormgearPower * 0.7);
         } else {
             Bot.wormgearRight.setPower(0);
         }
@@ -372,6 +372,12 @@ public class TeleOp_CompetitionBot extends OpMode {
             }
             else {
                 telemetry.addLine("Airplane Launcher - NOT In Position");
+            }
+
+            if (Bot.touchLimit1.isPressed()) {
+                telemetry.addLine("Downward movement disabled");
+            } else {
+                telemetry.addLine("Downward movement enabled");
             }
 
             telemetry.update();
