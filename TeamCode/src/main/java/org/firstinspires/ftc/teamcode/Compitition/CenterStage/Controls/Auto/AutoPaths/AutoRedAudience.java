@@ -67,7 +67,7 @@ public class AutoRedAudience extends AutoRedAlliance {
             sleep(100);
             Bot.drivePosition();
             sleep(100);
-            Bot.rightWormgearDown(.5, 790);
+            Bot.rightWormgearDown(.5, 770);
             sleep(100);
 //            Bot.driveForward(0.5,0.2);
 //            sleep(100); //800

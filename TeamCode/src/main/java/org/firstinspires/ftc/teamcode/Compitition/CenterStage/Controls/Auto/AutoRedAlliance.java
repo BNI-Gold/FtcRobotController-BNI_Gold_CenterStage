@@ -191,10 +191,10 @@ public abstract class AutoRedAlliance extends AutoMain{
             sleep(100);
             Bot.driveBack(0.3, 0.2);
             sleep(100);
-            Bot.rotateRight(0.3, 0.25);
+            Bot.rotateRight(0.3, 0.24);
             sleep(100);
 //            Key line to keep robot in between purple pixel & truss
-            Bot.strafeRight(0.5, 0.55); //0.5
+            Bot.strafeRight(0.5, 0.52); //0.5
             sleep(100);
             Bot.driveForward(0.5, 3.3);
             sleep(100);
@@ -207,8 +207,10 @@ public abstract class AutoRedAlliance extends AutoMain{
         }
         else if (teamPropPosition == TeamPropPosition.RED_MIDDLE) {
             Bot.driveForward(.5,8.4);
-            sleep(50);
-            //   Bot.strafeLeft(.4,.3);
+            sleep(100);
+            Bot.strafeRight(0.5, 0.4); // added to keep on "red" side
+            sleep(100);
+//            Bot.strafeLeft(.4,.3);
 
 
         }
@@ -216,12 +218,14 @@ public abstract class AutoRedAlliance extends AutoMain{
 
 
 
-            Bot.driveForward(.5, 3.3);
+            Bot.driveForward(.5, 3.25);
             sleep(200);
             Bot.rotateRight(.4, 2.2);
             sleep(100);
             Bot.driveForward(.5, 7);
             sleep(100);
+            Bot.strafeRight(0.5, 0.4); // added to keep on "red" side
+
 
 
         }
@@ -232,7 +236,7 @@ public abstract class AutoRedAlliance extends AutoMain{
         if (teamPropPosition == TeamPropPosition.RED_LEFT) {
             Bot.driveForward(.4,2);
             sleep(100);
-            Bot.rightWormgearUp(1,550);  //480
+            Bot.rightWormgearUp(1,600);  //480
             sleep(100);
             Bot.strafeRight(.5,1.7);
             sleep(100);
@@ -242,16 +246,64 @@ public abstract class AutoRedAlliance extends AutoMain{
             sleep(750);
             Bot.stopMotors();
 
+
             Bot.linearSlideExtend(.8);
-            sleep(125);
+            sleep(140);  //125
+            Bot.stopLinearSlide();
+            sleep(300);
+//            Make robot turn more so yellow against backdrop
+            Bot.rotateLeft(.2);
+            sleep(200);
+            Bot.stopMotors();
+            sleep(100);
+            Bot.driveForward(.25);
+            sleep(200);
+            Bot.stopMotors();
+            sleep(200);
+            Bot.rightPixelClawClose();
+            sleep(1500);
+            Bot.driveBack(1);
+            sleep(300);
+            Bot.stopMotors();
+            sleep(100);
+            Bot.rotateLeft(.5, .2);  //FULL SPeed reverse causes robot to end at angle.  To fix
+            sleep(100);
+            Bot.rightPixelClawOpen();
+            sleep(100);
+//            Bot.linearSlideRetract(.8);
+//            sleep(100);
+            Bot.strafeLeft(.5,1.8);
+            sleep(100);
+            Bot.driveForward(.5,.7);
+
+
+        }
+        else if (teamPropPosition == TeamPropPosition.RED_MIDDLE) {
+            Bot.driveForward(.4,1.2);
+            sleep(100);
+            Bot.rightWormgearUp(1,550);  // 480
+            sleep(100);
+            Bot.strafeRight(.5,1.9);   // 1.65
+            sleep(100);
+            Bot.autoPlacePosition();
+            sleep(100);
+            Bot.driveForward(.35);
+            sleep(900);
+            Bot.stopMotors();
+            sleep(1000);
+            Bot.linearSlideExtend(.8);
+            sleep(200);
             Bot.stopLinearSlide();
             sleep(300);
 
             Bot.rightPixelClawClose();
             sleep(1500);
-            Bot.driveBack(.5);
+            Bot.driveBack(1);  //0.5
             sleep(300);
             Bot.stopMotors();
+            sleep(100);
+            Bot.rotateLeft(.5, .2);  //FULL SPeed reverse causes robot to end at angle.  To fix
+            sleep(100);
             Bot.rightPixelClawOpen();
             sleep(100);
 //            Bot.linearSlideRetract(.8);
@@ -262,51 +314,18 @@ public abstract class AutoRedAlliance extends AutoMain{
 
 
         }
-        else if (teamPropPosition == TeamPropPosition.RED_MIDDLE) {
-            Bot.driveForward(.4,1.25);
-            sleep(100);
-            Bot.rightWormgearUp(1,480);
-            sleep(100);
-            Bot.strafeRight(.5,1.65);
-            sleep(100);
-            Bot.autoPlacePosition();
-            sleep(100);
-            Bot.driveForward(.25);
-            sleep(800);
-            Bot.stopMotors();
-            sleep(1000);
-            Bot.linearSlideExtend(.8);
-            sleep(200);
-            Bot.stopLinearSlide();
-            sleep(300);
-
-            Bot.rightPixelClawClose();
-            sleep(1500);
-            Bot.driveBack(.5);
-            sleep(300);
-            Bot.stopMotors();
-            Bot.rightPixelClawOpen();
-            sleep(100);
-//            Bot.linearSlideRetract(.8);
-//            sleep(100);
-            Bot.strafeLeft(.5,3.1);
-            sleep(100);
-            Bot.driveForward(.5,.7);
-
-
-        }
 
         else if (teamPropPosition == TeamPropPosition.RED_RIGHT) {
             Bot.driveForward(.4,1.7);
             sleep(100);
-            Bot.rightWormgearUp(1,480);
+            Bot.rightWormgearUp(1,550); //480
             sleep(100);
-            Bot.strafeRight(.5,3.6);
+            Bot.strafeRight(.5,3.1);
             sleep(100);
             Bot.autoPlacePosition();
             sleep(100);
-            Bot.driveForward(.25);
-            sleep(850);
+            Bot.driveForward(.35);
+            sleep(950);
             Bot.stopMotors();
             sleep(100);
             Bot.linearSlideExtend(.8);
@@ -316,9 +335,12 @@ public abstract class AutoRedAlliance extends AutoMain{
 
             Bot.rightPixelClawClose();
             sleep(1500);
-            Bot.driveBack(.5);
+            Bot.driveBack(1.0);
             sleep(300);
             Bot.stopMotors();
+            sleep(100);
+            Bot.rotateLeft(.5, .2);  //FULL SPeed reverse causes robot to end at angle.  To fix
+            sleep(100);
             Bot.rightPixelClawOpen();
             sleep(100);
 //            Bot.linearSlideRetract(.8);
