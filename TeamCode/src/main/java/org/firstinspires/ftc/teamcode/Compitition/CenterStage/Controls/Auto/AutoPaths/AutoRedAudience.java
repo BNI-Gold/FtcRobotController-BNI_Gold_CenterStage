@@ -78,6 +78,7 @@ public class AutoRedAudience extends AutoRedAlliance {
 
             sleep(100);
             driveToBackdropFar();
+            sleep(100);
             placeOnBackdrop();
 
 

@@ -193,7 +193,8 @@ public abstract class AutoRedAlliance extends AutoMain{
             sleep(100);
             Bot.rotateRight(0.3, 0.25);
             sleep(100);
-            Bot.strafeRight(0.5, 0.5);
+//            Key line to keep robot in between purple pixel & truss
+            Bot.strafeRight(0.5, 0.55); //0.5
             sleep(100);
             Bot.driveForward(0.5, 3.3);
             sleep(100);
@@ -201,6 +202,7 @@ public abstract class AutoRedAlliance extends AutoMain{
             sleep(100);
             Bot.driveForward(0.5, 6);
             sleep(100);
+            Bot.strafeRight(0.5, 0.4); // added to keep on "red" side
 
         }
         else if (teamPropPosition == TeamPropPosition.RED_MIDDLE) {
@@ -230,7 +232,7 @@ public abstract class AutoRedAlliance extends AutoMain{
         if (teamPropPosition == TeamPropPosition.RED_LEFT) {
             Bot.driveForward(.4,2);
             sleep(100);
-            Bot.rightWormgearUp(1,480);
+            Bot.rightWormgearUp(1,550);  //480
             sleep(100);
             Bot.strafeRight(.5,1.7);
             sleep(100);
