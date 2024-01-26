@@ -279,6 +279,30 @@ public class TeleOp_CompetitionBot extends OpMode {
 
     }
 
+
+    public void pixelPickupTelemetry(){
+        if (Bot.pixelDistanceSensor1.getDistance(DistanceUnit.INCH) > 0.8) {
+            telemetry.addLine("LEFTPixelSensor - NO PIXEL");
+        }
+        else if (Bot.pixelDistanceSensor1.getDistance(DistanceUnit.INCH) > 0.4 && Bot.pixelDistanceSensor1.getDistance(DistanceUnit.INCH) < 0.8) {
+            telemetry.addLine("LEFTPixelSensor - GRABBING PIXEL");
+        }
+        else if (Bot.pixelDistanceSensor1.getDistance(DistanceUnit.INCH) < 0.4) {
+            telemetry.addLine("LEFTPixelSensor - PIXEL GRABBED");
+        }
+
+        if (Bot.pixelDistanceSensor2.getDistance(DistanceUnit.INCH ) > 0.8) {
+            telemetry.addLine("RIGHTPixelSensor - NO PIXEL");
+        }
+        else if (Bot.pixelDistanceSensor2.getDistance(DistanceUnit.INCH) > 0.4 && Bot.pixelDistanceSensor2.getDistance(DistanceUnit.INCH) < 0.8) {
+            telemetry.addLine("RIGHTPixelSensor - GRABBING PIXEL");
+        }
+        else if (Bot.pixelDistanceSensor2.getDistance(DistanceUnit.INCH) < 0.4) {
+            telemetry.addLine("RIGHTPixelSensor - PIXEL GRABBED");
+        }
+
+    }
+
     public void endgameArm() {
 
         if (gamepad2.right_stick_y < -0.1) {
