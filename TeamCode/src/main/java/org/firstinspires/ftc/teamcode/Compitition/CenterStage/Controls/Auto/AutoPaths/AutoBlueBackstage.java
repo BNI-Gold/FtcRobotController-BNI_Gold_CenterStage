@@ -27,14 +27,14 @@ public class AutoBlueBackstage extends AutoBlueAlliance {
     @Override
     public void runOpMode() {
         Bot.initRobot(hardwareMap);
-       initCamera();
+        initCamera();
         Bot.setLinearOp(this);
+
         startObjectDetectionPipeline(pipeline);
-
-//        startObjectDetectionPipeline(pipeline);
-//        telemetry.addLine("Starting Vision Pipeline");
-
-
+        telemetry.addLine("Starting Vision Pipeline");
+//
+//        Bot.rightWormgearUp(1, 544);
+//        sleep(100);
         Bot.tuckPosition();
 
         telemetry.addLine("Robot Awaiting Start Procedure");
@@ -57,24 +57,19 @@ public class AutoBlueBackstage extends AutoBlueAlliance {
 //            sleep(1000);
 //            Bot.driveForward(0.5,3.0);
 //            sleep(1000);
-            Bot.driveForward(0.5,0.7);
-            sleep(1000);
-            Bot.rightWormgearDown(1);
-            sleep(700);
-            Bot.rightWormgearStop();
-
-            sleep(800);
-           CameraDetection();
-            Bot. drivePosition();
-
-           Bot.rightWormgearUp(1);
-            sleep(850);
-            Bot.rightWormgearStop();
-           sleep(1000);
-           Bot.driveForward(0.5,1.1);
-           sleep(1000);
+            CameraDetection();
+            sleep(100);
+            Bot.drivePosition();
+            sleep(100);
+            Bot.rightWormgearDown(.5, 790);
+            sleep(100);
+//            Bot.driveForward(0.5,0.2);
+//            sleep(100); //800
+            Bot.driveForward(0.5,1.5); //1.1
+            sleep(100);
           // Bot.driveForward(0.5,0.5);
             spikeMarkPlaceClose();
+            sleep(100);
 
 
 

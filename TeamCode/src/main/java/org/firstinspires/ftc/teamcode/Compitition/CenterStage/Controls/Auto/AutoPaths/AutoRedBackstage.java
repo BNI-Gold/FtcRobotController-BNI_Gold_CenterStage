@@ -24,8 +24,10 @@ public class AutoRedBackstage extends AutoRedAlliance {
 
         startObjectDetectionPipeline(pipeline);
         telemetry.addLine("Starting Vision Pipeline");
+//
+//        Bot.rightWormgearUp(1, 544);
+//        sleep(100);
         Bot.tuckPosition();
-
 
         telemetry.addLine("Robot Awaiting Start Procedure");
         telemetry.update();
@@ -42,25 +44,19 @@ public class AutoRedBackstage extends AutoRedAlliance {
 
 
 
-            Bot.driveForward(0.5,0.7);
-            sleep(1000);
-            Bot.rightWormgearDown(1);
-            sleep(700);
-            Bot.rightWormgearStop();
-
-            sleep(800);
             CameraDetection();
-            Bot. drivePosition();
-
-            Bot.rightWormgearUp(1);
-            sleep(850);
-            Bot.rightWormgearStop();
-            sleep(1000);
-            Bot.driveForward(0.5,1.1);
-            sleep(1000);
+            sleep(100);
+            Bot.drivePosition();
+            sleep(100);
+            Bot.rightWormgearDown(.5, 790);
+            sleep(100);
+//            Bot.driveForward(0.5,0.2);
+//            sleep(100); //800
+            Bot.driveForward(0.5,1.5); //1.1
+            sleep(100);
             // Bot.driveForward(0.5,0.5);
             spikeMarkPlaceClose();
-
+            sleep(100);
 
 
 
