@@ -79,6 +79,7 @@ public class TeleOp_CompetitionBot extends OpMode {
         pixelMechanismControl();
         LEDControl();
         planeLauncher();
+        pixelPickupTelemetry();
         drive();
         telemetryOutput();
     }
@@ -281,23 +282,17 @@ public class TeleOp_CompetitionBot extends OpMode {
 
 
     public void pixelPickupTelemetry(){
-        if (Bot.pixelDistanceSensor1.getDistance(DistanceUnit.INCH) > 0.8) {
-            telemetry.addLine("LEFTPixelSensor - NO PIXEL");
+        if (Bot.pixelDistanceSensor1.getDistance(DistanceUnit.INCH) > 0.75) {
+            telemetry.addLine("LEFTPixelSensor - NO PIXEL/GRABBING");
         }
-        else if (Bot.pixelDistanceSensor1.getDistance(DistanceUnit.INCH) > 0.4 && Bot.pixelDistanceSensor1.getDistance(DistanceUnit.INCH) < 0.8) {
-            telemetry.addLine("LEFTPixelSensor - GRABBING PIXEL");
-        }
-        else if (Bot.pixelDistanceSensor1.getDistance(DistanceUnit.INCH) < 0.4) {
+        else if (Bot.pixelDistanceSensor1.getDistance(DistanceUnit.INCH) < 0.75) {
             telemetry.addLine("LEFTPixelSensor - PIXEL GRABBED");
         }
 
-        if (Bot.pixelDistanceSensor2.getDistance(DistanceUnit.INCH ) > 0.8) {
-            telemetry.addLine("RIGHTPixelSensor - NO PIXEL");
+        if (Bot.pixelDistanceSensor2.getDistance(DistanceUnit.INCH ) > 0.75) {
+            telemetry.addLine("RIGHTPixelSensor - NO PIXEL/GRABBING");
         }
-        else if (Bot.pixelDistanceSensor2.getDistance(DistanceUnit.INCH) > 0.4 && Bot.pixelDistanceSensor2.getDistance(DistanceUnit.INCH) < 0.8) {
-            telemetry.addLine("RIGHTPixelSensor - GRABBING PIXEL");
-        }
-        else if (Bot.pixelDistanceSensor2.getDistance(DistanceUnit.INCH) < 0.4) {
+        else if (Bot.pixelDistanceSensor2.getDistance(DistanceUnit.INCH) < 0.75) {
             telemetry.addLine("RIGHTPixelSensor - PIXEL GRABBED");
         }
 
@@ -384,12 +379,6 @@ public class TeleOp_CompetitionBot extends OpMode {
 
 //            dashboardTelemetry.addData("worm gear encoder: ", Bot.wormgearRight.getCurrentPosition());
             dashboardTelemetry.update();
-
-            telemetry.addData("Distance 1 (in)",
-                    String.format(Locale.US, "%.02f", Bot.pixelDistanceSensor1.getDistance(DistanceUnit.INCH)));
-
-            telemetry.addData("Distance 2 (in)",
-                    String.format(Locale.US, "%.02f", Bot.pixelDistanceSensor2.getDistance(DistanceUnit.INCH)));
 
             if (Bot.magSensor1.isPressed()) {
                 telemetry.addLine("Airplane Launcher - In Position");

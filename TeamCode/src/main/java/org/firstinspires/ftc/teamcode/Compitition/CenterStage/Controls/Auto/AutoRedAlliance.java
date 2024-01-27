@@ -272,7 +272,7 @@ public abstract class AutoRedAlliance extends AutoMain{
             sleep(100);
 //            Bot.linearSlideRetract(.8);
 //            sleep(100);
-            Bot.strafeLeft(.5,1.8);
+            Bot.strafeLeft(.5,1.5);
             sleep(100);
             Bot.driveForward(.5,.7);
 
@@ -283,7 +283,7 @@ public abstract class AutoRedAlliance extends AutoMain{
             sleep(100);
             Bot.rightWormgearUp(1,550);  // 480
             sleep(100);
-            Bot.strafeRight(.5,1.9);   // 1.65
+            Bot.strafeRight(.5,2.5);   // 1.65
             sleep(100);
             Bot.autoPlacePosition();
             sleep(100);
@@ -292,7 +292,7 @@ public abstract class AutoRedAlliance extends AutoMain{
             Bot.stopMotors();
             sleep(1000);
             Bot.linearSlideExtend(.8);
-            sleep(200);
+            sleep(170);
             Bot.stopLinearSlide();
             sleep(300);
 
@@ -320,7 +320,7 @@ public abstract class AutoRedAlliance extends AutoMain{
             sleep(100);
             Bot.rightWormgearUp(1,550); //480
             sleep(100);
-            Bot.strafeRight(.5,3.1);
+            Bot.strafeRight(.5,3.25);
             sleep(100);
             Bot.autoPlacePosition();
             sleep(100);
@@ -345,7 +345,7 @@ public abstract class AutoRedAlliance extends AutoMain{
             sleep(100);
 //            Bot.linearSlideRetract(.8);
 //            sleep(100);
-            Bot.strafeLeft(.5,3.25);
+            Bot.strafeLeft(.5,3.05);
             sleep(100);
             Bot.driveForward(.5,.7);
         }
