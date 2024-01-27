@@ -229,7 +229,8 @@ public class TeleOp_CompetitionBot extends OpMode {
 //        }
         if (gamepad2.left_stick_y < -0.1) {
             Bot.rightWormgearDown(wormgearPower * 1);
-        } else if (gamepad2.left_stick_y > 0.1 && !Bot.magSensor1.isPressed()) {
+        } else if (gamepad2.left_stick_y > 0.1 ) {
+            //&& !Bot.magSensor1.isPressed()
             Bot.rightWormgearUp(wormgearPower * 0.7);
         } else {
             Bot.wormgearRight.setPower(0);
@@ -282,17 +283,17 @@ public class TeleOp_CompetitionBot extends OpMode {
 
 
     public void pixelPickupTelemetry(){
-        if (Bot.pixelDistanceSensor1.getDistance(DistanceUnit.INCH) > 0.75) {
+        if (Bot.pixelDistanceSensor2.getDistance(DistanceUnit.INCH) > 0.75) {
             telemetry.addLine("LEFTPixelSensor - NO PIXEL/GRABBING");
         }
-        else if (Bot.pixelDistanceSensor1.getDistance(DistanceUnit.INCH) < 0.75) {
+        else if (Bot.pixelDistanceSensor2.getDistance(DistanceUnit.INCH) < 0.75) {
             telemetry.addLine("LEFTPixelSensor - PIXEL GRABBED");
         }
 
-        if (Bot.pixelDistanceSensor2.getDistance(DistanceUnit.INCH ) > 0.75) {
+        if (Bot.pixelDistanceSensor1.getDistance(DistanceUnit.INCH ) > 0.75) {
             telemetry.addLine("RIGHTPixelSensor - NO PIXEL/GRABBING");
         }
-        else if (Bot.pixelDistanceSensor2.getDistance(DistanceUnit.INCH) < 0.75) {
+        else if (Bot.pixelDistanceSensor1.getDistance(DistanceUnit.INCH) < 0.75) {
             telemetry.addLine("RIGHTPixelSensor - PIXEL GRABBED");
         }
 

@@ -29,25 +29,28 @@ public abstract class AutoRedAlliance extends AutoMain{
 
     public void spikeMarkPlaceClose(){
         if (teamPropPosition == TeamPropPosition.RED_LEFT) {
-            Bot.rotateLeft(0.3,1.3);
+            Bot.rotateLeft(0.3,1.25);
             sleep(1000);
-            Bot.driveForward(0.5,0.2);
+            Bot.driveForward(0.5,0.5);
             sleep(500);
             Bot.leftPixelClawOpen();
             sleep(1500);
-            Bot.driveBack(0.5,0.45);
+            Bot.driveBack(0.5,0.55);
             sleep(100);
-            Bot.rotateRight(0.3,1.3);
+            Bot.rotateRight(0.3,1.55);
             sleep(1000);
             Bot.leftPixelClawClose();
             sleep(500);
+            Bot.driveBack(0.5,0.85);
+            sleep(500);
+            Bot.strafeRight(0.5,3);
         }
         else if (teamPropPosition == TeamPropPosition.RED_MIDDLE) {
             Bot.strafeRight(0.5, 0.3);
             sleep(100);
             Bot.rotateRight(0.3,1.2);
             sleep(100);
-            Bot.driveForward(0.5, 1.8);
+            Bot.driveForward(0.5, 1.6);
             sleep(100);
             Bot.rotateLeft(0.3, 1.5);
             sleep(100);
@@ -58,6 +61,8 @@ public abstract class AutoRedAlliance extends AutoMain{
             Bot.driveForward(.4,.355);
             sleep(100);
             Bot.rotateRight(.4,.2);
+            sleep(100);
+            Bot.driveBack(0.5,0.15);
 //            sleep(100);
 //            Bot.collectorPosition();
             sleep(250);
@@ -67,19 +72,23 @@ public abstract class AutoRedAlliance extends AutoMain{
             sleep(50);
             Bot.leftPixelClawClose();
             sleep(100);
-            Bot.driveBack(.5,.25);
+            Bot.driveBack(.5,.55);
             sleep(100);
-            Bot.rotateRight(.5,1.25);
+            Bot.rotateRight(.5,1.415);
             sleep(100);
+            Bot.strafeLeft(0.5,1.7);
+            sleep(200);
+            Bot.rotateLeft(0.3,.3);
+            sleep(500);
+            Bot.strafeLeft(0.5,3.45);
+            sleep(500);
+            Bot.driveBack(0.5,1.9);
+            Bot.strafeLeft(0.5,0.2);
         }
         else if (teamPropPosition == TeamPropPosition.RED_RIGHT){
-            Bot.strafeRight(0.5, 0.3);
-            sleep(100);
-            Bot.rotateRight(0.3,1.2);
+            Bot.rotateRight(0.3,0.85);
             sleep(1000);
-            Bot.driveForward(0.3,0.2);
-            sleep(100);
-            Bot.driveBack(0.3,0.05);
+            Bot.driveForward(0.3,0.1);
             sleep(100);
             Bot.leftPixelClawOpen();
             sleep(700);
@@ -87,14 +96,14 @@ public abstract class AutoRedAlliance extends AutoMain{
             sleep(500);
             Bot.leftPixelClawClose();
             sleep(500);
-            Bot.rotateLeft(0.3,0.7);
+            Bot.rotateLeft(0.3,0.85);
             sleep(100);
-            Bot.driveBack(0.3, 0.2);
+            Bot.driveBack(0.3, 1.25);
             sleep(100);
-            Bot.rotateLeft(0.3, 0.575);
+            Bot.rotateRight(0.3, 2.35);
             sleep(100);
-            Bot.strafeLeft(0.5, 0.2);
-            sleep(100);
+            Bot.driveForward(0.5,2.6);
+            Bot.strafeRight(0.5,0.3);
         }
 //            else {
 //                telemetryUpdate("No Position Detected");
