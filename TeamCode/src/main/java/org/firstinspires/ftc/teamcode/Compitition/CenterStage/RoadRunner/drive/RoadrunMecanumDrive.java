@@ -58,7 +58,6 @@ public class RoadrunMecanumDrive extends MecanumDrive {
     public static final boolean RUN_USING_ENCODER = false;
     public static PIDFCoefficients MOTOR_VELO_PID = new PIDFCoefficients(0, 0, 0,
             getMotorVelocityF(MAX_RPM / 60 * TICKS_PER_REV));
-
     /*
      * These are physical constants that can be determined from your robot (including the track
      * width; it will be tune empirically later although a rough estimate is important). Users are
@@ -67,9 +66,9 @@ public class RoadrunMecanumDrive extends MecanumDrive {
      * angular distances although most angular parameters are wrapped in Math.toRadians() for
      * convenience. Make sure to exclude any gear ratio included in MOTOR_CONFIG from GEAR_RATIO.
      */
-    public static double WHEEL_RADIUS = 2; // in
-    public static double GEAR_RATIO = 1; // output (wheel) speed / input (motor) speed
-    public static double TRACK_WIDTH = 1; // in
+    public static double WHEEL_RADIUS = 1.8898; // in
+    public static double GEAR_RATIO = 0.875; // output (wheel) speed / input (motor) speed
+    public static double TRACK_WIDTH = 15.8; // in
 
     /*
      * These are the feedforward parameters used to model the drive motor behavior. If you are using
@@ -77,9 +76,9 @@ public class RoadrunMecanumDrive extends MecanumDrive {
      * motor encoders or have elected not to use them for velocity control, these values should be
      * empirically tuned.
      */
-    public static double kV = 1.0 / rpmToVelocity(MAX_RPM);
-    public static double kA = 0;
-    public static double kStatic = 0;
+    public static double kV = 0.0035 / rpmToVelocity(MAX_RPM); //0.01
+    public static double kA = 0.001; //0
+    public static double kStatic = 0.02; //0
 
     /*
      * These values are used to generate the trajectories for you robot. To ensure proper operation,
@@ -88,10 +87,11 @@ public class RoadrunMecanumDrive extends MecanumDrive {
      * small and gradually increase them later after everything is working. All distance units are
      * inches.
      */
-    public static double MAX_VEL = 10; //45.92255419789212
-    public static double MAX_ACCEL = 10;//45.92255419789212
-    public static double MAX_ANG_VEL = Math.toRadians(10); //166.52965443037974
-    public static double MAX_ANG_ACCEL = Math.toRadians(10); //166.52965443037974
+    public static double MAX_VEL = 20; //45.92255419789212
+    public static double MAX_ACCEL = 20; //45.92255419789212
+    public static double MAX_ANG_VEL = Math.toRadians(240.65656843804032); //166.5296544303
+    // 7974
+    public static double MAX_ANG_ACCEL = Math.toRadians(240.52965443037974); //166.52965443037974
 
     /*
      * Adjust the orientations here to match your robot. See the FTC SDK documentation for details.
@@ -116,10 +116,10 @@ public class RoadrunMecanumDrive extends MecanumDrive {
         // see https://docs.google.com/document/d/1tyWrXDfMidwYyP_5H4mZyVgaEswhOC35gvdmP-V-5hA/edit#heading=h.61g9ixenznbx
         return 32767 / ticksPerSecond;
     }
-    public static PIDCoefficients TRANSLATIONAL_PID = new PIDCoefficients(0, 0, 0);
-    public static PIDCoefficients HEADING_PID = new PIDCoefficients(0, 0, 0);
+    public static PIDCoefficients TRANSLATIONAL_PID = new PIDCoefficients(0, 0, 1.2);
+    public static PIDCoefficients HEADING_PID = new PIDCoefficients(12, 0, 0);
 
-    public static double LATERAL_MULTIPLIER = 1;
+    public static double LATERAL_MULTIPLIER = 1.5;
 
     public static double VX_WEIGHT = 1;
     public static double VY_WEIGHT = 1;

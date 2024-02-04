@@ -24,7 +24,7 @@ import org.firstinspires.ftc.teamcode.Compitition.CenterStage.RoadRunner.traject
 @Config
 @Autonomous(group = "drive")
 public class FollowerPIDTuner extends LinearOpMode {
-    public static double DISTANCE = 48; // in
+    public static double DISTANCE = 20; // in
 
     @Override
     public void runOpMode() throws InterruptedException {
