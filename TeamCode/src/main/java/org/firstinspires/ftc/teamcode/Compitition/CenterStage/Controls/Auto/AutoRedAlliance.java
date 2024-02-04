@@ -128,9 +128,9 @@ public abstract class AutoRedAlliance extends AutoMain{
             sleep(1000);
 //            Bot.driveForward(0.3,0.1);
 //            sleep(100);
-            Bot.driveBack(0.3,0.055);
-            sleep(100);
-            Bot.rotateRight(.3,.15);
+//            Bot.driveBack(0.3,0.055);
+//            sleep(100);
+//            Bot.rotateRight(.3,.15);
             sleep(100);
             Bot.leftPixelClawOpen();
             sleep(700);
@@ -155,14 +155,16 @@ public abstract class AutoRedAlliance extends AutoMain{
             sleep(100);
             Bot.rotateRight(.4,3.5);
             sleep(100);
-            Bot.driveForward(.4,.355);
-            sleep(100);
-            Bot.rotateLeft(.4,.2);
-            sleep(100);
-            Bot.driveForward(0.5,0.2);
+//            Bot.driveForward(.4,.355);
 //            sleep(100);
+//            Bot.rotateLeft(.4,.2);
+//            sleep(100);
+            Bot.driveForward(0.5,0.3);
+            sleep(100);
+            Bot.driveBack(0.5,0.06);
+            sleep(200);
 //            Bot.collectorPosition();
-            sleep(250);
+//            sleep(250);
             Bot.leftPixelClawOpen();
             sleep(500);
             Bot.drivePosition();
@@ -171,7 +173,7 @@ public abstract class AutoRedAlliance extends AutoMain{
             sleep(100);
             Bot.driveBack(.5,.55);
             sleep(100);
-            Bot.rotateLeft(.5,1.415);
+            Bot.rotateLeft(.5,1.55);
             sleep(100);
 
         }
@@ -205,9 +207,9 @@ public abstract class AutoRedAlliance extends AutoMain{
 //            Key line to keep robot in between purple pixel & truss
             Bot.strafeRight(0.5, 0.52); //0.5
             sleep(100);
-            Bot.driveForward(0.5, 3.3);
+            Bot.driveForward(0.5, 3.5);
             sleep(100);
-            Bot.rotateRight(.4, 2.25);
+            Bot.rotateRight(.4, 2.55);
             sleep(100);
             Bot.driveForward(0.5, 6);
             sleep(100);
@@ -229,7 +231,7 @@ public abstract class AutoRedAlliance extends AutoMain{
 
             Bot.driveForward(.5, 3.25);
             sleep(200);
-            Bot.rotateRight(.4, 2.2);
+            Bot.rotateRight(.4, 2.45);
             sleep(100);
             Bot.driveForward(.5, 7);
             sleep(100);
@@ -245,9 +247,11 @@ public abstract class AutoRedAlliance extends AutoMain{
         if (teamPropPosition == TeamPropPosition.RED_LEFT) {
             Bot.driveForward(.4,2);
             sleep(100);
-            Bot.rightWormgearUp(1,600);  //480
-            sleep(100);
-            Bot.strafeRight(.5,1.7);
+//            Bot.rightWormgearUp(1,600);  //480
+            Bot.rightWormgearDown(1);
+            sleep(700);
+            Bot.rightWormgearStop();
+            Bot.strafeRight(.5,1.6);
             sleep(100);
             Bot.autoPlacePosition();
             sleep(100);
@@ -257,7 +261,7 @@ public abstract class AutoRedAlliance extends AutoMain{
 
 
             Bot.linearSlideExtend(.8);
-            sleep(140);  //125
+            sleep(200);  //125
             Bot.stopLinearSlide();
             sleep(300);
 //            Make robot turn more so yellow against backdrop
@@ -288,11 +292,13 @@ public abstract class AutoRedAlliance extends AutoMain{
 
         }
         else if (teamPropPosition == TeamPropPosition.RED_MIDDLE) {
-            Bot.driveForward(.4,1.2);
+            Bot.driveForward(.4,1.05);
             sleep(100);
-            Bot.rightWormgearUp(1,550);  // 480
-            sleep(100);
-            Bot.strafeRight(.5,2.5);   // 1.65
+//            Bot.rightWormgearUp(1,550);  // 480
+            Bot.rightWormgearDown(1);
+            sleep(700);
+            Bot.rightWormgearStop();
+            Bot.strafeRight(.5,2.2);   // 1.65
             sleep(100);
             Bot.autoPlacePosition();
             sleep(100);
@@ -300,8 +306,10 @@ public abstract class AutoRedAlliance extends AutoMain{
             sleep(900);
             Bot.stopMotors();
             sleep(1000);
+            Bot.strafeLeft(0.3,.3);
+            sleep(200);
             Bot.linearSlideExtend(.8);
-            sleep(170);
+            sleep(200);
             Bot.stopLinearSlide();
             sleep(300);
 
@@ -327,9 +335,12 @@ public abstract class AutoRedAlliance extends AutoMain{
         else if (teamPropPosition == TeamPropPosition.RED_RIGHT) {
             Bot.driveForward(.4,1.7);
             sleep(100);
-            Bot.rightWormgearUp(1,550); //480
-            sleep(100);
-            Bot.strafeRight(.5,3.25);
+//            Bot.rightWormgearUp(1,550); //480
+            Bot.rightWormgearDown(1);
+            sleep(700);
+            Bot.rightWormgearStop();
+
+            Bot.strafeRight(.5,2.4);
             sleep(100);
             Bot.autoPlacePosition();
             sleep(100);
@@ -337,8 +348,12 @@ public abstract class AutoRedAlliance extends AutoMain{
             sleep(950);
             Bot.stopMotors();
             sleep(100);
-            Bot.linearSlideExtend(.8);
-            sleep(120);
+            Bot.rotateLeft(0.3,0.3);
+            sleep(200);
+            Bot.strafeLeft(0.3,.35);
+            sleep(200);
+            Bot.linearSlideExtend(.9);
+            sleep(240);
             Bot.stopLinearSlide();
             sleep(300);
 

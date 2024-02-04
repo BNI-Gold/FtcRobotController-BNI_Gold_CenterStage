@@ -126,7 +126,7 @@ public abstract class AutoBlueAlliance extends AutoMain{
     public void spikeMarkPlaceFar(){
 //        teamPropPosition = TeamPropPosition.BLUE_RIGHT;
         if (teamPropPosition == TeamPropPosition.BLUE_LEFT) {
-            Bot.rotateLeft(0.3,1.3);
+            Bot.rotateLeft(0.3,1.15);
             sleep(1000);
             Bot.driveForward(0.5,0.26);
             sleep(500);
@@ -183,7 +183,7 @@ public abstract class AutoBlueAlliance extends AutoMain{
             sleep(100);
             Bot.driveBack(.5,.25);
             sleep(100);
-            Bot.rotateRight(.5,1.1);
+            Bot.rotateRight(.5,1.15);
             sleep(100);
 
 
@@ -216,7 +216,7 @@ public abstract class AutoBlueAlliance extends AutoMain{
         if (teamPropPosition == TeamPropPosition.BLUE_LEFT) {
             Bot.driveForward(.5, 3.2);
             sleep(200);
-            Bot.rotateLeft(.4, 2.45);
+            Bot.rotateLeft(.4, 2.5);
             sleep(100);
             Bot.driveForward(.5, 7);
             sleep(100);
@@ -258,7 +258,7 @@ public abstract class AutoBlueAlliance extends AutoMain{
             sleep(100);
             Bot.rightWormgearUp(1,600);
             sleep(100);
-            Bot.strafeLeft(.5,4.3);
+            Bot.strafeLeft(.5,4.55);
             sleep(100);
             Bot.autoPlacePosition();
             sleep(100);
@@ -293,7 +293,7 @@ public abstract class AutoBlueAlliance extends AutoMain{
             sleep(100);
             Bot.rightWormgearUp(1,600);
             sleep(100);
-            Bot.strafeLeft(.5,3.45);
+            Bot.strafeLeft(.5,3.3);
             sleep(100);
             Bot.autoPlacePosition();
             sleep(100);
@@ -302,7 +302,7 @@ public abstract class AutoBlueAlliance extends AutoMain{
             Bot.stopMotors();
             sleep(1000);
             Bot.linearSlideExtend(.8);
-            sleep(55);
+            sleep(75);
             Bot.stopLinearSlide();
             sleep(300);
 
@@ -327,7 +327,7 @@ public abstract class AutoBlueAlliance extends AutoMain{
             sleep(100);
             Bot.rightWormgearUp(1,600);
             sleep(100);
-            Bot.strafeLeft(.5,2.3);
+            Bot.strafeLeft(.5,2.05);
             sleep(100);
             Bot.autoPlacePosition();
             sleep(100);

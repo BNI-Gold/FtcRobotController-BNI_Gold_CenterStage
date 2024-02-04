@@ -27,6 +27,7 @@ public class AutoRedAudience extends AutoRedAlliance {
         Bot.initRobot(hardwareMap);
         initCamera();
         Bot.setLinearOp(this);
+        Bot.planeLauncherServo.setPosition(1);
 
         startObjectDetectionPipeline(pipeline);
         telemetry.addLine("Starting Vision Pipeline");
@@ -67,8 +68,10 @@ public class AutoRedAudience extends AutoRedAlliance {
             sleep(100);
             Bot.drivePosition();
             sleep(100);
-            Bot.rightWormgearDown(.5, 770);
-            sleep(100);
+//            Bot.rightWormgearDown(.7, 770);
+            Bot.rightWormgearUp(.5);
+            sleep(750);
+            Bot.rightWormgearStop();
 //            Bot.driveForward(0.5,0.2);
 //            sleep(100); //800
             Bot.driveForward(0.5,1.5); //1.1

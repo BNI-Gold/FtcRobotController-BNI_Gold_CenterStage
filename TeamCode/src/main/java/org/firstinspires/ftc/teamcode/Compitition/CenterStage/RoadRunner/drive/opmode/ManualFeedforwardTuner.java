@@ -19,7 +19,7 @@ import com.qualcomm.robotcore.hardware.VoltageSensor;
 import com.qualcomm.robotcore.util.RobotLog;
 
 import org.firstinspires.ftc.robotcore.external.Telemetry;
-import org.firstinspires.ftc.teamcode.Compitition.CenterStage.RoadRunner.drive.SampleMecanumDrive;
+import org.firstinspires.ftc.teamcode.Compitition.CenterStage.RoadRunner.drive.RoadrunMecanumDrive;
 
 import java.util.Objects;
 
@@ -65,9 +65,9 @@ public class ManualFeedforwardTuner extends LinearOpMode {
      * angular distances although most angular parameters are wrapped in Math.toRadians() for
      * convenience. Make sure to exclude any gear ratio included in MOTOR_CONFIG from GEAR_RATIO.
      */
-    public static double WHEEL_RADIUS = 1.889; // in
-    public static double GEAR_RATIO = 1.3; // output (wheel) speed / input (motor) speed
-    public static double TRACK_WIDTH = 16; // in
+    public static double WHEEL_RADIUS = 1.8898; // in
+    public static double GEAR_RATIO = 0.875; // output (wheel) speed / input (motor) speed
+    public static double TRACK_WIDTH = 15.8; // in
 
     /*
      * These are the feedforward parameters used to model the drive motor behavior. If you are using
@@ -75,9 +75,9 @@ public class ManualFeedforwardTuner extends LinearOpMode {
      * motor encoders or have elected not to use them for velocity control, these values should be
      * empirically tuned.
      */
-    public static double kV = 1.0 / rpmToVelocity(MAX_RPM);
-    public static double kA = 0;
-    public static double kStatic = 0;
+    public static double kV = 0.0035 / rpmToVelocity(MAX_RPM); //0.01
+    public static double kA = 0.001; //0
+    public static double kStatic = 0.02; //0
 
     /*
      * These values are used to generate the trajectories for you robot. To ensure proper operation,
@@ -86,10 +86,11 @@ public class ManualFeedforwardTuner extends LinearOpMode {
      * small and gradually increase them later after everything is working. All distance units are
      * inches.
      */
-    public static double MAX_VEL = 30;
-    public static double MAX_ACCEL = 30;
-    public static double MAX_ANG_VEL = Math.toRadians(60);
-    public static double MAX_ANG_ACCEL = Math.toRadians(60);
+    public static double MAX_VEL = 20; //45.92255419789212
+    public static double MAX_ACCEL = 20; //45.92255419789212
+    public static double MAX_ANG_VEL = Math.toRadians(166.52965443037974); //166.5296544303
+    // 7974
+    public static double MAX_ANG_ACCEL = Math.toRadians(166.52965443037974); //166.52965443037974
 
     /*
      * Adjust the orientations here to match your robot. See the FTC SDK documentation for details.
@@ -97,7 +98,7 @@ public class ManualFeedforwardTuner extends LinearOpMode {
     public static RevHubOrientationOnRobot.LogoFacingDirection LOGO_FACING_DIR =
             RevHubOrientationOnRobot.LogoFacingDirection.UP;
     public static RevHubOrientationOnRobot.UsbFacingDirection USB_FACING_DIR =
-            RevHubOrientationOnRobot.UsbFacingDirection.FORWARD;
+            RevHubOrientationOnRobot.UsbFacingDirection.RIGHT;
 
 
     public static double encoderTicksToInches(double ticks) {
@@ -113,11 +114,11 @@ public class ManualFeedforwardTuner extends LinearOpMode {
         return 32767 / ticksPerSecond;
     }
 
-    public static double DISTANCE = 72; // in
+    public static double DISTANCE = 20; // in
 
     private FtcDashboard dashboard = FtcDashboard.getInstance();
 
-    private SampleMecanumDrive drive;
+    private RoadrunMecanumDrive drive;
 
     enum Mode {
         DRIVER_MODE,
@@ -141,7 +142,7 @@ public class ManualFeedforwardTuner extends LinearOpMode {
 
         Telemetry telemetry = new MultipleTelemetry(this.telemetry, dashboard.getTelemetry());
 
-        drive = new SampleMecanumDrive(hardwareMap);
+        drive = new RoadrunMecanumDrive(hardwareMap);
 
         final VoltageSensor voltageSensor = hardwareMap.voltageSensor.iterator().next();
 

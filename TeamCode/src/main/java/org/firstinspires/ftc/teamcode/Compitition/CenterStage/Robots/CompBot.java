@@ -47,8 +47,7 @@ public class CompBot extends MecanumDrive {
         public Servo pixelClawLeft = null;
         public Servo pixelClawRight = null;
 
-         public   TouchSensor magSensor1;
-         public TouchSensor touchLimit1;
+//         public   TouchSensor magSensor1;
 
         public static final double TICKS_PER_ROTATION_WORMGEAR = 384.5;
 
@@ -94,8 +93,7 @@ public class CompBot extends MecanumDrive {
             rearRightMotor = hwBot.dcMotor.get("rear_right_motor");
 
 
-            magSensor1 = hwBot.get (TouchSensor.class, "MagSensor1");
-            touchLimit1 = hwBot.get (TouchSensor.class, "TouchLimit1");
+//            magSensor1 = hwBot.get (TouchSensor.class, "MagSensor1");
 
 
 
@@ -724,8 +722,8 @@ public class CompBot extends MecanumDrive {
 //    }
 
     public void collectorPosition(){
-            pixelRotatorRight.setPosition(.437);
-            pixelRotatorLeft.setPosition(.437);
+            pixelRotatorRight.setPosition(.44);
+            pixelRotatorLeft.setPosition(.44);
     }
 
     public void drivePosition(){

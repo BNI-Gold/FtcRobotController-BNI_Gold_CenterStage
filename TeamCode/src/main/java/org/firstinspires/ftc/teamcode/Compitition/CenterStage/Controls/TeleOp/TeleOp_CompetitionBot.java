@@ -64,6 +64,7 @@ public class TeleOp_CompetitionBot extends OpMode {
     public void init() {
         Bot.initRobot(hardwareMap);
 
+
     }
 
     public void init_loop() {
@@ -229,11 +230,29 @@ public class TeleOp_CompetitionBot extends OpMode {
 //        }
         if (gamepad2.left_stick_y < -0.1) {
             Bot.rightWormgearDown(wormgearPower * 1);
-        } else if (gamepad2.left_stick_y > 0.1 ) {
+        } else if (gamepad2.left_stick_y > 0.1) {
             //&& !Bot.magSensor1.isPressed()
-            Bot.rightWormgearUp(wormgearPower * 0.7);
+            Bot.rightWormgearUp(wormgearPower * 0.5);
         } else {
             Bot.wormgearRight.setPower(0);
+        }
+
+        //Mitchell's code for sensor limits
+
+        if (gamepad2.dpad_right && Bot.pixelDistanceSensor1.getDistance(DistanceUnit.INCH) > 1.5 ) {
+            //&& !Bot.magSensor1.isPressed()
+            Bot.rightWormgearUp(wormgearPower * 0.5);
+        } else if (gamepad2.dpad_right && Bot.pixelDistanceSensor1.getDistance(DistanceUnit.INCH) > 1.175 && Bot.pixelDistanceSensor1.getDistance(DistanceUnit.INCH) < 1.5 ) {
+            //&& !Bot.magSensor1.isPressed()
+            Bot.rightWormgearUp(wormgearPower * 0.2);
+        }
+
+        if (gamepad2.dpad_left && Bot.pixelDistanceSensor2.getDistance(DistanceUnit.INCH) > 1.7 ) {
+            //&& !Bot.magSensor1.isPressed()
+            Bot.rightWormgearUp(wormgearPower * 0.5);
+        } else if (gamepad2.dpad_left && Bot.pixelDistanceSensor2.getDistance(DistanceUnit.INCH) > 1.195 && Bot.pixelDistanceSensor2.getDistance(DistanceUnit.INCH) < 1.7 ) {
+            //&& !Bot.magSensor1.isPressed()
+            Bot.rightWormgearUp(wormgearPower * 0.2);
         }
 
 
@@ -283,19 +302,9 @@ public class TeleOp_CompetitionBot extends OpMode {
 
 
     public void pixelPickupTelemetry(){
-        if (Bot.pixelDistanceSensor2.getDistance(DistanceUnit.INCH) > 0.75) {
-            telemetry.addLine("LEFTPixelSensor - NO PIXEL/GRABBING");
-        }
-        else if (Bot.pixelDistanceSensor2.getDistance(DistanceUnit.INCH) < 0.75) {
-            telemetry.addLine("LEFTPixelSensor - PIXEL GRABBED");
-        }
+        telemetry.addData("LEFTPixelSensor - ", Bot.pixelDistanceSensor2.getDistance(DistanceUnit.INCH));
 
-        if (Bot.pixelDistanceSensor1.getDistance(DistanceUnit.INCH ) > 0.75) {
-            telemetry.addLine("RIGHTPixelSensor - NO PIXEL/GRABBING");
-        }
-        else if (Bot.pixelDistanceSensor1.getDistance(DistanceUnit.INCH) < 0.75) {
-            telemetry.addLine("RIGHTPixelSensor - PIXEL GRABBED");
-        }
+        telemetry.addData("RIGHTPixelSensor - ", Bot.pixelDistanceSensor1.getDistance(DistanceUnit.INCH ));
 
     }
 
@@ -350,10 +359,10 @@ public class TeleOp_CompetitionBot extends OpMode {
     public void planeLauncher() {
 
         if (gamepad2.dpad_down) {
-            Bot.planeLauncherServo.setPosition(1);//launch
+            Bot.planeLauncherServo.setPosition(1);//reset
         }
         else if (gamepad2.dpad_up) {
-            Bot.planeLauncherServo.setPosition(0);   //reset
+            Bot.planeLauncherServo.setPosition(0);   //LAUNCH
         }
     }
         public void telemetryOutput () {
@@ -381,18 +390,18 @@ public class TeleOp_CompetitionBot extends OpMode {
 //            dashboardTelemetry.addData("worm gear encoder: ", Bot.wormgearRight.getCurrentPosition());
             dashboardTelemetry.update();
 
-            if (Bot.magSensor1.isPressed()) {
-                telemetry.addLine("Airplane Launcher - In Position");
-            }
-            else {
-                telemetry.addLine("Airplane Launcher - NOT In Position");
-            }
-
-            if (Bot.touchLimit1.isPressed()) {
-                telemetry.addLine("Downward movement disabled");
-            } else {
-                telemetry.addLine("Downward movement enabled");
-            }
+//            if (Bot.magSensor1.isPressed()) {
+//                telemetry.addLine("Airplane Launcher - In Position");
+//            }
+//            else {
+//                telemetry.addLine("Airplane Launcher - NOT In Position");
+//            }
+//
+//            if (Bot.touchLimit1.isPressed()) {
+//                telemetry.addLine("Downward movement disabled");
+//            } else {
+//                telemetry.addLine("Downward movement enabled");
+//            }
 
             telemetry.update();
         }

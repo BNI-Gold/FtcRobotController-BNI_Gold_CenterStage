@@ -1,14 +1,11 @@
-package org.firstinspires.ftc.teamcode.Compitition.CenterStage.Controls.Auto.AutoPaths;
-
+package org.firstinspires.ftc.teamcode.Compitition.CenterStage.Controls.Auto;
 
 import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
 
-import org.firstinspires.ftc.teamcode.Compitition.CenterStage.Controls.Auto.AutoRedAlliance;
 import org.firstinspires.ftc.vision.tfod.TfodProcessor;
 
-@Autonomous(name = "A - Red Backstage FOR COMP(Also CAM TEST)")
-public class AutoRedBackstage extends AutoRedAlliance {
-
+@Autonomous(name = "A - Forwards Backwards")
+public class ForwardBackward extends AutoBlueAlliance {
 
     public static final boolean USE_WEBCAM = true;
 
@@ -16,17 +13,20 @@ public class AutoRedBackstage extends AutoRedAlliance {
 
     public TfodProcessor tFod;
 
+
+
+
+
+
+
+
+
     @Override
     public void runOpMode() throws InterruptedException {
         Bot.initRobot(hardwareMap);
-        initCamera();
+
         Bot.setLinearOp(this);
-        Bot.planeLauncherServo.setPosition(1);
-        startObjectDetectionPipeline(pipeline);
-        telemetry.addLine("Starting Vision Pipeline");
-//
-//        Bot.rightWormgearUp(1, 544);
-//        sleep(100);
+
         Bot.tuckPosition();
 
         telemetry.addLine("Robot Awaiting Start Procedure");
@@ -40,31 +40,57 @@ public class AutoRedBackstage extends AutoRedAlliance {
 
         while (opModeIsActive()) {
 
+
             telemetry.addLine("Robot Autonomous Control Initialized");
 
 
 
-            CameraDetection();
-            sleep(100);
-            Bot.drivePosition();
-            sleep(100);
-            Bot.rightWormgearDown(.5, 790);
-            sleep(100);
-//            Bot.driveForward(0.5,0.2);
-//            sleep(100); //800
+
+
+
+//            Bot.driveForward(0.5,0.7);
+//            sleep(1000);
+//            Bot.rightWormgearDown(1);
+//            sleep(700);
+//            Bot.rightWormgearStop();
+
+//            sleep(800);
+//            Bot.rotateLeft(0.2,0.15);
+
+
+
             Bot.driveForward(0.5,1.5); //1.1
-            sleep(100);
-            // Bot.driveForward(0.5,0.5);
-            spikeMarkPlaceClose();
-            sleep(100);
+            sleep(500);
+            Bot.driveBack(0.5,1.5);
+            sleep(500);
+            Bot.driveForward(0.5,1.5); //1.1
+            sleep(500);
+            Bot.driveBack(0.5,1.5);
+            sleep(500);
+            Bot.driveForward(0.5,1.5); //1.1
+            sleep(500);
+            Bot.driveBack(0.5,1.5);
+            sleep(500);
+            Bot.driveForward(0.5,1.5); //1.1
+            sleep(500);
+            Bot.driveBack(0.5,1.5);
+            sleep(500);
+            Bot.driveForward(0.5,1.5); //1.1
+            sleep(500);
+            Bot.driveBack(0.5,1.5);
+            sleep(500);
 
 
 
 
 
 
-            telemetry.addLine("Robot Autonomous Control Complete");
 
+
+
+
+
+//
             requestOpModeStop();
         }
 

@@ -31,7 +31,7 @@ public class AutoBlueAudience extends AutoBlueAlliance {
         Bot.initRobot(hardwareMap);
         initCamera();
         Bot.setLinearOp(this);
-
+        Bot.planeLauncherServo.setPosition(1);
         startObjectDetectionPipeline(pipeline);
         telemetry.addLine("Starting Vision Pipeline");
 //
