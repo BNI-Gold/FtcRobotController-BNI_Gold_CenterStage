@@ -66,9 +66,9 @@ public class RoadrunMecanumDrive extends MecanumDrive {
      * angular distances although most angular parameters are wrapped in Math.toRadians() for
      * convenience. Make sure to exclude any gear ratio included in MOTOR_CONFIG from GEAR_RATIO.
      */
-    public static double WHEEL_RADIUS = 1.8898; // in
+    public static double WHEEL_RADIUS = 1.889765; // in
     public static double GEAR_RATIO = 0.875; // output (wheel) speed / input (motor) speed
-    public static double TRACK_WIDTH = 15.8; // in
+    public static double TRACK_WIDTH = 15.86; // in
 
     /*
      * These are the feedforward parameters used to model the drive motor behavior. If you are using
@@ -89,17 +89,17 @@ public class RoadrunMecanumDrive extends MecanumDrive {
      */
     public static double MAX_VEL = 20; //45.92255419789212
     public static double MAX_ACCEL = 20; //45.92255419789212
-    public static double MAX_ANG_VEL = Math.toRadians(240.65656843804032); //166.5296544303
+    public static double MAX_ANG_VEL = Math.toRadians(200.65656843804032); //166.5296544303
     // 7974
-    public static double MAX_ANG_ACCEL = Math.toRadians(240.52965443037974); //166.52965443037974
+    public static double MAX_ANG_ACCEL = Math.toRadians(200.52965443037974); //166.52965443037974
 
     /*
      * Adjust the orientations here to match your robot. See the FTC SDK documentation for details.
      */
     public static RevHubOrientationOnRobot.LogoFacingDirection LOGO_FACING_DIR =
-            RevHubOrientationOnRobot.LogoFacingDirection.UP;
+            RevHubOrientationOnRobot.LogoFacingDirection.RIGHT;
     public static RevHubOrientationOnRobot.UsbFacingDirection USB_FACING_DIR =
-            RevHubOrientationOnRobot.UsbFacingDirection.RIGHT;
+            RevHubOrientationOnRobot.UsbFacingDirection.UP;
 
 
 
@@ -116,8 +116,8 @@ public class RoadrunMecanumDrive extends MecanumDrive {
         // see https://docs.google.com/document/d/1tyWrXDfMidwYyP_5H4mZyVgaEswhOC35gvdmP-V-5hA/edit#heading=h.61g9ixenznbx
         return 32767 / ticksPerSecond;
     }
-    public static PIDCoefficients TRANSLATIONAL_PID = new PIDCoefficients(0, 0, 1.2);
-    public static PIDCoefficients HEADING_PID = new PIDCoefficients(12, 0, 0);
+    public static PIDCoefficients TRANSLATIONAL_PID = new PIDCoefficients(0, 0, 1);
+    public static PIDCoefficients HEADING_PID = new PIDCoefficients(8, 0, 1);
 
     public static double LATERAL_MULTIPLIER = 1.5;
 
