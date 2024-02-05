@@ -245,14 +245,18 @@ public class TeleOp_CompetitionBot extends OpMode {
         } else if (gamepad2.dpad_right && Bot.pixelDistanceSensor1.getDistance(DistanceUnit.INCH) > 1.175 && Bot.pixelDistanceSensor1.getDistance(DistanceUnit.INCH) < 1.5 ) {
             //&& !Bot.magSensor1.isPressed()
             Bot.rightWormgearUp(wormgearPower * 0.2);
+        } else if (gamepad2.dpad_left && Bot.pixelDistanceSensor2.getDistance(DistanceUnit.INCH) < 1.15) {
+            Bot.rightWormgearUp(wormgearPower * 0.2);
         }
 
         if (gamepad2.dpad_left && Bot.pixelDistanceSensor2.getDistance(DistanceUnit.INCH) > 1.7 ) {
             //&& !Bot.magSensor1.isPressed()
             Bot.rightWormgearUp(wormgearPower * 0.5);
-        } else if (gamepad2.dpad_left && Bot.pixelDistanceSensor2.getDistance(DistanceUnit.INCH) > 1.195 && Bot.pixelDistanceSensor2.getDistance(DistanceUnit.INCH) < 1.7 ) {
+        } else if (gamepad2.dpad_left && Bot.pixelDistanceSensor2.getDistance(DistanceUnit.INCH) > 1.225 && Bot.pixelDistanceSensor2.getDistance(DistanceUnit.INCH) < 1.7 ) {
             //&& !Bot.magSensor1.isPressed()
             Bot.rightWormgearUp(wormgearPower * 0.2);
+        } else if (gamepad2.dpad_left && Bot.pixelDistanceSensor2.getDistance(DistanceUnit.INCH) < 1.12) {
+            Bot.rightWormgearDown(wormgearPower * 0.2);
         }
 
 
