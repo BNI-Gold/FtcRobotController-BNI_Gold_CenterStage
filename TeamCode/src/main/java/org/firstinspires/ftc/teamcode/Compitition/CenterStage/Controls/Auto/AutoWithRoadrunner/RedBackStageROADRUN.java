@@ -4,6 +4,7 @@ import com.acmerobotics.roadrunner.geometry.Pose2d;
 import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
 
 import org.firstinspires.ftc.teamcode.Compitition.CenterStage.Controls.Auto.AutoRedAlliance;
+import org.firstinspires.ftc.teamcode.Compitition.CenterStage.RoadRunner.trajectorysequence.TrajectorySequence;
 import org.firstinspires.ftc.vision.tfod.TfodProcessor;
 
 @Autonomous(name = "RR- RedBackstage")
@@ -28,6 +29,15 @@ public class RedBackStageROADRUN extends AutoRedAlliance {
         Bot.tuckPosition();
 
         Pose2d startPose = new Pose2d(13, -58, -4.7);
+        drive.setPoseEstimate(startPose);
+
+        TrajectorySequence trajSeq = drive.trajectorySequenceBuilder(startPose)
+
+                .lineToLinearHeading(new Pose2d(13,-31,Math.toRadians(182)))
+                .lineToLinearHeading(new Pose2d(45,-31,Math.toRadians(1)))
+                .lineToLinearHeading(new Pose2d(45,-10,Math.toRadians(-45)))
+                .forward(5)
+                        .build();
 
         telemetry.addLine("Robot Awaiting Start Procedure");
         telemetry.update();
@@ -45,6 +55,7 @@ public class RedBackStageROADRUN extends AutoRedAlliance {
 
 
             CameraDetection();
+            drive.followTrajectorySequence(trajSeq);
 
 
 
