@@ -5,18 +5,17 @@ import org.firstinspires.ftc.teamcode.Compitition.CenterStage.Robots.CompBot;
 import org.firstinspires.ftc.teamcode.Compitition.CenterStage.Vision.TeamPropPosition;
 import org.firstinspires.ftc.teamcode.Compitition.CenterStage.Vision.TeamPropPositionPipeline_Gold;
 
-public abstract class AutoRedAlliance extends AutoMain{
+public abstract class AutoRedAlliance extends AutoMain {
 
-    public CompBot Bot = new CompBot();
-    public RoadrunMecanumDrive drive = new RoadrunMecanumDrive(hardwareMap);
+        public CompBot Bot = new CompBot();
+
     public TeamPropPositionPipeline_Gold pipeline = new TeamPropPositionPipeline_Gold("RED", 140);
 
-    public void CameraDetection () {
+    public void CameraDetection() {
         teamPropPosition = pipeline.getAnalysis();
         telemetry.addData("Position Detected: ", teamPropPosition);
         telemetry.update();
         sleep(150);
-
 
 
         stopCamera();
@@ -25,6 +24,7 @@ public abstract class AutoRedAlliance extends AutoMain{
         //sleep(150);
 
     }
+
 
 
 
