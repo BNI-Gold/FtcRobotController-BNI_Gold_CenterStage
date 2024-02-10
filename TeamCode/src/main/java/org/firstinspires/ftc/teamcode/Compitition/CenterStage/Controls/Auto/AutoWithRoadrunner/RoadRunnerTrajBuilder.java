@@ -35,11 +35,25 @@ public class RoadRunnerTrajBuilder extends LinearOpMode {
 
         if (isStopRequested()) return;
 
+        telemetry.addLine("Executing Trajectory 1...");
+        telemetry.update();
         drive.followTrajectory(traj1);
+        telemetry.addLine("Executing Turn...");
+        telemetry.update();
         drive.turn(Math.toRadians(90));
+        telemetry.addLine("Executing Trajectory 2...");
+        telemetry.update();
         drive.followTrajectory(traj2);
+        telemetry.addLine("Executing Trajectory 3...");
+        telemetry.update();
         drive.followTrajectory(traj3);
-
+        telemetry.addLine("Finished All Trajectories...");
+        telemetry.update();
+        sleep(1000);
+        telemetry.addLine("Ready for Next Sequence...");
+        telemetry.update();
+        sleep(1000);
+        requestOpModeStop();
     }
 
 }

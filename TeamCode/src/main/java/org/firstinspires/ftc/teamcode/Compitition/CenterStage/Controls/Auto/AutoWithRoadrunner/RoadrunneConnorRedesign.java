@@ -35,6 +35,8 @@ public class RoadrunneConnorRedesign extends AutoRedAliianceRoadrun {
         telemetry.addLine("Robot Awaiting Start");
         telemetry.update();
 
+        if(isStopRequested()) return;
+
         waitForStart();
 
         if (!trajectoryCompleted) { // Check if the trajectory has not been completed
@@ -45,8 +47,12 @@ public class RoadrunneConnorRedesign extends AutoRedAliianceRoadrun {
             telemetry.update();
             trajectoryCompleted = true;
         }
+        sleep(1000);
         telemetry.addLine("Ready for Next Sequence");
         telemetry.update();
+        sleep(1000);
+        requestOpModeStop();
+
     }
 
 }
