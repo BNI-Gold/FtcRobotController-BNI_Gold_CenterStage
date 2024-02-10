@@ -3,14 +3,13 @@ package org.firstinspires.ftc.teamcode.Compitition.CenterStage.Controls.Auto.Aut
 import com.acmerobotics.roadrunner.geometry.Pose2d;
 import com.acmerobotics.roadrunner.trajectory.Trajectory;
 import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
-import com.qualcomm.robotcore.eventloop.opmode.Disabled;
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 import org.firstinspires.ftc.teamcode.Compitition.CenterStage.RoadRunner.drive.RoadrunMecanumDrive;
 
 //@Config
 //@Disabled
-@Autonomous(name = "RR- Acker")
-public class RoadRunnerAcker extends LinearOpMode {
+@Autonomous(name = "RR: Acker: Traj Builder")
+public class RoadRunnerTrajBuilder extends LinearOpMode {
 
     @Override
     public void runOpMode() throws InterruptedException {
@@ -41,8 +40,6 @@ public class RoadRunnerAcker extends LinearOpMode {
         drive.followTrajectory(traj2);
         drive.followTrajectory(traj3);
 
-
-        //requestOpModeStop();
     }
 
 }
