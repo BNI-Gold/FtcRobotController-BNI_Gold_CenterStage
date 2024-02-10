@@ -18,20 +18,15 @@ import com.acmerobotics.roadrunner.trajectory.constraints.ProfileAccelerationCon
 import com.acmerobotics.roadrunner.trajectory.constraints.TrajectoryAccelerationConstraint;
 import com.acmerobotics.roadrunner.trajectory.constraints.TrajectoryVelocityConstraint;
 import com.qualcomm.hardware.lynx.LynxModule;
-import com.qualcomm.hardware.rev.RevBlinkinLedDriver;
 import com.qualcomm.hardware.rev.RevHubOrientationOnRobot;
-import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.hardware.DcMotorEx;
 import com.qualcomm.robotcore.hardware.DcMotorSimple;
-import com.qualcomm.robotcore.hardware.DistanceSensor;
 import com.qualcomm.robotcore.hardware.HardwareMap;
 import com.qualcomm.robotcore.hardware.IMU;
 import com.qualcomm.robotcore.hardware.PIDFCoefficients;
-import com.qualcomm.robotcore.hardware.Servo;
 import com.qualcomm.robotcore.hardware.VoltageSensor;
 import com.qualcomm.robotcore.hardware.configuration.typecontainers.MotorConfigurationType;
-import com.qualcomm.robotcore.util.ElapsedTime;
 
 import org.firstinspires.ftc.robotcore.external.navigation.AngleUnit;
 import org.firstinspires.ftc.teamcode.Compitition.CenterStage.RoadRunner.trajectorysequence.TrajectorySequence;
@@ -49,54 +44,10 @@ import java.util.List;
 @Config
 public class RoadrunMecanumDrive extends MecanumDrive {
 
-    public static final double TICKS_PER_REV = 1;
+    public static final double TICKS_PER_REV = 2000;
     public static final double MAX_RPM = 1;   //actually 1
 
-    public HardwareMap hwBot = null;
 
-    public DcMotor viperSlideRight = null;
-    public DcMotor viperSlideLeft = null;
-    public DcMotor wormgearRight = null;
-    //        public DcMotor wormgearLeft = null;
-    public DcMotor endgameArm = null;
-    public Servo endgameArmRotator = null;
-    public Servo pixelRotatorRight = null;
-
-    public Servo pixelRotatorLeft = null;
-
-//        public DcMotor pixelRotatorButThisTimeItsAMotor = null;
-
-    public Servo pixelClawLeft = null;
-    public Servo pixelClawRight = null;
-
-//         public   TouchSensor magSensor1;
-
-    public static final double TICKS_PER_ROTATION_WORMGEAR = 384.5;
-
-    public DcMotor planeLauncher = null;
-
-    public Servo planeLauncherServo = null;
-
-    public DistanceSensor pixelDistanceSensor1;
-    public DistanceSensor pixelDistanceSensor2;
-    public ElapsedTime currentTime = new ElapsedTime();
-
-    public LinearOpMode LinearOp = null;
-
-    public ElapsedTime upTimer = new ElapsedTime();
-    public ElapsedTime downTimer = new ElapsedTime();
-
-    public static final double TICKS_PER_ROTATION = 386.3;
-
-    RevBlinkinLedDriver blinkinLedDriver;
-    RevBlinkinLedDriver.BlinkinPattern pattern;
-
-    RevBlinkinLedDriver blinkinLedDriver2;
-    RevBlinkinLedDriver.BlinkinPattern pattern2;
-
-
-
-    public double headingError  = 0;
 
     /*
      * Set RUN_USING_ENCODER to true to enable built-in hub velocity control using drive encoders.
@@ -192,15 +143,7 @@ public class RoadrunMecanumDrive extends MecanumDrive {
     private List<Integer> lastEncPositions = new ArrayList<>();
     private List<Integer> lastEncVels = new ArrayList<>();
 
-
-
-
-
-//
-
     public RoadrunMecanumDrive(HardwareMap hardwareMap) {
-
-
         super(kV, kA, kStatic, TRACK_WIDTH, TRACK_WIDTH, LATERAL_MULTIPLIER);
 
         follower = new HolonomicPIDVAFollower(TRANSLATIONAL_PID, TRANSLATIONAL_PID, HEADING_PID,
@@ -257,245 +200,7 @@ public class RoadrunMecanumDrive extends MecanumDrive {
                 follower, HEADING_PID, batteryVoltageSensor,
                 lastEncPositions, lastEncVels, lastTrackingEncPositions, lastTrackingEncVels
         );
-
-//        magSensor1 = hwBot.get (TouchSensor.class, "MagSensor1");
-
-
-
-
-
-
-
-        viperSlideRight = hwBot.dcMotor.get("viper_slide_right");
-        viperSlideRight.setDirection(DcMotor.Direction.FORWARD);
-        viperSlideRight.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
-
-        viperSlideLeft = hwBot.dcMotor.get("viper_slide_left");
-        viperSlideLeft.setDirection(DcMotorSimple.Direction.FORWARD);
-        viperSlideLeft.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
-
-        wormgearRight = hwBot.dcMotor.get("wormgear_right");
-        wormgearRight.setDirection(DcMotor.Direction.FORWARD); //check direction b/f testing
-        wormgearRight.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
-
-
-//            pixelRotatorButThisTimeItsAMotor = hwBot.dcMotor.get("pixel_rotator_motor");
-//            pixelRotatorButThisTimeItsAMotor.setDirection(DcMotorSimple.Direction.FORWARD);
-//            pixelRotatorButThisTimeItsAMotor.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
-
-//            wormgearLeft = hwBot.dcMotor.get("wormgear_left");
-//            wormgearLeft.setDirection(DcMotor.Direction.FORWARD);  //check direction b/f testing
-//            wormgearLeft.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
-
-
-
-        //Expantion Hub Port 0
-
-        endgameArm = hwBot.dcMotor.get("endgame_arm");
-        endgameArm.setDirection(DcMotorSimple.Direction.FORWARD);
-        endgameArm.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
-        endgameArm.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
-        endgameArm.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
-
-        endgameArmRotator = hwBot.servo.get("end_game_arm_rotator");
-//            endgameArmRotator.setDirection(Servo.Direction.FORWARD);
-
-
-        pixelRotatorRight = hwBot.servo.get("pixel_rotator");
-        //pixelRotator.setDirection(Servo.Direction.REVERSE);
-        pixelRotatorLeft = hwBot.servo.get("pixel_rotator_left");
-        pixelRotatorLeft.setDirection(Servo.Direction.REVERSE);
-
-        pixelClawLeft = hwBot.servo.get("pixel_claw_left");
-        pixelClawLeft.setDirection(Servo.Direction.FORWARD);
-
-        pixelClawRight = hwBot.servo.get("pixel_claw_right");
-        pixelClawRight.setDirection(Servo.Direction.FORWARD);
-
-        planeLauncherServo = hwBot.servo.get("plane_launcher_servo");
-        planeLauncherServo.setDirection(Servo.Direction.FORWARD);
-//
-//            planeLauncher = hwBot.dcMotor.get("plane_launcher");
-//            planeLauncher.setDirection(DcMotor.Direction.FORWARD);
-//            planeLauncher.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
-
-        currentTime.reset();
-
-
-//
-
-
-
-        pixelDistanceSensor1 = hwBot.get(DistanceSensor.class, "pixel_distance_1");
-        pixelDistanceSensor2 = hwBot.get(DistanceSensor.class, "pixel_distance_2");
-
-
-        blinkinLedDriver = hwBot.get(RevBlinkinLedDriver.class, "left_light");
-        blinkinLedDriver2 = hwBot.get(RevBlinkinLedDriver.class, "right_light");
-
-//
-
     }
-
-    public void linearSlideExtend(double power) {
-        viperSlideRight.setPower(-Math.abs(power));
-        viperSlideLeft.setPower(-Math.abs(power));
-    }
-
-    public void linearSlideRetract(double power) {
-        viperSlideRight.setPower(Math.abs(power));
-        viperSlideLeft.setPower(Math.abs(power));
-    }
-
-    public void stopLinearSlide () {
-        viperSlideLeft.setPower(0);
-        viperSlideRight.setPower(0);
-
-    }
-
-    public void linearSlideExtend(double power, double rotations)  {
-        double ticks = rotations * (1) * TICKS_PER_ROTATION;
-        viperSlideRight.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
-        viperSlideRight.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
-        while (Math.abs(viperSlideRight.getCurrentPosition()) < ticks && LinearOp.opModeIsActive()) {
-            linearSlideExtend(power);
-        }
-        stopLinearSlide();
-    }
-
-    public void linearSlideRetract(double power, double rotations) {
-        double ticks = rotations * TICKS_PER_ROTATION;
-        viperSlideRight.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
-        viperSlideRight.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
-        while (Math.abs(viperSlideRight.getCurrentPosition())< ticks && LinearOp.opModeIsActive()) {
-            linearSlideRetract(power);
-        }
-        stopLinearSlide();
-    }
-
-    public void rightWormgearUp (double power, double ticks) {
-//        double ticks = rotations * TICKS_PER_ROTATION_WORMGEAR;
-        wormgearRight.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
-        wormgearRight.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
-        while (Math.abs(wormgearRight.getCurrentPosition()) < ticks && LinearOp.opModeIsActive()) {
-            rightWormgearDown(power);
-        }
-        rightWormgearStop();
-    }
-
-    public void rightWormgearDown(double power, double ticks){
-//        double ticks = rotations * TICKS_PER_ROTATION_WORMGEAR;
-        wormgearRight.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
-        wormgearRight.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
-        while (Math.abs(wormgearRight.getCurrentPosition()) < ticks && LinearOp.opModeIsActive()) {
-            rightWormgearUp(power);
-        }
-        rightWormgearStop();
-    }
-
-//    public void linearSlideStop() {
-//        viperSlideRight.setPower(0);
-//        viperSlideLeft.setPower(0);
-//    }
-
-    public void rightWormgearUp(double power) {
-        wormgearRight.setPower(Math.abs(power));
-    }
-
-    public void rightWormgearDown(double power) {
-        wormgearRight.setPower(-Math.abs(power));
-    }
-
-    public void rightWormgearStop() {wormgearRight.setPower(0);}
-
-    public void endgameArmExtend(){
-        endgameArm.setPower(-1);
-    }
-
-    public void endgameArmRetract(){
-        endgameArm.setPower(1);
-    }
-    public void endgameArmStop(){
-        endgameArm.setPower(0);
-    }
-
-    public void endgameArmRotatorMovement (double position) {
-        endgameArmRotator.setPosition(position);
-    }
-
-    public void rightPixelClawOpen () { pixelClawRight.setPosition(0.948);//378
-    }
-    public void rightPixelClawClose(){
-        pixelClawRight.setPosition(0.478);
-    }//848
-
-    public void leftPixelClawOpen (){
-        pixelClawLeft.setPosition(0.948);
-    }
-
-    public void leftPixelClawClose (){
-        pixelClawLeft.setPosition(0.478);
-    }
-
-    public void leftPixelLEDNone() {
-        blinkinLedDriver.setPattern(RevBlinkinLedDriver.BlinkinPattern.BLACK);
-    }
-
-    public void leftPixelLEDIn() {
-        blinkinLedDriver.setPattern(RevBlinkinLedDriver.BlinkinPattern.BLUE);
-    }
-
-    public void leftPixelLEDCaptured() {
-        blinkinLedDriver.setPattern(RevBlinkinLedDriver.BlinkinPattern.GREEN);
-    }
-
-    public void rightPixelLEDNone(){
-        blinkinLedDriver2.setPattern(RevBlinkinLedDriver.BlinkinPattern.BLACK);
-    }
-    public void rightPixelLEDIn(){
-        blinkinLedDriver2.setPattern(RevBlinkinLedDriver.BlinkinPattern.BLUE);
-    }
-    public void rightPixelLEDCaptured(){
-        blinkinLedDriver2.setPattern(RevBlinkinLedDriver.BlinkinPattern.GREEN);
-    }
-
-//    public void planeLauncherOn(){
-//            planeLauncherServo.setPower(1);
-//    }
-//
-//    public void planeLauncherOff(){
-//            planeLauncherServo.setPower(0);
-//    }
-
-    public void collectorPosition(){
-        pixelRotatorRight.setPosition(.4179);
-        pixelRotatorLeft.setPosition(.4179);
-    }
-
-    public void drivePosition(){
-        pixelRotatorRight.setPosition(.5);
-        pixelRotatorLeft.setPosition(.5);
-    }
-
-    public void autoPlacePosition() {
-        pixelRotatorRight.setPosition(0.555);
-        pixelRotatorLeft.setPosition((0.555));
-    }
-
-    public void automousPosition(){
-        pixelRotatorRight.setPosition(.9);
-    }
-
-    //Need to determine new hang position based on how hang arm is mounted
-    public void hangPosition(){
-        pixelRotatorRight.setPosition(.5);
-    }
-
-    public void tuckPosition(){
-        pixelRotatorRight.setPosition(0.283);
-        pixelRotatorLeft.setPosition(0.283);
-    }
-
 
     public TrajectoryBuilder trajectoryBuilder(Pose2d startPose) {
         return new TrajectoryBuilder(startPose, VEL_CONSTRAINT, ACCEL_CONSTRAINT);
@@ -613,7 +318,7 @@ public class RoadrunMecanumDrive extends MecanumDrive {
 
         setDrivePower(vel);
     }
-    public void setLinearOp(LinearOpMode LinearOp) {this.LinearOp = LinearOp;}
+
     @NonNull
     @Override
     public List<Double> getWheelPositions() {

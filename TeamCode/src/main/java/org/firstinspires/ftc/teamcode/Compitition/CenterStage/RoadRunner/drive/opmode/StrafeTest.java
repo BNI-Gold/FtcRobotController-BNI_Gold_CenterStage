@@ -10,6 +10,7 @@ import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 
 import org.firstinspires.ftc.robotcore.external.Telemetry;
 import org.firstinspires.ftc.teamcode.Compitition.CenterStage.RoadRunner.drive.RoadrunMecanumDrive;
+import org.firstinspires.ftc.teamcode.Compitition.CenterStage.RoadRunner.drive.StandardTrackingWheelLocalizer;
 
 /*
  * This is a simple routine to test translational drive capabilities.
@@ -17,7 +18,7 @@ import org.firstinspires.ftc.teamcode.Compitition.CenterStage.RoadRunner.drive.R
 @Config
 @Autonomous(group = "drive")
 public class StrafeTest extends LinearOpMode {
-    public static double DISTANCE = 30; // in
+    public static double DISTANCE = 3; // in
 
     @Override
     public void runOpMode() throws InterruptedException {

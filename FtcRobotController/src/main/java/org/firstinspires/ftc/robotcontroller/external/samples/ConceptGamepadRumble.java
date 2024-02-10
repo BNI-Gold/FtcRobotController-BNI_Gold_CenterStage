@@ -101,6 +101,7 @@ public class ConceptGamepadRumble extends LinearOpMode
     final double HALF_TIME = 60.0;              // Wait this many seconds before rumble-alert for half-time.
     final double TRIGGER_THRESHOLD  = 0.75;     // Squeeze more than 3/4 to get rumble.
 
+
     @Override
     public void runOpMode()
     {
@@ -183,14 +184,18 @@ public class ConceptGamepadRumble extends LinearOpMode
             // ----------------------------------------------------------------------------------------
             // Example 4. Rumble once when gamepad right trigger goes above the THRESHOLD.
             // ----------------------------------------------------------------------------------------
-            if (gamepad1.right_trigger > TRIGGER_THRESHOLD) {
-                if (!highLevel) {
-                    gamepad1.rumble(0.9, 0, 200);  // 200 mSec burst on left motor.
-                    highLevel = true;  // Hold off any more triggers
-                }
-            } else {
-                highLevel = false;  // We can trigger again now.
-            }
+
+
+
+
+
+//                if (!highLevel) {
+//                    gamepad1.rumble(0.9, 0, 200);  // 200 mSec burst on left motor.
+//                    highLevel = true;  // Hold off any more triggers
+//                }
+//            } else {
+//                highLevel = false;  // We can trigger again now.
+//            }
 
             // Send the telemetry data to the Driver Station, and then pause to pace the program.
             telemetry.update();

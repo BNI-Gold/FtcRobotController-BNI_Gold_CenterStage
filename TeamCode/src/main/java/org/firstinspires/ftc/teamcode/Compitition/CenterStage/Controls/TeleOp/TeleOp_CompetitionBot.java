@@ -30,6 +30,8 @@ public class TeleOp_CompetitionBot extends OpMode {
 
     double pixelRotationDown = 0.0;
 
+    boolean rumbleState = false;
+
     double leftStickYVal;
     double leftStickXVal;
     double rightStickXVal;
@@ -81,6 +83,7 @@ public class TeleOp_CompetitionBot extends OpMode {
         LEDControl();
         planeLauncher();
         pixelPickupTelemetry();
+        controlerRumble();
         drive();
         telemetryOutput();
     }
@@ -245,8 +248,8 @@ public class TeleOp_CompetitionBot extends OpMode {
         } else if (gamepad2.dpad_right && Bot.pixelDistanceSensor1.getDistance(DistanceUnit.INCH) > 1.175 && Bot.pixelDistanceSensor1.getDistance(DistanceUnit.INCH) < 1.5 ) {
             //&& !Bot.magSensor1.isPressed()
             Bot.rightWormgearUp(wormgearPower * 0.2);
-        } else if (gamepad2.dpad_left && Bot.pixelDistanceSensor2.getDistance(DistanceUnit.INCH) < 1.15) {
-            Bot.rightWormgearUp(wormgearPower * 0.2);
+        } else if (gamepad2.dpad_right && Bot.pixelDistanceSensor1.getDistance(DistanceUnit.INCH) < 1.17) {
+            Bot.rightWormgearDown(wormgearPower * 0.2);
         }
 
         if (gamepad2.dpad_left && Bot.pixelDistanceSensor2.getDistance(DistanceUnit.INCH) > 1.7 ) {
@@ -255,7 +258,7 @@ public class TeleOp_CompetitionBot extends OpMode {
         } else if (gamepad2.dpad_left && Bot.pixelDistanceSensor2.getDistance(DistanceUnit.INCH) > 1.225 && Bot.pixelDistanceSensor2.getDistance(DistanceUnit.INCH) < 1.7 ) {
             //&& !Bot.magSensor1.isPressed()
             Bot.rightWormgearUp(wormgearPower * 0.2);
-        } else if (gamepad2.dpad_left && Bot.pixelDistanceSensor2.getDistance(DistanceUnit.INCH) < 1.12) {
+        } else if (gamepad2.dpad_left && Bot.pixelDistanceSensor2.getDistance(DistanceUnit.INCH) < 1.22) {
             Bot.rightWormgearDown(wormgearPower * 0.2);
         }
 
@@ -304,6 +307,16 @@ public class TeleOp_CompetitionBot extends OpMode {
 
     }
 
+
+    public void controlerRumble(){
+        if (gamepad2.right_bumper && gamepad2.left_bumper) {
+            rumbleState = true;
+        } else if (!gamepad2.right_bumper && !gamepad2.left_bumper && rumbleState) {
+            gamepad1.rumble(1000);
+            rumbleState = false;
+
+        }
+    }
 
     public void pixelPickupTelemetry(){
         telemetry.addData("LEFTPixelSensor - ", Bot.pixelDistanceSensor2.getDistance(DistanceUnit.INCH));
@@ -370,6 +383,10 @@ public class TeleOp_CompetitionBot extends OpMode {
         }
     }
         public void telemetryOutput () {
+
+//            telemetry.addData("Encoder Count Lateral Odometry:", Bot.rearLeftMotor.getCurrentPosition());
+//            telemetry.addData("Encoder COunt Right Odometry", Bot.rearRightMotor.getCurrentPosition());
+//            telemetry.addData("Encoder COunt Left Odometry", Bot.frontRightMotor.getCurrentPosition());
 
             telemetry.addData("worm gear encoder: ", Bot.wormgearRight.getCurrentPosition());
 
