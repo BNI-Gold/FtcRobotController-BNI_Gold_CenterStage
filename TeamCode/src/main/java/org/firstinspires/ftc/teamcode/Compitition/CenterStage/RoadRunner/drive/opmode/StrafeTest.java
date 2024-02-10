@@ -18,7 +18,7 @@ import org.firstinspires.ftc.teamcode.Compitition.CenterStage.RoadRunner.drive.S
 @Config
 @Autonomous(group = "drive")
 public class StrafeTest extends LinearOpMode {
-    public static double DISTANCE = 3; // in
+    public static double DISTANCE = 10; // in
 
     @Override
     public void runOpMode() throws InterruptedException {

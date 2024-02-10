@@ -68,8 +68,8 @@ public class RoadrunMecanumDrive extends MecanumDrive {
      * angular distances although most angular parameters are wrapped in Math.toRadians() for
      * convenience. Make sure to exclude any gear ratio included in MOTOR_CONFIG from GEAR_RATIO.
      */
-    public static double WHEEL_RADIUS = 1.889765; // in
-    public static double GEAR_RATIO = 0.875; // output (wheel) speed / input (motor) speed
+    public static double WHEEL_RADIUS = 1.49606; // in 1.889765
+    public static double GEAR_RATIO = 1; // output (wheel) speed / input (motor) speed 0.875
     public static double TRACK_WIDTH = 15.86; // in
 
     /*
@@ -121,7 +121,7 @@ public class RoadrunMecanumDrive extends MecanumDrive {
     public static PIDCoefficients TRANSLATIONAL_PID = new PIDCoefficients(0, 0, 1);
     public static PIDCoefficients HEADING_PID = new PIDCoefficients(8, 0, 1);
 
-    public static double LATERAL_MULTIPLIER = 1.5;
+    public static double LATERAL_MULTIPLIER = 0.65;
 
     public static double VX_WEIGHT = 1;
     public static double VY_WEIGHT = 1;
