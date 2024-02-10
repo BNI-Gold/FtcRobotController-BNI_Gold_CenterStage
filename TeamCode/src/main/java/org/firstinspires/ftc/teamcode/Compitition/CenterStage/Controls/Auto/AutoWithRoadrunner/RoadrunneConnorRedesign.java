@@ -43,7 +43,8 @@ public class RoadrunneConnorRedesign extends AutoRedAliianceRoadrun {
             telemetry.update();
             trajectoryCompleted = true;
         }
-
+        telemetry.addLine("Ready for Next Sequence");
+        telemetry.update();
     }
 
 }
