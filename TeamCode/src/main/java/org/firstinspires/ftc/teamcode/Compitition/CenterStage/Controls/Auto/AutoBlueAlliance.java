@@ -9,7 +9,7 @@ import org.firstinspires.ftc.teamcode.Compitition.CenterStage.Vision.TeamPropPos
 public abstract class AutoBlueAlliance extends AutoMain{
 
     public CompBot Bot = new CompBot();
-    public RoadrunMecanumDrive drive = new RoadrunMecanumDrive(hardwareMap);
+
     public TeamPropPositionPipeline_Gold pipeline = new TeamPropPositionPipeline_Gold("BLUE", 140);
 
     public void CameraDetection () {

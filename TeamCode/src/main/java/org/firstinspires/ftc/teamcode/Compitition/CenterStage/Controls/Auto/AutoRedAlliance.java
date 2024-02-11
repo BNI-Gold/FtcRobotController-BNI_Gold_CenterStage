@@ -26,6 +26,15 @@ public abstract class AutoRedAlliance extends AutoMain {
     }
 
 
+    public void slideExtendRR(){
+        Bot.linearSlideExtend(.8,350);
+
+    }
+
+    public void slideRetractRR (){
+        Bot.linearSlideRetract(.8,200);
+    }
+
 
 
     public void spikeMarkPlaceClose(){

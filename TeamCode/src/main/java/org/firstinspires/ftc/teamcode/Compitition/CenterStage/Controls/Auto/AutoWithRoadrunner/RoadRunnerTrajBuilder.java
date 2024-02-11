@@ -20,15 +20,15 @@ public class RoadRunnerTrajBuilder extends LinearOpMode {
         drive.setPoseEstimate(startPose);
 
         Trajectory traj1 = drive.trajectoryBuilder(startPose)
-                .forward(10)
+                .forward(27)
                 .build();
 
         Trajectory traj2 = drive.trajectoryBuilder(traj1.end())
-                .strafeLeft(10)
+                .strafeLeft(20)
                 .build();
 
         Trajectory traj3 = drive.trajectoryBuilder(traj2.end())
-                .strafeRight(10)
+                .strafeRight(20)
                 .build();
 
         waitForStart();
@@ -37,7 +37,7 @@ public class RoadRunnerTrajBuilder extends LinearOpMode {
 
         telemetry.addLine("Executing Trajectory 1...");
         telemetry.update();
-        drive.followTrajectory(traj1);
+//        drive.followTrajectory(traj1);
         telemetry.addLine("Executing Turn...");
         telemetry.update();
         drive.turn(Math.toRadians(90));

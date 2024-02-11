@@ -607,22 +607,30 @@ public class CompBot extends MecanumDrive {
 
     }
 
-    public void linearSlideExtend(double power, double rotations)  {
-        double ticks = rotations * (1) * TICKS_PER_ROTATION;
+    public void linearSlideExtend(double power, double ticks)  {
+//        double ticks = rotations * (1) * TICKS_PER_ROTATION;
         viperSlideRight.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
         viperSlideRight.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
+        viperSlideLeft.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
+        viperSlideLeft.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
         while (Math.abs(viperSlideRight.getCurrentPosition()) < ticks && LinearOp.opModeIsActive()) {
             linearSlideExtend(power);
+
         }
+
+
         stopLinearSlide();
     }
 
-    public void linearSlideRetract(double power, double rotations) {
-        double ticks = rotations * TICKS_PER_ROTATION;
+    public void linearSlideRetract(double power, double ticks) {
+//        double ticks = rotations * TICKS_PER_ROTATION;
         viperSlideRight.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
         viperSlideRight.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
-        while (Math.abs(viperSlideRight.getCurrentPosition())< ticks && LinearOp.opModeIsActive()) {
+        viperSlideLeft.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
+        viperSlideLeft.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
+        while (Math.abs(viperSlideRight.getCurrentPosition()) < ticks && LinearOp.opModeIsActive()) {
             linearSlideRetract(power);
+
         }
         stopLinearSlide();
     }
@@ -732,8 +740,8 @@ public class CompBot extends MecanumDrive {
     }
 
     public void autoPlacePosition() {
-            pixelRotatorRight.setPosition(0.555);
-            pixelRotatorLeft.setPosition((0.555));
+            pixelRotatorRight.setPosition(0.515);
+            pixelRotatorLeft.setPosition((0.515));
     }
 
     public void automousPosition(){

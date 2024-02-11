@@ -121,7 +121,7 @@ public class RoadrunMecanumDrive extends MecanumDrive {
     public static PIDCoefficients TRANSLATIONAL_PID = new PIDCoefficients(0, 0, 1);
     public static PIDCoefficients HEADING_PID = new PIDCoefficients(8, 0, 1);
 
-    public static double LATERAL_MULTIPLIER = 0.65;
+    public static double LATERAL_MULTIPLIER = 0.375; // (0.4 gave 38 on 30) .38 was close, .37 is very very close
 
     public static double VX_WEIGHT = 1;
     public static double VY_WEIGHT = 1;

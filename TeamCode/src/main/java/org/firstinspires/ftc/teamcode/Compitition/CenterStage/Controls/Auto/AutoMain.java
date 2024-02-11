@@ -81,6 +81,9 @@ public abstract class AutoMain extends LinearOpMode {
 //
 //    }
 
+
+
+
     public void startObjectDetectionPipeline(TeamPropPositionPipeline_Gold pipe) {
         webcam.setPipeline(pipe);
         webcam.setViewportRenderingPolicy(OpenCvCamera.ViewportRenderingPolicy.MAXIMIZE_EFFICIENCY);
