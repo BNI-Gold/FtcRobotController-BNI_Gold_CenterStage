@@ -43,46 +43,51 @@ public class RoadrunnerRedAudience extends AutoRedAlliance {
 
 
         TrajectorySequence trajSeqRedLeft = drive.trajectorySequenceBuilder(startPose)
-                //Actions To Drop Purple Pixel
+
+                //Drop Pixel
                 .forward(25)
-                .addDisplacementMarker(() -> {
-                        Bot.collectorPosition();
-                       // if (Bot.pixelDistanceSensor1.getDistance(DistanceUnit.INCH) > 1.05 && Bot.pixelDistanceSensor1.getDistance(DistanceUnit.INCH) < 1.5 ))
-                    Bot.rightWormgearDown(.6, 800);
-                })
-                .turn(Math.toRadians(90))
-                .forward(8)
-                .back(0.5)
-                .addDisplacementMarker(() -> {
-
-                    Bot.leftPixelClawOpen();
-                })
-                .waitSeconds(1)
-
-                //Actions To Move to Backdrop
-                .forward(24)
-                .turn(Math.toRadians(-90))
-                .turn(Math.toRadians(90))
-                .forward(24)
-                .turn(Math.toRadians(-90))
-                .forward(80)
-                .strafeRight(30)
-
-
-                // Parking
-                .strafeLeft(23)
-                .forward(15)
-                .build();
-
-        TrajectorySequence trajseqRedMid = drive.trajectorySequenceBuilder(startPose)
-                //Actions To Drop Purple Pixel
-                .forward(15)
                 .addDisplacementMarker(() -> {
                     Bot.collectorPosition();
                     // if (Bot.pixelDistanceSensor1.getDistance(DistanceUnit.INCH) > 1.05 && Bot.pixelDistanceSensor1.getDistance(DistanceUnit.INCH) < 1.5 ))
                     Bot.rightWormgearDown(.6, 800);
                 })
+                .turn(Math.toRadians(-90))
+                .forward(9.5)
+                .back(1)
+
+                .addDisplacementMarker(() -> {
+
+                    Bot.leftPixelClawOpen();
+
+                })
                 .waitSeconds(1)
+                .back(24)
+                .addDisplacementMarker(() -> {
+                    Bot.leftPixelClawClose();
+                    Bot.drivePosition();
+                })
+                .turn(Math.toRadians(180))
+                .addDisplacementMarker(()->{
+                    Bot.rightWormgearUp(1,721);
+                    Bot.autoPlacePosition();
+
+                })
+                .strafeRight(15)
+                .forward(17)
+                .build();
+
+        TrajectorySequence trajseqRedMid = drive.trajectorySequenceBuilder(startPose)
+                .forward(15)
+
+                .addDisplacementMarker(() -> {
+                    Bot.collectorPosition();
+                    // if (Bot.pixelDistanceSensor1.getDistance(DistanceUnit.INCH) > 1.05 && Bot.pixelDistanceSensor1.getDistance(DistanceUnit.INCH) < 1.5 ))
+                    Bot.rightWormgearDown(.6, 800);
+
+                })
+
+                .waitSeconds(1)
+
                 .forward(19)
                 .back(2.5)
                 .addDisplacementMarker(() -> {
@@ -90,26 +95,20 @@ public class RoadrunnerRedAudience extends AutoRedAlliance {
                 })
                 .back(7)
                 .waitSeconds(1)
-
-                //Actions To Move to Backdrop
-                .forward(24)
-                .turn(Math.toRadians(-90))
                 .turn(Math.toRadians(90))
-                .forward(24)
-                .turn(Math.toRadians(-90))
-                .forward(80)
-                .strafeRight(30)
+                .addDisplacementMarker(()->{
+                    Bot.rightWormgearUp(1,721);
+                    Bot.autoPlacePosition();
 
-
-
-                // Parking
-                .strafeLeft(20)
+                })
                 .forward(25)
-                        .build();
+                .strafeRight(14)
+                .forward(23)
+                .build();
 
         TrajectorySequence trajRedRight = drive.trajectorySequenceBuilder(startPose)
-                //Actions To Drop Purple Pixel
                 .forward(7)
+
                 .addDisplacementMarker(() -> {
                     Bot.collectorPosition();
                     // if (Bot.pixelDistanceSensor1.getDistance(DistanceUnit.INCH) > 1.05 && Bot.pixelDistanceSensor1.getDistance(DistanceUnit.INCH) < 1.5 ))
@@ -117,7 +116,7 @@ public class RoadrunnerRedAudience extends AutoRedAlliance {
 
                 })
                 .waitSeconds(1)
-                .strafeRight(18)
+                .strafeLeft(16)
                 .forward(11)
                 .back(1)
                 .addDisplacementMarker(() -> {
@@ -125,22 +124,15 @@ public class RoadrunnerRedAudience extends AutoRedAlliance {
                 })
                 .back(8)
                 .waitSeconds(1)
-
-                //Actions To Move to Backdrop
-                .forward(24)
-                .turn(Math.toRadians(-90))
                 .turn(Math.toRadians(90))
-                .forward(24)
-                .turn(Math.toRadians(-90))
-                .forward(80)
-                .strafeRight(30)
+                .addDisplacementMarker(()->{
+                    Bot.rightWormgearUp(1,721);
+                    Bot.autoPlacePosition();
 
-
-
-
-                // Parking
-                .strafeLeft(9)
-                .forward(15)
+                })
+                .forward(20)
+                .strafeLeft(24)
+                .forward(20)
                 .build();
 
         telemetry.addLine("Robot Awaiting Start");
