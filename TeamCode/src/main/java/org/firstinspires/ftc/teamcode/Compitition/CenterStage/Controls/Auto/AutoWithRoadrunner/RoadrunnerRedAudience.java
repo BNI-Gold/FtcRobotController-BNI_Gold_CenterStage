@@ -42,7 +42,8 @@ public class RoadrunnerRedAudience extends AutoRedAlliance {
         drive.setPoseEstimate(startPose);
 
 
-        TrajectorySequence trajSeq1 = drive.trajectorySequenceBuilder(startPose)
+        TrajectorySequence trajSeqRedLeft = drive.trajectorySequenceBuilder(startPose)
+                //Actions To Drop Purple Pixel
                 .forward(25)
                 .addDisplacementMarker(() -> {
                         Bot.collectorPosition();
@@ -62,6 +63,8 @@ public class RoadrunnerRedAudience extends AutoRedAlliance {
                     Bot.leftPixelClawClose();
                     Bot.drivePosition();
                 })
+
+                //Actions To Move to Backdrop
                 .turn(Math.toRadians(-180))
                 .addDisplacementMarker(()->{
                     Bot.rightWormgearUp(1,751);
@@ -71,30 +74,24 @@ public class RoadrunnerRedAudience extends AutoRedAlliance {
                 .forward(15)
                 .build();
 
-        TrajectorySequence trajseq2 = drive.trajectorySequenceBuilder(startPose)
+        TrajectorySequence trajseqRedMid = drive.trajectorySequenceBuilder(startPose)
                 .forward(15)
-
                 .addDisplacementMarker(() -> {
                     Bot.collectorPosition();
                     // if (Bot.pixelDistanceSensor1.getDistance(DistanceUnit.INCH) > 1.05 && Bot.pixelDistanceSensor1.getDistance(DistanceUnit.INCH) < 1.5 ))
                     Bot.rightWormgearDown(.6, 800);
 
                 })
-
                 .waitSeconds(1)
-
                 .forward(19)
                 .back(2.5)
                 .addDisplacementMarker(() -> {
                     Bot.leftPixelClawOpen();
                 })
 
-
-
                 .back(7)
                 .waitSeconds(1)
                 .turn(Math.toRadians(-90))
-
 
                 .addDisplacementMarker(()->{
                     Bot.rightWormgearUp(1,751);
@@ -106,7 +103,7 @@ public class RoadrunnerRedAudience extends AutoRedAlliance {
                 .forward(25)
                         .build();
 
-        TrajectorySequence trajseq3 = drive.trajectorySequenceBuilder(startPose)
+        TrajectorySequence trajRedRight = drive.trajectorySequenceBuilder(startPose)
                 .forward(7)
 
                 .addDisplacementMarker(() -> {
@@ -141,19 +138,6 @@ public class RoadrunnerRedAudience extends AutoRedAlliance {
                 .forward(15)
                 .build();
 
-
-
-//        Trajectory traj2 = drive.trajectoryBuilder(trajSeq1.end())
-//                        .back(25)
-//                                .build();
-//
-//        Trajectory traj3 = drive.trajectoryBuilder(traj2.end())
-//                        .strafeLeft(27)
-//                                .build();
-//        Trajectory traj4 = drive.trajectoryBuilder(traj3.end())
-//                        .forward(10)
-//                                .build();
-
         telemetry.addLine("Robot Awaiting Start");
         telemetry.update();
 
@@ -168,7 +152,7 @@ public class RoadrunnerRedAudience extends AutoRedAlliance {
             if (teamPropPosition == TeamPropPosition.RED_LEFT) {
                 telemetry.addLine("Executing Trajectory...");
                 telemetry.update();
-                drive.followTrajectorySequence(trajSeq1);
+                drive.followTrajectorySequence(trajSeqRedLeft);
                 telemetry.addLine("Finished Trajectory...");
                 telemetry.update();
 
@@ -188,7 +172,7 @@ public class RoadrunnerRedAudience extends AutoRedAlliance {
             else if (teamPropPosition == TeamPropPosition.RED_MIDDLE) {
                 telemetry.addLine("Executing Trajectory...");
                 telemetry.update();
-                drive.followTrajectorySequence(trajseq2);
+                drive.followTrajectorySequence(trajseqRedMid);
                 telemetry.addLine("Finished Trajectory...");
                 telemetry.update();
                 Bot.linearSlideExtend(.8,390);
@@ -210,7 +194,7 @@ public class RoadrunnerRedAudience extends AutoRedAlliance {
             else if (teamPropPosition == TeamPropPosition.RED_RIGHT) {
                 telemetry.addLine("Executing Trajectory...");
                 telemetry.update();
-                drive.followTrajectorySequence(trajseq3);
+                drive.followTrajectorySequence(trajRedRight);
                 telemetry.addLine("Finished Trajectory...");
                 telemetry.update();
 
