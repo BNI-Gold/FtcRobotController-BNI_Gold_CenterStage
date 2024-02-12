@@ -60,6 +60,13 @@ public class RoadrunnerRedAudience extends AutoRedAlliance {
                 .waitSeconds(1)
 
                 //Actions To Move to Backdrop
+                .forward(24)
+                .turn(Math.toRadians(-90))
+                .turn(Math.toRadians(90))
+                .forward(24)
+                .turn(Math.toRadians(-90))
+                .forward(80)
+                .strafeRight(30)
 
 
                 // Parking
@@ -85,6 +92,13 @@ public class RoadrunnerRedAudience extends AutoRedAlliance {
                 .waitSeconds(1)
 
                 //Actions To Move to Backdrop
+                .forward(24)
+                .turn(Math.toRadians(-90))
+                .turn(Math.toRadians(90))
+                .forward(24)
+                .turn(Math.toRadians(-90))
+                .forward(80)
+                .strafeRight(30)
 
 
 
@@ -113,6 +127,13 @@ public class RoadrunnerRedAudience extends AutoRedAlliance {
                 .waitSeconds(1)
 
                 //Actions To Move to Backdrop
+                .forward(24)
+                .turn(Math.toRadians(-90))
+                .turn(Math.toRadians(90))
+                .forward(24)
+                .turn(Math.toRadians(-90))
+                .forward(80)
+                .strafeRight(30)
 
 
 
