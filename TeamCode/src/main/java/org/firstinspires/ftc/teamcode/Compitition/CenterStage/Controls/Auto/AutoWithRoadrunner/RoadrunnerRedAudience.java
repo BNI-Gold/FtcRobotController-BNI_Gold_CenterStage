@@ -43,31 +43,31 @@ public class RoadrunnerRedAudience extends AutoRedAlliance {
                     Bot.rightWormgearDown(.6, 800);
                 })
                 .turn(Math.toRadians(90))
-                .forward(8)
-                .back(.5)
+                .back(6)
+                .forward(.5)
                 .addDisplacementMarker(() -> {
                     Bot.leftPixelClawOpen();
                 })
-                .back(7.5)
+                .back(4)
                 .waitSeconds(1)
+                .turn(Math.toRadians(-90))
+                .forward(25)
+                .turn(Math.toRadians(-90))
+                .forward(75)
                 .addDisplacementMarker(()->{
                     Bot.rightWormgearUp(1,721);
                     Bot.autoPlacePosition();
                 })
-                .turn(Math.toRadians(-90))
-                .forward(24)
-                .turn(Math.toRadians(-90))
-                .forward(80)
-                .strafeRight(30)
+                .strafeRight(25)
                 .build();
 
         TrajectorySequence trajseqRedMid = drive.trajectorySequenceBuilder(startPose)
-                .forward(24)
+                .forward(.5)
                 .addDisplacementMarker(() -> {
                     Bot.collectorPosition();
                     Bot.rightWormgearDown(.6, 800);
                 })
-                .forward(8)
+                .forward(30)
                 .back(.5)
                 .addDisplacementMarker(() -> {
                     Bot.leftPixelClawOpen();
@@ -75,13 +75,13 @@ public class RoadrunnerRedAudience extends AutoRedAlliance {
                 .back(7.5)
                 .strafeLeft(20)
                 .waitSeconds(1)
+                .forward(30)
+                .turn(Math.toRadians(-90))
+                .forward(90)
                 .addDisplacementMarker(()->{
                     Bot.rightWormgearUp(1,721);
                     Bot.autoPlacePosition();
                 })
-                .forward(24)
-                .turn(Math.toRadians(-90))
-                .forward(100)
                 .strafeRight(30)
                 .build();
 
@@ -92,22 +92,22 @@ public class RoadrunnerRedAudience extends AutoRedAlliance {
                     Bot.rightWormgearDown(.6, 800);
                 })
                 .turn(Math.toRadians(-90))
-                .forward(8)
+                .forward(2)
                 .back(.5)
                 .addDisplacementMarker(() -> {
                     Bot.leftPixelClawOpen();
                 })
-                .back(7.5)
+                .back(9)
                 .waitSeconds(1)
                 .turn(Math.toRadians(90))
+                .forward(24)
+                .turn(Math.toRadians(-90))
+                .forward(77)
                 .addDisplacementMarker(()->{
                     Bot.rightWormgearUp(1,721);
                     Bot.autoPlacePosition();
                 })
-                .forward(24)
-                .turn(Math.toRadians(-90))
-                .forward(80)
-                .strafeRight(30)
+                .strafeRight(35)
                 .build();
 
         telemetry.addLine("Robot Awaiting Start");
@@ -117,65 +117,66 @@ public class RoadrunnerRedAudience extends AutoRedAlliance {
 
         if(isStopRequested()) return;
 
-            CameraDetection();
+        CameraDetection();
 
-            if (teamPropPosition == TeamPropPosition.RED_LEFT) {
+        if (teamPropPosition == TeamPropPosition.RED_LEFT) {
                 telemetry.addLine("Executing Trajectory...");
                 telemetry.update();
                 drive.followTrajectorySequence(trajSeqRedLeft);
                 telemetry.addLine("Finished Trajectory...");
                 telemetry.update();
 
-                Bot.linearSlideExtend(.8,390);
-                sleep(500);
-                Bot.rightPixelClawClose();
-                sleep(1500);
-                Bot.linearSlideRetract(.8,200);
-                sleep(200);
-                Bot.driveForward(0.8,2);
-                Bot.strafeLeft(0.6,3.5);
-                Bot.driveBack(0.6,1.5);
+                dropPixelBackdrop();
+                parkAuto();
+
                 requestOpModeStop();
 
             }
-            else if (teamPropPosition == TeamPropPosition.RED_MIDDLE) {
+        else if (teamPropPosition == TeamPropPosition.RED_MIDDLE) {
                 telemetry.addLine("Executing Trajectory...");
                 telemetry.update();
                 drive.followTrajectorySequence(trajseqRedMid);
                 telemetry.addLine("Finished Trajectory...");
                 telemetry.update();
-                Bot.linearSlideExtend(.8,390);
-                sleep(500);
-                Bot.rightPixelClawClose();
-                sleep(1500);
-                Bot.linearSlideRetract(.8,200);
-                sleep(200);
-                Bot.driveForward(0.8,2.2);
-                Bot.strafeLeft(0.6,2.4);
-                Bot.driveBack(0.6,1);
+
+                dropPixelBackdrop();
+                parkAuto();
+
                 requestOpModeStop();
 
             }
 
-            else if (teamPropPosition == TeamPropPosition.RED_RIGHT) {
+        else if (teamPropPosition == TeamPropPosition.RED_RIGHT) {
                 telemetry.addLine("Executing Trajectory...");
                 telemetry.update();
                 drive.followTrajectorySequence(trajRedRight);
                 telemetry.addLine("Finished Trajectory...");
                 telemetry.update();
-                Bot.linearSlideExtend(.8,390);
-                sleep(500);
-                Bot.rightPixelClawClose();
-                sleep(1500);
-                Bot.linearSlideRetract(.8,200);
-                sleep(200);
-                Bot.strafeLeft(0.5,0.5);
-                Bot.driveForward(0.8,1);
-                Bot.strafeLeft(0.6,1.2);
-                Bot.driveBack(0.6,0.5);
+
+                dropPixelBackdrop();
+                parkAuto();
+
                 requestOpModeStop();
 
             }
+
+
+        }
+
+     public void dropPixelBackdrop() {
+         Bot.linearSlideExtend(.8,390);
+         sleep(500);
+         Bot.rightPixelClawClose();
+         sleep(1500);
+         Bot.linearSlideRetract(.8,200);
+         sleep(200);
+
+     }
+
+        public void parkAuto() {
+            Bot.driveForward(0.8,2);
+            Bot.strafeLeft(0.6,2.5);
+            Bot.driveBack(0.6,.5);
 
 
         }

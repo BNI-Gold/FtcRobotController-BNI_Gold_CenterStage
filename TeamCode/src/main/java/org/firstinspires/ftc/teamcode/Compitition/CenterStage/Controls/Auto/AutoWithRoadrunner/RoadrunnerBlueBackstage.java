@@ -41,7 +41,6 @@ public class RoadrunnerBlueBackstage extends AutoBlueAlliance {
         drive.setPoseEstimate(startPose);
 
 
-
         TrajectorySequence trajSeq1 = drive.trajectorySequenceBuilder(startPose)
                 .forward(25)
                 .addDisplacementMarker(() -> {

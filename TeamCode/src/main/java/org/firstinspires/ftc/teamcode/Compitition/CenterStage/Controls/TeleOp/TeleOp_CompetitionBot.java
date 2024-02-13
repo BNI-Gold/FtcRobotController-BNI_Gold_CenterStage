@@ -246,9 +246,9 @@ public class TeleOp_CompetitionBot extends OpMode {
             Bot.rightWormgearUp(wormgearPower * 0.5);
         } else if (gamepad2.dpad_right && Bot.pixelDistanceSensor1.getDistance(DistanceUnit.INCH) > 1.05 && Bot.pixelDistanceSensor1.getDistance(DistanceUnit.INCH) < 1.5 ) {
             //&& !Bot.magSensor1.isPressed()
-            Bot.rightWormgearUp(wormgearPower * 0.2);
+            Bot.rightWormgearUp(wormgearPower * 0.3);
         } else if (gamepad2.dpad_right && Bot.pixelDistanceSensor1.getDistance(DistanceUnit.INCH) < 0.95) {
-            Bot.rightWormgearDown(wormgearPower * 0.8);
+            Bot.rightWormgearDown(wormgearPower * 0.7);
         }
 
         if (gamepad2.dpad_left && Bot.pixelDistanceSensor2.getDistance(DistanceUnit.INCH) > 1.7 ) {
@@ -256,9 +256,9 @@ public class TeleOp_CompetitionBot extends OpMode {
             Bot.rightWormgearUp(wormgearPower * 0.5);
         } else if (gamepad2.dpad_left && Bot.pixelDistanceSensor2.getDistance(DistanceUnit.INCH) > 1.22 && Bot.pixelDistanceSensor2.getDistance(DistanceUnit.INCH) < 1.7 ) {
             //&& !Bot.magSensor1.isPressed()
-            Bot.rightWormgearUp(wormgearPower * 0.2);
+            Bot.rightWormgearUp(wormgearPower * 0.3);
         } else if (gamepad2.dpad_left && Bot.pixelDistanceSensor2.getDistance(DistanceUnit.INCH) < 1.08) {
-            Bot.rightWormgearDown(wormgearPower * 0.8);
+            Bot.rightWormgearDown(wormgearPower * 0.7);
         }
 
 
