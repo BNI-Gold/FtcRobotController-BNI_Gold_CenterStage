@@ -3,7 +3,7 @@ package org.firstinspires.ftc.teamcode.Compitition.CenterStage.Controls.Auto.Aut
 import com.acmerobotics.roadrunner.geometry.Pose2d;
 import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
 
-import org.firstinspires.ftc.teamcode.Compitition.CenterStage.Controls.Auto.AutoRedAlliance;
+import org.firstinspires.ftc.teamcode.Compitition.CenterStage.Controls.Auto.AutoBlueAlliance;
 import org.firstinspires.ftc.teamcode.Compitition.CenterStage.RoadRunner.drive.RoadrunMecanumDrive;
 import org.firstinspires.ftc.teamcode.Compitition.CenterStage.RoadRunner.trajectorysequence.TrajectorySequence;
 import org.firstinspires.ftc.teamcode.Compitition.CenterStage.Vision.TeamPropPosition;
@@ -11,8 +11,8 @@ import org.firstinspires.ftc.vision.tfod.TfodProcessor;
 
 //@Config
 //@Disabled
-@Autonomous(name = "RR: RED AUDIENCE")
-public class RoadrunnerRedAudience extends AutoRedAlliance {
+@Autonomous(name = "RR: BLUE AUDIENCE")
+public class RoadrunnerBlueAudience extends AutoBlueAlliance {
 
 
     public static final boolean USE_WEBCAM = true;
@@ -36,7 +36,7 @@ public class RoadrunnerRedAudience extends AutoRedAlliance {
         Pose2d startPose = new Pose2d(-35, -60, -4.7);
         drive.setPoseEstimate(startPose);
 
-        TrajectorySequence trajSeqRedLeft = drive.trajectorySequenceBuilder(startPose)
+        TrajectorySequence trajSeqBlueLeft = drive.trajectorySequenceBuilder(startPose)
                 .forward(24)
                 .addDisplacementMarker(() -> {
                     Bot.collectorPosition();
@@ -61,7 +61,7 @@ public class RoadrunnerRedAudience extends AutoRedAlliance {
                 .strafeRight(25)
                 .build();
 
-        TrajectorySequence trajseqRedMid = drive.trajectorySequenceBuilder(startPose)
+        TrajectorySequence trajseqBlueMid = drive.trajectorySequenceBuilder(startPose)
                 .forward(.5)
                 .addDisplacementMarker(() -> {
                     Bot.collectorPosition();
@@ -85,7 +85,7 @@ public class RoadrunnerRedAudience extends AutoRedAlliance {
                 .strafeRight(30)
                 .build();
 
-        TrajectorySequence trajRedRight = drive.trajectorySequenceBuilder(startPose)
+        TrajectorySequence trajBlueRight = drive.trajectorySequenceBuilder(startPose)
                 .forward(24)
                 .addDisplacementMarker(() -> {
                     Bot.collectorPosition();
@@ -119,42 +119,42 @@ public class RoadrunnerRedAudience extends AutoRedAlliance {
 
         CameraDetection();
 
-        if (teamPropPosition == TeamPropPosition.RED_LEFT) {
+        if (teamPropPosition == TeamPropPosition.BLUE_LEFT) {
                 telemetry.addLine("Executing Trajectory...");
                 telemetry.update();
-                drive.followTrajectorySequence(trajSeqRedLeft);
+                drive.followTrajectorySequence(trajSeqBlueLeft);
                 telemetry.addLine("Finished Trajectory...");
                 telemetry.update();
 
                 dropPixelBackdrop();
-                parkAutoRed();
+                parkAutoBlue();
 
                 requestOpModeStop();
 
         }
 
-        else if (teamPropPosition == TeamPropPosition.RED_MIDDLE) {
+        else if (teamPropPosition == TeamPropPosition.BLUE_MIDDLE) {
                 telemetry.addLine("Executing Trajectory...");
                 telemetry.update();
-                drive.followTrajectorySequence(trajseqRedMid);
+                drive.followTrajectorySequence(trajseqBlueMid);
                 telemetry.addLine("Finished Trajectory...");
                 telemetry.update();
 
                 dropPixelBackdrop();
-                parkAutoRed();
+                parkAutoBlue();
 
                 requestOpModeStop();
         }
 
-        else if (teamPropPosition == TeamPropPosition.RED_RIGHT) {
+        else if (teamPropPosition == TeamPropPosition.BLUE_RIGHT) {
                 telemetry.addLine("Executing Trajectory...");
                 telemetry.update();
-                drive.followTrajectorySequence(trajRedRight);
+                drive.followTrajectorySequence(trajBlueRight);
                 telemetry.addLine("Finished Trajectory...");
                 telemetry.update();
 
                 dropPixelBackdrop();
-                parkAutoRed();
+                parkAutoBlue();
 
                 requestOpModeStop();
         }
@@ -169,9 +169,9 @@ public class RoadrunnerRedAudience extends AutoRedAlliance {
          sleep(200);
     }
 
-     public void parkAutoRed() {
+     public void parkAutoBlue() {
         Bot.driveForward(0.8,2);
-        Bot.strafeLeft(0.6,2.5);
+        Bot.strafeRight(0.6,2.5);
         Bot.driveBack(0.6,.5);
     }
 
