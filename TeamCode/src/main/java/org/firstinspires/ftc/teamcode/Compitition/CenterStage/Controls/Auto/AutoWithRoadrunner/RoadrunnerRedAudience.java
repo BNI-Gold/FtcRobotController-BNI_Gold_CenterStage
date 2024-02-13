@@ -131,7 +131,8 @@ public class RoadrunnerRedAudience extends AutoRedAlliance {
 
                 requestOpModeStop();
 
-            }
+        }
+
         else if (teamPropPosition == TeamPropPosition.RED_MIDDLE) {
                 telemetry.addLine("Executing Trajectory...");
                 telemetry.update();
@@ -143,8 +144,7 @@ public class RoadrunnerRedAudience extends AutoRedAlliance {
                 parkAuto();
 
                 requestOpModeStop();
-
-            }
+        }
 
         else if (teamPropPosition == TeamPropPosition.RED_RIGHT) {
                 telemetry.addLine("Executing Trajectory...");
@@ -157,30 +157,24 @@ public class RoadrunnerRedAudience extends AutoRedAlliance {
                 parkAuto();
 
                 requestOpModeStop();
-
-            }
-
-
         }
+    }
 
-     public void dropPixelBackdrop() {
+    public void dropPixelBackdrop() {
          Bot.linearSlideExtend(.8,390);
          sleep(500);
          Bot.rightPixelClawClose();
          sleep(1500);
          Bot.linearSlideRetract(.8,200);
          sleep(200);
-
-     }
-
-        public void parkAuto() {
-            Bot.driveForward(0.8,2);
-            Bot.strafeLeft(0.6,2.5);
-            Bot.driveBack(0.6,.5);
-
-
-        }
-
     }
+
+     public void parkAuto() {
+        Bot.driveForward(0.8,2);
+        Bot.strafeLeft(0.6,2.5);
+        Bot.driveBack(0.6,.5);
+    }
+
+}
 
 
