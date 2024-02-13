@@ -33,9 +33,11 @@ public class RoadrunnerBlueAudience extends AutoBlueAlliance {
         Bot.tuckPosition();
 
         RoadrunMecanumDrive drive = new RoadrunMecanumDrive(hardwareMap);
+        // JDA: I need to Change this
         Pose2d startPose = new Pose2d(-35, -60, -4.7);
         drive.setPoseEstimate(startPose);
 
+        // JDA: I need to Change this
         TrajectorySequence trajSeqBlueLeft = drive.trajectorySequenceBuilder(startPose)
                 .forward(24)
                 .addDisplacementMarker(() -> {
@@ -61,6 +63,7 @@ public class RoadrunnerBlueAudience extends AutoBlueAlliance {
                 .strafeRight(25)
                 .build();
 
+        // JDA: I need to Change this
         TrajectorySequence trajseqBlueMid = drive.trajectorySequenceBuilder(startPose)
                 .forward(.5)
                 .addDisplacementMarker(() -> {
@@ -85,6 +88,7 @@ public class RoadrunnerBlueAudience extends AutoBlueAlliance {
                 .strafeRight(30)
                 .build();
 
+        // JDA: I need to Change this
         TrajectorySequence trajBlueRight = drive.trajectorySequenceBuilder(startPose)
                 .forward(24)
                 .addDisplacementMarker(() -> {
