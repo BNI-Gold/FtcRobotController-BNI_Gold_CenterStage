@@ -38,21 +38,21 @@ public class RoadrunnerRedAudience extends AutoRedAlliance {
         drive.setPoseEstimate(startPose);
 
         TrajectorySequence trajSeqRedLeft = drive.trajectorySequenceBuilder(startPose)
-                .forward(24)
+                .forward(26)  //24
                 .addDisplacementMarker(() -> {
                     Bot.collectorPosition();
                     Bot.rightWormgearDown(.6, 800);
                 })
                 .turn(Math.toRadians(90))
-                .back(6)
-                .forward(.5)
+                .back(7) //6
+                .forward(1) //.5
                 .addDisplacementMarker(() -> {
                     Bot.leftPixelClawOpen();
                 })
-                .back(4)
+                .back(4)  //3
                 .waitSeconds(1)
                 .turn(Math.toRadians(-90))
-                .forward(25)
+                .forward(23)  //25
                 .turn(Math.toRadians(-90))
                 .forward(75)
                 .addDisplacementMarker(()->{
@@ -93,12 +93,13 @@ public class RoadrunnerRedAudience extends AutoRedAlliance {
                     Bot.rightWormgearDown(.6, 800);
                 })
                 .turn(Math.toRadians(-90))
-                .forward(2)
+                .waitSeconds(0.25)
+                .forward(6)
                 .back(.5)
                 .addDisplacementMarker(() -> {
                     Bot.leftPixelClawOpen();
                 })
-                .back(9)
+                .back(6)
                 .waitSeconds(1)
                 .turn(Math.toRadians(90))
                 .forward(24)
@@ -128,7 +129,10 @@ public class RoadrunnerRedAudience extends AutoRedAlliance {
                 telemetry.update();
 
                 dropPixelBackdrop();
-                parkAutoRed();
+
+                Bot.strafeRight(0.6,2.0);
+                sleep(500);
+                Bot.driveBack(0.6,0.3);
 
                 requestOpModeStop();
 
@@ -142,7 +146,9 @@ public class RoadrunnerRedAudience extends AutoRedAlliance {
                 telemetry.update();
 
                 dropPixelBackdrop();
-                parkAutoRed();
+
+                Bot.strafeRight(0.6,2.4);
+                Bot.driveBack(0.6,0.3);
 
                 requestOpModeStop();
         }
@@ -155,7 +161,9 @@ public class RoadrunnerRedAudience extends AutoRedAlliance {
                 telemetry.update();
 
                 dropPixelBackdrop();
-                parkAutoRed();
+
+                Bot.strafeRight(0.6,2.7);
+                Bot.driveBack(0.6,0.3);
 
                 requestOpModeStop();
         }
@@ -167,14 +175,11 @@ public class RoadrunnerRedAudience extends AutoRedAlliance {
          Bot.rightPixelClawClose();
          sleep(1500);
          Bot.linearSlideRetract(.8,200);
-         sleep(200);
+         sleep(500);
+         Bot.driveForward(0.8,2);
     }
-// This needs to Part to left of the Backdrop
-     public void parkAutoRed() {
-        Bot.driveForward(0.8,2);
-        Bot.strafeRight(0.6,1.5);
-        //Bot.driveBack(0.6,.5);
-    }
+
+
 
 }
 
