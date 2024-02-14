@@ -22,6 +22,7 @@ public class MecanumDrive {
     public LinearOpMode LinearOp = null;
 
     public static final double TICKS_PER_ROTATION = 386.3;
+    public static final double ODO_TICKS_PER_ROTATION = 2000;
 
     // Instance Variables for IMU
     public IMU imu = null;
@@ -346,7 +347,7 @@ public class MecanumDrive {
 
     // Speed Acceleration and Deceleration Method
     public void speedAcceleration(double rotations, double maxPower, driveDirections driveDirection) {
-        double targetDistance = rotations * TICKS_PER_ROTATION;
+        double targetDistance = rotations * ODO_TICKS_PER_ROTATION;
 
         resetEncoders();
         double accelerationDistance = targetDistance * 0.2;
@@ -442,7 +443,7 @@ public class MecanumDrive {
     }
 
     public void speedAccelerationStrafe (double rotations, double maxPower, driveDirections driveDirection) {
-        double targetDistance = rotations * TICKS_PER_ROTATION;
+        double targetDistance = rotations * ODO_TICKS_PER_ROTATION;
 
         resetEncoders();
         double accelerationDistance = targetDistance * 0.2;

@@ -7,7 +7,7 @@ import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 import org.firstinspires.ftc.teamcode.Compitition.CenterStage.Drivetrains.MecanumDrive;
 import org.firstinspires.ftc.teamcode.Compitition.CenterStage.Robots.CompBot;
 
-@Disabled
+//@Disabled
 @Autonomous (name = "Auto Path Tester")
 public class AutoTester extends LinearOpMode {
 
