@@ -18,6 +18,7 @@ public class RoadrunnerRedAudience extends AutoRedAlliance {
     public static final boolean USE_WEBCAM = true;
     public static int oneSecond = 1000;
     public TfodProcessor tFod;
+    Pose2d redAudienceStartPose = new Pose2d(-35, -60, -4.7);
 
     @Override
     public void runOpMode() throws InterruptedException {
@@ -33,7 +34,7 @@ public class RoadrunnerRedAudience extends AutoRedAlliance {
         Bot.tuckPosition();
 
         RoadrunMecanumDrive drive = new RoadrunMecanumDrive(hardwareMap);
-        Pose2d startPose = new Pose2d(-35, -60, -4.7);
+        Pose2d startPose = redAudienceStartPose;
         drive.setPoseEstimate(startPose);
 
         TrajectorySequence trajSeqRedLeft = drive.trajectorySequenceBuilder(startPose)
@@ -168,11 +169,11 @@ public class RoadrunnerRedAudience extends AutoRedAlliance {
          Bot.linearSlideRetract(.8,200);
          sleep(200);
     }
-
+// This needs to Part to left of the Backdrop
      public void parkAutoRed() {
         Bot.driveForward(0.8,2);
-        Bot.strafeLeft(0.6,2.5);
-        Bot.driveBack(0.6,.5);
+        Bot.strafeRight(0.6,1.5);
+        //Bot.driveBack(0.6,.5);
     }
 
 }

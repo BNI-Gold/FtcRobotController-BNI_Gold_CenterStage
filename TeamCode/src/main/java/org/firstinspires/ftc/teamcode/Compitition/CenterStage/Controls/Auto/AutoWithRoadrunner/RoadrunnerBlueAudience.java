@@ -18,6 +18,7 @@ public class RoadrunnerBlueAudience extends AutoBlueAlliance {
     public static final boolean USE_WEBCAM = true;
     public static int oneSecond = 1000;
     public TfodProcessor tFod;
+    Pose2d blueAudienceStartPose = new Pose2d(-35, 60, 4.7);
 
     @Override
     public void runOpMode() throws InterruptedException {
@@ -34,7 +35,7 @@ public class RoadrunnerBlueAudience extends AutoBlueAlliance {
 
         RoadrunMecanumDrive drive = new RoadrunMecanumDrive(hardwareMap);
         // JDA: I need to Change this
-        Pose2d startPose = new Pose2d(-35, -60, -4.7);
+        Pose2d startPose = blueAudienceStartPose;
         drive.setPoseEstimate(startPose);
 
         // JDA: I need to Change this
@@ -44,23 +45,23 @@ public class RoadrunnerBlueAudience extends AutoBlueAlliance {
                     Bot.collectorPosition();
                     Bot.rightWormgearDown(.6, 800);
                 })
-                .turn(Math.toRadians(90))
-                .back(6)
-                .forward(.5)
+                .turn(Math.toRadians(-90))
+                .forward(2)
+                .back(.5)
                 .addDisplacementMarker(() -> {
                     Bot.leftPixelClawOpen();
                 })
-                .back(4)
+                .back(9)
                 .waitSeconds(1)
+                .turn(Math.toRadians(90))
+                .forward(24)
                 .turn(Math.toRadians(-90))
-                .forward(25)
-                .turn(Math.toRadians(-90))
-                .forward(75)
+                .forward(77)
                 .addDisplacementMarker(()->{
                     Bot.rightWormgearUp(1,721);
                     Bot.autoPlacePosition();
                 })
-                .strafeRight(25)
+                .strafeRight(35)
                 .build();
 
         // JDA: I need to Change this
@@ -173,9 +174,10 @@ public class RoadrunnerBlueAudience extends AutoBlueAlliance {
          sleep(200);
     }
 
+    // This needs to part to right of Backdrop
      public void parkAutoBlue() {
         Bot.driveForward(0.8,2);
-        Bot.strafeRight(0.6,2.5);
+        Bot.strafeRight(0.6,1.5);
         Bot.driveBack(0.6,.5);
     }
 
