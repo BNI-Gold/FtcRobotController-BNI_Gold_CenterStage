@@ -1,5 +1,6 @@
 package org.firstinspires.ftc.teamcode.Compitition.CenterStage.Controls.Auto;
 
+import org.firstinspires.ftc.teamcode.Compitition.CenterStage.Drivetrains.MecanumDrive;
 import org.firstinspires.ftc.teamcode.Compitition.CenterStage.RoadRunner.drive.RoadrunMecanumDrive;
 import org.firstinspires.ftc.teamcode.Compitition.CenterStage.Robots.CompBot;
 import org.firstinspires.ftc.teamcode.Compitition.CenterStage.Robots.ProgrammingBot;
@@ -159,6 +160,97 @@ public abstract class AutoBlueAlliance extends AutoMain{
 
 
 /*  DUVAL'S CODE */
+            Bot.strafeRight(0.5, 0.3);
+            sleep(100);
+            Bot.rotateRight(0.3,1.2);
+            sleep(100);
+            Bot.driveForward(0.5, 1.8);
+            sleep(100);
+            Bot.rotateLeft(0.3, 1.5);
+            sleep(100);
+            Bot.driveForward(.5,1.7);
+            sleep(100);
+            Bot.rotateLeft(.4,3.5);
+            sleep(100);
+            Bot.driveForward(.4,.355);
+            sleep(100);
+            Bot.rotateRight(.4,.2);
+//            sleep(100);
+//            Bot.collectorPosition();
+            sleep(250);
+            Bot.leftPixelClawOpen();
+            sleep(500);
+            Bot.drivePosition();
+            sleep(50);
+            Bot.leftPixelClawClose();
+            sleep(100);
+            Bot.driveBack(.5,.25);
+            sleep(100);
+            Bot.rotateRight(.5,1.15);
+            sleep(100);
+
+
+
+
+        }
+        else if (teamPropPosition == TeamPropPosition.BLUE_RIGHT){
+            Bot.strafeRight(0.5, 0.3);
+            sleep(100);
+            Bot.rotateRight(0.3,1.2);
+            sleep(1000);
+            Bot.driveForward(0.3,0.2);
+            sleep(100);
+            Bot.driveBack(0.3,0.06);
+            sleep(100);
+            Bot.leftPixelClawOpen();
+            sleep(700);
+//            Bot.driveBack(0.3,0.1);
+            sleep(500);
+            Bot.leftPixelClawClose();
+            sleep(500);
+
+
+
+
+        }
+    }
+
+    public void spikeMarkPlaceFar_Accel(){
+//        teamPropPosition = TeamPropPosition.BLUE_RIGHT;
+        if (teamPropPosition == TeamPropPosition.BLUE_LEFT) {
+            Bot.speedAcceleration(2.4, FAST_SPD, MecanumDrive.driveDirections.DRIVE_FORWARD);
+            sleep(SLEEP_TIME);
+            Bot.gyroPath(GYRO_PATH_SPD, 90);
+            sleep(SLEEP_GYRO);
+            Bot.gyroCorrection(GYRO_CORRECT_SPD, 90);
+            sleep(SLEEP_TIME);
+            Bot.leftPixelClawOpen();
+            sleep(1500);
+//            Bot.driveBack(0.5,0.51);
+            sleep(100);
+//            Bot.rotateRight(0.3,1.3);
+            sleep(1000);
+            Bot.leftPixelClawClose();
+            sleep(500);
+
+
+
+
+        }
+        else if (teamPropPosition == TeamPropPosition.BLUE_MIDDLE) {
+
+//              CONNOR'S CODE
+//            Bot.driveForward(0.5,0.8);
+//            sleep(1000);
+//            Bot.leftPixelClawOpen();
+//            sleep(1500);
+//            Bot.leftPixelClawClose();
+//            sleep(500);
+
+
+
+
+            /*  DUVAL'S CODE */
             Bot.strafeRight(0.5, 0.3);
             sleep(100);
             Bot.rotateRight(0.3,1.2);

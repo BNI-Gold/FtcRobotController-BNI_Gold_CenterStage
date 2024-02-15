@@ -43,6 +43,17 @@ public abstract class AutoMain extends LinearOpMode {
 
 
 
+    double GYRO_PATH_SPD = .5;
+    double GYRO_CORRECT_SPD = .21;
+    double MAX_SPD = 1.0;
+    double FAST_SPD = .7;
+    double MED_SPD = .5;
+    double STRAFE_SPD = .8;
+    double LONG_STRAFE_SPD = 1;
+    int SLEEP_GYRO = 150;
+    int SLEEP_TIME = 100;
+
+
 
 
 
@@ -59,6 +70,8 @@ public abstract class AutoMain extends LinearOpMode {
         webcam.stopStreaming();
         webcam.closeCameraDevice();
     }
+
+
 
 //        public void initAprilTag(){
 //

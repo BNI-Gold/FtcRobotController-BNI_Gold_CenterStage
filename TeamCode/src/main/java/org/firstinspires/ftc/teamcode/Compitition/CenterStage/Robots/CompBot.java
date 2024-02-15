@@ -67,20 +67,10 @@ public class CompBot extends MecanumDrive {
 
         RevBlinkinLedDriver blinkinLedDriver2;
         RevBlinkinLedDriver.BlinkinPattern pattern2;
+        RevHubOrientationOnRobot.LogoFacingDirection logoDirection = RevHubOrientationOnRobot.LogoFacingDirection.RIGHT;
+        RevHubOrientationOnRobot.UsbFacingDirection  usbDirection  = RevHubOrientationOnRobot.UsbFacingDirection.UP;
+        RevHubOrientationOnRobot orientationOnRobot = new RevHubOrientationOnRobot(logoDirection, usbDirection);
 
-
-    public IMU imu  = null;
-    public double headingError  = 0;
-    RevHubOrientationOnRobot.LogoFacingDirection logoDirection = RevHubOrientationOnRobot.LogoFacingDirection.RIGHT;
-    RevHubOrientationOnRobot.UsbFacingDirection  usbDirection  = RevHubOrientationOnRobot.UsbFacingDirection.UP;
-    RevHubOrientationOnRobot orientationOnRobot = new RevHubOrientationOnRobot(logoDirection, usbDirection);
-
-
-//        public BNO055IMU imu_old;
-//        public Orientation angles;
-//        public Acceleration gravity;
-//        public final double SPEED = .3;
-//        public final double TOLERANCE = .4;
 
         public CompBot (){}
 

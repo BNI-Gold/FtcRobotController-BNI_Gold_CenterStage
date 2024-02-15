@@ -4,7 +4,6 @@ import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.hardware.IMU;
 import com.qualcomm.robotcore.util.Range;
-
 import org.firstinspires.ftc.robotcore.external.navigation.AngleUnit;
 import org.firstinspires.ftc.robotcore.external.navigation.YawPitchRollAngles;
 import org.firstinspires.ftc.teamcode.Compitition.CenterStage.RoadRunner.util.Encoder;
@@ -26,7 +25,7 @@ public class MecanumDrive {
 
     // Instance Variables for IMU
     public IMU imu = null;
-    public double headingTolerance = 2;
+    public double headingTolerance = 0.5;
     public double currentHeading = 0;
 
     public enum driveDirections {
@@ -347,9 +346,8 @@ public class MecanumDrive {
 
     // Speed Acceleration and Deceleration Method
     public void speedAcceleration(double rotations, double maxPower, driveDirections driveDirection) {
-        double targetDistance = rotations * ODO_TICKS_PER_ROTATION;
-
         resetEncoders();
+        double targetDistance = rotations * ODO_TICKS_PER_ROTATION;
         double accelerationDistance = targetDistance * 0.2;
         double decelerationDistance = targetDistance * 0.7;
         double minPowerStart = 0;
@@ -364,9 +362,9 @@ public class MecanumDrive {
         }
 
         double power;
-        double currentDistance = getEncoderAvgDistanceX();
+        double currentDistance = 0;
 
-        while(getEncoderAvgDistanceX() < targetDistance && LinearOp.opModeIsActive()){
+        while(currentDistance < targetDistance && LinearOp.opModeIsActive()){
 
 
             // Acceleration
@@ -398,26 +396,26 @@ public class MecanumDrive {
                     stopMotors();
                     break;
                 case DRIVE_FORWARD:
-                    frontLeftMotor.setPower(power);
-                    frontRightMotor.setPower(power);
-                    rearLeftMotor.setPower(power);
-                    rearRightMotor.setPower(power);
-                    break;
-                case DRIVE_BACK:
                     frontLeftMotor.setPower(-power);
                     frontRightMotor.setPower(-power);
                     rearLeftMotor.setPower(-power);
                     rearRightMotor.setPower(-power);
                     break;
-                case STRAFE_LEFT:
-                    frontLeftMotor.setPower(-power);
+                case DRIVE_BACK:
+                    frontLeftMotor.setPower(power);
                     frontRightMotor.setPower(power);
+                    rearLeftMotor.setPower(power);
+                    rearRightMotor.setPower(power);
+                    break;
+                case STRAFE_LEFT:
+                    frontLeftMotor.setPower(power);
+                    frontRightMotor.setPower(-power);
                     rearLeftMotor.setPower(-power);
                     rearRightMotor.setPower(power);
                     break;
                 case STRAFE_RIGHT:
-                    frontLeftMotor.setPower(power);
-                    frontRightMotor.setPower(-power);
+                    frontLeftMotor.setPower(-power);
+                    frontRightMotor.setPower(power);
                     rearLeftMotor.setPower(power);
                     rearRightMotor.setPower(-power);
                     break;
@@ -434,8 +432,13 @@ public class MecanumDrive {
             {
                 Thread.currentThread().interrupt();//re-interrupt the thread
             }
-
-            currentDistance = getEncoderAvgDistanceX();
+            if (driveDirection == driveDirections.DRIVE_FORWARD || driveDirection == driveDirections.DRIVE_BACK) {
+                currentDistance = getEncoderAvgDistanceX();
+            }
+            else {
+                currentDistance = getEncoderAvgDistanceY();
+            }
+//            currentDistance = getEncoderAvgDistanceX();
         }
 
         stopMotors();

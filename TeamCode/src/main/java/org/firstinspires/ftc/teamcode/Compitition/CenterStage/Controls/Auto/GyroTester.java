@@ -27,10 +27,14 @@ public class GyroTester extends LinearOpMode {
 
 
         while (opModeIsActive()) {
+            testBot.resetHeading();
             telemetryUpdate("Drive Forward");
-            testBot.speedAcceleration(5,.7, MecanumDrive.driveDirections.DRIVE_FORWARD);
-            testBot.gyroCorrection(.4,0);
+            testBot.speedAcceleration(10,.7, MecanumDrive.driveDirections.DRIVE_FORWARD);
+            telemetryUpdate("Drive Forward");
+            testBot.gyroCorrection(.6,0);
             sleep(2000);
+
+            requestOpModeStop();
 
 
         }

@@ -3,12 +3,13 @@ package org.firstinspires.ftc.teamcode.Compitition.CenterStage.Controls.Auto.Aut
 import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
 import com.qualcomm.robotcore.eventloop.opmode.Disabled;
 
-import org.firstinspires.ftc.teamcode.Compitition.CenterStage.Controls.Auto.AutoRedAlliance;
+import org.firstinspires.ftc.teamcode.Compitition.CenterStage.Controls.Auto.AutoBlueAlliance;
 import org.firstinspires.ftc.vision.tfod.TfodProcessor;
 
-@Disabled
-@Autonomous(name = "A - RED Audience")
-public class AutoRedAudience extends AutoRedAlliance {
+
+
+@Autonomous (name = "A - Blue Audience-FOR COMP")
+public class AutoBlueAudience_Acceleration extends AutoBlueAlliance {
 
     public static final boolean USE_WEBCAM = true;
 
@@ -30,7 +31,6 @@ public class AutoRedAudience extends AutoRedAlliance {
         initCamera();
         Bot.setLinearOp(this);
         Bot.planeLauncherServo.setPosition(1);
-
         startObjectDetectionPipeline(pipeline);
         telemetry.addLine("Starting Vision Pipeline");
 //
@@ -68,22 +68,21 @@ public class AutoRedAudience extends AutoRedAlliance {
 
             CameraDetection();
             sleep(100);
-            Bot.drivePosition();
+//            CLAW
+            Bot.collectorPosition();
             sleep(100);
-//            Bot.rightWormgearDown(.7, 770);
-            Bot.rightWormgearUp(.5);
-            sleep(750);
-            Bot.rightWormgearStop();
+//            LOWER WORM GEAR
+            Bot.rightWormgearDown(.6, 750);
+            sleep(100);
 //            Bot.driveForward(0.5,0.2);
 //            sleep(100); //800
-            Bot.driveForward(0.5,1.5); //1.1
-            sleep(100);
+//            Bot.driveForward(0.5,1.5); //1.1
+//            sleep(100);
             // Bot.driveForward(0.5,0.5);
-            spikeMarkPlaceFar();
+            spikeMarkPlaceFar_Accel();
 
             sleep(100);
             driveToBackdropFar();
-            sleep(100);
             placeOnBackdrop();
 
 
@@ -157,7 +156,4 @@ public class AutoRedAudience extends AutoRedAlliance {
         telemetry.addData("Encoder Count: ", Bot.frontLeftMotor.getCurrentPosition());
         telemetry.update();
     }
-
-
-
 }

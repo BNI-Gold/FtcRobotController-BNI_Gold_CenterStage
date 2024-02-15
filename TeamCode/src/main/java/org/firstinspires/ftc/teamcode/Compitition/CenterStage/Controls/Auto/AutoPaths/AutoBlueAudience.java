@@ -1,6 +1,7 @@
 package org.firstinspires.ftc.teamcode.Compitition.CenterStage.Controls.Auto.AutoPaths;
 
 import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
+import com.qualcomm.robotcore.eventloop.opmode.Disabled;
 
 import org.firstinspires.ftc.teamcode.Compitition.CenterStage.Controls.Auto.AutoBlueAlliance;
 import org.firstinspires.ftc.teamcode.Compitition.CenterStage.Controls.Auto.AutoMain;
@@ -9,7 +10,8 @@ import org.firstinspires.ftc.teamcode.Compitition.CenterStage.Vision.TeamPropPos
 import org.firstinspires.ftc.vision.VisionPortal;
 import org.firstinspires.ftc.vision.tfod.TfodProcessor;
 
-@Autonomous (name = "A - Blue Audience-FOR COMP")
+@Disabled
+@Autonomous (name = "A - Blue Audience")
 public class AutoBlueAudience extends AutoBlueAlliance {
 
     public static final boolean USE_WEBCAM = true;
