@@ -1,13 +1,12 @@
 package org.firstinspires.ftc.teamcode.Compitition.CenterStage.Controls.Auto.AutoPaths;
 
 import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
-import com.qualcomm.robotcore.eventloop.opmode.Disabled;
 
-import org.firstinspires.ftc.teamcode.Compitition.CenterStage.Controls.Auto.AutoBlueAlliance;
+import org.firstinspires.ftc.teamcode.Compitition.CenterStage.Controls.Auto.AutoRedAlliance;
 import org.firstinspires.ftc.vision.tfod.TfodProcessor;
 
-@Autonomous (name = "A - Blue Audience-FOR COMP")
-public class AutoBlueAudience_Acceleration extends AutoBlueAlliance {
+@Autonomous(name = "A - RED Backstage-FOR COMP")
+public class AutoRedBackstage_Acceleration extends AutoRedAlliance {
 
     public static final boolean USE_WEBCAM = true;
 
@@ -52,16 +51,14 @@ public class AutoBlueAudience_Acceleration extends AutoBlueAlliance {
             Bot.rightWormgearDown(.6, 780);
             Bot.rightWormgearStop();
             sleep(100);
-
-            spikeMarkPlaceFar_Accel();
-
+            spikeMarkPlaceBasckstage_Accel();
             sleep(100);
 //            USE THIS FOR PIXEL DELIVERY
 //            dropPixelBackdrop();
 
             telemetry.addLine("Robot Autonomous Control Complete");
 
-//            sleep(100);
+            sleep(100);
             requestOpModeStop();
         }
 
@@ -84,4 +81,7 @@ public class AutoBlueAudience_Acceleration extends AutoBlueAlliance {
         telemetry.addData("Encoder Count: ", Bot.frontLeftMotor.getCurrentPosition());
         telemetry.update();
     }
+
+
+
 }

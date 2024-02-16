@@ -1,10 +1,11 @@
 package org.firstinspires.ftc.teamcode.Compitition.CenterStage.Controls.Auto;
 
 import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
+import com.qualcomm.robotcore.eventloop.opmode.Disabled;
 
 import org.firstinspires.ftc.teamcode.Compitition.CenterStage.Robots.ProgrammingBot;
 import org.firstinspires.ftc.vision.tfod.TfodProcessor;
-
+@Disabled
 @Autonomous (name = "GyroTest")
 public class AutoGyroCorrectTest extends AutoMain{
 

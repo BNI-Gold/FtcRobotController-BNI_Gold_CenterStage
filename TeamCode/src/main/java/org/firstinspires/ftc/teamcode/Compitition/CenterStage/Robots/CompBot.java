@@ -343,8 +343,8 @@ public class CompBot extends MecanumDrive {
     }
 
     public void tuckPosition(){
-            pixelRotatorRight.setPosition(0.283);
-            pixelRotatorLeft.setPosition(0.283);
+            pixelRotatorRight.setPosition(0.183);
+            pixelRotatorLeft.setPosition(0.183);
     }
 
 

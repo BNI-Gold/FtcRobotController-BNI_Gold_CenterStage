@@ -2,6 +2,7 @@ package org.firstinspires.ftc.teamcode.Compitition.CenterStage.Controls.Auto.Aut
 
 import com.acmerobotics.roadrunner.geometry.Pose2d;
 import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
+import com.qualcomm.robotcore.eventloop.opmode.Disabled;
 
 import org.firstinspires.ftc.teamcode.Compitition.CenterStage.Controls.Auto.AutoRedAlliance;
 import org.firstinspires.ftc.teamcode.Compitition.CenterStage.RoadRunner.drive.RoadrunMecanumDrive;
@@ -10,7 +11,7 @@ import org.firstinspires.ftc.teamcode.Compitition.CenterStage.Vision.TeamPropPos
 import org.firstinspires.ftc.vision.tfod.TfodProcessor;
 
 //@Config
-//@Disabled
+@Disabled
 @Autonomous(name = "RR: RED BACKSTAGE")
 public class RoadrunnerRedBackstage extends AutoRedAlliance {
 

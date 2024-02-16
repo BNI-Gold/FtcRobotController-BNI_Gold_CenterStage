@@ -2,13 +2,14 @@ package org.firstinspires.ftc.teamcode.Compitition.CenterStage.Controls.Auto.Aut
 
 import com.acmerobotics.roadrunner.geometry.Pose2d;
 import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
+import com.qualcomm.robotcore.eventloop.opmode.Disabled;
 
 import org.firstinspires.ftc.teamcode.Compitition.CenterStage.Controls.Auto.AutoBlueAlliance;
 import org.firstinspires.ftc.teamcode.Compitition.CenterStage.RoadRunner.drive.RoadrunMecanumDrive;
 import org.firstinspires.ftc.teamcode.Compitition.CenterStage.RoadRunner.trajectorysequence.TrajectorySequence;
 import org.firstinspires.ftc.teamcode.Compitition.CenterStage.Vision.TeamPropPosition;
 import org.firstinspires.ftc.vision.tfod.TfodProcessor;
-
+@Disabled
 @Autonomous (name = "RR- BLUE BACKSTAGE")
 public class RoadrunnerBlueBackstage extends AutoBlueAlliance {
 

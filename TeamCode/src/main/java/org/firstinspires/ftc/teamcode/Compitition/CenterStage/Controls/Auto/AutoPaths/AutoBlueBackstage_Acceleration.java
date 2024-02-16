@@ -1,13 +1,12 @@
 package org.firstinspires.ftc.teamcode.Compitition.CenterStage.Controls.Auto.AutoPaths;
 
 import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
-import com.qualcomm.robotcore.eventloop.opmode.Disabled;
 
 import org.firstinspires.ftc.teamcode.Compitition.CenterStage.Controls.Auto.AutoBlueAlliance;
 import org.firstinspires.ftc.vision.tfod.TfodProcessor;
 
-@Autonomous (name = "A - Blue Audience-FOR COMP")
-public class AutoBlueAudience_Acceleration extends AutoBlueAlliance {
+@Autonomous (name = "A - Blue Backstage-FOR COMP")
+public class AutoBlueBackstage_Acceleration extends AutoBlueAlliance {
 
     public static final boolean USE_WEBCAM = true;
 
@@ -53,7 +52,7 @@ public class AutoBlueAudience_Acceleration extends AutoBlueAlliance {
             Bot.rightWormgearStop();
             sleep(100);
 
-            spikeMarkPlaceFar_Accel();
+            spikeMarkPlaceFar_Backstage();
 
             sleep(100);
 //            USE THIS FOR PIXEL DELIVERY

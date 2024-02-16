@@ -59,7 +59,7 @@ public class AutoRedAudience_Acceleration extends AutoRedAlliance {
 
             telemetry.addLine("Robot Autonomous Control Complete");
 
-            sleep(1000);
+            sleep(100);
             requestOpModeStop();
         }
 

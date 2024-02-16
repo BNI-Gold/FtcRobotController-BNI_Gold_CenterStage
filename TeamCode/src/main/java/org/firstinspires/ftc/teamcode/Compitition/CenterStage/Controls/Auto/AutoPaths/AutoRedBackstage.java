@@ -2,10 +2,11 @@ package org.firstinspires.ftc.teamcode.Compitition.CenterStage.Controls.Auto.Aut
 
 
 import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
+import com.qualcomm.robotcore.eventloop.opmode.Disabled;
 
 import org.firstinspires.ftc.teamcode.Compitition.CenterStage.Controls.Auto.AutoRedAlliance;
 import org.firstinspires.ftc.vision.tfod.TfodProcessor;
-
+@Disabled
 @Autonomous(name = "A - Red Backstage FOR COMP(Also CAM TEST)")
 public class AutoRedBackstage extends AutoRedAlliance {
 

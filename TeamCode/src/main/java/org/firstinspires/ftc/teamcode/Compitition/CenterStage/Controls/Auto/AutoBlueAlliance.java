@@ -218,88 +218,287 @@ public abstract class AutoBlueAlliance extends AutoMain{
     public void spikeMarkPlaceFar_Accel(){
 //        teamPropPosition = TeamPropPosition.BLUE_RIGHT;
         if (teamPropPosition == TeamPropPosition.BLUE_LEFT) {
-            Bot.speedAcceleration(2.4, FAST_SPD, MecanumDrive.driveDirections.DRIVE_FORWARD);
-            sleep(SLEEP_TIME);
-            Bot.gyroPath(GYRO_PATH_SPD, 90);
-            sleep(SLEEP_GYRO);
-            Bot.gyroCorrection(GYRO_CORRECT_SPD, 90);
-            sleep(SLEEP_TIME);
-            Bot.leftPixelClawOpen();
-            sleep(1500);
-//            Bot.driveBack(0.5,0.51);
+
+           // Drop Pixel Purple Sequence
+            Bot.speedAcceleration(3.4, FAST_SPD, MecanumDrive.driveDirections.DRIVE_FORWARD);
             sleep(100);
-//            Bot.rotateRight(0.3,1.3);
-            sleep(1000);
-            Bot.leftPixelClawClose();
+            Bot.gyroCorrection(GYRO_CORRECT_SPD, 0);
+            sleep(100);
+            Bot.gyroPath(GYRO_PATH_SPD, 70);
+            sleep(100);
+            Bot.gyroCorrection(GYRO_CORRECT_SPD, 70);
+            sleep(100);
+            Bot.speedAcceleration(0.5, MED_SPD, MecanumDrive.driveDirections.DRIVE_FORWARD);
+            sleep(100);
+            Bot.gyroCorrection(GYRO_CORRECT_SPD, 60);
+            sleep(100);
+            Bot.leftPixelClawOpen();
             sleep(500);
+            Bot.speedAcceleration(0.7, MED_SPD, MecanumDrive.driveDirections.DRIVE_BACK);
+            sleep(100);
+            Bot.gyroPath(GYRO_PATH_SPD, 0);
+            sleep(100);
+            Bot.gyroCorrection(GYRO_CORRECT_SPD, 0);
+            sleep(100);
+            Bot.leftPixelClawClose();
+            sleep(100);
 
-
-
+            // Drive Away from Pixel Purple Drop, Rotate, and Drive Backwards
+            Bot.speedAcceleration(4.5, FAST_SPD, MecanumDrive.driveDirections.DRIVE_FORWARD);
+            sleep(100);
+            Bot.gyroCorrection(GYRO_CORRECT_SPD, 0);
+            sleep(100);
+            Bot.gyroPath(GYRO_PATH_SPD, -91);
+            sleep(100);
+            Bot.gyroCorrection(GYRO_CORRECT_SPD, -91);
+            sleep(100);
+            Bot.speedAcceleration(14.3, FAST_SPD, MecanumDrive.driveDirections.DRIVE_BACK);
+            sleep(100);
+            Bot.gyroCorrection(GYRO_CORRECT_SPD, -90);
+            sleep(100);
+            Bot.speedAcceleration(4.5, STRAFE_SPD, MecanumDrive.driveDirections.STRAFE_RIGHT);
+            sleep(100);
+            Bot.gyroPath(GYRO_PATH_SPD, 90);
+            sleep(100);
+            Bot.gyroCorrection(GYRO_CORRECT_SPD, 90);
+            sleep(100);
+            dropPixelBackdrop();
+            Bot.gyroCorrection(GYRO_CORRECT_SPD, 90);
+            sleep(100);
+            Bot.speedAcceleration(3.9, STRAFE_SPD, MecanumDrive.driveDirections.STRAFE_RIGHT);
+            sleep(100);
 
         }
         else if (teamPropPosition == TeamPropPosition.BLUE_MIDDLE) {
 
-//              CONNOR'S CODE
-//            Bot.driveForward(0.5,0.8);
-//            sleep(1000);
-//            Bot.leftPixelClawOpen();
-//            sleep(1500);
-//            Bot.leftPixelClawClose();
-//            sleep(500);
-
-
-
-
-            /*  DUVAL'S CODE */
-            Bot.strafeRight(0.5, 0.3);
+            /*  RIP-OFF ROADRUNNER CODE */
+            // Drop Pixel Purple Sequence
+            Bot.speedAcceleration(2.8, FAST_SPD, MecanumDrive.driveDirections.DRIVE_FORWARD);
             sleep(100);
-            Bot.rotateRight(0.3,1.2);
+            Bot.gyroCorrection(GYRO_CORRECT_SPD, 0);
             sleep(100);
-            Bot.driveForward(0.5, 1.8);
+            Bot.speedAcceleration(1.8, STRAFE_SPD, MecanumDrive.driveDirections.STRAFE_RIGHT);
             sleep(100);
-            Bot.rotateLeft(0.3, 1.5);
+            Bot.gyroCorrection(GYRO_CORRECT_SPD, 0);
             sleep(100);
-            Bot.driveForward(.5,1.7);
+            Bot.speedAcceleration(3, FAST_SPD, MecanumDrive.driveDirections.DRIVE_FORWARD);
             sleep(100);
-            Bot.rotateLeft(.4,3.5);
+            Bot.gyroPath(GYRO_PATH_SPD, 115);
             sleep(100);
-            Bot.driveForward(.4,.355);
+            Bot.gyroCorrection(GYRO_CORRECT_SPD, 115);
             sleep(100);
-            Bot.rotateRight(.4,.2);
-//            sleep(100);
-//            Bot.collectorPosition();
-            sleep(250);
             Bot.leftPixelClawOpen();
             sleep(500);
-            Bot.drivePosition();
-            sleep(50);
+            Bot.speedAcceleration(0.5, MED_SPD, MecanumDrive.driveDirections.DRIVE_BACK);
+            sleep(100);
+            Bot.gyroCorrection(GYRO_CORRECT_SPD, 115);
+            sleep(100);
+            Bot.speedAcceleration(1.5, STRAFE_SPD, MecanumDrive.driveDirections.STRAFE_RIGHT);
+            sleep(100);
             Bot.leftPixelClawClose();
             sleep(100);
-            Bot.driveBack(.5,.25);
+            Bot.gyroPath(GYRO_PATH_SPD +.1, -90);
             sleep(100);
-            Bot.rotateRight(.5,1.15);
+            Bot.gyroCorrection(.15, -90);
             sleep(100);
 
+            // Drive Away from Pixel Purple Drop, Rotate, and Drive Backwards
+            Bot.speedAcceleration(16, FAST_SPD, MecanumDrive.driveDirections.DRIVE_BACK);
+            sleep(100);
+            Bot.gyroCorrection(.15, -90);
+            sleep(100);
+            Bot.speedAcceleration(3.4, STRAFE_SPD, MecanumDrive.driveDirections.STRAFE_RIGHT);
+            sleep(100);
+            Bot.gyroPath(GYRO_PATH_SPD, 90);
+            sleep(100);
+            Bot.gyroCorrection(GYRO_CORRECT_SPD, 90);
+            sleep(100);
+            dropPixelBackdrop();
+            sleep(100);
+            Bot.speedAcceleration(3.0, STRAFE_SPD, MecanumDrive.driveDirections.STRAFE_RIGHT);
+            sleep(100);
+
+        }
+        else if (teamPropPosition == TeamPropPosition.BLUE_RIGHT){
+
+            Bot.speedAcceleration(1, FAST_SPD, MecanumDrive.driveDirections.DRIVE_FORWARD);
+            sleep(100);
+            Bot.gyroCorrection(GYRO_CORRECT_SPD, 0);
+            sleep(100);
+            Bot.speedAcceleration(0.38, STRAFE_SPD-.05, MecanumDrive.driveDirections.STRAFE_LEFT);
+            sleep(100);
+            Bot.gyroCorrection(GYRO_CORRECT_SPD, 0);
+            sleep(100);
+            Bot.speedAcceleration(2.2, FAST_SPD, MecanumDrive.driveDirections.DRIVE_FORWARD);
+            sleep(100);
+            Bot.gyroCorrection(GYRO_CORRECT_SPD, 0);
+            sleep(100);
+            Bot.speedAcceleration(1.8, STRAFE_SPD, MecanumDrive.driveDirections.STRAFE_RIGHT);
+            sleep(100);
+            Bot.gyroCorrection(GYRO_CORRECT_SPD, 0);
+            sleep(100);
+            Bot.leftPixelClawOpen();
+            sleep(500);
+            Bot.speedAcceleration(.2, STRAFE_SPD-.05, MecanumDrive.driveDirections.STRAFE_LEFT);
+            sleep(100);
+            Bot.gyroCorrection(GYRO_CORRECT_SPD, 0);
+            sleep(100);
+            Bot.speedAcceleration(4.05, FAST_SPD, MecanumDrive.driveDirections.DRIVE_FORWARD);
+            sleep(100);
+            Bot.gyroPath(GYRO_PATH_SPD, -90);
+            sleep(100);
+            Bot.gyroCorrection(GYRO_CORRECT_SPD, -90);
+            sleep(100);
+
+
+            // Drive Away from Pixel Purple Drop, Rotate, and Drive Backwards
+            Bot.speedAcceleration(15, FAST_SPD, MecanumDrive.driveDirections.DRIVE_BACK);
+            sleep(100);
+            Bot.gyroCorrection(.15, -90);
+            sleep(100);
+            Bot.speedAcceleration(2.5, STRAFE_SPD, MecanumDrive.driveDirections.STRAFE_RIGHT);
+            sleep(100);
+            Bot.gyroPath(GYRO_PATH_SPD, 90);
+            sleep(100);
+            Bot.gyroCorrection(GYRO_CORRECT_SPD, 90);
+            sleep(100);
+            dropPixelBackdrop();
+            sleep(100);
+            Bot.speedAcceleration(2.1, STRAFE_SPD, MecanumDrive.driveDirections.STRAFE_RIGHT);
+            sleep(100);
 
 
 
         }
-        else if (teamPropPosition == TeamPropPosition.BLUE_RIGHT){
-            Bot.strafeRight(0.5, 0.3);
+    }
+
+
+    public void spikeMarkPlaceFar_Backstage(){
+        //teamPropPosition = TeamPropPosition.BLUE_RIGHT;
+        if (teamPropPosition == TeamPropPosition.BLUE_LEFT) {
+
+            Bot.speedAcceleration(1.2, FAST_SPD, MecanumDrive.driveDirections.DRIVE_FORWARD);
             sleep(100);
-            Bot.rotateRight(0.3,1.2);
-            sleep(1000);
-            Bot.driveForward(0.3,0.2);
+            Bot.gyroCorrection(GYRO_CORRECT_SPD, 0);
             sleep(100);
-            Bot.driveBack(0.3,0.06);
+            Bot.speedAcceleration(1.1, STRAFE_SPD, MecanumDrive.driveDirections.STRAFE_LEFT);
+            sleep(100);
+            Bot.gyroCorrection(GYRO_CORRECT_SPD, 0);
+            sleep(100);
+            Bot.speedAcceleration(1.0, FAST_SPD, MecanumDrive.driveDirections.DRIVE_FORWARD);
+            sleep(100);
+            Bot.gyroCorrection(GYRO_CORRECT_SPD, 0);
+            sleep(100);
+            Bot.speedAcceleration(.2, FAST_SPD, MecanumDrive.driveDirections.DRIVE_BACK);
+            sleep(100);
+            Bot.gyroCorrection(GYRO_CORRECT_SPD, 0);
             sleep(100);
             Bot.leftPixelClawOpen();
-            sleep(700);
-//            Bot.driveBack(0.3,0.1);
-            sleep(500);
-            Bot.leftPixelClawClose();
             sleep(500);
 
+//
+            Bot.speedAcceleration(.5, FAST_SPD, MecanumDrive.driveDirections.DRIVE_BACK);
+            sleep(100);
+            Bot.gyroPath(GYRO_PATH_SPD, 90);
+            sleep(100);
+            Bot.gyroCorrection(GYRO_CORRECT_SPD, 90);
+            Bot.leftPixelClawClose();
+            sleep(100);
+            Bot.speedAcceleration(2.5, FAST_SPD, MecanumDrive.driveDirections.DRIVE_FORWARD);
+            sleep(100);
+            Bot.speedAcceleration(0.8, STRAFE_SPD, MecanumDrive.driveDirections.STRAFE_RIGHT);
+
+
+            Bot.gyroCorrection(GYRO_CORRECT_SPD, 90);
+            sleep(100);
+//
+            dropPixelBackdrop();
+//
+            Bot.gyroCorrection(GYRO_CORRECT_SPD, 90);
+            sleep(100);
+            Bot.speedAcceleration(2, FAST_SPD, MecanumDrive.driveDirections.STRAFE_LEFT);
+            sleep(100);
+
+        }
+        else if (teamPropPosition == TeamPropPosition.BLUE_MIDDLE) {
+
+            /*  RIP-OFF ROADRUNNER CODE */
+            Bot.speedAcceleration(2.8, FAST_SPD, MecanumDrive.driveDirections.DRIVE_FORWARD);
+            sleep(100);
+            Bot.gyroCorrection(GYRO_CORRECT_SPD, 0);
+            sleep(100);
+            Bot.speedAcceleration(1.5, STRAFE_SPD, MecanumDrive.driveDirections.STRAFE_LEFT);
+            sleep(100);
+            Bot.gyroCorrection(GYRO_CORRECT_SPD, 0);
+            sleep(100);
+            Bot.speedAcceleration(3, FAST_SPD, MecanumDrive.driveDirections.DRIVE_FORWARD);
+            sleep(100);
+            Bot.gyroPath(GYRO_PATH_SPD, -140);
+            sleep(100);
+            Bot.gyroCorrection(GYRO_CORRECT_SPD, -105);
+            sleep(100);
+            Bot.leftPixelClawOpen();
+            sleep(500);
+            Bot.speedAcceleration(0.5, MED_SPD, MecanumDrive.driveDirections.DRIVE_BACK);
+            sleep(100);
+            Bot.gyroPath(GYRO_PATH_SPD, 90);
+            sleep(100);
+            Bot.gyroCorrection(GYRO_CORRECT_SPD, 90);
+            Bot.leftPixelClawClose();
+            sleep(100);
+            Bot.speedAcceleration(1.5, FAST_SPD, MecanumDrive.driveDirections.DRIVE_FORWARD);
+            sleep(100);
+            Bot.gyroCorrection(GYRO_CORRECT_SPD, 90);
+            sleep(100);
+            Bot.speedAcceleration(2.5, STRAFE_SPD, MecanumDrive.driveDirections.STRAFE_LEFT);
+            sleep(100);
+            Bot.gyroCorrection(GYRO_CORRECT_SPD, 90);
+            sleep(100);
+
+            dropPixelBackdrop();
+
+            Bot.gyroCorrection(GYRO_CORRECT_SPD, 90);
+            sleep(100);
+            Bot.speedAcceleration(3.5, FAST_SPD, MecanumDrive.driveDirections.STRAFE_LEFT);
+            sleep(100);
+
+        }
+        else if (teamPropPosition == TeamPropPosition.BLUE_RIGHT){
+
+            Bot.speedAcceleration(3.4, FAST_SPD, MecanumDrive.driveDirections.DRIVE_FORWARD);
+            sleep(100);
+            Bot.gyroPath(GYRO_PATH_SPD, -70);
+            sleep(100);
+            Bot.gyroCorrection(GYRO_CORRECT_SPD, -70);
+            sleep(100);
+            Bot.speedAcceleration(0.5, MED_SPD, MecanumDrive.driveDirections.DRIVE_FORWARD);
+            sleep(100);
+            Bot.gyroCorrection(GYRO_CORRECT_SPD, -51);
+            sleep(100);
+            Bot.leftPixelClawOpen();
+            sleep(500);
+
+
+            Bot.speedAcceleration(0.7, MED_SPD, MecanumDrive.driveDirections.DRIVE_BACK);
+            sleep(100);
+            Bot.gyroPath(GYRO_PATH_SPD, 90);
+            sleep(100);
+            Bot.gyroCorrection(GYRO_CORRECT_SPD, 90);
+            Bot.leftPixelClawClose();
+            sleep(100);
+            Bot.speedAcceleration(4.1, FAST_SPD, MecanumDrive.driveDirections.DRIVE_FORWARD);
+            sleep(100);
+            Bot.gyroCorrection(GYRO_CORRECT_SPD, 90);
+            sleep(100);
+            Bot.speedAcceleration(1.2, STRAFE_SPD, MecanumDrive.driveDirections.STRAFE_RIGHT);
+            sleep(100);
+            Bot.gyroCorrection(GYRO_CORRECT_SPD, 90);
+            sleep(100);
+            dropPixelBackdrop();
+            Bot.gyroCorrection(GYRO_CORRECT_SPD, 90);
+            sleep(100);
+            Bot.speedAcceleration(4.5, FAST_SPD, MecanumDrive.driveDirections.STRAFE_LEFT);
+            sleep(100);
 
 
 
@@ -448,6 +647,25 @@ public abstract class AutoBlueAlliance extends AutoMain{
             Bot.driveForward(.5,.7);
 
         }
+    }
+
+
+    public void dropPixelBackdrop() {
+//        Need full power or motor stalls.
+        Bot.rightWormgearUp(1, 430);
+        sleep(100);
+        Bot.driveForward(.3);
+        sleep(1000);
+        Bot.stopMotors();
+        Bot.linearSlideExtend(.8,390);
+        sleep(500);
+        Bot.rightPixelClawClose();
+        sleep(1500);
+        Bot.linearSlideRetract(.8,200);
+        sleep(500);
+        Bot.speedAcceleration(0.8, MAX_SPD, MecanumDrive.driveDirections.DRIVE_BACK);
+        sleep(1000);
+        Bot.stopMotors();
     }
 
 

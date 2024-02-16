@@ -1,9 +1,10 @@
 package org.firstinspires.ftc.teamcode.Compitition.CenterStage.Controls.Auto;
 
 import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
+import com.qualcomm.robotcore.eventloop.opmode.Disabled;
 
 import org.firstinspires.ftc.vision.tfod.TfodProcessor;
-
+@Disabled
 @Autonomous(name = "A - Forwards Backwards")
 public class ForwardBackward extends AutoBlueAlliance {
 

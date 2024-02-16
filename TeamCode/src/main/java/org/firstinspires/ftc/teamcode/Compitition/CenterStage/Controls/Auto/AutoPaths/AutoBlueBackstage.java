@@ -1,6 +1,7 @@
 package org.firstinspires.ftc.teamcode.Compitition.CenterStage.Controls.Auto.AutoPaths;
 
 import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
+import com.qualcomm.robotcore.eventloop.opmode.Disabled;
 
 import org.firstinspires.ftc.teamcode.Compitition.CenterStage.Controls.Auto.AutoBlueAlliance;
 import org.firstinspires.ftc.teamcode.Compitition.CenterStage.Controls.Auto.AutoMain;
@@ -10,6 +11,7 @@ import org.firstinspires.ftc.teamcode.Compitition.CenterStage.Vision.TeamPropPos
 import org.firstinspires.ftc.vision.VisionPortal;
 import org.firstinspires.ftc.vision.tfod.TfodProcessor;
 
+@Disabled
 @Autonomous (name = "A - Blue Backstage FOR COMP")
 public class AutoBlueBackstage extends AutoBlueAlliance {
 

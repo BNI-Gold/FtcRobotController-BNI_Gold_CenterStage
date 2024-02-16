@@ -2,6 +2,7 @@ package org.firstinspires.ftc.teamcode.Compitition.CenterStage.RoadRunner.drive.
 
 import com.acmerobotics.dashboard.config.Config;
 import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
+import com.qualcomm.robotcore.eventloop.opmode.Disabled;
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 
 import org.firstinspires.ftc.teamcode.Compitition.CenterStage.RoadRunner.drive.RoadrunMecanumDrive;
@@ -9,6 +10,7 @@ import org.firstinspires.ftc.teamcode.Compitition.CenterStage.RoadRunner.drive.R
 /*
  * This is a simple routine to test turning capabilities.
  */
+@Disabled
 @Config
 @Autonomous(group = "drive")
 public class TurnTest extends LinearOpMode {

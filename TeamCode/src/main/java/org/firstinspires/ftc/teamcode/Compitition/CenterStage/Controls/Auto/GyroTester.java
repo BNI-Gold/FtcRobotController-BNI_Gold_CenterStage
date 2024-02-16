@@ -8,6 +8,7 @@ import org.firstinspires.ftc.teamcode.Compitition.CenterStage.Drivetrains.Mecanu
 import org.firstinspires.ftc.teamcode.Compitition.CenterStage.Robots.CompBot;
 
 //@Disabled
+@Disabled
 @Autonomous (name = "Gyro Tester")
 public class GyroTester extends LinearOpMode {
 

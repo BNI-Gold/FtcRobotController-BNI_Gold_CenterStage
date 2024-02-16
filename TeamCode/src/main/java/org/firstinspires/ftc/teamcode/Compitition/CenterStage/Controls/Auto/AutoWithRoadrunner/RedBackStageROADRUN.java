@@ -5,6 +5,7 @@ import com.acmerobotics.roadrunner.geometry.Pose2d;
 import com.acmerobotics.roadrunner.trajectory.Trajectory;
 import com.acmerobotics.roadrunner.trajectory.TrajectoryBuilder;
 import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
+import com.qualcomm.robotcore.eventloop.opmode.Disabled;
 
 import org.firstinspires.ftc.teamcode.Compitition.CenterStage.Controls.Auto.AutoRedAliianceRoadrun;
 import org.firstinspires.ftc.teamcode.Compitition.CenterStage.Controls.Auto.AutoRedAlliance;
@@ -13,6 +14,7 @@ import org.firstinspires.ftc.teamcode.Compitition.CenterStage.RoadRunner.traject
 import org.firstinspires.ftc.teamcode.Compitition.CenterStage.Robots.CompBot;
 import org.firstinspires.ftc.vision.tfod.TfodProcessor;
 
+@Disabled
 @Config
 @Autonomous(name = "RR- RedBackstage")
 public class RedBackStageROADRUN extends AutoRedAliianceRoadrun {
