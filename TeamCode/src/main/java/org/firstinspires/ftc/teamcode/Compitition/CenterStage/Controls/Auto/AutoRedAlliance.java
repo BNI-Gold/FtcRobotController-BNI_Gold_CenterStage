@@ -205,6 +205,7 @@ public abstract class AutoRedAlliance extends AutoMain {
         }
     }
 
+//    FOR PLACING FROM AUDIANCE!!!
     public void spikeMarkPlaceFar_Accel(){
         if (teamPropPosition == TeamPropPosition.RED_LEFT) {
             Bot.speedAcceleration(3, FAST_SPD, MecanumDrive.driveDirections.DRIVE_FORWARD);
@@ -232,7 +233,7 @@ public abstract class AutoRedAlliance extends AutoMain {
             sleep(100);
             Bot.gyroCorrection(GYRO_CORRECT_SPD, 0);
             sleep(100);
-            Bot.speedAcceleration(4.2, FAST_SPD, MecanumDrive.driveDirections.DRIVE_FORWARD);
+            Bot.speedAcceleration(4.0, FAST_SPD, MecanumDrive.driveDirections.DRIVE_FORWARD);
             sleep(100);
             Bot.gyroPath(GYRO_PATH_SPD, 90);
             sleep(100);
@@ -243,12 +244,19 @@ public abstract class AutoRedAlliance extends AutoMain {
             sleep(100);
             Bot.gyroCorrection(GYRO_CORRECT_SPD, 90);
             sleep(100);
-            Bot.speedAcceleration(2.8, STRAFE_SPD, MecanumDrive.driveDirections.STRAFE_LEFT);
+            Bot.speedAcceleration(2.5, STRAFE_SPD, MecanumDrive.driveDirections.STRAFE_LEFT);
             sleep(100);
             Bot.gyroPath(GYRO_PATH_SPD, -90);
             sleep(100);
             Bot.gyroCorrection(GYRO_CORRECT_SPD, -90);
             sleep(100);
+
+            dropPixelBackdrop();
+
+//            Bot.gyroCorrection(GYRO_CORRECT_SPD, -90);
+            sleep(100);
+
+            Bot.speedAcceleration(1.0, STRAFE_SPD, MecanumDrive.driveDirections.STRAFE_LEFT);
 
 
 
@@ -274,7 +282,7 @@ public abstract class AutoRedAlliance extends AutoMain {
             sleep(100);
             Bot.gyroCorrection(GYRO_CORRECT_SPD, -115);
             sleep(100);
-            Bot.speedAcceleration(1.5, STRAFE_SPD, MecanumDrive.driveDirections.STRAFE_LEFT);
+            Bot.speedAcceleration(1.4, STRAFE_SPD, MecanumDrive.driveDirections.STRAFE_LEFT);
             sleep(100);
             Bot.leftPixelClawClose();
             sleep(100);
@@ -287,14 +295,18 @@ public abstract class AutoRedAlliance extends AutoMain {
             sleep(100);
             Bot.gyroCorrection(.15, 90);
             sleep(100);
-            Bot.speedAcceleration(3.9, STRAFE_SPD, MecanumDrive.driveDirections.STRAFE_LEFT);
+            Bot.speedAcceleration(3.3, STRAFE_SPD, MecanumDrive.driveDirections.STRAFE_LEFT);
             sleep(100);
             Bot.gyroPath(GYRO_PATH_SPD, -90);
             sleep(100);
             Bot.gyroCorrection(GYRO_CORRECT_SPD, -90);
             sleep(100);
 
+            dropPixelBackdrop();
 
+//            Bot.gyroCorrection(GYRO_CORRECT_SPD, -90);
+            sleep(100);
+            Bot.speedAcceleration(3.4, STRAFE_SPD, MecanumDrive.driveDirections.STRAFE_LEFT);
 
 
 
@@ -320,7 +332,7 @@ public abstract class AutoRedAlliance extends AutoMain {
             sleep(100);
             Bot.leftPixelClawClose();
             sleep(100);
-            Bot.speedAcceleration(4.1, FAST_SPD, MecanumDrive.driveDirections.DRIVE_FORWARD);
+            Bot.speedAcceleration(3.95, FAST_SPD, MecanumDrive.driveDirections.DRIVE_FORWARD);
             sleep(100);
             Bot.gyroPath(GYRO_PATH_SPD, 90);
             sleep(100);
@@ -328,17 +340,23 @@ public abstract class AutoRedAlliance extends AutoMain {
             sleep(100);
 
             //            DRIVE TO BACKDROP
-            Bot.speedAcceleration(13.2, FAST_SPD, MecanumDrive.driveDirections.DRIVE_BACK);
+            Bot.speedAcceleration(13.3, FAST_SPD, MecanumDrive.driveDirections.DRIVE_BACK);
             sleep(100);
             Bot.gyroCorrection(GYRO_CORRECT_SPD, 90);
             sleep(100);
-            Bot.speedAcceleration(4.7, STRAFE_SPD, MecanumDrive.driveDirections.STRAFE_LEFT);
+            Bot.speedAcceleration(4.0, STRAFE_SPD, MecanumDrive.driveDirections.STRAFE_LEFT);
             sleep(100);
             Bot.gyroPath(GYRO_PATH_SPD, -90);
             sleep(100);
             Bot.gyroCorrection(GYRO_CORRECT_SPD, -90);
             sleep(100);
 
+
+            dropPixelBackdrop();
+
+//            Bot.gyroCorrection(GYRO_CORRECT_SPD, -90);
+            sleep(100);
+            Bot.speedAcceleration(4.3, STRAFE_SPD, MecanumDrive.driveDirections.STRAFE_LEFT);
 
         }
     }
@@ -376,7 +394,7 @@ public abstract class AutoRedAlliance extends AutoMain {
             Bot.gyroCorrection(GYRO_CORRECT_SPD, -90);
             sleep(100);
             dropPixelBackdrop();
-            Bot.gyroCorrection(GYRO_CORRECT_SPD, -90);
+//            Bot.gyroCorrection(GYRO_CORRECT_SPD, -90);
             sleep(100);
             Bot.speedAcceleration(5, FAST_SPD, MecanumDrive.driveDirections.STRAFE_RIGHT);
             sleep(100);
@@ -390,7 +408,8 @@ public abstract class AutoRedAlliance extends AutoMain {
             sleep(100);
             Bot.gyroCorrection(GYRO_CORRECT_SPD, 0);
             sleep(100);
-            Bot.speedAcceleration(1.5, STRAFE_SPD, MecanumDrive.driveDirections.STRAFE_RIGHT);
+//            Change for how close to center line!
+            Bot.speedAcceleration(1.55, STRAFE_SPD, MecanumDrive.driveDirections.STRAFE_RIGHT);
             sleep(100);
             Bot.gyroCorrection(GYRO_CORRECT_SPD, 0);
             sleep(100);
@@ -410,20 +429,20 @@ public abstract class AutoRedAlliance extends AutoMain {
             sleep(100);
             Bot.leftPixelClawClose();
 
-            Bot.speedAcceleration(1.5, FAST_SPD, MecanumDrive.driveDirections.DRIVE_FORWARD);
+            Bot.speedAcceleration(1.4, FAST_SPD, MecanumDrive.driveDirections.DRIVE_FORWARD);
             sleep(100);
             Bot.gyroCorrection(GYRO_CORRECT_SPD, -90);
             sleep(100);
-            Bot.speedAcceleration(2, STRAFE_SPD, MecanumDrive.driveDirections.STRAFE_RIGHT);
+            Bot.speedAcceleration(1.6, STRAFE_SPD, MecanumDrive.driveDirections.STRAFE_RIGHT);
             sleep(100);
             Bot.gyroCorrection(GYRO_CORRECT_SPD, -90);
             sleep(100);
 
             dropPixelBackdrop();
 
-            Bot.gyroCorrection(GYRO_CORRECT_SPD, -90);
+//            Bot.gyroCorrection(GYRO_CORRECT_SPD, -90);
             sleep(100);
-            Bot.speedAcceleration(3.5, FAST_SPD, MecanumDrive.driveDirections.STRAFE_RIGHT);
+            Bot.speedAcceleration(3.9, FAST_SPD, MecanumDrive.driveDirections.STRAFE_RIGHT);
             sleep(100);
 
 
@@ -469,7 +488,7 @@ public abstract class AutoRedAlliance extends AutoMain {
 
             dropPixelBackdrop();
 
-            Bot.gyroCorrection(GYRO_CORRECT_SPD, -90);
+//            Bot.gyroCorrection(GYRO_CORRECT_SPD, -90);
             sleep(100);
             Bot.speedAcceleration(3, FAST_SPD, MecanumDrive.driveDirections.STRAFE_RIGHT);
             sleep(100);

@@ -55,7 +55,7 @@ public class AutoRedAudience_Acceleration extends AutoRedAlliance {
             spikeMarkPlaceFar_Accel();
             sleep(100);
 //            USE THIS FOR PIXEL DELIVERY
-            dropPixelBackdrop();
+//            dropPixelBackdrop();
 
             telemetry.addLine("Robot Autonomous Control Complete");
 

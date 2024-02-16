@@ -263,7 +263,7 @@ public abstract class AutoBlueAlliance extends AutoMain{
             Bot.gyroCorrection(GYRO_CORRECT_SPD, 90);
             sleep(100);
             dropPixelBackdrop();
-            Bot.gyroCorrection(GYRO_CORRECT_SPD, 90);
+//            Bot.gyroCorrection(GYRO_CORRECT_SPD, 90);
             sleep(100);
             Bot.speedAcceleration(3.9, STRAFE_SPD, MecanumDrive.driveDirections.STRAFE_RIGHT);
             sleep(100);
@@ -414,7 +414,7 @@ public abstract class AutoBlueAlliance extends AutoMain{
 //
             dropPixelBackdrop();
 //
-            Bot.gyroCorrection(GYRO_CORRECT_SPD, 90);
+//            Bot.gyroCorrection(GYRO_CORRECT_SPD, 90);
             sleep(100);
             Bot.speedAcceleration(2, FAST_SPD, MecanumDrive.driveDirections.STRAFE_LEFT);
             sleep(100);
@@ -457,7 +457,7 @@ public abstract class AutoBlueAlliance extends AutoMain{
 
             dropPixelBackdrop();
 
-            Bot.gyroCorrection(GYRO_CORRECT_SPD, 90);
+//            Bot.gyroCorrection(GYRO_CORRECT_SPD, 90);
             sleep(100);
             Bot.speedAcceleration(3.5, FAST_SPD, MecanumDrive.driveDirections.STRAFE_LEFT);
             sleep(100);
@@ -495,7 +495,7 @@ public abstract class AutoBlueAlliance extends AutoMain{
             Bot.gyroCorrection(GYRO_CORRECT_SPD, 90);
             sleep(100);
             dropPixelBackdrop();
-            Bot.gyroCorrection(GYRO_CORRECT_SPD, 90);
+//            Bot.gyroCorrection(GYRO_CORRECT_SPD, 90);
             sleep(100);
             Bot.speedAcceleration(4.5, FAST_SPD, MecanumDrive.driveDirections.STRAFE_LEFT);
             sleep(100);
