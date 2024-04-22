@@ -11,7 +11,9 @@ public class RipOffRoadrunner_Adapted_MecanumDrive {
 
 
 
-        public DcMotor frontLeftMotor;
+
+
+    public DcMotor frontLeftMotor;
         public DcMotor frontRightMotor;
         public DcMotor rearLeftMotor;
         public DcMotor rearRightMotor;
@@ -76,7 +78,7 @@ public class RipOffRoadrunner_Adapted_MecanumDrive {
 
         // Method that corrects the robots original heading.
         // Method assumes the heading to correct to has been set outside of this method
-    //bad/old
+    //
         public void gyroTurn(double speed, double targetAngle) {
             currentHeading = getHeading();
             if (currentHeading >= targetAngle + headingTolerance && LinearOp.opModeIsActive()) {
@@ -571,6 +573,8 @@ public class RipOffRoadrunner_Adapted_MecanumDrive {
     }
 
     */
+
+
 
 
 

@@ -130,7 +130,7 @@ public class RobotAprilTagAutoAdjust_Simplified extends LinearOpMode{
             telemetry.update();
 
             // Apply desired axes motions to the drivetrain.
-            moveRobot(drive, strafe, turn);
+            moveRobot(-drive, -strafe, -turn);
             sleep(10);
         }
     }

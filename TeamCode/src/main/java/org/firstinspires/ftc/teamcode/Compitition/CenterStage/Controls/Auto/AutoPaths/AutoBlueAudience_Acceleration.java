@@ -57,7 +57,7 @@ public class AutoBlueAudience_Acceleration extends AutoBlueAlliance {
 
             sleep(100);
 //            USE THIS FOR PIXEL DELIVERY
-//            dropPixelBackdrop();
+         //   dropPixelBackdrop();
 
             telemetry.addLine("Robot Autonomous Control Complete");
 

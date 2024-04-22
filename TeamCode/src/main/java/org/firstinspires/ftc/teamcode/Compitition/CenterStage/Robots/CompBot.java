@@ -333,9 +333,9 @@ public class CompBot extends MecanumDrive {
             pixelRotatorLeft.setPosition((0.515));
     }
 
-    public void automousPosition(){
-            pixelRotatorRight.setPosition(.9);
-    }
+//    public void automousPosition(){
+//            pixelRotatorRight.setPosition(.9);
+//    }
 
     //Need to determine new hang position based on how hang arm is mounted
     public void hangPosition(){

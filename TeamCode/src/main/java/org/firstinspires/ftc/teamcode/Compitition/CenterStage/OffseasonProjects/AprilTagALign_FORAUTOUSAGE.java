@@ -19,6 +19,18 @@ import java.util.concurrent.TimeUnit;
 public abstract class AprilTagALign_FORAUTOUSAGE extends LinearOpMode {
 
 
+    public double GYRO_PATH_SPD = .5;
+    public    double GYRO_CORRECT_SPD = .21;
+    public double MAX_SPD = 1.0;
+    public  double FAST_SPD = .7;
+    public double MED_SPD = .5;
+    public double STRAFE_SPD = .8;
+    public double LONG_STRAFE_SPD = 1;
+    public  int SLEEP_GYRO = 150;
+    public   int SLEEP_TIME = 100;
+
+
+
     public ProgramingBot Bot = new ProgramingBot();
     public int webCamWidth = 960;
     public int webCamHeight = 720;
@@ -43,87 +55,86 @@ public abstract class AprilTagALign_FORAUTOUSAGE extends LinearOpMode {
     private DcMotor rearRightMotor = null;
 
     private static final boolean USE_WEBCAM = true;  // Set true to use a webcam, or false for a phone camera
-   // private static final int DESIRED_TAG_ID = 2;     // Choose the tag you want to approach or set to -1 for ANY tag.
+    private static final int DESIRED_TAG_ID = 2;     // Choose the tag you want to approach or set to -1 for ANY tag.
     private VisionPortal visionPortal;
     private AprilTagProcessor aprilTag;
     private AprilTagDetection desiredTag = null;
 
 
 
-    public void AprilTagAutoAdjust(int DESIRED_TAG_ID) {
+
         boolean targetFound = false;    // Set to true when an AprilTag target is detected
         double drive = 0;        // Desired forward power/speed (-1 to +1)
         double strafe = 0;        // Desired strafe power/speed (-1 to +1)
         double turn = 0;        // Desired turning power/speed (-1 to +1)
-        isRobotAlligned = false;
 
 
-        initAprilTag();
 
-//        frontLeftMotor = hardwareMap.get(DcMotor.class, "front_left_motor");
-//        frontRightMotor = hardwareMap.get(DcMotor.class, "front_right_motor");
-//        rearLeftMotor = hardwareMap.get(DcMotor.class, "rear_left_motor");
-//        rearRightMotor = hardwareMap.get(DcMotor.class, "rear_right_motor");
-//
-//
-//        frontLeftMotor.setDirection(DcMotor.Direction.FORWARD);
-//        rearLeftMotor.setDirection(DcMotor.Direction.FORWARD);
-//        frontRightMotor.setDirection(DcMotor.Direction.REVERSE);
-//        rearRightMotor.setDirection(DcMotor.Direction.REVERSE);
 
-        if (USE_WEBCAM) {
-            setManualExposure(6, 250);  // Use low exposure time to reduce motion blur
+
+
+
+public void detect(){
+
+    if (USE_WEBCAM) {
+        setManualExposure(6, 250);  // Use low exposure time to reduce motion blur
+    }
+    initAprilTag();
+    targetFound = false;
+    desiredTag = null;
+
+    // Step through the list of detected tags and look for a matching tag
+    List<AprilTagDetection> currentDetections = aprilTag.getDetections();
+    for (AprilTagDetection detection : currentDetections) {
+        if ((detection.metadata != null) &&
+                ((DESIRED_TAG_ID < 0) || (detection.id == DESIRED_TAG_ID))) {
+            targetFound = true;
+            desiredTag = detection;
+            telemetry.addLine("Tag Detected");
+            break;  // don't look any further.
+        } else {
+            telemetry.addData("Unknown Target", "Tag ID %d is not in TagLibrary\n", detection.id);
         }
+    }
+
+}
 
 
-
-            targetFound = false;
-            desiredTag = null;
-
-            // Step through the list of detected tags and look for a matching tag
-            List<AprilTagDetection> currentDetections = aprilTag.getDetections();
-            for (AprilTagDetection detection : currentDetections) {
-                if ((detection.metadata != null) &&
-                        ((DESIRED_TAG_ID < 0) || (detection.id == DESIRED_TAG_ID))) {
-                    targetFound = true;
-                    desiredTag = detection;
-                    break;  // don't look any further.
-                } else {
-                    telemetry.addData("Unknown Target", "Tag ID %d is not in TagLibrary\n", detection.id);
-                }
-            }
-
-            // Tell the driver what we see, and what to do.
-            if (targetFound) {
-
-                telemetry.addData("Target", "ID %d (%s)", desiredTag.id, desiredTag.metadata.name);
-                telemetry.addData("Range", "%5.1f inches", desiredTag.ftcPose.range);
-                telemetry.addData("Bearing", "%3.0f degrees", desiredTag.ftcPose.bearing);
-                telemetry.addData("Yaw", "%3.0f degrees", desiredTag.ftcPose.yaw);
+public void AprilTagAutoAdjust() {
 
 
-                // Determine heading, range and Yaw (tag image rotation) error so we can use them to control the robot automatically.
-                double rangeError = (desiredTag.ftcPose.range - DESIRED_DISTANCE);
-                double headingError = desiredTag.ftcPose.bearing;
-                double yawError = desiredTag.ftcPose.yaw;
+    // Tell the driver what we see, and what to do.
+    if (targetFound) {
+//
+//                telemetry.addData("Target", "ID %d (%s)", desiredTag.id, desiredTag.metadata.name);
+//                telemetry.addData("Range", "%5.1f inches", desiredTag.ftcPose.range);
+//                telemetry.addData("Bearing", "%3.0f degrees", desiredTag.ftcPose.bearing);
+//                telemetry.addData("Yaw", "%3.0f degrees", desiredTag.ftcPose.yaw);
 
-                // Use the speed and turn "gains" to calculate how we want the robot to move.
-                drive = Range.clip(rangeError * SPEED_GAIN, -MAX_AUTO_SPEED, MAX_AUTO_SPEED);
-                turn = Range.clip(headingError * TURN_GAIN, -MAX_AUTO_TURN, MAX_AUTO_TURN);
-                strafe = Range.clip(-yawError * STRAFE_GAIN, -MAX_AUTO_STRAFE, MAX_AUTO_STRAFE);
-            } else {
-                telemetry.addLine("Target Not Detected");
-            }
 
-            // If Left Bumper is being pressed, AND we have found the desired target, Drive to target Automatically .
+        // Determine heading, range and Yaw (tag image rotation) error so we can use them to control the robot automatically.
+        double rangeError = (desiredTag.ftcPose.range - DESIRED_DISTANCE);
+        double headingError = desiredTag.ftcPose.bearing;
+        double yawError = desiredTag.ftcPose.yaw;
 
-            telemetry.update();
+        // Use the speed and turn "gains" to calculate how we want the robot to move.
+        drive = Range.clip(rangeError * SPEED_GAIN, -MAX_AUTO_SPEED, MAX_AUTO_SPEED);
+        turn = Range.clip(headingError * TURN_GAIN, -MAX_AUTO_TURN, MAX_AUTO_TURN);
+        strafe = Range.clip(-yawError * STRAFE_GAIN, -MAX_AUTO_STRAFE, MAX_AUTO_STRAFE);
+//            } else {
+//                telemetry.addLine("Target Not Detected");
+//            }
 
-            // Apply desired axes motions to the drivetrain.
-            moveRobot(drive, strafe, turn);
-            sleep(10);
-            isRobotAlligned = true;
-        }
+        // If Left Bumper is being pressed, AND we have found the desired target, Drive to target Automatically .
+
+       telemetry.update();
+
+        // Apply desired axes motions to the drivetrain.
+        moveRobot(-drive, -strafe, -turn);
+        sleep(10);
+
+    }
+}
 
 
 
@@ -221,6 +232,9 @@ public abstract class AprilTagALign_FORAUTOUSAGE extends LinearOpMode {
             sleep(20);
         }
     }
+
+
+
 
 
 

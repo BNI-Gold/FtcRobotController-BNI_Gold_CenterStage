@@ -220,19 +220,19 @@ public abstract class AutoRedAlliance extends AutoMain {
             Bot.speedAcceleration(.2, MED_SPD, MecanumDrive.driveDirections.DRIVE_FORWARD);
             sleep(100);
             Bot.gyroPath(GYRO_CORRECT_SPD, 25);
-            sleep(100);
+            sleep(150);
             Bot.gyroCorrection(GYRO_CORRECT_SPD, 25);
-            sleep(100);
+            sleep(150);
             Bot.speedAcceleration(.1, MED_SPD, MecanumDrive.driveDirections.DRIVE_FORWARD);
             sleep(100);
             Bot.leftPixelClawClose();
-            sleep(100);
+            sleep(2000);
             Bot.gyroCorrection(GYRO_CORRECT_SPD, 0);
             sleep(100);
             Bot.speedAcceleration(0.13 ,    STRAFE_SPD, MecanumDrive.driveDirections.STRAFE_LEFT); //.11
             sleep(100);
             Bot.gyroCorrection(GYRO_CORRECT_SPD, 0);
-            sleep(100);
+            sleep(2000);
             Bot.speedAcceleration(4.0, FAST_SPD, MecanumDrive.driveDirections.DRIVE_FORWARD);
             sleep(100);
             Bot.gyroPath(GYRO_PATH_SPD, 90);
@@ -295,7 +295,7 @@ public abstract class AutoRedAlliance extends AutoMain {
             sleep(100);
             Bot.gyroCorrection(.15, 90);
             sleep(100);
-            Bot.speedAcceleration(3.3, STRAFE_SPD, MecanumDrive.driveDirections.STRAFE_LEFT);
+            Bot.speedAcceleration(3.55, STRAFE_SPD, MecanumDrive.driveDirections.STRAFE_LEFT);
             sleep(100);
             Bot.gyroPath(GYRO_PATH_SPD, -90);
             sleep(100);
@@ -344,7 +344,7 @@ public abstract class AutoRedAlliance extends AutoMain {
             sleep(100);
             Bot.gyroCorrection(GYRO_CORRECT_SPD, 90);
             sleep(100);
-            Bot.speedAcceleration(4.0, STRAFE_SPD, MecanumDrive.driveDirections.STRAFE_LEFT);
+            Bot.speedAcceleration(3.8, STRAFE_SPD, MecanumDrive.driveDirections.STRAFE_LEFT);
             sleep(100);
             Bot.gyroPath(GYRO_PATH_SPD, -90);
             sleep(100);
@@ -396,7 +396,9 @@ public abstract class AutoRedAlliance extends AutoMain {
             dropPixelBackdrop();
 //            Bot.gyroCorrection(GYRO_CORRECT_SPD, -90);
             sleep(100);
-            Bot.speedAcceleration(5, FAST_SPD, MecanumDrive.driveDirections.STRAFE_RIGHT);
+            Bot.speedAcceleration(5.5, FAST_SPD, MecanumDrive.driveDirections.STRAFE_RIGHT);
+            sleep(100);
+            Bot.speedAcceleration(0.45, MAX_SPD, MecanumDrive.driveDirections.DRIVE_FORWARD);
             sleep(100);
 
 
@@ -442,7 +444,9 @@ public abstract class AutoRedAlliance extends AutoMain {
 
 //            Bot.gyroCorrection(GYRO_CORRECT_SPD, -90);
             sleep(100);
-            Bot.speedAcceleration(3.9, FAST_SPD, MecanumDrive.driveDirections.STRAFE_RIGHT);
+            Bot.speedAcceleration(4.3, FAST_SPD, MecanumDrive.driveDirections.STRAFE_RIGHT);
+            sleep(100);
+            Bot.speedAcceleration(0.45, MAX_SPD, MecanumDrive.driveDirections.DRIVE_FORWARD);
             sleep(100);
 
 
@@ -490,7 +494,9 @@ public abstract class AutoRedAlliance extends AutoMain {
 
 //            Bot.gyroCorrection(GYRO_CORRECT_SPD, -90);
             sleep(100);
-            Bot.speedAcceleration(3, FAST_SPD, MecanumDrive.driveDirections.STRAFE_RIGHT);
+            Bot.speedAcceleration(3.3, FAST_SPD, MecanumDrive.driveDirections.STRAFE_RIGHT);
+            sleep(100);
+            Bot.speedAcceleration(0.45, MAX_SPD, MecanumDrive.driveDirections.DRIVE_FORWARD);
             sleep(100);
 
         }
@@ -677,8 +683,9 @@ public abstract class AutoRedAlliance extends AutoMain {
 
     public void dropPixelBackdrop() {
 //        Need full power or motor stalls.
-        Bot.rightWormgearUp(1, 430);
+        Bot.rightWormgearUp(1, 530);
         sleep(100);
+        Bot.autoPlacePosition();
         Bot.driveForward(.3);
         sleep(1000);
         Bot.stopMotors();
@@ -688,7 +695,7 @@ public abstract class AutoRedAlliance extends AutoMain {
         sleep(1500);
         Bot.linearSlideRetract(.8,200);
         sleep(500);
-        Bot.speedAcceleration(0.8, MAX_SPD, MecanumDrive.driveDirections.DRIVE_BACK);
+        Bot.speedAcceleration(0.7, MAX_SPD, MecanumDrive.driveDirections.DRIVE_BACK);
         sleep(1000);
         Bot.stopMotors();
     }

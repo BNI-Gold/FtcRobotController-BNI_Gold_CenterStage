@@ -228,13 +228,13 @@ public abstract class AutoBlueAlliance extends AutoMain{
             sleep(100);
             Bot.gyroCorrection(GYRO_CORRECT_SPD, 70);
             sleep(100);
-            Bot.speedAcceleration(0.5, MED_SPD, MecanumDrive.driveDirections.DRIVE_FORWARD);
+            Bot.speedAcceleration(0.65, MED_SPD, MecanumDrive.driveDirections.DRIVE_FORWARD);
             sleep(100);
             Bot.gyroCorrection(GYRO_CORRECT_SPD, 60);
             sleep(100);
             Bot.leftPixelClawOpen();
             sleep(500);
-            Bot.speedAcceleration(0.7, MED_SPD, MecanumDrive.driveDirections.DRIVE_BACK);
+            Bot.speedAcceleration(0.85, MED_SPD, MecanumDrive.driveDirections.DRIVE_BACK);
             sleep(100);
             Bot.gyroPath(GYRO_PATH_SPD, 0);
             sleep(100);
@@ -256,7 +256,7 @@ public abstract class AutoBlueAlliance extends AutoMain{
             sleep(100);
             Bot.gyroCorrection(GYRO_CORRECT_SPD, -90);
             sleep(100);
-            Bot.speedAcceleration(4.5, STRAFE_SPD, MecanumDrive.driveDirections.STRAFE_RIGHT);
+            Bot.speedAcceleration(4.1, STRAFE_SPD, MecanumDrive.driveDirections.STRAFE_RIGHT);
             sleep(100);
             Bot.gyroPath(GYRO_PATH_SPD, 90);
             sleep(100);
@@ -307,7 +307,7 @@ public abstract class AutoBlueAlliance extends AutoMain{
             sleep(100);
             Bot.gyroCorrection(.15, -90);
             sleep(100);
-            Bot.speedAcceleration(3.4, STRAFE_SPD, MecanumDrive.driveDirections.STRAFE_RIGHT);
+            Bot.speedAcceleration(3.2, STRAFE_SPD, MecanumDrive.driveDirections.STRAFE_RIGHT);
             sleep(100);
             Bot.gyroPath(GYRO_PATH_SPD, 90);
             sleep(100);
@@ -356,7 +356,7 @@ public abstract class AutoBlueAlliance extends AutoMain{
             sleep(100);
             Bot.gyroCorrection(.15, -90);
             sleep(100);
-            Bot.speedAcceleration(2.5, STRAFE_SPD, MecanumDrive.driveDirections.STRAFE_RIGHT);
+            Bot.speedAcceleration(2.2, STRAFE_SPD, MecanumDrive.driveDirections.STRAFE_RIGHT);
             sleep(100);
             Bot.gyroPath(GYRO_PATH_SPD, 90);
             sleep(100);
@@ -406,7 +406,7 @@ public abstract class AutoBlueAlliance extends AutoMain{
             sleep(100);
             Bot.speedAcceleration(2.5, FAST_SPD, MecanumDrive.driveDirections.DRIVE_FORWARD);
             sleep(100);
-            Bot.speedAcceleration(0.8, STRAFE_SPD, MecanumDrive.driveDirections.STRAFE_RIGHT);
+            Bot.speedAcceleration(0.85, STRAFE_SPD, MecanumDrive.driveDirections.STRAFE_RIGHT);
 
 
             Bot.gyroCorrection(GYRO_CORRECT_SPD, 90);
@@ -416,51 +416,54 @@ public abstract class AutoBlueAlliance extends AutoMain{
 //
 //            Bot.gyroCorrection(GYRO_CORRECT_SPD, 90);
             sleep(100);
-            Bot.speedAcceleration(2, FAST_SPD, MecanumDrive.driveDirections.STRAFE_LEFT);
+            Bot.speedAcceleration(4.7, FAST_SPD, MecanumDrive.driveDirections.STRAFE_RIGHT);//2.4
             sleep(100);
+      //     Bot.speedAcceleration(2, FAST_SPD, MecanumDrive.driveDirections.DRIVE_FORWARD);
 
         }
         else if (teamPropPosition == TeamPropPosition.BLUE_MIDDLE) {
 
             /*  RIP-OFF ROADRUNNER CODE */
-            Bot.speedAcceleration(2.8, FAST_SPD, MecanumDrive.driveDirections.DRIVE_FORWARD);
+            Bot.speedAcceleration(3.8, FAST_SPD, MecanumDrive.driveDirections.DRIVE_FORWARD);//2.8
             sleep(100);
             Bot.gyroCorrection(GYRO_CORRECT_SPD, 0);
             sleep(100);
-            Bot.speedAcceleration(1.5, STRAFE_SPD, MecanumDrive.driveDirections.STRAFE_LEFT);
-            sleep(100);
-            Bot.gyroCorrection(GYRO_CORRECT_SPD, 0);
-            sleep(100);
-            Bot.speedAcceleration(3, FAST_SPD, MecanumDrive.driveDirections.DRIVE_FORWARD);
-            sleep(100);
-            Bot.gyroPath(GYRO_PATH_SPD, -140);
-            sleep(100);
-            Bot.gyroCorrection(GYRO_CORRECT_SPD, -105);
-            sleep(100);
+//            Bot.speedAcceleration(1.5, STRAFE_SPD, MecanumDrive.driveDirections.STRAFE_LEFT);
+//            sleep(100);
+//            Bot.gyroCorrection(GYRO_CORRECT_SPD, 0);
+//            sleep(100);
+//            Bot.speedAcceleration(3, FAST_SPD, MecanumDrive.driveDirections.DRIVE_FORWARD);
+//            sleep(100);
+//            Bot.gyroPath(GYRO_PATH_SPD, -140);
+//            sleep(100);
+//            Bot.gyroCorrection(GYRO_CORRECT_SPD, -105);
+//            sleep(100);
             Bot.leftPixelClawOpen();
             sleep(500);
-            Bot.speedAcceleration(0.5, MED_SPD, MecanumDrive.driveDirections.DRIVE_BACK);
+            Bot.speedAcceleration(0.5, MED_SPD, MecanumDrive.driveDirections.DRIVE_BACK);//0.5
             sleep(100);
             Bot.gyroPath(GYRO_PATH_SPD, 90);
             sleep(100);
             Bot.gyroCorrection(GYRO_CORRECT_SPD, 90);
             Bot.leftPixelClawClose();
             sleep(100);
-            Bot.speedAcceleration(1.5, FAST_SPD, MecanumDrive.driveDirections.DRIVE_FORWARD);
-            sleep(100);
-            Bot.gyroCorrection(GYRO_CORRECT_SPD, 90);
-            sleep(100);
-            Bot.speedAcceleration(2.5, STRAFE_SPD, MecanumDrive.driveDirections.STRAFE_LEFT);
-            sleep(100);
-            Bot.gyroCorrection(GYRO_CORRECT_SPD, 90);
-            sleep(100);
+            Bot.speedAcceleration(4.5,MED_SPD,MecanumDrive.driveDirections.DRIVE_FORWARD); //for milton
+//            Bot.speedAcceleration(1.5, FAST_SPD, MecanumDrive.driveDirections.DRIVE_FORWARD);
+//            sleep(100);
+//            Bot.gyroCorrection(GYRO_CORRECT_SPD, 90);
+//            sleep(100);
+//            Bot.speedAcceleration(2.5, STRAFE_SPD, MecanumDrive.driveDirections.STRAFE_LEFT);
+//            sleep(100);
+//            Bot.gyroCorrection(GYRO_CORRECT_SPD, 90);
+//            sleep(100);
 
             dropPixelBackdrop();
 
 //            Bot.gyroCorrection(GYRO_CORRECT_SPD, 90);
             sleep(100);
-            Bot.speedAcceleration(3.5, FAST_SPD, MecanumDrive.driveDirections.STRAFE_LEFT);
+            Bot.speedAcceleration(3.5, FAST_SPD, MecanumDrive.driveDirections.STRAFE_RIGHT);
             sleep(100);
+           // Bot.speedAcceleration(2, FAST_SPD, MecanumDrive.driveDirections.DRIVE_FORWARD);
 
         }
         else if (teamPropPosition == TeamPropPosition.BLUE_RIGHT){
@@ -490,15 +493,17 @@ public abstract class AutoBlueAlliance extends AutoMain{
             sleep(100);
             Bot.gyroCorrection(GYRO_CORRECT_SPD, 90);
             sleep(100);
-            Bot.speedAcceleration(1.2, STRAFE_SPD, MecanumDrive.driveDirections.STRAFE_RIGHT);
+            Bot.speedAcceleration(0.5, STRAFE_SPD, MecanumDrive.driveDirections.STRAFE_RIGHT);
             sleep(100);
             Bot.gyroCorrection(GYRO_CORRECT_SPD, 90);
             sleep(100);
             dropPixelBackdrop();
 //            Bot.gyroCorrection(GYRO_CORRECT_SPD, 90);
             sleep(100);
-            Bot.speedAcceleration(4.5, FAST_SPD, MecanumDrive.driveDirections.STRAFE_LEFT);
+
+            Bot.speedAcceleration(2.4, FAST_SPD, MecanumDrive.driveDirections.STRAFE_RIGHT);//4.7
             sleep(100);
+          //  Bot.speedAcceleration(2, FAST_SPD, MecanumDrive.driveDirections.DRIVE_FORWARD);
 
 
 
@@ -652,8 +657,9 @@ public abstract class AutoBlueAlliance extends AutoMain{
 
     public void dropPixelBackdrop() {
 //        Need full power or motor stalls.
-        Bot.rightWormgearUp(1, 430);
+        Bot.rightWormgearUp(1, 550);
         sleep(100);
+        Bot.autoPlacePosition();
         Bot.driveForward(.3);
         sleep(1000);
         Bot.stopMotors();

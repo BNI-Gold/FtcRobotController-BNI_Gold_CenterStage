@@ -2,8 +2,10 @@ package org.firstinspires.ftc.teamcode.Compitition.CenterStage.OffseasonProjects
 
 import com.qualcomm.hardware.bosch.BNO055IMU;
 import com.qualcomm.hardware.bosch.JustLoggingAccelerationIntegrator;
+import com.qualcomm.hardware.rev.RevHubOrientationOnRobot;
 import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.hardware.HardwareMap;
+import com.qualcomm.robotcore.hardware.IMU;
 import com.qualcomm.robotcore.util.ElapsedTime;
 
 import org.firstinspires.ftc.robotcore.external.navigation.Acceleration;
@@ -21,12 +23,17 @@ public class ProgramingBot extends RipOffRoadrunner_Adapted_MecanumDrive {
 
     public ElapsedTime timer = new ElapsedTime();
 
+    RevHubOrientationOnRobot.LogoFacingDirection logoDirection = RevHubOrientationOnRobot.LogoFacingDirection.RIGHT;
+    RevHubOrientationOnRobot.UsbFacingDirection  usbDirection  = RevHubOrientationOnRobot.UsbFacingDirection.UP;
+    RevHubOrientationOnRobot orientationOnRobot = new RevHubOrientationOnRobot(logoDirection, usbDirection);
 
-    public BNO055IMU imu;
-    public Orientation angles;
-    public Acceleration gravity;
-    public final double SPEED = .3;
-    public final double TOLERANCE = .4;
+
+//
+//    public BNO055IMU imu;
+//    public Orientation angles;
+//    public Acceleration gravity;
+//    public final double SPEED = .3;
+//    public final double TOLERANCE = .4;
 
     public ProgramingBot (){}
 
@@ -37,6 +44,10 @@ public class ProgramingBot extends RipOffRoadrunner_Adapted_MecanumDrive {
         frontRightMotor = hwBot.dcMotor.get("front_right_motor");
         rearLeftMotor = hwBot.dcMotor.get("rear_left_motor");
         rearRightMotor = hwBot.dcMotor.get("rear_right_motor");
+
+        leftEncoder = frontRightMotor;
+        rightEncoder = rearRightMotor;
+        centerEncoder = rearLeftMotor;
 
         frontLeftMotor.setDirection(DcMotor.Direction.FORWARD);
         rearLeftMotor.setDirection(DcMotor.Direction.FORWARD);
@@ -55,18 +66,21 @@ public class ProgramingBot extends RipOffRoadrunner_Adapted_MecanumDrive {
 
         currentTime.reset();
 
+      imu = hwBot.get(IMU.class,"imu");
+      imu.initialize(new IMU.Parameters(orientationOnRobot));
 
-        BNO055IMU.Parameters parametersimu = new BNO055IMU.Parameters();
-        parametersimu.angleUnit = BNO055IMU.AngleUnit.DEGREES;
-        parametersimu.accelUnit = BNO055IMU.AccelUnit.METERS_PERSEC_PERSEC;
-        parametersimu.calibrationDataFile = "BNO055IMUCalibration.json"; // see the calibration sample opmode
 
-        parametersimu.loggingEnabled = true;
-        parametersimu.loggingTag = "IMU";
-        parametersimu.accelerationIntegrationAlgorithm = new JustLoggingAccelerationIntegrator();
-
-        imu = hwBot.get(BNO055IMU.class, "imu");
-        imu.initialize(parametersimu);
+//        BNO055IMU.Parameters parametersimu = new BNO055IMU.Parameters();
+//        parametersimu.angleUnit = BNO055IMU.AngleUnit.DEGREES;
+//        parametersimu.accelUnit = BNO055IMU.AccelUnit.METERS_PERSEC_PERSEC;
+//        parametersimu.calibrationDataFile = "BNO055IMUCalibration.json"; // see the calibration sample opmode
+//
+//        parametersimu.loggingEnabled = true;
+//        parametersimu.loggingTag = "IMU";
+//        parametersimu.accelerationIntegrationAlgorithm = new JustLoggingAccelerationIntegrator();
+//
+//        imu = hwBot.get(BNO055IMU.class, "imu");
+//        imu.initialize(parametersimu);
 
 
     }

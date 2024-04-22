@@ -17,6 +17,8 @@ public class AprilTagAlign_AutoTest extends AprilTagALign_FORAUTOUSAGE {
     public  int SLEEP_GYRO = 150;
     public   int SLEEP_TIME = 100;
 
+
+
     @Override
     public void runOpMode() throws InterruptedException {
         Bot.initRobot(hardwareMap);
@@ -35,30 +37,36 @@ public class AprilTagAlign_AutoTest extends AprilTagALign_FORAUTOUSAGE {
 
             telemetry.addLine("Robot Autonomous Control Initialized");
 
-            Bot.speedAcceleration(0.5,FAST_SPD, RipOffRoadrunner_Adapted_MecanumDrive.driveDirections.DRIVE_FORWARD);
+            Bot.speedAcceleration(2.5,FAST_SPD, RipOffRoadrunner_Adapted_MecanumDrive.driveDirections.DRIVE_FORWARD);
             sleep(500);
+
             telemetry.addLine("DRIVE FORWARD");
-            Bot.rotateByGyro(GYRO_CORRECT_SPD,0);
+            Bot.gyroTurn(GYRO_CORRECT_SPD,0);
             sleep(500);
             telemetry.addLine("GYRO CORRECT");
-            Bot.rotateByGyro(GYRO_PATH_SPD,90);
+            Bot.gyroTurn(GYRO_PATH_SPD,90);
             sleep(500);
             telemetry.addLine("TURN TARGET ANGLE 90");
-            Bot.rotateByGyro(GYRO_CORRECT_SPD,90);
+            Bot.gyroTurn(GYRO_CORRECT_SPD,90);
             sleep(500);
             telemetry.addLine("GYRO CORRECT");
-            AprilTagAutoAdjust(2);
+            AprilTagAutoAdjust();
             sleep(100);
             telemetry.addLine("APRIL TAG ALIGNMENT");
+            Bot.gyroTurn(GYRO_CORRECT_SPD,90);
             sleep(500);
-            if (isRobotAlligned == true) {
-                telemetry.addLine("Robot is Alligned");
-            }
-            else if (isRobotAlligned == false) {
-                telemetry.addLine("RObot is NOT alligned");
-            }
+
+//            if (isRobotAlligned == true) {
+//                telemetry.addLine("Robot is Alligned");
+//            }
+//            else if (isRobotAlligned == false) {
+//                telemetry.addLine("RObot is NOT alligned");
+//            }
+
             telemetry.update();
 
+
+        
             requestOpModeStop();
 
         }
