@@ -3,7 +3,6 @@ package org.firstinspires.ftc.teamcode.Compitition.CenterStage.RoadRunner.drive.
 import com.acmerobotics.roadrunner.geometry.Pose2d;
 import com.acmerobotics.roadrunner.geometry.Vector2d;
 import com.acmerobotics.roadrunner.trajectory.Trajectory;
-import com.acmerobotics.roadrunner.trajectory.TrajectoryBuilder;
 import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
 import com.qualcomm.robotcore.eventloop.opmode.Disabled;
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
@@ -24,18 +23,9 @@ public class SplineTest extends LinearOpMode {
 
         if (isStopRequested()) return;
 
-
-
-
-        Trajectory traj = drive.trajectoryBuilder(new Pose2d(13, -58, -4.7))
-
-                .forward(23)
-                .lineToLinearHeading(new Pose2d(13,-57,Math.toRadians(1)))
-//                                    .forward(35)
-//                                    .strafeRight(Math.toRadians(800))
-                .splineToSplineHeading(new Pose2d(45,-31,Math.toRadians(0)),Math.toRadians(90))
-                .splineToSplineHeading(new Pose2d(13,-12,Math.toRadians(180)),Math.toRadians(190))
-//
+        Trajectory traj = drive.trajectoryBuilder(new Pose2d())
+                .splineTo(new Vector2d(30, 30), 0)
+//                .splineToSplineHeading(new Pose2d(45,-31, Math.toRadians(0)), Math.toRadians(90))
                 .build();
 
         drive.followTrajectory(traj);

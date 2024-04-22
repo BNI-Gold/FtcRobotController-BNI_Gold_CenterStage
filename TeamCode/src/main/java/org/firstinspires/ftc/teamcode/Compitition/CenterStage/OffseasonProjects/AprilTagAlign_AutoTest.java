@@ -1,9 +1,14 @@
 package org.firstinspires.ftc.teamcode.Compitition.CenterStage.OffseasonProjects;
 
 import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
+import com.qualcomm.robotcore.hardware.DcMotor;
+
+import org.firstinspires.ftc.vision.VisionPortal;
+import org.firstinspires.ftc.vision.apriltag.AprilTagDetection;
+import org.firstinspires.ftc.vision.apriltag.AprilTagProcessor;
 
 @Autonomous (name = "APrilTagAllign_Test")
-public class AprilTagAlign_AutoTest extends AprilTagALign_FORAUTOUSAGE {
+public class AprilTagAlign_AutoTest extends TestingAutoMain {
 
 
 
@@ -17,6 +22,29 @@ public class AprilTagAlign_AutoTest extends AprilTagALign_FORAUTOUSAGE {
     public  int SLEEP_GYRO = 150;
     public   int SLEEP_TIME = 100;
 
+    final double DESIRED_DISTANCE = 12.0; //  this is how close the camera should get to the target (inches)
+
+    //  Set the GAIN constants to control the relationship between the measured position error, and how much power is
+    //  applied to the drive motors to correct the error.
+    //  Drive = Error * Gain    Make these values smaller for smoother control, or larger for a more aggressive response.
+    final double SPEED_GAIN  =  0.02  ;   //  Forward Speed Control "Gain". eg: Ramp up to 50% power at a 25 inch error.   (0.50 / 25.0)
+    final double STRAFE_GAIN =  0.015 ;   //  Strafe Speed Control "Gain".  eg: Ramp up to 25% power at a 25 degree Yaw error.   (0.25 / 25.0)
+    final double TURN_GAIN   =  0.01  ;   //  Turn Control "Gain".  eg: Ramp up to 25% power at a 25 degree error. (0.25 / 25.0)
+
+    final double MAX_AUTO_SPEED = 0.5;   //  Clip the approach speed to this max value (adjust for your robot)
+    final double MAX_AUTO_STRAFE= 0.5;   //  Clip the approach speed to this max value (adjust for your robot)
+    final double MAX_AUTO_TURN  = 0.3;   //  Clip the turn speed to this max value (adjust for your robot)
+
+    private DcMotor frontLeftMotor = null;  //  Used to control the left front drive wheel
+    private DcMotor frontRightMotor = null;  //  Used to control the right front drive wheel
+    private DcMotor rearLeftMotor = null;  //  Used to control the left back drive wheel
+    private DcMotor rearRightMotor = null;  //  Used to control the right back drive wheel
+
+    private static final boolean USE_WEBCAM = true;  // Set true to use a webcam, or false for a phone camera
+    private static final int DESIRED_TAG_ID = 2;     // Choose the tag you want to approach or set to -1 for ANY tag.
+    private VisionPortal visionPortal;               // Used to manage the video source.
+    private AprilTagProcessor aprilTag;              // Used for managing the AprilTag detection process.
+    private AprilTagDetection desiredTag = null;
 
 
     @Override
@@ -26,10 +54,11 @@ public class AprilTagAlign_AutoTest extends AprilTagALign_FORAUTOUSAGE {
 
 
 
-        boolean targetFound     = false;    // Set to true when an AprilTag target is detected
-        double  drive           = 0;        // Desired forward power/speed (-1 to +1)
-        double  strafe          = 0;        // Desired strafe power/speed (-1 to +1)
-        double  turn            = 0;        // Desired turning power/speed (-1 to +1)
+
+        initAprilTag();
+
+        if (USE_WEBCAM)
+            setManualExposure(6,250);
        //for april tag stuff
 
         telemetry.addLine("Robot Awaiting Start Procedure");
@@ -60,7 +89,7 @@ public class AprilTagAlign_AutoTest extends AprilTagALign_FORAUTOUSAGE {
             Bot.gyroTurn(GYRO_CORRECT_SPD,90);
             sleep(500);
             telemetry.addLine("GYRO CORRECT");
-            AprilTagAutoAdjust();
+            AutoAlign();
             sleep(100);
             telemetry.addLine("APRIL TAG ALIGNMENT");
             Bot.gyroTurn(GYRO_CORRECT_SPD,90);
