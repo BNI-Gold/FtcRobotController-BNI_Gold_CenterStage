@@ -24,8 +24,18 @@ public class AprilTagAlign_AutoTest extends AprilTagALign_FORAUTOUSAGE {
         Bot.initRobot(hardwareMap);
         Bot.setLinearOp(this);
 
+
+
+        boolean targetFound     = false;    // Set to true when an AprilTag target is detected
+        double  drive           = 0;        // Desired forward power/speed (-1 to +1)
+        double  strafe          = 0;        // Desired strafe power/speed (-1 to +1)
+        double  turn            = 0;        // Desired turning power/speed (-1 to +1)
+       //for april tag stuff
+
         telemetry.addLine("Robot Awaiting Start Procedure");
         telemetry.update();
+
+
 
 
 
