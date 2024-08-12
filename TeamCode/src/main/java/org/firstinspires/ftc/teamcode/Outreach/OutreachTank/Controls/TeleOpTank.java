@@ -9,7 +9,7 @@ import com.qualcomm.robotcore.util.Range;
 import org.firstinspires.ftc.teamcode.Compitition.ZFreightFrenzy.Robots.TankBot;
 import org.firstinspires.ftc.teamcode.Outreach.OutreachTank.Robots.OutreachTank;
 
-@TeleOp( name = "L.A.U.N.C.H.E.R", group = "2")
+@TeleOp( name = "TANK BOT", group = "2")
 
 // Ludicrous Application for the Universal Nullification for the Comprehension of Hardware of Extreme Range
 
@@ -77,9 +77,6 @@ public class TeleOpTank extends OpMode {
 
         telemtryOutput();
 
-        turntableControl();
-        flywheelControl();
-        launcherAngleControl();
 
     }
 
@@ -133,55 +130,11 @@ public class TeleOpTank extends OpMode {
         Bot.rightMotorB.setPower(rightMotorValue * speedMultiply);
     }
 
-    public void turntableControl () {
 
-        if (gamepad1.right_bumper) {
 
-            Bot.tableRight(0.6);
 
-        } else if (gamepad1.left_bumper) {
 
-            Bot.tableLeft(0.6);
 
-        } else {
-
-            Bot.stopTable();
-
-        }
-
-    }
-
-    public void launcherAngleControl () {
-
-        if (gamepad1.y) {
-
-            Bot.launcherAngleIncrease();
-
-        } else if (gamepad1.a) {
-
-            Bot.launcherAngleDecrease();
-
-        } else {
-
-            Bot.launcherAngleStop();
-
-        }
-
-    }
-
-    public void flywheelControl () {
-
-        if (gamepad1.right_trigger >= 0.2) {
-
-            Bot.flywheelSpeed(1);
-
-        } else {
-
-            Bot.flywheelStop();
-
-        }
-
-    }
 
     public void telemtryOutput () {
         telemetry.addData("Tank Drive? (x/b to swap) ", tankDrive);
